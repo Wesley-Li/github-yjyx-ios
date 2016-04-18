@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common
+END
+QNALAssetFile.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/QNALAssetFile.h
+END
+GTM_Base64.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/GTM_Base64.h
+END
+QNALAssetFile.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/QNALAssetFile.m
+END
+GTM_Base64.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/GTM_Base64.m
+END
+QNAsyncRun.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/QNAsyncRun.h
+END
+QNUrlSafeBase64.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/QNUrlSafeBase64.h
+END
+QNAsyncRun.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/QNAsyncRun.m
+END
+QNFileDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/QNFileDelegate.h
+END
+QNUrlSafeBase64.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/QNUrlSafeBase64.m
+END
+QNCrc32.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/QNCrc32.h
+END
+QNFile.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/QNFile.h
+END
+QNEtag.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/QNEtag.h
+END
+QNCrc32.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/QNCrc32.m
+END
+QNFile.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/QNFile.m
+END
+QNVersion.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/QNVersion.h
+END
+QNEtag.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Common/QNEtag.m
+END

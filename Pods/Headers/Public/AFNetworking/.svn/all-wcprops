@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking
+END
+UIAlertView+AFNetworking.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/UIAlertView+AFNetworking.h
+END
+AFSecurityPolicy.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/AFSecurityPolicy.h
+END
+AFNetworking.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/AFNetworking.h
+END
+UIWebView+AFNetworking.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/UIWebView+AFNetworking.h
+END
+UIButton+AFNetworking.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/UIButton+AFNetworking.h
+END
+AFNetworkActivityIndicatorManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/AFNetworkActivityIndicatorManager.h
+END
+UIImageView+AFNetworking.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/UIImageView+AFNetworking.h
+END
+AFURLSessionManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/AFURLSessionManager.h
+END
+UIImage+AFNetworking.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/UIImage+AFNetworking.h
+END
+AFURLConnectionOperation.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/AFURLConnectionOperation.h
+END
+AFHTTPRequestOperationManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/AFHTTPRequestOperationManager.h
+END
+UIActivityIndicatorView+AFNetworking.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/UIActivityIndicatorView+AFNetworking.h
+END
+AFNetworkReachabilityManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/AFNetworkReachabilityManager.h
+END
+UIKit+AFNetworking.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/UIKit+AFNetworking.h
+END
+AFHTTPRequestOperation.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/AFHTTPRequestOperation.h
+END
+AFURLRequestSerialization.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/AFURLRequestSerialization.h
+END
+AFHTTPSessionManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/AFHTTPSessionManager.h
+END
+AFURLResponseSerialization.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/AFURLResponseSerialization.h
+END
+UIProgressView+AFNetworking.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/UIProgressView+AFNetworking.h
+END
+UIRefreshControl+AFNetworking.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Public/AFNetworking/UIRefreshControl+AFNetworking.h
+END

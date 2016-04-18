@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Http
+END
+QNHttpDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Http/QNHttpDelegate.h
+END
+QNHttpManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Http/QNHttpManager.h
+END
+QNResponseInfo.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Http/QNResponseInfo.h
+END
+QNUserAgent.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Http/QNUserAgent.h
+END
+QNSessionManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Http/QNSessionManager.h
+END
+QNHttpManager.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Http/QNHttpManager.m
+END
+QNResponseInfo.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Http/QNResponseInfo.m
+END
+QNUserAgent.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Http/QNUserAgent.m
+END
+QNSessionManager.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Http/QNSessionManager.m
+END
+QNDns.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Http/QNDns.h
+END
+QNDns.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Qiniu/QiniuSDK/Http/QNDns.m
+END

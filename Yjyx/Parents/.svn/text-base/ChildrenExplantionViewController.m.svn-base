@@ -1,0 +1,47 @@
+//
+//  ChildrenExplantionViewController.m
+//  Yjyx
+//
+//  Created by zhujianyu on 16/3/11.
+//  Copyright © 2016年 Alibaba. All rights reserved.
+//
+
+#import "ChildrenExplantionViewController.h"
+
+@interface ChildrenExplantionViewController ()
+
+@end
+
+@implementation ChildrenExplantionViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.navigationController.navigationBarHidden = NO;
+    [self loadBackBtn];
+    [self initView];
+    // Do any additional setup after loading the view from its nib.
+}
+
+-(void)initView
+{
+    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [web loadHTMLString:_explantionStr baseURL:nil];
+    [self.view addSubview:web];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParentChildrensViewController">
+            <connections>
+                <outlet property="childrenTab" destination="ADN-Cx-uPo" id="t4B-fQ-0qs"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ADN-Cx-uPo">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="sdM-Zy-bBO"/>
+                        <outlet property="delegate" destination="-1" id="rR0-3L-eZj"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ADN-Cx-uPo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Eza-Ag-Tpo"/>
+                <constraint firstAttribute="trailing" secondItem="ADN-Cx-uPo" secondAttribute="trailing" id="HAW-Or-Mqe"/>
+                <constraint firstItem="ADN-Cx-uPo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SeQ-BK-LRb"/>
+                <constraint firstAttribute="bottom" secondItem="ADN-Cx-uPo" secondAttribute="bottom" id="rwB-cK-OeP"/>
+            </constraints>
+            <point key="canvasLocation" x="218" y="331"/>
+        </view>
+    </objects>
+</document>

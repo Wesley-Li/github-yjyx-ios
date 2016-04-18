@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Private/HappyDNS
+END
+QNDes.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Private/HappyDNS/QNDes.h
+END
+QNResolverDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Private/HappyDNS/QNResolverDelegate.h
+END
+QNRecord.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Private/HappyDNS/QNRecord.h
+END
+QNDnsManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Private/HappyDNS/QNDnsManager.h
+END
+QNHosts.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Private/HappyDNS/QNHosts.h
+END
+QNHijackingDetectWrapper.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Private/HappyDNS/QNHijackingDetectWrapper.h
+END
+QNResolver.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Private/HappyDNS/QNResolver.h
+END
+QNHex.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Private/HappyDNS/QNHex.h
+END
+QNNetworkInfo.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Private/HappyDNS/QNNetworkInfo.h
+END
+HappyDNS.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Private/HappyDNS/HappyDNS.h
+END
+QNDomain.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Private/HappyDNS/QNDomain.h
+END
+QNDnspodEnterprise.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Private/HappyDNS/QNDnspodEnterprise.h
+END
+QNDnspodFree.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/yiyx/!svn/ver/11/Yjyx/Pods/Headers/Private/HappyDNS/QNDnspodFree.h
+END
