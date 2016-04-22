@@ -244,7 +244,7 @@
     for (int i = 0; i < [self.productEntity.price_pacakge count]; i++) {
         NSDictionary *dic = [self.productEntity.price_pacakge objectAtIndex:i];
         UIButton *timeBtn = [[UIButton alloc] initWithFrame:CGRectMake(90+i*82, 63, 75, 15)];
-        NSString *str = [NSString stringWithFormat:@"%@天/%@元",[dic objectForKey:@"days"],[dic objectForKey:@"price"]];
+        NSString *str = [NSString stringWithFormat:@"%@元/%@天",[dic objectForKey:@"price"],[dic objectForKey:@"days"]];
         [timeBtn setTitle:str forState:UIControlStateNormal];
         [timeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         timeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
