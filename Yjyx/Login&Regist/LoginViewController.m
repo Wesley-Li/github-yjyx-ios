@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "RegistViewController.h"
+#import "RegistOneViewController.h"
 
 @interface LoginViewController ()
 {
@@ -124,7 +125,7 @@
 
 -(IBAction)registBtnClicked:(id)sender
 {
-    RegistViewController *registView = [[RegistViewController alloc] init];
+    RegistOneViewController *registView = [[RegistOneViewController alloc] init];
     [self.navigationController pushViewController:registView animated:YES];
 }
 
