@@ -50,6 +50,7 @@
 
 -(void)purchaseProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 
+-(void)isCanLookProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 
 //发送短信验证码
 -(void)getSMSsendcode:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;

@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "RegistViewController.h"
 #import "RegistOneViewController.h"
+#import "ForgetOneViewController.h"
 
 @interface LoginViewController ()
 {
@@ -127,6 +128,12 @@
 {
     RegistOneViewController *registView = [[RegistOneViewController alloc] init];
     [self.navigationController pushViewController:registView animated:YES];
+}
+
+-(IBAction)forgetPassWord:(id)sender
+{
+    ForgetOneViewController *vc = [[ForgetOneViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

@@ -40,7 +40,7 @@
         return;
     }
     NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",phoneText.text];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",[sign md5],@"sign", nil];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",[sign md5],@"sign",@"MREGISTER",@"stype",nil];
     [[YjxService sharedInstance] getSMSsendcode:dic withBlock:^(id result, NSError *error){//验证验证码
         [self.view hideToastActivity];
         if (result) {
@@ -55,15 +55,11 @@
             [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
-    
-    _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
-    //发送注册码按钮失效，防止频繁请求
-    [verifyBtn setEnabled:false];
 }
 
 -(void)checkCodeTimeout
 {
-    [verifyBtn setTitle:[NSString stringWithFormat:@"%ds",_second--] forState:UIControlStateDisabled];
+    timeLb.text = [NSString stringWithFormat:@"%ds",_second--];
     if (_second < 0) {
         [self resetTimer];
     }
@@ -73,7 +69,7 @@
 {
     _second = 60;
     codeText.text = @"";
-    [verifyBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+    timeLb.text = @"获取验证码";
     [_timer invalidate];
     _timer = nil;
 }
@@ -84,7 +80,7 @@
     if (parentNameText.text.length == 0||parentPasswordText.text.length == 0||relationText.text.length == 0||phoneText.text.length == 0||codeText.text.length == 0) {
         [self.view makeToast:@"请输入完整信息" duration:1.0 position:SHOW_CENTER complete:nil];
     }else{
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",codeText.text,@"code",nil];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",codeText.text,@"code",@"MREGISTER",@"stype",nil];
         [[YjxService sharedInstance] checkOutVerfirycode:dic withBlock:^(id result, NSError *error){//验证验证码
             [self.view hideToastActivity];
             if (result) {
@@ -133,6 +129,12 @@
 -(IBAction)goBack:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 /*

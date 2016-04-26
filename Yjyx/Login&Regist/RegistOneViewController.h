@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegistOneViewController : UIViewController
+@interface RegistOneViewController : UIViewController<UITextFieldDelegate>
 {
     ChildrenEntity *childrenEntity;
     IBOutlet UITextField *codeTextField;

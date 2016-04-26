@@ -281,6 +281,22 @@
 
 }
 
+-(void)isCanLookProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/parents/product/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+
+}
+
 -(void)getSMSsendcode:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

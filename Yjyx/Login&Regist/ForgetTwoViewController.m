@@ -1,0 +1,66 @@
+//
+//  ForgetTwoViewController.m
+//  Yjyx
+//
+//  Created by zhujianyu on 16/4/26.
+//  Copyright © 2016年 Alibaba. All rights reserved.
+//
+
+#import "ForgetTwoViewController.h"
+#import "ForgetThreeViewController.h"
+
+@interface ForgetTwoViewController ()
+
+@end
+
+@implementation ForgetTwoViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    NSString *str = [_phoneStr stringByReplacingCharactersInRange:NSMakeRange(3, 5) withString:@"*****"];
+    titleLb.text = [NSString stringWithFormat:@"你的账号已绑定手机%@,你可以通过短信验证码找回",str];
+}
+
+-(IBAction)getCode:(id)sender
+{
+    NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",_phoneStr];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneStr,@"target",[sign md5],@"sign",@"MPASSWDRST",@"stype",nil];
+    [[YjxService sharedInstance] getSMSsendcode:dic withBlock:^(id result, NSError *error){//验证验证码
+        [self.view hideToastActivity];
+        if (result) {
+            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                ForgetThreeViewController *vc = [[ForgetThreeViewController alloc] init];
+                vc.phoneStr = self.phoneStr;
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }else{
+                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+        }else{
+            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+    }];
+}
+
+-(IBAction)goBack:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end
