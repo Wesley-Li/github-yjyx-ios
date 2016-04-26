@@ -227,6 +227,37 @@
 		3AFE02C61CA29D540097CC83 /* member_yingyu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE02BF1CA29D540097CC83 /* member_yingyu@3x.png */; };
 		3AFE02C71CA29D540097CC83 /* member_yuwen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE02C01CA29D540097CC83 /* member_yuwen@3x.png */; };
 		3AFE02C81CA29D540097CC83 /* memberCenter_bg1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE02C11CA29D540097CC83 /* memberCenter_bg1@3x.png */; };
+		3B48642D1CCF101100D2DE3C /* TeacherEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B48642C1CCF101100D2DE3C /* TeacherEntity.m */; };
+		3B4864461CCF10C200D2DE3C /* hw_stats.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864321CCF10C200D2DE3C /* hw_stats.png */; };
+		3B4864471CCF10C200D2DE3C /* mall.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864331CCF10C200D2DE3C /* mall.png */; };
+		3B4864481CCF10C200D2DE3C /* message@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864341CCF10C200D2DE3C /* message@3x.png */; };
+		3B4864491CCF10C200D2DE3C /* message_click@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864351CCF10C200D2DE3C /* message_click@3x.png */; };
+		3B48644A1CCF10C200D2DE3C /* myclass@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864361CCF10C200D2DE3C /* myclass@3x.png */; };
+		3B48644B1CCF10C200D2DE3C /* myclass_click@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864371CCF10C200D2DE3C /* myclass_click@3x.png */; };
+		3B48644C1CCF10C200D2DE3C /* mymclass.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864381CCF10C200D2DE3C /* mymclass.png */; };
+		3B48644D1CCF10C200D2DE3C /* new.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864391CCF10C200D2DE3C /* new.png */; };
+		3B48644E1CCF10C200D2DE3C /* pic.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B48643A1CCF10C200D2DE3C /* pic.png */; };
+		3B48644F1CCF10C200D2DE3C /* privatecenter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B48643B1CCF10C200D2DE3C /* privatecenter@3x.png */; };
+		3B4864501CCF10C200D2DE3C /* privatecenter_click@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B48643C1CCF10C200D2DE3C /* privatecenter_click@3x.png */; };
+		3B4864511CCF10C200D2DE3C /* publishhw@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B48643D1CCF10C200D2DE3C /* publishhw@3x.png */; };
+		3B4864521CCF10C200D2DE3C /* publishhw_click@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B48643E1CCF10C200D2DE3C /* publishhw_click@3x.png */; };
+		3B4864531CCF10C200D2DE3C /* report.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B48643F1CCF10C200D2DE3C /* report.png */; };
+		3B4864541CCF10C200D2DE3C /* score.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864401CCF10C200D2DE3C /* score.png */; };
+		3B4864551CCF10C200D2DE3C /* stu_hw.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864411CCF10C200D2DE3C /* stu_hw.png */; };
+		3B4864561CCF10C200D2DE3C /* tab_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864421CCF10C200D2DE3C /* tab_bg.png */; };
+		3B4864571CCF10C200D2DE3C /* tab_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864431CCF10C200D2DE3C /* tab_home@3x.png */; };
+		3B4864581CCF10C200D2DE3C /* tab_home_click@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864441CCF10C200D2DE3C /* tab_home_click@3x.png */; };
+		3B4864591CCF10C200D2DE3C /* top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864451CCF10C200D2DE3C /* top_bg.png */; };
+		3B48646E1CCF117300D2DE3C /* TeacherHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B48645C1CCF117300D2DE3C /* TeacherHomeViewController.m */; };
+		3B48646F1CCF117300D2DE3C /* TeacherHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B48645D1CCF117300D2DE3C /* TeacherHomeViewController.xib */; };
+		3B4864701CCF117300D2DE3C /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4864601CCF117300D2DE3C /* MessageViewController.m */; };
+		3B4864711CCF117300D2DE3C /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864611CCF117300D2DE3C /* MessageViewController.xib */; };
+		3B4864721CCF117300D2DE3C /* MyClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4864641CCF117300D2DE3C /* MyClassViewController.m */; };
+		3B4864731CCF117300D2DE3C /* MyClassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864651CCF117300D2DE3C /* MyClassViewController.xib */; };
+		3B4864741CCF117300D2DE3C /* PrivateCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4864681CCF117300D2DE3C /* PrivateCenterViewController.m */; };
+		3B4864751CCF117300D2DE3C /* PrivateCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864691CCF117300D2DE3C /* PrivateCenterViewController.xib */; };
+		3B4864761CCF117300D2DE3C /* PublishHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B48646C1CCF117300D2DE3C /* PublishHomeworkViewController.m */; };
+		3B4864771CCF117300D2DE3C /* PublishHomeworkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */; };
 		7D453D9CA19A8B9493453E33 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D2260EAA2B915029186C49 /* libPods.a */; };
 		CB40047F1C609BCD00556AA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB40047E1C609BCD00556AA7 /* main.m */; };
 		CB4004821C609BCD00556AA7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4004811C609BCD00556AA7 /* AppDelegate.m */; };
@@ -658,6 +689,43 @@
 		3AFE02BF1CA29D540097CC83 /* member_yingyu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "member_yingyu@3x.png"; sourceTree = "<group>"; };
 		3AFE02C01CA29D540097CC83 /* member_yuwen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "member_yuwen@3x.png"; sourceTree = "<group>"; };
 		3AFE02C11CA29D540097CC83 /* memberCenter_bg1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "memberCenter_bg1@3x.png"; sourceTree = "<group>"; };
+		3B48642B1CCF101100D2DE3C /* TeacherEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherEntity.h; sourceTree = "<group>"; };
+		3B48642C1CCF101100D2DE3C /* TeacherEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherEntity.m; sourceTree = "<group>"; };
+		3B4864321CCF10C200D2DE3C /* hw_stats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hw_stats.png; sourceTree = "<group>"; };
+		3B4864331CCF10C200D2DE3C /* mall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mall.png; sourceTree = "<group>"; };
+		3B4864341CCF10C200D2DE3C /* message@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message@3x.png"; sourceTree = "<group>"; };
+		3B4864351CCF10C200D2DE3C /* message_click@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_click@3x.png"; sourceTree = "<group>"; };
+		3B4864361CCF10C200D2DE3C /* myclass@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myclass@3x.png"; sourceTree = "<group>"; };
+		3B4864371CCF10C200D2DE3C /* myclass_click@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myclass_click@3x.png"; sourceTree = "<group>"; };
+		3B4864381CCF10C200D2DE3C /* mymclass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mymclass.png; sourceTree = "<group>"; };
+		3B4864391CCF10C200D2DE3C /* new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new.png; sourceTree = "<group>"; };
+		3B48643A1CCF10C200D2DE3C /* pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic.png; sourceTree = "<group>"; };
+		3B48643B1CCF10C200D2DE3C /* privatecenter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "privatecenter@3x.png"; sourceTree = "<group>"; };
+		3B48643C1CCF10C200D2DE3C /* privatecenter_click@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "privatecenter_click@3x.png"; sourceTree = "<group>"; };
+		3B48643D1CCF10C200D2DE3C /* publishhw@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "publishhw@3x.png"; sourceTree = "<group>"; };
+		3B48643E1CCF10C200D2DE3C /* publishhw_click@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "publishhw_click@3x.png"; sourceTree = "<group>"; };
+		3B48643F1CCF10C200D2DE3C /* report.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = report.png; sourceTree = "<group>"; };
+		3B4864401CCF10C200D2DE3C /* score.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = score.png; sourceTree = "<group>"; };
+		3B4864411CCF10C200D2DE3C /* stu_hw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stu_hw.png; sourceTree = "<group>"; };
+		3B4864421CCF10C200D2DE3C /* tab_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_bg.png; sourceTree = "<group>"; };
+		3B4864431CCF10C200D2DE3C /* tab_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_home@3x.png"; sourceTree = "<group>"; };
+		3B4864441CCF10C200D2DE3C /* tab_home_click@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_home_click@3x.png"; sourceTree = "<group>"; };
+		3B4864451CCF10C200D2DE3C /* top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg.png; sourceTree = "<group>"; };
+		3B48645B1CCF117300D2DE3C /* TeacherHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherHomeViewController.h; sourceTree = "<group>"; };
+		3B48645C1CCF117300D2DE3C /* TeacherHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherHomeViewController.m; sourceTree = "<group>"; };
+		3B48645D1CCF117300D2DE3C /* TeacherHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherHomeViewController.xib; sourceTree = "<group>"; };
+		3B48645F1CCF117300D2DE3C /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		3B4864601CCF117300D2DE3C /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		3B4864611CCF117300D2DE3C /* MessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageViewController.xib; sourceTree = "<group>"; };
+		3B4864631CCF117300D2DE3C /* MyClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClassViewController.h; sourceTree = "<group>"; };
+		3B4864641CCF117300D2DE3C /* MyClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClassViewController.m; sourceTree = "<group>"; };
+		3B4864651CCF117300D2DE3C /* MyClassViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyClassViewController.xib; sourceTree = "<group>"; };
+		3B4864671CCF117300D2DE3C /* PrivateCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateCenterViewController.h; sourceTree = "<group>"; };
+		3B4864681CCF117300D2DE3C /* PrivateCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateCenterViewController.m; sourceTree = "<group>"; };
+		3B4864691CCF117300D2DE3C /* PrivateCenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateCenterViewController.xib; sourceTree = "<group>"; };
+		3B48646B1CCF117300D2DE3C /* PublishHomeworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishHomeworkViewController.h; sourceTree = "<group>"; };
+		3B48646C1CCF117300D2DE3C /* PublishHomeworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishHomeworkViewController.m; sourceTree = "<group>"; };
+		3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublishHomeworkViewController.xib; sourceTree = "<group>"; };
 		CB40047A1C609BCD00556AA7 /* Yjyx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yjyx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB40047E1C609BCD00556AA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CB4004801C609BCD00556AA7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1211,6 +1279,8 @@
 				3AD1FD8E1C72B6D100E362B9 /* ChildrenActivity.m */,
 				3A724DAA1CAE63BD00A06D72 /* ProductEntity.h */,
 				3A724DAB1CAE63BD00A06D72 /* ProductEntity.m */,
+				3B48642B1CCF101100D2DE3C /* TeacherEntity.h */,
+				3B48642C1CCF101100D2DE3C /* TeacherEntity.m */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -1227,6 +1297,8 @@
 		3AE893FB1C6C268500E8BA97 /* Files */ = {
 			isa = PBXGroup;
 			children = (
+				3B48642E1CCF10C200D2DE3C /* StudentFiles */,
+				3B4864301CCF10C200D2DE3C /* TeacherFiles */,
 				3A26EE581C71A62F009C3242 /* ParentFiles */,
 			);
 			path = Files;
@@ -1283,6 +1355,11 @@
 		3AEF26DA1C61F08A0028BE09 /* Teacher */ = {
 			isa = PBXGroup;
 			children = (
+				3B48645A1CCF117300D2DE3C /* Home */,
+				3B48645E1CCF117300D2DE3C /* Message */,
+				3B4864621CCF117300D2DE3C /* MyClass */,
+				3B4864661CCF117300D2DE3C /* PrivateCenter */,
+				3B48646A1CCF117300D2DE3C /* PublishHomeWork */,
 			);
 			path = Teacher;
 			sourceTree = "<group>";
@@ -1403,6 +1480,106 @@
 				3AF11DDD1CB2691A00F98A03 /* subject_shiyong@3x.png */,
 			);
 			name = memberCenter;
+			sourceTree = "<group>";
+		};
+		3B48642E1CCF10C200D2DE3C /* StudentFiles */ = {
+			isa = PBXGroup;
+			children = (
+				3B48642F1CCF10C200D2DE3C /* StudentHome */,
+			);
+			path = StudentFiles;
+			sourceTree = "<group>";
+		};
+		3B48642F1CCF10C200D2DE3C /* StudentHome */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = StudentHome;
+			sourceTree = "<group>";
+		};
+		3B4864301CCF10C200D2DE3C /* TeacherFiles */ = {
+			isa = PBXGroup;
+			children = (
+				3B4864311CCF10C200D2DE3C /* TeacherHome */,
+			);
+			path = TeacherFiles;
+			sourceTree = "<group>";
+		};
+		3B4864311CCF10C200D2DE3C /* TeacherHome */ = {
+			isa = PBXGroup;
+			children = (
+				3B4864321CCF10C200D2DE3C /* hw_stats.png */,
+				3B4864331CCF10C200D2DE3C /* mall.png */,
+				3B4864341CCF10C200D2DE3C /* message@3x.png */,
+				3B4864351CCF10C200D2DE3C /* message_click@3x.png */,
+				3B4864361CCF10C200D2DE3C /* myclass@3x.png */,
+				3B4864371CCF10C200D2DE3C /* myclass_click@3x.png */,
+				3B4864381CCF10C200D2DE3C /* mymclass.png */,
+				3B4864391CCF10C200D2DE3C /* new.png */,
+				3B48643A1CCF10C200D2DE3C /* pic.png */,
+				3B48643B1CCF10C200D2DE3C /* privatecenter@3x.png */,
+				3B48643C1CCF10C200D2DE3C /* privatecenter_click@3x.png */,
+				3B48643D1CCF10C200D2DE3C /* publishhw@3x.png */,
+				3B48643E1CCF10C200D2DE3C /* publishhw_click@3x.png */,
+				3B48643F1CCF10C200D2DE3C /* report.png */,
+				3B4864401CCF10C200D2DE3C /* score.png */,
+				3B4864411CCF10C200D2DE3C /* stu_hw.png */,
+				3B4864421CCF10C200D2DE3C /* tab_bg.png */,
+				3B4864431CCF10C200D2DE3C /* tab_home@3x.png */,
+				3B4864441CCF10C200D2DE3C /* tab_home_click@3x.png */,
+				3B4864451CCF10C200D2DE3C /* top_bg.png */,
+			);
+			path = TeacherHome;
+			sourceTree = "<group>";
+		};
+		3B48645A1CCF117300D2DE3C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3B48645B1CCF117300D2DE3C /* TeacherHomeViewController.h */,
+				3B48645C1CCF117300D2DE3C /* TeacherHomeViewController.m */,
+				3B48645D1CCF117300D2DE3C /* TeacherHomeViewController.xib */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		3B48645E1CCF117300D2DE3C /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				3B48645F1CCF117300D2DE3C /* MessageViewController.h */,
+				3B4864601CCF117300D2DE3C /* MessageViewController.m */,
+				3B4864611CCF117300D2DE3C /* MessageViewController.xib */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		3B4864621CCF117300D2DE3C /* MyClass */ = {
+			isa = PBXGroup;
+			children = (
+				3B4864631CCF117300D2DE3C /* MyClassViewController.h */,
+				3B4864641CCF117300D2DE3C /* MyClassViewController.m */,
+				3B4864651CCF117300D2DE3C /* MyClassViewController.xib */,
+			);
+			path = MyClass;
+			sourceTree = "<group>";
+		};
+		3B4864661CCF117300D2DE3C /* PrivateCenter */ = {
+			isa = PBXGroup;
+			children = (
+				3B4864671CCF117300D2DE3C /* PrivateCenterViewController.h */,
+				3B4864681CCF117300D2DE3C /* PrivateCenterViewController.m */,
+				3B4864691CCF117300D2DE3C /* PrivateCenterViewController.xib */,
+			);
+			path = PrivateCenter;
+			sourceTree = "<group>";
+		};
+		3B48646A1CCF117300D2DE3C /* PublishHomeWork */ = {
+			isa = PBXGroup;
+			children = (
+				3B48646B1CCF117300D2DE3C /* PublishHomeworkViewController.h */,
+				3B48646C1CCF117300D2DE3C /* PublishHomeworkViewController.m */,
+				3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */,
+			);
+			path = PublishHomeWork;
 			sourceTree = "<group>";
 		};
 		5B7C88DD048F57B9225E4451 /* Frameworks */ = {
@@ -1566,19 +1743,24 @@
 				3A905D201C7F3A51005AB12F /* push4.caf in Resources */,
 				3A905D211C7F3A51005AB12F /* push5.caf in Resources */,
 				3A905D221C7F3A51005AB12F /* push6.caf in Resources */,
+				3B4864771CCF117300D2DE3C /* PublishHomeworkViewController.xib in Resources */,
 				3A44A1EC1CC0C76200B93F6A /* memberCenter_bg2@3x.png in Resources */,
+				3B48644B1CCF10C200D2DE3C /* myclass_click@3x.png in Resources */,
 				3A2E870A1C8C079F00C3CD6C /* ChildrenResultTableViewController.xib in Resources */,
 				3A8827771C6EE1470008367F /* ParentCommunityViewController.xib in Resources */,
 				3A26EE611C71A81B009C3242 /* Parent_default@3x.png in Resources */,
 				3AC1D1EC1CCDE7EE006291D0 /* regist_student_logo@3x.png in Resources */,
+				3B4864571CCF10C200D2DE3C /* tab_home@3x.png in Resources */,
 				3AC1D1EA1CCDE7EE006291D0 /* regist_login_btn@3x.png in Resources */,
 				3AFE02C31CA29D540097CC83 /* member_shuxue@3x.png in Resources */,
 				3AE8940F1C6C47C400E8BA97 /* login_left_line@3x.png in Resources */,
+				3B48644C1CCF10C200D2DE3C /* mymclass.png in Resources */,
 				3A26EE631C71A81B009C3242 /* Parent_home_up@3x.png in Resources */,
 				3AFE02C71CA29D540097CC83 /* member_yuwen@3x.png in Resources */,
 				3AE894031C6C28C300E8BA97 /* login_password_icon@3x.png in Resources */,
 				3A8CAEC21C70B3C200BDEB6B /* ParentChildrensViewController.xib in Resources */,
 				3AF11DDF1CB2691A00F98A03 /* subject_logo@3x.png in Resources */,
+				3B4864711CCF117300D2DE3C /* MessageViewController.xib in Resources */,
 				3A7864341C868062001BB65A /* ChildrenResultViewController.xib in Resources */,
 				3A8827881C6EE5730008367F /* tab_homes@3x.png in Resources */,
 				3A8CAE9F1C70AD9200BDEB6B /* comm_sure@2x.png in Resources */,
@@ -1586,6 +1768,7 @@
 				3AC1D1EB1CCDE7EE006291D0 /* regist_parent_logo@3x.png in Resources */,
 				3A8B7FA81C75C3A900E990F2 /* LaunchScreen.storyboard in Resources */,
 				3A44AA021CBE489500348B49 /* member_paysuccess@3x.png in Resources */,
+				3B4864461CCF10C200D2DE3C /* hw_stats.png in Resources */,
 				3AF27E381C73239400698673 /* AddChildrenViewController.xib in Resources */,
 				3AE894021C6C28C300E8BA97 /* login_btn@3x.png in Resources */,
 				3A3C1B441C9562A900514C32 /* YjyxMicroClassViewController.xib in Resources */,
@@ -1599,6 +1782,7 @@
 				3AE893FD1C6C26A400E8BA97 /* login_bg@3x.png in Resources */,
 				3AFE02B61CA28C2B0097CC83 /* tab_memberCenter@3x.png in Resources */,
 				3A03CB691C8EB876007B5136 /* Parent_weike@3x.png in Resources */,
+				3B48644D1CCF10C200D2DE3C /* new.png in Resources */,
 				3A5A00F51C79EA2A004584E6 /* MJRefresh.bundle in Resources */,
 				3A8827921C6EEFEF0008367F /* Personal_children@3x.png in Resources */,
 				3A26EE651C71A81B009C3242 /* Parent_message@3x.png in Resources */,
@@ -1609,25 +1793,33 @@
 				3A44A91D1CBD0F4400348B49 /* AlipaySDK.bundle in Resources */,
 				3AE8940C1C6C335D00E8BA97 /* login_logo@3x.png in Resources */,
 				3A26EE661C71A81B009C3242 /* Parent_statistics@3x.png in Resources */,
+				3B4864551CCF10C200D2DE3C /* stu_hw.png in Resources */,
 				3AF339421C770D5600586A37 /* defaultImage@3x.png in Resources */,
+				3B4864511CCF10C200D2DE3C /* publishhw@3x.png in Resources */,
 				3A91F46B1C7606FB001568AA /* ChildrenStatisticViewController.xib in Resources */,
 				3A8827851C6EE5730008367F /* tab_community@3x.png in Resources */,
 				3AE894101C6C47C400E8BA97 /* login_right_line@3x.png in Resources */,
 				3AFE02C61CA29D540097CC83 /* member_yingyu@3x.png in Resources */,
+				3B48646F1CCF117300D2DE3C /* TeacherHomeViewController.xib in Resources */,
 				3AF11DE01CB2691A00F98A03 /* subject_shiyong@3x.png in Resources */,
 				3AFE02C41CA29D540097CC83 /* member_subjectbg1@3x.png in Resources */,
 				3AD1FD941C72BD8F00E362B9 /* MyChildrenTableViewCell.xib in Resources */,
 				3AF339471C770FDC00586A37 /* AutoLoginViewController.xib in Resources */,
+				3B4864751CCF117300D2DE3C /* PrivateCenterViewController.xib in Resources */,
 				3AD1FD991C72CBC200E362B9 /* children_downline@3x.png in Resources */,
 				3AFE02C51CA29D540097CC83 /* member_subjectbg2@3x.png in Resources */,
 				3AD1FDA61C73149200E362B9 /* nav_operate@2x.png in Resources */,
 				3A44A1ED1CC0C76200B93F6A /* memberCenter_bg3@3x.png in Resources */,
+				3B4864581CCF10C200D2DE3C /* tab_home_click@3x.png in Resources */,
 				3A66A8041C931BBA005E2D43 /* ChildrenExplantionViewController.xib in Resources */,
 				3AE894041C6C28C300E8BA97 /* login_textView_bg@3x.png in Resources */,
+				3B4864471CCF10C200D2DE3C /* mall.png in Resources */,
 				3A8CAE921C70A11800BDEB6B /* ParentMoifyNameViewController.xib in Resources */,
+				3B48644F1CCF10C200D2DE3C /* privatecenter@3x.png in Resources */,
 				3AFE02C81CA29D540097CC83 /* memberCenter_bg1@3x.png in Resources */,
 				3AA165691C91BCD6006B8756 /* homework_4@3x.png in Resources */,
 				3A616F5A1CBB9C6B007255BB /* member_arrow@3x.png in Resources */,
+				3B4864491CCF10C200D2DE3C /* message_click@3x.png in Resources */,
 				3A88277D1C6EE1820008367F /* ParentPersonalViewController.xib in Resources */,
 				3AA165661C91BCD6006B8756 /* homework_1@3x.png in Resources */,
 				3A26EE641C71A81B009C3242 /* Parent_hone_down@3x.png in Resources */,
@@ -1639,17 +1831,27 @@
 				3AD1FDA41C73113700E362B9 /* ParentChildrenTableViewCell.xib in Resources */,
 				3AC1D1E41CCDE70E006291D0 /* RegistOneViewController.xib in Resources */,
 				3AE8940A1C6C306700E8BA97 /* login_unselect@3x.png in Resources */,
+				3B48644E1CCF10C200D2DE3C /* pic.png in Resources */,
 				3A04A5DA1C93E6590040D913 /* ChildrenVideoViewController.xib in Resources */,
+				3B4864591CCF10C200D2DE3C /* top_bg.png in Resources */,
+				3B4864541CCF10C200D2DE3C /* score.png in Resources */,
 				3A8827701C6EE0DE0008367F /* ParentHomeViewController.xib in Resources */,
+				3B4864731CCF117300D2DE3C /* MyClassViewController.xib in Resources */,
+				3B48644A1CCF10C200D2DE3C /* myclass@3x.png in Resources */,
+				3B4864501CCF10C200D2DE3C /* privatecenter_click@3x.png in Resources */,
 				3AF11DDA1CB211D600F98A03 /* YjyxMemberDetailViewController.xib in Resources */,
+				3B4864521CCF10C200D2DE3C /* publishhw_click@3x.png in Resources */,
 				3AC1D1E21CCDE70E006291D0 /* RegistFinalViewController.xib in Resources */,
 				3A04A5E01C9406850040D913 /* YjyxWorkPreviewViewController.xib in Resources */,
 				3AD1FD961C72C72E00E362B9 /* Parent_homework@3x.png in Resources */,
+				3B4864481CCF10C200D2DE3C /* message@3x.png in Resources */,
 				CB4004881C609BCD00556AA7 /* Main.storyboard in Resources */,
 				3AA165671C91BCD6006B8756 /* homework_2@3x.png in Resources */,
 				3AF11DDE1CB2691A00F98A03 /* subject_kaitong@3x.png in Resources */,
+				3B4864531CCF10C200D2DE3C /* report.png in Resources */,
 				3A26EE6B1C71CCDB009C3242 /* MyChildrenViewController.xib in Resources */,
 				3AA165681C91BCD6006B8756 /* homework_3@3x.png in Resources */,
+				3B4864561CCF10C200D2DE3C /* tab_bg.png in Resources */,
 				3A26EE601C71A81B009C3242 /* Parent_children@3x.png in Resources */,
 				3A8CAE9A1C70A39600BDEB6B /* comm_back@2x.png in Resources */,
 				3A88278F1C6EE9BD0008367F /* RegistViewController.xib in Resources */,
@@ -1718,6 +1920,7 @@
 				3A5A00F91C79EA2A004584E6 /* MJRefreshHeaderView.m in Sources */,
 				3A04A5CB1C93E6290040D913 /* MASCompositeConstraint.m in Sources */,
 				3A44A9F61CBD1CAB00348B49 /* DataVerifier.m in Sources */,
+				3B4864701CCF117300D2DE3C /* MessageViewController.m in Sources */,
 				3AEF27221C61F08A0028BE09 /* PasswordStipulateCheckin.m in Sources */,
 				CB4004821C609BCD00556AA7 /* AppDelegate.m in Sources */,
 				3A91F49A1C760CF4001568AA /* PNRadarChart.m in Sources */,
@@ -1726,6 +1929,7 @@
 				3AD1D1AF1C6300D9005F9969 /* ChildrenEntity.m in Sources */,
 				3A44A9FA1CBD1CAB00348B49 /* RSADataSigner.m in Sources */,
 				3AC1D1E11CCDE70E006291D0 /* RegistFinalViewController.m in Sources */,
+				3B4864741CCF117300D2DE3C /* PrivateCenterViewController.m in Sources */,
 				3A5A00FC1C79EA2A004584E6 /* UIView+MJExtension.m in Sources */,
 				3A5A00F71C79EA2A004584E6 /* MJRefreshConst.m in Sources */,
 				3A04A5D21C93E6290040D913 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
@@ -1805,11 +2009,13 @@
 				3A91F4991C760CF4001568AA /* PNPieChartDataItem.m in Sources */,
 				3AEF272A1C61F08A0028BE09 /* ViewRender.m in Sources */,
 				3A8CAEB71C70B36200BDEB6B /* SDImageCache.m in Sources */,
+				3B48646E1CCF117300D2DE3C /* TeacherHomeViewController.m in Sources */,
 				3A04A5D01C93E6290040D913 /* MASViewConstraint.m in Sources */,
 				3AF11DD91CB211D600F98A03 /* YjyxMemberDetailViewController.m in Sources */,
 				3A8827761C6EE1470008367F /* ParentCommunityViewController.m in Sources */,
 				3AEF272D1C61F08A0028BE09 /* SBJsonParser.m in Sources */,
 				3AEF26D61C61AE610028BE09 /* YjxService.m in Sources */,
+				3B4864721CCF117300D2DE3C /* MyClassViewController.m in Sources */,
 				3A2E87091C8C079F00C3CD6C /* ChildrenResultTableViewController.m in Sources */,
 				3AA1655C1C91AB40006B8756 /* RCLabel.m in Sources */,
 				3A5A00F61C79EA2A004584E6 /* MJRefreshBaseView.m in Sources */,
@@ -1817,8 +2023,10 @@
 				3AEF271F1C61F08A0028BE09 /* GTMBase64.m in Sources */,
 				3AEF27211C61F08A0028BE09 /* NSObject+category.m in Sources */,
 				3AEF27281C61F08A0028BE09 /* UIView+category.m in Sources */,
+				3B4864761CCF117300D2DE3C /* PublishHomeworkViewController.m in Sources */,
 				3A44A9FB1CBD1CAB00348B49 /* RSADataVerifier.m in Sources */,
 				3AF27E3B1C73465400698673 /* AccessJudge.m in Sources */,
+				3B48642D1CCF101100D2DE3C /* TeacherEntity.m in Sources */,
 				3AEF272E1C61F08A0028BE09 /* SBJsonWriter.m in Sources */,
 				3A88276F1C6EE0DE0008367F /* ParentHomeViewController.m in Sources */,
 			);

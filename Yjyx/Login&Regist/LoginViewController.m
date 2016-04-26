@@ -155,28 +155,81 @@
 
 -(IBAction)loginBtnClicked:(id)sender
 {
-    if (_uesrNameTF.text.length == 0||_passWordTF.text.length == 0) {
-      [self.view makeToast:@"请输入用户名或者密码" duration:1.0 position:SHOW_CENTER complete:nil];
-    }else{
-        [self.view makeToastActivity:SHOW_CENTER];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text,@"username",[_passWordTF.text md5],@"password",@"1",@"ostype",((AppDelegate*)SYS_DELEGATE).deviceToken,@"devicetoken",[[UIDevice currentDevice] model],@"description",nil];
-        [[YjxService sharedInstance] parentsLogin:dic withBlock:^(id result,NSError *error){
-            [self.view hideToastActivity];
-            if (result != nil) {
-                if ([[result objectForKey:@"retcode"] integerValue] == 0) {
-                    [(AppDelegate *)SYS_DELEGATE fillViews];
-                    [YjyxOverallData sharedInstance].parentInfo = [ParentEntity wrapParentWithdic:result];
-                    [YjyxOverallData sharedInstance].parentInfo.phone = _uesrNameTF.text;
-                    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text,@"username",_passWordTF.text,@"password", nil];
-                    [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
-                    [SYS_CACHE synchronize];
-                 }else{
-                    [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
-                }
-            }else{
-                [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+    if ([((AppDelegate*)SYS_DELEGATE).role isEqualToString:@"none"]) {
+        [self.view makeToast:@"请选择身份" duration:1.0 position:SHOW_CENTER complete:nil];
+    }else {
+        if (_uesrNameTF.text.length == 0||_passWordTF.text.length == 0) {
+            [self.view makeToast:@"请输入用户名或者密码" duration:1.0 position:SHOW_CENTER complete:nil];
+        }else{
+            [self.view makeToastActivity:SHOW_CENTER];
+            
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text,@"username",[_passWordTF.text md5],@"password",@"1",@"ostype",((AppDelegate*)SYS_DELEGATE).deviceToken,@"devicetoken",[[UIDevice currentDevice] model],@"description",nil];
+            
+            // 调用登录接口
+            if ([((AppDelegate*)SYS_DELEGATE).role isEqualToString:@"parents"]) {
+                // 家长
+                [[YjxService sharedInstance] parentsLogin:dic withBlock:^(id result,NSError *error){
+                    [self.view hideToastActivity];
+                    if (result != nil) {
+                        if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                            [(AppDelegate *)SYS_DELEGATE fillViews];
+                            [YjyxOverallData sharedInstance].parentInfo = [ParentEntity wrapParentWithdic:result];
+                            [YjyxOverallData sharedInstance].parentInfo.phone = _uesrNameTF.text;
+                            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text,@"username",_passWordTF.text,@"password", nil];
+                            [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
+                            [SYS_CACHE synchronize];
+                        }else{
+                            [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                        }
+                    }else{
+                        [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+                    }
+                }];
+                
+            }else if ([((AppDelegate*)SYS_DELEGATE).role isEqualToString:@"teacher"]){
+                // 老师
+                // 参数字典
+                NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text,@"username",_passWordTF.text,@"password",@"1",@"ostype",((AppDelegate*)SYS_DELEGATE).deviceToken,@"devicetoken",[[UIDevice currentDevice] model],@"description",nil];
+                
+                [[YjxService sharedInstance] teacherLogin:dic withBlock:^(id result, NSError *error) {
+                    
+                    [self.view hideToastActivity];
+                    if (result != nil) {
+                        
+                        NSLog(@"%@", result);
+                        
+                        if ([result[@"retcode"] integerValue] == 0) {
+                            [(AppDelegate *)SYS_DELEGATE fillViews];
+                            
+                            [YjyxOverallData sharedInstance].teacherInfo = [TeacherEntity wrapTeacherWithDic:result];
+                            
+                            [YjyxOverallData sharedInstance].teacherInfo.name = _uesrNameTF.text;
+                            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text, @"username", _passWordTF.text, @"password", nil];
+                            
+                            [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
+                            [SYS_CACHE synchronize];
+                            
+                            NSLog(@"登录老师界面");
+                        }else {
+                            
+                            [self.view makeToast:[result objectForKey:@"msg"] duration:3.0 position:SHOW_CENTER complete:nil];
+                        }
+                    }else {
+                        
+                        [self.view makeToast:[error description] duration:2.0 position:SHOW_CENTER complete:nil];
+                    }
+                    
+                    
+                }];
+                
+            }else if ([((AppDelegate*)SYS_DELEGATE).role isEqualToString:@"student"]){
+                // 学生
+                [self.view makeToast:@"正在建设中,敬请期待" duration:3.0 position:SHOW_CENTER complete:nil];
+                
             }
-        }];
+            
+        }
+        
     }
 }
 

@@ -57,12 +57,34 @@
 -(void)checkOutVerfirycode:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
 
 
-/*
-学生相关接口
-*/
+
 
 /*
-老师相关接口
-*/
+ ******************************学生相关接口************************
+ */
+
+/*
+ *学生登录接口
+ */
+- (void)studentLogin:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
+
+
+/*
+ ******************************老师相关接口*************************
+ */
+/*
+ *老师登录接口
+ */
+- (void)teacherLogin:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
+/*
+ *老师登出接口
+ */
+- (void)teacherLogout:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
+/*
+ *老师获取所有学生列表
+ */
+- (void)teacherGetAllStuList:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
+
+
 
 @end

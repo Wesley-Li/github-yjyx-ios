@@ -10,6 +10,13 @@
 #import "ParentHomeViewController.h"
 #import "ParentCommunityViewController.h"
 #import "ParentPersonalViewController.h"
+
+#import "TeacherHomeViewController.h"
+#import "MessageViewController.h"
+#import "MyClassViewController.h"
+#import "PrivateCenterViewController.h"
+#import "PublishHomeworkViewController.h"
+
 #import "AutoLoginViewController.h"
 #import "UMessage.h"
 #import "YjyxPMemberCenterViewController.h"
@@ -119,7 +126,7 @@
         self.window.rootViewController = _navigation;
         [self.window makeKeyAndVisible];
     }else{
-//        _deviceToken = @"1231231312da1231sqwc1213";
+        _deviceToken = @"1231231312da1231sqwc1213";
         LoginViewController *loginView = [[LoginViewController alloc] init];
         _navigation = [[NavRootViewController alloc] initWithRootViewController:loginView];
         _navigation.navigationBar.hidden = YES;
@@ -255,21 +262,49 @@
         _tabBar = [[UITabBarController alloc] init];
     }
     
-    NavRootViewController *home = [[NavRootViewController alloc] initWithRootViewController:[[ParentHomeViewController alloc] initWithNibName:@"ParentHomeViewController" bundle:nil]];
-    home.tabBarItem = [UITabBarItem itemWithTitle:@"首页" image:[UIImage imageNamed:@"tab_home"] selectedImage:[UIImage imageNamed:@"tab_homes"]];
-    home.navigationBarHidden = YES;
-    
-    NavRootViewController *community = [[NavRootViewController alloc] initWithRootViewController:[[ParentCommunityViewController alloc] initWithNibName:@"ParentCommunityViewController" bundle:nil]];
-    community.tabBarItem = [UITabBarItem itemWithTitle:@"社区" image:[UIImage imageNamed:@"tab_community"] selectedImage:[UIImage imageNamed:@"tab_communitys"]];
-    community.navigationBarHidden = YES;
-    
-    NavRootViewController *memberCenter = [[NavRootViewController alloc] initWithRootViewController:[[YjyxPMemberCenterViewController alloc] initWithNibName:@"YjyxPMemberCenterViewController" bundle:nil]];
-    memberCenter.tabBarItem = [UITabBarItem itemWithTitle:@"会员中心" image:[UIImage imageNamed:@"tab_memberCenter"] selectedImage:[UIImage imageNamed:@"tab_memberCenter"]];
-    
-    NavRootViewController *personal = [[NavRootViewController alloc] initWithRootViewController:[[ParentPersonalViewController alloc] initWithNibName:@"ParentPersonalViewController" bundle:nil]];
-    personal.tabBarItem = [UITabBarItem itemWithTitle:@"个人中心" image:[UIImage imageNamed:@"tab_personal"] selectedImage:[UIImage imageNamed:@"tab_personals"]];
-    
-    [_tabBar setViewControllers:@[home,community,memberCenter,personal]];
+    if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {
+        NavRootViewController *home = [[NavRootViewController alloc] initWithRootViewController:[[ParentHomeViewController alloc] initWithNibName:@"ParentHomeViewController" bundle:nil]];
+        home.tabBarItem = [UITabBarItem itemWithTitle:@"首页" image:[UIImage imageNamed:@"tab_home"] selectedImage:[UIImage imageNamed:@"tab_homes"]];
+        home.navigationBarHidden = YES;
+        
+        NavRootViewController *community = [[NavRootViewController alloc] initWithRootViewController:[[ParentCommunityViewController alloc] initWithNibName:@"ParentCommunityViewController" bundle:nil]];
+        community.tabBarItem = [UITabBarItem itemWithTitle:@"社区" image:[UIImage imageNamed:@"tab_community"] selectedImage:[UIImage imageNamed:@"tab_communitys"]];
+        community.navigationBarHidden = YES;
+        
+        NavRootViewController *memberCenter = [[NavRootViewController alloc] initWithRootViewController:[[YjyxPMemberCenterViewController alloc] initWithNibName:@"YjyxPMemberCenterViewController" bundle:nil]];
+        memberCenter.tabBarItem = [UITabBarItem itemWithTitle:@"会员中心" image:[UIImage imageNamed:@"tab_memberCenter"] selectedImage:[UIImage imageNamed:@"tab_memberCenter"]];
+        
+        NavRootViewController *personal = [[NavRootViewController alloc] initWithRootViewController:[[ParentPersonalViewController alloc] initWithNibName:@"ParentPersonalViewController" bundle:nil]];
+        personal.tabBarItem = [UITabBarItem itemWithTitle:@"个人中心" image:[UIImage imageNamed:@"tab_personal"] selectedImage:[UIImage imageNamed:@"tab_personals"]];
+        
+        [_tabBar setViewControllers:@[home,community,memberCenter,personal]];
+    }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"teacher"]){
+        
+        // 首页
+        NavRootViewController *teacherHome = [[NavRootViewController alloc] initWithRootViewController:[[TeacherHomeViewController alloc] initWithNibName:@"TeacherHomeViewController" bundle:nil]];
+        teacherHome.tabBarItem = [UITabBarItem itemWithTitle:@"首页" image:[UIImage imageNamed:@"tab_home"] selectedImage:[UIImage imageNamed:@"tab_home_click"]];
+        teacherHome.navigationBar.hidden = YES;
+        
+        // 消息
+        NavRootViewController *message = [[NavRootViewController alloc] initWithRootViewController:[[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil]];
+        message.tabBarItem = [UITabBarItem itemWithTitle:@"消息" image:[UIImage imageNamed:@"message"] selectedImage:[UIImage imageNamed:@"message_click"]];
+        
+        // 发布作业
+        NavRootViewController *publishHomework = [[NavRootViewController alloc] initWithRootViewController:[[PublishHomeworkViewController alloc] initWithNibName:@"PublishHomeworkViewController" bundle:nil]];
+        publishHomework.tabBarItem = [UITabBarItem itemWithTitle:@"发布作业" image:[UIImage imageNamed:@"publishhw"] selectedImage:[UIImage imageNamed:@"publishhw_click"]];
+        
+        // 班级
+        NavRootViewController *myClass = [[NavRootViewController alloc] initWithRootViewController:[[MyClassViewController alloc] initWithNibName:@"MyClassViewController" bundle:nil]];
+        myClass.tabBarItem = [UITabBarItem itemWithTitle:@"班级" image:[UIImage imageNamed:@"myclass"] selectedImage:[UIImage imageNamed:@"myclass_click"]];
+        
+        // 个人中心
+        NavRootViewController *privateCenter = [[NavRootViewController alloc] initWithRootViewController:[[PrivateCenterViewController alloc] initWithNibName:@"PrivateCenterViewController" bundle:nil]];
+        privateCenter.tabBarItem = [UITabBarItem itemWithTitle:@"个人中心" image:[UIImage imageNamed:@"privatecenter"] selectedImage:[UIImage imageNamed:@"privatecenter_click"]];
+        
+        [_tabBar setViewControllers:@[teacherHome, message, publishHomework, myClass, privateCenter]];
+        
+        
+    }
     
     [_tabBar setSelectedIndex:0];
     [self.window setRootViewController:_tabBar];

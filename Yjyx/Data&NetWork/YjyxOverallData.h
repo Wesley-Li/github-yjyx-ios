@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "ParentEntity.h"
 #import "ChildrenEntity.h"
+#import "TeacherEntity.h"
+
 
 typedef enum PUSH_TYPE{
     PUSHTYPE_PREVIEWHOME = 1,
@@ -22,6 +24,9 @@ typedef enum PUSH_TYPE{
 @interface YjyxOverallData : NSObject
 @property(strong, nonatomic) NSString *baseUrl;
 @property(strong, nonatomic) ParentEntity *parentInfo;
+@property(strong, nonatomic) TeacherEntity *teacherInfo;
+
+
 @property(assign, nonatomic) PUSH_TYPE pushType;
 @property(strong, nonatomic) NSString *historyId;
 @property(strong, nonatomic) NSString *previewRid;

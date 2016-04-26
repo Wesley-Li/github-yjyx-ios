@@ -96,7 +96,7 @@
 -(void)parentsLogin:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:[BaseURL stringByAppendingString:@"/api/parents/login/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+    [manager POST:[BaseURL stringByAppendingString:@"/api/parents/register/?action=checkcode"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -312,6 +312,50 @@
     }];
 
 }
+
+//**************************老师接口实现**************************
+#pragma mark - 老师相关接口实现
+
+// 老师登录
+- (void)teacherLogin:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block {
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:SESSIONID forHTTPHeaderField:@"sessionid"];
+    [manager POST:[BaseURL stringByAppendingString:@"/api/teacher/mobile/login/"] parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject, nil);
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+    
+}
+
+// 老师登出
+- (void)teacherLogout:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block {
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:SESSIONID forHTTPHeaderField:@"sessionid"];
+    [manager POST:[BaseURL stringByAppendingString:@"/api/teacher/mobile/logout/"] parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject, nil);
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+    
+}
+
+//**************************学生接口实现**************************
+#pragma mark - 学生相关接口实现
+
+// 学生登录
+- (void)studentLogin:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block {
+    
+    
+}
+
+
 
 
 @end
