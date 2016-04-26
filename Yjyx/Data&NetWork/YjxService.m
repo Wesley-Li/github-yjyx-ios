@@ -281,5 +281,37 @@
 
 }
 
+-(void)getSMSsendcode:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/sms/sendcode/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+
+}
+
+-(void)checkOutVerfirycode:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/sms/checkcode/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+
+}
+
 
 @end

@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface RegistFinalViewController : UIViewController
-
+{
+    IBOutlet UILabel *titleLb;
+    IBOutlet UITextField *parentNameText;
+    IBOutlet UITextField *parentPasswordText;
+    IBOutlet UITextField *relationText;
+    IBOutlet UITextField *phoneText;
+    IBOutlet UITextField *codeText;
+    IBOutlet UIButton *verifyBtn;
+}
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) ChildrenEntity *childrenEntity;
+@property (nonatomic, strong) NSString *school;
+@property (nonatomic, strong) NSString *verifyCode;
+@property (assign,nonatomic) int second;
 @end

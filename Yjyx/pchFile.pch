@@ -29,6 +29,7 @@
 #import <QiniuSDK.h>
 #import "BaseViewController.h"
 #import <CoreText/CoreText.h>
+#import "ChildrenEntity.h"
 //系统版本
 #define SESSIONID [[NSUserDefaults standardUserDefaults] objectForKey:@"SessionID"]
 #define SYS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]

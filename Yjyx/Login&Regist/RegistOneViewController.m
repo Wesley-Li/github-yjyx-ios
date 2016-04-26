@@ -8,6 +8,7 @@
 
 #import "RegistOneViewController.h"
 #import "RegistViewController.h"
+#import "RegistFinalViewController.h"
 
 @interface RegistOneViewController ()
 
@@ -40,11 +41,16 @@
                 childrenEntity.name = [result objectForKey:@"childname"];
                 childrenEntity.cid = [result objectForKey:@"cid"];
                 childrenEntity.childavatar = @"";
+                RegistFinalViewController *vc = [[RegistFinalViewController alloc] init];
+                vc.childrenEntity = childrenEntity;
+                vc.school = [result objectForKey:@"school"];
+                vc.verifyCode = codeTextField.text;
+                [self.navigationController pushViewController:vc animated:YES];
+                
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
-            RegistViewController *vc = [[RegistViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+           
         }else{
             [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
         }

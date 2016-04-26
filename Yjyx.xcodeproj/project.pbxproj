@@ -145,6 +145,14 @@
 		3AA165691C91BCD6006B8756 /* homework_4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AA165651C91BCD6006B8756 /* homework_4@3x.png */; };
 		3AB212B31CA2E11900DCC618 /* KWFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB212B01CA2E11900DCC618 /* KWFormView.m */; };
 		3AB212B41CA2E11900DCC618 /* KWFormViewQuickBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB212B21CA2E11900DCC618 /* KWFormViewQuickBuilder.m */; };
+		3AC1D1E11CCDE70E006291D0 /* RegistFinalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC1D1DC1CCDE70E006291D0 /* RegistFinalViewController.m */; };
+		3AC1D1E21CCDE70E006291D0 /* RegistFinalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC1D1DD1CCDE70E006291D0 /* RegistFinalViewController.xib */; };
+		3AC1D1E31CCDE70E006291D0 /* RegistOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC1D1DF1CCDE70E006291D0 /* RegistOneViewController.m */; };
+		3AC1D1E41CCDE70E006291D0 /* RegistOneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC1D1E01CCDE70E006291D0 /* RegistOneViewController.xib */; };
+		3AC1D1EA1CCDE7EE006291D0 /* regist_login_btn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AC1D1E61CCDE7EE006291D0 /* regist_login_btn@3x.png */; };
+		3AC1D1EB1CCDE7EE006291D0 /* regist_parent_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AC1D1E71CCDE7EE006291D0 /* regist_parent_logo@3x.png */; };
+		3AC1D1EC1CCDE7EE006291D0 /* regist_student_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AC1D1E81CCDE7EE006291D0 /* regist_student_logo@3x.png */; };
+		3AC1D1ED1CCDE7EE006291D0 /* regist_text_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AC1D1E91CCDE7EE006291D0 /* regist_text_bg@3x.png */; };
 		3AD1D1AF1C6300D9005F9969 /* ChildrenEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1D1AE1C6300D9005F9969 /* ChildrenEntity.m */; };
 		3AD1D1B21C633260005F9969 /* YjyxOverallData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1D1B11C633260005F9969 /* YjyxOverallData.m */; };
 		3AD1FD8F1C72B6D100E362B9 /* ChildrenActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1FD8E1C72B6D100E362B9 /* ChildrenActivity.m */; };
@@ -533,6 +541,16 @@
 		3AB212B01CA2E11900DCC618 /* KWFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWFormView.m; sourceTree = "<group>"; };
 		3AB212B11CA2E11900DCC618 /* KWFormViewQuickBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KWFormViewQuickBuilder.h; sourceTree = "<group>"; };
 		3AB212B21CA2E11900DCC618 /* KWFormViewQuickBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KWFormViewQuickBuilder.m; sourceTree = "<group>"; };
+		3AC1D1DB1CCDE70E006291D0 /* RegistFinalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistFinalViewController.h; sourceTree = "<group>"; };
+		3AC1D1DC1CCDE70E006291D0 /* RegistFinalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistFinalViewController.m; sourceTree = "<group>"; };
+		3AC1D1DD1CCDE70E006291D0 /* RegistFinalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistFinalViewController.xib; sourceTree = "<group>"; };
+		3AC1D1DE1CCDE70E006291D0 /* RegistOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistOneViewController.h; sourceTree = "<group>"; };
+		3AC1D1DF1CCDE70E006291D0 /* RegistOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistOneViewController.m; sourceTree = "<group>"; };
+		3AC1D1E01CCDE70E006291D0 /* RegistOneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistOneViewController.xib; sourceTree = "<group>"; };
+		3AC1D1E61CCDE7EE006291D0 /* regist_login_btn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "regist_login_btn@3x.png"; sourceTree = "<group>"; };
+		3AC1D1E71CCDE7EE006291D0 /* regist_parent_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "regist_parent_logo@3x.png"; sourceTree = "<group>"; };
+		3AC1D1E81CCDE7EE006291D0 /* regist_student_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "regist_student_logo@3x.png"; sourceTree = "<group>"; };
+		3AC1D1E91CCDE7EE006291D0 /* regist_text_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "regist_text_bg@3x.png"; sourceTree = "<group>"; };
 		3AD1D1AD1C6300D9005F9969 /* ChildrenEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildrenEntity.h; sourceTree = "<group>"; };
 		3AD1D1AE1C6300D9005F9969 /* ChildrenEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildrenEntity.m; sourceTree = "<group>"; };
 		3AD1D1B01C633260005F9969 /* YjyxOverallData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxOverallData.h; sourceTree = "<group>"; };
@@ -742,6 +760,7 @@
 		3A26EE581C71A62F009C3242 /* ParentFiles */ = {
 			isa = PBXGroup;
 			children = (
+				3AC1D1E51CCDE7D7006291D0 /* regist */,
 				3AFE02BA1CA29D340097CC83 /* memberCenter */,
 				3AA165611C91BC12006B8756 /* childrenHomework */,
 				3A905D161C7F38E7005AB12F /* audio */,
@@ -759,6 +778,12 @@
 				3A4302011C61FDFB00B8D259 /* LoginViewController.h */,
 				3A4302021C61FDFB00B8D259 /* LoginViewController.m */,
 				3A4302031C61FDFB00B8D259 /* LoginViewController.xib */,
+				3AC1D1DE1CCDE70E006291D0 /* RegistOneViewController.h */,
+				3AC1D1DF1CCDE70E006291D0 /* RegistOneViewController.m */,
+				3AC1D1E01CCDE70E006291D0 /* RegistOneViewController.xib */,
+				3AC1D1DB1CCDE70E006291D0 /* RegistFinalViewController.h */,
+				3AC1D1DC1CCDE70E006291D0 /* RegistFinalViewController.m */,
+				3AC1D1DD1CCDE70E006291D0 /* RegistFinalViewController.xib */,
 				3A88278B1C6EE9BD0008367F /* RegistViewController.h */,
 				3A88278C1C6EE9BD0008367F /* RegistViewController.m */,
 				3A88278D1C6EE9BD0008367F /* RegistViewController.xib */,
@@ -1164,6 +1189,17 @@
 			path = Yjyx/KWFormView;
 			sourceTree = SOURCE_ROOT;
 		};
+		3AC1D1E51CCDE7D7006291D0 /* regist */ = {
+			isa = PBXGroup;
+			children = (
+				3AC1D1E61CCDE7EE006291D0 /* regist_login_btn@3x.png */,
+				3AC1D1E71CCDE7EE006291D0 /* regist_parent_logo@3x.png */,
+				3AC1D1E81CCDE7EE006291D0 /* regist_student_logo@3x.png */,
+				3AC1D1E91CCDE7EE006291D0 /* regist_text_bg@3x.png */,
+			);
+			name = regist;
+			sourceTree = "<group>";
+		};
 		3AD1D1AC1C63007C005F9969 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -1534,6 +1570,8 @@
 				3A2E870A1C8C079F00C3CD6C /* ChildrenResultTableViewController.xib in Resources */,
 				3A8827771C6EE1470008367F /* ParentCommunityViewController.xib in Resources */,
 				3A26EE611C71A81B009C3242 /* Parent_default@3x.png in Resources */,
+				3AC1D1EC1CCDE7EE006291D0 /* regist_student_logo@3x.png in Resources */,
+				3AC1D1EA1CCDE7EE006291D0 /* regist_login_btn@3x.png in Resources */,
 				3AFE02C31CA29D540097CC83 /* member_shuxue@3x.png in Resources */,
 				3AE8940F1C6C47C400E8BA97 /* login_left_line@3x.png in Resources */,
 				3A26EE631C71A81B009C3242 /* Parent_home_up@3x.png in Resources */,
@@ -1545,11 +1583,13 @@
 				3A8827881C6EE5730008367F /* tab_homes@3x.png in Resources */,
 				3A8CAE9F1C70AD9200BDEB6B /* comm_sure@2x.png in Resources */,
 				3AD1FD9F1C72CE5000E362B9 /* CommonWebViewController.xib in Resources */,
+				3AC1D1EB1CCDE7EE006291D0 /* regist_parent_logo@3x.png in Resources */,
 				3A8B7FA81C75C3A900E990F2 /* LaunchScreen.storyboard in Resources */,
 				3A44AA021CBE489500348B49 /* member_paysuccess@3x.png in Resources */,
 				3AF27E381C73239400698673 /* AddChildrenViewController.xib in Resources */,
 				3AE894021C6C28C300E8BA97 /* login_btn@3x.png in Resources */,
 				3A3C1B441C9562A900514C32 /* YjyxMicroClassViewController.xib in Resources */,
+				3AC1D1ED1CCDE7EE006291D0 /* regist_text_bg@3x.png in Resources */,
 				3A905D151C7F3587005AB12F /* YjyxSoundViewController.xib in Resources */,
 				3AE894051C6C28C300E8BA97 /* login_username_icon@3x.png in Resources */,
 				3A4302051C61FDFB00B8D259 /* LoginViewController.xib in Resources */,
@@ -1597,10 +1637,12 @@
 				3A3B97191C97A03E00C6A15A /* Common_video@3x.png in Resources */,
 				3A8827871C6EE5730008367F /* tab_home@3x.png in Resources */,
 				3AD1FDA41C73113700E362B9 /* ParentChildrenTableViewCell.xib in Resources */,
+				3AC1D1E41CCDE70E006291D0 /* RegistOneViewController.xib in Resources */,
 				3AE8940A1C6C306700E8BA97 /* login_unselect@3x.png in Resources */,
 				3A04A5DA1C93E6590040D913 /* ChildrenVideoViewController.xib in Resources */,
 				3A8827701C6EE0DE0008367F /* ParentHomeViewController.xib in Resources */,
 				3AF11DDA1CB211D600F98A03 /* YjyxMemberDetailViewController.xib in Resources */,
+				3AC1D1E21CCDE70E006291D0 /* RegistFinalViewController.xib in Resources */,
 				3A04A5E01C9406850040D913 /* YjyxWorkPreviewViewController.xib in Resources */,
 				3AD1FD961C72C72E00E362B9 /* Parent_homework@3x.png in Resources */,
 				CB4004881C609BCD00556AA7 /* Main.storyboard in Resources */,
@@ -1683,6 +1725,7 @@
 				3AD1FD8F1C72B6D100E362B9 /* ChildrenActivity.m in Sources */,
 				3AD1D1AF1C6300D9005F9969 /* ChildrenEntity.m in Sources */,
 				3A44A9FA1CBD1CAB00348B49 /* RSADataSigner.m in Sources */,
+				3AC1D1E11CCDE70E006291D0 /* RegistFinalViewController.m in Sources */,
 				3A5A00FC1C79EA2A004584E6 /* UIView+MJExtension.m in Sources */,
 				3A5A00F71C79EA2A004584E6 /* MJRefreshConst.m in Sources */,
 				3A04A5D21C93E6290040D913 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
@@ -1731,6 +1774,7 @@
 				3A91F48F1C760CF4001568AA /* PNBar.m in Sources */,
 				3AEF27201C61F08A0028BE09 /* RTSpinKitView.m in Sources */,
 				3AB212B31CA2E11900DCC618 /* KWFormView.m in Sources */,
+				3AC1D1E31CCDE70E006291D0 /* RegistOneViewController.m in Sources */,
 				3A44A9F71CBD1CAB00348B49 /* MD5DataSigner.m in Sources */,
 				3AEF27271C61F08A0028BE09 /* UIImageEffects.m in Sources */,
 				3AD1FD931C72BD8F00E362B9 /* MyChildrenTableViewCell.m in Sources */,

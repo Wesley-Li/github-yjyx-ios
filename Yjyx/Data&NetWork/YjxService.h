@@ -50,6 +50,13 @@
 
 -(void)purchaseProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 
+
+//发送短信验证码
+-(void)getSMSsendcode:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
+
+-(void)checkOutVerfirycode:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
+
+
 /*
 学生相关接口
 */
