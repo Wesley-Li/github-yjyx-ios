@@ -29,6 +29,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    ((AppDelegate*)SYS_DELEGATE).role = @"parents";
+
         //1.注册APNS推送通知
     if (SYS_VERSION >= 8.0) {
         [[UIApplication sharedApplication] registerForRemoteNotifications];

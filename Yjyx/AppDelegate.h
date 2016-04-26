@@ -19,6 +19,9 @@
 
 @property (strong, nonatomic) UITabBarController *tabBar;
 
+@property (strong, nonatomic) NSString *role;// 用户身份
+
+
 - (void)fillViews;
 
 @end

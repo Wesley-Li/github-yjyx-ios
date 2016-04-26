@@ -7,7 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
             <connections>
+                <outlet property="parentsBtn" destination="aCY-IF-LqX" id="u9j-2f-QQt"/>
                 <outlet property="passWordTF" destination="lTj-KF-Pd2" id="Ub6-7q-lgk"/>
+                <outlet property="stuBtn" destination="93N-vy-Hfg" id="9G5-SW-UO6"/>
+                <outlet property="teacherBtn" destination="j3H-Nj-NSO" id="Zu2-fS-xfB"/>
                 <outlet property="uesrNameTF" destination="c9u-WE-1ih" id="mNL-iP-zWd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -33,6 +36,10 @@
                             <rect key="frame" x="14" y="8" width="17" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="login_unselect.png"/>
+                            <state key="selected" image="login_select.png"/>
+                            <connections>
+                                <action selector="teacherBtnClicked:" destination="-1" eventType="touchUpInside" id="zmK-gl-5iV"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="老师" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W90-am-vcC">
                             <rect key="frame" x="41" y="6" width="42" height="21"/>
@@ -44,7 +51,11 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aCY-IF-LqX">
                             <rect key="frame" x="92" y="9" width="17" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="login_select.png"/>
+                            <state key="normal" image="login_unselect.png"/>
+                            <state key="selected" image="login_select.png"/>
+                            <connections>
+                                <action selector="parentsBtnClicked:" destination="-1" eventType="touchUpInside" id="Dmf-VD-Fi3"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="家长" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WS1-NQ-hWc">
                             <rect key="frame" x="119" y="7" width="42" height="21"/>
@@ -57,6 +68,10 @@
                             <rect key="frame" x="162" y="9" width="17" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="login_unselect.png"/>
+                            <state key="selected" image="login_select.png"/>
+                            <connections>
+                                <action selector="stuBtnClicked:" destination="-1" eventType="touchUpInside" id="6Kh-2t-ysQ"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="学生" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A9F-R0-b3A">
                             <rect key="frame" x="189" y="7" width="42" height="21"/>

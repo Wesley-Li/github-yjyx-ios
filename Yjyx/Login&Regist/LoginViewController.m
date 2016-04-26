@@ -24,6 +24,12 @@
     [super viewDidLoad];
     self.title = @"登录";
     
+    // 身份选择默认是家长
+    ((AppDelegate*)SYS_DELEGATE).role = @"parents";
+    [_parentsBtn setSelected:YES];
+    [_teacherBtn setSelected:NO];
+    [_stuBtn setSelected:NO];
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clicked:)];
     [self.view addGestureRecognizer:tap];
     
@@ -95,6 +101,57 @@
 {
     [self.view hideKeyboard];
 }
+
+// 点击老师按钮
+- (IBAction)teacherBtnClicked:(id)sender {
+    if (_teacherBtn.isSelected) {
+        [_teacherBtn setSelected:NO];
+        ((AppDelegate*)SYS_DELEGATE).role = @"none";
+        _uesrNameTF.placeholder = @"";
+    }else {
+        
+        [_teacherBtn setSelected:YES];
+        _uesrNameTF.placeholder = @"用户名";
+        ((AppDelegate*)SYS_DELEGATE).role = @"teacher";
+        [_parentsBtn setSelected:NO];
+        [_stuBtn setSelected:NO];
+    }
+    
+}
+
+- (IBAction)parentsBtnClicked:(id)sender {
+    if (_parentsBtn.isSelected) {
+        [_parentsBtn setSelected:NO];
+        ((AppDelegate*)SYS_DELEGATE).role = @"none";
+        _uesrNameTF.placeholder = @"";
+        
+    }else {
+        
+        [_parentsBtn setSelected:YES];
+        _uesrNameTF.placeholder = @"手机号";
+        ((AppDelegate*)SYS_DELEGATE).role = @"parents";
+        [_teacherBtn setSelected:NO];
+        [_stuBtn setSelected:NO];
+    }
+}
+
+- (IBAction)stuBtnClicked:(id)sender {
+    if (_stuBtn.isSelected) {
+        [_stuBtn setSelected:NO];
+        ((AppDelegate*)SYS_DELEGATE).role = @"none";
+        _uesrNameTF.placeholder = @"";
+        
+    }else {
+        
+        [_stuBtn setSelected:YES];
+        _uesrNameTF.placeholder = @"用户名";
+        ((AppDelegate*)SYS_DELEGATE).role = @"student";
+        [_parentsBtn setSelected:NO];
+        [_teacherBtn setSelected:NO];
+    }
+    
+}
+
 
 -(IBAction)loginBtnClicked:(id)sender
 {

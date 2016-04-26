@@ -10,7 +10,34 @@
 	<string>46</string>
 	<key>objects</key>
 	<dict>
-		<key>0005C206B14A94150D6EB9B9C679E919</key>
+		<key>016D07485E0B5B946BD36F482DBB8B8D</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>100D29054ED209C81B48DDCC3A60F4F4</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>024FFBBCA952A00DF8A6306E2D0FD309</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7F0475F5319409A7BB29B4534B82CE6A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>030940DC44671D59C9AD37533429EFCD</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -25,98 +52,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>016D07485E0B5B946BD36F482DBB8B8D</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>100D29054ED209C81B48DDCC3A60F4F4</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>019C8FADF6CD1E933022BA7D7C017828</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNDnsManager.h</string>
-			<key>path</key>
-			<string>HappyDNS/Common/QNDnsManager.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>01B3D9989DBE8FC5E538976B3C1CE467</key>
-		<dict>
-			<key>fileRef</key>
-			<string>77CDC01265E1B1F2EA90413D211AA63F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>02292C0438722849D0B2E25714A05E6E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Qiniu-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>023ECC330A4F234E7771DCC04054EA67</key>
-		<dict>
-			<key>fileRef</key>
-			<string>259F4BA09A6AFF12527BB464CD72A765</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>02EE3885B0DBCFE76C4C879F65CD76F1</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNResolver.m</string>
-			<key>path</key>
-			<string>HappyDNS/Local/QNResolver.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>030D420072BDE89804EA66179D0FEE88</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNRecord.m</string>
-			<key>path</key>
-			<string>HappyDNS/Common/QNRecord.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>037C0CA694176A3C0915F62C9D20B3E6</key>
 		<dict>
 			<key>children</key>
@@ -127,36 +62,6 @@
 			<string>PBXGroup</string>
 			<key>name</key>
 			<string>Targets Support Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>04B87C10B4923065C825FF381FF53598</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNStats.h</string>
-			<key>path</key>
-			<string>QiniuSDK/Http/QNStats.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>04F6DB04E9F9B7773891FF0D517AEE0A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNFileDelegate.h</string>
-			<key>path</key>
-			<string>QiniuSDK/Common/QNFileDelegate.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -228,10 +133,40 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
+		<key>062070799F98ECFC4B8F298249378EC4</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>D1769BC66338C01708C1E995DBE788D6</string>
+				<string>B2FD116B0D47BBC79E879F55B6C2B9BB</string>
+				<string>B2D33787590C755D9704E95927EEFB2A</string>
+				<string>A778F4477DEB7EC5FFCF04BF703C5E68</string>
+				<string>7FE6C0DEB45DF22BA08536E14472DE90</string>
+				<string>5D154ACCCDBF79A905165CE8E407AAA3</string>
+				<string>97D1FC0A4ACED38C197AC2FA0B3AEE87</string>
+				<string>F9139AEA8A0362C365FDAF4C910D02C3</string>
+				<string>32816DE61799B70DA9C792239B2C87C4</string>
+				<string>92F73EF1D150B8D7EAB84FD01371107A</string>
+				<string>1694CDDFF7902527F37865288E0E2104</string>
+				<string>9B91A1DF69BC0DF4F2F6C8E42118829E</string>
+				<string>8E68EE878C578F7841B818FAD33D47B4</string>
+				<string>2B0926271509E5E5B1D1D76DE0A038B7</string>
+				<string>FFDABD8D5D206A3A2ABF8A3DEC4D869D</string>
+				<string>3EE498C0577E72B0062795E79383CA1C</string>
+				<string>CC3E4F4CC066C77A9265D2CF502FD3DD</string>
+				<string>B68BCB7DD14D7822EEF1F2A89A6BEC0F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>UIKit</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>06A5B0C6A8C4AEB343B5CA6989E22B72</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>557D3EF2DE8A191EE0DC79017A93E0C0</string>
+			<string>2EA2AE550ACDD73C7CF7FE1566D4EC5E</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
@@ -262,26 +197,20 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>09BDD795FD7D9D3A1323D89062C23CF2</key>
+		<key>0A913288BEDA903F5D02B240D1DEF722</key>
 		<dict>
-			<key>fileRef</key>
-			<string>AFF9ECD3B392A461FD1221A5BC0F1943</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>0A38690CC29B8A2F1530BE52CD3F0290</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3DFFE59716756E6CE347CC60504DACBC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNDes.h</string>
+			<key>path</key>
+			<string>HappyDNS/Util/QNDes.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>0AA2A8063B86C8A5F667E162B488FDF0</key>
 		<dict>
@@ -308,10 +237,25 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
+		<key>0BA482D8F529A8459BBC4C01B521DC14</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNResolver.m</string>
+			<key>path</key>
+			<string>HappyDNS/Local/QNResolver.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>0BC8027D3AD9AF72E1E1A32524D063D2</key>
 		<dict>
 			<key>fileRef</key>
-			<string>B0B78340F36B55838B39177F19A4D529</string>
+			<string>844B25C5A192619FE9DE980D21C3D311</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -322,6 +266,23 @@
 				</array>
 			</dict>
 		</dict>
+		<key>0BD29DEB0CAA894DD21D09E1C7EB85B9</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>2EA2AE550ACDD73C7CF7FE1566D4EC5E</string>
+				<string>BC12FD6AF7AB9BDD1E2F270CD78D5619</string>
+				<string>F510802B2C5281E614AC06A65ED64E68</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/Qiniu</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>0F8217A7033D4B1169408CA2DEBFA592</key>
 		<dict>
 			<key>fileRef</key>
@@ -329,25 +290,10 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>0FB397B3E048117E6D9AD879A1EEBAB8</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNHttpManager.m</string>
-			<key>path</key>
-			<string>QiniuSDK/Http/QNHttpManager.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>0FE011D99B531EB8FABBA943929DED7B</key>
 		<dict>
 			<key>fileRef</key>
-			<string>1D7B18D0A5575FAC06C11682AB552776</string>
+			<string>18354FBA6B9E927EFD24D381AF34661F</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -378,7 +324,7 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>115E0FA6C2ED6088463B833A38BEC36B</key>
+		<key>10D7036408ED4C80A7B3E605A5B289D7</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -387,34 +333,60 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>QNCrc32.h</string>
+			<string>QNEtag.h</string>
 			<key>path</key>
-			<string>QiniuSDK/Common/QNCrc32.h</string>
+			<string>QiniuSDK/Common/QNEtag.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>11998F42C464A6BA169BF8103C8CA91D</key>
+		<key>1244563103E0A2EEFBAC2E70DD006686</key>
 		<dict>
-			<key>fileRef</key>
-			<string>04B87C10B4923065C825FF381FF53598</string>
+			<key>children</key>
+			<array>
+				<string>9CDF5EBC6AEEA5A2F2148369ABAD15D6</string>
+				<string>D88E05971112B9676CF819EB1EC1BF70</string>
+				<string>B462471FBC9365E53ABF0CF569B57240</string>
+			</array>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/HappyDNS</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>136DD02C84502EAD638D804B53256AA3</key>
+		<key>147BB457A955598717403F65AF2D900D</key>
 		<dict>
-			<key>fileRef</key>
-			<string>A2ACDD2806F3009DE72E4D127A016857</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNVersion.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Common/QNVersion.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>1619DE88268A4592690069C5BAAE60E1</key>
+		<key>14C1181497A3C3D893D652948A4B5C92</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNFormUpload.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Storage/QNFormUpload.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1694CDDFF7902527F37865288E0E2104</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -423,24 +395,9 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNDns.m</string>
+			<string>UIImageView+AFNetworking.m</string>
 			<key>path</key>
-			<string>QiniuSDK/Http/QNDns.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>173AECBB5AE02413343C63D69142BD58</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNFileRecorder.m</string>
-			<key>path</key>
-			<string>QiniuSDK/Recorder/QNFileRecorder.m</string>
+			<string>UIKit+AFNetworking/UIImageView+AFNetworking.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -457,36 +414,14 @@
 			<key>remoteInfo</key>
 			<string>Qiniu</string>
 		</dict>
-		<key>1C57FFFBE04EAF577A69CAF54BA58022</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNNetworkInfo.h</string>
-			<key>path</key>
-			<string>HappyDNS/Common/QNNetworkInfo.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1CBDB47B210A0C2448C14A610BC6D4D6</key>
+		<key>181A069868ACB7872C846A54130E6C89</key>
 		<dict>
 			<key>fileRef</key>
-			<string>6C3187CA415B92021254E03EE533FA5C</string>
+			<string>DE1FD91D5D2C4D3CD87BAE4710B3D86F</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
 		</dict>
-		<key>1D7B18D0A5575FAC06C11682AB552776</key>
+		<key>18354FBA6B9E927EFD24D381AF34661F</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -501,10 +436,129 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>18FE7FEED178D26F552AB5593C3CFA66</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>B94148F7546EA22C94B0210758897715</string>
+				<string>1A95FF3D22439B454431303091AB923D</string>
+				<string>2EA1711D7A9406C7CF148B336AA35D57</string>
+				<string>292DCC92C59CD847CC99D5EB876D29E4</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>NSURLSession</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>19065E25B3147BD3985B98969EE0B368</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNPHAssetResource.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Common/QNPHAssetResource.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>193112A4B0A8D04E263EC56D9C287255</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C989B0DA88E966E991FD3D29752F9683</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>19377F98B7DD3F6A3F054C71F724C30A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>AFURLConnectionOperation.m</string>
+			<key>path</key>
+			<string>AFNetworking/AFURLConnectionOperation.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>198AEF910B40BBCC30B207F60B21DE7B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNRecord.h</string>
+			<key>path</key>
+			<string>HappyDNS/Common/QNRecord.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1A95FF3D22439B454431303091AB923D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>AFHTTPSessionManager.m</string>
+			<key>path</key>
+			<string>AFNetworking/AFHTTPSessionManager.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1BBC0C80075AF256D8E368EE259D69C2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D18D07627753138921EBE04813C6B915</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1BEE4A7F5D4C0F71B489AF4155E7C41B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNDomain.m</string>
+			<key>path</key>
+			<string>HappyDNS/Common/QNDomain.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1CBDB47B210A0C2448C14A610BC6D4D6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>BE4E7BD59D99A1D1D65651D1BE99D4D0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
 		<key>1E310D0CE3BE27EF253B6D822B0AEE5E</key>
 		<dict>
 			<key>fileRef</key>
-			<string>9F330E32CCBCB349FD1E49604D090612</string>
+			<string>70D9805EAB026973AB14B9E7CC186A25</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -547,48 +601,20 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>1F1A872AC28EA74A28799BA25FE6209D</key>
+		<key>205628C783345C6EF0AC01D7082DA1EE</key>
 		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>8EEECB0B0143B813BEB08DA61DDD50CE</string>
-				<string>90C6EC52F428A7045D0B10C60249A259</string>
-				<string>E1C4CFC7F03BCB793308024F5FC45943</string>
-				<string>B8D0FD81B9F6A71B978BF138B7631748</string>
-				<string>20576544D7E8F741D8D9BA7BB83AA9AB</string>
-				<string>8096AA4679F29601E1F839462B0C910D</string>
-				<string>A616BAF059089B451348A12EF1D9FEB4</string>
-				<string>F022023B775D4C03C05971551DA5E71E</string>
-				<string>469E3B82CD0B157436E2902F5D68D5D8</string>
-				<string>C299D6345C8A1383AF56AA824389BBED</string>
-				<string>0A38690CC29B8A2F1530BE52CD3F0290</string>
-				<string>5045C7A9EE63055A1F2D90BAFD52F3D5</string>
-				<string>37928167B1A9CBD21A0D4C76122375B0</string>
-				<string>4652B27DCA94E12FDFE680254F5D6334</string>
-				<string>613740D3761D31ECECDA59AEA1CA4B94</string>
-				<string>24F03FD298F41CDBF50A4336D7A7C723</string>
-				<string>41C5050013BED0F662F436D272407B75</string>
-				<string>6363F13F5863C81E6F049350D221808C</string>
-				<string>F0541EE549F27CCB64077093C60D9F43</string>
-				<string>A27C6743E4A7A8CDF0E8A86F5BDB3609</string>
-				<string>2D1853C29A21C38CD772FAA1DA61B4EF</string>
-				<string>CEE22CEDB4D4E477FD042409B4834471</string>
-				<string>136DD02C84502EAD638D804B53256AA3</string>
-				<string>01B3D9989DBE8FC5E538976B3C1CE467</string>
-			</array>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>20576544D7E8F741D8D9BA7BB83AA9AB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>57C77738F11FDF100EDCCE3A0CE797A6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNResumeUpload.m</string>
+			<key>path</key>
+			<string>QiniuSDK/Storage/QNResumeUpload.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>20B56609144CE204DFA8221F742B2D76</key>
 		<dict>
@@ -606,14 +632,14 @@
 		<key>20F5CCA2F131DBFEA246DE5DD5AB855B</key>
 		<dict>
 			<key>fileRef</key>
-			<string>02EE3885B0DBCFE76C4C879F65CD76F1</string>
+			<string>0BA482D8F529A8459BBC4C01B521DC14</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
 		<key>211D4EA06F5920376A069ACB55DF6006</key>
 		<dict>
 			<key>fileRef</key>
-			<string>6162C3096A1153DC7AC6DF290DC72A79</string>
+			<string>BBABC466A30F319E6471341484EF4636</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -624,32 +650,10 @@
 				</array>
 			</dict>
 		</dict>
-		<key>24725E112903DE216E95FF565F7F8223</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UIImage+AFNetworking.h</string>
-			<key>path</key>
-			<string>UIKit+AFNetworking/UIImage+AFNetworking.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>24F03FD298F41CDBF50A4336D7A7C723</key>
+		<key>23C0E5A02714DC589E9E88AEEE807336</key>
 		<dict>
 			<key>fileRef</key>
-			<string>B336F1231DFD7E41FDA97589890780D4</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>25605835423EE43631C196692FC27F6B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>B9E35CDE71F5ED64A402A526BDEFE3FC</string>
+			<string>D5A59ADB40595A64EFF85FB1F9FBBDE7</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -660,40 +664,32 @@
 				</array>
 			</dict>
 		</dict>
-		<key>259F4BA09A6AFF12527BB464CD72A765</key>
+		<key>23D07853BC735F2AED2F3334FD961BFF</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>fileRef</key>
+			<string>A2AC867097A333A5CB8E1633F924A021</string>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNFileRecorder.h</string>
-			<key>path</key>
-			<string>QiniuSDK/Recorder/QNFileRecorder.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
 		</dict>
-		<key>265072EDA53A152225CAC56459B318F9</key>
+		<key>259E759CE83083D8C8B73970446BAD77</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNReachability.h</string>
+			<string>QNALAssetFile.m</string>
 			<key>path</key>
-			<string>QiniuSDK/QNReachability/QNReachability.h</string>
+			<string>QiniuSDK/Common/QNALAssetFile.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 		<key>26DAA77D558335E3AFACAD898D647B2A</key>
 		<dict>
 			<key>fileRef</key>
-			<string>6D573ECB28BAFA5658618FC145F77C7F</string>
+			<string>FA2FA194033EBC05687C9D322AE6E1FD</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -725,21 +721,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>27678D8C6CBE06660B09A1A655C000D2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNEtag.h</string>
-			<key>path</key>
-			<string>QiniuSDK/Common/QNEtag.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>278A0A5B4E07B46EAAF2CB22378FA543</key>
 		<dict>
 			<key>isa</key>
@@ -751,21 +732,28 @@
 			<key>targetProxy</key>
 			<string>B40ABC3DFA129D1E603B21EC3D950AD2</string>
 		</dict>
+		<key>27BEDC2DB4A8BE4593DCDBD897EA08E2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E17E01D23C94D475DFF003546BE978AF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
 		<key>27C299AE402C6ACC5D5377E73F4B7291</key>
 		<dict>
 			<key>fileRef</key>
-			<string>030D420072BDE89804EA66179D0FEE88</string>
+			<string>DFC815E2189F1E54866A49D41C515D7C</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>299FDF3F63F010F3E7D18945F9E404BD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>670F8620DB5065589DD4B98AAE69E4B8</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>2AD52C5C69BCEF42B8A62CB7A924C343</key>
+		<key>292DCC92C59CD847CC99D5EB876D29E4</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -774,16 +762,53 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNStats.m</string>
+			<string>AFURLSessionManager.m</string>
 			<key>path</key>
-			<string>QiniuSDK/Http/QNStats.m</string>
+			<string>AFNetworking/AFURLSessionManager.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>299FDF3F63F010F3E7D18945F9E404BD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E8EFAB5E68D3462EDCDE7AADE8EABF1E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2B0926271509E5E5B1D1D76DE0A038B7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIProgressView+AFNetworking.m</string>
+			<key>path</key>
+			<string>UIKit+AFNetworking/UIProgressView+AFNetworking.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2B0C55878ADF89735D9C5A3344D6EE37</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>AFNetworking.h</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworking.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 		<key>2B8269A87473D9F1259E9BD98E7588D3</key>
 		<dict>
 			<key>fileRef</key>
-			<string>ABF440C494CF1911FD295BB8FA2814C5</string>
+			<string>2B0C55878ADF89735D9C5A3344D6EE37</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -797,36 +822,7 @@
 		<key>2BD12C7853A83F4349F91319FA7BCB54</key>
 		<dict>
 			<key>fileRef</key>
-			<string>3D56E2741DA67C13D406896D48F39C75</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>2C206956360B0FE622172172718475F5</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UIButton+AFNetworking.h</string>
-			<key>path</key>
-			<string>UIKit+AFNetworking/UIButton+AFNetworking.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>2C921A37767FCD1B59EFC890762BB664</key>
-		<dict>
-			<key>fileRef</key>
-			<string>AB88DCDE78CB7651936105096EA847B9</string>
+			<string>F3413366055DF31E24E8F14B22C793D6</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -840,31 +836,9 @@
 		<key>2CF66E8669A348C421E93F2F67C6A61E</key>
 		<dict>
 			<key>fileRef</key>
-			<string>5F009FDE2940A1C746083106C8B0CA0E</string>
+			<string>1A95FF3D22439B454431303091AB923D</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-		</dict>
-		<key>2D1853C29A21C38CD772FAA1DA61B4EF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3445A37F160A233D629A76BB01478157</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>2D44B249324BA45F7DD72CE74C9AEEB3</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>AFNetworkReachabilityManager.m</string>
-			<key>path</key>
-			<string>AFNetworking/AFNetworkReachabilityManager.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>2D8E8EC45A3A1A1D94AE762CB5028504</key>
 		<dict>
@@ -880,14 +854,160 @@
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
+		<key>2EA1711D7A9406C7CF148B336AA35D57</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>AFURLSessionManager.h</string>
+			<key>path</key>
+			<string>AFNetworking/AFURLSessionManager.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2EA2AE550ACDD73C7CF7FE1566D4EC5E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Qiniu.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2EC9710A05F604B666CDB59CFD1FE737</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNUrlSafeBase64.m</string>
+			<key>path</key>
+			<string>QiniuSDK/Common/QNUrlSafeBase64.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2EE0219D7B1B709F9EEE337B360BDA2C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNFileRecorder.m</string>
+			<key>path</key>
+			<string>QiniuSDK/Recorder/QNFileRecorder.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2F29430AEF2739C3AA749BDCA43636BF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>19065E25B3147BD3985B98969EE0B368</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>2F50C3996979404BEF2DC8AC8CBE098D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNSystem.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Common/QNSystem.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2F75266E0FEDE06E9FDAF283E1EB7213</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNUploadManager.m</string>
+			<key>path</key>
+			<string>QiniuSDK/Storage/QNUploadManager.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>3033C63AC334D346E9461D0942D8FB69</key>
 		<dict>
 			<key>fileRef</key>
-			<string>BE9B63FEB87DBBAD9F97E50FD6F51C98</string>
+			<string>8A4456ECE9233630DDCECB6F89296549</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>3167FAD3D5B06B3EFDBEB36AE88FF966</key>
+		<key>30641CFCAEEB1FAB448D4B36454B6301</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNCrc32.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Common/QNCrc32.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3204CC233C98BACD44C118A71EC2FB28</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>BE4E7BD59D99A1D1D65651D1BE99D4D0</string>
+				<string>6DBC6E0E6489A5C984A9830FE9DB2D4C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Security</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>32816DE61799B70DA9C792239B2C87C4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIImage+AFNetworking.h</string>
+			<key>path</key>
+			<string>UIKit+AFNetworking/UIImage+AFNetworking.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>33AB92F7BFCA8B1D3B0DF6979BB12A78</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -896,13 +1016,13 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNSystem.m</string>
+			<string>QNHttpManager.m</string>
 			<key>path</key>
-			<string>QiniuSDK/Common/QNSystem.m</string>
+			<string>QiniuSDK/Http/QNHttpManager.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>32513788788658C8654670AEFA157005</key>
+		<key>37648F6722276D761201D177FE6ECC55</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -911,63 +1031,11 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>QNDnspodEnterprise.h</string>
+			<string>QNDnsManager.h</string>
 			<key>path</key>
-			<string>HappyDNS/Http/QNDnspodEnterprise.h</string>
+			<string>HappyDNS/Common/QNDnsManager.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3379B7BC04C16F4AD8C0AD96CBBB0D3A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNHttpDelegate.h</string>
-			<key>path</key>
-			<string>QiniuSDK/Http/QNHttpDelegate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3445A37F160A233D629A76BB01478157</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNUploadOption.m</string>
-			<key>path</key>
-			<string>QiniuSDK/Storage/QNUploadOption.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>376869ED3A8585D3F0A966ECC1C6AC6F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNVersion.h</string>
-			<key>path</key>
-			<string>QiniuSDK/Common/QNVersion.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>37928167B1A9CBD21A0D4C76122375B0</key>
-		<dict>
-			<key>fileRef</key>
-			<string>B53F33B232BDC877DAC9052D520D8988</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>37DB56D75062CC75FCB0966E1C6E8A8E</key>
 		<dict>
@@ -998,7 +1066,7 @@
 		<key>399AC825EE10F70364CE7B0AA89F466D</key>
 		<dict>
 			<key>fileRef</key>
-			<string>F0BE23A6A295F09A8CD206FCC0423996</string>
+			<string>7FE6C0DEB45DF22BA08536E14472DE90</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -1008,26 +1076,11 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>3A1AA6463FCA032C9F9D3D4FC92AF06D</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNReachability.m</string>
-			<key>path</key>
-			<string>QiniuSDK/QNReachability/QNReachability.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>3A5B54373A45916EC8DE74D060DE5503</key>
 		<dict>
 			<key>fileRef</key>
-			<string>2C206956360B0FE622172172718475F5</string>
+			<string>97D1FC0A4ACED38C197AC2FA0B3AEE87</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -1038,89 +1091,7 @@
 				</array>
 			</dict>
 		</dict>
-		<key>3D56E2741DA67C13D406896D48F39C75</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNDnspodFree.h</string>
-			<key>path</key>
-			<string>HappyDNS/Http/QNDnspodFree.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3DFFE59716756E6CE347CC60504DACBC</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNFormUpload.m</string>
-			<key>path</key>
-			<string>QiniuSDK/Storage/QNFormUpload.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3F5D0943048F0A1D309D08CBDA7A0D89</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>ABF440C494CF1911FD295BB8FA2814C5</string>
-				<string>71A50922B538A37D2303B75848EE446B</string>
-				<string>F3A8228F0D3A1650708CEE2E8D746F94</string>
-				<string>F90838690D4E08940E90D1F3C7C71350</string>
-				<string>A73BD5D595DA21E5D75A4AA55F05EF88</string>
-				<string>5F4B0E3CFD4B5F090EAFFC38538D5A87</string>
-				<string>79CB59BBA82BB85F144A641D3A575341</string>
-				<string>C76052AEAFBE8146CA1BD19749587D1B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>AFNetworking</string>
-			<key>path</key>
-			<string>AFNetworking</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3F5EB2BE1FBEEF1D4B54EA7CF141AF51</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNUrlSafeBase64.h</string>
-			<key>path</key>
-			<string>QiniuSDK/Common/QNUrlSafeBase64.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3FB0D15888BBC7EF4A3D18046F26125A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNResumeUpload.h</string>
-			<key>path</key>
-			<string>QiniuSDK/Storage/QNResumeUpload.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>40FB5F148A03DAD7FC949A51A6AA42D2</key>
+		<key>3CF532DD8B0C751B73DB123C1D3259B9</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1132,6 +1103,21 @@
 			<string>AFURLRequestSerialization.h</string>
 			<key>path</key>
 			<string>AFNetworking/AFURLRequestSerialization.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3EE498C0577E72B0062795E79383CA1C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIRefreshControl+AFNetworking.m</string>
+			<key>path</key>
+			<string>UIKit+AFNetworking/UIRefreshControl+AFNetworking.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1160,27 +1146,20 @@
 			<key>productType</key>
 			<string>com.apple.product-type.library.static</string>
 		</dict>
-		<key>4136A9D5959C331A925C2A1CFA408BF1</key>
+		<key>41BAD972B42D1BE8EB9C4F32FA851F98</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
+			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>UIWebView+AFNetworking.m</string>
+			<string>AFHTTPRequestOperationManager.h</string>
 			<key>path</key>
-			<string>UIKit+AFNetworking/UIWebView+AFNetworking.m</string>
+			<string>AFNetworking/AFHTTPRequestOperationManager.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>41C5050013BED0F662F436D272407B75</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D91D5B2D059F2A25FD747B5E0C97AA85</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>41F6B64BF089D072A394601910D14E7B</key>
 		<dict>
@@ -1196,29 +1175,82 @@
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
-		<key>4424B7AA1F393059FC876631F3242F97</key>
+		<key>43C9A9AD1219C1306B8BC35AB13AF223</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>children</key>
+			<array>
+				<string>6F1128F2DDA7BBDB1E8E72CD114C02A5</string>
+				<string>46B8BEC0AC778D98AC6B97EF0D31A9C1</string>
+				<string>CC346FD16D8F6AAE26EB30C5DB60C899</string>
+			</array>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>PBXGroup</string>
 			<key>name</key>
-			<string>QNUpToken.h</string>
-			<key>path</key>
-			<string>QiniuSDK/Storage/QNUpToken.h</string>
+			<string>Pods</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 		<key>445DE84291EB7312596CB53BF9BC0006</key>
 		<dict>
 			<key>fileRef</key>
-			<string>873380D2D1ABA00E011C6427175B2C16</string>
+			<string>6207088C24A4E05BE6F030EE6693CC07</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>44AC25BA2DBE510F6B45BC91EAA2E901</key>
+		<key>46B8BEC0AC778D98AC6B97EF0D31A9C1</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>66FDE0004A65CCB893EE0572C92877A5</string>
+				<string>0A913288BEDA903F5D02B240D1DEF722</string>
+				<string>E36F7E4784DBDAFCCA44533145B86CAC</string>
+				<string>37648F6722276D761201D177FE6ECC55</string>
+				<string>8A3AC2E6B7EC312D232C96E2A02B8391</string>
+				<string>B5B4DCE626F1BDF3C442D719F48163AF</string>
+				<string>8B8433A76762141E78C5C0B563290830</string>
+				<string>F3413366055DF31E24E8F14B22C793D6</string>
+				<string>E8EFAB5E68D3462EDCDE7AADE8EABF1E</string>
+				<string>AC493F6E3A52072255E4B0336FC8CB17</string>
+				<string>1BEE4A7F5D4C0F71B489AF4155E7C41B</string>
+				<string>18354FBA6B9E927EFD24D381AF34661F</string>
+				<string>FA2FA194033EBC05687C9D322AE6E1FD</string>
+				<string>9F6E21756153AC7725DFB74CC1156898</string>
+				<string>C9DBA6164687E4A2A4A806B14D6CE453</string>
+				<string>D08E64ED3209177DB59DD97DA9403DBF</string>
+				<string>B7BBD4CAF496198F03F73A06019E4697</string>
+				<string>F04B5912BBB38F5571292D4761BF94D1</string>
+				<string>6207088C24A4E05BE6F030EE6693CC07</string>
+				<string>198AEF910B40BBCC30B207F60B21DE7B</string>
+				<string>DFC815E2189F1E54866A49D41C515D7C</string>
+				<string>4744FE734737700BF75336E5A6E801BA</string>
+				<string>0BA482D8F529A8459BBC4C01B521DC14</string>
+				<string>844B25C5A192619FE9DE980D21C3D311</string>
+				<string>1244563103E0A2EEFBAC2E70DD006686</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>HappyDNS</string>
+			<key>path</key>
+			<string>HappyDNS</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>471C71A69E6651CB69918A0CFFA21806</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F808FCA42DC1629D83814FA07E46CB2A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>472A6BFCC6207D98F787649BDF44A1BE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9FA17E118A387C690934A8430144BE2B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4744FE734737700BF75336E5A6E801BA</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1227,90 +1259,38 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>AFHTTPSessionManager.h</string>
+			<string>QNResolver.h</string>
 			<key>path</key>
-			<string>AFNetworking/AFHTTPSessionManager.h</string>
+			<string>HappyDNS/Local/QNResolver.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>45B2D2C9717CC55EB0F8537ECE30ED30</key>
+		<key>47A47D770D59DCF4A7B7C03B9908BB13</key>
 		<dict>
 			<key>fileRef</key>
-			<string>4424B7AA1F393059FC876631F3242F97</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>4652B27DCA94E12FDFE680254F5D6334</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3A1AA6463FCA032C9F9D3D4FC92AF06D</string>
+			<string>C9DBA6164687E4A2A4A806B14D6CE453</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>469E3B82CD0B157436E2902F5D68D5D8</key>
-		<dict>
-			<key>fileRef</key>
-			<string>B5F8578AC8BBE33B79864AD606870CCE</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>46D04BC32F4DE871BEE9EDD5AE5F556D</key>
+		<key>48D7EFD52B7CEC2B9A99C66BE1248BEC</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
+			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>QNEtag.m</string>
+			<string>QNDns.h</string>
 			<key>path</key>
-			<string>QiniuSDK/Common/QNEtag.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>472A6BFCC6207D98F787649BDF44A1BE</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5162CE2A53B75BDF25731824DDE363E9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>47A47D770D59DCF4A7B7C03B9908BB13</key>
-		<dict>
-			<key>fileRef</key>
-			<string>AEF616A7FC4AB4ECCFEFD6C5C0DC6E98</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>494D17863A9DC84248EFE759E3052179</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>557D3EF2DE8A191EE0DC79017A93E0C0</string>
-				<string>02292C0438722849D0B2E25714A05E6E</string>
-				<string>A1AFD76F984F11658AA790DC84B57E82</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>path</key>
-			<string>../Target Support Files/Qiniu</string>
+			<string>QiniuSDK/Http/QNDns.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 		<key>495F717651B12E6496C72D16BCC28C29</key>
 		<dict>
 			<key>fileRef</key>
-			<string>40FB5F148A03DAD7FC949A51A6AA42D2</string>
+			<string>3CF532DD8B0C751B73DB123C1D3259B9</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -1321,20 +1301,12 @@
 				</array>
 			</dict>
 		</dict>
-		<key>49FA636AC59A16E42043D269B4FE40BA</key>
+		<key>4B7CF737383851ED0DB2A2A8C19E969E</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>fileRef</key>
+			<string>2F75266E0FEDE06E9FDAF283E1EB7213</string>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UIWebView+AFNetworking.h</string>
-			<key>path</key>
-			<string>UIKit+AFNetworking/UIWebView+AFNetworking.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>4BA123B8023DF911C684F29732FCF34F</key>
 		<dict>
@@ -1350,34 +1322,6 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>4DF303D0910AFCED4BC9D095C0B35791</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UIProgressView+AFNetworking.m</string>
-			<key>path</key>
-			<string>UIKit+AFNetworking/UIProgressView+AFNetworking.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4E082675B5D83B131A9B8407562871EF</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>HappyDNS.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>4E762F23EC34ED4A6FF3312D84E33A40</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -1391,38 +1335,10 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>4EE5E1AB46576DEE1965AFFA40152712</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3379B7BC04C16F4AD8C0AD96CBBB0D3A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>4EFBAFD2B02824A1DC240A640E2E7985</key>
-		<dict>
-			<key>fileRef</key>
-			<string>115E0FA6C2ED6088463B833A38BEC36B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
 		<key>50015D97ABFA9585F790F85B63E84E73</key>
 		<dict>
 			<key>fileRef</key>
-			<string>C90A1577EF47F5BECB66DF9E6295F5EA</string>
+			<string>0A913288BEDA903F5D02B240D1DEF722</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -1432,86 +1348,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>5045C7A9EE63055A1F2D90BAFD52F3D5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0FB397B3E048117E6D9AD879A1EEBAB8</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5066E26EA96C1F2C90F4B1262F525797</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNFile.h</string>
-			<key>path</key>
-			<string>QiniuSDK/Common/QNFile.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5162CE2A53B75BDF25731824DDE363E9</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>AFHTTPRequestOperationManager.m</string>
-			<key>path</key>
-			<string>AFNetworking/AFHTTPRequestOperationManager.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5173BE162174E09B8551CFD2FBCAA403</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNDes.m</string>
-			<key>path</key>
-			<string>HappyDNS/Util/QNDes.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>523687EE648207D7242CD2BD2F11B452</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNALAssetFile.m</string>
-			<key>path</key>
-			<string>QiniuSDK/Common/QNALAssetFile.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>557D3EF2DE8A191EE0DC79017A93E0C0</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Qiniu.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>574FCDC55BDB62544F9FA7FAE28DC7BE</key>
 		<dict>
@@ -1523,21 +1359,6 @@
 			<string>410B25DF16EA5C5B3E2698F74F9625FB</string>
 			<key>targetProxy</key>
 			<string>AB4FA0728D18BDC0B2D35511809EBC99</string>
-		</dict>
-		<key>57C77738F11FDF100EDCCE3A0CE797A6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNConfiguration.m</string>
-			<key>path</key>
-			<string>QiniuSDK/Storage/QNConfiguration.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>57F2B5E013FD1D42752E768761E043FC</key>
 		<dict>
@@ -1555,7 +1376,7 @@
 		<key>5891361CF1616BE0B7B05FF10B0644AF</key>
 		<dict>
 			<key>fileRef</key>
-			<string>32513788788658C8654670AEFA157005</string>
+			<string>B5B4DCE626F1BDF3C442D719F48163AF</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -1569,14 +1390,14 @@
 		<key>593F9D657EBCEAAC1818F301D5BCDFA0</key>
 		<dict>
 			<key>fileRef</key>
-			<string>5173BE162174E09B8551CFD2FBCAA403</string>
+			<string>E36F7E4784DBDAFCCA44533145B86CAC</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
 		<key>5986F73288471F32F83666990A475886</key>
 		<dict>
 			<key>fileRef</key>
-			<string>FF2C8CA8ABF2C8F0546049BDD94DF972</string>
+			<string>198AEF910B40BBCC30B207F60B21DE7B</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -1587,54 +1408,46 @@
 				</array>
 			</dict>
 		</dict>
-		<key>5A13902FDA029121C33D07FBC4977084</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>AFHTTPRequestOperationManager.h</string>
-			<key>path</key>
-			<string>AFNetworking/AFHTTPRequestOperationManager.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5A646C232DC20E105018FA7C41A59C8D</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNDomain.h</string>
-			<key>path</key>
-			<string>HappyDNS/Common/QNDomain.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5BB1E6FE796B65C5E5DD5D84AB63333E</key>
+		<key>5A1A1371E1F909B36B632B3D25923E36</key>
 		<dict>
 			<key>fileRef</key>
-			<string>88D26A10F3177364EBB8DDA4A8C51036</string>
+			<string>DC9DD2A93AF0CA56373A5E884BDA6F0F</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
 		</dict>
 		<key>5CF0E043147B69E77976A2CCADFF18CA</key>
 		<dict>
 			<key>fileRef</key>
-			<string>7CD03CBEF48291945F7FDA8230C78F77</string>
+			<string>2EA1711D7A9406C7CF148B336AA35D57</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>5D154ACCCDBF79A905165CE8E407AAA3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIAlertView+AFNetworking.m</string>
+			<key>path</key>
+			<string>UIKit+AFNetworking/UIAlertView+AFNetworking.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5D1B0D31B13119EFC65A35A5B837033E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A01D46A4A346539A993E61029CA152AC</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -1659,7 +1472,7 @@
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
-		<key>5D83FF5FD6ADFED580D3E8308E88A0D5</key>
+		<key>5D393192BBE58F0508875E66F145119E</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1667,17 +1480,30 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNSystem.h</string>
 			<key>path</key>
-			<string>QiniuSDK/Common/QNSystem.h</string>
+			<string>AFNetworking-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5D7124E5D31A8966D95F8FCE6F3BD9E6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNPHAssetResource.m</string>
+			<key>path</key>
+			<string>QiniuSDK/Common/QNPHAssetResource.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 		<key>5EDA5F3BE85268BA7D8F76097B2C7E67</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>4E082675B5D83B131A9B8407562871EF</string>
+			<string>9CDF5EBC6AEEA5A2F2148369ABAD15D6</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
@@ -1708,72 +1534,36 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>5F009FDE2940A1C746083106C8B0CA0E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>AFHTTPSessionManager.m</string>
-			<key>path</key>
-			<string>AFNetworking/AFHTTPSessionManager.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5F3427EB97E5CBE273167A446853F460</key>
-		<dict>
-			<key>fileRef</key>
-			<string>27678D8C6CBE06660B09A1A655C000D2</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>5F4B0E3CFD4B5F090EAFFC38538D5A87</key>
+		<key>5EFBCD289A2CAF35892B5CECB612635A</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>40FB5F148A03DAD7FC949A51A6AA42D2</string>
-				<string>BE9B63FEB87DBBAD9F97E50FD6F51C98</string>
-				<string>9F330E32CCBCB349FD1E49604D090612</string>
-				<string>EDADF02A60DEC560D4266C58ACDEFC23</string>
+				<string>81368EA07977E1A493A74581DC68A16E</string>
+				<string>C329D4E1AEBE6BD5353B269B37E806E3</string>
+				<string>5D393192BBE58F0508875E66F145119E</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
 			<key>name</key>
-			<string>Serialization</string>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/AFNetworking</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>613740D3761D31ECECDA59AEA1CA4B94</key>
+		<key>5FB2235A99764BBC53E12B350655577A</key>
 		<dict>
 			<key>fileRef</key>
-			<string>621169644692CFC0072440C33AD1BBFC</string>
+			<string>7FE0893B071AC42450C3E89585385A13</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>6162C3096A1153DC7AC6DF290DC72A79</key>
+		<key>61D825B986C1F07569826ADC426F3896</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>fileRef</key>
+			<string>AF07A0B1C73BDAE09A1A5E687F842B15</string>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>AFHTTPRequestOperation.h</string>
-			<key>path</key>
-			<string>AFNetworking/AFHTTPRequestOperation.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>61DF6F9C7D175CBB90CFB07922C21A74</key>
 		<dict>
@@ -1789,22 +1579,7 @@
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
-		<key>61E89BCC5940140323CC24EE0221303B</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNFormUpload.h</string>
-			<key>path</key>
-			<string>QiniuSDK/Storage/QNFormUpload.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>621169644692CFC0072440C33AD1BBFC</key>
+		<key>6207088C24A4E05BE6F030EE6693CC07</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1813,25 +1588,11 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNResponseInfo.m</string>
+			<string>QNNetworkInfo.m</string>
 			<key>path</key>
-			<string>QiniuSDK/Http/QNResponseInfo.m</string>
+			<string>HappyDNS/Common/QNNetworkInfo.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6234B6055BCC0EAF65754274599F24DF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BF389B13D73D47C2175F3DD1DECF518D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
 		</dict>
 		<key>62F0F56647A50461616ED023C623FAD4</key>
 		<dict>
@@ -1848,14 +1609,7 @@
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>6363F13F5863C81E6F049350D221808C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>2AD52C5C69BCEF42B8A62CB7A924C343</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>658C56F810DD6294F22849AC591B8FA5</key>
+		<key>6405AF271AAF8D23A6438D99379D2566</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1864,9 +1618,9 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>QNSessionManager.h</string>
+			<string>QNRecorderDelegate.h</string>
 			<key>path</key>
-			<string>QiniuSDK/Http/QNSessionManager.h</string>
+			<string>QiniuSDK/Recorder/QNRecorderDelegate.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1895,40 +1649,53 @@
 			<key>productType</key>
 			<string>com.apple.product-type.library.static</string>
 		</dict>
-		<key>670F8620DB5065589DD4B98AAE69E4B8</key>
+		<key>669815D3D52889E8F4BDC052D801238E</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>fileRef</key>
+			<string>30641CFCAEEB1FAB448D4B36454B6301</string>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNDnspodFree.m</string>
-			<key>path</key>
-			<string>HappyDNS/Http/QNDnspodFree.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
-		<key>678391E4D16E699AF12955C02636C598</key>
+		<key>66FDE0004A65CCB893EE0572C92877A5</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
+			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>QNDnsManager.m</string>
+			<string>HappyDNS.h</string>
 			<key>path</key>
-			<string>HappyDNS/Common/QNDnsManager.m</string>
+			<string>HappyDNS/HappyDNS.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 		<key>68D0394CA41EB7A2676A663A5CCA3C02</key>
 		<dict>
 			<key>fileRef</key>
-			<string>BE8051144BA7AF2BFD63EFBBF87A8A1F</string>
+			<string>66FDE0004A65CCB893EE0572C92877A5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>68D6BABBA78DFA9D85F00C0F2213F2AD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EDA52839F5A4B24E39CDF7453257F7C5</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -1952,74 +1719,7 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>6BED276F1F1C65634ACD7E1DD3DCA446</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>AFE46E5DB8BD9771F8C5F4264016D115</string>
-				<string>9C21DED111D85EFE06F343CDFDBAB678</string>
-				<string>FE45DE4072D1D99C456129C2E83837B6</string>
-				<string>790B184BC35BAB2E2B51E50E895A142A</string>
-				<string>523687EE648207D7242CD2BD2F11B452</string>
-				<string>CDA6708FE701C1AB323AC6ABC259C259</string>
-				<string>9DCEFA34449F5B8270B6330AB538FC5A</string>
-				<string>E924759E7CA07882E862F59F05BB7720</string>
-				<string>57C77738F11FDF100EDCCE3A0CE797A6</string>
-				<string>115E0FA6C2ED6088463B833A38BEC36B</string>
-				<string>E41F4D401F91391ADCD6B11538675872</string>
-				<string>BF389B13D73D47C2175F3DD1DECF518D</string>
-				<string>1619DE88268A4592690069C5BAAE60E1</string>
-				<string>27678D8C6CBE06660B09A1A655C000D2</string>
-				<string>46D04BC32F4DE871BEE9EDD5AE5F556D</string>
-				<string>5066E26EA96C1F2C90F4B1262F525797</string>
-				<string>B5F8578AC8BBE33B79864AD606870CCE</string>
-				<string>04F6DB04E9F9B7773891FF0D517AEE0A</string>
-				<string>259F4BA09A6AFF12527BB464CD72A765</string>
-				<string>173AECBB5AE02413343C63D69142BD58</string>
-				<string>61E89BCC5940140323CC24EE0221303B</string>
-				<string>3DFFE59716756E6CE347CC60504DACBC</string>
-				<string>3379B7BC04C16F4AD8C0AD96CBBB0D3A</string>
-				<string>F26C4A653259CA47972583831D1061CF</string>
-				<string>0FB397B3E048117E6D9AD879A1EEBAB8</string>
-				<string>AB88DCDE78CB7651936105096EA847B9</string>
-				<string>B53F33B232BDC877DAC9052D520D8988</string>
-				<string>265072EDA53A152225CAC56459B318F9</string>
-				<string>3A1AA6463FCA032C9F9D3D4FC92AF06D</string>
-				<string>ACAB0D00F9F866D42845550B7767CA45</string>
-				<string>88D26A10F3177364EBB8DDA4A8C51036</string>
-				<string>621169644692CFC0072440C33AD1BBFC</string>
-				<string>3FB0D15888BBC7EF4A3D18046F26125A</string>
-				<string>B336F1231DFD7E41FDA97589890780D4</string>
-				<string>658C56F810DD6294F22849AC591B8FA5</string>
-				<string>D91D5B2D059F2A25FD747B5E0C97AA85</string>
-				<string>04B87C10B4923065C825FF381FF53598</string>
-				<string>2AD52C5C69BCEF42B8A62CB7A924C343</string>
-				<string>5D83FF5FD6ADFED580D3E8308E88A0D5</string>
-				<string>3167FAD3D5B06B3EFDBEB36AE88FF966</string>
-				<string>A3A67A4044B0A921319CC1A000822275</string>
-				<string>82632BDA3881A210C4EAD86CB9753ADE</string>
-				<string>AFF9ECD3B392A461FD1221A5BC0F1943</string>
-				<string>3445A37F160A233D629A76BB01478157</string>
-				<string>B9E35CDE71F5ED64A402A526BDEFE3FC</string>
-				<string>4424B7AA1F393059FC876631F3242F97</string>
-				<string>F95CF65EC9DA92541A4A83012B76457B</string>
-				<string>3F5EB2BE1FBEEF1D4B54EA7CF141AF51</string>
-				<string>A2ACDD2806F3009DE72E4D127A016857</string>
-				<string>6DDD94948C5051ED7771804113DB8400</string>
-				<string>77CDC01265E1B1F2EA90413D211AA63F</string>
-				<string>376869ED3A8585D3F0A966ECC1C6AC6F</string>
-				<string>494D17863A9DC84248EFE759E3052179</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Qiniu</string>
-			<key>path</key>
-			<string>Qiniu</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6C3187CA415B92021254E03EE533FA5C</key>
+		<key>69EE0270AB06260ABCF8FFD1FD4DE37C</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -2028,20 +1728,41 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>AFSecurityPolicy.h</string>
+			<string>QNConfiguration.h</string>
 			<key>path</key>
-			<string>AFNetworking/AFSecurityPolicy.h</string>
+			<string>QiniuSDK/Storage/QNConfiguration.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6AC677DD1F06455D884ACB10F1FB3C16</key>
+		<dict>
+			<key>fileRef</key>
+			<string>81C22B4CFA02A9CCCDFB3D22E1C5069C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>6C1655BD3C3A4B05C3853993F975D5A3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>147BB457A955598717403F65AF2D900D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
 		<key>6CC4B79C1FEE1E7B3F2860ADA479D381</key>
 		<dict>
 			<key>fileRef</key>
-			<string>C0A2BCEF25F1A963D7F7408E4A64EFD4</string>
+			<string>292DCC92C59CD847CC99D5EB876D29E4</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>6D573ECB28BAFA5658618FC145F77C7F</key>
+		<key>6DBC6E0E6489A5C984A9830FE9DB2D4C</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -2050,24 +1771,31 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNHex.m</string>
+			<string>AFSecurityPolicy.m</string>
 			<key>path</key>
-			<string>HappyDNS/Util/QNHex.m</string>
+			<string>AFNetworking/AFSecurityPolicy.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>6DDD94948C5051ED7771804113DB8400</key>
+		<key>6F1128F2DDA7BBDB1E8E72CD114C02A5</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>children</key>
+			<array>
+				<string>2B0C55878ADF89735D9C5A3344D6EE37</string>
+				<string>9332012BD0BA62C9A01F36834C3C4AEC</string>
+				<string>18FE7FEED178D26F552AB5593C3CFA66</string>
+				<string>C39B99B72E6DB62AA76BFB9DE10125CA</string>
+				<string>3204CC233C98BACD44C118A71EC2FB28</string>
+				<string>F699271535471898C759F6F592AABF5A</string>
+				<string>5EFBCD289A2CAF35892B5CECB612635A</string>
+				<string>062070799F98ECFC4B8F298249378EC4</string>
+			</array>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>PBXGroup</string>
 			<key>name</key>
-			<string>QNUserAgent.h</string>
+			<string>AFNetworking</string>
 			<key>path</key>
-			<string>QiniuSDK/Http/QNUserAgent.h</string>
+			<string>AFNetworking</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2084,10 +1812,25 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>7108D3F01FE7CB2483913CD45EC320AE</key>
+		<key>70D9805EAB026973AB14B9E7CC186A25</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>AFURLResponseSerialization.h</string>
+			<key>path</key>
+			<string>AFNetworking/AFURLResponseSerialization.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>714678C83D01C813FFB6D198E71CA796</key>
 		<dict>
 			<key>fileRef</key>
-			<string>ACAB0D00F9F866D42845550B7767CA45</string>
+			<string>6405AF271AAF8D23A6438D99379D2566</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -2098,58 +1841,31 @@
 				</array>
 			</dict>
 		</dict>
-		<key>71A50922B538A37D2303B75848EE446B</key>
+		<key>71801B0D864C2A008B7FA5B2CD926B60</key>
 		<dict>
-			<key>children</key>
-			<array>
-				<string>6162C3096A1153DC7AC6DF290DC72A79</string>
-				<string>0005C206B14A94150D6EB9B9C679E919</string>
-				<string>5A13902FDA029121C33D07FBC4977084</string>
-				<string>5162CE2A53B75BDF25731824DDE363E9</string>
-				<string>9AFD3D9BA9D269F9B26CF937D577377E</string>
-				<string>99C8F03ED505FAEC1722D88A95AF3AA0</string>
-			</array>
+			<key>fileRef</key>
+			<string>990BEB1F52373C938E0353ED0D8133E0</string>
 			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>NSURLConnection</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
-		<key>71B75EA3143AFCD44E4397BC5A5B446B</key>
+		<key>71873C69EAA29107C484000DF9885AEF</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>fileRef</key>
+			<string>2EE0219D7B1B709F9EEE337B360BDA2C</string>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNHijackingDetectWrapper.h</string>
-			<key>path</key>
-			<string>HappyDNS/Local/QNHijackingDetectWrapper.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7283AB5034BCE08E9F6EB2A6BAE8EA97</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>AFSecurityPolicy.m</string>
-			<key>path</key>
-			<string>AFNetworking/AFSecurityPolicy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>74281E2F9775440C37E6693357060DD2</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>557D3EF2DE8A191EE0DC79017A93E0C0</string>
+			<string>2EA2AE550ACDD73C7CF7FE1566D4EC5E</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
@@ -2180,25 +1896,10 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>77CDC01265E1B1F2EA90413D211AA63F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNUserAgent.m</string>
-			<key>path</key>
-			<string>QiniuSDK/Http/QNUserAgent.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>78449FCC01114171AA3CCB45C6666206</key>
+		<key>74A2B10C59DC389B7C7B70B1171240CE</key>
 		<dict>
 			<key>fileRef</key>
-			<string>E535F67A3EB6FD6D65B52561AE9BAA20</string>
+			<string>93FFF0C615CE70919AB38E23BDEF7FF3</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -2209,493 +1910,7 @@
 				</array>
 			</dict>
 		</dict>
-		<key>790B184BC35BAB2E2B51E50E895A142A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNALAssetFile.h</string>
-			<key>path</key>
-			<string>QiniuSDK/Common/QNALAssetFile.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>79ABB12DD86FBD2AD22B88EC546E1406</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNResolver.h</string>
-			<key>path</key>
-			<string>HappyDNS/Local/QNResolver.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>79CB59BBA82BB85F144A641D3A575341</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>82895A44C3C17E6F6DEBF363B53FEAD3</string>
-				<string>9E6DD3E5B806F6BFC6BFA0F9C8ECEFF1</string>
-				<string>A5D10BED1CE6D60E03595BADA6559432</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>path</key>
-			<string>../Target Support Files/AFNetworking</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7C168D5DBDB78691493E24B13EF6B6A8</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>SystemConfiguration.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/SystemConfiguration.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>7C3C9A785D12C46C25807B41ECD7111B</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>HappyDNS-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7CA10970E1A09F285EAC2674C7D870D8</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>3F5D0943048F0A1D309D08CBDA7A0D89</string>
-				<string>FE749285CAA888C0C71561C38093223F</string>
-				<string>6BED276F1F1C65634ACD7E1DD3DCA446</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7CD03CBEF48291945F7FDA8230C78F77</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>AFURLSessionManager.h</string>
-			<key>path</key>
-			<string>AFNetworking/AFURLSessionManager.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7D8132FF2135DD9181A91B80359A1840</key>
-		<dict>
-			<key>fileRef</key>
-			<string>BB2C20D75543AD924159E8B1F2123223</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>7DB267AC865657E9E62E10967AA8E195</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>949840BEFEC96C81E60D818C34FC9FC9</string>
-				<string>F7D36D535A084E948FF2F5C1310DBDE0</string>
-				<string>98E5C40A78FE661071A3CF76FF253D59</string>
-				<string>FD7EE5EE3675880765743C7E2FC632CC</string>
-				<string>AF243F154C7250906FE224D61D7E5731</string>
-				<string>4EFBAFD2B02824A1DC240A640E2E7985</string>
-				<string>6234B6055BCC0EAF65754274599F24DF</string>
-				<string>5F3427EB97E5CBE273167A446853F460</string>
-				<string>98D4A0DF0B287223270E7E7FC4AE5E1A</string>
-				<string>BF044E583B6A14EC83747E82275DC828</string>
-				<string>023ECC330A4F234E7771DCC04054EA67</string>
-				<string>ED133D35818604477FB25894466E89FA</string>
-				<string>4EE5E1AB46576DEE1965AFFA40152712</string>
-				<string>FEB4365B0D95E546783E3B7F4DFE9FD5</string>
-				<string>2C921A37767FCD1B59EFC890762BB664</string>
-				<string>A9F7151DE5E34644EC31185026FAF2EF</string>
-				<string>7108D3F01FE7CB2483913CD45EC320AE</string>
-				<string>5BB1E6FE796B65C5E5DD5D84AB63333E</string>
-				<string>D06EF07D7091DBDAA3BD8512AD96E0A3</string>
-				<string>9071BC800340C159E31D56406EBDCE5A</string>
-				<string>11998F42C464A6BA169BF8103C8CA91D</string>
-				<string>DDC10E7912CDB1EAECE5DE77AFC7112E</string>
-				<string>DA38C9C3AAAB2EB19F1B127C62CB7DAC</string>
-				<string>25605835423EE43631C196692FC27F6B</string>
-				<string>09BDD795FD7D9D3A1323D89062C23CF2</string>
-				<string>45B2D2C9717CC55EB0F8537ECE30ED30</string>
-				<string>CEDB0D81F72A22289082F223F7292F14</string>
-				<string>961E7D18630BEE78457DE8EEF19CD62D</string>
-				<string>EF00D5E27CE1C9E831FA0DE3BB55BA65</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>7DB346D0F39D3F0E887471402A8071AB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BA6428E9F66FD5A23C0A2E06ED26CD2F</string>
-				<string>20B56609144CE204DFA8221F742B2D76</string>
-				<string>7CA10970E1A09F285EAC2674C7D870D8</string>
-				<string>ABF6C8F7C0A11AFF5DB0B702D6185EAD</string>
-				<string>037C0CA694176A3C0915F62C9D20B3E6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8096AA4679F29601E1F839462B0C910D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E41F4D401F91391ADCD6B11538675872</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>82632BDA3881A210C4EAD86CB9753ADE</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNUploadManager.m</string>
-			<key>path</key>
-			<string>QiniuSDK/Storage/QNUploadManager.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>82895A44C3C17E6F6DEBF363B53FEAD3</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>AFNetworking.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>83005D97133A4783DA2CEB23F82993B6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E1EED9560799C93215C8B68206BAE339</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>832BCDADDAB403F8937E33D19EA107E5</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UIProgressView+AFNetworking.h</string>
-			<key>path</key>
-			<string>UIKit+AFNetworking/UIProgressView+AFNetworking.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>84132AAB5BBE8BF2897C831D47E428E8</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5A646C232DC20E105018FA7C41A59C8D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>854BC4449D8CAD0F2799B021D1914C3B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>B83BC0C155EBFA1966BFC14D26C0DA86</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>873380D2D1ABA00E011C6427175B2C16</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNNetworkInfo.m</string>
-			<key>path</key>
-			<string>HappyDNS/Common/QNNetworkInfo.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>876C2EF5FE318346CDCB4BFE25A9D5B2</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0005C206B14A94150D6EB9B9C679E919</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>87C7A9494B915A90DACA2B292DF6A229</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1C57FFFBE04EAF577A69CAF54BA58022</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>88D26A10F3177364EBB8DDA4A8C51036</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNResponseInfo.h</string>
-			<key>path</key>
-			<string>QiniuSDK/Http/QNResponseInfo.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8B4EA21DB16F7BB96F2FBB7DBF80C181</key>
-		<dict>
-			<key>fileRef</key>
-			<string>9B6DD15FD0926F50C561FA1C5F9C381E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8EEECB0B0143B813BEB08DA61DDD50CE</key>
-		<dict>
-			<key>fileRef</key>
-			<string>9C21DED111D85EFE06F343CDFDBAB678</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>903A0E1F82A29D285902CBB5A0828BE9</key>
-		<dict>
-			<key>fileRef</key>
-			<string>24725E112903DE216E95FF565F7F8223</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>9071BC800340C159E31D56406EBDCE5A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>658C56F810DD6294F22849AC591B8FA5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>90C6EC52F428A7045D0B10C60249A259</key>
-		<dict>
-			<key>fileRef</key>
-			<string>02292C0438722849D0B2E25714A05E6E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>949840BEFEC96C81E60D818C34FC9FC9</key>
-		<dict>
-			<key>fileRef</key>
-			<string>AFE46E5DB8BD9771F8C5F4264016D115</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>94E4AEC8F5F4D61ACD03B5B2F2A348BA</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UIImageView+AFNetworking.m</string>
-			<key>path</key>
-			<string>UIKit+AFNetworking/UIImageView+AFNetworking.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>961E7D18630BEE78457DE8EEF19CD62D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>6DDD94948C5051ED7771804113DB8400</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>96F660525AEDFA347205988F79887698</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UIAlertView+AFNetworking.m</string>
-			<key>path</key>
-			<string>UIKit+AFNetworking/UIAlertView+AFNetworking.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>974C1F8A3489B132509D0378B4362700</key>
-		<dict>
-			<key>fileRef</key>
-			<string>019C8FADF6CD1E933022BA7D7C017828</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>98C98CDFB3F20F2925F6CD1F141BB14F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>98D4A0DF0B287223270E7E7FC4AE5E1A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>5066E26EA96C1F2C90F4B1262F525797</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>98E5C40A78FE661071A3CF76FF253D59</key>
-		<dict>
-			<key>fileRef</key>
-			<string>790B184BC35BAB2E2B51E50E895A142A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>99C8F03ED505FAEC1722D88A95AF3AA0</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>AFURLConnectionOperation.m</string>
-			<key>path</key>
-			<string>AFNetworking/AFURLConnectionOperation.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>99E82D6DC032555656E37AF2367B20D3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D98C0639E39D8A938A7C94BC79807E64</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>9A04E971065AF4281E43947994A53D07</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4136A9D5959C331A925C2A1CFA408BF1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>9AFD3D9BA9D269F9B26CF937D577377E</key>
+		<key>77580B3B014C81D0D50BD4E449B361FB</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -2710,14 +1925,92 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>9B47A1441B897F71505D8BE670B0940B</key>
+		<key>78449FCC01114171AA3CCB45C6666206</key>
 		<dict>
 			<key>fileRef</key>
-			<string>96F660525AEDFA347205988F79887698</string>
+			<string>B5AD80713B6F552A94DD6DB8324902D0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>7C168D5DBDB78691493E24B13EF6B6A8</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>SystemConfiguration.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/SystemConfiguration.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>7D75DF261A1AC3A1E3903B729BCB95EE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>259E759CE83083D8C8B73970446BAD77</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>9B6DD15FD0926F50C561FA1C5F9C381E</key>
+		<key>7D8132FF2135DD9181A91B80359A1840</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8B8433A76762141E78C5C0B563290830</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>7DB346D0F39D3F0E887471402A8071AB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>BA6428E9F66FD5A23C0A2E06ED26CD2F</string>
+				<string>20B56609144CE204DFA8221F742B2D76</string>
+				<string>43C9A9AD1219C1306B8BC35AB13AF223</string>
+				<string>ABF6C8F7C0A11AFF5DB0B702D6185EAD</string>
+				<string>037C0CA694176A3C0915F62C9D20B3E6</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7EBF3C4402C79ED96CB83524A56F62F9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2F50C3996979404BEF2DC8AC8CBE098D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>7F0475F5319409A7BB29B4534B82CE6A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNUploadOption.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Storage/QNUploadOption.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7FE0893B071AC42450C3E89585385A13</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -2726,9 +2019,574 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNDomain.m</string>
+			<string>QNAsyncRun.m</string>
 			<key>path</key>
-			<string>HappyDNS/Common/QNDomain.m</string>
+			<string>QiniuSDK/Common/QNAsyncRun.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7FE6C0DEB45DF22BA08536E14472DE90</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIAlertView+AFNetworking.h</string>
+			<key>path</key>
+			<string>UIKit+AFNetworking/UIAlertView+AFNetworking.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7FF993B28C1C2716D4A87359AD84C054</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F7C455F11AFAC9FBD8BC62C9BA7A3CB1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>81368EA07977E1A493A74581DC68A16E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>AFNetworking.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>81627B57E9E55B5170589A1C8A2F672A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNCrc32.m</string>
+			<key>path</key>
+			<string>QiniuSDK/Common/QNCrc32.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>81C22B4CFA02A9CCCDFB3D22E1C5069C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNUpToken.m</string>
+			<key>path</key>
+			<string>QiniuSDK/Storage/QNUpToken.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>83005D97133A4783DA2CEB23F82993B6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D88E05971112B9676CF819EB1EC1BF70</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>840FE22793F317BEBD0F16808528EADA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNFileRecorder.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Recorder/QNFileRecorder.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>84132AAB5BBE8BF2897C831D47E428E8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AC493F6E3A52072255E4B0336FC8CB17</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>844B25C5A192619FE9DE980D21C3D311</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNResolverDelegate.h</string>
+			<key>path</key>
+			<string>HappyDNS/Common/QNResolverDelegate.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>849A8162C11D9A1E5E79B457F46D3BFE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNUploadOption+Private.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Storage/QNUploadOption+Private.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>854BC4449D8CAD0F2799B021D1914C3B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3EE498C0577E72B0062795E79383CA1C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>876C2EF5FE318346CDCB4BFE25A9D5B2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>030940DC44671D59C9AD37533429EFCD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>87C7A9494B915A90DACA2B292DF6A229</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F04B5912BBB38F5571292D4761BF94D1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>8A3AC2E6B7EC312D232C96E2A02B8391</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNDnsManager.m</string>
+			<key>path</key>
+			<string>HappyDNS/Common/QNDnsManager.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8A4456ECE9233630DDCECB6F89296549</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>AFURLRequestSerialization.m</string>
+			<key>path</key>
+			<string>AFNetworking/AFURLRequestSerialization.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8B4EA21DB16F7BB96F2FBB7DBF80C181</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1BEE4A7F5D4C0F71B489AF4155E7C41B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8B5E45E6B58EFBEFF8357FC820729D1D</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>E669E68570D919781FD5104A38F41B50</string>
+				<string>23D07853BC735F2AED2F3334FD961BFF</string>
+				<string>7D75DF261A1AC3A1E3903B729BCB95EE</string>
+				<string>5FB2235A99764BBC53E12B350655577A</string>
+				<string>5A1A1371E1F909B36B632B3D25923E36</string>
+				<string>D072869C0A3951BC7D3E6D4E08CF79E7</string>
+				<string>F001872783CB98CA49159E208E114FC7</string>
+				<string>61D825B986C1F07569826ADC426F3896</string>
+				<string>181A069868ACB7872C846A54130E6C89</string>
+				<string>71873C69EAA29107C484000DF9885AEF</string>
+				<string>EE2A38E19296EE74E2D3148C629A45B5</string>
+				<string>B5DF360CEA512263B09B39E8AA7504AC</string>
+				<string>471C71A69E6651CB69918A0CFFA21806</string>
+				<string>C3B03292BC4468AA9D3FFC853EF8F9AF</string>
+				<string>193112A4B0A8D04E263EC56D9C287255</string>
+				<string>9E078FAA57126C29F0B42BBE2B185976</string>
+				<string>8EF87D02A0601AFE6EA2C0D0E9622ADB</string>
+				<string>FD087340F3CD9C441F8BE5E5D11E0452</string>
+				<string>4B7CF737383851ED0DB2A2A8C19E969E</string>
+				<string>C58602760FC6B85DDC48E52621C46ADB</string>
+				<string>6AC677DD1F06455D884ACB10F1FB3C16</string>
+				<string>98FF583A096836F6CDBA0D5B72296801</string>
+				<string>1BBC0C80075AF256D8E368EE259D69C2</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>8B8433A76762141E78C5C0B563290830</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNDnspodEnterprise.m</string>
+			<key>path</key>
+			<string>HappyDNS/Http/QNDnspodEnterprise.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8E68EE878C578F7841B818FAD33D47B4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIProgressView+AFNetworking.h</string>
+			<key>path</key>
+			<string>UIKit+AFNetworking/UIProgressView+AFNetworking.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8EF87D02A0601AFE6EA2C0D0E9622ADB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E81DF06317D6AEDEE08C9DE5E6077335</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8FB170555F6D06CD367BD2D584ED6EBB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>849A8162C11D9A1E5E79B457F46D3BFE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>903A0E1F82A29D285902CBB5A0828BE9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>32816DE61799B70DA9C792239B2C87C4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>92F73EF1D150B8D7EAB84FD01371107A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIImageView+AFNetworking.h</string>
+			<key>path</key>
+			<string>UIKit+AFNetworking/UIImageView+AFNetworking.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9332012BD0BA62C9A01F36834C3C4AEC</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>BBABC466A30F319E6471341484EF4636</string>
+				<string>030940DC44671D59C9AD37533429EFCD</string>
+				<string>41BAD972B42D1BE8EB9C4F32FA851F98</string>
+				<string>9FA17E118A387C690934A8430144BE2B</string>
+				<string>77580B3B014C81D0D50BD4E449B361FB</string>
+				<string>19377F98B7DD3F6A3F054C71F724C30A</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>NSURLConnection</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>93FFF0C615CE70919AB38E23BDEF7FF3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNUpToken.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Storage/QNUpToken.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>944A7A79E068FF3B185165DC460CFDA1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNUserAgent.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Http/QNUserAgent.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>953C9C1A21197D7860D3202C26809AE6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNAsyncRun.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Common/QNAsyncRun.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>96353DC61AB21AB940C60AB76A4A18AF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QN_GTM_Base64.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Common/QN_GTM_Base64.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>970FE31A533ECD51A08DD5F4D9B5611C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>27BEDC2DB4A8BE4593DCDBD897EA08E2</string>
+				<string>EB2B4BA3EF33F6F04A99E926F40D0FF1</string>
+				<string>68D6BABBA78DFA9D85F00C0F2213F2AD</string>
+				<string>99A0F82760B69D1C05266C6ADC0D274D</string>
+				<string>C34DBE2B5CE621D504EB3969B0F8F734</string>
+				<string>669815D3D52889E8F4BDC052D801238E</string>
+				<string>B3F0BDACF3301C349DAC67770AC24576</string>
+				<string>F29600140F62E2EC9E0CCA34D2065E09</string>
+				<string>F837D859824DA393C54E19B89D1E956B</string>
+				<string>7FF993B28C1C2716D4A87359AD84C054</string>
+				<string>FCF366DAAD3BBD0A2E9C65FCEF053B39</string>
+				<string>BD4872DC98108893D380A6145F29EF87</string>
+				<string>23C0E5A02714DC589E9E88AEEE807336</string>
+				<string>BD20C0EA0637448D58916218C2ADBCA7</string>
+				<string>DB169DB8D678ABCF9F120848E771562B</string>
+				<string>2F29430AEF2739C3AA749BDCA43636BF</string>
+				<string>714678C83D01C813FFB6D198E71CA796</string>
+				<string>F38B5F8E07CC1FBA023F1542D93261C4</string>
+				<string>71801B0D864C2A008B7FA5B2CD926B60</string>
+				<string>EA60C451D224996D9175674E1B49A637</string>
+				<string>7EBF3C4402C79ED96CB83524A56F62F9</string>
+				<string>B8E977FB285993C578119A3E6B683ACF</string>
+				<string>8FB170555F6D06CD367BD2D584ED6EBB</string>
+				<string>024FFBBCA952A00DF8A6306E2D0FD309</string>
+				<string>74A2B10C59DC389B7C7B70B1171240CE</string>
+				<string>5D1B0D31B13119EFC65A35A5B837033E</string>
+				<string>B76AC552E724DFC63D895F0563D82652</string>
+				<string>6C1655BD3C3A4B05C3853993F975D5A3</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>974C1F8A3489B132509D0378B4362700</key>
+		<dict>
+			<key>fileRef</key>
+			<string>37648F6722276D761201D177FE6ECC55</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>97D1FC0A4ACED38C197AC2FA0B3AEE87</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIButton+AFNetworking.h</string>
+			<key>path</key>
+			<string>UIKit+AFNetworking/UIButton+AFNetworking.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>98C98CDFB3F20F2925F6CD1F141BB14F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>98FF583A096836F6CDBA0D5B72296801</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2EC9710A05F604B666CDB59CFD1FE737</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>990BEB1F52373C938E0353ED0D8133E0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNResumeUpload.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Storage/QNResumeUpload.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>99A0F82760B69D1C05266C6ADC0D274D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>953C9C1A21197D7860D3202C26809AE6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>99E82D6DC032555656E37AF2367B20D3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F9139AEA8A0362C365FDAF4C910D02C3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>99EA0870D2E6B358F0A5C028629DA64C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNFile.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Common/QNFile.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9A04E971065AF4281E43947994A53D07</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B68BCB7DD14D7822EEF1F2A89A6BEC0F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B47A1441B897F71505D8BE670B0940B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5D154ACCCDBF79A905165CE8E407AAA3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9B91A1DF69BC0DF4F2F6C8E42118829E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIKit+AFNetworking.h</string>
+			<key>path</key>
+			<string>UIKit+AFNetworking/UIKit+AFNetworking.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2743,21 +2601,6 @@
 			<key>targetProxy</key>
 			<string>E213D98DD2A1299A17AA6DCDFEE565FE</string>
 		</dict>
-		<key>9C21DED111D85EFE06F343CDFDBAB678</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>GTM_Base64.m</string>
-			<key>path</key>
-			<string>QiniuSDK/Common/GTM_Base64.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>9C31A9B26388001B26382C7C355DA572</key>
 		<dict>
 			<key>isa</key>
@@ -2770,6 +2613,19 @@
 			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework</string>
 			<key>sourceTree</key>
 			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>9CDF5EBC6AEEA5A2F2148369ABAD15D6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>HappyDNS.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>9D44B0AD2D97CB2AA74B614C1E92EDCF</key>
 		<dict>
@@ -2801,35 +2657,14 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>9DCEFA34449F5B8270B6330AB538FC5A</key>
+		<key>9E078FAA57126C29F0B42BBE2B185976</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>fileRef</key>
+			<string>205628C783345C6EF0AC01D7082DA1EE</string>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNAsyncRun.m</string>
-			<key>path</key>
-			<string>QiniuSDK/Common/QNAsyncRun.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
 		</dict>
-		<key>9E6DD3E5B806F6BFC6BFA0F9C8ECEFF1</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>AFNetworking-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9F330E32CCBCB349FD1E49604D090612</key>
+		<key>9F6E21756153AC7725DFB74CC1156898</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -2838,9 +2673,39 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>AFURLResponseSerialization.h</string>
+			<string>QNHijackingDetectWrapper.h</string>
 			<key>path</key>
-			<string>AFNetworking/AFURLResponseSerialization.h</string>
+			<string>HappyDNS/Local/QNHijackingDetectWrapper.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9FA17E118A387C690934A8430144BE2B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>AFHTTPRequestOperationManager.m</string>
+			<key>path</key>
+			<string>AFNetworking/AFHTTPRequestOperationManager.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A01D46A4A346539A993E61029CA152AC</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNUrlSafeBase64.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Common/QNUrlSafeBase64.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2870,30 +2735,10 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>A1AFD76F984F11658AA790DC84B57E82</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Qiniu-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A27C6743E4A7A8CDF0E8A86F5BDB3609</key>
-		<dict>
-			<key>fileRef</key>
-			<string>82632BDA3881A210C4EAD86CB9753ADE</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>A28588D1CCB5253CF80509F30A1AF1A5</key>
 		<dict>
 			<key>fileRef</key>
-			<string>BC13275666092BFB6334DAEB466C1CD0</string>
+			<string>B2D33787590C755D9704E95927EEFB2A</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -2904,7 +2749,7 @@
 				</array>
 			</dict>
 		</dict>
-		<key>A2ACDD2806F3009DE72E4D127A016857</key>
+		<key>A2AC867097A333A5CB8E1633F924A021</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -2913,31 +2758,31 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNUrlSafeBase64.m</string>
+			<string>QN_GTM_Base64.m</string>
 			<key>path</key>
-			<string>QiniuSDK/Common/QNUrlSafeBase64.m</string>
+			<string>QiniuSDK/Common/QN_GTM_Base64.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>A3A67A4044B0A921319CC1A000822275</key>
+		<key>A49994B61357DBB3155F344DC873BD95</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNUploadManager.h</string>
+			<string>AFURLResponseSerialization.m</string>
 			<key>path</key>
-			<string>QiniuSDK/Storage/QNUploadManager.h</string>
+			<string>AFNetworking/AFURLResponseSerialization.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 		<key>A4EE8D1BEE38B87066BAA1B09A047356</key>
 		<dict>
 			<key>fileRef</key>
-			<string>49FA636AC59A16E42043D269B4FE40BA</string>
+			<string>CC3E4F4CC066C77A9265D2CF502FD3DD</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -2947,26 +2792,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>A5D10BED1CE6D60E03595BADA6559432</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>AFNetworking-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A616BAF059089B451348A12EF1D9FEB4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1619DE88268A4592690069C5BAAE60E1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>A6206381242CDEF9B0092AC555D3639A</key>
 		<dict>
@@ -2996,33 +2821,50 @@
 			<key>productType</key>
 			<string>com.apple.product-type.library.static</string>
 		</dict>
-		<key>A73BD5D595DA21E5D75A4AA55F05EF88</key>
+		<key>A778F4477DEB7EC5FFCF04BF703C5E68</key>
 		<dict>
-			<key>children</key>
-			<array>
-				<string>6C3187CA415B92021254E03EE533FA5C</string>
-				<string>7283AB5034BCE08E9F6EB2A6BAE8EA97</string>
-			</array>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXGroup</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>Security</string>
+			<string>UIActivityIndicatorView+AFNetworking.m</string>
+			<key>path</key>
+			<string>UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>A9F7151DE5E34644EC31185026FAF2EF</key>
+		<key>A918A89DECB04CFAF38454E0F36FB768</key>
 		<dict>
-			<key>fileRef</key>
-			<string>265072EDA53A152225CAC56459B318F9</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNHttpManager.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Http/QNHttpManager.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AAB04D80EC3E1B2BC6889F46E5279487</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNDns.m</string>
+			<key>path</key>
+			<string>QiniuSDK/Http/QNDns.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>AB4FA0728D18BDC0B2D35511809EBC99</key>
 		<dict>
@@ -3037,33 +2879,18 @@
 			<key>remoteInfo</key>
 			<string>AFNetworking</string>
 		</dict>
-		<key>AB88DCDE78CB7651936105096EA847B9</key>
+		<key>ABABAE854802E81B1DD3C1336E37B601</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNPHAssetFile.h</string>
+			<string>QNSystem.m</string>
 			<key>path</key>
-			<string>QiniuSDK/Common/QNPHAssetFile.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>ABF440C494CF1911FD295BB8FA2814C5</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>AFNetworking.h</string>
-			<key>path</key>
-			<string>AFNetworking/AFNetworking.h</string>
+			<string>QiniuSDK/Common/QNSystem.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -3086,11 +2913,11 @@
 		<key>AC2BC5B2D99237BF15438952BADF3627</key>
 		<dict>
 			<key>fileRef</key>
-			<string>678391E4D16E699AF12955C02636C598</string>
+			<string>8A3AC2E6B7EC312D232C96E2A02B8391</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>ACAB0D00F9F866D42845550B7767CA45</key>
+		<key>AC493F6E3A52072255E4B0336FC8CB17</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -3099,20 +2926,13 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>QNRecorderDelegate.h</string>
+			<string>QNDomain.h</string>
 			<key>path</key>
-			<string>QiniuSDK/Recorder/QNRecorderDelegate.h</string>
+			<string>HappyDNS/Common/QNDomain.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>AE607E682415FAA160B33C7C13A8475B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>FD905B09EEA3E06E06E4DFAC2581B069</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>AEF616A7FC4AB4ECCFEFD6C5C0DC6E98</key>
+		<key>AC9F3B770C3E7D2884AF2C4068013A08</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -3121,16 +2941,52 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNHijackingDetectWrapper.m</string>
+			<string>QNFormUpload.m</string>
 			<key>path</key>
-			<string>HappyDNS/Local/QNHijackingDetectWrapper.m</string>
+			<string>QiniuSDK/Storage/QNFormUpload.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>AF243F154C7250906FE224D61D7E5731</key>
+		<key>AE607E682415FAA160B33C7C13A8475B</key>
 		<dict>
 			<key>fileRef</key>
-			<string>E924759E7CA07882E862F59F05BB7720</string>
+			<string>A778F4477DEB7EC5FFCF04BF703C5E68</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>AF07A0B1C73BDAE09A1A5E687F842B15</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNEtag.m</string>
+			<key>path</key>
+			<string>QiniuSDK/Common/QNEtag.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B12AD2EE044D6F7424F75F1506B516B2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6DBC6E0E6489A5C984A9830FE9DB2D4C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>B2B5DEC33B644F946C59F656AAAA8146</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B2FD116B0D47BBC79E879F55B6C2B9BB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>B2C5738B39F0D47E6C2D00FBE823FB4B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9F6E21756153AC7725DFB74CC1156898</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -3141,7 +2997,7 @@
 				</array>
 			</dict>
 		</dict>
-		<key>AFE46E5DB8BD9771F8C5F4264016D115</key>
+		<key>B2D33787590C755D9704E95927EEFB2A</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -3150,43 +3006,13 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>GTM_Base64.h</string>
+			<string>UIActivityIndicatorView+AFNetworking.h</string>
 			<key>path</key>
-			<string>QiniuSDK/Common/GTM_Base64.h</string>
+			<string>UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>AFF9ECD3B392A461FD1221A5BC0F1943</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNUploadOption.h</string>
-			<key>path</key>
-			<string>QiniuSDK/Storage/QNUploadOption.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B0B78340F36B55838B39177F19A4D529</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNResolverDelegate.h</string>
-			<key>path</key>
-			<string>HappyDNS/Common/QNResolverDelegate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B0E0FEE5F8A95DCE0620410A82D83DF6</key>
+		<key>B2FD116B0D47BBC79E879F55B6C2B9BB</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -3198,66 +3024,6 @@
 			<string>AFNetworkActivityIndicatorManager.m</string>
 			<key>path</key>
 			<string>UIKit+AFNetworking/AFNetworkActivityIndicatorManager.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B12AD2EE044D6F7424F75F1506B516B2</key>
-		<dict>
-			<key>fileRef</key>
-			<string>7283AB5034BCE08E9F6EB2A6BAE8EA97</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>B26D318BF5749E77ABF6A691B58A5697</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>4E082675B5D83B131A9B8407562871EF</string>
-				<string>E1EED9560799C93215C8B68206BAE339</string>
-				<string>7C3C9A785D12C46C25807B41ECD7111B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>path</key>
-			<string>../Target Support Files/HappyDNS</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B2B5DEC33B644F946C59F656AAAA8146</key>
-		<dict>
-			<key>fileRef</key>
-			<string>B0E0FEE5F8A95DCE0620410A82D83DF6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>B2C5738B39F0D47E6C2D00FBE823FB4B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>71B75EA3143AFCD44E4397BC5A5B446B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>B336F1231DFD7E41FDA97589890780D4</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNResumeUpload.m</string>
-			<key>path</key>
-			<string>QiniuSDK/Storage/QNResumeUpload.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -3355,6 +3121,20 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>B3F0BDACF3301C349DAC67770AC24576</key>
+		<dict>
+			<key>fileRef</key>
+			<string>48D7EFD52B7CEC2B9A99C66BE1248BEC</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
 		<key>B40ABC3DFA129D1E603B21EC3D950AD2</key>
 		<dict>
 			<key>containerPortal</key>
@@ -3368,22 +3148,20 @@
 			<key>remoteInfo</key>
 			<string>AFNetworking</string>
 		</dict>
-		<key>B53F33B232BDC877DAC9052D520D8988</key>
+		<key>B462471FBC9365E53ABF0CF569B57240</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNPHAssetFile.m</string>
+			<string>sourcecode.c.h</string>
 			<key>path</key>
-			<string>QiniuSDK/Common/QNPHAssetFile.m</string>
+			<string>HappyDNS-prefix.pch</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>B5F8578AC8BBE33B79864AD606870CCE</key>
+		<key>B586FCDA0C7D4DD6D466128031AC19EA</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -3392,9 +3170,61 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNFile.m</string>
+			<string>QNUploadOption.m</string>
 			<key>path</key>
-			<string>QiniuSDK/Common/QNFile.m</string>
+			<string>QiniuSDK/Storage/QNUploadOption.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B5AD80713B6F552A94DD6DB8324902D0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>AFNetworkReachabilityManager.h</string>
+			<key>path</key>
+			<string>AFNetworking/AFNetworkReachabilityManager.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B5B4DCE626F1BDF3C442D719F48163AF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNDnspodEnterprise.h</string>
+			<key>path</key>
+			<string>HappyDNS/Http/QNDnspodEnterprise.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B5DF360CEA512263B09B39E8AA7504AC</key>
+		<dict>
+			<key>fileRef</key>
+			<string>33AB92F7BFCA8B1D3B0DF6979BB12A78</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>B68BCB7DD14D7822EEF1F2A89A6BEC0F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIWebView+AFNetworking.m</string>
+			<key>path</key>
+			<string>UIKit+AFNetworking/UIWebView+AFNetworking.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -3422,22 +3252,21 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>B760F948D884621C3DAE9FA3B6DD6591</key>
+		<key>B76AC552E724DFC63D895F0563D82652</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>fileRef</key>
+			<string>944A7A79E068FF3B185165DC460CFDA1</string>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UIRefreshControl+AFNetworking.h</string>
-			<key>path</key>
-			<string>UIKit+AFNetworking/UIRefreshControl+AFNetworking.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
-		<key>B83BC0C155EBFA1966BFC14D26C0DA86</key>
+		<key>B7BBD4CAF496198F03F73A06019E4697</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -3446,16 +3275,16 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>UIRefreshControl+AFNetworking.m</string>
+			<string>QNHosts.m</string>
 			<key>path</key>
-			<string>UIKit+AFNetworking/UIRefreshControl+AFNetworking.m</string>
+			<string>HappyDNS/Local/QNHosts.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 		<key>B88B985BCF32AAAD610994FAAE7B9604</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>82895A44C3C17E6F6DEBF363B53FEAD3</string>
+			<string>81368EA07977E1A493A74581DC68A16E</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
@@ -3486,17 +3315,24 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>B8D0FD81B9F6A71B978BF138B7631748</key>
+		<key>B8E977FB285993C578119A3E6B683ACF</key>
 		<dict>
 			<key>fileRef</key>
-			<string>9DCEFA34449F5B8270B6330AB538FC5A</string>
+			<string>EE312F4EAC6B3681D9A9BC8EBC09BFC3</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
 		<key>B9140FC12410CBE58A51EEC03AB28A4F</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>82895A44C3C17E6F6DEBF363B53FEAD3</string>
+			<string>81368EA07977E1A493A74581DC68A16E</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
@@ -3527,14 +3363,7 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>B9DAA002CF3E0E8EBE9B6E9A7778CFD4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>9E6DD3E5B806F6BFC6BFA0F9C8ECEFF1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>B9E35CDE71F5ED64A402A526BDEFE3FC</key>
+		<key>B94148F7546EA22C94B0210758897715</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -3543,11 +3372,18 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>QNUploadOption+Private.h</string>
+			<string>AFHTTPSessionManager.h</string>
 			<key>path</key>
-			<string>QiniuSDK/Storage/QNUploadOption+Private.h</string>
+			<string>AFNetworking/AFHTTPSessionManager.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B9DAA002CF3E0E8EBE9B6E9A7778CFD4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C329D4E1AEBE6BD5353B269B37E806E3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>BA025A85A850C1E24A6C92F4C29E5531</key>
 		<dict>
@@ -3573,22 +3409,7 @@
 			<key>xcLanguageSpecificationIdentifier</key>
 			<string>xcode.lang.ruby</string>
 		</dict>
-		<key>BB2C20D75543AD924159E8B1F2123223</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNDnspodEnterprise.m</string>
-			<key>path</key>
-			<string>HappyDNS/Http/QNDnspodEnterprise.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BC13275666092BFB6334DAEB466C1CD0</key>
+		<key>BBABC466A30F319E6471341484EF4636</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -3597,53 +3418,36 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>UIActivityIndicatorView+AFNetworking.h</string>
+			<string>AFHTTPRequestOperation.h</string>
 			<key>path</key>
-			<string>UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.h</string>
+			<string>AFNetworking/AFHTTPRequestOperation.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BC12FD6AF7AB9BDD1E2F270CD78D5619</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Qiniu-dummy.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 		<key>BC7993B7436D4D7FADE6DD554DA52769</key>
 		<dict>
 			<key>fileRef</key>
-			<string>2D44B249324BA45F7DD72CE74C9AEEB3</string>
+			<string>E3FFC7EAD5E5C5CCD1444539167943D2</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>BE8051144BA7AF2BFD63EFBBF87A8A1F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>HappyDNS.h</string>
-			<key>path</key>
-			<string>HappyDNS/HappyDNS.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BE9B63FEB87DBBAD9F97E50FD6F51C98</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>AFURLRequestSerialization.m</string>
-			<key>path</key>
-			<string>AFNetworking/AFURLRequestSerialization.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BF044E583B6A14EC83747E82275DC828</key>
+		<key>BD20C0EA0637448D58916218C2ADBCA7</key>
 		<dict>
 			<key>fileRef</key>
-			<string>04F6DB04E9F9B7773891FF0D517AEE0A</string>
+			<string>A918A89DECB04CFAF38454E0F36FB768</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -3654,7 +3458,21 @@
 				</array>
 			</dict>
 		</dict>
-		<key>BF389B13D73D47C2175F3DD1DECF518D</key>
+		<key>BD4872DC98108893D380A6145F29EF87</key>
+		<dict>
+			<key>fileRef</key>
+			<string>14C1181497A3C3D893D652948A4B5C92</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>BE4E7BD59D99A1D1D65651D1BE99D4D0</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -3663,48 +3481,26 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>QNDns.h</string>
+			<string>AFSecurityPolicy.h</string>
 			<key>path</key>
-			<string>QiniuSDK/Http/QNDns.h</string>
+			<string>AFNetworking/AFSecurityPolicy.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>C0A2BCEF25F1A963D7F7408E4A64EFD4</key>
+		<key>C23FBFB36A9C9A64A2812716B3A00E3C</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
+			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>AFURLSessionManager.m</string>
+			<string>QNPHAssetFile.h</string>
 			<key>path</key>
-			<string>AFNetworking/AFURLSessionManager.m</string>
+			<string>QiniuSDK/Common/QNPHAssetFile.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C1A6D9EE1AEA3B15D4BF661F58C092F9</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNHosts.m</string>
-			<key>path</key>
-			<string>HappyDNS/Local/QNHosts.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C299D6345C8A1383AF56AA824389BBED</key>
-		<dict>
-			<key>fileRef</key>
-			<string>173AECBB5AE02413343C63D69142BD58</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>C2B240D99C3FC6A7DC6C66A2434CA799</key>
 		<dict>
@@ -3719,25 +3515,23 @@
 			<key>sourceTree</key>
 			<string>DEVELOPER_DIR</string>
 		</dict>
-		<key>C302E22D64B7BB6D5AC964AECD05B4DC</key>
+		<key>C329D4E1AEBE6BD5353B269B37E806E3</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UIImageView+AFNetworking.h</string>
+			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>UIKit+AFNetworking/UIImageView+AFNetworking.h</string>
+			<string>AFNetworking-dummy.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>C58268D5A4D2A786576E0EAA5B50FB93</key>
+		<key>C34DBE2B5CE621D504EB3969B0F8F734</key>
 		<dict>
 			<key>fileRef</key>
-			<string>B760F948D884621C3DAE9FA3B6DD6591</string>
+			<string>69EE0270AB06260ABCF8FFD1FD4DE37C</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -3748,10 +3542,52 @@
 				</array>
 			</dict>
 		</dict>
+		<key>C39B99B72E6DB62AA76BFB9DE10125CA</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>B5AD80713B6F552A94DD6DB8324902D0</string>
+				<string>E3FFC7EAD5E5C5CCD1444539167943D2</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Reachability</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C3B03292BC4468AA9D3FFC853EF8F9AF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5D7124E5D31A8966D95F8FCE6F3BD9E6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C58268D5A4D2A786576E0EAA5B50FB93</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FFDABD8D5D206A3A2ABF8A3DEC4D869D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>C58602760FC6B85DDC48E52621C46ADB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B586FCDA0C7D4DD6D466128031AC19EA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>C59B494883D0A46E495B5C99D2D44807</key>
 		<dict>
 			<key>fileRef</key>
-			<string>79ABB12DD86FBD2AD22B88EC546E1406</string>
+			<string>4744FE734737700BF75336E5A6E801BA</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -3773,40 +3609,10 @@
 			<key>targetProxy</key>
 			<string>DF3A4722F3839F5648AAC0FA473376F8</string>
 		</dict>
-		<key>C76052AEAFBE8146CA1BD19749587D1B</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>D912FECEEC49D94BCFF6051E01DBD0A6</string>
-				<string>B0E0FEE5F8A95DCE0620410A82D83DF6</string>
-				<string>BC13275666092BFB6334DAEB466C1CD0</string>
-				<string>FD905B09EEA3E06E06E4DFAC2581B069</string>
-				<string>F0BE23A6A295F09A8CD206FCC0423996</string>
-				<string>96F660525AEDFA347205988F79887698</string>
-				<string>2C206956360B0FE622172172718475F5</string>
-				<string>D98C0639E39D8A938A7C94BC79807E64</string>
-				<string>24725E112903DE216E95FF565F7F8223</string>
-				<string>C302E22D64B7BB6D5AC964AECD05B4DC</string>
-				<string>94E4AEC8F5F4D61ACD03B5B2F2A348BA</string>
-				<string>EE6A142B43D6EC1486FF15481D382146</string>
-				<string>832BCDADDAB403F8937E33D19EA107E5</string>
-				<string>4DF303D0910AFCED4BC9D095C0B35791</string>
-				<string>B760F948D884621C3DAE9FA3B6DD6591</string>
-				<string>B83BC0C155EBFA1966BFC14D26C0DA86</string>
-				<string>49FA636AC59A16E42043D269B4FE40BA</string>
-				<string>4136A9D5959C331A925C2A1CFA408BF1</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>UIKit</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>C7ACDDE36465ACAF629FEC233B1BF172</key>
 		<dict>
 			<key>fileRef</key>
-			<string>832BCDADDAB403F8937E33D19EA107E5</string>
+			<string>8E68EE878C578F7841B818FAD33D47B4</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -3817,29 +3623,109 @@
 				</array>
 			</dict>
 		</dict>
-		<key>C90A1577EF47F5BECB66DF9E6295F5EA</key>
+		<key>C989B0DA88E966E991FD3D29752F9683</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNDes.h</string>
+			<string>QNResponseInfo.m</string>
 			<key>path</key>
-			<string>HappyDNS/Util/QNDes.h</string>
+			<string>QiniuSDK/Http/QNResponseInfo.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C9DBA6164687E4A2A4A806B14D6CE453</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNHijackingDetectWrapper.m</string>
+			<key>path</key>
+			<string>HappyDNS/Local/QNHijackingDetectWrapper.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 		<key>CAA0F8074B35A2F73890310EC4521A0D</key>
 		<dict>
 			<key>fileRef</key>
-			<string>EDADF02A60DEC560D4266C58ACDEFC23</string>
+			<string>A49994B61357DBB3155F344DC873BD95</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>CCF1CD8F42347FD75B5F1DA94CC483BD</key>
+		<key>CC346FD16D8F6AAE26EB30C5DB60C899</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>E17E01D23C94D475DFF003546BE978AF</string>
+				<string>96353DC61AB21AB940C60AB76A4A18AF</string>
+				<string>A2AC867097A333A5CB8E1633F924A021</string>
+				<string>EDA52839F5A4B24E39CDF7453257F7C5</string>
+				<string>259E759CE83083D8C8B73970446BAD77</string>
+				<string>953C9C1A21197D7860D3202C26809AE6</string>
+				<string>7FE0893B071AC42450C3E89585385A13</string>
+				<string>69EE0270AB06260ABCF8FFD1FD4DE37C</string>
+				<string>DC9DD2A93AF0CA56373A5E884BDA6F0F</string>
+				<string>30641CFCAEEB1FAB448D4B36454B6301</string>
+				<string>81627B57E9E55B5170589A1C8A2F672A</string>
+				<string>48D7EFD52B7CEC2B9A99C66BE1248BEC</string>
+				<string>AAB04D80EC3E1B2BC6889F46E5279487</string>
+				<string>10D7036408ED4C80A7B3E605A5B289D7</string>
+				<string>AF07A0B1C73BDAE09A1A5E687F842B15</string>
+				<string>99EA0870D2E6B358F0A5C028629DA64C</string>
+				<string>DE1FD91D5D2C4D3CD87BAE4710B3D86F</string>
+				<string>F7C455F11AFAC9FBD8BC62C9BA7A3CB1</string>
+				<string>840FE22793F317BEBD0F16808528EADA</string>
+				<string>2EE0219D7B1B709F9EEE337B360BDA2C</string>
+				<string>14C1181497A3C3D893D652948A4B5C92</string>
+				<string>AC9F3B770C3E7D2884AF2C4068013A08</string>
+				<string>D5A59ADB40595A64EFF85FB1F9FBBDE7</string>
+				<string>A918A89DECB04CFAF38454E0F36FB768</string>
+				<string>33AB92F7BFCA8B1D3B0DF6979BB12A78</string>
+				<string>C23FBFB36A9C9A64A2812716B3A00E3C</string>
+				<string>F808FCA42DC1629D83814FA07E46CB2A</string>
+				<string>19065E25B3147BD3985B98969EE0B368</string>
+				<string>5D7124E5D31A8966D95F8FCE6F3BD9E6</string>
+				<string>6405AF271AAF8D23A6438D99379D2566</string>
+				<string>D674720D06B9A2514D7CD74F56081C7C</string>
+				<string>C989B0DA88E966E991FD3D29752F9683</string>
+				<string>990BEB1F52373C938E0353ED0D8133E0</string>
+				<string>205628C783345C6EF0AC01D7082DA1EE</string>
+				<string>DB17DB86AE2486BEF7DEEED89E5D3695</string>
+				<string>E81DF06317D6AEDEE08C9DE5E6077335</string>
+				<string>2F50C3996979404BEF2DC8AC8CBE098D</string>
+				<string>ABABAE854802E81B1DD3C1336E37B601</string>
+				<string>EE312F4EAC6B3681D9A9BC8EBC09BFC3</string>
+				<string>2F75266E0FEDE06E9FDAF283E1EB7213</string>
+				<string>7F0475F5319409A7BB29B4534B82CE6A</string>
+				<string>B586FCDA0C7D4DD6D466128031AC19EA</string>
+				<string>849A8162C11D9A1E5E79B457F46D3BFE</string>
+				<string>93FFF0C615CE70919AB38E23BDEF7FF3</string>
+				<string>81C22B4CFA02A9CCCDFB3D22E1C5069C</string>
+				<string>A01D46A4A346539A993E61029CA152AC</string>
+				<string>2EC9710A05F604B666CDB59CFD1FE737</string>
+				<string>944A7A79E068FF3B185165DC460CFDA1</string>
+				<string>D18D07627753138921EBE04813C6B915</string>
+				<string>147BB457A955598717403F65AF2D900D</string>
+				<string>0BD29DEB0CAA894DD21D09E1C7EB85B9</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Qiniu</string>
+			<key>path</key>
+			<string>Qiniu</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CC3E4F4CC066C77A9265D2CF502FD3DD</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -3848,9 +3734,9 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>QNHosts.h</string>
+			<string>UIWebView+AFNetworking.h</string>
 			<key>path</key>
-			<string>HappyDNS/Local/QNHosts.h</string>
+			<string>UIKit+AFNetworking/UIWebView+AFNetworking.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -3860,9 +3746,9 @@
 			<string>EB13C6E0E4E5C9DC5C7958090D355FE0</string>
 			<key>buildPhases</key>
 			<array>
-				<string>1F1A872AC28EA74A28799BA25FE6209D</string>
+				<string>8B5E45E6B58EFBEFF8357FC820729D1D</string>
 				<string>016D07485E0B5B946BD36F482DBB8B8D</string>
-				<string>7DB267AC865657E9E62E10967AA8E195</string>
+				<string>970FE31A533ECD51A08DD5F4D9B5611C</string>
 			</array>
 			<key>buildRules</key>
 			<array/>
@@ -3882,7 +3768,21 @@
 			<key>productType</key>
 			<string>com.apple.product-type.library.static</string>
 		</dict>
-		<key>CDA6708FE701C1AB323AC6ABC259C259</key>
+		<key>D070B784EFCA099C141EEAB69FBCC870</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1694CDDFF7902527F37865288E0E2104</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>D072869C0A3951BC7D3E6D4E08CF79E7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>81627B57E9E55B5170589A1C8A2F672A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>D08E64ED3209177DB59DD97DA9403DBF</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -3891,58 +3791,16 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>QNAsyncRun.h</string>
+			<string>QNHosts.h</string>
 			<key>path</key>
-			<string>QiniuSDK/Common/QNAsyncRun.h</string>
+			<string>HappyDNS/Local/QNHosts.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB0D81F72A22289082F223F7292F14</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3F5EB2BE1FBEEF1D4B54EA7CF141AF51</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>CEE22CEDB4D4E477FD042409B4834471</key>
-		<dict>
-			<key>fileRef</key>
-			<string>F95CF65EC9DA92541A4A83012B76457B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>D06EF07D7091DBDAA3BD8512AD96E0A3</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3FB0D15888BBC7EF4A3D18046F26125A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>D070B784EFCA099C141EEAB69FBCC870</key>
-		<dict>
-			<key>fileRef</key>
-			<string>94E4AEC8F5F4D61ACD03B5B2F2A348BA</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>D15889615DC3D0788CA745D4E1D73FF0</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>4E082675B5D83B131A9B8407562871EF</string>
+			<string>9CDF5EBC6AEEA5A2F2148369ABAD15D6</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
@@ -3972,6 +3830,36 @@
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
 			<string>Debug</string>
+		</dict>
+		<key>D1769BC66338C01708C1E995DBE788D6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>AFNetworkActivityIndicatorManager.h</string>
+			<key>path</key>
+			<string>UIKit+AFNetworking/AFNetworkActivityIndicatorManager.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D18D07627753138921EBE04813C6B915</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNUserAgent.m</string>
+			<key>path</key>
+			<string>QiniuSDK/Http/QNUserAgent.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>D41D8CD98F00B204E9800998ECF8427E</key>
 		<dict>
@@ -4017,7 +3905,7 @@
 		<key>D4A65C2E29ACB340587FD41196176F8A</key>
 		<dict>
 			<key>fileRef</key>
-			<string>C302E22D64B7BB6D5AC964AECD05B4DC</string>
+			<string>92F73EF1D150B8D7EAB84FD01371107A</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -4027,6 +3915,36 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>D5A59ADB40595A64EFF85FB1F9FBBDE7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNHttpDelegate.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Http/QNHttpDelegate.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D674720D06B9A2514D7CD74F56081C7C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNResponseInfo.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Http/QNResponseInfo.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>D77E2896F6FE8BDF01C7B00330CE3ADA</key>
 		<dict>
@@ -4046,26 +3964,11 @@
 		<key>D879CB5C930423C4D6CAF72474EC5C53</key>
 		<dict>
 			<key>fileRef</key>
-			<string>C1A6D9EE1AEA3B15D4BF661F58C092F9</string>
+			<string>B7BBD4CAF496198F03F73A06019E4697</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>D912FECEEC49D94BCFF6051E01DBD0A6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>AFNetworkActivityIndicatorManager.h</string>
-			<key>path</key>
-			<string>UIKit+AFNetworking/AFNetworkActivityIndicatorManager.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D91D5B2D059F2A25FD747B5E0C97AA85</key>
+		<key>D88E05971112B9676CF819EB1EC1BF70</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -4073,32 +3976,15 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>QNSessionManager.m</string>
 			<key>path</key>
-			<string>QiniuSDK/Http/QNSessionManager.m</string>
+			<string>HappyDNS-dummy.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>D98C0639E39D8A938A7C94BC79807E64</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UIButton+AFNetworking.m</string>
-			<key>path</key>
-			<string>UIKit+AFNetworking/UIButton+AFNetworking.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DA38C9C3AAAB2EB19F1B127C62CB7DAC</key>
+		<key>DB169DB8D678ABCF9F120848E771562B</key>
 		<dict>
 			<key>fileRef</key>
-			<string>A3A67A4044B0A921319CC1A000822275</string>
+			<string>C23FBFB36A9C9A64A2812716B3A00E3C</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -4109,10 +3995,25 @@
 				</array>
 			</dict>
 		</dict>
+		<key>DB17DB86AE2486BEF7DEEED89E5D3695</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNSessionManager.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Http/QNSessionManager.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>DB2E92A71137AD2E6993E8B0CE682C89</key>
 		<dict>
 			<key>fileRef</key>
-			<string>9AFD3D9BA9D269F9B26CF937D577377E</string>
+			<string>77580B3B014C81D0D50BD4E449B361FB</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -4129,6 +4030,21 @@
 			<string>C2B240D99C3FC6A7DC6C66A2434CA799</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>DC9DD2A93AF0CA56373A5E884BDA6F0F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNConfiguration.m</string>
+			<key>path</key>
+			<string>QiniuSDK/Storage/QNConfiguration.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>DCC6EEE71D8C25F77E97945BDCACB4EA</key>
 		<dict>
@@ -4162,24 +4078,25 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>DDC10E7912CDB1EAECE5DE77AFC7112E</key>
+		<key>DE1FD91D5D2C4D3CD87BAE4710B3D86F</key>
 		<dict>
-			<key>fileRef</key>
-			<string>5D83FF5FD6ADFED580D3E8308E88A0D5</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNFile.m</string>
+			<key>path</key>
+			<string>QiniuSDK/Common/QNFile.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>DECD5915774351B8473476B041DD87D7</key>
 		<dict>
 			<key>fileRef</key>
-			<string>44AC25BA2DBE510F6B45BC91EAA2E901</string>
+			<string>B94148F7546EA22C94B0210758897715</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -4203,6 +4120,21 @@
 			<key>remoteInfo</key>
 			<string>HappyDNS</string>
 		</dict>
+		<key>DFC815E2189F1E54866A49D41C515D7C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNRecord.m</string>
+			<key>path</key>
+			<string>HappyDNS/Common/QNRecord.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>E0B1F535CBC86A9CEB19123376E3E14C</key>
 		<dict>
 			<key>buildActionMask</key>
@@ -4216,23 +4148,18 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>E1C4CFC7F03BCB793308024F5FC45943</key>
-		<dict>
-			<key>fileRef</key>
-			<string>523687EE648207D7242CD2BD2F11B452</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E1EED9560799C93215C8B68206BAE339</key>
+		<key>E17E01D23C94D475DFF003546BE978AF</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QiniuSDK.h</string>
 			<key>path</key>
-			<string>HappyDNS-dummy.m</string>
+			<string>QiniuSDK/QiniuSDK.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -4264,7 +4191,7 @@
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>E41F4D401F91391ADCD6B11538675872</key>
+		<key>E36F7E4784DBDAFCCA44533145B86CAC</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -4273,46 +4200,68 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNCrc32.m</string>
+			<string>QNDes.m</string>
 			<key>path</key>
-			<string>QiniuSDK/Common/QNCrc32.m</string>
+			<string>HappyDNS/Util/QNDes.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>E535F67A3EB6FD6D65B52561AE9BAA20</key>
+		<key>E3FFC7EAD5E5C5CCD1444539167943D2</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>AFNetworkReachabilityManager.h</string>
+			<string>AFNetworkReachabilityManager.m</string>
 			<key>path</key>
-			<string>AFNetworking/AFNetworkReachabilityManager.h</string>
+			<string>AFNetworking/AFNetworkReachabilityManager.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E669E68570D919781FD5104A38F41B50</key>
+		<dict>
+			<key>fileRef</key>
+			<string>BC12FD6AF7AB9BDD1E2F270CD78D5619</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>E6DD6ABB4FC13B60FA54C950FB6B262B</key>
 		<dict>
 			<key>fileRef</key>
-			<string>99C8F03ED505FAEC1722D88A95AF3AA0</string>
+			<string>19377F98B7DD3F6A3F054C71F724C30A</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>E924759E7CA07882E862F59F05BB7720</key>
+		<key>E81DF06317D6AEDEE08C9DE5E6077335</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNConfiguration.h</string>
+			<string>QNSessionManager.m</string>
 			<key>path</key>
-			<string>QiniuSDK/Storage/QNConfiguration.h</string>
+			<string>QiniuSDK/Http/QNSessionManager.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E8EFAB5E68D3462EDCDE7AADE8EABF1E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNDnspodFree.m</string>
+			<key>path</key>
+			<string>HappyDNS/Http/QNDnspodFree.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -4348,6 +4297,20 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
+		<key>EA60C451D224996D9175674E1B49A637</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DB17DB86AE2486BEF7DEEED89E5D3695</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
 		<key>EB13C6E0E4E5C9DC5C7958090D355FE0</key>
 		<dict>
 			<key>buildConfigurations</key>
@@ -4362,10 +4325,24 @@
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
+		<key>EB2B4BA3EF33F6F04A99E926F40D0FF1</key>
+		<dict>
+			<key>fileRef</key>
+			<string>96353DC61AB21AB940C60AB76A4A18AF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
 		<key>EC162D2EC6E4EFCBA69040B467AEAB3F</key>
 		<dict>
 			<key>fileRef</key>
-			<string>CCF1CD8F42347FD75B5F1DA94CC483BD</string>
+			<string>D08E64ED3209177DB59DD97DA9403DBF</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -4376,36 +4353,7 @@
 				</array>
 			</dict>
 		</dict>
-		<key>ED133D35818604477FB25894466E89FA</key>
-		<dict>
-			<key>fileRef</key>
-			<string>61E89BCC5940140323CC24EE0221303B</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>EDADF02A60DEC560D4266C58ACDEFC23</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>AFURLResponseSerialization.m</string>
-			<key>path</key>
-			<string>AFNetworking/AFURLResponseSerialization.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EE6A142B43D6EC1486FF15481D382146</key>
+		<key>EDA52839F5A4B24E39CDF7453257F7C5</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -4414,9 +4362,31 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>UIKit+AFNetworking.h</string>
+			<string>QNALAssetFile.h</string>
 			<key>path</key>
-			<string>UIKit+AFNetworking/UIKit+AFNetworking.h</string>
+			<string>QiniuSDK/Common/QNALAssetFile.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EE2A38E19296EE74E2D3148C629A45B5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AC9F3B770C3E7D2884AF2C4068013A08</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>EE312F4EAC6B3681D9A9BC8EBC09BFC3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNUploadManager.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Storage/QNUploadManager.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -4431,33 +4401,27 @@
 			<key>targetProxy</key>
 			<string>180AC62D65D8A813FC54E8453DC78DE9</string>
 		</dict>
-		<key>EF00D5E27CE1C9E831FA0DE3BB55BA65</key>
+		<key>F001872783CB98CA49159E208E114FC7</key>
 		<dict>
 			<key>fileRef</key>
-			<string>376869ED3A8585D3F0A966ECC1C6AC6F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>F022023B775D4C03C05971551DA5E71E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>46D04BC32F4DE871BEE9EDD5AE5F556D</string>
+			<string>AAB04D80EC3E1B2BC6889F46E5279487</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>F0541EE549F27CCB64077093C60D9F43</key>
+		<key>F04B5912BBB38F5571292D4761BF94D1</key>
 		<dict>
-			<key>fileRef</key>
-			<string>3167FAD3D5B06B3EFDBEB36AE88FF966</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNNetworkInfo.h</string>
+			<key>path</key>
+			<string>HappyDNS/Common/QNNetworkInfo.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>F08E19D8B440D85D564273B1A501B1FC</key>
 		<dict>
@@ -4473,35 +4437,19 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>F0BE23A6A295F09A8CD206FCC0423996</key>
+		<key>F29600140F62E2EC9E0CCA34D2065E09</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>fileRef</key>
+			<string>10D7036408ED4C80A7B3E605A5B289D7</string>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>UIAlertView+AFNetworking.h</string>
-			<key>path</key>
-			<string>UIKit+AFNetworking/UIAlertView+AFNetworking.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F26C4A653259CA47972583831D1061CF</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNHttpManager.h</string>
-			<key>path</key>
-			<string>QiniuSDK/Http/QNHttpManager.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
 		<key>F2AF56F00E313B9CD0F4ADA3C5D73BDF</key>
 		<dict>
@@ -4510,21 +4458,34 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>F3A8228F0D3A1650708CEE2E8D746F94</key>
+		<key>F3413366055DF31E24E8F14B22C793D6</key>
 		<dict>
-			<key>children</key>
-			<array>
-				<string>44AC25BA2DBE510F6B45BC91EAA2E901</string>
-				<string>5F009FDE2940A1C746083106C8B0CA0E</string>
-				<string>7CD03CBEF48291945F7FDA8230C78F77</string>
-				<string>C0A2BCEF25F1A963D7F7408E4A64EFD4</string>
-			</array>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXGroup</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>NSURLSession</string>
+			<string>QNDnspodFree.h</string>
+			<key>path</key>
+			<string>HappyDNS/Http/QNDnspodFree.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F38B5F8E07CC1FBA023F1542D93261C4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D674720D06B9A2514D7CD74F56081C7C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
 		<key>F428C0A5C7AEF469CC7F9B7E6EC0003A</key>
 		<dict>
@@ -4546,7 +4507,7 @@
 		<key>F4A1512E8C4D8C8194CBB276BF72A552</key>
 		<dict>
 			<key>fileRef</key>
-			<string>5A13902FDA029121C33D07FBC4977084</string>
+			<string>41BAD972B42D1BE8EB9C4F32FA851F98</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -4560,7 +4521,7 @@
 		<key>F4B03681047157E5C357E584147F5A46</key>
 		<dict>
 			<key>fileRef</key>
-			<string>EE6A142B43D6EC1486FF15481D382146</string>
+			<string>9B91A1DF69BC0DF4F2F6C8E42118829E</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -4574,7 +4535,7 @@
 		<key>F4DCBA2A42A38C6E7A755182DA50DEA2</key>
 		<dict>
 			<key>fileRef</key>
-			<string>D912FECEEC49D94BCFF6051E01DBD0A6</string>
+			<string>D1769BC66338C01708C1E995DBE788D6</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -4585,35 +4546,51 @@
 				</array>
 			</dict>
 		</dict>
-		<key>F7D36D535A084E948FF2F5C1310DBDE0</key>
+		<key>F510802B2C5281E614AC06A65ED64E68</key>
 		<dict>
-			<key>fileRef</key>
-			<string>FE45DE4072D1D99C456129C2E83837B6</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>Qiniu-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>F90838690D4E08940E90D1F3C7C71350</key>
+		<key>F699271535471898C759F6F592AABF5A</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>E535F67A3EB6FD6D65B52561AE9BAA20</string>
-				<string>2D44B249324BA45F7DD72CE74C9AEEB3</string>
+				<string>3CF532DD8B0C751B73DB123C1D3259B9</string>
+				<string>8A4456ECE9233630DDCECB6F89296549</string>
+				<string>70D9805EAB026973AB14B9E7CC186A25</string>
+				<string>A49994B61357DBB3155F344DC873BD95</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
 			<key>name</key>
-			<string>Reachability</string>
+			<string>Serialization</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>F95CF65EC9DA92541A4A83012B76457B</key>
+		<key>F7C455F11AFAC9FBD8BC62C9BA7A3CB1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>QNFileDelegate.h</string>
+			<key>path</key>
+			<string>QiniuSDK/Common/QNFileDelegate.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F808FCA42DC1629D83814FA07E46CB2A</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -4622,130 +4599,83 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>QNUpToken.m</string>
+			<string>QNPHAssetFile.m</string>
 			<key>path</key>
-			<string>QiniuSDK/Storage/QNUpToken.m</string>
+			<string>QiniuSDK/Common/QNPHAssetFile.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F837D859824DA393C54E19B89D1E956B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>99EA0870D2E6B358F0A5C028629DA64C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>F9139AEA8A0362C365FDAF4C910D02C3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIButton+AFNetworking.m</string>
+			<key>path</key>
+			<string>UIKit+AFNetworking/UIButton+AFNetworking.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FA2FA194033EBC05687C9D322AE6E1FD</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>QNHex.m</string>
+			<key>path</key>
+			<string>HappyDNS/Util/QNHex.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FCF366DAAD3BBD0A2E9C65FCEF053B39</key>
+		<dict>
+			<key>fileRef</key>
+			<string>840FE22793F317BEBD0F16808528EADA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>FD087340F3CD9C441F8BE5E5D11E0452</key>
+		<dict>
+			<key>fileRef</key>
+			<string>ABABAE854802E81B1DD3C1336E37B601</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>FD6F966F458CEE40B07A2367BA3BC8EC</key>
 		<dict>
 			<key>fileRef</key>
-			<string>4DF303D0910AFCED4BC9D095C0B35791</string>
+			<string>2B0926271509E5E5B1D1D76DE0A038B7</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-		</dict>
-		<key>FD7EE5EE3675880765743C7E2FC632CC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CDA6708FE701C1AB323AC6ABC259C259</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>FD905B09EEA3E06E06E4DFAC2581B069</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>UIActivityIndicatorView+AFNetworking.m</string>
-			<key>path</key>
-			<string>UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>FE45DE4072D1D99C456129C2E83837B6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QiniuSDK.h</string>
-			<key>path</key>
-			<string>QiniuSDK/QiniuSDK.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>FE749285CAA888C0C71561C38093223F</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BE8051144BA7AF2BFD63EFBBF87A8A1F</string>
-				<string>C90A1577EF47F5BECB66DF9E6295F5EA</string>
-				<string>5173BE162174E09B8551CFD2FBCAA403</string>
-				<string>019C8FADF6CD1E933022BA7D7C017828</string>
-				<string>678391E4D16E699AF12955C02636C598</string>
-				<string>32513788788658C8654670AEFA157005</string>
-				<string>BB2C20D75543AD924159E8B1F2123223</string>
-				<string>3D56E2741DA67C13D406896D48F39C75</string>
-				<string>670F8620DB5065589DD4B98AAE69E4B8</string>
-				<string>5A646C232DC20E105018FA7C41A59C8D</string>
-				<string>9B6DD15FD0926F50C561FA1C5F9C381E</string>
-				<string>1D7B18D0A5575FAC06C11682AB552776</string>
-				<string>6D573ECB28BAFA5658618FC145F77C7F</string>
-				<string>71B75EA3143AFCD44E4397BC5A5B446B</string>
-				<string>AEF616A7FC4AB4ECCFEFD6C5C0DC6E98</string>
-				<string>CCF1CD8F42347FD75B5F1DA94CC483BD</string>
-				<string>C1A6D9EE1AEA3B15D4BF661F58C092F9</string>
-				<string>1C57FFFBE04EAF577A69CAF54BA58022</string>
-				<string>873380D2D1ABA00E011C6427175B2C16</string>
-				<string>FF2C8CA8ABF2C8F0546049BDD94DF972</string>
-				<string>030D420072BDE89804EA66179D0FEE88</string>
-				<string>79ABB12DD86FBD2AD22B88EC546E1406</string>
-				<string>02EE3885B0DBCFE76C4C879F65CD76F1</string>
-				<string>B0B78340F36B55838B39177F19A4D529</string>
-				<string>B26D318BF5749E77ABF6A691B58A5697</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>HappyDNS</string>
-			<key>path</key>
-			<string>HappyDNS</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>FEB4365B0D95E546783E3B7F4DFE9FD5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>F26C4A653259CA47972583831D1061CF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>FF2C8CA8ABF2C8F0546049BDD94DF972</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>QNRecord.h</string>
-			<key>path</key>
-			<string>HappyDNS/Common/QNRecord.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>FFD977C5D23FB16656C5D57197BAA49C</key>
 		<dict>
@@ -4761,6 +4691,21 @@
 			<string>PBXGroup</string>
 			<key>name</key>
 			<string>iOS</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FFDABD8D5D206A3A2ABF8A3DEC4D869D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIRefreshControl+AFNetworking.h</string>
+			<key>path</key>
+			<string>UIKit+AFNetworking/UIRefreshControl+AFNetworking.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>

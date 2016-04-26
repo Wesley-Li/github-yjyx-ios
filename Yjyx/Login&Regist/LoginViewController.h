@@ -14,4 +14,9 @@
 @property(weak, nonatomic) IBOutlet UITextField * uesrNameTF;
 @property(weak, nonatomic) IBOutlet UITextField * passWordTF;
 
+@property (weak, nonatomic) IBOutlet UIButton *teacherBtn;
+@property (weak, nonatomic) IBOutlet UIButton *parentsBtn;
+@property (weak, nonatomic) IBOutlet UIButton *stuBtn;
+
+
 @end
