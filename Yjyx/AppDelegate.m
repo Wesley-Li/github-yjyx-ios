@@ -37,6 +37,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [[UITabBar appearance] setBarTintColor:[UIColor clearColor]];
+    
     ((AppDelegate*)SYS_DELEGATE).role = @"parents";
 
         //1.注册APNS推送通知
@@ -116,16 +118,16 @@
         [YjyxOverallData sharedInstance].previewRid = remoteNotification[@"rid"];
     }
     
-    NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
-    if ([[dic objectForKey:@"username"] length] > 0) {
-        autologin = [[AutoLoginViewController alloc] init];
-        _navigation = [[NavRootViewController alloc] initWithRootViewController:autologin];
-        _navigation.navigationBar.hidden = YES;
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        self.window.backgroundColor = [UIColor whiteColor];
-        self.window.rootViewController = _navigation;
-        [self.window makeKeyAndVisible];
-    }else{
+//    NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
+//    if ([[dic objectForKey:@"username"] length] > 0) {
+//        autologin = [[AutoLoginViewController alloc] init];
+//        _navigation = [[NavRootViewController alloc] initWithRootViewController:autologin];
+//        _navigation.navigationBar.hidden = YES;
+//        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//        self.window.backgroundColor = [UIColor whiteColor];
+//        self.window.rootViewController = _navigation;
+//        [self.window makeKeyAndVisible];
+//    }else{
         _deviceToken = @"1231231312da1231sqwc1213";
         LoginViewController *loginView = [[LoginViewController alloc] init];
         _navigation = [[NavRootViewController alloc] initWithRootViewController:loginView];
@@ -134,7 +136,7 @@
         self.window.backgroundColor = [UIColor whiteColor];
         self.window.rootViewController = _navigation;
         [self.window makeKeyAndVisible];
-    }
+//    }
     return YES;
 }
 
@@ -258,11 +260,13 @@
 #pragma mark 登录成功根界面
 - (void)fillViews
 {
-    if (!_tabBar) {
-        _tabBar = [[UITabBarController alloc] init];
-    }
     
     if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {
+        
+        if (!_tabBar) {
+            _tabBar = [[UITabBarController alloc] init];
+        }
+        
         NavRootViewController *home = [[NavRootViewController alloc] initWithRootViewController:[[ParentHomeViewController alloc] initWithNibName:@"ParentHomeViewController" bundle:nil]];
         home.tabBarItem = [UITabBarItem itemWithTitle:@"首页" image:[UIImage imageNamed:@"tab_home"] selectedImage:[UIImage imageNamed:@"tab_homes"]];
         home.navigationBarHidden = YES;
@@ -278,7 +282,16 @@
         personal.tabBarItem = [UITabBarItem itemWithTitle:@"个人中心" image:[UIImage imageNamed:@"tab_personal"] selectedImage:[UIImage imageNamed:@"tab_personals"]];
         
         [_tabBar setViewControllers:@[home,community,memberCenter,personal]];
-    }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"teacher"]){
+        
+        [_tabBar setSelectedIndex:0];
+        [self.window setRootViewController:_tabBar];
+
+        
+    }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"teacher"]) {
+        
+        if (!_cusTBViewController) {
+            _cusTBViewController = [[CustomTabBarViewController alloc] init];
+        }
         
         // 首页
         NavRootViewController *teacherHome = [[NavRootViewController alloc] initWithRootViewController:[[TeacherHomeViewController alloc] initWithNibName:@"TeacherHomeViewController" bundle:nil]];
@@ -286,28 +299,45 @@
         teacherHome.navigationBar.hidden = YES;
         
         // 消息
-        NavRootViewController *message = [[NavRootViewController alloc] initWithRootViewController:[[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil]];
-        message.tabBarItem = [UITabBarItem itemWithTitle:@"消息" image:[UIImage imageNamed:@"message"] selectedImage:[UIImage imageNamed:@"message_click"]];
+//        NavRootViewController *message = [[NavRootViewController alloc] initWithRootViewController:[[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil]];
+//        message.tabBarItem = [UITabBarItem itemWithTitle:@"消息" image:[UIImage imageNamed:@"message"] selectedImage:[UIImage imageNamed:@"message_click"]];
         
         // 发布作业
         NavRootViewController *publishHomework = [[NavRootViewController alloc] initWithRootViewController:[[PublishHomeworkViewController alloc] initWithNibName:@"PublishHomeworkViewController" bundle:nil]];
-        publishHomework.tabBarItem = [UITabBarItem itemWithTitle:@"发布作业" image:[UIImage imageNamed:@"publishhw"] selectedImage:[UIImage imageNamed:@"publishhw_click"]];
+        publishHomework.tabBarItem = [UITabBarItem itemWithTitle:@"发布作业" image:nil selectedImage:nil];
+        //    publishHomework.tabBarItem = [UITabBarItem itemWithTitle:@"发布作业" image:[UIImage imageNamed:@"publishhw"] selectedImage:[UIImage imageNamed:@"publishhw_click"]];
         
         // 班级
-        NavRootViewController *myClass = [[NavRootViewController alloc] initWithRootViewController:[[MyClassViewController alloc] initWithNibName:@"MyClassViewController" bundle:nil]];
-        myClass.tabBarItem = [UITabBarItem itemWithTitle:@"班级" image:[UIImage imageNamed:@"myclass"] selectedImage:[UIImage imageNamed:@"myclass_click"]];
+//        NavRootViewController *myClass = [[NavRootViewController alloc] initWithRootViewController:[[MyClassViewController alloc] initWithNibName:@"MyClassViewController" bundle:nil]];
+//        myClass.tabBarItem = [UITabBarItem itemWithTitle:@"班级" image:[UIImage imageNamed:@"myclass"] selectedImage:[UIImage imageNamed:@"myclass_click"]];
         
         // 个人中心
         NavRootViewController *privateCenter = [[NavRootViewController alloc] initWithRootViewController:[[PrivateCenterViewController alloc] initWithNibName:@"PrivateCenterViewController" bundle:nil]];
         privateCenter.tabBarItem = [UITabBarItem itemWithTitle:@"个人中心" image:[UIImage imageNamed:@"privatecenter"] selectedImage:[UIImage imageNamed:@"privatecenter_click"]];
         
-        [_tabBar setViewControllers:@[teacherHome, message, publishHomework, myClass, privateCenter]];
+        _cusTBViewController.viewControllers = @[teacherHome, publishHomework, privateCenter];
         
+        //    _cusTBViewController.tabBar.backgroundColor = [UIColor whiteColor];
         
+        CGRect rect = CGRectMake(0, 0, SCREEN_SIZE.width, SCREEN_SIZE.height);
+        UIGraphicsBeginImageContext(rect.size);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSetFillColorWithColor(context, [[UIColor clearColor] CGColor]);
+        CGContextFillRect(context, rect);
+        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        [_cusTBViewController.tabBar setBackgroundImage:img];
+        [_cusTBViewController.tabBar setShadowImage:img];
+        
+        self.window.rootViewController = _cusTBViewController;
+
+    
+    }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"student"]) {
+        
+        // 学生登录
+    
     }
     
-    [_tabBar setSelectedIndex:0];
-    [self.window setRootViewController:_tabBar];
 }
 
 #pragma mark -UIAlertView

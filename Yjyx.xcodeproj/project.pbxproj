@@ -258,6 +258,7 @@
 		3B4864751CCF117300D2DE3C /* PrivateCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864691CCF117300D2DE3C /* PrivateCenterViewController.xib */; };
 		3B4864761CCF117300D2DE3C /* PublishHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B48646C1CCF117300D2DE3C /* PublishHomeworkViewController.m */; };
 		3B4864771CCF117300D2DE3C /* PublishHomeworkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */; };
+		3B48647F1CCF3FBA00D2DE3C /* CustomTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B48647E1CCF3FBA00D2DE3C /* CustomTabBarViewController.m */; };
 		7D453D9CA19A8B9493453E33 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D2260EAA2B915029186C49 /* libPods.a */; };
 		CB40047F1C609BCD00556AA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB40047E1C609BCD00556AA7 /* main.m */; };
 		CB4004821C609BCD00556AA7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4004811C609BCD00556AA7 /* AppDelegate.m */; };
@@ -726,6 +727,8 @@
 		3B48646B1CCF117300D2DE3C /* PublishHomeworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishHomeworkViewController.h; sourceTree = "<group>"; };
 		3B48646C1CCF117300D2DE3C /* PublishHomeworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishHomeworkViewController.m; sourceTree = "<group>"; };
 		3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublishHomeworkViewController.xib; sourceTree = "<group>"; };
+		3B48647D1CCF3FBA00D2DE3C /* CustomTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarViewController.h; sourceTree = "<group>"; };
+		3B48647E1CCF3FBA00D2DE3C /* CustomTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarViewController.m; sourceTree = "<group>"; };
 		CB40047A1C609BCD00556AA7 /* Yjyx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yjyx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB40047E1C609BCD00556AA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CB4004801C609BCD00556AA7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1360,6 +1363,8 @@
 				3B4864621CCF117300D2DE3C /* MyClass */,
 				3B4864661CCF117300D2DE3C /* PrivateCenter */,
 				3B48646A1CCF117300D2DE3C /* PublishHomeWork */,
+				3B48647D1CCF3FBA00D2DE3C /* CustomTabBarViewController.h */,
+				3B48647E1CCF3FBA00D2DE3C /* CustomTabBarViewController.m */,
 			);
 			path = Teacher;
 			sourceTree = "<group>";
@@ -1931,6 +1936,7 @@
 				3AC1D1E11CCDE70E006291D0 /* RegistFinalViewController.m in Sources */,
 				3B4864741CCF117300D2DE3C /* PrivateCenterViewController.m in Sources */,
 				3A5A00FC1C79EA2A004584E6 /* UIView+MJExtension.m in Sources */,
+				3B48647F1CCF3FBA00D2DE3C /* CustomTabBarViewController.m in Sources */,
 				3A5A00F71C79EA2A004584E6 /* MJRefreshConst.m in Sources */,
 				3A04A5D21C93E6290040D913 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				3A04A5CC1C93E6290040D913 /* MASConstraint.m in Sources */,

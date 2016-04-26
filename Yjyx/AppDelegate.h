@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Login&Regist/LoginViewController.h"
+#import "CustomTabBarViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UIAlertViewDelegate>
 
@@ -18,6 +19,8 @@
 @property (strong, nonatomic) NavRootViewController *navigation;
 
 @property (strong, nonatomic) UITabBarController *tabBar;
+
+@property (strong, nonatomic) CustomTabBarViewController *cusTBViewController;
 
 @property (strong, nonatomic) NSString *role;// 用户身份
 

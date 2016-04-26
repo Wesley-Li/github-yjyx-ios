@@ -182,7 +182,7 @@
                             [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
                         }
                     }else{
-                        [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+                        [self.view makeToast:[error description] duration:3.0 position:SHOW_CENTER complete:nil];
                     }
                 }];
                 
@@ -225,6 +225,8 @@
             }else if ([((AppDelegate*)SYS_DELEGATE).role isEqualToString:@"student"]){
                 // 学生
                 [self.view makeToast:@"正在建设中,敬请期待" duration:3.0 position:SHOW_CENTER complete:nil];
+                
+                [self.view hideToastActivity];
                 
             }
             

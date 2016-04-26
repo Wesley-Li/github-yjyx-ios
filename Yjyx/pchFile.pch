@@ -85,3 +85,60 @@
 
 #define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
 
+
+// ******************接口部分***************
+// 家长部分
+
+
+
+
+// *************************老师部分******************
+// 登录
+#define TEACHER_LOGIN_CONECT_POST @"/api/teacher/mobile/login/"
+
+// 登出
+#define TEACHER_LOGOUT_CONNECT_POST @"/api/teacher/mobile/logout/"
+
+// 获取所有学生的列表
+#define TEACHER_GETALLSTULIST_CONNECT_POST @"/api/teacher/mobile/yj_teachers/"
+
+// 根据学生id列表获取学生的头像和姓名
+#define TEACHER_GETSTU_BYID_CONNECT_POST @"/api/teacher/mobile/yj_teachers/"
+
+// 老师修改自己头像
+#define TEACHER_PIC_SETTING_CONNECT_GET @"/api/teacher/qiniu/"
+
+// 老师上报头像地址
+#define TEACHER_UPLOAD_PIC_CONNECT_POST @"/api/teacher/setting/"
+
+// 老师修改姓名和手机号
+#define TEACHER_NAME_AND_PHONE_CONNECT_POST @"/api/teacher/setting/"
+
+// 上报消息通知设置
+#define TEACHER_UPLOAD_SOUND_SETTING_CONNECT_POST @"/api/teacher/setting/"
+
+// 版本更新
+#define VERSION_UPLOAD_CONNECT_GET @"/api/teacher/version/"
+
+
+// 获取所有作业的列表
+#define TEACHER_GET_ALL_TASKLIST_CONNECT_GET @"/api/teacher/mobile/task/"
+
+// 查看某次作业详情
+#define TEACHER_SCAN_THE_TASK_CONNECT_GET @"/api/teacher/mobile/task/"
+
+// 查看作业中某一题的详情
+#define TEACHER_SCAN_ONE_TASK_CONNECT_GET @"/api/teacher/mobile/task/"
+
+// 某个学生对某个题目的详情
+#define TEACHER_DETAIL_ONESTU_ONETASK_CONNECT_GET @"/api/teacher/mobile/task/"
+
+// 某次任务中某个学生的概况
+#define TEACHER_DETAIL_ACTION_CONNECT_GET @"/api/teacher/mobile/task/"
+
+
+
+
+// 学生部分
+
+
