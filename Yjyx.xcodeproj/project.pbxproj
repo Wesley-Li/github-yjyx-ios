@@ -37,6 +37,12 @@
 		3A3B97191C97A03E00C6A15A /* Common_video@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A3B97181C97A03E00C6A15A /* Common_video@3x.png */; };
 		3A3C1B431C9562A900514C32 /* YjyxMicroClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C1B411C9562A900514C32 /* YjyxMicroClassViewController.m */; };
 		3A3C1B441C9562A900514C32 /* YjyxMicroClassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A3C1B421C9562A900514C32 /* YjyxMicroClassViewController.xib */; };
+		3A4057071CCF6FAF00258784 /* ForgetOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4057051CCF6FAF00258784 /* ForgetOneViewController.m */; };
+		3A4057081CCF6FAF00258784 /* ForgetOneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A4057061CCF6FAF00258784 /* ForgetOneViewController.xib */; };
+		3A40570C1CCF732800258784 /* ForgetTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40570A1CCF732800258784 /* ForgetTwoViewController.m */; };
+		3A40570D1CCF732800258784 /* ForgetTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A40570B1CCF732800258784 /* ForgetTwoViewController.xib */; };
+		3A4057111CCF859B00258784 /* ForgetThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40570F1CCF859B00258784 /* ForgetThreeViewController.m */; };
+		3A4057121CCF859B00258784 /* ForgetThreeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A4057101CCF859B00258784 /* ForgetThreeViewController.xib */; };
 		3A4302041C61FDFB00B8D259 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4302021C61FDFB00B8D259 /* LoginViewController.m */; };
 		3A4302051C61FDFB00B8D259 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A4302031C61FDFB00B8D259 /* LoginViewController.xib */; };
 		3A44A1E91CC0C63100B93F6A /* ZLScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A44A1E81CC0C63100B93F6A /* ZLScrolling.m */; };
@@ -289,6 +295,15 @@
 		3A3C1B401C9562A900514C32 /* YjyxMicroClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxMicroClassViewController.h; sourceTree = "<group>"; };
 		3A3C1B411C9562A900514C32 /* YjyxMicroClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxMicroClassViewController.m; sourceTree = "<group>"; };
 		3A3C1B421C9562A900514C32 /* YjyxMicroClassViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxMicroClassViewController.xib; sourceTree = "<group>"; };
+		3A4057041CCF6FAF00258784 /* ForgetOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetOneViewController.h; sourceTree = "<group>"; };
+		3A4057051CCF6FAF00258784 /* ForgetOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetOneViewController.m; sourceTree = "<group>"; };
+		3A4057061CCF6FAF00258784 /* ForgetOneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetOneViewController.xib; sourceTree = "<group>"; };
+		3A4057091CCF732800258784 /* ForgetTwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetTwoViewController.h; sourceTree = "<group>"; };
+		3A40570A1CCF732800258784 /* ForgetTwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetTwoViewController.m; sourceTree = "<group>"; };
+		3A40570B1CCF732800258784 /* ForgetTwoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetTwoViewController.xib; sourceTree = "<group>"; };
+		3A40570E1CCF859A00258784 /* ForgetThreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetThreeViewController.h; sourceTree = "<group>"; };
+		3A40570F1CCF859B00258784 /* ForgetThreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetThreeViewController.m; sourceTree = "<group>"; };
+		3A4057101CCF859B00258784 /* ForgetThreeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetThreeViewController.xib; sourceTree = "<group>"; };
 		3A4302011C61FDFB00B8D259 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		3A4302021C61FDFB00B8D259 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		3A4302031C61FDFB00B8D259 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -784,6 +799,15 @@
 				3AC1D1DB1CCDE70E006291D0 /* RegistFinalViewController.h */,
 				3AC1D1DC1CCDE70E006291D0 /* RegistFinalViewController.m */,
 				3AC1D1DD1CCDE70E006291D0 /* RegistFinalViewController.xib */,
+				3A4057041CCF6FAF00258784 /* ForgetOneViewController.h */,
+				3A4057051CCF6FAF00258784 /* ForgetOneViewController.m */,
+				3A4057061CCF6FAF00258784 /* ForgetOneViewController.xib */,
+				3A4057091CCF732800258784 /* ForgetTwoViewController.h */,
+				3A40570A1CCF732800258784 /* ForgetTwoViewController.m */,
+				3A40570B1CCF732800258784 /* ForgetTwoViewController.xib */,
+				3A40570E1CCF859A00258784 /* ForgetThreeViewController.h */,
+				3A40570F1CCF859B00258784 /* ForgetThreeViewController.m */,
+				3A4057101CCF859B00258784 /* ForgetThreeViewController.xib */,
 				3A88278B1C6EE9BD0008367F /* RegistViewController.h */,
 				3A88278C1C6EE9BD0008367F /* RegistViewController.m */,
 				3A88278D1C6EE9BD0008367F /* RegistViewController.xib */,
@@ -1574,6 +1598,7 @@
 				3AC1D1EA1CCDE7EE006291D0 /* regist_login_btn@3x.png in Resources */,
 				3AFE02C31CA29D540097CC83 /* member_shuxue@3x.png in Resources */,
 				3AE8940F1C6C47C400E8BA97 /* login_left_line@3x.png in Resources */,
+				3A4057081CCF6FAF00258784 /* ForgetOneViewController.xib in Resources */,
 				3A26EE631C71A81B009C3242 /* Parent_home_up@3x.png in Resources */,
 				3AFE02C71CA29D540097CC83 /* member_yuwen@3x.png in Resources */,
 				3AE894031C6C28C300E8BA97 /* login_password_icon@3x.png in Resources */,
@@ -1582,6 +1607,7 @@
 				3A7864341C868062001BB65A /* ChildrenResultViewController.xib in Resources */,
 				3A8827881C6EE5730008367F /* tab_homes@3x.png in Resources */,
 				3A8CAE9F1C70AD9200BDEB6B /* comm_sure@2x.png in Resources */,
+				3A4057121CCF859B00258784 /* ForgetThreeViewController.xib in Resources */,
 				3AD1FD9F1C72CE5000E362B9 /* CommonWebViewController.xib in Resources */,
 				3AC1D1EB1CCDE7EE006291D0 /* regist_parent_logo@3x.png in Resources */,
 				3A8B7FA81C75C3A900E990F2 /* LaunchScreen.storyboard in Resources */,
@@ -1635,6 +1661,7 @@
 				3A04A5D41C93E6290040D913 /* WMPlayer.bundle in Resources */,
 				3AFE02B41CA28B2D0097CC83 /* YjyxPMemberCenterViewController.xib in Resources */,
 				3A3B97191C97A03E00C6A15A /* Common_video@3x.png in Resources */,
+				3A40570D1CCF732800258784 /* ForgetTwoViewController.xib in Resources */,
 				3A8827871C6EE5730008367F /* tab_home@3x.png in Resources */,
 				3AD1FDA41C73113700E362B9 /* ParentChildrenTableViewCell.xib in Resources */,
 				3AC1D1E41CCDE70E006291D0 /* RegistOneViewController.xib in Resources */,
@@ -1732,12 +1759,14 @@
 				3A04A5CC1C93E6290040D913 /* MASConstraint.m in Sources */,
 				3A04A5D91C93E6590040D913 /* ChildrenVideoViewController.m in Sources */,
 				3A8CAE9D1C70A62200BDEB6B /* ParentEntity.m in Sources */,
+				3A4057111CCF859B00258784 /* ForgetThreeViewController.m in Sources */,
 				3AEF27251C61F08A0028BE09 /* UIDevice+Space.m in Sources */,
 				3A04A5CE1C93E6290040D913 /* MASLayoutConstraint.m in Sources */,
 				3A91F4961C760CF4001568AA /* PNLineChartData.m in Sources */,
 				3AFE02B31CA28B2D0097CC83 /* YjyxPMemberCenterViewController.m in Sources */,
 				3A91F49C1C760CF4001568AA /* PNScatterChart.m in Sources */,
 				3A91F4951C760CF4001568AA /* PNLineChart.m in Sources */,
+				3A4057071CCF6FAF00258784 /* ForgetOneViewController.m in Sources */,
 				3A44A9F91CBD1CAB00348B49 /* openssl_wrapper.m in Sources */,
 				3A88278E1C6EE9BD0008367F /* RegistViewController.m in Sources */,
 				3A8CAE961C70A12E00BDEB6B /* ParentModifyPhoneViewController.m in Sources */,
@@ -1812,6 +1841,7 @@
 				3AEF26D61C61AE610028BE09 /* YjxService.m in Sources */,
 				3A2E87091C8C079F00C3CD6C /* ChildrenResultTableViewController.m in Sources */,
 				3AA1655C1C91AB40006B8756 /* RCLabel.m in Sources */,
+				3A40570C1CCF732800258784 /* ForgetTwoViewController.m in Sources */,
 				3A5A00F61C79EA2A004584E6 /* MJRefreshBaseView.m in Sources */,
 				3A5A00F81C79EA2A004584E6 /* MJRefreshFooterView.m in Sources */,
 				3AEF271F1C61F08A0028BE09 /* GTMBase64.m in Sources */,
