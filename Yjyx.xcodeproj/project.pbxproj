@@ -227,6 +227,7 @@
 		3AFE02C61CA29D540097CC83 /* member_yingyu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE02BF1CA29D540097CC83 /* member_yingyu@3x.png */; };
 		3AFE02C71CA29D540097CC83 /* member_yuwen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE02C01CA29D540097CC83 /* member_yuwen@3x.png */; };
 		3AFE02C81CA29D540097CC83 /* memberCenter_bg1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE02C11CA29D540097CC83 /* memberCenter_bg1@3x.png */; };
+		3B1B52D81CD08E7A00BEA520 /* tab_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B1B52D71CD08E7A00BEA520 /* tab_bg@3x.png */; };
 		3B48642D1CCF101100D2DE3C /* TeacherEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B48642C1CCF101100D2DE3C /* TeacherEntity.m */; };
 		3B4864461CCF10C200D2DE3C /* hw_stats.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864321CCF10C200D2DE3C /* hw_stats.png */; };
 		3B4864471CCF10C200D2DE3C /* mall.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864331CCF10C200D2DE3C /* mall.png */; };
@@ -244,7 +245,7 @@
 		3B4864531CCF10C200D2DE3C /* report.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B48643F1CCF10C200D2DE3C /* report.png */; };
 		3B4864541CCF10C200D2DE3C /* score.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864401CCF10C200D2DE3C /* score.png */; };
 		3B4864551CCF10C200D2DE3C /* stu_hw.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864411CCF10C200D2DE3C /* stu_hw.png */; };
-		3B4864561CCF10C200D2DE3C /* tab_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864421CCF10C200D2DE3C /* tab_bg.png */; };
+		3B4864561CCF10C200D2DE3C /* tab_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864421CCF10C200D2DE3C /* tab_bg@2x.png */; };
 		3B4864571CCF10C200D2DE3C /* tab_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864431CCF10C200D2DE3C /* tab_home@3x.png */; };
 		3B4864581CCF10C200D2DE3C /* tab_home_click@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864441CCF10C200D2DE3C /* tab_home_click@3x.png */; };
 		3B4864591CCF10C200D2DE3C /* top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864451CCF10C200D2DE3C /* top_bg.png */; };
@@ -690,6 +691,7 @@
 		3AFE02BF1CA29D540097CC83 /* member_yingyu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "member_yingyu@3x.png"; sourceTree = "<group>"; };
 		3AFE02C01CA29D540097CC83 /* member_yuwen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "member_yuwen@3x.png"; sourceTree = "<group>"; };
 		3AFE02C11CA29D540097CC83 /* memberCenter_bg1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "memberCenter_bg1@3x.png"; sourceTree = "<group>"; };
+		3B1B52D71CD08E7A00BEA520 /* tab_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_bg@3x.png"; sourceTree = "<group>"; };
 		3B48642B1CCF101100D2DE3C /* TeacherEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherEntity.h; sourceTree = "<group>"; };
 		3B48642C1CCF101100D2DE3C /* TeacherEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherEntity.m; sourceTree = "<group>"; };
 		3B4864321CCF10C200D2DE3C /* hw_stats.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hw_stats.png; sourceTree = "<group>"; };
@@ -708,7 +710,7 @@
 		3B48643F1CCF10C200D2DE3C /* report.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = report.png; sourceTree = "<group>"; };
 		3B4864401CCF10C200D2DE3C /* score.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = score.png; sourceTree = "<group>"; };
 		3B4864411CCF10C200D2DE3C /* stu_hw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stu_hw.png; sourceTree = "<group>"; };
-		3B4864421CCF10C200D2DE3C /* tab_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_bg.png; sourceTree = "<group>"; };
+		3B4864421CCF10C200D2DE3C /* tab_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_bg@2x.png"; sourceTree = "<group>"; };
 		3B4864431CCF10C200D2DE3C /* tab_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_home@3x.png"; sourceTree = "<group>"; };
 		3B4864441CCF10C200D2DE3C /* tab_home_click@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_home_click@3x.png"; sourceTree = "<group>"; };
 		3B4864451CCF10C200D2DE3C /* top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg.png; sourceTree = "<group>"; };
@@ -1529,7 +1531,8 @@
 				3B48643F1CCF10C200D2DE3C /* report.png */,
 				3B4864401CCF10C200D2DE3C /* score.png */,
 				3B4864411CCF10C200D2DE3C /* stu_hw.png */,
-				3B4864421CCF10C200D2DE3C /* tab_bg.png */,
+				3B4864421CCF10C200D2DE3C /* tab_bg@2x.png */,
+				3B1B52D71CD08E7A00BEA520 /* tab_bg@3x.png */,
 				3B4864431CCF10C200D2DE3C /* tab_home@3x.png */,
 				3B4864441CCF10C200D2DE3C /* tab_home_click@3x.png */,
 				3B4864451CCF10C200D2DE3C /* top_bg.png */,
@@ -1848,6 +1851,7 @@
 				3B4864521CCF10C200D2DE3C /* publishhw_click@3x.png in Resources */,
 				3AC1D1E21CCDE70E006291D0 /* RegistFinalViewController.xib in Resources */,
 				3A04A5E01C9406850040D913 /* YjyxWorkPreviewViewController.xib in Resources */,
+				3B1B52D81CD08E7A00BEA520 /* tab_bg@3x.png in Resources */,
 				3AD1FD961C72C72E00E362B9 /* Parent_homework@3x.png in Resources */,
 				3B4864481CCF10C200D2DE3C /* message@3x.png in Resources */,
 				CB4004881C609BCD00556AA7 /* Main.storyboard in Resources */,
@@ -1856,7 +1860,7 @@
 				3B4864531CCF10C200D2DE3C /* report.png in Resources */,
 				3A26EE6B1C71CCDB009C3242 /* MyChildrenViewController.xib in Resources */,
 				3AA165681C91BCD6006B8756 /* homework_3@3x.png in Resources */,
-				3B4864561CCF10C200D2DE3C /* tab_bg.png in Resources */,
+				3B4864561CCF10C200D2DE3C /* tab_bg@2x.png in Resources */,
 				3A26EE601C71A81B009C3242 /* Parent_children@3x.png in Resources */,
 				3A8CAE9A1C70A39600BDEB6B /* comm_back@2x.png in Resources */,
 				3A88278F1C6EE9BD0008367F /* RegistViewController.xib in Resources */,

@@ -10,4 +10,12 @@
 
 @interface TeacherHomeViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+
+@property (weak, nonatomic) IBOutlet UIImageView *picImage;
+
+
 @end

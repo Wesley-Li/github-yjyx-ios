@@ -321,7 +321,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setValue:SESSIONID forHTTPHeaderField:@"sessionid"];
-    [manager POST:[BaseURL stringByAppendingString:@"/api/teacher/mobile/login/"] parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [manager POST:[BaseURL stringByAppendingString:TEACHER_LOGIN_CONECT_POST] parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject, nil);
         }
@@ -336,7 +336,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setValue:SESSIONID forHTTPHeaderField:@"sessionid"];
-    [manager POST:[BaseURL stringByAppendingString:@"/api/teacher/mobile/logout/"] parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [manager POST:[BaseURL stringByAppendingString:TEACHER_LOGOUT_CONNECT_POST] parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject, nil);
         }
