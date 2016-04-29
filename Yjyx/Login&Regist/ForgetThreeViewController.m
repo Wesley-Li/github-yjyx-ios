@@ -16,13 +16,53 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _second = 120;
+     _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
     titleLb.text = [NSString stringWithFormat:@"请为你的账号%@设置密码，以保证下次正常登陆",_phoneStr];
-    // Do any additional setup after loading the view from its nib.
+}
+
+-(void)checkCodeTimeout
+{
+    codeLb.text = [NSString stringWithFormat:@"重新获取验证码(%ds)",_second--];
+    if (_second < 0) {
+        [self resetTimer];
+    }
+}
+
+-(void)resetTimer
+{
+    _second = 120;
+    codeLb.text = @"重新获取验证码(120s)";
+    [_timer invalidate];
+    _timer = nil;
+
 }
 
 - (IBAction)restPassWord:(id)sender
 {
+    if (codeText.text.length == 0||confrimPassWord.text.length == 0||newPassWord.text.length == 0) {
+        [self.view makeToast:@"请输入完整的信息" duration:1.0 position:SHOW_CENTER complete:nil];
+        return;
+    }
     
+    if (![newPassWord.text isEqualToString:confrimPassWord.text]) {
+        [self.view makeToast:@"两次密码必须一致" duration:1.0 position:SHOW_CENTER complete:nil];
+        return;
+    }
+    
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_userName,@"username",codeText.text,@"smscode",[confrimPassWord.text md5],@"password",nil];
+    [[YjxService sharedInstance] restPassWord:dic withBlock:^(id result, NSError *error){//重置密码
+        [self.view hideToastActivity];
+        if (result) {
+            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }else{
+                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+        }else{
+            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+    }];
 }
 
 

@@ -13,5 +13,6 @@
     IBOutlet UILabel *titleLb;
 }
 @property(nonatomic , strong) NSString *phoneStr;
+@property(nonatomic , strong) NSString *userName;
 
 @end

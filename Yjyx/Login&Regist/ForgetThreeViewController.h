@@ -16,5 +16,10 @@
     IBOutlet UITextField *confrimPassWord;
     IBOutlet UILabel *codeLb;
 }
-@property(nonatomic , strong) NSString *phoneStr;
+
+@property (assign,nonatomic) int second;
+@property(nonatomic, strong) NSTimer *timer;
+@property(nonatomic, strong) NSString *phoneStr;
+@property(nonatomic , strong) NSString *userName;
+
 @end

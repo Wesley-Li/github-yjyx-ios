@@ -329,5 +329,50 @@
 
 }
 
+-(void)getRestpasswordSms:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/utils/password/get_reset_password_sms/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+
+}
+
+-(void)restPassWord:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
+    [manager POST:[BaseURL stringByAppendingString:@"/api/utils/password/reset_password/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+
+}
+
+-(void)getUserPhone:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/utils/password/get_user_phone/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+
+}
 
 @end

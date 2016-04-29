@@ -57,6 +57,14 @@
 
 -(void)checkOutVerfirycode:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
 
+//发送手机验证码至用户
+-(void)getRestpasswordSms:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
+
+//重置密码信息提交
+-(void)restPassWord:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
+
+//根据用户名获取手机号
+-(void)getUserPhone:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
 
 /*
 学生相关接口

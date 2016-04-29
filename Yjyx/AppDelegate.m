@@ -261,7 +261,7 @@
     community.navigationBarHidden = YES;
     
     NavRootViewController *memberCenter = [[NavRootViewController alloc] initWithRootViewController:[[YjyxPMemberCenterViewController alloc] initWithNibName:@"YjyxPMemberCenterViewController" bundle:nil]];
-    memberCenter.tabBarItem = [UITabBarItem itemWithTitle:@"会员中心" image:[UIImage imageNamed:@"tab_memberCenter"] selectedImage:[UIImage imageNamed:@"tab_memberCenter"]];
+    memberCenter.tabBarItem = [UITabBarItem itemWithTitle:@"会员中心" image:[UIImage imageNamed:@"tab_memberCenter"] selectedImage:[UIImage imageNamed:@"tab_memberCenters"]];
     
     NavRootViewController *personal = [[NavRootViewController alloc] initWithRootViewController:[[ParentPersonalViewController alloc] initWithNibName:@"ParentPersonalViewController" bundle:nil]];
     personal.tabBarItem = [UITabBarItem itemWithTitle:@"个人中心" image:[UIImage imageNamed:@"tab_personal"] selectedImage:[UIImage imageNamed:@"tab_personals"]];

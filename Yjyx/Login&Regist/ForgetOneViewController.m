@@ -31,10 +31,27 @@
         [self.view makeToast:@"请输入正确的手机号" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
-    ForgetTwoViewController *vc = [[ForgetTwoViewController alloc] init];
-    vc.phoneStr = accountText.text;
-    [self.navigationController pushViewController:vc animated:YES];
-}
+    
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:accountText.text,@"username",nil];
+    [[YjxService sharedInstance] getUserPhone:dic withBlock:^(id result, NSError *error){//验证验证码
+        [self.view hideToastActivity];
+        if (result) {
+            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                
+                ForgetTwoViewController *vc = [[ForgetTwoViewController alloc] init];
+                vc.phoneStr = [result objectForKey:@"phone"];
+                vc.userName = accountText.text;
+                [self.navigationController pushViewController:vc animated:YES];
+
+            }else{
+                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+        }else{
+            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+    }];
+    
+  }
 
 -(IBAction)goBack:(id)sender
 {

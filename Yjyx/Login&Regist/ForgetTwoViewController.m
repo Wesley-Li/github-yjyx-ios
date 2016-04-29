@@ -23,16 +23,15 @@
 
 -(IBAction)getCode:(id)sender
 {
-    NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",_phoneStr];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneStr,@"target",[sign md5],@"sign",@"MPASSWDRST",@"stype",nil];
-    [[YjxService sharedInstance] getSMSsendcode:dic withBlock:^(id result, NSError *error){//验证验证码
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_userName,@"username",nil];
+    [[YjxService sharedInstance] getRestpasswordSms:dic withBlock:^(id result, NSError *error){//验证验证码
         [self.view hideToastActivity];
         if (result) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 ForgetThreeViewController *vc = [[ForgetThreeViewController alloc] init];
                 vc.phoneStr = self.phoneStr;
+                vc.userName = self.userName;
                 [self.navigationController pushViewController:vc animated:YES];
-                
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
@@ -40,6 +39,14 @@
             [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
+}
+
+-(void)restPassWord
+{
+    ForgetThreeViewController *vc = [[ForgetThreeViewController alloc] init];
+    vc.phoneStr = self.phoneStr;
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 -(IBAction)goBack:(id)sender

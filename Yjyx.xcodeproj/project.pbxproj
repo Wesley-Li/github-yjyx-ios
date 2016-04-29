@@ -77,6 +77,7 @@
 		3A5A00FA1C79EA2A004584E6 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A00F01C79EA2A004584E6 /* UIScrollView+MJExtension.m */; };
 		3A5A00FB1C79EA2A004584E6 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A00F21C79EA2A004584E6 /* UIScrollView+MJRefresh.m */; };
 		3A5A00FC1C79EA2A004584E6 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A00F41C79EA2A004584E6 /* UIView+MJExtension.m */; };
+		3A5BE7121CD0BCB800DA848F /* tab_memberCenters@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5BE7111CD0BCB800DA848F /* tab_memberCenters@3x.png */; };
 		3A616F5A1CBB9C6B007255BB /* member_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A616F591CBB9C6B007255BB /* member_arrow@3x.png */; };
 		3A66A8031C931BBA005E2D43 /* ChildrenExplantionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A66A8011C931BBA005E2D43 /* ChildrenExplantionViewController.m */; };
 		3A66A8041C931BBA005E2D43 /* ChildrenExplantionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A66A8021C931BBA005E2D43 /* ChildrenExplantionViewController.xib */; };
@@ -434,6 +435,7 @@
 		3A5A00F21C79EA2A004584E6 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		3A5A00F31C79EA2A004584E6 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		3A5A00F41C79EA2A004584E6 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		3A5BE7111CD0BCB800DA848F /* tab_memberCenters@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_memberCenters@3x.png"; sourceTree = "<group>"; };
 		3A616F591CBB9C6B007255BB /* member_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "member_arrow@3x.png"; sourceTree = "<group>"; };
 		3A66A8001C931BBA005E2D43 /* ChildrenExplantionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildrenExplantionViewController.h; sourceTree = "<group>"; };
 		3A66A8011C931BBA005E2D43 /* ChildrenExplantionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildrenExplantionViewController.m; sourceTree = "<group>"; };
@@ -1064,6 +1066,7 @@
 				3A88277F1C6EE5730008367F /* tab_community@3x.png */,
 				3A8827801C6EE5730008367F /* tab_communitys@3x.png */,
 				3AFE02B51CA28C2B0097CC83 /* tab_memberCenter@3x.png */,
+				3A5BE7111CD0BCB800DA848F /* tab_memberCenters@3x.png */,
 				3A8827811C6EE5730008367F /* tab_home@3x.png */,
 				3A8827821C6EE5730008367F /* tab_homes@3x.png */,
 				3A8827831C6EE5730008367F /* tab_personal@3x.png */,
@@ -1590,6 +1593,7 @@
 				3A905D201C7F3A51005AB12F /* push4.caf in Resources */,
 				3A905D211C7F3A51005AB12F /* push5.caf in Resources */,
 				3A905D221C7F3A51005AB12F /* push6.caf in Resources */,
+				3A5BE7121CD0BCB800DA848F /* tab_memberCenters@3x.png in Resources */,
 				3A44A1EC1CC0C76200B93F6A /* memberCenter_bg2@3x.png in Resources */,
 				3A2E870A1C8C079F00C3CD6C /* ChildrenResultTableViewController.xib in Resources */,
 				3A8827771C6EE1470008367F /* ParentCommunityViewController.xib in Resources */,
@@ -1964,16 +1968,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULE_DEBUGGING = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Yjyx",
 				);
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Yjyx/pchFile.pch;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -2004,16 +2013,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULE_DEBUGGING = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Yjyx",
 				);
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Yjyx/pchFile.pch;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
