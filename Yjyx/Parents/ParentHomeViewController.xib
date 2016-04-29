@@ -26,7 +26,7 @@
                         <constraint firstAttribute="height" constant="100" id="JjN-m1-xKi"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eH7-dO-kmQ">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eH7-dO-kmQ">
                     <rect key="frame" x="281" y="21" width="23" height="23"/>
                     <state key="normal" image="Parent_message.png"/>
                 </button>
@@ -116,12 +116,12 @@
         </view>
     </objects>
     <resources>
-        <image name="Parent_Exchange_goods.png" width="93" height="93"/>
-        <image name="Parent_children.png" width="93" height="93"/>
+        <image name="Parent_Exchange_goods.png" width="86" height="86"/>
+        <image name="Parent_children.png" width="87" height="86"/>
         <image name="Parent_default.png" width="94" height="94"/>
         <image name="Parent_home_up.png" width="360" height="237"/>
-        <image name="Parent_hone_down.png" width="360" height="375"/>
+        <image name="Parent_hone_down.png" width="360" height="371"/>
         <image name="Parent_message.png" width="23" height="23"/>
-        <image name="Parent_statistics.png" width="93" height="93"/>
+        <image name="Parent_statistics.png" width="87" height="86"/>
     </resources>
 </document>

@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"个人中心";
+    self.title = @"设置";
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -40,6 +40,8 @@
     
     isNeednotifySet = YES;
     [_personalTab reloadData];
+    [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -161,9 +163,10 @@
     else{
         UIButton *loginOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         [loginOutBtn addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
-        loginOutBtn.backgroundColor = [UIColor redColor];
+        loginOutBtn.backgroundColor = [UIColor whiteColor];
         [loginOutBtn setTitle:@"退出登录" forState:UIControlStateNormal];
-        [loginOutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [loginOutBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        loginOutBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         cell.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:loginOutBtn];
     }

@@ -50,6 +50,11 @@
 
 -(void)purchaseProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 
+//获取单个会员商品详情
+-(void)getOneMemberProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
+
+
+//判断是否可以观看解析视频
 -(void)isCanLookProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 
 //发送短信验证码
@@ -65,6 +70,7 @@
 
 //根据用户名获取手机号
 -(void)getUserPhone:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
+
 
 /*
 学生相关接口

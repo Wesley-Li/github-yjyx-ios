@@ -11,10 +11,12 @@
 #import "ChildrenVideoViewController.h"
 #import "RCLabel.h"
 #import "KWFormViewQuickBuilder.h"
+#import "YjyxMemberDetailViewController.h"
 
 @interface ChildrenResultViewController ()
 {
     NSArray *letterAry;
+    NSString *subjectID;//科目ID，会员跳转时需要
 }
 
 @end
@@ -73,6 +75,7 @@
         [self.view hideToastActivity];
         if (result != nil) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                subjectID = [[result objectForKey:@"data"] objectForKey:@"subjectid"];
                 _blankfills = [[result objectForKey:@"data"] objectForKey:@"blankfills"];
                 _choices = [[result objectForKey:@"data"] objectForKey:@"choices"];
                 _resultchoices = [[[result objectForKey:@"data"] objectForKey:@"result"] objectForKey:@"choice"];
@@ -220,7 +223,6 @@
             UIImageView *imageLine = [[UIImageView alloc] initWithFrame:CGRectMake(8, optimalSize.height + 8, SCREEN_WIDTH - 16, 1)];
             imageLine.backgroundColor = RGBACOLOR(220, 220, 220, 1);
             [cell.contentView addSubview:imageLine];
-            NSLog(@"%@",_resultchoices);
           
             NSString *tureAnswer = [letterAry objectAtIndex:[[[_choices objectForKey:key] objectForKey:@"answer"] integerValue]];
             
@@ -233,7 +235,7 @@
             [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
             [cell.contentView addSubview:explainText];
             
-            if ([[[_choices objectForKey:key] objectForKey:@"videourl"] length] == 0&&[[[_blankfills objectForKey:key] objectForKey:@"explanation"] length] == 0) {
+            if ([[[_choices objectForKey:key] objectForKey:@"showview"] integerValue] == 0) {
                 explainText.hidden = YES;
             }else{
                 explainText.hidden = NO;
@@ -458,22 +460,58 @@
     UIButton *btn = (UIButton *)sender;
     NSString *videoUrl;
     NSString *explantionStr;
-    if (btn.tag/100 == 0) {
+    if (btn.tag/100 == 0) {//选择题
         NSInteger index = btn.tag%100;
         NSString *key = [NSString stringWithFormat:@"%@",[[_resultchoices objectAtIndex:index] firstObject]];
         videoUrl = [[_choices objectForKey:key] objectForKey:@"videourl"];
         explantionStr = [[_choices objectForKey:key] objectForKey:@"explanation"];
-    }else{
+    }else{//填空题
         NSInteger index = btn.tag%100;
         NSString *key = [NSString stringWithFormat:@"%@",[[_resultblankfills objectAtIndex:index] firstObject]];
         videoUrl = [[_blankfills objectForKey:key] objectForKey:@"videourl"];
         explantionStr = [[_blankfills objectForKey:key] objectForKey:@"explanation"];
     }
-    ChildrenVideoViewController *vc = [[ChildrenVideoViewController alloc] init];
-    vc.URLString = videoUrl;
-    vc.explantionStr = [explantionStr stringByReplacingOccurrencesOfString:@"" withString:@""];
-    vc.title = @"详解";
-    [self.navigationController pushViewController:vc animated:YES];
+
+    //判断是否有权限查看视频解析
+    
+    if (videoUrl.length == 0 &&explantionStr.length == 0) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"查看解题方法需要会员权限，是否前往试用或成为会员" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+        [alertView show];
+    }else{
+        ChildrenVideoViewController *vc = [[ChildrenVideoViewController alloc] init];
+        vc.URLString = videoUrl;
+        vc.explantionStr = [explantionStr stringByReplacingOccurrencesOfString:@"" withString:@""];
+        vc.title = @"详解";
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }
+}
+
+#pragma mark -UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getonememproductinfo",@"action",subjectID,@"subjectid",nil];
+        [[YjxService sharedInstance] getOneMemberProduct:dic withBlock:^(id result, NSError *error){//查看商品详情
+            [self.view hideToastActivity];
+            if (result) {
+                if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                     ProductEntity *entity = [ProductEntity wrapProductEntityWithDic:result];
+                    
+                    YjyxMemberDetailViewController *detail = [[YjyxMemberDetailViewController alloc] init];
+                    detail.title = [entity.subject_name stringByAppendingString:@"会员"];
+                    detail.productEntity = entity;
+                    [detail setHidesBottomBarWhenPushed:YES];
+                    [self.navigationController pushViewController:detail animated:YES];
+                }else{
+                    [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                }
+            }else{
+                [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+        }];
+
+    }
 }
 
 /*

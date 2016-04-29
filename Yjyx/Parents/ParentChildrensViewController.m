@@ -22,15 +22,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的孩子";
-    [self loadBackBtn];
+    
+    UIButton *goBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [goBackBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [goBackBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [goBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    goBackBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:goBackBtn];
+    self.navigationItem.leftBarButtonItem = leftBtnItem;
     
     UIButton* rightBar = [UIButton buttonWithType:UIButtonTypeCustom];
     [rightBar setFrame:(CGRect){ 0, 0, 30, 30 }];
-    [rightBar setImage:[UIImage imageNamed:@"nav_operate"] forState:UIControlStateNormal];
+    [rightBar setImage:[UIImage imageNamed:@"common_add"] forState:UIControlStateNormal];
     [rightBar addTarget:self action:@selector(addchildren) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:rightBar]];
     _childrenAry = [[NSMutableArray alloc] init];
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)preparechildrens
@@ -109,22 +121,9 @@
 {
     UIButton *btn = (UIButton *)sender;
     ChildrenEntity *children = [_childrenAry objectAtIndex:btn.tag];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"removechild",@"action",children.cid,@"cid",[YjyxOverallData sharedInstance].parentInfo.pid,@"pid", nil];
-    [self.view makeToastActivity:SHOW_CENTER];
-    [[YjxService sharedInstance] parentsAboutChildrenSetting:dic withBlock:^(id result,NSError *error){
-        [self.view hideToastActivity];
-        if (result != nil) {
-            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
-                [_childrenAry removeObjectAtIndex:btn.tag];
-                [[YjyxOverallData sharedInstance].parentInfo.childrens removeObjectAtIndex:btn.tag];
-                [_childrenTab deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:btn.tag inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-            }else{
-                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
-            }
-        }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
-        }
-    }];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"是否确定删除%@",children.name] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alert show];
+    objc_setAssociatedObject(alert, "deleteChildren", [NSString stringWithFormat:@"%ld",(long)btn.tag], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 
@@ -238,6 +237,39 @@
     
 }
 
+#pragma mark -UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        return;
+    }
+    
+    NSString *index = objc_getAssociatedObject(alertView, "deleteChildren");
+
+    ChildrenEntity *children = [_childrenAry objectAtIndex:[index integerValue]];
+
+    
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"removechild",@"action",children.cid,@"cid",[YjyxOverallData sharedInstance].parentInfo.pid,@"pid", nil];
+    [self.view makeToastActivity:SHOW_CENTER];
+    [[YjxService sharedInstance] parentsAboutChildrenSetting:dic withBlock:^(id result,NSError *error){
+        [self.view hideToastActivity];
+        if (result != nil) {
+            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                [_childrenAry removeObjectAtIndex:[index integerValue]];
+                [[YjyxOverallData sharedInstance].parentInfo.childrens removeObjectAtIndex:[index integerValue]];
+                [_childrenTab deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[index integerValue] inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+            }else{
+                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+        }else{
+            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+    }];
+
+    
+    objc_removeAssociatedObjects(alertView);
+    
+}
 
 /*
 #pragma mark - Navigation

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChildrenResultViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface ChildrenResultViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 @property (nonatomic,strong) IBOutlet UITableView *resultTable;
 @property (nonatomic,strong) NSString *childrenCid;
 @property (nonatomic,strong) NSString *taskResultId;
