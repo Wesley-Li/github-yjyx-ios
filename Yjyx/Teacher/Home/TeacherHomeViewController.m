@@ -17,15 +17,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    self.picImage.layer.cornerRadius = self.picImage.frame.size.height/2;
-    self.picImage.layer.masksToBounds = YES;
+
+    self.picImage.image =[UIImage imageNamed:@"pic.png"];
+    self.picImage.contentMode = UIViewContentModeScaleAspectFit;
+//    self.picImage.layer.cornerRadius = self.picImage.frame.size.height/2;
+//    self.picImage.layer.masksToBounds = YES;
     self.picImage.layer.borderColor = [UIColor whiteColor].CGColor;
     self.picImage.layer.borderWidth = 5.0f;
+    
     
     [self addTapToPicImage];
     
 }
+
+// 方法重调
+- (void)viewDidLayoutSubviews {
+
+    [super viewDidLayoutSubviews];
+    self.picImage.layer.cornerRadius = self.picImage.layer.frame.size.height/2;
+    self.picImage.layer.masksToBounds = YES;
+
+}
+
 
 #pragma mark - 点击积分按钮
 - (IBAction)handleScoreBtn:(id)sender {
@@ -87,17 +100,67 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-
-    UIImage *newPic = info[@"UIImagePickerControllerEditedImage"];
-    self.picImage.image = newPic;
-    // 模态回去并上报头像
-    [self dismissViewControllerAnimated:YES completion:^{
-       // 在此处上报服务器
-        NSLog(@"我改头像了,上传给你");
-        
+    
+    [self.view makeToastActivity:SHOW_CENTER];
+    UIImage *image = [info[UIImagePickerControllerOriginalImage] fixOrientation];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
+    [[YjxService sharedInstance] getAboutqinniu:dic withBlock:^(id result, NSError *error){
+        if (result != nil) {
+            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                NSString *token = [result objectForKey:@"uptoken"];
+                [self upfiletoQiniu:token image:image];
+            }else{
+                [self.view hideToastActivity];
+                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+        }else{
+            [self.view hideToastActivity];
+            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
         
     }];
+    [picker dismissViewControllerAnimated:YES completion:^{}];
+
 }
+
+-(void)upfiletoQiniu:(NSString *)token image:(UIImage*)image
+{
+    NSData *data = UIImageJPEGRepresentation(image, 0.3);
+    QNUploadManager *upManager = [[QNUploadManager alloc] init];
+    [upManager putData:data key:nil token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resq){
+        if (info.error == nil) {
+            NSString *portraitUrl = [NSString stringWithFormat:@"%@%@",QiniuYunURL,[resq objectForKey:@"key"]];
+            [self uploadPortrait:portraitUrl image:image];
+        }else{
+            [self.view hideToastActivity];
+            [self.view makeToast:[info.error description] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+    } option:nil];
+    
+}
+
+-(void)uploadPortrait:(NSString *)url image:(UIImage *)image
+{
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"chavatar",@"action",url,@"url", nil];
+    [[YjxService sharedInstance] parentsAboutChildrenSetting:dic withBlock:^(id result,NSError *error){
+        [self.view hideToastActivity];
+        if (result != nil) {
+            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                _iconImage.image = image;
+                [_iconImage setCornerRadius:_iconImage.height /2];
+                
+                [YjyxOverallData sharedInstance].parentInfo.avatar = url;
+            }else{
+                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+        }else{
+            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+    }];
+    
+}
+
+
 
 #pragma mark - 点击学生任务
 - (IBAction)handleStuTask:(id)sender {

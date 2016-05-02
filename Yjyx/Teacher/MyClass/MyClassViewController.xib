@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyClassViewController">
             <connections>
+                <outlet property="classListTableView" destination="vgb-Kp-VaN" id="Pdw-f3-2Ui"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,14 +16,22 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="班级" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dig-8m-IV4">
-                    <rect key="frame" x="117" y="224" width="87" height="120"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vgb-Kp-VaN">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="MJp-bB-Fzg"/>
+                        <outlet property="delegate" destination="-1" id="aLI-wP-75I"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="vgb-Kp-VaN" secondAttribute="bottom" id="1xI-lL-atw"/>
+                <constraint firstAttribute="trailing" secondItem="vgb-Kp-VaN" secondAttribute="trailing" id="2xx-5D-hlq"/>
+                <constraint firstItem="vgb-Kp-VaN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Eoc-a9-flx"/>
+                <constraint firstItem="vgb-Kp-VaN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ylK-Gj-RqY"/>
+            </constraints>
             <point key="canvasLocation" x="455" y="375"/>
         </view>
     </objects>

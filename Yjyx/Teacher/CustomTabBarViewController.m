@@ -18,6 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
     [self configure];
 }
 
@@ -76,7 +77,7 @@
 
 -(void)pressChange:(id)sender
 {
-    self.selectedIndex = 1;
+    self.selectedIndex = 2;
     _customButton.selected=YES;
 }
 
@@ -85,7 +86,7 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    if (self.selectedIndex == 1) {
+    if (self.selectedIndex == 2) {
         _customButton.selected=YES;
     }else
     {

@@ -346,6 +346,43 @@
     
 }
 
+// 老师从青牛云获取上传Token
+- (void)teacherGetAboutqinniu:(NSDictionary*)params withBlock:(void(^)(id result, NSError *error))block {
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
+    [manager GET:[BaseURL stringByAppendingString:TEACHER_PIC_SETTING_CONNECT_GET] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+        
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+
+}
+
+// 老师上传青牛云
+-(void)teacherUploadFile:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block {
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
+    [manager POST:[BaseURL stringByAppendingString:TEACHER_UPLOAD_PIC_CONNECT_POST] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+        
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+
+    
+}
+
 //**************************学生接口实现**************************
 #pragma mark - 学生相关接口实现
 

@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MyClassViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITableView *classListTableView;
+
+
 
 @end

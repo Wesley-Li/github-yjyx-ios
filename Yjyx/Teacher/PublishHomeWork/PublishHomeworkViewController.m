@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.title = @"发布作业";
 }
 
 - (void)didReceiveMemoryWarning {

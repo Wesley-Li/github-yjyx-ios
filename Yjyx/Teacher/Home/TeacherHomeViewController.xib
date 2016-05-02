@@ -24,11 +24,17 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="top_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="pcg-X1-mQM">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="213"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic.png" translatesAutoresizingMaskIntoConstraints="NO" id="Lcp-0J-T4V">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lcp-0J-T4V">
                     <rect key="frame" x="119" y="60" width="83" height="83"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Lcp-0J-T4V" secondAttribute="height" multiplier="1:1" id="2aP-SG-Dy5"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="42"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张三" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4O-em-cz1">
                     <rect key="frame" x="85" y="158" width="150" height="30"/>
@@ -107,25 +113,25 @@
                                 <constraint firstAttribute="height" constant="20" id="qCr-6T-zqK"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数据统计" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lw5-5z-qeA">
                             <rect key="frame" x="187" y="122" width="80" height="20"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的微课" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grz-dy-VKL">
                             <rect key="frame" x="52" y="267" width="80" height="20"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="积分商城" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6T-gz-sjb">
                             <rect key="frame" x="187" y="267" width="80" height="20"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -260,14 +266,13 @@
                 <constraint firstAttribute="trailing" secondItem="UPI-xg-NWk" secondAttribute="trailing" id="unG-ft-6hZ"/>
                 <constraint firstItem="Lcp-0J-T4V" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="zs5-Yf-ELI"/>
             </constraints>
-            <point key="canvasLocation" x="455" y="375"/>
+            <point key="canvasLocation" x="283" y="338"/>
         </view>
     </objects>
     <resources>
         <image name="hw_stats.png" width="312" height="312"/>
         <image name="mall.png" width="312" height="313"/>
         <image name="mymclass.png" width="312" height="313"/>
-        <image name="pic.png" width="284" height="284"/>
         <image name="report.png" width="59" height="59"/>
         <image name="score.png" width="51" height="51"/>
         <image name="stu_hw.png" width="312" height="312"/>

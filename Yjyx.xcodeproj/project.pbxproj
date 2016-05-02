@@ -261,6 +261,8 @@
 		3B4864771CCF117300D2DE3C /* PublishHomeworkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */; };
 		3B48647F1CCF3FBA00D2DE3C /* CustomTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B48647E1CCF3FBA00D2DE3C /* CustomTabBarViewController.m */; };
 		7D453D9CA19A8B9493453E33 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D2260EAA2B915029186C49 /* libPods.a */; };
+		807959341CD217BC00C9B841 /* ClassDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 807959321CD217BC00C9B841 /* ClassDetailViewController.m */; };
+		807959351CD217BC00C9B841 /* ClassDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 807959331CD217BC00C9B841 /* ClassDetailViewController.xib */; };
 		CB40047F1C609BCD00556AA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB40047E1C609BCD00556AA7 /* main.m */; };
 		CB4004821C609BCD00556AA7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4004811C609BCD00556AA7 /* AppDelegate.m */; };
 		CB4004851C609BCD00556AA7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4004841C609BCD00556AA7 /* ViewController.m */; };
@@ -731,6 +733,9 @@
 		3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublishHomeworkViewController.xib; sourceTree = "<group>"; };
 		3B48647D1CCF3FBA00D2DE3C /* CustomTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarViewController.h; sourceTree = "<group>"; };
 		3B48647E1CCF3FBA00D2DE3C /* CustomTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarViewController.m; sourceTree = "<group>"; };
+		807959311CD217BC00C9B841 /* ClassDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassDetailViewController.h; sourceTree = "<group>"; };
+		807959321CD217BC00C9B841 /* ClassDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassDetailViewController.m; sourceTree = "<group>"; };
+		807959331CD217BC00C9B841 /* ClassDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClassDetailViewController.xib; sourceTree = "<group>"; };
 		CB40047A1C609BCD00556AA7 /* Yjyx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yjyx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB40047E1C609BCD00556AA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CB4004801C609BCD00556AA7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1566,6 +1571,9 @@
 				3B4864631CCF117300D2DE3C /* MyClassViewController.h */,
 				3B4864641CCF117300D2DE3C /* MyClassViewController.m */,
 				3B4864651CCF117300D2DE3C /* MyClassViewController.xib */,
+				807959311CD217BC00C9B841 /* ClassDetailViewController.h */,
+				807959321CD217BC00C9B841 /* ClassDetailViewController.m */,
+				807959331CD217BC00C9B841 /* ClassDetailViewController.xib */,
 			);
 			path = MyClass;
 			sourceTree = "<group>";
@@ -1861,6 +1869,7 @@
 				3A26EE6B1C71CCDB009C3242 /* MyChildrenViewController.xib in Resources */,
 				3AA165681C91BCD6006B8756 /* homework_3@3x.png in Resources */,
 				3B4864561CCF10C200D2DE3C /* tab_bg@2x.png in Resources */,
+				807959351CD217BC00C9B841 /* ClassDetailViewController.xib in Resources */,
 				3A26EE601C71A81B009C3242 /* Parent_children@3x.png in Resources */,
 				3A8CAE9A1C70A39600BDEB6B /* comm_back@2x.png in Resources */,
 				3A88278F1C6EE9BD0008367F /* RegistViewController.xib in Resources */,
@@ -1966,6 +1975,7 @@
 				3A91F49B1C760CF4001568AA /* PNRadarChartDataItem.m in Sources */,
 				3A7864331C868062001BB65A /* ChildrenResultViewController.m in Sources */,
 				3AEF272C1C61F08A0028BE09 /* SBJsonBase.m in Sources */,
+				807959341CD217BC00C9B841 /* ClassDetailViewController.m in Sources */,
 				3AA1655D1C91AB40006B8756 /* RegexKitLite.m in Sources */,
 				3A8CAE911C70A11800BDEB6B /* ParentMoifyNameViewController.m in Sources */,
 				3A91F4971C760CF4001568AA /* PNLineChartDataItem.m in Sources */,

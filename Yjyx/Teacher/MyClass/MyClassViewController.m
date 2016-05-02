@@ -8,7 +8,10 @@
 
 #import "MyClassViewController.h"
 
-@interface MyClassViewController ()
+
+#define kIdentifier @"ccell"
+
+@interface MyClassViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @end
 
@@ -17,7 +20,46 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.title = @"我的班级";
+    
+    // 注册cell
+    [self.classListTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kIdentifier];
 }
+
+#pragma mark - delegate
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+    return 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kIdentifier];
+    
+    if (cell == nil) {
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kIdentifier];
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    }
+    
+    cell.textLabel.text = @"我的班级";
+    cell.detailTextLabel.text = @"班级邀请码:789673264";
+    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

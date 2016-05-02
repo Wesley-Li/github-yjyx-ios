@@ -15,14 +15,18 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="消息" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7v-qg-Prq">
-                    <rect key="frame" x="115" y="222" width="91" height="124"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="敬请期待" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7v-qg-Prq">
+                    <rect key="frame" x="126.5" y="274" width="68" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="P7v-qg-Prq" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="2mr-4L-h6R"/>
+                <constraint firstItem="P7v-qg-Prq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="5qQ-7u-van"/>
+            </constraints>
             <point key="canvasLocation" x="455" y="375"/>
         </view>
     </objects>

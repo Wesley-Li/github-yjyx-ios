@@ -81,6 +81,15 @@
  */
 - (void)teacherLogout:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 /*
+ *老师青牛云,获取Token
+ */
+- (void)teacherGetAboutqinniu:(NSDictionary*)params withBlock:(void(^)(id result, NSError *error))block;
+
+/*
+ *老师青牛云,上传
+ */
+-(void)teacherUploadFile:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
+/*
  *老师获取所有学生列表
  */
 - (void)teacherGetAllStuList:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
