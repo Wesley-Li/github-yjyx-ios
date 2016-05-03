@@ -37,54 +37,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [[UITabBar appearance] setBarTintColor:[UIColor clearColor]];
-    
-    if (!_cusTBViewController) {
-        _cusTBViewController = [[CustomTabBarViewController alloc] init];
-    }
-    
-    // 首页
-    NavRootViewController *teacherHome = [[NavRootViewController alloc] initWithRootViewController:[[TeacherHomeViewController alloc] initWithNibName:@"TeacherHomeViewController" bundle:nil]];
-    teacherHome.tabBarItem = [UITabBarItem itemWithTitle:@"首页" image:[UIImage imageNamed:@"tab_home"] selectedImage:[UIImage imageNamed:@"tab_home_click"]];
-    teacherHome.navigationBar.hidden = YES;
-    
-    // 消息
-    NavRootViewController *message = [[NavRootViewController alloc] initWithRootViewController:[[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil]];
-    message.tabBarItem = [UITabBarItem itemWithTitle:@"消息" image:[UIImage imageNamed:@"message"] selectedImage:[UIImage imageNamed:@"message_click"]];
-    
-    // 发布作业
-    NavRootViewController *publishHomework = [[NavRootViewController alloc] initWithRootViewController:[[PublishHomeworkViewController alloc] initWithNibName:@"PublishHomeworkViewController" bundle:nil]];
-    publishHomework.tabBarItem = [UITabBarItem itemWithTitle:@"发布作业" image:nil selectedImage:nil];
-    //    publishHomework.tabBarItem = [UITabBarItem itemWithTitle:@"发布作业" image:[UIImage imageNamed:@"publishhw"] selectedImage:[UIImage imageNamed:@"publishhw_click"]];
-    
-    // 班级
-    NavRootViewController *myClass = [[NavRootViewController alloc] initWithRootViewController:[[MyClassViewController alloc] initWithNibName:@"MyClassViewController" bundle:nil]];
-    myClass.tabBarItem = [UITabBarItem itemWithTitle:@"班级" image:[UIImage imageNamed:@"myclass"] selectedImage:[UIImage imageNamed:@"myclass_click"]];
-    
-    // 个人中心
-    NavRootViewController *privateCenter = [[NavRootViewController alloc] initWithRootViewController:[[PrivateCenterViewController alloc] initWithNibName:@"PrivateCenterViewController" bundle:nil]];
-    privateCenter.tabBarItem = [UITabBarItem itemWithTitle:@"个人中心" image:[UIImage imageNamed:@"privatecenter"] selectedImage:[UIImage imageNamed:@"privatecenter_click"]];
-    
-    _cusTBViewController.viewControllers = @[teacherHome, message, publishHomework, myClass, privateCenter];
-    
-    //    _cusTBViewController.tabBar.backgroundColor = [UIColor whiteColor];
-    
-    CGRect rect = CGRectMake(0, 0, SCREEN_SIZE.width, SCREEN_SIZE.height);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [[UIColor clearColor] CGColor]);
-    CGContextFillRect(context, rect);
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [_cusTBViewController.tabBar setBackgroundImage:img];
-    [_cusTBViewController.tabBar setShadowImage:img];
-    
-    self.window.rootViewController = _cusTBViewController;
-    
-
-    /*
-    
-    
     
     ((AppDelegate*)SYS_DELEGATE).role = @"parents";
 
@@ -186,7 +138,7 @@
 //    }
      
      
-     */
+  
     return YES;
 }
 
@@ -349,8 +301,8 @@
         teacherHome.navigationBar.hidden = YES;
         
         // 消息
-//        NavRootViewController *message = [[NavRootViewController alloc] initWithRootViewController:[[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil]];
-//        message.tabBarItem = [UITabBarItem itemWithTitle:@"消息" image:[UIImage imageNamed:@"message"] selectedImage:[UIImage imageNamed:@"message_click"]];
+        NavRootViewController *message = [[NavRootViewController alloc] initWithRootViewController:[[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil]];
+        message.tabBarItem = [UITabBarItem itemWithTitle:@"消息" image:[UIImage imageNamed:@"message"] selectedImage:[UIImage imageNamed:@"message_click"]];
         
         // 发布作业
         NavRootViewController *publishHomework = [[NavRootViewController alloc] initWithRootViewController:[[PublishHomeworkViewController alloc] initWithNibName:@"PublishHomeworkViewController" bundle:nil]];
@@ -358,14 +310,14 @@
         //    publishHomework.tabBarItem = [UITabBarItem itemWithTitle:@"发布作业" image:[UIImage imageNamed:@"publishhw"] selectedImage:[UIImage imageNamed:@"publishhw_click"]];
         
         // 班级
-//        NavRootViewController *myClass = [[NavRootViewController alloc] initWithRootViewController:[[MyClassViewController alloc] initWithNibName:@"MyClassViewController" bundle:nil]];
-//        myClass.tabBarItem = [UITabBarItem itemWithTitle:@"班级" image:[UIImage imageNamed:@"myclass"] selectedImage:[UIImage imageNamed:@"myclass_click"]];
+        NavRootViewController *myClass = [[NavRootViewController alloc] initWithRootViewController:[[MyClassViewController alloc] initWithNibName:@"MyClassViewController" bundle:nil]];
+        myClass.tabBarItem = [UITabBarItem itemWithTitle:@"班级" image:[UIImage imageNamed:@"myclass"] selectedImage:[UIImage imageNamed:@"myclass_click"]];
         
         // 个人中心
         NavRootViewController *privateCenter = [[NavRootViewController alloc] initWithRootViewController:[[PrivateCenterViewController alloc] initWithNibName:@"PrivateCenterViewController" bundle:nil]];
         privateCenter.tabBarItem = [UITabBarItem itemWithTitle:@"个人中心" image:[UIImage imageNamed:@"privatecenter"] selectedImage:[UIImage imageNamed:@"privatecenter_click"]];
         
-        _cusTBViewController.viewControllers = @[teacherHome, publishHomework, privateCenter];
+        _cusTBViewController.viewControllers = @[teacherHome, message, publishHomework, myClass, privateCenter];
         
         //    _cusTBViewController.tabBar.backgroundColor = [UIColor whiteColor];
         

@@ -7,6 +7,7 @@
 //
 
 #import "TeacherHomeViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface TeacherHomeViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -14,16 +15,29 @@
 
 @implementation TeacherHomeViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+
+     _nameLabel.text = [YjyxOverallData sharedInstance].teacherInfo.name;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
-    self.picImage.image =[UIImage imageNamed:@"pic.png"];
+    // 头像
+    [self.picImage setImageWithURL:[NSURL URLWithString:[YjyxOverallData sharedInstance].teacherInfo.avatar] placeholderImage:[UIImage imageNamed:@"pic"]];
     self.picImage.contentMode = UIViewContentModeScaleAspectFit;
-//    self.picImage.layer.cornerRadius = self.picImage.frame.size.height/2;
-//    self.picImage.layer.masksToBounds = YES;
+
     self.picImage.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.picImage.layer.borderWidth = 5.0f;
+    self.picImage.layer.borderWidth = 4.0f;
+    
+    // 名字
+    _nameLabel.text = [YjyxOverallData sharedInstance].teacherInfo.name;
+    
+    // 简介
+#warning 后续可能会加上老师的科目信息
+    _descriptionLabel.text = [NSString stringWithFormat:@"%@%@%@**老师", [YjyxOverallData sharedInstance].teacherInfo.school_province, [YjyxOverallData sharedInstance].teacherInfo.school_city, [YjyxOverallData sharedInstance].teacherInfo.school_name];
     
     
     [self addTapToPicImage];
@@ -99,30 +113,33 @@
 
 }
 
+// 头像更换代理方法
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     [self.view makeToastActivity:SHOW_CENTER];
-    UIImage *image = [info[UIImagePickerControllerOriginalImage] fixOrientation];
+//    UIImage *image = [info[UIImagePickerControllerOriginalImage] fixOrientation];
+    UIImage *image = info[@"UIImagePickerControllerEditedImage"];
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
-    [[YjxService sharedInstance] getAboutqinniu:dic withBlock:^(id result, NSError *error){
-        if (result != nil) {
-            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
-                NSString *token = [result objectForKey:@"uptoken"];
-                [self upfiletoQiniu:token image:image];
-            }else{
-                [self.view hideToastActivity];
-                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
-            }
-        }else{
-            [self.view hideToastActivity];
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
-        }
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager GET:[BaseURL stringByAppendingString:TEACHER_PIC_SETTING_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
+//        NSLog(@"%@", responseObject);
+        NSString *upToken = responseObject[@"uptoken"];
+        
+        [self upfiletoQiniu:upToken image:image];
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
     }];
+    
+    
     [picker dismissViewControllerAnimated:YES completion:^{}];
 
 }
 
+// 上传头像
 -(void)upfiletoQiniu:(NSString *)token image:(UIImage*)image
 {
     NSData *data = UIImageJPEGRepresentation(image, 0.3);
@@ -142,21 +159,27 @@
 -(void)uploadPortrait:(NSString *)url image:(UIImage *)image
 {
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"chavatar",@"action",url,@"url", nil];
-    [[YjxService sharedInstance] parentsAboutChildrenSetting:dic withBlock:^(id result,NSError *error){
+    
+    [[YjxService sharedInstance] teacherUploadFile:dic withBlock:^(id result, NSError *error) {
+        
         [self.view hideToastActivity];
+        
         if (result != nil) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
-                _iconImage.image = image;
-                [_iconImage setCornerRadius:_iconImage.height /2];
+                _picImage.image = image;
+//                [_picImage setCornerRadius:_picImage.height /2];
                 
-                [YjyxOverallData sharedInstance].parentInfo.avatar = url;
+                [YjyxOverallData sharedInstance].teacherInfo.avatar = url;
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
             [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
         }
+
+        
     }];
+    
     
 }
 

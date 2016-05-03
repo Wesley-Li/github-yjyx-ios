@@ -260,6 +260,34 @@
 		3B4864761CCF117300D2DE3C /* PublishHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B48646C1CCF117300D2DE3C /* PublishHomeworkViewController.m */; };
 		3B4864771CCF117300D2DE3C /* PublishHomeworkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */; };
 		3B48647F1CCF3FBA00D2DE3C /* CustomTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B48647E1CCF3FBA00D2DE3C /* CustomTabBarViewController.m */; };
+		3BB773941CD86B3A00A24485 /* home_img_book.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773881CD86B3A00A24485 /* home_img_book.png */; };
+		3BB773951CD86B3A00A24485 /* home_img_book@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773891CD86B3A00A24485 /* home_img_book@3x.png */; };
+		3BB773961CD86B3A00A24485 /* home_img_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7738A1CD86B3A00A24485 /* home_img_camera.png */; };
+		3BB773971CD86B3A00A24485 /* home_img_camera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7738B1CD86B3A00A24485 /* home_img_camera@3x.png */; };
+		3BB773981CD86B3A00A24485 /* home_img_midtest.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7738C1CD86B3A00A24485 /* home_img_midtest.png */; };
+		3BB773991CD86B3A00A24485 /* home_img_midtest@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7738D1CD86B3A00A24485 /* home_img_midtest@3x.png */; };
+		3BB7739A1CD86B3A00A24485 /* home_img_private.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7738E1CD86B3A00A24485 /* home_img_private.png */; };
+		3BB7739B1CD86B3A00A24485 /* home_img_private@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7738F1CD86B3A00A24485 /* home_img_private@3x.png */; };
+		3BB7739C1CD86B3A00A24485 /* home_img_smart.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773901CD86B3A00A24485 /* home_img_smart.png */; };
+		3BB7739D1CD86B3A00A24485 /* home_img_smart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773911CD86B3A00A24485 /* home_img_smart@3x.png */; };
+		3BB7739E1CD86B3A00A24485 /* home_img_testPaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773921CD86B3A00A24485 /* home_img_testPaper.png */; };
+		3BB7739F1CD86B3A00A24485 /* home_img_testPaper@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773931CD86B3A00A24485 /* home_img_testPaper@3x.png */; };
+		3BB773A31CD8781400A24485 /* SmartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB773A11CD8781400A24485 /* SmartViewController.m */; };
+		3BB773A41CD8781400A24485 /* SmartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773A21CD8781400A24485 /* SmartViewController.xib */; };
+		3BB773A81CD8784000A24485 /* BookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB773A61CD8784000A24485 /* BookViewController.m */; };
+		3BB773A91CD8784000A24485 /* BookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773A71CD8784000A24485 /* BookViewController.xib */; };
+		3BB773AD1CD8786900A24485 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB773AB1CD8786900A24485 /* TestViewController.m */; };
+		3BB773AE1CD8786900A24485 /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773AC1CD8786900A24485 /* TestViewController.xib */; };
+		3BB773B21CD8788200A24485 /* MidTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB773B01CD8788200A24485 /* MidTestViewController.m */; };
+		3BB773B31CD8788200A24485 /* MidTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773B11CD8788200A24485 /* MidTestViewController.xib */; };
+		3BB773B71CD8789800A24485 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB773B51CD8789800A24485 /* CameraViewController.m */; };
+		3BB773B81CD8789800A24485 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773B61CD8789800A24485 /* CameraViewController.xib */; };
+		3BB773BC1CD878B900A24485 /* PrivateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB773BA1CD878B900A24485 /* PrivateViewController.m */; };
+		3BB773BD1CD878B900A24485 /* PrivateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773BB1CD878B900A24485 /* PrivateViewController.xib */; };
+		3BB773C11CD883C700A24485 /* NameChageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB773BF1CD883C700A24485 /* NameChageViewController.m */; };
+		3BB773C21CD883C700A24485 /* NameChageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773C01CD883C700A24485 /* NameChageViewController.xib */; };
+		3BB773C61CD883EA00A24485 /* PhoneChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BB773C41CD883EA00A24485 /* PhoneChangeViewController.m */; };
+		3BB773C71CD883EA00A24485 /* PhoneChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773C51CD883EA00A24485 /* PhoneChangeViewController.xib */; };
 		7D453D9CA19A8B9493453E33 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D2260EAA2B915029186C49 /* libPods.a */; };
 		807959341CD217BC00C9B841 /* ClassDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 807959321CD217BC00C9B841 /* ClassDetailViewController.m */; };
 		807959351CD217BC00C9B841 /* ClassDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 807959331CD217BC00C9B841 /* ClassDetailViewController.xib */; };
@@ -733,6 +761,42 @@
 		3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublishHomeworkViewController.xib; sourceTree = "<group>"; };
 		3B48647D1CCF3FBA00D2DE3C /* CustomTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarViewController.h; sourceTree = "<group>"; };
 		3B48647E1CCF3FBA00D2DE3C /* CustomTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarViewController.m; sourceTree = "<group>"; };
+		3BB773881CD86B3A00A24485 /* home_img_book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_img_book.png; sourceTree = "<group>"; };
+		3BB773891CD86B3A00A24485 /* home_img_book@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_img_book@3x.png"; sourceTree = "<group>"; };
+		3BB7738A1CD86B3A00A24485 /* home_img_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_img_camera.png; sourceTree = "<group>"; };
+		3BB7738B1CD86B3A00A24485 /* home_img_camera@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_img_camera@3x.png"; sourceTree = "<group>"; };
+		3BB7738C1CD86B3A00A24485 /* home_img_midtest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_img_midtest.png; sourceTree = "<group>"; };
+		3BB7738D1CD86B3A00A24485 /* home_img_midtest@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_img_midtest@3x.png"; sourceTree = "<group>"; };
+		3BB7738E1CD86B3A00A24485 /* home_img_private.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_img_private.png; sourceTree = "<group>"; };
+		3BB7738F1CD86B3A00A24485 /* home_img_private@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_img_private@3x.png"; sourceTree = "<group>"; };
+		3BB773901CD86B3A00A24485 /* home_img_smart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_img_smart.png; sourceTree = "<group>"; };
+		3BB773911CD86B3A00A24485 /* home_img_smart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_img_smart@3x.png"; sourceTree = "<group>"; };
+		3BB773921CD86B3A00A24485 /* home_img_testPaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_img_testPaper.png; sourceTree = "<group>"; };
+		3BB773931CD86B3A00A24485 /* home_img_testPaper@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_img_testPaper@3x.png"; sourceTree = "<group>"; };
+		3BB773A01CD8781400A24485 /* SmartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartViewController.h; sourceTree = "<group>"; };
+		3BB773A11CD8781400A24485 /* SmartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartViewController.m; sourceTree = "<group>"; };
+		3BB773A21CD8781400A24485 /* SmartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartViewController.xib; sourceTree = "<group>"; };
+		3BB773A51CD8784000A24485 /* BookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookViewController.h; sourceTree = "<group>"; };
+		3BB773A61CD8784000A24485 /* BookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookViewController.m; sourceTree = "<group>"; };
+		3BB773A71CD8784000A24485 /* BookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookViewController.xib; sourceTree = "<group>"; };
+		3BB773AA1CD8786900A24485 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		3BB773AB1CD8786900A24485 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		3BB773AC1CD8786900A24485 /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
+		3BB773AF1CD8788200A24485 /* MidTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidTestViewController.h; sourceTree = "<group>"; };
+		3BB773B01CD8788200A24485 /* MidTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MidTestViewController.m; sourceTree = "<group>"; };
+		3BB773B11CD8788200A24485 /* MidTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MidTestViewController.xib; sourceTree = "<group>"; };
+		3BB773B41CD8789800A24485 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		3BB773B51CD8789800A24485 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		3BB773B61CD8789800A24485 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
+		3BB773B91CD878B900A24485 /* PrivateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateViewController.h; sourceTree = "<group>"; };
+		3BB773BA1CD878B900A24485 /* PrivateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateViewController.m; sourceTree = "<group>"; };
+		3BB773BB1CD878B900A24485 /* PrivateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateViewController.xib; sourceTree = "<group>"; };
+		3BB773BE1CD883C700A24485 /* NameChageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameChageViewController.h; sourceTree = "<group>"; };
+		3BB773BF1CD883C700A24485 /* NameChageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameChageViewController.m; sourceTree = "<group>"; };
+		3BB773C01CD883C700A24485 /* NameChageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameChageViewController.xib; sourceTree = "<group>"; };
+		3BB773C31CD883EA00A24485 /* PhoneChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneChangeViewController.h; sourceTree = "<group>"; };
+		3BB773C41CD883EA00A24485 /* PhoneChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneChangeViewController.m; sourceTree = "<group>"; };
+		3BB773C51CD883EA00A24485 /* PhoneChangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhoneChangeViewController.xib; sourceTree = "<group>"; };
 		807959311CD217BC00C9B841 /* ClassDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassDetailViewController.h; sourceTree = "<group>"; };
 		807959321CD217BC00C9B841 /* ClassDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassDetailViewController.m; sourceTree = "<group>"; };
 		807959331CD217BC00C9B841 /* ClassDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClassDetailViewController.xib; sourceTree = "<group>"; };
@@ -1512,6 +1576,7 @@
 		3B4864301CCF10C200D2DE3C /* TeacherFiles */ = {
 			isa = PBXGroup;
 			children = (
+				3BB773871CD86B3A00A24485 /* TeacherPublishHW */,
 				3B4864311CCF10C200D2DE3C /* TeacherHome */,
 			);
 			path = TeacherFiles;
@@ -1584,6 +1649,12 @@
 				3B4864671CCF117300D2DE3C /* PrivateCenterViewController.h */,
 				3B4864681CCF117300D2DE3C /* PrivateCenterViewController.m */,
 				3B4864691CCF117300D2DE3C /* PrivateCenterViewController.xib */,
+				3BB773BE1CD883C700A24485 /* NameChageViewController.h */,
+				3BB773BF1CD883C700A24485 /* NameChageViewController.m */,
+				3BB773C01CD883C700A24485 /* NameChageViewController.xib */,
+				3BB773C31CD883EA00A24485 /* PhoneChangeViewController.h */,
+				3BB773C41CD883EA00A24485 /* PhoneChangeViewController.m */,
+				3BB773C51CD883EA00A24485 /* PhoneChangeViewController.xib */,
 			);
 			path = PrivateCenter;
 			sourceTree = "<group>";
@@ -1594,8 +1665,45 @@
 				3B48646B1CCF117300D2DE3C /* PublishHomeworkViewController.h */,
 				3B48646C1CCF117300D2DE3C /* PublishHomeworkViewController.m */,
 				3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */,
+				3BB773A01CD8781400A24485 /* SmartViewController.h */,
+				3BB773A11CD8781400A24485 /* SmartViewController.m */,
+				3BB773A21CD8781400A24485 /* SmartViewController.xib */,
+				3BB773A51CD8784000A24485 /* BookViewController.h */,
+				3BB773A61CD8784000A24485 /* BookViewController.m */,
+				3BB773A71CD8784000A24485 /* BookViewController.xib */,
+				3BB773AA1CD8786900A24485 /* TestViewController.h */,
+				3BB773AB1CD8786900A24485 /* TestViewController.m */,
+				3BB773AC1CD8786900A24485 /* TestViewController.xib */,
+				3BB773AF1CD8788200A24485 /* MidTestViewController.h */,
+				3BB773B01CD8788200A24485 /* MidTestViewController.m */,
+				3BB773B11CD8788200A24485 /* MidTestViewController.xib */,
+				3BB773B41CD8789800A24485 /* CameraViewController.h */,
+				3BB773B51CD8789800A24485 /* CameraViewController.m */,
+				3BB773B61CD8789800A24485 /* CameraViewController.xib */,
+				3BB773B91CD878B900A24485 /* PrivateViewController.h */,
+				3BB773BA1CD878B900A24485 /* PrivateViewController.m */,
+				3BB773BB1CD878B900A24485 /* PrivateViewController.xib */,
 			);
 			path = PublishHomeWork;
+			sourceTree = "<group>";
+		};
+		3BB773871CD86B3A00A24485 /* TeacherPublishHW */ = {
+			isa = PBXGroup;
+			children = (
+				3BB773881CD86B3A00A24485 /* home_img_book.png */,
+				3BB773891CD86B3A00A24485 /* home_img_book@3x.png */,
+				3BB7738A1CD86B3A00A24485 /* home_img_camera.png */,
+				3BB7738B1CD86B3A00A24485 /* home_img_camera@3x.png */,
+				3BB7738C1CD86B3A00A24485 /* home_img_midtest.png */,
+				3BB7738D1CD86B3A00A24485 /* home_img_midtest@3x.png */,
+				3BB7738E1CD86B3A00A24485 /* home_img_private.png */,
+				3BB7738F1CD86B3A00A24485 /* home_img_private@3x.png */,
+				3BB773901CD86B3A00A24485 /* home_img_smart.png */,
+				3BB773911CD86B3A00A24485 /* home_img_smart@3x.png */,
+				3BB773921CD86B3A00A24485 /* home_img_testPaper.png */,
+				3BB773931CD86B3A00A24485 /* home_img_testPaper@3x.png */,
+			);
+			path = TeacherPublishHW;
 			sourceTree = "<group>";
 		};
 		5B7C88DD048F57B9225E4451 /* Frameworks */ = {
@@ -1758,12 +1866,14 @@
 				3A905D1F1C7F3A51005AB12F /* push3.caf in Resources */,
 				3A905D201C7F3A51005AB12F /* push4.caf in Resources */,
 				3A905D211C7F3A51005AB12F /* push5.caf in Resources */,
+				3BB773991CD86B3A00A24485 /* home_img_midtest@3x.png in Resources */,
 				3A905D221C7F3A51005AB12F /* push6.caf in Resources */,
 				3B4864771CCF117300D2DE3C /* PublishHomeworkViewController.xib in Resources */,
 				3A44A1EC1CC0C76200B93F6A /* memberCenter_bg2@3x.png in Resources */,
 				3B48644B1CCF10C200D2DE3C /* myclass_click@3x.png in Resources */,
 				3A2E870A1C8C079F00C3CD6C /* ChildrenResultTableViewController.xib in Resources */,
 				3A8827771C6EE1470008367F /* ParentCommunityViewController.xib in Resources */,
+				3BB773A41CD8781400A24485 /* SmartViewController.xib in Resources */,
 				3A26EE611C71A81B009C3242 /* Parent_default@3x.png in Resources */,
 				3AC1D1EC1CCDE7EE006291D0 /* regist_student_logo@3x.png in Resources */,
 				3B4864571CCF10C200D2DE3C /* tab_home@3x.png in Resources */,
@@ -1773,7 +1883,9 @@
 				3B48644C1CCF10C200D2DE3C /* mymclass.png in Resources */,
 				3A26EE631C71A81B009C3242 /* Parent_home_up@3x.png in Resources */,
 				3AFE02C71CA29D540097CC83 /* member_yuwen@3x.png in Resources */,
+				3BB7739E1CD86B3A00A24485 /* home_img_testPaper.png in Resources */,
 				3AE894031C6C28C300E8BA97 /* login_password_icon@3x.png in Resources */,
+				3BB773941CD86B3A00A24485 /* home_img_book.png in Resources */,
 				3A8CAEC21C70B3C200BDEB6B /* ParentChildrensViewController.xib in Resources */,
 				3AF11DDF1CB2691A00F98A03 /* subject_logo@3x.png in Resources */,
 				3B4864711CCF117300D2DE3C /* MessageViewController.xib in Resources */,
@@ -1786,10 +1898,16 @@
 				3A44AA021CBE489500348B49 /* member_paysuccess@3x.png in Resources */,
 				3B4864461CCF10C200D2DE3C /* hw_stats.png in Resources */,
 				3AF27E381C73239400698673 /* AddChildrenViewController.xib in Resources */,
+				3BB7739D1CD86B3A00A24485 /* home_img_smart@3x.png in Resources */,
+				3BB7739B1CD86B3A00A24485 /* home_img_private@3x.png in Resources */,
 				3AE894021C6C28C300E8BA97 /* login_btn@3x.png in Resources */,
+				3BB773961CD86B3A00A24485 /* home_img_camera.png in Resources */,
 				3A3C1B441C9562A900514C32 /* YjyxMicroClassViewController.xib in Resources */,
+				3BB7739A1CD86B3A00A24485 /* home_img_private.png in Resources */,
 				3AC1D1ED1CCDE7EE006291D0 /* regist_text_bg@3x.png in Resources */,
 				3A905D151C7F3587005AB12F /* YjyxSoundViewController.xib in Resources */,
+				3BB7739C1CD86B3A00A24485 /* home_img_smart.png in Resources */,
+				3BB773B31CD8788200A24485 /* MidTestViewController.xib in Resources */,
 				3AE894051C6C28C300E8BA97 /* login_username_icon@3x.png in Resources */,
 				3A4302051C61FDFB00B8D259 /* LoginViewController.xib in Resources */,
 				3A8CAE971C70A12E00BDEB6B /* ParentModifyPhoneViewController.xib in Resources */,
@@ -1801,6 +1919,7 @@
 				3B48644D1CCF10C200D2DE3C /* new.png in Resources */,
 				3A5A00F51C79EA2A004584E6 /* MJRefresh.bundle in Resources */,
 				3A8827921C6EEFEF0008367F /* Personal_children@3x.png in Resources */,
+				3BB773971CD86B3A00A24485 /* home_img_camera@3x.png in Resources */,
 				3A26EE651C71A81B009C3242 /* Parent_message@3x.png in Resources */,
 				3A88278A1C6EE5730008367F /* tab_personals@3x.png in Resources */,
 				3A26EE621C71A81B009C3242 /* Parent_Exchange_goods@3x.png in Resources */,
@@ -1812,6 +1931,7 @@
 				3B4864551CCF10C200D2DE3C /* stu_hw.png in Resources */,
 				3AF339421C770D5600586A37 /* defaultImage@3x.png in Resources */,
 				3B4864511CCF10C200D2DE3C /* publishhw@3x.png in Resources */,
+				3BB773951CD86B3A00A24485 /* home_img_book@3x.png in Resources */,
 				3A91F46B1C7606FB001568AA /* ChildrenStatisticViewController.xib in Resources */,
 				3A8827851C6EE5730008367F /* tab_community@3x.png in Resources */,
 				3AE894101C6C47C400E8BA97 /* login_right_line@3x.png in Resources */,
@@ -1819,7 +1939,10 @@
 				3B48646F1CCF117300D2DE3C /* TeacherHomeViewController.xib in Resources */,
 				3AF11DE01CB2691A00F98A03 /* subject_shiyong@3x.png in Resources */,
 				3AFE02C41CA29D540097CC83 /* member_subjectbg1@3x.png in Resources */,
+				3BB773A91CD8784000A24485 /* BookViewController.xib in Resources */,
+				3BB773AE1CD8786900A24485 /* TestViewController.xib in Resources */,
 				3AD1FD941C72BD8F00E362B9 /* MyChildrenTableViewCell.xib in Resources */,
+				3BB773B81CD8789800A24485 /* CameraViewController.xib in Resources */,
 				3AF339471C770FDC00586A37 /* AutoLoginViewController.xib in Resources */,
 				3B4864751CCF117300D2DE3C /* PrivateCenterViewController.xib in Resources */,
 				3AD1FD991C72CBC200E362B9 /* children_downline@3x.png in Resources */,
@@ -1834,6 +1957,7 @@
 				3B48644F1CCF10C200D2DE3C /* privatecenter@3x.png in Resources */,
 				3AFE02C81CA29D540097CC83 /* memberCenter_bg1@3x.png in Resources */,
 				3AA165691C91BCD6006B8756 /* homework_4@3x.png in Resources */,
+				3BB773C71CD883EA00A24485 /* PhoneChangeViewController.xib in Resources */,
 				3A616F5A1CBB9C6B007255BB /* member_arrow@3x.png in Resources */,
 				3B4864491CCF10C200D2DE3C /* message_click@3x.png in Resources */,
 				3A88277D1C6EE1820008367F /* ParentPersonalViewController.xib in Resources */,
@@ -1850,6 +1974,7 @@
 				3B48644E1CCF10C200D2DE3C /* pic.png in Resources */,
 				3A04A5DA1C93E6590040D913 /* ChildrenVideoViewController.xib in Resources */,
 				3B4864591CCF10C200D2DE3C /* top_bg.png in Resources */,
+				3BB773981CD86B3A00A24485 /* home_img_midtest.png in Resources */,
 				3B4864541CCF10C200D2DE3C /* score.png in Resources */,
 				3A8827701C6EE0DE0008367F /* ParentHomeViewController.xib in Resources */,
 				3B4864731CCF117300D2DE3C /* MyClassViewController.xib in Resources */,
@@ -1863,13 +1988,16 @@
 				3AD1FD961C72C72E00E362B9 /* Parent_homework@3x.png in Resources */,
 				3B4864481CCF10C200D2DE3C /* message@3x.png in Resources */,
 				CB4004881C609BCD00556AA7 /* Main.storyboard in Resources */,
+				3BB7739F1CD86B3A00A24485 /* home_img_testPaper@3x.png in Resources */,
 				3AA165671C91BCD6006B8756 /* homework_2@3x.png in Resources */,
 				3AF11DDE1CB2691A00F98A03 /* subject_kaitong@3x.png in Resources */,
 				3B4864531CCF10C200D2DE3C /* report.png in Resources */,
 				3A26EE6B1C71CCDB009C3242 /* MyChildrenViewController.xib in Resources */,
 				3AA165681C91BCD6006B8756 /* homework_3@3x.png in Resources */,
+				3BB773C21CD883C700A24485 /* NameChageViewController.xib in Resources */,
 				3B4864561CCF10C200D2DE3C /* tab_bg@2x.png in Resources */,
 				807959351CD217BC00C9B841 /* ClassDetailViewController.xib in Resources */,
+				3BB773BD1CD878B900A24485 /* PrivateViewController.xib in Resources */,
 				3A26EE601C71A81B009C3242 /* Parent_children@3x.png in Resources */,
 				3A8CAE9A1C70A39600BDEB6B /* comm_back@2x.png in Resources */,
 				3A88278F1C6EE9BD0008367F /* RegistViewController.xib in Resources */,
@@ -1936,6 +2064,8 @@
 				CB4004851C609BCD00556AA7 /* ViewController.m in Sources */,
 				3A91F4901C760CF4001568AA /* PNBarChart.m in Sources */,
 				3A5A00F91C79EA2A004584E6 /* MJRefreshHeaderView.m in Sources */,
+				3BB773C11CD883C700A24485 /* NameChageViewController.m in Sources */,
+				3BB773B21CD8788200A24485 /* MidTestViewController.m in Sources */,
 				3A04A5CB1C93E6290040D913 /* MASCompositeConstraint.m in Sources */,
 				3A44A9F61CBD1CAB00348B49 /* DataVerifier.m in Sources */,
 				3B4864701CCF117300D2DE3C /* MessageViewController.m in Sources */,
@@ -1944,10 +2074,12 @@
 				3A91F49A1C760CF4001568AA /* PNRadarChart.m in Sources */,
 				3AF339461C770FDC00586A37 /* AutoLoginViewController.m in Sources */,
 				3AD1FD8F1C72B6D100E362B9 /* ChildrenActivity.m in Sources */,
+				3BB773B71CD8789800A24485 /* CameraViewController.m in Sources */,
 				3AD1D1AF1C6300D9005F9969 /* ChildrenEntity.m in Sources */,
 				3A44A9FA1CBD1CAB00348B49 /* RSADataSigner.m in Sources */,
 				3AC1D1E11CCDE70E006291D0 /* RegistFinalViewController.m in Sources */,
 				3B4864741CCF117300D2DE3C /* PrivateCenterViewController.m in Sources */,
+				3BB773A81CD8784000A24485 /* BookViewController.m in Sources */,
 				3A5A00FC1C79EA2A004584E6 /* UIView+MJExtension.m in Sources */,
 				3B48647F1CCF3FBA00D2DE3C /* CustomTabBarViewController.m in Sources */,
 				3A5A00F71C79EA2A004584E6 /* MJRefreshConst.m in Sources */,
@@ -1956,11 +2088,13 @@
 				3A04A5D91C93E6590040D913 /* ChildrenVideoViewController.m in Sources */,
 				3A8CAE9D1C70A62200BDEB6B /* ParentEntity.m in Sources */,
 				3AEF27251C61F08A0028BE09 /* UIDevice+Space.m in Sources */,
+				3BB773A31CD8781400A24485 /* SmartViewController.m in Sources */,
 				3A04A5CE1C93E6290040D913 /* MASLayoutConstraint.m in Sources */,
 				3A91F4961C760CF4001568AA /* PNLineChartData.m in Sources */,
 				3AFE02B31CA28B2D0097CC83 /* YjyxPMemberCenterViewController.m in Sources */,
 				3A91F49C1C760CF4001568AA /* PNScatterChart.m in Sources */,
 				3A91F4951C760CF4001568AA /* PNLineChart.m in Sources */,
+				3BB773BC1CD878B900A24485 /* PrivateViewController.m in Sources */,
 				3A44A9F91CBD1CAB00348B49 /* openssl_wrapper.m in Sources */,
 				3A88278E1C6EE9BD0008367F /* RegistViewController.m in Sources */,
 				3A8CAE961C70A12E00BDEB6B /* ParentModifyPhoneViewController.m in Sources */,
@@ -1984,6 +2118,7 @@
 				3AEF27291C61F08A0028BE09 /* UIViewController+util.m in Sources */,
 				3A8CAEB91C70B36200BDEB6B /* SDWebImageDownloader.m in Sources */,
 				3A44A1E91CC0C63100B93F6A /* ZLScrolling.m in Sources */,
+				3BB773AD1CD8786900A24485 /* TestViewController.m in Sources */,
 				3A91F4931C760CF4001568AA /* PNColor.m in Sources */,
 				3AD1FD9E1C72CE5000E362B9 /* CommonWebViewController.m in Sources */,
 				3AEF27241C61F08A0028BE09 /* UICountingLabel.m in Sources */,
@@ -2018,6 +2153,7 @@
 				3A44A91B1CBD0F3800348B49 /* Order.m in Sources */,
 				3A8CAEC11C70B3C200BDEB6B /* ParentChildrensViewController.m in Sources */,
 				3A91F49E1C760CF4001568AA /* PNScatterChartDataItem.m in Sources */,
+				3BB773C61CD883EA00A24485 /* PhoneChangeViewController.m in Sources */,
 				3A91F4911C760CF4001568AA /* PNChartLabel.m in Sources */,
 				3A8CAEBA1C70B36200BDEB6B /* SDWebImageManager.m in Sources */,
 				3A91F49D1C760CF4001568AA /* PNScatterChartData.m in Sources */,

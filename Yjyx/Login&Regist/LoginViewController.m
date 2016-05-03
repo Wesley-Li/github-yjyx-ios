@@ -203,7 +203,7 @@
                             
                             [YjyxOverallData sharedInstance].teacherInfo = [TeacherEntity wrapTeacherWithDic:result];
                             
-                            [YjyxOverallData sharedInstance].teacherInfo.name = _uesrNameTF.text;
+//                            [YjyxOverallData sharedInstance].teacherInfo.name = _uesrNameTF.text;
                             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text, @"username", _passWordTF.text, @"password", nil];
                             
                             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
