@@ -37,8 +37,10 @@
     _childrenAry = [[NSMutableArray alloc] init];
     self.title = @"孩子动态";
     [self loadBackBtn];
+    
     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;//将跳转页面标志置为空
     if ([YjyxOverallData sharedInstance].parentInfo.childrens.count == 0) {
+        childrenViews.hidden = YES;
         [self.view makeToast:@"您暂无小孩，请先去添加" duration:1.0 position:SHOW_CENTER complete:nil];
     }else{
         [self setChildrenViews];
@@ -50,20 +52,30 @@
 //设置小孩头像
 -(void)setChildrenViews
 {
+    
     for (int i =0; i< [[YjyxOverallData sharedInstance].parentInfo.childrens count]; i++) {
         ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:i];
-        UIButton *iconBtn =[[UIButton alloc] initWithFrame:CGRectMake(10+i*90, 5, 70, 70)];
-        [iconBtn setImageWithURL:[NSURL URLWithString:childrenEntity.childavatar] placeholderImage:[UIImage imageNamed:@"Personal_children.png"]];
-        [iconBtn addTarget:self action:@selector(seltectChildren:) forControlEvents:UIControlEventTouchUpInside];
-        iconBtn.tag = i;
-        UILabel *namelb = [UILabel labelWithFrame:CGRectMake(10+i*90, 78, 70, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:13] context:childrenEntity.name];
-        namelb.textAlignment = NSTextAlignmentCenter;
-        [childrenViews addSubview:iconBtn];
-        [childrenViews addSubview:namelb];
+        [segmentedControl setTitle:childrenEntity.name forSegmentAtIndex:i];
+//        UIButton *iconBtn =[[UIButton alloc] initWithFrame:CGRectMake(10+i*90, 5, 70, 70)];
+//        [iconBtn setImageWithURL:[NSURL URLWithString:childrenEntity.childavatar] placeholderImage:[UIImage imageNamed:@"Personal_children.png"]];
+//        [iconBtn addTarget:self action:@selector(seltectChildren:) forControlEvents:UIControlEventTouchUpInside];
+//        iconBtn.tag = i;
+//        UILabel *namelb = [UILabel labelWithFrame:CGRectMake(10+i*90, 78, 70, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:13] context:childrenEntity.name];
+//        namelb.textAlignment = NSTextAlignmentCenter;
+//        [childrenViews addSubview:iconBtn];
+//        [childrenViews addSubview:namelb];
         [_childrenAry addObject:childrenEntity];
     }
+    segmentedControl.tintColor = RGBACOLOR(23, 155, 121, 1);
+    [segmentedControl addTarget:self action:@selector(seltectChildren:) forControlEvents:UIControlEventValueChanged];
+    if (_childrenAry.count <= 1) {
+        childrenViews.hidden = YES;
+        _childrenTab.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT -64);
+    }
+    
     [self setupRefresh];//刷新空间
 }
+
 
 //获取最新小孩信息
 -(void)getnewChildrenActivityWihtCid:(NSString *)cid
@@ -131,6 +143,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
+
     self.navigationController.navigationBarHidden = NO;
 }
 
@@ -180,7 +195,7 @@
         }
     }
     cell.timelb.text = children.update;
-    UILabel *titleLb = [UILabel labelWithFrame:CGRectMake(96, 28, SCREEN_WIDTH - 106 , 21) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:13] context:children.title];
+    UILabel *titleLb = [UILabel labelWithFrame:CGRectMake(85, 28, SCREEN_WIDTH - 106 , 21) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:13] context:children.title];
     if ([children.finished integerValue] == 1) {
         titleLb.textColor =RGBACOLOR(119, 162, 150, 1);
     }else{
@@ -190,17 +205,15 @@
     [cell.contentView addSubview:titleLb];
     [titleLb sizeToFit];
     
-//    cell.titlelb.text = children.title;
-//    cell.titlelb.frame = CGRectMake(96, 28, SCREEN_WIDTH - 96, 22);
-//    [cell.titlelb sizeToFit];
+
     if ([children.tasktype integerValue] == 1) {
         [cell.typeImage setImage:[UIImage imageNamed:@"Parent_homework.png"] forState:UIControlStateNormal];
     }else{
         [cell.typeImage setImage:[UIImage imageNamed:@"Parent_weike.png"] forState:UIControlStateNormal];
     }
+    cell.iconImage.layer.cornerRadius = cell.iconImage.frame.size.height/2;
     
-    
-       return cell;
+    return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -233,10 +246,10 @@
 }
 
 #pragma mark -MyEvent
--(void)seltectChildren:(id)sender
+-(void)seltectChildren:(UISegmentedControl *)seg
 {
-    UIButton *btn =(UIButton *)sender;
-    ChildrenEntity *childrenEntity = [_childrenAry objectAtIndex:btn.tag];
+    NSInteger index = seg.selectedSegmentIndex  ;
+    ChildrenEntity *childrenEntity = [_childrenAry objectAtIndex:index];
     [_activities removeAllObjects];
     for (ChildrenActivity *entity in totalAry) {
         if ([entity.cid integerValue] == [childrenEntity.cid integerValue]) {

@@ -33,19 +33,21 @@
     type = 1;
     self.title = @"数据统计";
     [self loadBackBtn];
-    childrenEntity = [[[YjyxOverallData sharedInstance] parentInfo].childrens objectAtIndex:0];
-    achievementAry = [[NSMutableArray alloc] init];//单个小孩所有科目的数据
-    taskDataAry = [[NSMutableArray alloc] init];
-    [self getChildrenAchievement:childrenEntity.cid];
-//    [self getchildrenTaskWithCid:childrenEntity.cid];
-//    [self getchildrenbillionWithCid:childrenEntity.cid];
-    [self initView];
+    if ([[[YjyxOverallData sharedInstance] parentInfo].childrens count] != 0) {
+        childrenEntity = [[[YjyxOverallData sharedInstance] parentInfo].childrens objectAtIndex:0];
+        achievementAry = [[NSMutableArray alloc] init];//单个小孩所有科目的数据
+        taskDataAry = [[NSMutableArray alloc] init];
+        [self getChildrenAchievement:childrenEntity.cid];
+        [self initView];
+    }
     // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
     self.navigationController.navigationBarHidden = NO;
 }
 

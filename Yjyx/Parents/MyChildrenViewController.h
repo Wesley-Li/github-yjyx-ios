@@ -12,6 +12,7 @@
 {
     IBOutlet UIView *childrenViews;
     NSMutableArray *totalAry;
+    IBOutlet UISegmentedControl *segmentedControl;
 }
 @property(weak,nonatomic) IBOutlet UITableView *childrenTab;
 @property(strong,nonatomic) NSMutableArray *childrenAry;

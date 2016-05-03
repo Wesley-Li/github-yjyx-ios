@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyChildrenViewController">
             <connections>
                 <outlet property="childrenTab" destination="ZFC-cm-jDg" id="uLg-eO-R49"/>
                 <outlet property="childrenViews" destination="09T-wo-QiP" id="oDz-p8-A8g"/>
+                <outlet property="segmentedControl" destination="uBL-hG-KJY" id="DpR-sm-mHk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,22 +18,24 @@
             <rect key="frame" x="0.0" y="64" width="320" height="504"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="09T-wo-QiP">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
+                <view contentMode="scaleToFill" id="09T-wo-QiP">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="children_downline.png" translatesAutoresizingMaskIntoConstraints="NO" id="rgz-SL-1Hp">
-                            <rect key="frame" x="0.0" y="88" width="320" height="7"/>
-                        </imageView>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="uBL-hG-KJY">
+                            <rect key="frame" x="100" y="9" width="121" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Second"/>
+                            </segments>
+                        </segmentedControl>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="bottom" secondItem="rgz-SL-1Hp" secondAttribute="bottom" id="7T2-9z-wc5"/>
-                        <constraint firstItem="rgz-SL-1Hp" firstAttribute="leading" secondItem="09T-wo-QiP" secondAttribute="leading" id="JCu-rP-xaT"/>
-                        <constraint firstAttribute="trailing" secondItem="rgz-SL-1Hp" secondAttribute="trailing" id="cGP-Rw-zau"/>
-                    </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZFC-cm-jDg">
-                    <rect key="frame" x="0.0" y="95" width="320" height="414"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZFC-cm-jDg">
+                    <rect key="frame" x="0.0" y="46" width="320" height="414"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="bbS-30-gEg"/>
@@ -41,20 +44,8 @@
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="09T-wo-QiP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6up-B4-azx"/>
-                <constraint firstAttribute="trailing" secondItem="ZFC-cm-jDg" secondAttribute="trailing" id="D4Z-Rg-yFj"/>
-                <constraint firstAttribute="bottom" secondItem="ZFC-cm-jDg" secondAttribute="bottom" id="eJX-XU-d4o"/>
-                <constraint firstItem="ZFC-cm-jDg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eUi-DM-oag"/>
-                <constraint firstAttribute="trailing" secondItem="09T-wo-QiP" secondAttribute="trailing" id="kPU-PQ-q6b"/>
-                <constraint firstItem="ZFC-cm-jDg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="95" id="mQo-fm-FxK"/>
-                <constraint firstItem="09T-wo-QiP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zXI-0M-tWe"/>
-            </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <point key="canvasLocation" x="218" y="192"/>
         </view>
     </objects>
-    <resources>
-        <image name="children_downline.png" width="360" height="7"/>
-    </resources>
 </document>

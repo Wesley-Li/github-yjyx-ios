@@ -37,6 +37,7 @@
 		3A3B97191C97A03E00C6A15A /* Common_video@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A3B97181C97A03E00C6A15A /* Common_video@3x.png */; };
 		3A3C1B431C9562A900514C32 /* YjyxMicroClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C1B411C9562A900514C32 /* YjyxMicroClassViewController.m */; };
 		3A3C1B441C9562A900514C32 /* YjyxMicroClassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A3C1B421C9562A900514C32 /* YjyxMicroClassViewController.xib */; };
+		3A3E6DE71CD8F4B8002133D8 /* Parent_read@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A3E6DE61CD8F4B8002133D8 /* Parent_read@3x.png */; };
 		3A4057071CCF6FAF00258784 /* ForgetOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4057051CCF6FAF00258784 /* ForgetOneViewController.m */; };
 		3A4057081CCF6FAF00258784 /* ForgetOneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A4057061CCF6FAF00258784 /* ForgetOneViewController.xib */; };
 		3A40570C1CCF732800258784 /* ForgetTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40570A1CCF732800258784 /* ForgetTwoViewController.m */; };
@@ -298,6 +299,7 @@
 		3A3C1B401C9562A900514C32 /* YjyxMicroClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxMicroClassViewController.h; sourceTree = "<group>"; };
 		3A3C1B411C9562A900514C32 /* YjyxMicroClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxMicroClassViewController.m; sourceTree = "<group>"; };
 		3A3C1B421C9562A900514C32 /* YjyxMicroClassViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxMicroClassViewController.xib; sourceTree = "<group>"; };
+		3A3E6DE61CD8F4B8002133D8 /* Parent_read@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Parent_read@3x.png"; sourceTree = "<group>"; };
 		3A4057041CCF6FAF00258784 /* ForgetOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetOneViewController.h; sourceTree = "<group>"; };
 		3A4057051CCF6FAF00258784 /* ForgetOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetOneViewController.m; sourceTree = "<group>"; };
 		3A4057061CCF6FAF00258784 /* ForgetOneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetOneViewController.xib; sourceTree = "<group>"; };
@@ -1076,6 +1078,7 @@
 				3A8827831C6EE5730008367F /* tab_personal@3x.png */,
 				3A8827841C6EE5730008367F /* tab_personals@3x.png */,
 				3AD1FD951C72C72E00E362B9 /* Parent_homework@3x.png */,
+				3A3E6DE61CD8F4B8002133D8 /* Parent_read@3x.png */,
 				3AD1FD971C72CBC200E362B9 /* children_downline@3x.png */,
 				3AD1FD981C72CBC200E362B9 /* children_upline@3x.png */,
 			);
@@ -1629,6 +1632,7 @@
 				3AC1D1ED1CCDE7EE006291D0 /* regist_text_bg@3x.png in Resources */,
 				3A905D151C7F3587005AB12F /* YjyxSoundViewController.xib in Resources */,
 				3AE894051C6C28C300E8BA97 /* login_username_icon@3x.png in Resources */,
+				3A3E6DE71CD8F4B8002133D8 /* Parent_read@3x.png in Resources */,
 				3A4302051C61FDFB00B8D259 /* LoginViewController.xib in Resources */,
 				3A8CAE971C70A12E00BDEB6B /* ParentModifyPhoneViewController.xib in Resources */,
 				3A8827861C6EE5730008367F /* tab_communitys@3x.png in Resources */,
@@ -1977,8 +1981,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -2011,7 +2015,7 @@
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2f8ad128-e076-49ad-a75a-bbfaa50c0de7";
 			};
 			name = Debug;
 		};
@@ -2022,8 +2026,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -2054,7 +2058,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2f8ad128-e076-49ad-a75a-bbfaa50c0de7";
 			};
 			name = Release;
 		};
