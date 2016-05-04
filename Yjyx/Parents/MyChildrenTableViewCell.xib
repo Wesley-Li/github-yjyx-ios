@@ -45,6 +45,7 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="finishedImage" destination="8fA-65-Gnw" id="3ph-hY-LnL"/>
                 <outlet property="iconImage" destination="4qg-fn-3Mb" id="zyE-Ka-G2r"/>
                 <outlet property="timelb" destination="4yS-oe-7Ar" id="lMq-na-6Wq"/>
                 <outlet property="typeImage" destination="W3J-9J-6L4" id="9V2-1Y-SrJ"/>

@@ -7,8 +7,9 @@
 //
 
 #import "ChildrenStatisticViewController.h"
+#import "AddChildrenViewController.h"
 
-@interface ChildrenStatisticViewController ()<PNChartDelegate>
+@interface ChildrenStatisticViewController ()<PNChartDelegate,UIAlertViewDelegate>
 {
     UIView *childrensubView;
     UIView *childrentaskView;
@@ -39,6 +40,10 @@
         taskDataAry = [[NSMutableArray alloc] init];
         [self getChildrenAchievement:childrenEntity.cid];
         [self initView];
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先关联您的孩子" delegate:self cancelButtonTitle:@"暂不" otherButtonTitles:@"前往", nil];
+        [alertView show];
+
     }
     // Do any additional setup after loading the view from its nib.
 }
@@ -501,6 +506,16 @@
     }
     
 }
+
+#pragma mark -UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        AddChildrenViewController *vc = [[AddChildrenViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
 /*
 #pragma mark - Navigation
 

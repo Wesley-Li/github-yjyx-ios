@@ -14,8 +14,9 @@
 #import "ChildrenResultViewController.h"
 #import "YjyxWorkPreviewViewController.h"
 #import "YjyxMicroClassViewController.h"
+#import "AddChildrenViewController.h"
 
-@interface MyChildrenViewController ()
+@interface MyChildrenViewController ()<UIAlertViewDelegate>
 {
     ChildrenEntity *currentChildren;//当前选择小孩，默认第一个
     NSString *last_id;
@@ -40,8 +41,9 @@
     
     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;//将跳转页面标志置为空
     if ([YjyxOverallData sharedInstance].parentInfo.childrens.count == 0) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先关联您的孩子" delegate:self cancelButtonTitle:@"暂不" otherButtonTitles:@"前往", nil];
+        [alertView show];
         childrenViews.hidden = YES;
-        [self.view makeToast:@"您暂无小孩，请先去添加" duration:1.0 position:SHOW_CENTER complete:nil];
     }else{
         [self setChildrenViews];
         currentChildren = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:0];
@@ -96,6 +98,16 @@
                         last_id = [NSString stringWithFormat:@"%@",children.activityID];
                     }
                 }
+                
+                NSInteger index = 0;
+                ChildrenEntity *childrenEntity = [_childrenAry objectAtIndex:index];
+                [_activities removeAllObjects];
+                for (ChildrenActivity *entity in totalAry) {
+                    if ([entity.cid integerValue] == [childrenEntity.cid integerValue]) {
+                        [_activities addObject:entity];
+                    }
+                }
+                segmentedControl.selectedSegmentIndex = 0;
                 [_childrenTab reloadData];
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
@@ -126,6 +138,16 @@
                         last_id = [NSString stringWithFormat:@"%@",children.activityID];
                     }
                 }
+                
+                NSInteger index = 0;
+                ChildrenEntity *childrenEntity = [_childrenAry objectAtIndex:index];
+                [_activities removeAllObjects];
+                for (ChildrenActivity *entity in totalAry) {
+                    if ([entity.cid integerValue] == [childrenEntity.cid integerValue]) {
+                        [_activities addObject:entity];
+                    }
+                }
+                segmentedControl.selectedSegmentIndex = 0;
                 [_childrenTab reloadData];
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
@@ -198,8 +220,10 @@
     UILabel *titleLb = [UILabel labelWithFrame:CGRectMake(85, 28, SCREEN_WIDTH - 106 , 21) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:13] context:children.title];
     if ([children.finished integerValue] == 1) {
         titleLb.textColor =RGBACOLOR(119, 162, 150, 1);
+        cell.finishedImage.hidden = NO;
     }else{
         titleLb.textColor =[UIColor blackColor];
+        cell.finishedImage.hidden = YES;
     }
     titleLb.numberOfLines = 0;
     [cell.contentView addSubview:titleLb];
@@ -288,7 +312,7 @@
     // 1.添加假数据
    
     NSMutableArray *cids = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [[YjyxOverallData sharedInstance].parentInfo.childrens count]; i++) {
+    for (int i = 0; i < [YjyxOverallData sharedInstance].parentInfo.childrens.count; i++) {
         ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:i];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         [dic setObject:childrenEntity.cid forKey:@"id"];
@@ -313,6 +337,14 @@
 
 }
 
+#pragma mark -UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        AddChildrenViewController *vc = [[AddChildrenViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
 
 /*
 #pragma mark - Navigation
