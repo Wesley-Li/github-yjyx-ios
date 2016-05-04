@@ -320,10 +320,15 @@
 - (void)teacherLogin:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID forHTTPHeaderField:@"sessionid"];
     [manager POST:[BaseURL stringByAppendingString:TEACHER_LOGIN_CONECT_POST] parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject, nil);
+            
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:[responseObject objectForKey:@"sessionid"] forKey:@"TSessionID"];
+            [defaults synchronize];
+//            NSLog(@"########%@", T_SESSIONID);
+
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         block(nil, error);
@@ -335,7 +340,7 @@
 - (void)teacherLogout:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID forHTTPHeaderField:@"sessionid"];
+    [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
     [manager POST:[BaseURL stringByAppendingString:TEACHER_LOGOUT_CONNECT_POST] parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject, nil);
@@ -350,7 +355,7 @@
 - (void)teacherGetAboutqinniu:(NSDictionary*)params withBlock:(void(^)(id result, NSError *error))block {
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
+    [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:TEACHER_PIC_SETTING_CONNECT_GET] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -368,7 +373,7 @@
 -(void)teacherUploadFile:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block {
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
+    [manager.requestSerializer setValue:T_SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager POST:[BaseURL stringByAppendingString:TEACHER_UPLOAD_PIC_CONNECT_POST] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);

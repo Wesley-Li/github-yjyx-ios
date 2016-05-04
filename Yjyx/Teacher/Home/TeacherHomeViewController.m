@@ -29,7 +29,7 @@
     [self.picImage setImageWithURL:[NSURL URLWithString:[YjyxOverallData sharedInstance].teacherInfo.avatar] placeholderImage:[UIImage imageNamed:@"pic"]];
     self.picImage.contentMode = UIViewContentModeScaleAspectFit;
 
-    self.picImage.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.picImage.layer.borderColor = [UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
     self.picImage.layer.borderWidth = 4.0f;
     
     // 名字
@@ -41,6 +41,9 @@
     
     
     [self addTapToPicImage];
+    
+    // 程序沙盒路径
+    NSLog(@"#####%@", NSHomeDirectory());
     
 }
 
@@ -57,13 +60,13 @@
 #pragma mark - 点击积分按钮
 - (IBAction)handleScoreBtn:(id)sender {
     
-    NSLog(@"点击了积分商城");
+    [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
     
 }
 #pragma mark - 点击签到按钮
 - (IBAction)handleReport:(id)sender {
     
-    NSLog(@"点击了签到");
+    [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
 }
 
 #pragma mark - 点击更换头像
@@ -122,7 +125,7 @@
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
+    [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:TEACHER_PIC_SETTING_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
 //        NSLog(@"%@", responseObject);
@@ -194,20 +197,20 @@
 #pragma mark - 点击数据统计
 - (IBAction)handleAcount:(id)sender {
     
-    NSLog(@"点击了数据统计");
+    [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
 }
 
 
 #pragma mark - 点击我的微课
 - (IBAction)handleMicroClass:(id)sender {
     
-    NSLog(@"点击了我的微课");
+    [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
 }
 
 #pragma mark - 点击积分商城
 - (IBAction)handleMall:(id)sender {
     
-    NSLog(@"点击了积分商城");
+    [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
 }
 
 

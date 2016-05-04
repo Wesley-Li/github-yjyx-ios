@@ -20,16 +20,21 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/standard (2.6.2)
   - HappyDNS (0.2.3)
   - Qiniu (7.0.17):
     - AFNetworking (~> 2.0)
     - HappyDNS (~> 0.2)
 
 DEPENDENCIES:
+  - FMDB (~> 2.6)
   - Qiniu (~> 7.0)
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   HappyDNS: 6d85942e64c28b4fa61f8c76580398f52d6d1d11
   Qiniu: 2c05af1f9d580c036b18faf832cc98e98bfb21bc
 

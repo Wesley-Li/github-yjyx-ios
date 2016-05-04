@@ -31,7 +31,10 @@
 #import <CoreText/CoreText.h>
 #import "ChildrenEntity.h"
 //系统版本
+// 家长sessionid
 #define SESSIONID [[NSUserDefaults standardUserDefaults] objectForKey:@"SessionID"]
+// 老师sessionid
+#define T_SESSIONID [[NSUserDefaults standardUserDefaults] objectForKey:@"TSessionID"]
 #define SYS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
 //openUDID
 #define SYS_UDID [OpenUDID value]
@@ -100,10 +103,10 @@
 #define TEACHER_LOGOUT_CONNECT_POST @"/api/teacher/mobile/logout/"
 
 // 获取所有学生的列表
-#define TEACHER_GETALLSTULIST_CONNECT_POST @"/api/teacher/mobile/yj_teachers/"
+#define TEACHER_GETALLSTULIST_CONNECT_GET @"/api/teacher/mobile/yj_teachers/"
 
 // 根据学生id列表获取学生的头像和姓名
-#define TEACHER_GETSTU_BYID_CONNECT_POST @"/api/teacher/mobile/yj_teachers/"
+#define TEACHER_GETSTU_BYID_CONNECT_GET @"/api/teacher/mobile/yj_teachers/"
 
 // 老师修改自己头像
 #define TEACHER_PIC_SETTING_CONNECT_GET @"/api/teacher/qiniu/"

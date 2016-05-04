@@ -9,6 +9,10 @@
 #import "LoginViewController.h"
 #import "RegistViewController.h"
 #import "RegistOneViewController.h"
+#import "StudentEntity.h"
+#import "StuClassEntity.h"
+#import "StuGroupEntity.h"
+#import "StuDataBase.h"
 
 @interface LoginViewController ()
 {
@@ -16,9 +20,19 @@
     UITextField *serverTextField;
 }
 
+@property (nonatomic, strong) NSMutableArray *stuListArr;
+
 @end
 
 @implementation LoginViewController
+
+- (NSMutableArray *)stuListArr {
+
+    if (!_stuListArr) {
+        self.stuListArr = [NSMutableArray array];
+    }
+    return _stuListArr;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -196,7 +210,7 @@
                     [self.view hideToastActivity];
                     if (result != nil) {
                         
-                        NSLog(@"%@", result);
+//                        NSLog(@"%@", result);
                         
                         if ([result[@"retcode"] integerValue] == 0) {
                             [(AppDelegate *)SYS_DELEGATE fillViews];
@@ -210,6 +224,18 @@
                             [SYS_CACHE synchronize];
                             
                             NSLog(@"登录老师界面");
+                            
+                            // GCD写定时器 每24小时执行一次
+//                            NSTimeInterval period = 1;
+//                            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+//                            dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+//                            dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, period * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+//                            dispatch_source_set_event_handler(timer, ^{
+                                // 在此处执行循环事件
+                                [self getStuList];
+//                            });
+//                            dispatch_resume(timer);
+//                            
                         }else {
                             
                             [self.view makeToast:[result objectForKey:@"msg"] duration:3.0 position:SHOW_CENTER complete:nil];
@@ -239,6 +265,53 @@
 {
     RegistOneViewController *registView = [[RegistOneViewController alloc] init];
     [self.navigationController pushViewController:registView animated:YES];
+}
+
+
+// 获取所有学生列表
+- (void)getStuList {
+
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"getstudents", @"action", nil];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
+    [manager GET:[BaseURL stringByAppendingString:TEACHER_GETALLSTULIST_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+
+        // 创建数据库
+        [[StuDataBase shareStuDataBase] deleteStuTable];
+        [[StuDataBase shareStuDataBase] creatStuDataBase];
+        
+        if ([responseObject[@"retcode"] integerValue] == 0) {
+            
+            for (NSDictionary *dic in responseObject[@"allstudents"]) {
+                StudentEntity *model = [[StudentEntity alloc] init];
+                [model initStudentWithDic:dic];
+                [self.stuListArr addObject:model];
+                // 插入学生数据
+                [[StuDataBase shareStuDataBase] insertStudent:model];
+            }
+            
+            for (NSDictionary *dic in responseObject[@"classes"]) {
+                StuClassEntity *model = [[StuClassEntity alloc] init];
+                [model initStuClassWithDic:dic];
+                [[StuDataBase shareStuDataBase] insertStuClass:model];
+            }
+            
+            for (NSDictionary *dic in responseObject[@"groups"]) {
+                StuGroupEntity *model = [[StuGroupEntity alloc] init];
+                [model initStuGroupWithDic:dic];
+                [[StuDataBase shareStuDataBase] insertStuGroup:model];
+            }
+            
+        }else {
+        
+            [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+    }];
+
 }
 
 
