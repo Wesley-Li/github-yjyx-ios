@@ -14,14 +14,22 @@
 
 + (StuDataBase *)shareStuDataBase;
 
+
+
 // 添加数据
 - (void)insertStudent:(StudentEntity *)student;
 - (void)insertStuClass:(StuClassEntity *)stuClass;
 - (void)insertStuGroup:(StuGroupEntity *)stuGroup;
 
 // 查询所有数据
-//- (NSArray *)selectAllStudent;
-- (NSArray *)selectStuById:(NSString *)Sid;
+// 查询所有学生
+- (NSMutableArray *)selectAllStudent;
+// 查询所有班级
+- (NSMutableArray *)selectAllClass;
+// 查询所有群组
+- (NSMutableArray *)selectAllGroup;
+
+- (StudentEntity *)selectStuById:(NSString *)Sid;
 
 
 // 创建数据库

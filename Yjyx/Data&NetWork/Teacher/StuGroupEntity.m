@@ -13,8 +13,8 @@
 - (void)initStuGroupWithDic:(NSDictionary *)dic {
 
     self.memberlist = dic[@"memberlist"];
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    self.gid = [numberFormatter stringFromNumber:dic[@"gid"]];
+    
+    self.gid = dic[@"id"];
     self.name = dic[@"name"];
 
 }

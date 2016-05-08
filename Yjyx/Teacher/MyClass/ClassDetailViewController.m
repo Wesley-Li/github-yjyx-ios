@@ -7,8 +7,15 @@
 //
 
 #import "ClassDetailViewController.h"
+#import "StuClassEntity.h"
+#import "ClassCustomTableViewCell.h"
+#import "StudentEntity.h"
+#import "StuDataBase.h"
 
-@interface ClassDetailViewController ()
+@interface ClassDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UILabel *invitecodeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stuCountLabel;
+@property (weak, nonatomic) IBOutlet UITableView *stuListTableView;
 
 @end
 
@@ -17,7 +24,46 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.title = self.model.name;
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+
+    self.invitecodeLabel.text = [NSString stringWithFormat:@"班级邀请码:%@" ,[numberFormatter stringFromNumber:self.model.invitecode]];
+    self.stuCountLabel.text = [NSString stringWithFormat:@"%ld人", self.model.memberlist.count];
+    
+    // 注册
+    [self.stuListTableView registerNib:[UINib nibWithNibName:@"ClassCustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"CC"];
+    
 }
+
+#pragma mark - delegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+    return self.model.memberlist.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    ClassCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CC" forIndexPath:indexPath];
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    NSString *stuID = [numberFormatter stringFromNumber: self.model.memberlist[indexPath.row]];
+//    NSLog(@"____%@", stuID);
+    
+    StudentEntity *model = [[StuDataBase shareStuDataBase] selectStuById:stuID];
+//    NSLog(@"%@", model.realname);
+    [cell setValueWithStudentEntity:model];
+    
+    return cell;
+    
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    return 50;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

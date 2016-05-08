@@ -29,7 +29,7 @@ PODS:
     - HappyDNS (~> 0.2)
 
 DEPENDENCIES:
-  - FMDB (~> 2.6)
+  - FMDB (~> 2.6.2)
   - Qiniu (~> 7.0)
 
 SPEC CHECKSUMS:

@@ -21,6 +21,7 @@
 }
 
 @property (nonatomic, strong) NSMutableArray *stuListArr;
+@property (nonatomic, strong) dispatch_source_t timer;// 定时器
 
 @end
 
@@ -55,6 +56,17 @@
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showURL:)];
     [self.view addGestureRecognizer:longPress];
+    
+    // 创建定时器,并行,24小时执行一次
+    dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
+    self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, 24*60*60 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+    dispatch_source_set_event_handler(_timer, ^{
+        NSLog(@"我被调用了");
+        [self getStuList];
+    });
+    
+    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -205,6 +217,7 @@
                 // 参数字典
                 NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text,@"username",_passWordTF.text,@"password",@"1",@"ostype",((AppDelegate*)SYS_DELEGATE).deviceToken,@"devicetoken",[[UIDevice currentDevice] model],@"description",nil];
                 
+                __weak typeof(self) weakself = self;
                 [[YjxService sharedInstance] teacherLogin:dic withBlock:^(id result, NSError *error) {
                     
                     [self.view hideToastActivity];
@@ -225,17 +238,9 @@
                             
                             NSLog(@"登录老师界面");
                             
-                            // GCD写定时器 每24小时执行一次
-//                            NSTimeInterval period = 1;
-//                            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-//                            dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-//                            dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, period * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
-//                            dispatch_source_set_event_handler(timer, ^{
-                                // 在此处执行循环事件
-                                [self getStuList];
-//                            });
-//                            dispatch_resume(timer);
-//                            
+                             // GCD写定时器启动
+                            dispatch_resume(weakself.timer);
+//
                         }else {
                             
                             [self.view makeToast:[result objectForKey:@"msg"] duration:3.0 position:SHOW_CENTER complete:nil];
@@ -265,6 +270,8 @@
 {
     RegistOneViewController *registView = [[RegistOneViewController alloc] init];
     [self.navigationController pushViewController:registView animated:YES];
+    
+    
 }
 
 
@@ -276,7 +283,7 @@
     [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:TEACHER_GETALLSTULIST_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-
+        NSLog(@"%@", responseObject);
         // 创建数据库
         [[StuDataBase shareStuDataBase] deleteStuTable];
         [[StuDataBase shareStuDataBase] creatStuDataBase];

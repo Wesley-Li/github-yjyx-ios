@@ -11,8 +11,9 @@
 @interface StuClassEntity : NSObject
 
 @property (nonatomic, strong) NSArray *memberlist;// 学生ID
-@property (nonatomic, copy) NSString *gradeid;// 年级ID
-@property (nonatomic, copy) NSString *cid;// 班级ID
+@property (nonatomic, strong) NSNumber *gradeid;// 年级ID
+@property (nonatomic, strong) NSNumber *cid;// 班级ID
+@property (nonatomic, strong) NSNumber *invitecode;// 邀请码
 @property (nonatomic, copy) NSString *name;// 班级名称
 
 - (void)initStuClassWithDic:(NSDictionary *)dic;

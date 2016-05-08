@@ -11,7 +11,7 @@
 @interface StuGroupEntity : NSObject
 
 @property (nonatomic, strong) NSArray *memberlist;
-@property (nonatomic, copy) NSString *gid;
+@property (nonatomic, strong) NSNumber *gid;
 @property (nonatomic, copy) NSString *name;
 
 - (void)initStuGroupWithDic:(NSDictionary *)dic;

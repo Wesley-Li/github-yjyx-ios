@@ -13,9 +13,11 @@
 - (void)initStuClassWithDic:(NSDictionary *)dic {
 
     self.memberlist = dic[@"memberlist"];
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    self.gradeid = [numberFormatter stringFromNumber:dic[@"gradeid"]];
-    self.cid = [numberFormatter stringFromNumber:dic[@"cid"]];
+    self.gradeid = dic[@"gradeid"];
+    self.cid = dic[@"id"];
+    
+//    NSNumberFormatter *numberF = [[NSNumberFormatter alloc] init];
+    self.invitecode = dic[@"invitecode"];
     self.name = dic[@"name"];
 }
 

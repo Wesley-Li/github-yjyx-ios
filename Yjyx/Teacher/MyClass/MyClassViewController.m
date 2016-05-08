@@ -7,25 +7,52 @@
 //
 
 #import "MyClassViewController.h"
+#import "ClassDetailViewController.h"
+#import "StuDataBase.h"
+#import "StuClassEntity.h"
 
-
-#define kIdentifier @"ccell"
 
 @interface MyClassViewController ()<UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) NSMutableArray *dataSource;
 
 @end
 
 @implementation MyClassViewController
 
+//- (NSMutableArray *)dataSource {
+//
+//    if (!_dataSource) {
+//        self.dataSource = [NSMutableArray array];
+//    }
+//    return _dataSource;
+//}
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    self.dataSource = [[[StuDataBase shareStuDataBase]selectAllClass] mutableCopy];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:20/255.0 green:155/255.0 blue:213/255.0 alpha:1.0];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+
     self.title = @"我的班级";
     
-    // 注册cell
-    [self.classListTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kIdentifier];
+//    [self.classListTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"1"];
+   
 }
+
+// 从数据库读取数据
+
+//- (void)readDataFromDataBase {
+//
+//    self.dataSource = [[[StuDataBase shareStuDataBase]selectAllClass] mutableCopy];
+//    [self.classListTableView reloadData];
+//}
 
 #pragma mark - delegate
 
@@ -36,27 +63,36 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 3;
+    return self.dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kIdentifier];
+    static NSString *ID = @"MyClass";
     
-    if (cell == nil) {
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kIdentifier];
-        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
     }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    StuClassEntity *model = self.dataSource[indexPath.row];
     
-    cell.textLabel.text = @"我的班级";
-    cell.detailTextLabel.text = @"班级邀请码:789673264";
+    cell.textLabel.text = model.name;
+    NSNumberFormatter *numberF = [[NSNumberFormatter alloc] init];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"邀请码:%@", [numberF stringFromNumber: model.invitecode]];
     cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+    
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    ClassDetailViewController *detailVC = [[ClassDetailViewController alloc] initWithNibName:@"ClassDetailViewController" bundle:nil];
+    detailVC.model = self.dataSource[indexPath.row];
+
+    [self.navigationController pushViewController:detailVC animated:YES];
     
 }
 

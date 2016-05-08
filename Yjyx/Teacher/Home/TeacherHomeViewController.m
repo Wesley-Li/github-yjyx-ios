@@ -8,6 +8,7 @@
 
 #import "TeacherHomeViewController.h"
 #import "UIImageView+WebCache.h"
+#import "StuTaskTableViewController.h"
 
 @interface TeacherHomeViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -18,6 +19,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 
      _nameLabel.text = [YjyxOverallData sharedInstance].teacherInfo.name;
+    self.navigationController.navigationBarHidden = YES;
 }
 
 
@@ -43,7 +45,7 @@
     [self addTapToPicImage];
     
     // 程序沙盒路径
-    NSLog(@"#####%@", NSHomeDirectory());
+//    NSLog(@"#####%@", NSHomeDirectory());
     
 }
 
@@ -191,6 +193,10 @@
 #pragma mark - 点击学生任务
 - (IBAction)handleStuTask:(id)sender {
     NSLog(@"点击了学生任务");
+    
+    StuTaskTableViewController *stuTaskTVC = [[StuTaskTableViewController alloc] init];
+    [self.navigationController pushViewController:stuTaskTVC animated:YES];
+    
 }
 
 

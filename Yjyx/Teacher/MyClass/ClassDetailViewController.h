@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class StuClassEntity;
 @interface ClassDetailViewController : UIViewController
+
+@property (nonatomic, strong) StuClassEntity *model;
 
 @end

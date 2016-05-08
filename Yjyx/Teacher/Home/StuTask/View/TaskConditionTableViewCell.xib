@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="210" id="KGk-i7-Jjw" customClass="TaskConditionTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="426" height="210"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="426" height="209"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnD-kn-W8B">
+                        <rect key="frame" x="10" y="10" width="406" height="189"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="brooch.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y8m-Fp-I5E">
+                        <rect key="frame" x="0.0" y="5" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="Hf4-4R-4Oc"/>
+                            <constraint firstAttribute="width" constant="35" id="hJG-AD-lVb"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="li8-6L-XyQ">
+                        <rect key="frame" x="38" y="33" width="350" height="1"/>
+                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="zNT-kf-ftf"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xre-9O-JiW">
+                        <rect key="frame" x="88" y="11" width="250" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Whc-hr-oUi"/>
+                            <constraint firstAttribute="width" constant="250" id="uhO-JD-Xcj"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="Y8m-Fp-I5E" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="0XM-ra-rpi"/>
+                    <constraint firstItem="li8-6L-XyQ" firstAttribute="top" secondItem="xre-9O-JiW" secondAttribute="bottom" constant="2" id="1gx-jt-sYs"/>
+                    <constraint firstItem="li8-6L-XyQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="30" id="7qq-ga-RWX"/>
+                    <constraint firstAttribute="bottom" secondItem="bnD-kn-W8B" secondAttribute="bottom" constant="10" id="EkU-rM-FF1"/>
+                    <constraint firstAttribute="trailing" secondItem="bnD-kn-W8B" secondAttribute="trailing" constant="10" id="Elf-Q9-zCw"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="li8-6L-XyQ" secondAttribute="trailing" constant="30" id="ORL-ZI-Veg"/>
+                    <constraint firstItem="li8-6L-XyQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="25" id="Q6O-uL-tGb"/>
+                    <constraint firstItem="Y8m-Fp-I5E" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="W07-B6-p4l"/>
+                    <constraint firstItem="xre-9O-JiW" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ZeB-lm-UW6"/>
+                    <constraint firstItem="bnD-kn-W8B" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="dHb-LF-cNq"/>
+                    <constraint firstItem="bnD-kn-W8B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="dr3-au-aeo"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bg_label" destination="bnD-kn-W8B" id="qsK-Hq-CRi"/>
+                <outlet property="descriptionLabel" destination="xre-9O-JiW" id="dsN-Oe-6Kf"/>
+            </connections>
+            <point key="canvasLocation" x="371" y="375"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="brooch.png" width="72" height="72"/>
+    </resources>
+</document>
