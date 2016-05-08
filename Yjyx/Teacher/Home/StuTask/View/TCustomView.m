@@ -15,10 +15,9 @@
     self = [super initWithCoder:coder];
     if (self) {
         
-        UIView *containerView = [[[UINib nibWithNibName:@"TCustomView" bundle:nil] instantiateWithOwner:self options:nil] objectAtIndex:0];
-        CGRect newFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-        containerView.frame = newFrame;
-        [self addSubview:containerView];
+        [[UINib nibWithNibName:@"TCustomView" bundle:nil] instantiateWithOwner:self options:nil];
+        
+        [self addSubview:self.view];
 
     }
     return self;

@@ -12,6 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *taskidlabel;
 
+@property (nonatomic, strong) UIView *view;
+
 
 
 

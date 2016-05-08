@@ -13,12 +13,19 @@
 #import "BlankFillModel.h"
 #import "ChoiceModel.h"
 #import "PNChart.h"
+#import "TCustomView.h"
 
 #define stuCondition @"stuConditionCell"
+#define taskConditon @"taskConditonCell"
 @interface TaskDetailTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *choiceDataSource;
 @property (nonatomic, strong) NSMutableArray *blankFillDataSource;
+@property (nonatomic, strong) NSMutableArray *finishedArr;
+@property (nonatomic, strong) NSMutableArray *unfinishedArr;
+
+@property (nonatomic, assign) NSInteger choiceTaskCellHeight;
+@property (nonatomic, assign) NSInteger blankfillTaskCellHeight;
 
 @end
 
@@ -44,11 +51,13 @@
     [super viewDidLoad];
     
     self.title = self.taskModel.t_description;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self readDataFromNetWork];
     
     // 注册
-    [self.tableView registerNib:[UINib nibWithNibName:@"TaskConditionTableViewCell" bundle:nil] forCellReuseIdentifier:stuCondition];
+    [self.tableView registerNib:[UINib nibWithNibName:@"TaskConditionTableViewCell" bundle:nil] forCellReuseIdentifier:taskConditon];
+    [self.tableView registerNib:[UINib nibWithNibName:@"StuConditionTableViewCell" bundle:nil] forCellReuseIdentifier:stuCondition];
     
 }
 
@@ -96,27 +105,99 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 1;
+    
+    if (_choiceDataSource.count == 0 || _blankFillDataSource.count == 0) {
+        return 2;
+    }
+    
+    return 3;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TaskConditionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition  forIndexPath:indexPath];
     
-    cell.choiceArr = self.choiceDataSource;
-    cell.descriptionLabel.text = @"选择题正确率";
     
-    [self cell:cell addSubViewsWithChoiceArr:self.choiceDataSource];
-    [cell setValuesWithChoiceModelArr:self.choiceDataSource];
+    if (_choiceDataSource.count != 0 && _blankFillDataSource.count == 0) {
+        if (indexPath.row == 0) {
+            TaskConditionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
+            cell.descriptionLabel.text = @"选择题正确率";
+            [self cell:cell addSubViewsWithChoiceArr:self.choiceDataSource];
+            return cell;
+        }else {
+        
+            StuConditionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
+            cell.descriptionLabel.text = @"作业上交情况";
+            return cell;
+
+        }
+    }else if (_blankFillDataSource != 0 && _choiceDataSource == 0) {
+        if (indexPath.row == 0) {
+            TaskConditionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
+            [self cell:cell addSubViewsWithBlankfillArr:self.blankFillDataSource];
+            cell.descriptionLabel.text = @"填空题正确率";
+            return cell;
+        }else {
+        
+            StuConditionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
+            cell.descriptionLabel.text = @"作业上交情况";
+            return cell;
+        }
+        
+    }else {
     
-    return cell;
+        if (indexPath.row == 0 || indexPath.row == 1) {
+            TaskConditionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
+            
+            if (indexPath.row == 0) {
+                //            cell.choiceArr = self.choiceDataSource;
+                cell.descriptionLabel.text = @"选择题正确率";
+                
+                [self cell:cell addSubViewsWithChoiceArr:self.choiceDataSource];
+                //            [cell setValuesWithChoiceModelArr:self.choiceDataSource];
+                return cell;
+            }else {
+                //            cell.blankArr = self.blankFillDataSource;
+                [self cell:cell addSubViewsWithBlankfillArr:self.blankFillDataSource];
+                cell.descriptionLabel.text = @"填空题正确率";
+                return cell;
+                
+            }
+            
+        }else {
+            
+            StuConditionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
+            cell.descriptionLabel.text = @"作业上交情况";
+            return cell;
+        }
+ 
+    }
+    
+    
+    
+    
+    /*
+    
+    TaskConditionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:taskConditon forIndexPath:indexPath];
+    TCustomView *view = [[[NSBundle mainBundle] loadNibNamed:@"TCustomView" owner:nil options:nil] lastObject];
+    
+    view.taskidlabel.text = @"测试";
+    [cell addSubview:view];
+    */
+    
+    
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)cell:(TaskConditionTableViewCell *)cell addSubViewsWithChoiceArr:(NSMutableArray *)arr {
 
-    CGSize size = CGSizeMake(5, 50);
+    CGSize size = CGSizeMake(10, 25);
     CGFloat padding = 5;
-    CGFloat width = cell.bg_label.width;
+    
     CGFloat TWidth = 60;
     CGFloat Theight = 80;
     
@@ -125,36 +206,131 @@
     for (int i = 0; i < arr.count; i++) {
         
         UIView *taskView = [[UIView alloc] init];
+        taskView.frame = CGRectMake(size.width, size.height, TWidth, Theight);
+
         size.width += TWidth + padding;
         
-        if (width - size.width < TWidth + padding) {
+        if (cell.bg_view.width - size.width < TWidth + padding) {
+            // 换行
+            size.width = 10;
             size.height += Theight;
         }
-        taskView.frame = CGRectMake(size.width, size.height, TWidth, Theight);
         
 //        taskView.backgroundColor = [UIColor redColor];
         ChoiceModel *model = self.choiceDataSource[i];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, TWidth, 20)];
-        PNCircleChart *circleChart = [[PNCircleChart alloc] initWithFrame:CGRectMake(0, 20, TWidth, 60) total:@100 current:@80 clockwise:YES];
-        
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, TWidth, TWidth)];
+        imageView.image = [UIImage imageNamed:@"stu_pic"];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(0, 20, TWidth, TWidth);
+        NSString *titleString = [NSString stringWithFormat:@"%.f%%", [model.C_count floatValue]*100/([model.C_count floatValue] + [model.W_count floatValue])];
+        [button setTitle:[NSString stringWithFormat:@"%@", titleString] forState:UIControlStateNormal];
+        button.tag = 200 + i;
+        [button addTarget:self action:@selector(handleButton) forControlEvents:UIControlEventTouchUpInside];
         
         label.text = [NSString stringWithFormat:@"%d", i+1];
         label.textAlignment = NSTextAlignmentCenter;
-        circleChart.backgroundColor = [UIColor lightGrayColor];
-        [circleChart setStrokeColor:PNGreen];
-        [circleChart strokeChart];
         [taskView addSubview:label];
-        [taskView addSubview:circleChart];
+        [taskView addSubview:imageView];
+        [taskView addSubview:button];
         
-        
-        [cell.contentView addSubview:taskView];
+        [cell.bg_view addSubview:taskView];
     }
+    
+    self.choiceTaskCellHeight = size.height + 80 + 30;
+
+}
+
+- (void)handleButton {
+
+    NSLog(@"点击了题目");
+}
+
+- (void)cell:(TaskConditionTableViewCell *)cell addSubViewsWithBlankfillArr:(NSMutableArray *)arr{
+
+    CGSize size = CGSizeMake(10, 25);
+    CGFloat padding = 5;
+    
+    CGFloat TWidth = 60;
+    CGFloat Theight = 80;
+    
+    //    NSLog(@"%@", self.choiceArr);
+    
+    for (int i = 0; i < arr.count; i++) {
+        
+        UIView *taskView = [[UIView alloc] init];
+        taskView.frame = CGRectMake(size.width, size.height, TWidth, Theight);
+        
+        size.width += TWidth + padding;
+        
+        if (cell.bg_view.width - size.width < TWidth + padding) {
+            // 换行
+            size.width = 10;
+            size.height += Theight;
+        }
+        
+        //        taskView.backgroundColor = [UIColor redColor];
+        BlankFillModel *model = self.blankFillDataSource[i];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, TWidth, 20)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, TWidth, TWidth)];
+        imageView.image = [UIImage imageNamed:@"stu_pic"];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(0, 20, TWidth, TWidth);
+        NSString *titleString = [NSString stringWithFormat:@"%.f%%", [model.C_count floatValue]*100/([model.C_count floatValue] + [model.W_count floatValue])];
+        [button setTitle:[NSString stringWithFormat:@"%@", titleString] forState:UIControlStateNormal];
+        button.tag = 200 + i;
+        [button addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventTouchUpInside];
+        
+        label.text = [NSString stringWithFormat:@"%d", i+1];
+        label.textAlignment = NSTextAlignmentCenter;
+        [taskView addSubview:label];
+        [taskView addSubview:imageView];
+        [taskView addSubview:button];
+        
+        [cell.bg_view addSubview:taskView];
+    }
+    
+    self.blankfillTaskCellHeight = size.height + 80 + 30;
+
+    
+
+}
+
+- (void)buttonClick {
+
+    NSLog(@"点击了填空题");
 
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    return 200;
+    if (_blankFillDataSource.count == 0 && _choiceDataSource != 0) {
+        if (indexPath.row == 0) {
+            return _choiceTaskCellHeight;
+        }else {
+        
+            return 400;
+        }
+        
+    }else if (_blankFillDataSource.count != 0 && _choiceDataSource == 0) {
+    
+        if (indexPath.row == 0) {
+            return _blankfillTaskCellHeight;
+        }else {
+        
+            return 400;
+        }
+        
+    }
+    if (indexPath.row == 0) {
+        return _choiceTaskCellHeight;
+    }else if (indexPath.row == 1){
+    
+        return _blankfillTaskCellHeight;
+    }else {
+    
+        return 400;
+    }
 }
 
 

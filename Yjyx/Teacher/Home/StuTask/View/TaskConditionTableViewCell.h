@@ -15,7 +15,8 @@
 @property (nonatomic, strong) NSMutableArray *blankArr;
 
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *bg_label;
+@property (weak, nonatomic) IBOutlet UIView *bg_view;
+
 
 
 - (void)setValuesWithChoiceModelArr:(NSMutableArray *)choiceDataSource;

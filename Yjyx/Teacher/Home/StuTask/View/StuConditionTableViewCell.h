@@ -10,4 +10,7 @@
 
 @interface StuConditionTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+
+
 @end
