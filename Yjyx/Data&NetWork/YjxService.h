@@ -71,6 +71,8 @@
 //根据用户名获取手机号
 -(void)getUserPhone:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
 
+//用户反馈
+-(void)feedBack:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
 
 /*
 学生相关接口

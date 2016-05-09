@@ -52,7 +52,7 @@
         case 3:{
             ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
             result.taskResultId = [YjyxOverallData sharedInstance].historyId;
-            result.title = @"微课结果";
+            result.title = @"结果详情";
             [self.navigationController pushViewController:result animated:YES];
 
         }
@@ -60,7 +60,7 @@
         case 4:{
             ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
             result.taskResultId = [YjyxOverallData sharedInstance].historyId;
-            result.title = @"作业结果";
+            result.title = @"结果详情";
             [self.navigationController pushViewController:result animated:YES];
 
         }
@@ -100,7 +100,7 @@
         case 3:{
             ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
             result.taskResultId = [YjyxOverallData sharedInstance].historyId;
-            result.title = @"微课结果";
+            result.title = @"结果详情";
             [self.navigationController pushViewController:result animated:YES];
             
         }
@@ -108,7 +108,7 @@
         case 4:{
             ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
             result.taskResultId = [YjyxOverallData sharedInstance].historyId;
-            result.title = @"作业结果";
+            result.title = @"结果详情";
             [self.navigationController pushViewController:result animated:YES];
             
         }

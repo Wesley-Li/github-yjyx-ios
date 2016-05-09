@@ -34,6 +34,8 @@
 		3A26EE6B1C71CCDB009C3242 /* MyChildrenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A26EE691C71CCDB009C3242 /* MyChildrenViewController.xib */; };
 		3A2E87091C8C079F00C3CD6C /* ChildrenResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2E87071C8C079F00C3CD6C /* ChildrenResultTableViewController.m */; };
 		3A2E870A1C8C079F00C3CD6C /* ChildrenResultTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A2E87081C8C079F00C3CD6C /* ChildrenResultTableViewController.xib */; };
+		3A38278A1CDF185F00EAB979 /* YjyxFeedBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3827881CDF185F00EAB979 /* YjyxFeedBackViewController.m */; };
+		3A38278B1CDF185F00EAB979 /* YjyxFeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A3827891CDF185F00EAB979 /* YjyxFeedBackViewController.xib */; };
 		3A3B97191C97A03E00C6A15A /* Common_video@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A3B97181C97A03E00C6A15A /* Common_video@3x.png */; };
 		3A3C1B431C9562A900514C32 /* YjyxMicroClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C1B411C9562A900514C32 /* YjyxMicroClassViewController.m */; };
 		3A3C1B441C9562A900514C32 /* YjyxMicroClassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A3C1B421C9562A900514C32 /* YjyxMicroClassViewController.xib */; };
@@ -48,6 +50,8 @@
 		3A41974E1CD36178006BD7D2 /* common_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A41974C1CD36178006BD7D2 /* common_delete@2x.png */; };
 		3A4302041C61FDFB00B8D259 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4302021C61FDFB00B8D259 /* LoginViewController.m */; };
 		3A4302051C61FDFB00B8D259 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A4302031C61FDFB00B8D259 /* LoginViewController.xib */; };
+		3A442B931CE07E370037906A /* feedBack_add@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A442B921CE07E370037906A /* feedBack_add@3x.png */; };
+		3A442B961CE07E780037906A /* DynamicScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A442B951CE07E780037906A /* DynamicScrollView.m */; };
 		3A44A1E91CC0C63100B93F6A /* ZLScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A44A1E81CC0C63100B93F6A /* ZLScrolling.m */; };
 		3A44A1EC1CC0C76200B93F6A /* memberCenter_bg2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A44A1EA1CC0C76200B93F6A /* memberCenter_bg2@3x.png */; };
 		3A44A1ED1CC0C76200B93F6A /* memberCenter_bg3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A44A1EB1CC0C76200B93F6A /* memberCenter_bg3@3x.png */; };
@@ -295,6 +299,9 @@
 		3A2E87061C8C079F00C3CD6C /* ChildrenResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildrenResultTableViewController.h; sourceTree = "<group>"; };
 		3A2E87071C8C079F00C3CD6C /* ChildrenResultTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildrenResultTableViewController.m; sourceTree = "<group>"; };
 		3A2E87081C8C079F00C3CD6C /* ChildrenResultTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChildrenResultTableViewController.xib; sourceTree = "<group>"; };
+		3A3827871CDF185F00EAB979 /* YjyxFeedBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxFeedBackViewController.h; sourceTree = "<group>"; };
+		3A3827881CDF185F00EAB979 /* YjyxFeedBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxFeedBackViewController.m; sourceTree = "<group>"; };
+		3A3827891CDF185F00EAB979 /* YjyxFeedBackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxFeedBackViewController.xib; sourceTree = "<group>"; };
 		3A3B97181C97A03E00C6A15A /* Common_video@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Common_video@3x.png"; sourceTree = "<group>"; };
 		3A3C1B401C9562A900514C32 /* YjyxMicroClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxMicroClassViewController.h; sourceTree = "<group>"; };
 		3A3C1B411C9562A900514C32 /* YjyxMicroClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxMicroClassViewController.m; sourceTree = "<group>"; };
@@ -314,6 +321,9 @@
 		3A4302011C61FDFB00B8D259 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		3A4302021C61FDFB00B8D259 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		3A4302031C61FDFB00B8D259 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		3A442B921CE07E370037906A /* feedBack_add@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedBack_add@3x.png"; sourceTree = "<group>"; };
+		3A442B941CE07E780037906A /* DynamicScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DynamicScrollView.h; sourceTree = "<group>"; };
+		3A442B951CE07E780037906A /* DynamicScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicScrollView.m; sourceTree = "<group>"; };
 		3A44A1E71CC0C63100B93F6A /* ZLScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLScrolling.h; sourceTree = "<group>"; };
 		3A44A1E81CC0C63100B93F6A /* ZLScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLScrolling.m; sourceTree = "<group>"; };
 		3A44A1EA1CC0C76200B93F6A /* memberCenter_bg2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "memberCenter_bg2@3x.png"; sourceTree = "<group>"; };
@@ -829,6 +839,8 @@
 		3A44A1E61CC0C63100B93F6A /* Third Library */ = {
 			isa = PBXGroup;
 			children = (
+				3A442B941CE07E780037906A /* DynamicScrollView.h */,
+				3A442B951CE07E780037906A /* DynamicScrollView.m */,
 				3A44A1E71CC0C63100B93F6A /* ZLScrolling.h */,
 				3A44A1E81CC0C63100B93F6A /* ZLScrolling.m */,
 			);
@@ -1054,6 +1066,9 @@
 				3A905D111C7F3587005AB12F /* YjyxSoundViewController.h */,
 				3A905D121C7F3587005AB12F /* YjyxSoundViewController.m */,
 				3A905D131C7F3587005AB12F /* YjyxSoundViewController.xib */,
+				3A3827871CDF185F00EAB979 /* YjyxFeedBackViewController.h */,
+				3A3827881CDF185F00EAB979 /* YjyxFeedBackViewController.m */,
+				3A3827891CDF185F00EAB979 /* YjyxFeedBackViewController.xib */,
 			);
 			name = Personal;
 			sourceTree = "<group>";
@@ -1089,6 +1104,7 @@
 			isa = PBXGroup;
 			children = (
 				3A8827911C6EEFEF0008367F /* Personal_children@3x.png */,
+				3A442B921CE07E370037906A /* feedBack_add@3x.png */,
 			);
 			name = Personal;
 			sourceTree = "<group>";
@@ -1639,6 +1655,7 @@
 				CB40048A1C609BCD00556AA7 /* Assets.xcassets in Resources */,
 				3AE893FD1C6C26A400E8BA97 /* login_bg@3x.png in Resources */,
 				3AFE02B61CA28C2B0097CC83 /* tab_memberCenter@3x.png in Resources */,
+				3A38278B1CDF185F00EAB979 /* YjyxFeedBackViewController.xib in Resources */,
 				3A03CB691C8EB876007B5136 /* Parent_weike@3x.png in Resources */,
 				3A5A00F51C79EA2A004584E6 /* MJRefresh.bundle in Resources */,
 				3A8827921C6EEFEF0008367F /* Personal_children@3x.png in Resources */,
@@ -1661,6 +1678,7 @@
 				3AF339471C770FDC00586A37 /* AutoLoginViewController.xib in Resources */,
 				3AD1FD991C72CBC200E362B9 /* children_downline@3x.png in Resources */,
 				3AFE02C51CA29D540097CC83 /* member_subjectbg2@3x.png in Resources */,
+				3A442B931CE07E370037906A /* feedBack_add@3x.png in Resources */,
 				3AD1FDA61C73149200E362B9 /* nav_operate@2x.png in Resources */,
 				3A44A1ED1CC0C76200B93F6A /* memberCenter_bg3@3x.png in Resources */,
 				3A66A8041C931BBA005E2D43 /* ChildrenExplantionViewController.xib in Resources */,
@@ -1816,6 +1834,7 @@
 				3AF27E371C73239400698673 /* AddChildrenViewController.m in Sources */,
 				3A8CAEBC1C70B36200BDEB6B /* UIButton+WebCache.m in Sources */,
 				3A91F46A1C7606FB001568AA /* ChildrenStatisticViewController.m in Sources */,
+				3A38278A1CDF185F00EAB979 /* YjyxFeedBackViewController.m in Sources */,
 				3A91F48F1C760CF4001568AA /* PNBar.m in Sources */,
 				3AEF27201C61F08A0028BE09 /* RTSpinKitView.m in Sources */,
 				3AB212B31CA2E11900DCC618 /* KWFormView.m in Sources */,
@@ -1851,6 +1870,7 @@
 				3AEF272A1C61F08A0028BE09 /* ViewRender.m in Sources */,
 				3A8CAEB71C70B36200BDEB6B /* SDImageCache.m in Sources */,
 				3A04A5D01C93E6290040D913 /* MASViewConstraint.m in Sources */,
+				3A442B961CE07E780037906A /* DynamicScrollView.m in Sources */,
 				3AF11DD91CB211D600F98A03 /* YjyxMemberDetailViewController.m in Sources */,
 				3A8827761C6EE1470008367F /* ParentCommunityViewController.m in Sources */,
 				3AEF272D1C61F08A0028BE09 /* SBJsonParser.m in Sources */,

@@ -12,6 +12,7 @@
 #import "ParentModifyPhoneViewController.h"
 #import "ParentChildrensViewController.h"
 #import "YjyxSoundViewController.h"
+#import "YjyxFeedBackViewController.h"
 
 @interface ParentPersonalViewController ()<soundSelectDelegate>
 {
@@ -27,14 +28,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"设置";
+    self.title = @"个人中心";
+    notify_sound = [YjyxOverallData sharedInstance].parentInfo.notify_sound;
     // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    notify_sound = [YjyxOverallData sharedInstance].parentInfo.notify_sound;
     notify_with_sound = [YjyxOverallData sharedInstance].parentInfo.notify_with_sound;
     receive_notify = [YjyxOverallData sharedInstance].parentInfo.receive_notify;
     
@@ -76,7 +77,7 @@
             return 3;
             break;
         case 1:
-            return 3;
+            return 4;
             break;
         case 2:
             return 1;
@@ -134,7 +135,7 @@
             switchView.tag =101;
            [switchView setOn:[[YjyxOverallData sharedInstance].parentInfo.notify_with_sound integerValue]];
             cell.accessoryView = switchView;
-        }else{
+        }else if (indexPath.row == 2){
             cell.textLabel.text = @"消息提示音";
             if ([[YjyxOverallData sharedInstance].parentInfo.notify_sound isEqualToString:@"default"]) {
                 [cell.detailTextLabel setText:@"默认"];
@@ -158,6 +159,12 @@
                 [cell.detailTextLabel setText:@"电子乐"];
             }
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+
+        }else
+        {
+            cell.textLabel.text = @"我要吐槽";
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+
         }
     }
     else{
@@ -196,31 +203,15 @@
         if (indexPath.row == 2) {
             YjyxSoundViewController *sound = [[YjyxSoundViewController alloc] init];
             [sound setAudio:cell.detailTextLabel.text];
-//            if ([cell.detailTextLabel.text isEqualToString:NSLocalizedString(@"Push1", @"")]) {
-//                [sound setAudio:@"三全音"];
-//            }
-//            if ([cell.detailTextLabel.text isEqualToString:NSLocalizedString(@"Push2", @"")]) {
-//                [sound setAudio:@"管钟琴"];
-//            }
-//            if ([cell.detailTextLabel.text isEqualToString:NSLocalizedString(@"Push3", @"")]) {
-//                [sound setAudio:@"玻璃"];
-//            }
-//            if ([cell.detailTextLabel.text isEqualToString:NSLocalizedString(@"Push4", @"")]) {
-//                [sound setAudio:@"圆号"];
-//            }
-//            if ([cell.detailTextLabel.text isEqualToString:NSLocalizedString(@"Push5", @"")]) {
-//                [sound setAudio:@"铃音"];
-//            }
-//            if ([cell.detailTextLabel.text isEqualToString:NSLocalizedString(@"Push6", @"")]) {
-//                [sound setAudio:@"电子乐"];
-//            }
-//            if ([cell.detailTextLabel.text isEqualToString:NSLocalizedString(@"Push7", @"")]) {
-//                [sound setAudio:@"默认"];
-//            }
-
             sound.delegate = self;
             [sound setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:sound animated:YES];
+        }
+        
+        
+        if (indexPath.row == 3) {
+            YjyxFeedBackViewController *vc = [[YjyxFeedBackViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }

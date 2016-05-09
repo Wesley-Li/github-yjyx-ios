@@ -64,35 +64,35 @@
 
 - (void)initView
 {
-    childrensubLb = [UILabel labelWithFrame:CGRectMake(15, 20, 80, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:childrenEntity.name];
+//    childrensubLb = [UILabel labelWithFrame:CGRectMake(15, 20, 80, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:childrenEntity.name];
+//    
+//    childrentaskLb = [UILabel labelWithFrame:CGRectMake(15, 20, 80, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:childrenEntity.name];
+//    
+//    childrenbillionLb = [UILabel labelWithFrame:CGRectMake(15, 20, 80, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:childrenEntity.name];
+//    
+//    [subjectView addSubview:childrensubLb];
+//    [taskView addSubview:childrentaskLb];
+//    [billionView addSubview:childrenbillionLb];
     
-    childrentaskLb = [UILabel labelWithFrame:CGRectMake(15, 20, 80, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:childrenEntity.name];
     
-    childrenbillionLb = [UILabel labelWithFrame:CGRectMake(15, 20, 80, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:childrenEntity.name];
-    
-    [subjectView addSubview:childrensubLb];
-    [taskView addSubview:childrentaskLb];
-    [billionView addSubview:childrenbillionLb];
-    
-    
-    subjectLb = [UILabel labelWithFrame:CGRectMake((SCREEN_WIDTH -200)/2, 95, 200, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:@""];
+    subjectLb = [UILabel labelWithFrame:CGRectMake((SCREEN_WIDTH -200)/2, 125, 200, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:@""];
     subjectLb.textAlignment = NSTextAlignmentCenter;
     [subjectView addSubview:subjectLb];
     
-    detailLb = [UILabel labelWithFrame:CGRectMake((SCREEN_WIDTH -200)/2, 115, 200, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:10] context:@""];
+    detailLb = [UILabel labelWithFrame:CGRectMake((SCREEN_WIDTH -200)/2, 145, 200, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:10] context:@""];
     detailLb.textAlignment = NSTextAlignmentCenter;
     [subjectView addSubview:detailLb];
     
     
-    label1 = [UILabel labelWithFrame:CGRectMake((SCREEN_WIDTH -200)/2, 245, 200, 10) textColor:[UIColor lightGrayColor] font:[UIFont systemFontOfSize:10] context:@""];
+    label1 = [UILabel labelWithFrame:CGRectMake((SCREEN_WIDTH -200)/2, 275, 200, 10) textColor:[UIColor lightGrayColor] font:[UIFont systemFontOfSize:10] context:@""];
     label1.textAlignment = NSTextAlignmentCenter;
     [subjectView addSubview:label1];
     
-    label2 = [UILabel labelWithFrame:CGRectMake((SCREEN_WIDTH -200)/2, 260, 200, 10) textColor:[UIColor lightGrayColor] font:[UIFont systemFontOfSize:10] context:@""];
+    label2 = [UILabel labelWithFrame:CGRectMake((SCREEN_WIDTH -200)/2, 290, 200, 10) textColor:[UIColor lightGrayColor] font:[UIFont systemFontOfSize:10] context:@""];
     label2.textAlignment = NSTextAlignmentCenter;
     [subjectView addSubview:label2];
     
-    label3 = [UILabel labelWithFrame:CGRectMake((SCREEN_WIDTH -200)/2, 230, 200, 10) textColor:[UIColor lightGrayColor] font:[UIFont systemFontOfSize:10] context:@""];
+    label3 = [UILabel labelWithFrame:CGRectMake((SCREEN_WIDTH -200)/2, 260, 200, 10) textColor:[UIColor lightGrayColor] font:[UIFont systemFontOfSize:10] context:@""];
     label3.textAlignment = NSTextAlignmentCenter;
     [subjectView addSubview:label3];
     
@@ -120,6 +120,26 @@
     billionCountLb.textAlignment = NSTextAlignmentCenter;
     [billionView addSubview:billionCountLb];
 
+    //小孩切换UISegment
+    for (int i =0; i< [[YjyxOverallData sharedInstance].parentInfo.childrens count]; i++) {
+        ChildrenEntity *entity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:i];
+        [segmentedControl1 setTitle:entity.name forSegmentAtIndex:i];
+        [segmentedControl2 setTitle:entity.name forSegmentAtIndex:i];
+        [segmentedControl3 setTitle:entity.name forSegmentAtIndex:i];
+
+    }
+    segmentedControl1.tintColor = RGBACOLOR(23, 155, 121, 1);
+    segmentedControl2.tintColor = RGBACOLOR(23, 155, 121, 1);
+    segmentedControl3.tintColor = RGBACOLOR(23, 155, 121, 1);
+
+    [segmentedControl1 addTarget:self action:@selector(chooseChildren:) forControlEvents:UIControlEventValueChanged];
+    [segmentedControl2 addTarget:self action:@selector(chooseChildren:) forControlEvents:UIControlEventValueChanged];
+    [segmentedControl3 addTarget:self action:@selector(chooseChildren:) forControlEvents:UIControlEventValueChanged];
+    if ([[YjyxOverallData sharedInstance].parentInfo.childrens count] <= 1) {
+        segmentedControl1.hidden = YES;
+        segmentedControl2.hidden = YES;
+        segmentedControl3.hidden = YES;
+    }
     
 }
 
@@ -157,7 +177,7 @@
         [items addObject:item];
     }
     [pieChart removeFromSuperview];
-    pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 200)/2, 15, 200.0, 200.0) items:items];
+    pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 200)/2, 45, 200, 200) items:items];
     pieChart.descriptionTextColor = [UIColor blackColor];
     pieChart.descriptionTextFont  = [UIFont boldSystemFontOfSize:13];
     pieChart.hideValues = YES;
@@ -186,7 +206,7 @@
     NSString *questionwrong = [[[linechartDic objectForKey:@"items"] objectAtIndex:pointIndex] objectForKey:@"wrong"];
     NSString *dataStr = [[[linechartDic objectForKey:@"items"] objectAtIndex:pointIndex] objectForKey:@"date"];
     label1.text = [NSString stringWithFormat:@"正确%@,错误%@",questioncorrect,questionwrong];
-    label2.text = [NSString stringWithFormat:@"正确率%.2f",[[[[linechartDic objectForKey:@"items"] objectAtIndex:pointIndex] objectForKey:@"ratio"] floatValue]* 100];
+    label2.text = [NSString stringWithFormat:@"正确率%.0f%%",[[[[linechartDic objectForKey:@"items"] objectAtIndex:pointIndex] objectForKey:@"ratio"] floatValue]* 100];
     label3.text = [NSString stringWithFormat:@"%@",dataStr];
 
 }
@@ -207,7 +227,7 @@
         detailLb.text = [NSString stringWithFormat:@"正确%@,错误%@",questioncorrect,questionwrong];
         
         [pieLineChart removeFromSuperview];
-        pieLineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 260, SCREEN_WIDTH, SCREEN_HEIGHT-64-320)];
+        pieLineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 290, SCREEN_WIDTH, SCREEN_HEIGHT-94-320)];
         pieLineChart.backgroundColor = [UIColor clearColor];
         pieLineChart.showCoordinateAxis =YES;
         pieLineChart.yFixedValueMax = 100;
@@ -347,39 +367,64 @@
    
 }
 
--(void)chooseChildren:(id)sender
+-(void)chooseChildren:(UISegmentedControl *)segmentedControl
 {
-    UIButton *btn = (UIButton *)sender;
-    childrenEntity = [[[YjyxOverallData sharedInstance] parentInfo].childrens objectAtIndex:btn.tag];
-    switch (type) {
-        case 1:
-            [pieLineChart removeFromSuperview];
-            childrensubView.hidden = YES;
-            detailLb.text = @"";
-            subjectLb.text = @"";
-            label1.text = @"";
-            label2.text = @"";
-            label3.text = @"";
-            childrensubLb.text = childrenEntity.name;
-            [self getChildrenAchievement:childrenEntity.cid];
-            break;
-        case 2:
-            childrentaskView.hidden = YES;
-            taskweikeLb.text = @"";
-            taskSubjectlb.text = @"";
-            taskhomeworkLb.text = @"";
-            childrentaskLb.text = childrenEntity.name;
-            [self getchildrenTaskWithCid:childrenEntity.cid];
-            break;
-        case 3:
-            childrenbillionView.hidden = YES;
-            billionCountLb.text = @"";
-            childrenbillionLb.text = childrenEntity.name;
-            [self getchildrenbillionWithCid:childrenEntity.cid];
-            break;
-        default:
-            break;
+    
+    childrenEntity = [[[YjyxOverallData sharedInstance] parentInfo].childrens objectAtIndex:segmentedControl.selectedSegmentIndex];
+    if (segmentedControl == segmentedControl1) {
+        [pieLineChart removeFromSuperview];
+        childrensubView.hidden = YES;
+        detailLb.text = @"";
+        subjectLb.text = @"";
+        label1.text = @"";
+        label2.text = @"";
+        label3.text = @"";
+        childrensubLb.text = childrenEntity.name;
+        [self getChildrenAchievement:childrenEntity.cid];
+    }else if (segmentedControl == segmentedControl2){
+        childrentaskView.hidden = YES;
+        taskweikeLb.text = @"";
+        taskSubjectlb.text = @"";
+        taskhomeworkLb.text = @"";
+        childrentaskLb.text = childrenEntity.name;
+        [self getchildrenTaskWithCid:childrenEntity.cid];
+    }else{
+        childrenbillionView.hidden = YES;
+        billionCountLb.text = @"";
+        childrenbillionLb.text = childrenEntity.name;
+        [self getchildrenbillionWithCid:childrenEntity.cid];
+
     }
+    
+//    switch (type) {
+//        case 1:
+//            [pieLineChart removeFromSuperview];
+//            childrensubView.hidden = YES;
+//            detailLb.text = @"";
+//            subjectLb.text = @"";
+//            label1.text = @"";
+//            label2.text = @"";
+//            label3.text = @"";
+//            childrensubLb.text = childrenEntity.name;
+//            [self getChildrenAchievement:childrenEntity.cid];
+//            break;
+//        case 2:
+//            childrentaskView.hidden = YES;
+//            taskweikeLb.text = @"";
+//            taskSubjectlb.text = @"";
+//            taskhomeworkLb.text = @"";
+//            childrentaskLb.text = childrenEntity.name;
+//            [self getchildrenTaskWithCid:childrenEntity.cid];
+//            break;
+//        case 3:
+//            childrenbillionView.hidden = YES;
+//            billionCountLb.text = @"";
+//            childrenbillionLb.text = childrenEntity.name;
+//            [self getchildrenbillionWithCid:childrenEntity.cid];
+//            break;
+//        default:
+//            break;
+//    }
 }
 
 

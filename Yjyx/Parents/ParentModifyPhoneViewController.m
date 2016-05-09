@@ -150,7 +150,6 @@
 -(void)resetTimer
 {
     _second = 60;
-    codeText.text = @"";
     timeLb.text = @"获取验证码";
     [_timer invalidate];
     _timer = nil;

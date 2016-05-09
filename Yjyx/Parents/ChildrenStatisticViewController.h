@@ -17,6 +17,11 @@
     IBOutlet UIButton *taskBtn;
     IBOutlet UIButton *billionBtn;
     
+    IBOutlet UISegmentedControl *segmentedControl1;
+    IBOutlet UISegmentedControl *segmentedControl2;
+    IBOutlet UISegmentedControl *segmentedControl3;
+
+    
     IBOutlet UIView *subjectView;//题目页面,题目相关数据
     ChildrenEntity *childrenEntity;//选中的小孩
     NSMutableArray *achievementAry;//单个小孩所有科目的数据

@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"会员介绍";
+    self.title = @"会员中心";
     productAry = [[NSMutableArray alloc] init];
     [self getProductList];
     

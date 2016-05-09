@@ -36,6 +36,7 @@
     openChildAry = [[NSMutableArray alloc] init];
     payBtn.hidden = YES;
     
+    titleLb.text = [NSString stringWithFormat:@"%@会员特权",self.productEntity.subject_name];
     NSString *content = [self.productEntity.content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     contentLb = [[RCLabel alloc] initWithFrame:CGRectMake(35, 46, SCREEN_WIDTH - 50, 999)];
     contentLb.font = [UIFont systemFontOfSize:12];
@@ -249,7 +250,7 @@
     
     for (int i = 0; i < [self.productEntity.price_pacakge count]; i++) {
         NSDictionary *dic = [self.productEntity.price_pacakge objectAtIndex:i];
-        UIButton *timeBtn = [[UIButton alloc] initWithFrame:CGRectMake(90+i*82, 63, 75, 15)];
+        UIButton *timeBtn = [[UIButton alloc] initWithFrame:CGRectMake(90+i*82, 63, 80, 15)];
         NSString *str = [NSString stringWithFormat:@"%@元/%@天",[dic objectForKey:@"price"],[dic objectForKey:@"days"]];
         [timeBtn setTitle:str forState:UIControlStateNormal];
         [timeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

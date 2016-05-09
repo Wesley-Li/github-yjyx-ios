@@ -391,4 +391,21 @@
 
 }
 
+//用户反馈
+-(void)feedBack:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
+    [manager POST:[BaseURL stringByAppendingString:@"/api/feedback/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+
+}
+
 @end

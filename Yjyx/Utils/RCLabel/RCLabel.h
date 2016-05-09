@@ -95,6 +95,8 @@ typedef enum
     RTLabelComponent * _currentLinkComponent;
     RTLabelComponent * _currentImgComponent;
     RTLabelComponentsStructure *componentsAndPlainText_;
+    
+    CGSize imageSize;
 }
 
 

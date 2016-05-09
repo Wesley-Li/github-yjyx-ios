@@ -29,6 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     last_id = @"0";
+    segmentedIndex = 0;
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
     {
         self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -51,21 +52,12 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-//设置小孩头像
+//设置小孩
 -(void)setChildrenViews
 {
-    
     for (int i =0; i< [[YjyxOverallData sharedInstance].parentInfo.childrens count]; i++) {
         ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:i];
         [segmentedControl setTitle:childrenEntity.name forSegmentAtIndex:i];
-//        UIButton *iconBtn =[[UIButton alloc] initWithFrame:CGRectMake(10+i*90, 5, 70, 70)];
-//        [iconBtn setImageWithURL:[NSURL URLWithString:childrenEntity.childavatar] placeholderImage:[UIImage imageNamed:@"Personal_children.png"]];
-//        [iconBtn addTarget:self action:@selector(seltectChildren:) forControlEvents:UIControlEventTouchUpInside];
-//        iconBtn.tag = i;
-//        UILabel *namelb = [UILabel labelWithFrame:CGRectMake(10+i*90, 78, 70, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:13] context:childrenEntity.name];
-//        namelb.textAlignment = NSTextAlignmentCenter;
-//        [childrenViews addSubview:iconBtn];
-//        [childrenViews addSubview:namelb];
         [_childrenAry addObject:childrenEntity];
     }
     segmentedControl.tintColor = RGBACOLOR(23, 155, 121, 1);
@@ -99,15 +91,14 @@
                     }
                 }
                 
-                NSInteger index = 0;
-                ChildrenEntity *childrenEntity = [_childrenAry objectAtIndex:index];
+                ChildrenEntity *childrenEntity = [_childrenAry objectAtIndex:segmentedIndex];
                 [_activities removeAllObjects];
                 for (ChildrenActivity *entity in totalAry) {
                     if ([entity.cid integerValue] == [childrenEntity.cid integerValue]) {
                         [_activities addObject:entity];
                     }
                 }
-                segmentedControl.selectedSegmentIndex = 0;
+                segmentedControl.selectedSegmentIndex = segmentedIndex;
                 [_childrenTab reloadData];
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
@@ -139,15 +130,14 @@
                     }
                 }
                 
-                NSInteger index = 0;
-                ChildrenEntity *childrenEntity = [_childrenAry objectAtIndex:index];
+                ChildrenEntity *childrenEntity = [_childrenAry objectAtIndex:segmentedIndex];
                 [_activities removeAllObjects];
                 for (ChildrenActivity *entity in totalAry) {
                     if ([entity.cid integerValue] == [childrenEntity.cid integerValue]) {
                         [_activities addObject:entity];
                     }
                 }
-                segmentedControl.selectedSegmentIndex = 0;
+                segmentedControl.selectedSegmentIndex = segmentedIndex;
                 [_childrenTab reloadData];
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
@@ -217,7 +207,7 @@
         }
     }
     cell.timelb.text = children.update;
-    UILabel *titleLb = [UILabel labelWithFrame:CGRectMake(85, 28, SCREEN_WIDTH - 106 , 21) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:13] context:children.title];
+    UILabel *titleLb = [UILabel labelWithFrame:CGRectMake(85, 23, SCREEN_WIDTH - 106 , 21) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:children.title];
     if ([children.finished integerValue] == 1) {
         titleLb.textColor =RGBACOLOR(119, 162, 150, 1);
         cell.finishedImage.hidden = NO;
@@ -272,7 +262,8 @@
 #pragma mark -MyEvent
 -(void)seltectChildren:(UISegmentedControl *)seg
 {
-    NSInteger index = seg.selectedSegmentIndex  ;
+    NSInteger index = seg.selectedSegmentIndex;
+    segmentedIndex = index;
     ChildrenEntity *childrenEntity = [_childrenAry objectAtIndex:index];
     [_activities removeAllObjects];
     for (ChildrenActivity *entity in totalAry) {

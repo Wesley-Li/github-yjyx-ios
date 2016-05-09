@@ -9,6 +9,9 @@
             <connections>
                 <outlet property="billionBtn" destination="anE-Ec-8Bj" id="cYT-Ph-4qS"/>
                 <outlet property="billionView" destination="UeQ-yZ-DuE" id="gQB-fr-Fjf"/>
+                <outlet property="segmentedControl1" destination="iQN-6I-zGO" id="oWY-n9-0V5"/>
+                <outlet property="segmentedControl2" destination="dHh-az-ggV" id="nZE-YO-1bF"/>
+                <outlet property="segmentedControl3" destination="cob-GF-fw0" id="tgG-AH-LSz"/>
                 <outlet property="subjectBtn" destination="9Bp-zb-bha" id="bhH-ZP-n2l"/>
                 <outlet property="subjectView" destination="8Br-aE-FUG" id="XLU-li-lgT"/>
                 <outlet property="taskBtn" destination="iCi-Ol-MVt" id="II6-aZ-fHz"/>
@@ -24,13 +27,20 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Br-aE-FUG">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                     <subviews>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="iQN-6I-zGO">
+                            <rect key="frame" x="100" y="7" width="120" height="29"/>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Second"/>
+                            </segments>
+                        </segmentedControl>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="正确率" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bA0-5j-Gnn">
                             <rect key="frame" x="85" y="435" width="149" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTB-fe-KMf">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTB-fe-KMf">
                             <rect key="frame" x="266" y="430" width="46" height="30"/>
                             <state key="normal" title="小孩"/>
                             <connections>
@@ -44,12 +54,20 @@
                         <constraint firstAttribute="bottom" secondItem="bA0-5j-Gnn" secondAttribute="bottom" constant="4" id="c14-3a-Rln"/>
                         <constraint firstItem="bA0-5j-Gnn" firstAttribute="centerX" secondItem="8Br-aE-FUG" secondAttribute="centerX" id="pOd-7Q-7cE"/>
                         <constraint firstAttribute="bottom" secondItem="CTB-fe-KMf" secondAttribute="bottom" id="tUz-sf-aYd"/>
+                        <constraint firstItem="iQN-6I-zGO" firstAttribute="centerX" secondItem="8Br-aE-FUG" secondAttribute="centerX" id="xTO-DR-dTH"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M8H-RL-qJo">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GhF-ep-oox">
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dHh-az-ggV">
+                            <rect key="frame" x="100" y="7" width="120" height="29"/>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Second"/>
+                            </segments>
+                        </segmentedControl>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GhF-ep-oox">
                             <rect key="frame" x="266" y="430" width="46" height="30"/>
                             <state key="normal" title="小孩"/>
                             <connections>
@@ -59,6 +77,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="dHh-az-ggV" firstAttribute="centerX" secondItem="M8H-RL-qJo" secondAttribute="centerX" id="gNo-Dk-DVN"/>
                         <constraint firstAttribute="bottom" secondItem="GhF-ep-oox" secondAttribute="bottom" id="yit-I4-GYs"/>
                         <constraint firstAttribute="trailing" secondItem="GhF-ep-oox" secondAttribute="trailing" constant="8" id="yqN-oC-UV6"/>
                     </constraints>
@@ -66,18 +85,26 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UeQ-yZ-DuE">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pw3-2C-8QV">
+                        <button hidden="YES" opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pw3-2C-8QV">
                             <rect key="frame" x="266" y="430" width="46" height="30"/>
                             <state key="normal" title="小孩"/>
                             <connections>
                                 <action selector="selectChildren:" destination="-1" eventType="touchUpInside" id="Rnv-h4-aXv"/>
                             </connections>
                         </button>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cob-GF-fw0">
+                            <rect key="frame" x="100" y="7" width="120" height="29"/>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Second"/>
+                            </segments>
+                        </segmentedControl>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="pw3-2C-8QV" secondAttribute="bottom" id="TTD-44-SQl"/>
                         <constraint firstAttribute="trailing" secondItem="pw3-2C-8QV" secondAttribute="trailing" constant="8" id="miw-pq-OwK"/>
+                        <constraint firstItem="cob-GF-fw0" firstAttribute="centerX" secondItem="UeQ-yZ-DuE" secondAttribute="centerX" id="vjK-Mp-gbh"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4CD-4Z-1No">

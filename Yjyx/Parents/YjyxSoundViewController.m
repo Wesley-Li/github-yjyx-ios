@@ -104,6 +104,10 @@
     }
     NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"push%ld",(long)indexPath.row] ofType:@"caf"];
     if (path) {
+        if (player) {
+            [player stop];
+            player = nil;
+        }
         AVAudioSession *session = [AVAudioSession sharedInstance];
         [session setCategory:AVAudioSessionCategoryPlayback error:nil];
         [session setActive:YES error:nil];
