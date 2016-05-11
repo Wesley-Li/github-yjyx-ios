@@ -14,6 +14,7 @@
 #import "ChoiceModel.h"
 #import "PNChart.h"
 #import "TCustomView.h"
+#import "NextTableViewController.h"
 
 #define stuCondition @"stuConditionCell"
 #define taskConditon @"taskConditonCell"
@@ -26,6 +27,9 @@
 
 @property (nonatomic, assign) NSInteger choiceTaskCellHeight;
 @property (nonatomic, assign) NSInteger blankfillTaskCellHeight;
+
+@property (nonatomic, strong) UIButton *choiceBtn;
+@property (nonatomic, strong) UIButton *blankfillBtn;
 
 @end
 
@@ -66,6 +70,8 @@
 
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"gettasksubmitdetail", @"action", self.taskModel.t_id, @"taskid", nil];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
+
     
     [manager GET:[BaseURL stringByAppendingString:TEACHER_SCAN_THE_TASK_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
@@ -220,19 +226,21 @@
         ChoiceModel *model = self.choiceDataSource[i];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, TWidth, 20)];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, TWidth, TWidth)];
-        imageView.image = [UIImage imageNamed:@"stu_pic"];
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(0, 20, TWidth, TWidth);
+        imageView.image = [UIImage imageNamed:@"corect_pic"];
+        self.choiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _choiceBtn.frame = CGRectMake(0, 20, TWidth, TWidth);
         NSString *titleString = [NSString stringWithFormat:@"%.f%%", [model.C_count floatValue]*100/([model.C_count floatValue] + [model.W_count floatValue])];
-        [button setTitle:[NSString stringWithFormat:@"%@", titleString] forState:UIControlStateNormal];
-        button.tag = 200 + i;
-        [button addTarget:self action:@selector(handleButton) forControlEvents:UIControlEventTouchUpInside];
+        [_choiceBtn setTitle:[NSString stringWithFormat:@"%@", titleString] forState:UIControlStateNormal];
+        [_choiceBtn setTitleColor:[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:51.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+        
+        _choiceBtn.tag = 200 + i;
+        [_choiceBtn addTarget:self action:@selector(handleButton:) forControlEvents:UIControlEventTouchUpInside];
         
         label.text = [NSString stringWithFormat:@"%d", i+1];
         label.textAlignment = NSTextAlignmentCenter;
         [taskView addSubview:label];
         [taskView addSubview:imageView];
-        [taskView addSubview:button];
+        [taskView addSubview:_choiceBtn];
         
         [cell.bg_view addSubview:taskView];
     }
@@ -241,9 +249,20 @@
 
 }
 
-- (void)handleButton {
-
-    NSLog(@"点击了题目");
+- (void)handleButton:(UIButton *)sender {
+    
+    
+    
+    NSLog(@"点击的第%ld个按钮", _choiceBtn.tag - 200);
+    
+    NextTableViewController *NextVC = [[NextTableViewController alloc] init];
+    NextVC.taskid = self.taskModel.t_id;
+    
+    NextVC.qtype = @1;
+    NextVC.qid = [self.choiceDataSource[_choiceBtn.tag - 200] b_id];
+    
+    [self.navigationController pushViewController:NextVC animated:YES];
+    
 }
 
 - (void)cell:(TaskConditionTableViewCell *)cell addSubViewsWithBlankfillArr:(NSMutableArray *)arr{
@@ -273,11 +292,12 @@
         BlankFillModel *model = self.blankFillDataSource[i];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, TWidth, 20)];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, TWidth, TWidth)];
-        imageView.image = [UIImage imageNamed:@"stu_pic"];
+        imageView.image = [UIImage imageNamed:@"corect_pic"];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(0, 20, TWidth, TWidth);
         NSString *titleString = [NSString stringWithFormat:@"%.f%%", [model.C_count floatValue]*100/([model.C_count floatValue] + [model.W_count floatValue])];
         [button setTitle:[NSString stringWithFormat:@"%@", titleString] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:51.0/255.0 alpha:1.0] forState:UIControlStateNormal];
         button.tag = 200 + i;
         [button addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventTouchUpInside];
         
