@@ -17,6 +17,7 @@
 {
     NSArray *letterAry;
     NSString *subjectID;//科目ID，会员跳转时需要
+    NSMutableDictionary *selectDic;//判断cell是否展开
 }
 
 @end
@@ -38,6 +39,7 @@
     _choices = [[NSDictionary alloc] init];
     _resultblankfills = [[NSArray alloc] init];
     _resultchoices = [[NSArray alloc] init];
+    selectDic = [[NSMutableDictionary alloc] init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTable) name:@"RCLabelReload" object:nil];
     // Do any additional setup after loading the view from its nib.
 }
@@ -80,9 +82,10 @@
                 _choices = [[result objectForKey:@"data"] objectForKey:@"choices"];
                 _resultchoices = [[[result objectForKey:@"data"] objectForKey:@"result"] objectForKey:@"choice"];
                 _resultblankfills = [[[result objectForKey:@"data"] objectForKey:@"result"] objectForKey:@"blankfill"];
-                NSDictionary *dic = [[_choices allValues] firstObject];
-                NSLog(@"%@",[dic objectForKey:@"content"]);
                 [_resultTable reloadData];
+                for (int i = 0; i<[_resultchoices count]+[_resultblankfills count] -1; i++) {
+                    [selectDic setObject:@"0" forKey:[NSString stringWithFormat:@"%d",i]];
+                }
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }

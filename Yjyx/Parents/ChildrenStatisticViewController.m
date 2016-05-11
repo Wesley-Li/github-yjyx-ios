@@ -64,17 +64,7 @@
 
 - (void)initView
 {
-//    childrensubLb = [UILabel labelWithFrame:CGRectMake(15, 20, 80, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:childrenEntity.name];
-//    
-//    childrentaskLb = [UILabel labelWithFrame:CGRectMake(15, 20, 80, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:childrenEntity.name];
-//    
-//    childrenbillionLb = [UILabel labelWithFrame:CGRectMake(15, 20, 80, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:childrenEntity.name];
-//    
-//    [subjectView addSubview:childrensubLb];
-//    [taskView addSubview:childrentaskLb];
-//    [billionView addSubview:childrenbillionLb];
-    
-    
+
     subjectLb = [UILabel labelWithFrame:CGRectMake((SCREEN_WIDTH -200)/2, 125, 200, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:@""];
     subjectLb.textAlignment = NSTextAlignmentCenter;
     [subjectView addSubview:subjectLb];
@@ -108,10 +98,7 @@
     taskweikeLb.textAlignment = NSTextAlignmentCenter;
     [taskView addSubview:taskweikeLb];
     
-//    UILabel *weekLb =  [UILabel labelWithFrame:CGRectMake((SCREEN_WIDTH -250)/2, 20, 250, 10) textColor:RGBACOLOR(230, 152, 66, 1) font:[UIFont systemFontOfSize:12] context:@"本周"];
-//    weekLb.textAlignment = NSTextAlignmentCenter;
-//    [billionView addSubview:weekLb];
-    
+
     UILabel *billionTitle =  [UILabel labelWithFrame:CGRectMake((SCREEN_WIDTH -250)/2, 160, 250, 10) textColor:RGBACOLOR(230, 152, 66, 1) font:[UIFont systemFontOfSize:14] context:@"学习亿教课数"];
     billionTitle.textAlignment = NSTextAlignmentCenter;
     [billionView addSubview:billionTitle];

@@ -12,5 +12,6 @@
 {
     ChildrenEntity *childrenEntity;
     IBOutlet UITextField *codeTextField;
+    IBOutlet UIView *partentRegistView;
 }
 @end

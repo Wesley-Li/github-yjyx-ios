@@ -275,6 +275,7 @@
 #pragma mark -UIAlertView
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
+        [_tabBar setSelectedIndex:0];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
     }
 }

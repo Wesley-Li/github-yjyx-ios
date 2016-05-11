@@ -63,6 +63,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(IBAction)selectRoleRegist:(id)sender
+{
+    UIButton *btn = (UIButton *)sender;
+    if (btn.tag == 1) {
+        partentRegistView.hidden = YES;
+    }else{
+        partentRegistView.hidden = NO;
+    }
+}
+
 -(IBAction)goBack:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -78,6 +88,8 @@
     [textField resignFirstResponder];
     return YES;
 }
+
+
 /*
 #pragma mark - Navigation
 

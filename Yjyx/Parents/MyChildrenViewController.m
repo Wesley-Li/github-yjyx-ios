@@ -264,14 +264,14 @@
 {
     NSInteger index = seg.selectedSegmentIndex;
     segmentedIndex = index;
-    ChildrenEntity *childrenEntity = [_childrenAry objectAtIndex:index];
-    [_activities removeAllObjects];
-    for (ChildrenActivity *entity in totalAry) {
-        if ([entity.cid integerValue] == [childrenEntity.cid integerValue]) {
-            [_activities addObject:entity];
-        }
-    }
-    [_childrenTab reloadData];
+    
+    NSMutableArray *cids = [[NSMutableArray alloc] init];
+    ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:segmentedIndex];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:childrenEntity.cid forKey:@"id"];
+    [dic setObject:@"0" forKey:@"last_id"];
+    [cids addObject:dic];
+    [self getnewChildrenActivityWihtCid:[cids JSONString]];
 }
 
 /**
@@ -303,13 +303,11 @@
     // 1.添加假数据
    
     NSMutableArray *cids = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [YjyxOverallData sharedInstance].parentInfo.childrens.count; i++) {
-        ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:i];
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        [dic setObject:childrenEntity.cid forKey:@"id"];
-        [dic setObject:@"0" forKey:@"last_id"];
-        [cids addObject:dic];
-    }
+    ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:segmentedIndex];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:childrenEntity.cid forKey:@"id"];
+    [dic setObject:@"0" forKey:@"last_id"];
+    [cids addObject:dic];
     [self getnewChildrenActivityWihtCid:[cids JSONString]];
     
 }
@@ -317,13 +315,13 @@
 - (void)footerRereshing
 {
     NSMutableArray *cids = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [[YjyxOverallData sharedInstance].parentInfo.childrens count]; i++) {
-        ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:i];
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        [dic setObject:childrenEntity.cid forKey:@"id"];
-        [dic setObject:last_id forKey:@"last_id"];
-        [cids addObject:dic];
-    }
+    
+    ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:segmentedIndex];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:childrenEntity.cid forKey:@"id"];
+    [dic setObject:last_id forKey:@"last_id"];
+    [cids addObject:dic];
+    
     [self getoldChildrenActivityWihtCid:[cids JSONString]];
 
 }
