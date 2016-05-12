@@ -27,7 +27,7 @@
 
 -(IBAction)goSure:(id)sender
 {
-    if (accountText.text.length == 0) {
+    if (![accountText.text isPhone]) {
         [self.view makeToast:@"请输入正确的手机号" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }

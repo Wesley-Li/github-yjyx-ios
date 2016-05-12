@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSString *str = [_phoneStr stringByReplacingCharactersInRange:NSMakeRange(3, 5) withString:@"*****"];
-    titleLb.text = [NSString stringWithFormat:@"你的账号已绑定手机%@,你可以通过短信验证码找回",str];
+    titleLb.text = [NSString stringWithFormat:@"您的账号已绑定手机%@,您可以通过短信验证码找回",str];
 }
 
 -(IBAction)getCode:(id)sender

@@ -18,7 +18,7 @@
     [super viewDidLoad];
     _second = 120;
      _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
-    titleLb.text = [NSString stringWithFormat:@"请为你的账号%@设置密码，以保证下次正常登陆",_phoneStr];
+    titleLb.text = [NSString stringWithFormat:@"请为您的账号%@设置密码，以保证下次正常登录",_phoneStr];
 }
 
 -(void)checkCodeTimeout

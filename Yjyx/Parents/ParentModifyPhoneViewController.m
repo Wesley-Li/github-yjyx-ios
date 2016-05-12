@@ -73,6 +73,7 @@
         [self.view makeToastActivity:SHOW_CENTER];
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneTextfield.text,@"target",codeText.text,@"code",@"MPASSWDCHG",@"stype",nil];
         [[YjxService sharedInstance] checkOutVerfirycode:dic withBlock:^(id result, NSError *error){//验证验证码
+            [self.view hideToastActivity];
             if (result) {
                 if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                     [self changePhone];
@@ -117,8 +118,8 @@
 
 -(IBAction)getChangeCode:(id)sender
 {
-    if (_phoneTextfield.text.length == 0) {
-        [self.view makeToast:@"请输入正确的手机号" duration:1.0 position:SHOW_BOTTOM complete:nil];
+    if (![_phoneTextfield.text isPhone]) {
+        [self.view makeToast:@"请输入正确的手机号" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
     NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",_phoneTextfield.text];
@@ -131,7 +132,8 @@
                 //发送注册码按钮失效，防止频繁请求
                 [verifyBtn setEnabled:false];
             }else{
-                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                [self.view makeToast:@"获取验证码失败，请稍后重试" duration:1.0 position:SHOW_CENTER complete:nil];
+               
             }
         }else{
             [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];

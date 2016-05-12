@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define BaseURL @"http://139.196.14.118"
-//#define BaseURL @"http://ys.zgyjyx.com"
+//#define BaseURL @"http://139.196.14.118"
+#define BaseURL @"http://zgyjyx.com"
 @interface YjxService : NSObject
 
 //获取实例

@@ -83,7 +83,7 @@
                 _resultchoices = [[[result objectForKey:@"data"] objectForKey:@"result"] objectForKey:@"choice"];
                 _resultblankfills = [[[result objectForKey:@"data"] objectForKey:@"result"] objectForKey:@"blankfill"];
                 [_resultTable reloadData];
-                for (int i = 0; i<[_resultchoices count]+[_resultblankfills count] -1; i++) {
+                for (int i = 0; i<[_resultchoices count]+[_resultblankfills count]; i++) {
                     [selectDic setObject:@"0" forKey:[NSString stringWithFormat:@"%d",i]];
                 }
             }else{
@@ -166,10 +166,30 @@
             templabel.componentsAndPlainText = componentsDS;
             CGSize optimalSize = [templabel optimumSize];
             
+            NSString *isOpne = [selectDic objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row+[_resultchoices count]]];
             NSArray *resultary = [[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:1];
-            NSInteger answerCount = [resultary count]%3 == 0?([resultary count]/3):([resultary count]/3 +1);
-            CGFloat answerHeight = 20*(answerCount-1);
-            return optimalSize.height +55 + answerHeight;
+            NSString *myanswer = [[NSString alloc] initWithFormat:@""];
+            
+            if ([isOpne isEqualToString:@"0"]) {
+                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",1,[resultary objectAtIndex:0] ]];
+            }else{
+                for (int i = 0; i< [resultary count]; i++) {
+                    myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",(i+1),[resultary objectAtIndex:i] ]];
+                }
+            }
+            RCLabel *templabel1 = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH/2 - 90, 999)];
+            templabel1.font = [UIFont systemFontOfSize:14];
+            RTLabelComponentsStructure *componentsDS1 = [RCLabel extractTextStyle:myanswer];
+            templabel1.componentsAndPlainText = componentsDS1;
+            CGSize optimalSize1 = [templabel1 optimumSize];
+            
+            return optimalSize.height + 50 + optimalSize1.height;
+            
+//            NSArray *resultary = [[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:1];
+//            NSInteger answerCount = [resultary count]%3 == 0?([resultary count]/3):([resultary count]/3 +1);
+//            CGFloat answerHeight = 20*(answerCount-1);
+//            return optimalSize.height +55 + answerHeight;
+
         }
     }else
     {
@@ -182,10 +202,29 @@
         templabel.componentsAndPlainText = componentsDS;
         CGSize optimalSize = [templabel optimumSize];
         
+        NSString *isOpne = [selectDic objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row+[_resultchoices count]]];
         NSArray *resultary = [[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:1];
-        NSInteger answerCount = [resultary count]%3 == 0?([resultary count]/3):([resultary count]/3 +1);
-        CGFloat answerHeight = 20*(answerCount-1);
-        return optimalSize.height +55 + answerHeight;
+        NSString *myanswer = [[NSString alloc] initWithFormat:@""];
+        
+        if ([isOpne isEqualToString:@"0"]) {
+            myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",1,[resultary objectAtIndex:0] ]];
+        }else{
+            for (int i = 0; i< [resultary count]; i++) {
+                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",(i+1),[resultary objectAtIndex:i] ]];
+            }
+        }
+        RCLabel *templabel1 = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH/2 - 90, 999)];
+        templabel1.font = [UIFont systemFontOfSize:14];
+        RTLabelComponentsStructure *componentsDS1 = [RCLabel extractTextStyle:myanswer];
+        templabel1.componentsAndPlainText = componentsDS1;
+        CGSize optimalSize1 = [templabel1 optimumSize];
+        
+        return optimalSize.height + 50 + optimalSize1.height;
+        
+//        NSArray *resultary = [[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:1];
+//        NSInteger answerCount = [resultary count]%3 == 0?([resultary count]/3):([resultary count]/3 +1);
+//        CGFloat answerHeight = 20*(answerCount-1);
+//        return optimalSize.height +55 + answerHeight;
     }
 }
 
@@ -207,7 +246,7 @@
     bg.layer.borderColor = RGBACOLOR(225, 225, 225, 1).CGColor;
     
     if (indexPath.section == 0) {
-        if ([_resultchoices count]>0) {//只有选择题
+        if ([_resultchoices count]>0) {//选择题
             NSString *key = [NSString stringWithFormat:@"%@",[[_resultchoices objectAtIndex:indexPath.row] firstObject]];
             NSString *content = [[_choices objectForKey:key] objectForKey:@"content"];
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
@@ -267,12 +306,12 @@
             childrenAnswer.font = [UIFont systemFontOfSize:13];
             [cell.contentView addSubview:childrenAnswer];
             
-            UIButton *truebtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, optimalSize.height+12, 40, 38)];
+            UIButton *truebtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 35, optimalSize.height+12, 30, 28)];
             BOOL isture = [[[_resultchoices objectAtIndex:indexPath.row] objectAtIndex:2] boolValue];
             [truebtn setImage:[UIImage imageNamed:isture?@"homework_3":@"homework_4"] forState:UIControlStateNormal];
             [cell.contentView addSubview:truebtn];
             
-        }else{//只有填空题
+        }else{//填空题
             NSString *key = [NSString stringWithFormat:@"%@",[[_resultblankfills objectAtIndex:indexPath.row] firstObject]];
             NSString *content = [[_blankfills objectForKey:key] objectForKey:@"content"];
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
@@ -283,13 +322,32 @@
             CGSize optimalSize = [templabel optimumSize];
             
             NSArray *resultary = [[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:1];
-            NSInteger answerCount = [resultary count]%3 == 0?([resultary count]/3):([resultary count]/3 +1);
-            CGFloat answerHeight = 20*(answerCount-1);
             
-            bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 50 + answerHeight);
+            
+            NSString *myanswer = [[NSString alloc] initWithFormat:@""];
+            NSString *isOpne = [selectDic objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row+[_resultchoices count]]];
+            if ([isOpne isEqualToString:@"0"]) {
+                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",1,[resultary objectAtIndex:0] ]];
+            }else{
+                for (int i = 0; i< [resultary count]; i++) {
+                    myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",(i+1),[resultary objectAtIndex:i] ]];
+                }
+                
+            }
+            
+            
+            //小孩答案显示
+            RCLabel *templabel1 = [[RCLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2+30, optimalSize.height+22, SCREEN_WIDTH/2 - 90, 999)];
+            templabel1.font = [UIFont systemFontOfSize:14];
+            RTLabelComponentsStructure *componentsDS1 = [RCLabel extractTextStyle:myanswer];
+            templabel1.componentsAndPlainText = componentsDS1;
+            CGSize optimalSize1 = [templabel1 optimumSize];
+            
+            bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 55 + optimalSize1.height);
             [cell.contentView addSubview:bg];
             
             [bg addSubview:templabel];
+            [bg addSubview:templabel1];
             
             
             UIImageView *imageLine = [[UIImageView alloc] initWithFrame:CGRectMake(8, optimalSize.height + 8, SCREEN_WIDTH - 16, 1)];
@@ -300,18 +358,40 @@
             UILabel *answerLb = [UILabel labelWithFrame:CGRectMake(10, optimalSize.height + 12, 30, 38) textColor:RGBACOLOR(100, 174, 99, 1) font:[UIFont systemFontOfSize:15] context:[NSString stringWithFormat:@"正确"]];
             [cell.contentView addSubview:answerLb];
             
-            NSArray *myAnswer = [[[_blankfills objectForKey:key] objectForKey:@"answer"] JSONValue];
-            NSInteger myanswerCount = [myAnswer count]%3 == 0?([myAnswer count]/3):([myAnswer count]/3 +1);
-            KWFormViewQuickBuilder *mybuilder = [[KWFormViewQuickBuilder alloc] init];
-            for (int i = 0; i < myanswerCount; i++) {
-                NSString *str1 = (i+(i*3))>=[resultary count]?@"":[myAnswer objectAtIndex:(i*3)];
-                NSString *str2 = (1+(i*3))>=[resultary count]?@"":[myAnswer objectAtIndex:(1+(i*3))];
-                NSString *str3 = (2+(i*3))>=[resultary count]?@"":[myAnswer objectAtIndex:(2+(i*3))];
-                [mybuilder addRecord:@[str1,str2,str3]];
+            NSArray *tureAnswerAry = [[[_blankfills objectForKey:key] objectForKey:@"answer"] JSONValue];
+            NSString *tureAnswer = [[NSString alloc] initWithFormat:@""];
+
+            if ([isOpne isEqualToString:@"0"]) {
+                tureAnswer = [tureAnswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@",1,[tureAnswerAry objectAtIndex:0] ]];
+            }else{
+                for (int i = 0; i< [resultary count]; i++) {
+                    tureAnswer = [tureAnswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",(i+1),[tureAnswerAry objectAtIndex:i] ]];
+                }
+                
             }
             
-            KWFormView *myanswerformView = [mybuilder startCreatWithWidths:@[@((SCREEN_WIDTH/2 - 90)/3),@((SCREEN_WIDTH/2 - 90)/3),@((SCREEN_WIDTH/2 - 90)/3)] startPoint:CGPointMake(45 , optimalSize.height + 22)];
-            [cell.contentView addSubview:myanswerformView];
+            
+            //小孩答案显示
+            RCLabel *templabel2 = [[RCLabel alloc] initWithFrame:CGRectMake(45, optimalSize.height+22, SCREEN_WIDTH/2 - 90, 999)];
+            templabel2.font = [UIFont systemFontOfSize:14];
+            RTLabelComponentsStructure *componentsDS2 = [RCLabel extractTextStyle:myanswer];
+            templabel2.componentsAndPlainText = componentsDS2;
+            
+            [cell.contentView addSubview:templabel2];
+
+            
+            
+//            NSInteger myanswerCount = [myAnswer count]%3 == 0?([myAnswer count]/3):([myAnswer count]/3 +1);
+//            KWFormViewQuickBuilder *mybuilder = [[KWFormViewQuickBuilder alloc] init];
+//            for (int i = 0; i < myanswerCount; i++) {
+//                NSString *str1 = (i+(i*3))>=[resultary count]?@"":[myAnswer objectAtIndex:(i*3)];
+//                NSString *str2 = (1+(i*3))>=[resultary count]?@"":[myAnswer objectAtIndex:(1+(i*3))];
+//                NSString *str3 = (2+(i*3))>=[resultary count]?@"":[myAnswer objectAtIndex:(2+(i*3))];
+//                [mybuilder addRecord:@[str1,str2,str3]];
+//            }
+//            
+//            KWFormView *myanswerformView = [mybuilder startCreatWithWidths:@[@((SCREEN_WIDTH/2 - 90)/3),@((SCREEN_WIDTH/2 - 90)/3),@((SCREEN_WIDTH/2 - 90)/3)] startPoint:CGPointMake(45 , optimalSize.height + 22)];
+//            [cell.contentView addSubview:myanswerformView];
             
             //解析图标显示
             UIButton *explainText = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 35, optimalSize.height+12, 60, 38)];
@@ -326,26 +406,21 @@
                 explainText.hidden = NO;
             }
             
-            
-            //小孩答案显示
-            NSString *myanswer = [[NSString alloc] initWithFormat:@""];
-            for (int i = 0; i< [resultary count]; i++) {
-                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@" %@",[resultary objectAtIndex:i] ]];
-            }
         
-            KWFormViewQuickBuilder *builder = [[KWFormViewQuickBuilder alloc] init];
-            for (int i = 0; i < answerCount; i++) {
-                NSString *str1 = (i*3)>=[resultary count]?@"":[resultary objectAtIndex:(i*3)];
-                NSString *str2 = (1+(i*3))>=[resultary count]?@"":[resultary objectAtIndex:(1+i*3)];
-                NSString *str3 = (2+(i*3))>=[resultary count]?@"":[resultary objectAtIndex:(2+i*3)];
-                [builder addRecord:@[str1,str2,str3]];
-            }
-            
-            KWFormView *answerformView = [builder startCreatWithWidths:@[@((SCREEN_WIDTH/2 - 90)/3),@((SCREEN_WIDTH/2 - 90)/3),@((SCREEN_WIDTH/2 - 90)/3)] startPoint:CGPointMake(SCREEN_WIDTH/2 +40, optimalSize.height + 12)];
-            [cell.contentView addSubview:answerformView];
+            //收起展开按钮显示
+            UIButton *expandBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 55, optimalSize.height+18, 16, 16)];
 
-            
-            UIButton *truebtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, optimalSize.height+12, 40, 38)];
+            if ([isOpne isEqualToString:@"0"]) {
+                [expandBtn setImage:[UIImage imageNamed:@"homework_open.png"] forState:UIControlStateNormal];
+            }else{
+                [expandBtn setImage:[UIImage imageNamed:@"homework_close.png"] forState:UIControlStateNormal];
+            }
+            [expandBtn addTarget:self action:@selector(showMoreContent:) forControlEvents:UIControlEventTouchUpInside];
+            expandBtn.tag = [_resultchoices count] + indexPath.row;
+            [cell.contentView addSubview:expandBtn];
+
+            //对错按钮显示
+            UIButton *truebtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 35, optimalSize.height+12, 30, 28)];
             BOOL isture = [[[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:2] boolValue];
             [truebtn setImage:[UIImage imageNamed:isture?@"homework_3":@"homework_4"] forState:UIControlStateNormal];
             [cell.contentView addSubview:truebtn];
@@ -353,7 +428,7 @@
         }
         
         
-    }else{
+    }else{//填空题
         
         NSString *key = [NSString stringWithFormat:@"%@",[[_resultblankfills objectAtIndex:indexPath.row] firstObject]];
         NSString *content = [[_blankfills objectForKey:key] objectForKey:@"content"];
@@ -365,39 +440,78 @@
         CGSize optimalSize = [templabel optimumSize];
         
         NSArray *resultary = [[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:1];
-        NSInteger answerCount = [resultary count]%3 == 0?([resultary count]/3):([resultary count]/3 +1);
-        CGFloat answerHeight = 20*(answerCount-1);
-        bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 50 + answerHeight);
+        
+        NSString *myanswer = [[NSString alloc] initWithFormat:@""];
+        NSString *isOpne = [selectDic objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row+[_resultchoices count]]];
+        if ([isOpne isEqualToString:@"0"]) {
+            myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",1,[resultary objectAtIndex:0] ]];
+        }else{
+            for (int i = 0; i< [resultary count]; i++) {
+                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",(i+1),[resultary objectAtIndex:i] ]];
+            }
+
+        }
+        
+
+        //小孩答案布局
+        RCLabel *templabel1 = [[RCLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2+30, optimalSize.height+22, SCREEN_WIDTH/2 - 90, 999)];
+        templabel1.font = [UIFont systemFontOfSize:14];
+        RTLabelComponentsStructure *componentsDS1 = [RCLabel extractTextStyle:myanswer];
+        templabel1.componentsAndPlainText = componentsDS1;
+        CGSize optimalSize1 = [templabel1 optimumSize];
+
+        bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 55 + optimalSize1.height);
         [cell.contentView addSubview:bg];
         
         [bg addSubview:templabel];
+        [bg addSubview:templabel1];
         
         
         UIImageView *imageLine = [[UIImageView alloc] initWithFrame:CGRectMake(8, optimalSize.height + 8, SCREEN_WIDTH - 16, 1)];
         imageLine.backgroundColor = RGBACOLOR(220, 220, 220, 1);
         [cell.contentView addSubview:imageLine];
-        NSLog(@"%@",_resultchoices);
-        NSString *myanswer = [[NSString alloc] initWithFormat:@""];
-        for (int i = 0; i< [resultary count]; i++) {
-            myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@" %@",[resultary objectAtIndex:i] ]];
-        }
+        
+
         
         //正确答案
         UILabel *answerLb = [UILabel labelWithFrame:CGRectMake(10, optimalSize.height + 12, 30, 38) textColor:RGBACOLOR(100, 174, 99, 1) font:[UIFont systemFontOfSize:15] context:[NSString stringWithFormat:@"正确"]];
         [cell.contentView addSubview:answerLb];
         
-        NSArray *myAnswer = [[[_blankfills objectForKey:key] objectForKey:@"answer"] JSONValue];
-        NSInteger myanswerCount = [myAnswer count]%3 == 0?([myAnswer count]/3):([myAnswer count]/3 +1);
-        KWFormViewQuickBuilder *mybuilder = [[KWFormViewQuickBuilder alloc] init];
-        for (int i = 0; i < myanswerCount; i++) {
-            NSString *str1 = (i+(i*3))>=[resultary count]?@"":[myAnswer objectAtIndex:(i*3)];
-            NSString *str2 = (1+(i*3))>=[resultary count]?@"":[myAnswer objectAtIndex:(1+(i*3))];
-            NSString *str3 = (2+(i*3))>=[resultary count]?@"":[myAnswer objectAtIndex:(2+(i*3))];
-            [mybuilder addRecord:@[str1,str2,str3]];
+        NSArray *tureAnswerAry = [[[_blankfills objectForKey:key] objectForKey:@"answer"] JSONValue];
+        NSString *tureAnswer = [[NSString alloc] initWithFormat:@""];
+        
+        if ([isOpne isEqualToString:@"0"]) {
+            tureAnswer = [tureAnswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@",1,[tureAnswerAry objectAtIndex:0] ]];
+        }else{
+            for (int i = 0; i< [resultary count]; i++) {
+                tureAnswer = [tureAnswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",(i+1),[tureAnswerAry objectAtIndex:i] ]];
+            }
+            
         }
         
-        KWFormView *myanswerformView = [mybuilder startCreatWithWidths:@[@((SCREEN_WIDTH/2 - 90)/3),@((SCREEN_WIDTH/2 - 90)/3),@((SCREEN_WIDTH/2 - 90)/3)] startPoint:CGPointMake(45 , optimalSize.height + 22)];
-        [cell.contentView addSubview:myanswerformView];
+        
+        //小孩答案显示
+        RCLabel *templabel2 = [[RCLabel alloc] initWithFrame:CGRectMake(45, optimalSize.height+22, SCREEN_WIDTH/2 - 90, 999)];
+        templabel2.font = [UIFont systemFontOfSize:14];
+        RTLabelComponentsStructure *componentsDS2 = [RCLabel extractTextStyle:tureAnswer];
+        templabel2.componentsAndPlainText = componentsDS2;
+        
+        [cell.contentView addSubview:templabel2];
+        
+
+//        
+//        NSArray *myAnswer = [[[_blankfills objectForKey:key] objectForKey:@"answer"] JSONValue];
+//        NSInteger myanswerCount = [myAnswer count]%3 == 0?([myAnswer count]/3):([myAnswer count]/3 +1);
+//        KWFormViewQuickBuilder *mybuilder = [[KWFormViewQuickBuilder alloc] init];
+//        for (int i = 0; i < myanswerCount; i++) {
+//            NSString *str1 = (i+(i*3))>=[resultary count]?@"":[myAnswer objectAtIndex:(i*3)];
+//            NSString *str2 = (1+(i*3))>=[resultary count]?@"":[myAnswer objectAtIndex:(1+(i*3))];
+//            NSString *str3 = (2+(i*3))>=[resultary count]?@"":[myAnswer objectAtIndex:(2+(i*3))];
+//            [mybuilder addRecord:@[str1,str2,str3]];
+//        }
+//        
+//        KWFormView *myanswerformView = [mybuilder startCreatWithWidths:@[@((SCREEN_WIDTH/2 - 90)/3),@((SCREEN_WIDTH/2 - 90)/3),@((SCREEN_WIDTH/2 - 90)/3)] startPoint:CGPointMake(45 , optimalSize.height + 22)];
+//        [cell.contentView addSubview:myanswerformView];
 
         
         //解析图标显示
@@ -416,20 +530,21 @@
     
 
         
-        //小孩答案显示
-        KWFormViewQuickBuilder *builder = [[KWFormViewQuickBuilder alloc] init];
-        for (int i = 0; i < answerCount; i++) {
-            NSString *str1 = (i+(i*3))>=[resultary count]?@"":[resultary objectAtIndex:(i*3)];
-            NSString *str2 = (1+(i*3))>=[resultary count]?@"":[resultary objectAtIndex:(1+(i*3))];
-            NSString *str3 = (2+(i*3))>=[resultary count]?@"":[resultary objectAtIndex:(2+(i*3))];
-            [builder addRecord:@[str1,str2,str3]];
+
+        //收起展开按钮显示
+        UIButton *expandBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 55, optimalSize.height+18, 16, 16)];
+
+        if ([isOpne isEqualToString:@"0"]) {
+            [expandBtn setImage:[UIImage imageNamed:@"homework_open.png"] forState:UIControlStateNormal];
+        }else{
+            [expandBtn setImage:[UIImage imageNamed:@"homework_close.png"] forState:UIControlStateNormal];
         }
+        [expandBtn addTarget:self action:@selector(showMoreContent:) forControlEvents:UIControlEventTouchUpInside];
+        expandBtn.tag = [_resultchoices count] + indexPath.row;
+        [cell.contentView addSubview:expandBtn];
         
-        KWFormView *answerformView = [builder startCreatWithWidths:@[@((SCREEN_WIDTH/2 - 90)/3),@((SCREEN_WIDTH/2 - 90)/3),@((SCREEN_WIDTH/2 - 90)/3)] startPoint:CGPointMake(SCREEN_WIDTH/2 +40, optimalSize.height + 22)];
-        [cell.contentView addSubview:answerformView];
-
-
-        UIButton *truebtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, optimalSize.height+12, 40, 38)];
+        //对错按钮显示
+        UIButton *truebtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 35, optimalSize.height+12, 30, 28)];
         BOOL isture = [[[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:2] boolValue];
         [truebtn setImage:[UIImage imageNamed:isture?@"homework_3":@"homework_4"] forState:UIControlStateNormal];
         [cell.contentView addSubview:truebtn];
@@ -439,6 +554,19 @@
     
     
     return cell;
+}
+
+-(void)showMoreContent:(id)sender
+{
+    UIButton *btn = (UIButton *)sender;
+    NSString *isOpne = [selectDic objectForKey:[NSString stringWithFormat:@"%ld",(long)btn.tag]];
+    [selectDic removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)btn.tag]];
+    if ([isOpne isEqualToString:@"0"]) {
+        [selectDic setObject:@"1" forKey:[NSString stringWithFormat:@"%ld",(long)btn.tag]];
+    }else{
+        [selectDic setObject:@"0" forKey:[NSString stringWithFormat:@"%ld",(long)btn.tag]];
+    }
+    [_resultTable reloadData];
 }
 
 #pragma mark - Scroll

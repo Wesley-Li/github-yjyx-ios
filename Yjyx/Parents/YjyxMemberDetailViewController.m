@@ -431,6 +431,9 @@
         
         [self.view addSubview:paySuccessView];
         
+    }else{
+        [self.view makeToast:@"支付失败" duration:1.5 position:SHOW_CENTER complete:nil];
+
     }
 }
 

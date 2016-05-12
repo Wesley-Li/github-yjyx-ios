@@ -51,13 +51,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Yjyx/Utils/RCLabel/RCLabel.m"
-            timestampString = "484134743.819204"
+            filePath = "Yjyx/AppDelegate.m"
+            timestampString = "484641930.610749"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1322"
-            endingLineNumber = "1322"
-            landmarkName = "+extractTextStyle:"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "-application:didReceiveRemoteNotification:fetchCompletionHandler:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

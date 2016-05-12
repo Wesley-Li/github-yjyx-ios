@@ -32,11 +32,17 @@
     
     [self.view addSubview:dynamicScrollView];
     
-    finishBtn.frame = CGRectMake(finishBtn.frame.origin.x, 175+SCREEN_WIDTH/4, finishBtn.frame.size.width, 44);
+    finishBtn.frame = CGRectMake(finishBtn.frame.origin.x, 175+SCREEN_WIDTH/4, finishBtn.frame.size.width, 40);
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clicked:)];
     [self.view addGestureRecognizer:tap];
 
+    
+    contentText = [[FEPlaceHolderTextView alloc] initWithFrame:CGRectMake(3, 0, SCREEN_WIDTH-6, feedView.frame.size.height)];
+    contentText.placeholder = @"请简要描述您的问题和意见";
+    contentText.font = [UIFont systemFontOfSize:14];
+    [feedView addSubview:contentText];
+    [contentText becomeFirstResponder];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -124,7 +130,7 @@
 
 -(void)upfiletoQiniu:(NSString *)token image:(UIImage*)image
 {
-    NSData *data = UIImageJPEGRepresentation(image, 0.3);
+    NSData *data = UIImageJPEGRepresentation(image, 0.2);
     QNUploadManager *upManager = [[QNUploadManager alloc] init];
     [upManager putData:data key:nil token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resq){
         if (info.error == nil) {
