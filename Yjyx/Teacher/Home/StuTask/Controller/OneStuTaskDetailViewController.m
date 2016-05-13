@@ -37,7 +37,7 @@
     
     // 注册cell
     
-    
+    [self.tableView registerNib:[UINib nibWithNibName:@"TaskCell" bundle:nil] forCellReuseIdentifier:kidentifier1];
     
     
 
@@ -50,7 +50,6 @@
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"getonequestiondetailforonestudent", @"action", self.taskid, @"taskid", self.suid, @"suid", self.qtype, @"qtype", self.qid, @"qid", nil];
     NSLog(@"%@", dic);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
     
     [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
     
@@ -99,11 +98,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 0) {
-        
-    }
+    TaskCell *cell = [tableView dequeueReusableCellWithIdentifier:kidentifier1 forIndexPath:indexPath];
     
-    
+    return cell;
 }
 
 

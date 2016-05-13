@@ -15,11 +15,11 @@
 /**
  *  全屏按钮被点击的通知
  */
-#define WMPlayerFullScreenButtonClickedNotification @"WMPlayerFullScreenButtonClickedNotification"
+#define WMPlayerFullScreenButtonClickedNotification @"fullScreenBtnClickNotice"
 /**
  *  关闭播放器的通知
  */
-#define WMPlayerClosedNotification @"WMPlayerClosedNotification"
+#define WMPlayerClosedNotification @"closeTheVideo"
 /**
  *  播放完成的通知
  */

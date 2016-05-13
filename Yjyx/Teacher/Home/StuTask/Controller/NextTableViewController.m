@@ -81,13 +81,13 @@
 
 -(void)videoDidFinished:(NSNotification *)notice{
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
-    [currentCell.playBtn.superview bringSubviewToFront:currentCell.playBtn];
+    currentCell.playBtn.hidden = NO;
     [self releaseWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
 }
 -(void)closeTheVideo:(NSNotification *)obj{
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
-    [currentCell.playBtn.superview bringSubviewToFront:currentCell.playBtn];
+    currentCell.playBtn.hidden = NO;
     [self releaseWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
 }
@@ -355,6 +355,7 @@
     
     if (indexPath.row == 0) {
         self.taskCell = [tableView dequeueReusableCellWithIdentifier:KTaskCell forIndexPath:indexPath];
+        self.taskCell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSLog(@"%@", _dic);
         [_taskCell setValueWithDictionary:_dic];
         
@@ -367,6 +368,8 @@
     }else if (indexPath.row == 2) {
     
         self.correctCell = [tableView dequeueReusableCellWithIdentifier:KCorectCell forIndexPath:indexPath];
+        self.correctCell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         if ([self.qtype isEqual:@1]) {
             [_correctCell setChoiceValueWithDictionary:_dic];
             
@@ -379,6 +382,8 @@
     }else if (indexPath.row == 3) {
     
         self.solutionCell = [tableView dequeueReusableCellWithIdentifier:KSolutionCell forIndexPath:indexPath];
+        self.solutionCell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         [_solutionCell setSolutionValueWithDiction:_dic];
        
         return _solutionCell;
@@ -457,7 +462,8 @@
     // 将按钮放到底部
     [self.videoCell.backgroundIV addSubview:wmPlayer];
     [self.videoCell.backgroundIV bringSubviewToFront:wmPlayer];
-    [self.videoCell.playBtn.superview sendSubviewToBack:self.videoCell.playBtn];
+//    [self.videoCell.playBtn.superview sendSubviewToBack:self.videoCell.playBtn];
+    self.videoCell.playBtn.hidden = YES;
     [self.tableView reloadData];
     
 }

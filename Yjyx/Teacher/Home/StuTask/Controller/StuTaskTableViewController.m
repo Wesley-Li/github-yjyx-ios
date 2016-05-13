@@ -10,6 +10,8 @@
 #import "TaskListTableViewCell.h"
 #import "TaskModel.h"
 #import "TaskDetailTableViewController.h"
+#import "MJRefresh.h"
+
 
 #define kk @"Task"
 @interface StuTaskTableViewController ()
@@ -128,6 +130,62 @@
    
     [self.navigationController pushViewController:taskDetailVC animated:YES];
 }
+
+
+/**
+ *  集成刷新控件
+ */
+- (void)setupRefresh
+{
+    // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
+    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    //#warning 自动刷新(一进入程序就下拉刷新)
+    [self.tableView headerBeginRefreshing];
+    
+    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
+    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    
+    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
+    self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
+    self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
+    self.tableView.headerRefreshingText = @"正在帮你刷新中...";
+    
+    self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
+    self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
+    self.tableView.footerRefreshingText = @"正在帮你加载中...";
+}
+
+#pragma mark 开始进入刷新状态
+- (void)headerRereshing
+{
+    // 1.添加假数据
+    NSMutableArray *cids = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [[YjyxOverallData sharedInstance].parentInfo.childrens count]; i++) {
+        ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:i];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:childrenEntity.cid forKey:@"id"];
+        [dic setObject:@"0" forKey:@"last_id"];
+        [cids addObject:dic];
+    }
+    [self getnewChildrenActivityWihtCid:[cids JSONString]];
+    
+}
+
+- (void)footerRereshing
+{
+    NSMutableArray *cids = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [[YjyxOverallData sharedInstance].parentInfo.childrens count]; i++) {
+        ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:i];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        [dic setObject:childrenEntity.cid forKey:@"id"];
+        [dic setObject:last_id forKey:@"last_id"];
+        [cids addObject:dic];
+    }
+    [self getoldChildrenActivityWihtCid:[cids JSONString]];
+    
+}
+
+
 
 
 /*
