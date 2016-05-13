@@ -7,10 +7,11 @@
 //
 
 #import "SolutionCell.h"
+#import "RCLabel.h"
 
-@interface SolutionCell ()<UIWebViewDelegate>
+@interface SolutionCell ()
 
-@property (nonatomic, strong) UIWebView *web;
+
 
 
 @end
@@ -29,63 +30,16 @@
         return;
     }
     
-    self.web = [[UIWebView alloc] initWithFrame:CGRectMake(10, 40, SCREEN_WIDTH - 20, 500)];
-    self.web.delegate = self;
-    _web.scrollView.bounces = NO;
-    _web.scrollView.scrollEnabled = NO;
-    _web.scrollView.showsVerticalScrollIndicator = NO;
-    _web.scrollView.showsHorizontalScrollIndicator = NO;
-    _web.userInteractionEnabled = NO;
-    [_web sizeToFit];
-    
-    
     NSString *htmlString = [dic[@"question"] objectForKey:@"explanation"];
-    NSString *htmlContent = [NSString stringWithFormat:@"<div id=\"webview_content_wrapper\">%@</div>", htmlString];
-    [_web loadHTMLString:htmlContent baseURL:nil];
-    [self.contentView addSubview:_web];
-    /*
-    //    NSLog(@"%@", htmlString);
-    [self.web loadHTMLString:htmlString baseURL:nil];
-    CGRect frame = _web.frame;
-    frame.size.width = SCREEN_WIDTH - 20;
-    frame.size.height = _web.scrollView.contentSize.height;
-    _web.frame = frame;
-    
-    
-    
-    NSLog(@"%.f", _web.scrollView.contentSize.height);
-    self.height = _web.frame.size.height + 30 + 30;
-     */
-    
-}
+    NSString *content = [htmlString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    RCLabel *contentLabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 40, SCREEN_WIDTH - 20, 500)];
+    contentLabel.font = [UIFont systemFontOfSize:12];
+    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
+    contentLabel.componentsAndPlainText = componentsDS;
+    CGSize optimalSize = [contentLabel optimumSize];
+    self.height = optimalSize.height + 40 + 40;
+    [self.contentView addSubview:contentLabel];
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-
-    // 获取页面高度
-    NSString *clientHeight_str = [webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"];
-    float clientHeight = [clientHeight_str floatValue];
-    
-    // 设置到webView上
-//    CGRect frame = webView.frame;
-//    frame.size.width = SCREEN_WIDTH - 20;
-//    frame.size.height = clientHeight;
-//    webView.frame = frame;
-    webView.frame = CGRectMake(10, 40, SCREEN_WIDTH - 20, clientHeight);
-    // 获取最佳尺寸
-    CGSize frameB = [webView sizeThatFits:webView.frame.size];
-    
-    // 获取实际高度
-    NSString * height_str= [webView stringByEvaluatingJavaScriptFromString: @"document.getElementById('webview_content_wrapper').offsetHeight + parseInt(window.getComputedStyle(document.getElementsByTagName('body')[0]).getPropertyValue('margin-top'))  + parseInt(window.getComputedStyle(document.getElementsByTagName('body')[0]).getPropertyValue('margin-bottom'))"];
-    float height = [height_str floatValue];
-    
-    //内容实际高度（像素）* 点和像素的比
-    height = height * frameB.height / clientHeight;
-    
-    //再次设置WebView高度（点）
-    webView.frame = CGRectMake(10, 40, SCREEN_WIDTH - 20, height);
-   
-    
-    self.height = height + 40 + 40;
     
 }
 

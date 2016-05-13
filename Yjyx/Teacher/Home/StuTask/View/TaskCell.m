@@ -9,12 +9,13 @@
 #import "TaskCell.h"
 #import "RCLabel.h"
 
-@interface TaskCell ()<UIWebViewDelegate>
+@interface TaskCell ()
 
 
 @property (weak, nonatomic) IBOutlet UILabel *dificultyLabel;
 
-@property (nonatomic, strong) UIWebView *web;
+//@property (weak, nonatomic) IBOutlet RCLabel *contentLabel;
+
 
 
 
@@ -34,52 +35,36 @@
     if (dic == nil) {
         return;
     }
-    self.dificultyLabel.text = [NSString stringWithFormat:@"难度:%@级", [dic[@"question"] objectForKey:@"level"]];
     
+    NSString *htmlString = [NSString stringWithFormat:@"%@", [dic[@"question"] objectForKey:@"content"]];
+    NSString *content = [htmlString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    RCLabel *contentLabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 5, SCREEN_WIDTH - 20, 500)];
+    contentLabel.font = [UIFont systemFontOfSize:12];
+    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
+    contentLabel.componentsAndPlainText = componentsDS;
+    CGSize optimalSize = [contentLabel optimumSize];
+    self.height = optimalSize.height + 15 + 30;
+    [self.contentView addSubview:contentLabel];
     
-    self.web = [[UIWebView alloc] initWithFrame:CGRectMake(10, 5, SCREEN_WIDTH - 20, 500)];
-    self.web.delegate = self;
-    _web.scrollView.bounces = NO;
-    _web.scrollView.scrollEnabled = NO;
-    _web.scrollView.showsVerticalScrollIndicator = NO;
-    _web.scrollView.showsHorizontalScrollIndicator = NO;
-    _web.userInteractionEnabled = NO;
-    [_web sizeToFit];
-
-    NSString *htmlString = [dic[@"question"] objectForKey:@"content"];
-    NSString *htmlContent = [NSString stringWithFormat:@"<div id=\"webview_content_wrapper\">%@</div>", htmlString];
-    [_web loadHTMLString:htmlContent baseURL:nil];
-    [self.contentView addSubview:_web];
+    NSInteger level = [[dic[@"question"] objectForKey:@"level"] integerValue];
+    switch (level) {
+        case 1:
+            self.dificultyLabel.text = @"难度:简单";
+            break;
+        case 2:
+            self.dificultyLabel.text = @"难度:中等";
+            break;
+        case 3:
+            self.dificultyLabel.text = @"难度:较难";
+            break;
+        default:
+            break;
+    }
     
     
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
 
-    // 获取页面高度
-    NSString *clientHeight_str = [webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"];
-    float clientHeight = [clientHeight_str floatValue];
-    
-    // 设置到webView上
-   
-    webView.frame = CGRectMake(10, 5, SCREEN_WIDTH - 20, clientHeight);
-    // 获取最佳尺寸
-    CGSize frameB = [webView sizeThatFits:webView.frame.size];
-    
-    // 获取实际高度
-    NSString * height_str= [webView stringByEvaluatingJavaScriptFromString: @"document.getElementById('webview_content_wrapper').offsetHeight + parseInt(window.getComputedStyle(document.getElementsByTagName('body')[0]).getPropertyValue('margin-top'))  + parseInt(window.getComputedStyle(document.getElementsByTagName('body')[0]).getPropertyValue('margin-bottom'))"];
-    float height = [height_str floatValue];
-    
-    //内容实际高度（像素）* 点和像素的比
-    height = height * frameB.height / clientHeight;
-    
-    //再次设置WebView高度（点）
-    webView.frame = CGRectMake(10, 5, SCREEN_WIDTH - 20, height);
-    
-    
-    self.height = height + 5 + 40;
-
-}
 
 
 

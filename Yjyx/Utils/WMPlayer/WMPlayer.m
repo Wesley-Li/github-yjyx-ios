@@ -26,8 +26,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 @interface WMPlayer ()
 @property (nonatomic,assign)CGPoint firstPoint;
 @property (nonatomic,assign)CGPoint secondPoint;
-@property (nonatomic, retain) NSTimer *durationTimer;
-@property (nonatomic, retain) NSTimer *autoDismissTimer;
+
 @property (nonatomic, retain)NSDateFormatter *dateFormatter;
 
 @end

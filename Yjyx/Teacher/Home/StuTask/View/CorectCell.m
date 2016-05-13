@@ -7,6 +7,7 @@
 //
 
 #import "CorectCell.h"
+#import "RCLabel.h"
 
 
 
@@ -59,7 +60,6 @@
             break;
     }
     
-    NSLog(@"%@", answerLabel.text);
     
     [self.contentView addSubview:answerLabel];
     self.height = answerLabel.frame.size.height + 20 + 10;
@@ -72,16 +72,19 @@
     if (dic == nil) {
         return;
     }
+    
     NSString *htmlString = [NSString stringWithFormat:@"%@", [dic[@"question"] objectForKey:@"answer"]];
     
-    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(10, 30, SCREEN_WIDTH - 20, 1)];
-    [web loadHTMLString:htmlString baseURL:nil];
-    CGRect frame = web.frame;
-    frame.size.width = SCREEN_WIDTH - 20;
-    frame.size.height = web.scrollView.contentSize.height;
-    web.frame = frame;
     
-    self.height = web.frame.size.height + 20 + 10;
+    NSString *content = [htmlString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    RCLabel *contentLabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 30, SCREEN_WIDTH - 20, 500)];
+    contentLabel.font = [UIFont systemFontOfSize:12];
+    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
+    contentLabel.componentsAndPlainText = componentsDS;
+    CGSize optimalSize = [contentLabel optimumSize];
+    self.height = optimalSize.height + 15 + 30;
+    [self.contentView addSubview:contentLabel];
+
     
     
 }

@@ -10,8 +10,11 @@
 
 @interface VideoCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundIV;
 
-@property (nonatomic, assign) CGFloat height;
-- (void)setVideoValueWithDic:(NSDictionary *)dic;
+@property (weak, nonatomic) IBOutlet UIButton *playBtn;
+
+
+//- (void)setVideoValueWithDic:(NSDictionary *)dic;
 
 @end

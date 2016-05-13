@@ -10,6 +10,6 @@
 
 @interface AnswerSituationCell : UITableViewCell
 
-
+@property (nonatomic, assign) CGFloat height;
 
 @end

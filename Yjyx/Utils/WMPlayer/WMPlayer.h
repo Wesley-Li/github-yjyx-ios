@@ -11,6 +11,29 @@
    Copyright © 2016年 郑文明. All rights reserved.
  */
 
+
+/**
+ *  全屏按钮被点击的通知
+ */
+#define WMPlayerFullScreenButtonClickedNotification @"WMPlayerFullScreenButtonClickedNotification"
+/**
+ *  关闭播放器的通知
+ */
+#define WMPlayerClosedNotification @"WMPlayerClosedNotification"
+/**
+ *  播放完成的通知
+ */
+#define WMPlayerFinishedPlayNotification @"WMPlayerFinishedPlayNotification"
+/**
+ *  单击播放器view的通知
+ */
+#define WMPlayerSingleTapNotification @"WMPlayerSingleTapNotification"
+/**
+ *  双击播放器view的通知
+ */
+#define WMPlayerDoubleTapNotification @"WMPlayerDoubleTapNotification"
+
+
 #import <UIKit/UIKit.h>
 #import "Masonry.h"
 
@@ -36,6 +59,12 @@
 @property(nonatomic,retain)UISlider *progressSlider;
 @property(nonatomic,retain)UISlider *volumeSlider;
 @property(nonatomic,copy) NSString *videoURLStr;
+
+/**
+ *  定时器
+ */
+@property (nonatomic, retain) NSTimer *durationTimer;
+@property (nonatomic, retain) NSTimer *autoDismissTimer;
 /**
  *  BOOL值判断当前的状态
  */

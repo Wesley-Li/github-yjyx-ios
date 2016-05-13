@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,8 +14,43 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="430" height="184"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video_pic.png" translatesAutoresizingMaskIntoConstraints="NO" id="KlW-Mz-v4a">
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="184"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Im0-i8-5gX">
+                        <rect key="frame" x="183" y="60" width="64" height="64"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Im0-i8-5gX" secondAttribute="height" multiplier="1:1" id="IdI-aL-rt9"/>
+                            <constraint firstAttribute="width" constant="50" id="sI7-uR-OlH"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="start_btn.png"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="sI7-uR-OlH"/>
+                            </mask>
+                        </variation>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="KlW-Mz-v4a" secondAttribute="bottom" id="9Oe-fS-Yq6"/>
+                    <constraint firstAttribute="trailing" secondItem="KlW-Mz-v4a" secondAttribute="trailing" id="Kke-j3-XYA"/>
+                    <constraint firstItem="KlW-Mz-v4a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Rux-yE-Lgh"/>
+                    <constraint firstItem="Im0-i8-5gX" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="cy1-eH-Td6"/>
+                    <constraint firstItem="Im0-i8-5gX" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="nKK-xN-mHc"/>
+                    <constraint firstItem="KlW-Mz-v4a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ofA-jM-zug"/>
+                    <constraint firstItem="Im0-i8-5gX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="60" id="ypS-7v-xxG"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="backgroundIV" destination="KlW-Mz-v4a" id="8f7-kp-xJA"/>
+                <outlet property="playBtn" destination="Im0-i8-5gX" id="FlL-tl-GzU"/>
+            </connections>
             <point key="canvasLocation" x="407" y="329.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="start_btn.png" width="152" height="150"/>
+        <image name="video_pic.png" width="1125" height="631"/>
+    </resources>
 </document>

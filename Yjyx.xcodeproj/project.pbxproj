@@ -254,6 +254,12 @@
 		3B4864761CCF117300D2DE3C /* PublishHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B48646C1CCF117300D2DE3C /* PublishHomeworkViewController.m */; };
 		3B4864771CCF117300D2DE3C /* PublishHomeworkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */; };
 		3B48647F1CCF3FBA00D2DE3C /* CustomTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B48647E1CCF3FBA00D2DE3C /* CustomTabBarViewController.m */; };
+		3B831A291CE4B19D00724E6B /* OneStuTaskDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B831A281CE4B19D00724E6B /* OneStuTaskDetailViewController.m */; };
+		3B91A6F11CE5B8BB0082A92C /* start_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B91A6EE1CE5B8BB0082A92C /* start_btn.png */; };
+		3B91A6F21CE5B8BB0082A92C /* start_btn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B91A6EF1CE5B8BB0082A92C /* start_btn@3x.png */; };
+		3B91A6F31CE5B8BB0082A92C /* video_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B91A6F01CE5B8BB0082A92C /* video_pic.png */; };
+		3B91A6F71CE6010D0082A92C /* YourAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B91A6F51CE6010D0082A92C /* YourAnswerCell.m */; };
+		3B91A6F81CE6010D0082A92C /* YourAnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B91A6F61CE6010D0082A92C /* YourAnswerCell.xib */; };
 		3BB773941CD86B3A00A24485 /* home_img_book.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773881CD86B3A00A24485 /* home_img_book.png */; };
 		3BB773951CD86B3A00A24485 /* home_img_book@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB773891CD86B3A00A24485 /* home_img_book@3x.png */; };
 		3BB773961CD86B3A00A24485 /* home_img_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7738A1CD86B3A00A24485 /* home_img_camera.png */; };
@@ -723,6 +729,14 @@
 		3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublishHomeworkViewController.xib; sourceTree = "<group>"; };
 		3B48647D1CCF3FBA00D2DE3C /* CustomTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarViewController.h; sourceTree = "<group>"; };
 		3B48647E1CCF3FBA00D2DE3C /* CustomTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarViewController.m; sourceTree = "<group>"; };
+		3B831A271CE4B19D00724E6B /* OneStuTaskDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneStuTaskDetailViewController.h; sourceTree = "<group>"; };
+		3B831A281CE4B19D00724E6B /* OneStuTaskDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneStuTaskDetailViewController.m; sourceTree = "<group>"; };
+		3B91A6EE1CE5B8BB0082A92C /* start_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start_btn.png; sourceTree = "<group>"; };
+		3B91A6EF1CE5B8BB0082A92C /* start_btn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start_btn@3x.png"; sourceTree = "<group>"; };
+		3B91A6F01CE5B8BB0082A92C /* video_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_pic.png; sourceTree = "<group>"; };
+		3B91A6F41CE6010D0082A92C /* YourAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YourAnswerCell.h; sourceTree = "<group>"; };
+		3B91A6F51CE6010D0082A92C /* YourAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YourAnswerCell.m; sourceTree = "<group>"; };
+		3B91A6F61CE6010D0082A92C /* YourAnswerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YourAnswerCell.xib; sourceTree = "<group>"; };
 		3BB773881CD86B3A00A24485 /* home_img_book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_img_book.png; sourceTree = "<group>"; };
 		3BB773891CD86B3A00A24485 /* home_img_book@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_img_book@3x.png"; sourceTree = "<group>"; };
 		3BB7738A1CD86B3A00A24485 /* home_img_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_img_camera.png; sourceTree = "<group>"; };
@@ -1736,6 +1750,9 @@
 				3BCF19071CDC66E600E2EA1A /* list_btn_right@3x.png */,
 				3BCF19081CDC66E600E2EA1A /* list_btn_wrong.png */,
 				3BCF19091CDC66E600E2EA1A /* list_btn_wrong@3x.png */,
+				3B91A6EE1CE5B8BB0082A92C /* start_btn.png */,
+				3B91A6EF1CE5B8BB0082A92C /* start_btn@3x.png */,
+				3B91A6F01CE5B8BB0082A92C /* video_pic.png */,
 				3BCF190A1CDC66E600E2EA1A /* list_def.png */,
 				3BCF190B1CDC66E600E2EA1A /* list_icon_note_nor.png */,
 				3BCF190C1CDC66E600E2EA1A /* list_icon_note_nor2.png */,
@@ -1760,6 +1777,8 @@
 				3BCF193C1CDCC2B500E2EA1A /* TaskDetailTableViewController.m */,
 				3B35DB881CE0560F000B7F83 /* NextTableViewController.h */,
 				3B35DB891CE0560F000B7F83 /* NextTableViewController.m */,
+				3B831A271CE4B19D00724E6B /* OneStuTaskDetailViewController.h */,
+				3B831A281CE4B19D00724E6B /* OneStuTaskDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1807,6 +1826,9 @@
 				3B35DB9F1CE070DB000B7F83 /* VideoCell.h */,
 				3B35DBA01CE070DB000B7F83 /* VideoCell.m */,
 				3B35DBA11CE070DB000B7F83 /* VideoCell.xib */,
+				3B91A6F41CE6010D0082A92C /* YourAnswerCell.h */,
+				3B91A6F51CE6010D0082A92C /* YourAnswerCell.m */,
+				3B91A6F61CE6010D0082A92C /* YourAnswerCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2150,6 +2172,7 @@
 				3B4864771CCF117300D2DE3C /* PublishHomeworkViewController.xib in Resources */,
 				3A44A1EC1CC0C76200B93F6A /* memberCenter_bg2@3x.png in Resources */,
 				3B48644B1CCF10C200D2DE3C /* myclass_click@3x.png in Resources */,
+				3B91A6F21CE5B8BB0082A92C /* start_btn@3x.png in Resources */,
 				3BCF19521CDCC2B500E2EA1A /* TaskListTableViewCell.xib in Resources */,
 				3A2E870A1C8C079F00C3CD6C /* ChildrenResultTableViewController.xib in Resources */,
 				3A8827771C6EE1470008367F /* ParentCommunityViewController.xib in Resources */,
@@ -2180,6 +2203,7 @@
 				3A8B7FA81C75C3A900E990F2 /* LaunchScreen.storyboard in Resources */,
 				3A44AA021CBE489500348B49 /* member_paysuccess@3x.png in Resources */,
 				3B4864461CCF10C200D2DE3C /* hw_stats.png in Resources */,
+				3B91A6F11CE5B8BB0082A92C /* start_btn.png in Resources */,
 				3AF27E381C73239400698673 /* AddChildrenViewController.xib in Resources */,
 				3BB7739D1CD86B3A00A24485 /* home_img_smart@3x.png in Resources */,
 				3BB7739B1CD86B3A00A24485 /* home_img_private@3x.png in Resources */,
@@ -2218,6 +2242,7 @@
 				3A26EE621C71A81B009C3242 /* Parent_Exchange_goods@3x.png in Resources */,
 				3BCF191E1CDC66E600E2EA1A /* list_def.png in Resources */,
 				3AFE02C21CA29D540097CC83 /* member_kexue@3x.png in Resources */,
+				3B91A6F31CE5B8BB0082A92C /* video_pic.png in Resources */,
 				3AE894091C6C306700E8BA97 /* login_select@3x.png in Resources */,
 				3BCF19141CDC66E600E2EA1A /* list_btn_corrected.png in Resources */,
 				3AE8940C1C6C335D00E8BA97 /* login_logo@3x.png in Resources */,
@@ -2242,6 +2267,7 @@
 				3AD1FD941C72BD8F00E362B9 /* MyChildrenTableViewCell.xib in Resources */,
 				3BC7DBE01CDB27ED00E5E12F /* ClassCustomTableViewCell.xib in Resources */,
 				3BB773B81CD8789800A24485 /* CameraViewController.xib in Resources */,
+				3B91A6F81CE6010D0082A92C /* YourAnswerCell.xib in Resources */,
 				3AF339471C770FDC00586A37 /* AutoLoginViewController.xib in Resources */,
 				3BCF19241CDC66E600E2EA1A /* nav_btn_back@3x.png in Resources */,
 				3B4864751CCF117300D2DE3C /* PrivateCenterViewController.xib in Resources */,
@@ -2425,6 +2451,7 @@
 				3B35DBA21CE070DB000B7F83 /* VideoCell.m in Sources */,
 				3A7864331C868062001BB65A /* ChildrenResultViewController.m in Sources */,
 				3AEF272C1C61F08A0028BE09 /* SBJsonBase.m in Sources */,
+				3B831A291CE4B19D00724E6B /* OneStuTaskDetailViewController.m in Sources */,
 				801F44A81CDF164800B7E7E1 /* DataSigner.m in Sources */,
 				807959341CD217BC00C9B841 /* ClassDetailViewController.m in Sources */,
 				3AA1655D1C91AB40006B8756 /* RegexKitLite.m in Sources */,
@@ -2476,6 +2503,7 @@
 				CB40047F1C609BCD00556AA7 /* main.m in Sources */,
 				3A8CAEC11C70B3C200BDEB6B /* ParentChildrensViewController.m in Sources */,
 				3A91F49E1C760CF4001568AA /* PNScatterChartDataItem.m in Sources */,
+				3B91A6F71CE6010D0082A92C /* YourAnswerCell.m in Sources */,
 				3BE01BDF1CDDC3A400781B86 /* TCustomView.m in Sources */,
 				3BFE3B7D1CD9816D00502769 /* ProductEntity.m in Sources */,
 				3BB773C61CD883EA00A24485 /* PhoneChangeViewController.m in Sources */,

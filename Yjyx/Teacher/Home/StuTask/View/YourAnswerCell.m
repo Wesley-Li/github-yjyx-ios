@@ -1,30 +1,19 @@
 //
-//  VideoCell.m
+//  YourAnswerCell.m
 //  Yjyx
 //
-//  Created by  yjyx-ios1 on 16/5/9.
+//  Created by  yjyx-ios1 on 16/5/13.
 //  Copyright © 2016年 Alibaba. All rights reserved.
 //
 
-#import "VideoCell.h"
-#import <AVFoundation/AVFoundation.h>
-#import "WMPlayer.h"
+#import "YourAnswerCell.h"
 
-
-@interface VideoCell ()
-
-
-
-@end
-
-@implementation VideoCell
+@implementation YourAnswerCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
-
-
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
