@@ -319,6 +319,15 @@
 		3BFE3B841CD99E6100502769 /* StuDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B831CD99E6100502769 /* StuDataBase.m */; };
 		3BFE3B871CDA0D4A00502769 /* StuClassEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B861CDA0D4A00502769 /* StuClassEntity.m */; };
 		3BFE3B8A1CDA0D6F00502769 /* StuGroupEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B891CDA0D6F00502769 /* StuGroupEntity.m */; };
+		3F4CA6281CE17FC000F4B791 /* FinshedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4CA6271CE17FC000F4B791 /* FinshedModel.m */; };
+		3FEF7EAA1CE564FF0061AB04 /* list_btn_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEF7EA91CE564FF0061AB04 /* list_btn_right.png */; };
+		3FEF7EAC1CE565080061AB04 /* list_btn_right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEF7EAB1CE565080061AB04 /* list_btn_right@3x.png */; };
+		3FEF7EAE1CE5650D0061AB04 /* list_btn_wrong.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEF7EAD1CE5650D0061AB04 /* list_btn_wrong.png */; };
+		3FEF7EB01CE565150061AB04 /* list_btn_wrong@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FEF7EAF1CE565150061AB04 /* list_btn_wrong@3x.png */; };
+		3FEF7EB31CE568EE0061AB04 /* studentDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEF7EB21CE568EE0061AB04 /* studentDetail.m */; };
+		3FF740601CE308DD00D3C0F7 /* list_btn_shutdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */; };
+		3FF740621CE3090500D3C0F7 /* list_btn_shutdown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF740611CE3090500D3C0F7 /* list_btn_shutdown@3x.png */; };
+		743E1CCF1CE4E3F300B00033 /* StudentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743E1CCE1CE4E3F300B00033 /* StudentDetailViewController.m */; };
 		7D453D9CA19A8B9493453E33 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D2260EAA2B915029186C49 /* libPods.a */; };
 		801F44A51CDF164800B7E7E1 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 801F44401CDF164800B7E7E1 /* AlipaySDK.bundle */; };
 		801F44A61CDF164800B7E7E1 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 801F44411CDF164800B7E7E1 /* AlipaySDK.framework */; };
@@ -799,6 +808,18 @@
 		3BFE3B861CDA0D4A00502769 /* StuClassEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuClassEntity.m; sourceTree = "<group>"; };
 		3BFE3B881CDA0D6F00502769 /* StuGroupEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuGroupEntity.h; sourceTree = "<group>"; };
 		3BFE3B891CDA0D6F00502769 /* StuGroupEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuGroupEntity.m; sourceTree = "<group>"; };
+		3F4CA6261CE17FC000F4B791 /* FinshedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinshedModel.h; sourceTree = "<group>"; };
+		3F4CA6271CE17FC000F4B791 /* FinshedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinshedModel.m; sourceTree = "<group>"; };
+		3FEF7EA91CE564FF0061AB04 /* list_btn_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_btn_right.png; sourceTree = "<group>"; };
+		3FEF7EAB1CE565080061AB04 /* list_btn_right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_btn_right@3x.png"; sourceTree = "<group>"; };
+		3FEF7EAD1CE5650D0061AB04 /* list_btn_wrong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_btn_wrong.png; sourceTree = "<group>"; };
+		3FEF7EAF1CE565150061AB04 /* list_btn_wrong@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_btn_wrong@3x.png"; sourceTree = "<group>"; };
+		3FEF7EB11CE568EE0061AB04 /* studentDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = studentDetail.h; sourceTree = "<group>"; };
+		3FEF7EB21CE568EE0061AB04 /* studentDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = studentDetail.m; sourceTree = "<group>"; };
+		3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_btn_shutdown.png; sourceTree = "<group>"; };
+		3FF740611CE3090500D3C0F7 /* list_btn_shutdown@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_btn_shutdown@3x.png"; sourceTree = "<group>"; };
+		743E1CCD1CE4E3F300B00033 /* StudentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentDetailViewController.h; sourceTree = "<group>"; };
+		743E1CCE1CE4E3F300B00033 /* StudentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentDetailViewController.m; sourceTree = "<group>"; };
 		801F44401CDF164800B7E7E1 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		801F44411CDF164800B7E7E1 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		801F44441CDF164800B7E7E1 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
@@ -1560,6 +1581,10 @@
 				3B48643A1CCF10C200D2DE3C /* pic.png */,
 				3B48643B1CCF10C200D2DE3C /* privatecenter@3x.png */,
 				3B48643C1CCF10C200D2DE3C /* privatecenter_click@3x.png */,
+				3FEF7EA91CE564FF0061AB04 /* list_btn_right.png */,
+				3FEF7EAB1CE565080061AB04 /* list_btn_right@3x.png */,
+				3FEF7EAD1CE5650D0061AB04 /* list_btn_wrong.png */,
+				3FEF7EAF1CE565150061AB04 /* list_btn_wrong@3x.png */,
 				3B48643D1CCF10C200D2DE3C /* publishhw@3x.png */,
 				3B48643E1CCF10C200D2DE3C /* publishhw_click@3x.png */,
 				3B48643F1CCF10C200D2DE3C /* report.png */,
@@ -1700,6 +1725,8 @@
 				3BCF19011CDC66E600E2EA1A /* list_btn_corrected@3x.png */,
 				3BCF19021CDC66E600E2EA1A /* list_btn_More.png */,
 				3BCF19031CDC66E600E2EA1A /* list_btn_More@3x.png */,
+				3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */,
+				3FF740611CE3090500D3C0F7 /* list_btn_shutdown@3x.png */,
 				3BCF19041CDC66E600E2EA1A /* list_btn_nor.png */,
 				3BCF19051CDC66E600E2EA1A /* list_btn_nor@3x.png */,
 				3BCF19061CDC66E600E2EA1A /* list_btn_right.png */,
@@ -1727,6 +1754,8 @@
 				3BCF193A1CDCC2B500E2EA1A /* StuTaskTableViewController.m */,
 				3BCF193B1CDCC2B500E2EA1A /* TaskDetailTableViewController.h */,
 				3BCF193C1CDCC2B500E2EA1A /* TaskDetailTableViewController.m */,
+				743E1CCD1CE4E3F300B00033 /* StudentDetailViewController.h */,
+				743E1CCE1CE4E3F300B00033 /* StudentDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1740,6 +1769,10 @@
 				3BE01BD31CDD7DBE00781B86 /* BlankFillModel.m */,
 				3BE01BD51CDD7DD700781B86 /* ChoiceModel.h */,
 				3BE01BD61CDD7DD700781B86 /* ChoiceModel.m */,
+				3F4CA6261CE17FC000F4B791 /* FinshedModel.h */,
+				3F4CA6271CE17FC000F4B791 /* FinshedModel.m */,
+				3FEF7EB11CE568EE0061AB04 /* studentDetail.h */,
+				3FEF7EB21CE568EE0061AB04 /* studentDetail.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2105,10 +2138,12 @@
 				3BCF19521CDCC2B500E2EA1A /* TaskListTableViewCell.xib in Resources */,
 				3A2E870A1C8C079F00C3CD6C /* ChildrenResultTableViewController.xib in Resources */,
 				3A8827771C6EE1470008367F /* ParentCommunityViewController.xib in Resources */,
+				3FF740621CE3090500D3C0F7 /* list_btn_shutdown@3x.png in Resources */,
 				3BB773A41CD8781400A24485 /* SmartViewController.xib in Resources */,
 				3BCF19181CDC66E600E2EA1A /* list_btn_nor.png in Resources */,
 				3A26EE611C71A81B009C3242 /* Parent_default@3x.png in Resources */,
 				3AC1D1EC1CCDE7EE006291D0 /* regist_student_logo@3x.png in Resources */,
+				3FEF7EAC1CE565080061AB04 /* list_btn_right@3x.png in Resources */,
 				3B4864571CCF10C200D2DE3C /* tab_home@3x.png in Resources */,
 				3AC1D1EA1CCDE7EE006291D0 /* regist_login_btn@3x.png in Resources */,
 				3AFE02C31CA29D540097CC83 /* member_shuxue@3x.png in Resources */,
@@ -2136,6 +2171,7 @@
 				3BB7739B1CD86B3A00A24485 /* home_img_private@3x.png in Resources */,
 				3BCF191D1CDC66E600E2EA1A /* list_btn_wrong@3x.png in Resources */,
 				3BCF19271CDC66E600E2EA1A /* brooch@3x.png in Resources */,
+				3FEF7EAE1CE5650D0061AB04 /* list_btn_wrong.png in Resources */,
 				3BE01BE11CDDCA8200781B86 /* TCustomView.xib in Resources */,
 				3AE894021C6C28C300E8BA97 /* login_btn@3x.png in Resources */,
 				3BB773961CD86B3A00A24485 /* home_img_camera.png in Resources */,
@@ -2168,6 +2204,7 @@
 				3BCF191E1CDC66E600E2EA1A /* list_def.png in Resources */,
 				3AFE02C21CA29D540097CC83 /* member_kexue@3x.png in Resources */,
 				3AE894091C6C306700E8BA97 /* login_select@3x.png in Resources */,
+				3FF740601CE308DD00D3C0F7 /* list_btn_shutdown.png in Resources */,
 				3BCF19141CDC66E600E2EA1A /* list_btn_corrected.png in Resources */,
 				3AE8940C1C6C335D00E8BA97 /* login_logo@3x.png in Resources */,
 				3A26EE661C71A81B009C3242 /* Parent_statistics@3x.png in Resources */,
@@ -2235,6 +2272,7 @@
 				3B4864731CCF117300D2DE3C /* MyClassViewController.xib in Resources */,
 				3B48644A1CCF10C200D2DE3C /* myclass@3x.png in Resources */,
 				3B4864501CCF10C200D2DE3C /* privatecenter_click@3x.png in Resources */,
+				3FEF7EB01CE565150061AB04 /* list_btn_wrong@3x.png in Resources */,
 				3AF11DDA1CB211D600F98A03 /* YjyxMemberDetailViewController.xib in Resources */,
 				3B4864521CCF10C200D2DE3C /* publishhw_click@3x.png in Resources */,
 				3AC1D1E21CCDE70E006291D0 /* RegistFinalViewController.xib in Resources */,
@@ -2252,6 +2290,7 @@
 				3A26EE6B1C71CCDB009C3242 /* MyChildrenViewController.xib in Resources */,
 				3AA165681C91BCD6006B8756 /* homework_3@3x.png in Resources */,
 				3BB773C21CD883C700A24485 /* NameChageViewController.xib in Resources */,
+				3FEF7EAA1CE564FF0061AB04 /* list_btn_right.png in Resources */,
 				3B4864561CCF10C200D2DE3C /* tab_bg@2x.png in Resources */,
 				807959351CD217BC00C9B841 /* ClassDetailViewController.xib in Resources */,
 				3BB773BD1CD878B900A24485 /* PrivateViewController.xib in Resources */,
@@ -2403,6 +2442,7 @@
 				3AEF27271C61F08A0028BE09 /* UIImageEffects.m in Sources */,
 				3AD1FD931C72BD8F00E362B9 /* MyChildrenTableViewCell.m in Sources */,
 				3AD1FDA31C73113700E362B9 /* ParentChildrenTableViewCell.m in Sources */,
+				3FEF7EB31CE568EE0061AB04 /* studentDetail.m in Sources */,
 				3A26EE6A1C71CCDB009C3242 /* MyChildrenViewController.m in Sources */,
 				3AEF27261C61F08A0028BE09 /* UIImage+BlurGlass.m in Sources */,
 				3A8CAEB81C70B36200BDEB6B /* SDWebImageDecoder.m in Sources */,
@@ -2412,6 +2452,7 @@
 				3A04A5D31C93E6290040D913 /* View+MASAdditions.m in Sources */,
 				3BE01BD71CDD7DD700781B86 /* ChoiceModel.m in Sources */,
 				3A88277C1C6EE1820008367F /* ParentPersonalViewController.m in Sources */,
+				743E1CCF1CE4E3F300B00033 /* StudentDetailViewController.m in Sources */,
 				3A04A5D11C93E6290040D913 /* NSArray+MASAdditions.m in Sources */,
 				3BCF194C1CDCC2B500E2EA1A /* TaskModel.m in Sources */,
 				3BFE3B871CDA0D4A00502769 /* StuClassEntity.m in Sources */,
@@ -2432,6 +2473,7 @@
 				3A91F4991C760CF4001568AA /* PNPieChartDataItem.m in Sources */,
 				3AEF272A1C61F08A0028BE09 /* ViewRender.m in Sources */,
 				3A8CAEB71C70B36200BDEB6B /* SDImageCache.m in Sources */,
+				3F4CA6281CE17FC000F4B791 /* FinshedModel.m in Sources */,
 				3B48646E1CCF117300D2DE3C /* TeacherHomeViewController.m in Sources */,
 				3A04A5D01C93E6290040D913 /* MASViewConstraint.m in Sources */,
 				3BFE3B811CD981AE00502769 /* StudentEntity.m in Sources */,

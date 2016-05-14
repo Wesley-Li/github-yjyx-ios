@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class TaskModel;
+
 @interface TaskDetailTableViewController : UITableViewController
 
 @property (nonatomic, strong) TaskModel *taskModel;
