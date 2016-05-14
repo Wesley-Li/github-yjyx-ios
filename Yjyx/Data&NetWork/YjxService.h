@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-//#define BaseURL @"http://139.196.14.118"
-#define BaseURL @"http://zgyjyx.com"
+#define BaseURL @"http://139.196.14.118"
+//#define BaseURL @"http://zgyjyx.com"
 @interface YjxService : NSObject
 
 //获取实例
@@ -73,6 +73,9 @@
 
 //用户反馈
 -(void)feedBack:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
+
+//获取用户订单
+-(void)getOrder:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
 
 /*
 学生相关接口

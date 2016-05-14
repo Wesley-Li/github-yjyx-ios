@@ -233,7 +233,7 @@
 
     for (int i =0 ; i<[openChildAry count]; i++) {
         ChildrenEntity *entity = [openChildAry objectAtIndex:i];
-        UIButton *childrenBtn = [[UIButton alloc] initWithFrame:CGRectMake(68+i*42, 38, 35, 15)];
+        UIButton *childrenBtn = [[UIButton alloc] initWithFrame:CGRectMake(68+i*50, 38, 43, 15)];
         [childrenBtn setTitle:entity.name forState:UIControlStateNormal];
         [childrenBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         childrenBtn.titleLabel.font = [UIFont systemFontOfSize:12];

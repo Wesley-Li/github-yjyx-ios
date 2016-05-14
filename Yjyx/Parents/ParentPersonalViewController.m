@@ -13,6 +13,7 @@
 #import "ParentChildrensViewController.h"
 #import "YjyxSoundViewController.h"
 #import "YjyxFeedBackViewController.h"
+#import "YjyxOrderViewController.h"
 
 @interface ParentPersonalViewController ()<soundSelectDelegate>
 {
@@ -74,7 +75,7 @@
 {
     switch (section) {
         case 0:
-            return 3;
+            return 4;
             break;
         case 1:
             return 4;
@@ -113,9 +114,13 @@
             cell.textLabel.text = @"手机号码：";
             cell.detailTextLabel.text = [YjyxOverallData sharedInstance].parentInfo.phone;
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-        }else{
+        }else if (indexPath.row == 2){
             cell.textLabel.text = @"我的孩子";
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        }else{
+            cell.textLabel.text = @"我的订单";
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+
         }
     }
     else if (indexPath.section == 1)
@@ -194,10 +199,14 @@
             ParentModifyPhoneViewController *modifyPhone = [[ParentModifyPhoneViewController alloc] init];
             [modifyPhone setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:modifyPhone animated:YES];
-        }else{
+        }else if (indexPath.row == 2){
             ParentChildrensViewController *childrens = [[ParentChildrensViewController alloc] init];
             [childrens setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:childrens animated:YES];
+        }else{
+            YjyxOrderViewController *vc = [[YjyxOrderViewController alloc] init];
+            [vc setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }else if (indexPath.section == 1){
         if (indexPath.row == 2) {

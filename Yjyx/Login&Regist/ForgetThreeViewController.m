@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _second = 120;
+    _second = 60;
      _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
     titleLb.text = [NSString stringWithFormat:@"请为您的账号%@设置密码，以保证下次正常登录",_phoneStr];
 }
@@ -31,8 +31,8 @@
 
 -(void)resetTimer
 {
-    _second = 120;
-    codeLb.text = @"重新获取验证码(120s)";
+    _second = 60;
+    codeLb.text = @"重新获取验证码(60s)";
     [_timer invalidate];
     _timer = nil;
 

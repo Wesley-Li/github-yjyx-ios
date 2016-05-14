@@ -36,7 +36,7 @@
 -(IBAction)getRegisterCode:(id)sender
 {
     if (phoneText.text.length == 0) {
-        [self.view makeToast:@"请输入正确的手机号" duration:1.0 position:SHOW_BOTTOM complete:nil];
+        [self.view makeToast:@"请输入正确的账号" duration:1.0 position:SHOW_BOTTOM complete:nil];
         return;
     }
     NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",phoneText.text];

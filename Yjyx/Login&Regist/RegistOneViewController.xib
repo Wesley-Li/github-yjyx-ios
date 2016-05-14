@@ -63,7 +63,7 @@
                         <action selector="selectRoleRegist:" destination="-1" eventType="touchUpInside" id="vW2-7K-LwC"/>
                     </connections>
                 </button>
-                <view hidden="YES" contentMode="scaleToFill" id="gfj-Sa-fwC">
+                <view contentMode="scaleToFill" id="gfj-Sa-fwC">
                     <rect key="frame" x="0.0" y="232" width="320" height="150"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -76,11 +76,11 @@
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="regist_text_bg.png" id="aWf-Xz-XuH">
                             <rect key="frame" x="37" y="44" width="246" height="40"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" id="T0N-ko-3Hq">
                             <rect key="frame" x="48" y="44" width="224" height="40"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -89,7 +89,7 @@
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="AHp-vj-fIe">
                             <rect key="frame" x="37" y="96" width="246" height="40"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="确    定" backgroundImage="login_btn.png"/>
                             <connections>
                                 <action selector="checkCode:" destination="-1" eventType="touchUpInside" id="i48-xA-B1F"/>

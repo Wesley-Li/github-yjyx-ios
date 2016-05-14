@@ -119,7 +119,7 @@
 -(IBAction)getChangeCode:(id)sender
 {
     if (![_phoneTextfield.text isPhone]) {
-        [self.view makeToast:@"请输入正确的手机号" duration:1.0 position:SHOW_CENTER complete:nil];
+        [self.view makeToast:@"请输入正确的账号" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
     NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",_phoneTextfield.text];

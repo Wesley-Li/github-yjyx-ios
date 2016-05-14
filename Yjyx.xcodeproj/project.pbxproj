@@ -23,6 +23,11 @@
 		3A04A5DA1C93E6590040D913 /* ChildrenVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A04A5D81C93E6590040D913 /* ChildrenVideoViewController.xib */; };
 		3A04A5DF1C9406850040D913 /* YjyxWorkPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A04A5DD1C9406850040D913 /* YjyxWorkPreviewViewController.m */; };
 		3A04A5E01C9406850040D913 /* YjyxWorkPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A04A5DE1C9406850040D913 /* YjyxWorkPreviewViewController.xib */; };
+		3A188F9A1CE5C51600F055DD /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A188F981CE5C51600F055DD /* OrderTableViewCell.m */; };
+		3A188F9B1CE5C51600F055DD /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A188F991CE5C51600F055DD /* OrderTableViewCell.xib */; };
+		3A188F9F1CE5D60B00F055DD /* YjyxOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A188F9D1CE5D60B00F055DD /* YjyxOrderViewController.m */; };
+		3A188FA01CE5D60B00F055DD /* YjyxOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A188F9E1CE5D60B00F055DD /* YjyxOrderViewController.xib */; };
+		3A188FA31CE5D8DF00F055DD /* OrderEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A188FA21CE5D8DF00F055DD /* OrderEntity.m */; };
 		3A26EE601C71A81B009C3242 /* Parent_children@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A26EE591C71A81B009C3242 /* Parent_children@3x.png */; };
 		3A26EE611C71A81B009C3242 /* Parent_default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A26EE5A1C71A81B009C3242 /* Parent_default@3x.png */; };
 		3A26EE621C71A81B009C3242 /* Parent_Exchange_goods@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A26EE5B1C71A81B009C3242 /* Parent_Exchange_goods@3x.png */; };
@@ -290,6 +295,14 @@
 		3A04A5DC1C9406850040D913 /* YjyxWorkPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxWorkPreviewViewController.h; sourceTree = "<group>"; };
 		3A04A5DD1C9406850040D913 /* YjyxWorkPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxWorkPreviewViewController.m; sourceTree = "<group>"; };
 		3A04A5DE1C9406850040D913 /* YjyxWorkPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxWorkPreviewViewController.xib; sourceTree = "<group>"; };
+		3A188F971CE5C51600F055DD /* OrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewCell.h; sourceTree = "<group>"; };
+		3A188F981CE5C51600F055DD /* OrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewCell.m; sourceTree = "<group>"; };
+		3A188F991CE5C51600F055DD /* OrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
+		3A188F9C1CE5D60B00F055DD /* YjyxOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxOrderViewController.h; sourceTree = "<group>"; };
+		3A188F9D1CE5D60B00F055DD /* YjyxOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxOrderViewController.m; sourceTree = "<group>"; };
+		3A188F9E1CE5D60B00F055DD /* YjyxOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxOrderViewController.xib; sourceTree = "<group>"; };
+		3A188FA11CE5D8DF00F055DD /* OrderEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderEntity.h; sourceTree = "<group>"; };
+		3A188FA21CE5D8DF00F055DD /* OrderEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderEntity.m; sourceTree = "<group>"; };
 		3A26EE591C71A81B009C3242 /* Parent_children@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Parent_children@3x.png"; sourceTree = "<group>"; };
 		3A26EE5A1C71A81B009C3242 /* Parent_default@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Parent_default@3x.png"; sourceTree = "<group>"; };
 		3A26EE5B1C71A81B009C3242 /* Parent_Exchange_goods@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Parent_Exchange_goods@3x.png"; sourceTree = "<group>"; };
@@ -1080,6 +1093,12 @@
 				3A3827871CDF185F00EAB979 /* YjyxFeedBackViewController.h */,
 				3A3827881CDF185F00EAB979 /* YjyxFeedBackViewController.m */,
 				3A3827891CDF185F00EAB979 /* YjyxFeedBackViewController.xib */,
+				3A188F9C1CE5D60B00F055DD /* YjyxOrderViewController.h */,
+				3A188F9D1CE5D60B00F055DD /* YjyxOrderViewController.m */,
+				3A188F9E1CE5D60B00F055DD /* YjyxOrderViewController.xib */,
+				3A188F971CE5C51600F055DD /* OrderTableViewCell.h */,
+				3A188F981CE5C51600F055DD /* OrderTableViewCell.m */,
+				3A188F991CE5C51600F055DD /* OrderTableViewCell.xib */,
 			);
 			name = Personal;
 			sourceTree = "<group>";
@@ -1277,6 +1296,8 @@
 				3AD1FD8E1C72B6D100E362B9 /* ChildrenActivity.m */,
 				3A724DAA1CAE63BD00A06D72 /* ProductEntity.h */,
 				3A724DAB1CAE63BD00A06D72 /* ProductEntity.m */,
+				3A188FA11CE5D8DF00F055DD /* OrderEntity.h */,
+				3A188FA21CE5D8DF00F055DD /* OrderEntity.m */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -1656,6 +1677,7 @@
 				3AD1FD9F1C72CE5000E362B9 /* CommonWebViewController.xib in Resources */,
 				3AC1D1EB1CCDE7EE006291D0 /* regist_parent_logo@3x.png in Resources */,
 				3A8B7FA81C75C3A900E990F2 /* LaunchScreen.storyboard in Resources */,
+				3A188F9B1CE5C51600F055DD /* OrderTableViewCell.xib in Resources */,
 				3A44AA021CBE489500348B49 /* member_paysuccess@3x.png in Resources */,
 				3AF27E381C73239400698673 /* AddChildrenViewController.xib in Resources */,
 				3AE894021C6C28C300E8BA97 /* login_btn@3x.png in Resources */,
@@ -1732,6 +1754,7 @@
 				3A8CAE9A1C70A39600BDEB6B /* comm_back@2x.png in Resources */,
 				3A88278F1C6EE9BD0008367F /* RegistViewController.xib in Resources */,
 				3A8827891C6EE5730008367F /* tab_personal@3x.png in Resources */,
+				3A188FA01CE5D60B00F055DD /* YjyxOrderViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1819,6 +1842,7 @@
 				3A91F4951C760CF4001568AA /* PNLineChart.m in Sources */,
 				3A4057071CCF6FAF00258784 /* ForgetOneViewController.m in Sources */,
 				3A44A9F91CBD1CAB00348B49 /* openssl_wrapper.m in Sources */,
+				3A188FA31CE5D8DF00F055DD /* OrderEntity.m in Sources */,
 				3A88278E1C6EE9BD0008367F /* RegistViewController.m in Sources */,
 				3A8CAE961C70A12E00BDEB6B /* ParentModifyPhoneViewController.m in Sources */,
 				3A04A5CD1C93E6290040D913 /* MASConstraintMaker.m in Sources */,
@@ -1857,6 +1881,7 @@
 				3AB212B31CA2E11900DCC618 /* KWFormView.m in Sources */,
 				3AC1D1E31CCDE70E006291D0 /* RegistOneViewController.m in Sources */,
 				3A44A9F71CBD1CAB00348B49 /* MD5DataSigner.m in Sources */,
+				3A188F9A1CE5C51600F055DD /* OrderTableViewCell.m in Sources */,
 				3AEF27271C61F08A0028BE09 /* UIImageEffects.m in Sources */,
 				3AD1FD931C72BD8F00E362B9 /* MyChildrenTableViewCell.m in Sources */,
 				3A44A91A1CBD0F3800348B49 /* APAuthV2Info.m in Sources */,
@@ -1871,6 +1896,7 @@
 				3A04A5D31C93E6290040D913 /* View+MASAdditions.m in Sources */,
 				3A88277C1C6EE1820008367F /* ParentPersonalViewController.m in Sources */,
 				3A04A5D11C93E6290040D913 /* NSArray+MASAdditions.m in Sources */,
+				3A188F9F1CE5D60B00F055DD /* YjyxOrderViewController.m in Sources */,
 				CB40047F1C609BCD00556AA7 /* main.m in Sources */,
 				3A44A91B1CBD0F3800348B49 /* Order.m in Sources */,
 				3A8CAEC11C70B3C200BDEB6B /* ParentChildrensViewController.m in Sources */,
@@ -2019,7 +2045,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -2064,7 +2090,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
