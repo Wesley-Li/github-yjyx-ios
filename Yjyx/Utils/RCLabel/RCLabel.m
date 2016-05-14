@@ -352,7 +352,7 @@ static NSInteger totalCount = 0;
 
 CGSize MyGetSize(void* refCon) {
     NSString *src = (NSString*)refCon;
-    __block CGSize size = CGSizeMake(100.0,IMAGE_MAX_HEIGHT);
+    __block CGSize size = CGSizeMake(50,50);
     
     if (src) {
         

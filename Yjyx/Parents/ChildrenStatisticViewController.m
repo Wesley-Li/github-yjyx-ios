@@ -383,35 +383,6 @@
 
     }
     
-//    switch (type) {
-//        case 1:
-//            [pieLineChart removeFromSuperview];
-//            childrensubView.hidden = YES;
-//            detailLb.text = @"";
-//            subjectLb.text = @"";
-//            label1.text = @"";
-//            label2.text = @"";
-//            label3.text = @"";
-//            childrensubLb.text = childrenEntity.name;
-//            [self getChildrenAchievement:childrenEntity.cid];
-//            break;
-//        case 2:
-//            childrentaskView.hidden = YES;
-//            taskweikeLb.text = @"";
-//            taskSubjectlb.text = @"";
-//            taskhomeworkLb.text = @"";
-//            childrentaskLb.text = childrenEntity.name;
-//            [self getchildrenTaskWithCid:childrenEntity.cid];
-//            break;
-//        case 3:
-//            childrenbillionView.hidden = YES;
-//            billionCountLb.text = @"";
-//            childrenbillionLb.text = childrenEntity.name;
-//            [self getchildrenbillionWithCid:childrenEntity.cid];
-//            break;
-//        default:
-//            break;
-//    }
 }
 
 

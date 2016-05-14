@@ -170,6 +170,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:@"/api/parents/children/statistic/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
         }else{

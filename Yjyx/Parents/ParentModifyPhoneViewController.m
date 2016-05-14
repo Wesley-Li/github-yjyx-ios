@@ -130,6 +130,7 @@
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
                 //发送注册码按钮失效，防止频繁请求
+                timeLb.text = [NSString stringWithFormat:@"%ds",_second--];
                 [verifyBtn setEnabled:false];
             }else{
                 [self.view makeToast:@"获取验证码失败，请稍后重试" duration:1.0 position:SHOW_CENTER complete:nil];
@@ -154,6 +155,7 @@
     _second = 60;
     timeLb.text = @"获取验证码";
     [_timer invalidate];
+    [verifyBtn setEnabled:true];
     _timer = nil;
 }
 
