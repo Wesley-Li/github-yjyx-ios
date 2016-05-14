@@ -11,6 +11,7 @@
 @interface TeacherEntity : NSObject
 
 @property (nonatomic, copy) NSString *phone;// 电话
+@property (nonatomic, copy) NSString *coins;// 积分
 @property (nonatomic, copy) NSString *avatar;// 头像
 @property (nonatomic, copy) NSString *birth;// 生日
 @property (nonatomic, copy) NSString *address;// 地址

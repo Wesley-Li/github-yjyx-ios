@@ -351,6 +351,9 @@
     }else{
         
         NSString *key = [NSString stringWithFormat:@"%@",[[_resultblankfills objectAtIndex:indexPath.row] firstObject]];
+        
+        
+        
         NSString *content = [[_blankfills objectForKey:key] objectForKey:@"content"];
         content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
         RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
@@ -358,6 +361,10 @@
         RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
         templabel.componentsAndPlainText = componentsDS;
         CGSize optimalSize = [templabel optimumSize];
+        
+        
+        
+        
         
         NSArray *resultary = [[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:1];
         NSInteger answerCount = [resultary count]%3 == 0?([resultary count]/3):([resultary count]/3 +1);

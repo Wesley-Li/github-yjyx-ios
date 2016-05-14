@@ -12,6 +12,10 @@
 
 @interface TeacherHomeViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
+
+
+
+
 @end
 
 @implementation TeacherHomeViewController
@@ -26,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
 
     // 头像
     [self.picImage setImageWithURL:[NSURL URLWithString:[YjyxOverallData sharedInstance].teacherInfo.avatar] placeholderImage:[UIImage imageNamed:@"pic"]];
@@ -36,6 +41,9 @@
     
     // 名字
     _nameLabel.text = [YjyxOverallData sharedInstance].teacherInfo.name;
+    
+    // 积分
+    _scoreLabel.text = [YjyxOverallData sharedInstance].teacherInfo.coins;
     
     // 简介
 #warning 后续可能会加上老师的科目信息
@@ -57,6 +65,9 @@
     self.picImage.layer.masksToBounds = YES;
 
 }
+
+
+
 
 
 #pragma mark - 点击积分按钮

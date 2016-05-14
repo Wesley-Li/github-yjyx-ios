@@ -331,7 +331,7 @@
         UIGraphicsEndImageContext();
         [_cusTBViewController.tabBar setBackgroundImage:img];
         [_cusTBViewController.tabBar setShadowImage:img];
-        
+        _cusTBViewController.selectedIndex = 0;
         self.window.rootViewController = _cusTBViewController;
 
     
