@@ -17,6 +17,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *finishedLabel;
 @property (weak, nonatomic) IBOutlet UILabel *deadlineLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *statusImage;
+
+
 @end
 
 @implementation TaskListTableViewCell
@@ -27,6 +30,8 @@
 }
 
 - (void)setValueWithTaskModel:(TaskModel *)model {
+    
+    self.statusImage.hidden = YES;
 
     NSArray *arr = [model.delivertime componentsSeparatedByString:@"T"];
     NSArray *arr2 = [arr[1] componentsSeparatedByString:@":"];

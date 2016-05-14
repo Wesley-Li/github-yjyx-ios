@@ -45,7 +45,7 @@
 
 
 
-
+/*
 - (instancetype)init{
     self = [super init];
     if (self) {
@@ -54,6 +54,7 @@
     }
     return self;
 }
+ */
 -(BOOL)prefersStatusBarHidden{
     if (wmPlayer) {
         if (wmPlayer.isFullscreen) {
@@ -264,6 +265,8 @@
  */
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // 初始状态
+    isSmallScreen = NO;
     // 请求网络
     [self readDataFromNetWork];
     
@@ -356,7 +359,7 @@
     if (indexPath.row == 0) {
         self.taskCell = [tableView dequeueReusableCellWithIdentifier:KTaskCell forIndexPath:indexPath];
         self.taskCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        NSLog(@"%@", _dic);
+//        NSLog(@"%@", _dic);
         [_taskCell setValueWithDictionary:_dic];
         
         return _taskCell;

@@ -41,6 +41,7 @@
     NSInteger answer = [answerNumber integerValue];
     NSLog(@"%ld", answer);
     UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 25, SCREEN_WIDTH - 20, 40)];
+    answerLabel.font = [UIFont systemFontOfSize:13];
     
     switch (answer) {
         case 0:

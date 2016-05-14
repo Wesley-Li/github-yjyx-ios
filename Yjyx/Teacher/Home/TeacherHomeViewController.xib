@@ -12,7 +12,7 @@
                 <outlet property="descriptionLabel" destination="5sh-jN-mEu" id="aSe-3Z-Odj"/>
                 <outlet property="nameLabel" destination="M4O-em-cz1" id="mJB-WK-Lnd"/>
                 <outlet property="picImage" destination="Lcp-0J-T4V" id="NyL-cj-3gI"/>
-                <outlet property="scoreLabel" destination="iYz-d1-kSe" id="A33-83-tQp"/>
+                <outlet property="scoreLabel" destination="iYz-d1-kSe" id="TXH-l0-1Mt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

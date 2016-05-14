@@ -44,11 +44,14 @@
     self.last_id = @0;
     // 配置导航栏
     self.title = @"学生作业";
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:20/255.0 green:155/255.0 blue:213/255.0 alpha:1.0];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:3/255.0 green:136/255.0 blue:227/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
     [self readDataFromNetWork];
+    [self refreshAll];
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:@"TaskListTableViewCell" bundle:nil]forCellReuseIdentifier:kk];
@@ -60,6 +63,39 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+// 刷新
+- (void)refreshAll {
+
+    // 头部刷新
+    [self.tableView addHeaderWithTarget:self action:@selector(headerRefresh)];
+    // 尾部加载
+    [self.tableView addFooterWithTarget:self action:@selector(footerRefresh)];
+}
+
+// 刷新头部
+- (void)headerRefresh {
+
+    self.direction = @1;
+    self.last_id = @0;
+    [self readDataFromNetWork];
+}
+
+// 尾部加载
+- (void)footerRefresh {
+
+    TaskModel *model = self.dataSource.lastObject;
+    self.direction = @0;
+    self.last_id = model.t_id;
+    
+    if ([self.hasmore isEqual:@0]) {
+        self.tableView.footerRefreshingText = @"没有更多了!!!";
+    }
+    
+    [self readDataFromNetWork];
+    
+}
+
+
 // 网络请求
 - (void)readDataFromNetWork {
     
@@ -69,21 +105,35 @@
     [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:TEACHER_GET_ALL_TASKLIST_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-//        NSLog(@"%@", responseObject);
+        NSLog(@"%@", responseObject);
         
-//        if (responseObject[@"retcode"] == 0) {
+        // 创建临时数组
+        NSMutableArray *currentArr = [NSMutableArray array];
+        
+        if ([responseObject[@"retcode"] isEqual:@0]) {
             self.hasmore = responseObject[@"hasmore"];
             for (NSDictionary *dic in responseObject[@"tasks"]) {
                 TaskModel *model = [[TaskModel alloc] init];
                 [model initTaskModelWithDic:dic];
-                [self.dataSource addObject:model];
+                [currentArr addObject:model];
+            }
+            
+            // 判断刷新还是加载
+            if ([self.direction isEqual:@1] && [self.last_id isEqual:@0]) {
+                [self.dataSource removeAllObjects];
+                [self.dataSource addObjectsFromArray:currentArr];
+                [self.tableView headerEndRefreshing];
+            }else {
+            
+                [self.dataSource addObjectsFromArray:currentArr];
+                [self.tableView footerEndRefreshing];
             }
         
         [self.tableView reloadData];
-//        }else {
+        }else {
         
-//            [self.view makeToast:[NSString stringWithFormat:@"%@", responseObject[@"msg"]] duration:1.0 position:SHOW_CENTER complete:nil];
-//        }
+            [self.view makeToast:[NSString stringWithFormat:@"%@", responseObject[@"msg"]] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
 //        NSLog(@"%@", self.dataSource);
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -111,7 +161,7 @@
     TaskListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kk forIndexPath:indexPath];
     TaskModel *model = self.dataSource[indexPath.row];
     
-    NSLog(@"%@", model);
+//    NSLog(@"%@", model);
     
     [cell setValueWithTaskModel:model];
     return cell;
@@ -131,59 +181,6 @@
     [self.navigationController pushViewController:taskDetailVC animated:YES];
 }
 
-
-/**
- *  集成刷新控件
- */
-- (void)setupRefresh
-{
-    // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
-    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    //#warning 自动刷新(一进入程序就下拉刷新)
-    [self.tableView headerBeginRefreshing];
-    
-    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
-    
-    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
-    self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
-    self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
-    self.tableView.headerRefreshingText = @"正在帮你刷新中...";
-    
-    self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
-    self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
-    self.tableView.footerRefreshingText = @"正在帮你加载中...";
-}
-
-#pragma mark 开始进入刷新状态
-- (void)headerRereshing
-{
-    // 1.添加假数据
-    NSMutableArray *cids = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [[YjyxOverallData sharedInstance].parentInfo.childrens count]; i++) {
-        ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:i];
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        [dic setObject:childrenEntity.cid forKey:@"id"];
-        [dic setObject:@"0" forKey:@"last_id"];
-        [cids addObject:dic];
-    }
-    [self getnewChildrenActivityWihtCid:[cids JSONString]];
-    
-}
-
-- (void)footerRereshing
-{
-    NSMutableArray *cids = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [[YjyxOverallData sharedInstance].parentInfo.childrens count]; i++) {
-        ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:i];
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        [dic setObject:childrenEntity.cid forKey:@"id"];
-        [dic setObject:last_id forKey:@"last_id"];
-        [cids addObject:dic];
-    }
-    [self getoldChildrenActivityWihtCid:[cids JSONString]];
-    
-}
 
 
 
