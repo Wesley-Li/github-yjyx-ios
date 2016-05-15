@@ -8,7 +8,7 @@
 
 #import "YjyxOrderViewController.h"
 #import "OrderTableViewCell.h"
-#import "OrderEntity.h"
+#import "OrderNewEntity.h"
 
 @interface YjyxOrderViewController ()
 
@@ -35,7 +35,7 @@
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                     for (int i = 0; i< [[result objectForKey:@"orders"] count]; i++) {
-                        OrderEntity *entity = [OrderEntity wrapOrderEntityWithDic:[[result objectForKey:@"orders"] objectAtIndex:i]];
+                        OrderNewEntity *entity = [OrderNewEntity wrapOrderEntityWithDic:[[result objectForKey:@"orders"] objectAtIndex:i]];
                         [orderAry addObject:entity];
                     }
                     [orderTable reloadData];
@@ -81,7 +81,7 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"OrderTableViewCell" owner:self options:nil] lastObject];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
-    OrderEntity *entity = [orderAry objectAtIndex:indexPath.row];
+    OrderNewEntity *entity = [orderAry objectAtIndex:indexPath.row];
     cell.orderTime.text = [NSString stringWithFormat:@"订单时间:%@",entity.paiddatetime];
     cell.orderOutrade.text = [NSString stringWithFormat:@"订单编号:%@",entity.tradeno_yijiao];
     cell.orderPrice.text = [NSString stringWithFormat:@"%@元",entity.total_fee];
