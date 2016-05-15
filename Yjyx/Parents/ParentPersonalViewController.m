@@ -12,6 +12,8 @@
 #import "ParentModifyPhoneViewController.h"
 #import "ParentChildrensViewController.h"
 #import "YjyxSoundViewController.h"
+#import "YjyxFeedBackViewController.h"
+#import "YjyxOrderViewController.h"
 
 @interface ParentPersonalViewController ()<soundSelectDelegate>
 {
@@ -28,18 +30,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"个人中心";
+    notify_sound = [YjyxOverallData sharedInstance].parentInfo.notify_sound;
     // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    notify_sound = [YjyxOverallData sharedInstance].parentInfo.notify_sound;
     notify_with_sound = [YjyxOverallData sharedInstance].parentInfo.notify_with_sound;
     receive_notify = [YjyxOverallData sharedInstance].parentInfo.receive_notify;
     
     isNeednotifySet = YES;
     [_personalTab reloadData];
+    [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -71,10 +75,10 @@
 {
     switch (section) {
         case 0:
-            return 3;
+            return 4;
             break;
         case 1:
-            return 3;
+            return 4;
             break;
         case 2:
             return 1;
@@ -110,9 +114,13 @@
             cell.textLabel.text = @"手机号码：";
             cell.detailTextLabel.text = [YjyxOverallData sharedInstance].parentInfo.phone;
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-        }else{
+        }else if (indexPath.row == 2){
             cell.textLabel.text = @"我的孩子";
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        }else{
+            cell.textLabel.text = @"我的订单";
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+
         }
     }
     else if (indexPath.section == 1)
@@ -132,7 +140,7 @@
             switchView.tag =101;
            [switchView setOn:[[YjyxOverallData sharedInstance].parentInfo.notify_with_sound integerValue]];
             cell.accessoryView = switchView;
-        }else{
+        }else if (indexPath.row == 2){
             cell.textLabel.text = @"消息提示音";
             if ([[YjyxOverallData sharedInstance].parentInfo.notify_sound isEqualToString:@"default"]) {
                 [cell.detailTextLabel setText:@"默认"];
@@ -156,14 +164,21 @@
                 [cell.detailTextLabel setText:@"电子乐"];
             }
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+
+        }else
+        {
+            cell.textLabel.text = @"我要吐槽";
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+
         }
     }
     else{
         UIButton *loginOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         [loginOutBtn addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
-        loginOutBtn.backgroundColor = [UIColor redColor];
+        loginOutBtn.backgroundColor = [UIColor whiteColor];
         [loginOutBtn setTitle:@"退出登录" forState:UIControlStateNormal];
-        [loginOutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [loginOutBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        loginOutBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         cell.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:loginOutBtn];
     }
@@ -184,40 +199,28 @@
             ParentModifyPhoneViewController *modifyPhone = [[ParentModifyPhoneViewController alloc] init];
             [modifyPhone setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:modifyPhone animated:YES];
-        }else{
+        }else if (indexPath.row == 2){
             ParentChildrensViewController *childrens = [[ParentChildrensViewController alloc] init];
             [childrens setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:childrens animated:YES];
+        }else{
+            YjyxOrderViewController *vc = [[YjyxOrderViewController alloc] init];
+            [vc setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }else if (indexPath.section == 1){
         if (indexPath.row == 2) {
             YjyxSoundViewController *sound = [[YjyxSoundViewController alloc] init];
             [sound setAudio:cell.detailTextLabel.text];
-//            if ([cell.detailTextLabel.text isEqualToString:NSLocalizedString(@"Push1", @"")]) {
-//                [sound setAudio:@"三全音"];
-//            }
-//            if ([cell.detailTextLabel.text isEqualToString:NSLocalizedString(@"Push2", @"")]) {
-//                [sound setAudio:@"管钟琴"];
-//            }
-//            if ([cell.detailTextLabel.text isEqualToString:NSLocalizedString(@"Push3", @"")]) {
-//                [sound setAudio:@"玻璃"];
-//            }
-//            if ([cell.detailTextLabel.text isEqualToString:NSLocalizedString(@"Push4", @"")]) {
-//                [sound setAudio:@"圆号"];
-//            }
-//            if ([cell.detailTextLabel.text isEqualToString:NSLocalizedString(@"Push5", @"")]) {
-//                [sound setAudio:@"铃音"];
-//            }
-//            if ([cell.detailTextLabel.text isEqualToString:NSLocalizedString(@"Push6", @"")]) {
-//                [sound setAudio:@"电子乐"];
-//            }
-//            if ([cell.detailTextLabel.text isEqualToString:NSLocalizedString(@"Push7", @"")]) {
-//                [sound setAudio:@"默认"];
-//            }
-
             sound.delegate = self;
             [sound setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:sound animated:YES];
+        }
+        
+        
+        if (indexPath.row == 3) {
+            YjyxFeedBackViewController *vc = [[YjyxFeedBackViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }

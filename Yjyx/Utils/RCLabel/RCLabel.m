@@ -352,7 +352,7 @@ static NSInteger totalCount = 0;
 
 CGSize MyGetSize(void* refCon) {
     NSString *src = (NSString*)refCon;
-    __block CGSize size = CGSizeMake(100.0,IMAGE_MAX_HEIGHT);
+    __block CGSize size = CGSizeMake(50,50);
     
     if (src) {
         
@@ -565,9 +565,12 @@ CGFloat MyGetWidthCallback( void* refCon ){
         NSInteger index = imgComponent.position - runRange.location;
         
         CGSize imageSize = MyGetSize([imgComponent.attributes objectForKey:@"src"]);
-        
+
         runBounds.size.width = imageSize.width;
         runBounds.size.height = imageSize.height;
+
+//        runBounds.size.width = imageSize.width;
+//        runBounds.size.height = imageSize.height;
         
         // get the origin of the glyph run (this is relative to the origin of the line)
         
@@ -1501,6 +1504,7 @@ CGFloat MyGetWidthCallback( void* refCon ){
                     NSString *resultString = [USER_IMGCACHE stringByAppendingFormat:@"%@",[tempURL stringByReplacingOccurrencesOfString:@"/" withString:@""]];
                     
                     NSData *cacheData = [NSData dataWithContentsOfFile:resultString];
+                    
                     
                     if (cacheData) {
                         component.img = [UIImage imageWithData:cacheData];

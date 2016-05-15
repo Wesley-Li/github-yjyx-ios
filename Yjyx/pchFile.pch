@@ -86,7 +86,7 @@
 
 #define kIOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 
-#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
+
 
 
 // ******************接口部分***************

@@ -170,6 +170,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:@"/api/parents/children/statistic/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
         }else{
@@ -264,12 +265,44 @@
     }];
 }
 
+//获取单个会员商品详情
+-(void)getOneMemberProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/parents/product/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+}
+
 //学生购买某个会员产品
 -(void)purchaseProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager POST:[BaseURL stringByAppendingString:@"/api/parents/product/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+
+}
+
+-(void)isCanLookProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/parents/product/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
         }else{
@@ -357,6 +390,72 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:TEACHER_PIC_SETTING_CONNECT_GET] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    }
+}
+     
+
+-(void)getRestpasswordSms:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/utils/password/get_reset_password_sms/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+
+}
+
+-(void)restPassWord:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
+    [manager POST:[BaseURL stringByAppendingString:@"/api/utils/password/reset_password/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+
+}
+
+-(void)getUserPhone:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/utils/password/get_user_phone/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+
+}
+
+
+// 老师上传青牛云
+-(void)teacherUploadFile:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block {
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:T_SESSIONID  forHTTPHeaderField:@"sessionid"];
+    [manager POST:[BaseURL stringByAppendingString:TEACHER_UPLOAD_PIC_CONNECT_POST] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
         }else{
@@ -366,21 +465,23 @@
     }failure:^(AFHTTPRequestOperation *operation, NSError *error){
         block(nil,error);
     }];
-
+    
 }
-
-// 老师上传青牛云
--(void)teacherUploadFile:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block {
-
+     
+     
+//用户反馈
+-(void)feedBack:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
+{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:T_SESSIONID  forHTTPHeaderField:@"sessionid"];
-    [manager POST:[BaseURL stringByAppendingString:TEACHER_UPLOAD_PIC_CONNECT_POST] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
+    [manager POST:[BaseURL stringByAppendingString:@"/api/feedback/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
         }else{
             block(nil,nil);
         }
-        
+
     }failure:^(AFHTTPRequestOperation *operation, NSError *error){
         block(nil,error);
     }];
@@ -398,6 +499,24 @@
 }
 
 
+
+
+//获取用户订单
+-(void)getOrder:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/parents/order/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+    
+
+}
 
 
 @end

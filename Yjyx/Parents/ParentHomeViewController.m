@@ -39,6 +39,7 @@
             YjyxWorkPreviewViewController *result = [[YjyxWorkPreviewViewController alloc] init];
             result.previewRid = [YjyxOverallData sharedInstance].previewRid;
             result.title = @"作业预览";
+            [result setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:result animated:YES];
         }
             break;
@@ -46,13 +47,15 @@
             YjyxMicroClassViewController *result = [[YjyxMicroClassViewController alloc] init];
             result.previewRid = [YjyxOverallData sharedInstance].previewRid;
             result.title = @"微课预览";
+            [result setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:result animated:YES];
         }
             break;
         case 3:{
             ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
             result.taskResultId = [YjyxOverallData sharedInstance].historyId;
-            result.title = @"微课结果";
+            result.title = @"结果详情";
+            [result setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:result animated:YES];
 
         }
@@ -60,7 +63,8 @@
         case 4:{
             ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
             result.taskResultId = [YjyxOverallData sharedInstance].historyId;
-            result.title = @"作业结果";
+            result.title = @"结果详情";
+            [result setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:result animated:YES];
 
         }
@@ -87,6 +91,7 @@
             YjyxWorkPreviewViewController *result = [[YjyxWorkPreviewViewController alloc] init];
             result.previewRid = [YjyxOverallData sharedInstance].previewRid;
             result.title = @"作业预览";
+            [result setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:result animated:YES];
         }
             break;
@@ -94,13 +99,15 @@
             YjyxMicroClassViewController *result = [[YjyxMicroClassViewController alloc] init];
             result.previewRid = [YjyxOverallData sharedInstance].previewRid;
             result.title = @"微课预览";
+            [result setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:result animated:YES];
         }
             break;
         case 3:{
             ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
             result.taskResultId = [YjyxOverallData sharedInstance].historyId;
-            result.title = @"微课结果";
+            result.title = @"结果详情";
+            [result setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:result animated:YES];
             
         }
@@ -108,7 +115,8 @@
         case 4:{
             ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
             result.taskResultId = [YjyxOverallData sharedInstance].historyId;
-            result.title = @"作业结果";
+            [result setHidesBottomBarWhenPushed:YES];
+            result.title = @"结果详情";
             [self.navigationController pushViewController:result animated:YES];
             
         }

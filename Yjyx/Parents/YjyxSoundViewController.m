@@ -16,21 +16,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadBackBtn];
     [self setTitle:@"设置提示音"];
-    //    sounds = [[NSDictionary alloc] initWithObjectsAndKeys:
-    //                                                          @"push1",NSLocalizedString(@"Push1", @""),
-    //                                                          @"push2",NSLocalizedString(@"Push2", @""),
-    //                                                          @"push3",NSLocalizedString(@"Push3", @""),
-    //                                                          @"push4",NSLocalizedString(@"Push4", @""),
-    //                                                          @"push5",NSLocalizedString(@"Push5", @""),
-    //                                                          @"push6",NSLocalizedString(@"Push6", @""),
-    //              @"push7",NSLocalizedString(@"Push7", @""),nil];
     sounds = [[NSMutableArray alloc] initWithObjects:@"默认",@"三全音",@"管钟琴",@"玻璃",@"圆号",@"铃音",@"电子乐", nil];
     
-    UIButton *sureBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
+    UIButton *goBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [goBackBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [goBackBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [goBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    goBackBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:goBackBtn];
+    self.navigationItem.leftBarButtonItem = leftBtnItem;
+
+    
+    UIButton *sureBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     [sureBtn addTarget:self action:@selector(goSure) forControlEvents:UIControlEventTouchUpInside];
-    [sureBtn setImage:[UIImage imageNamed:@"comm_sure"] forState:UIControlStateNormal];
+    [sureBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    sureBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     UIBarButtonItem *rightBtnItem = [[UIBarButtonItem alloc] initWithCustomView:sureBtn];
     self.navigationItem.rightBarButtonItem = rightBtnItem;
 }
@@ -39,6 +41,11 @@
 {
     [super viewWillDisappear:animated];
     [APP_WINDOW hideToastActivity];
+}
+
+-(void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)goSure
@@ -97,6 +104,10 @@
     }
     NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"push%ld",(long)indexPath.row] ofType:@"caf"];
     if (path) {
+        if (player) {
+            [player stop];
+            player = nil;
+        }
         AVAudioSession *session = [AVAudioSession sharedInstance];
         [session setCategory:AVAudioSessionCategoryPlayback error:nil];
         [session setActive:YES error:nil];

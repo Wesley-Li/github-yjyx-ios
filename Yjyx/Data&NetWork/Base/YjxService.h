@@ -8,8 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+//开发
 #define BaseURL @"http://139.196.14.118"
-//#define BaseURL @"http://ys.zgyjyx.com"
+#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
+
+//演示
+//#define BaseURL @"http://zgyjyx.com"
+//#define QiniuYunURL @"http://cdn-web-img.zgyjyx.com/"
+//#define QiniuYunURL @"http://cdn-web-video.zgyjyx.com/"
+
 @interface YjxService : NSObject
 
 //获取实例
@@ -50,12 +57,32 @@
 
 -(void)purchaseProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 
+//获取单个会员商品详情
+-(void)getOneMemberProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
+
+
+//判断是否可以观看解析视频
+-(void)isCanLookProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 
 //发送短信验证码
 -(void)getSMSsendcode:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
 
 -(void)checkOutVerfirycode:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
 
+//发送手机验证码至用户
+-(void)getRestpasswordSms:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
+
+//重置密码信息提交
+-(void)restPassWord:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
+
+//根据用户名获取手机号
+-(void)getUserPhone:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
+
+//用户反馈
+-(void)feedBack:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
+
+//获取用户订单
+-(void)getOrder:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
 
 
 

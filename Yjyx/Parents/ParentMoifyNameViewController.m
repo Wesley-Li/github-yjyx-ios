@@ -21,14 +21,23 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
-    UIButton *sureBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
+    UIButton *goBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [goBackBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [goBackBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [goBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    goBackBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:goBackBtn];
+    self.navigationItem.leftBarButtonItem = leftBtnItem;
+    
+    UIButton *sureBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     [sureBtn addTarget:self action:@selector(goSure) forControlEvents:UIControlEventTouchUpInside];
-    [sureBtn setImage:[UIImage imageNamed:@"comm_sure"] forState:UIControlStateNormal];
+    [sureBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    sureBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     UIBarButtonItem *rightBtnItem = [[UIBarButtonItem alloc] initWithCustomView:sureBtn];
     self.navigationItem.rightBarButtonItem = rightBtnItem;
     
     self.title = @"修改姓名";
-    [self loadBackBtn];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -37,6 +46,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 -(void)goSure
 {

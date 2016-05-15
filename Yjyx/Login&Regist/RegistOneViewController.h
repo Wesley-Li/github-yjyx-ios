@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RegistOneViewController : UIViewController
+@interface RegistOneViewController : UIViewController<UITextFieldDelegate>
 {
     ChildrenEntity *childrenEntity;
     IBOutlet UITextField *codeTextField;
+    IBOutlet UIView *partentRegistView;
 }
 @end

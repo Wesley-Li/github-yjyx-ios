@@ -53,8 +53,8 @@ static NSInteger pageCount = 1000;
         }
         [self.view addSubview:self.collectionView];
         [self.view addSubview:self.pageControl];
-        self.collectionView.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-        self.pageControl.frame = CGRectMake(0, frame.size.height-20, frame.size.width, 20);
+        self.collectionView.frame = CGRectMake(0, 0, SCREEN_WIDTH, frame.size.height);
+        self.pageControl.frame = CGRectMake(0, frame.size.height-20, SCREEN_WIDTH, 20);
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:(_photos.count*pageCount)/2 inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
     }
     return self;
@@ -185,7 +185,7 @@ static NSInteger pageCount = 1000;
 }
 - (UIPageControl *)pageControl {
     if (!_pageControl) {
-        _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, self.frame.size.height-20, self.frame.size.width, 20)];
+        _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, self.frame.size.height-20,SCREEN_WIDTH, 20)];
         _pageControl.numberOfPages = _photos.count;
         _pageControl.currentPage = 0;
     }

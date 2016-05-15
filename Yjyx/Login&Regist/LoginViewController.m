@@ -14,6 +14,9 @@
 #import "StuGroupEntity.h"
 #import "StuDataBase.h"
 
+#import "ForgetOneViewController.h"
+
+
 @interface LoginViewController ()
 {
     UIView *serverView;
@@ -319,6 +322,12 @@
         [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
     }];
 
+}
+
+-(IBAction)forgetPassWord:(id)sender
+{
+    ForgetOneViewController *vc = [[ForgetOneViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@interface RegistFinalViewController : UIViewController
+@interface RegistFinalViewController : UIViewController<UITextFieldDelegate>
 {
     IBOutlet UILabel *titleLb;
     IBOutlet UITextField *parentNameText;
@@ -16,6 +16,7 @@
     IBOutlet UITextField *phoneText;
     IBOutlet UITextField *codeText;
     IBOutlet UIButton *verifyBtn;
+    IBOutlet UILabel *timeLb;
 }
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) ChildrenEntity *childrenEntity;

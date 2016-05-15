@@ -10,6 +10,7 @@
                 <outlet property="detailView" destination="TX9-nv-26H" id="Y7A-uA-q1t"/>
                 <outlet property="openBtn" destination="FlJ-Um-VYb" id="Zxq-T1-mHG"/>
                 <outlet property="payBtn" destination="Juy-NM-rjX" id="Uo8-Mr-AHa"/>
+                <outlet property="titleLb" destination="xWb-CK-zNz" id="lOq-uZ-9Lf"/>
                 <outlet property="trailBtn" destination="HZ1-v4-Ram" id="jWW-0a-etb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,7 +25,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subject_logo.png" id="rCq-lP-YL2">
-                            <rect key="frame" x="22" y="13" width="110" height="26"/>
+                            <rect key="frame" x="22" y="13" width="25" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教学版本：浙教版、人教版、苏教版" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G3I-Ba-Xmc">
@@ -46,6 +47,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xWb-CK-zNz">
+                            <rect key="frame" x="55" y="17" width="196" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                            <color key="textColor" red="0.99607843137254903" green="0.79607843137254897" blue="0.27058823529411763" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -89,7 +97,7 @@
     </objects>
     <resources>
         <image name="subject_kaitong.png" width="282" height="33"/>
-        <image name="subject_logo.png" width="123" height="28"/>
+        <image name="subject_logo.png" width="28" height="28"/>
         <image name="subject_shiyong.png" width="282" height="33"/>
     </resources>
 </document>

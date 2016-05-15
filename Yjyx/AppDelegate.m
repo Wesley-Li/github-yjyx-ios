@@ -137,9 +137,7 @@
         self.window.rootViewController = _navigation;
         [self.window makeKeyAndVisible];
 //    }
-     
-     
-  
+
     return YES;
 }
 
@@ -264,6 +262,7 @@
 - (void)fillViews
 {
     
+
     if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {
         
         if (!_tabBar) {
@@ -274,17 +273,19 @@
         home.tabBarItem = [UITabBarItem itemWithTitle:@"首页" image:[UIImage imageNamed:@"tab_home"] selectedImage:[UIImage imageNamed:@"tab_homes"]];
         home.navigationBarHidden = YES;
         
-        NavRootViewController *community = [[NavRootViewController alloc] initWithRootViewController:[[ParentCommunityViewController alloc] initWithNibName:@"ParentCommunityViewController" bundle:nil]];
-        community.tabBarItem = [UITabBarItem itemWithTitle:@"社区" image:[UIImage imageNamed:@"tab_community"] selectedImage:[UIImage imageNamed:@"tab_communitys"]];
-        community.navigationBarHidden = YES;
+//        NavRootViewController *community = [[NavRootViewController alloc] initWithRootViewController:[[ParentCommunityViewController alloc] initWithNibName:@"ParentCommunityViewController" bundle:nil]];
+//        community.tabBarItem = [UITabBarItem itemWithTitle:@"社区" image:[UIImage imageNamed:@"tab_community"] selectedImage:[UIImage imageNamed:@"tab_communitys"]];
+//        community.navigationBarHidden = YES;
         
-        NavRootViewController *memberCenter = [[NavRootViewController alloc] initWithRootViewController:[[YjyxPMemberCenterViewController alloc] initWithNibName:@"YjyxPMemberCenterViewController" bundle:nil]];
-        memberCenter.tabBarItem = [UITabBarItem itemWithTitle:@"会员中心" image:[UIImage imageNamed:@"tab_memberCenter"] selectedImage:[UIImage imageNamed:@"tab_memberCenter"]];
+//        memberCenter.tabBarItem = [UITabBarItem itemWithTitle:@"会员中心" image:[UIImage imageNamed:@"tab_memberCenter"] selectedImage:[UIImage imageNamed:@"tab_memberCenter"]];
         
         NavRootViewController *personal = [[NavRootViewController alloc] initWithRootViewController:[[ParentPersonalViewController alloc] initWithNibName:@"ParentPersonalViewController" bundle:nil]];
         personal.tabBarItem = [UITabBarItem itemWithTitle:@"个人中心" image:[UIImage imageNamed:@"tab_personal"] selectedImage:[UIImage imageNamed:@"tab_personals"]];
         
-        [_tabBar setViewControllers:@[home,community,memberCenter,personal]];
+        NavRootViewController *memberCenter = [[NavRootViewController alloc] initWithRootViewController:[[YjyxPMemberCenterViewController alloc] initWithNibName:@"YjyxPMemberCenterViewController" bundle:nil]];
+        memberCenter.tabBarItem = [UITabBarItem itemWithTitle:@"会员中心" image:[UIImage imageNamed:@"tab_memberCenter"] selectedImage:[UIImage imageNamed:@"tab_memberCenters"]];
+        
+        [_tabBar setViewControllers:@[home,memberCenter,personal]];
         
         [_tabBar setSelectedIndex:0];
         [self.window setRootViewController:_tabBar];
@@ -333,20 +334,21 @@
         [_cusTBViewController.tabBar setShadowImage:img];
         _cusTBViewController.selectedIndex = 0;
         self.window.rootViewController = _cusTBViewController;
-
     
     }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"student"]) {
         
         // 学生登录
     
     }
+
     
 }
 
 #pragma mark -UIAlertView
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
+        [_tabBar setSelectedIndex:0];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
     }
 }
 

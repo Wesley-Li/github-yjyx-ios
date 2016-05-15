@@ -14,8 +14,9 @@
 #import "ChildrenResultViewController.h"
 #import "YjyxWorkPreviewViewController.h"
 #import "YjyxMicroClassViewController.h"
+#import "AddChildrenViewController.h"
 
-@interface MyChildrenViewController ()
+@interface MyChildrenViewController ()<UIAlertViewDelegate>
 {
     ChildrenEntity *currentChildren;//当前选择小孩，默认第一个
     NSString *last_id;
@@ -28,6 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     last_id = @"0";
+    segmentedIndex = 0;
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
     {
         self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -37,9 +39,12 @@
     _childrenAry = [[NSMutableArray alloc] init];
     self.title = @"孩子动态";
     [self loadBackBtn];
+    
     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;//将跳转页面标志置为空
     if ([YjyxOverallData sharedInstance].parentInfo.childrens.count == 0) {
-        [self.view makeToast:@"您暂无小孩，请先去添加" duration:1.0 position:SHOW_CENTER complete:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先关联您的孩子" delegate:self cancelButtonTitle:@"暂不" otherButtonTitles:@"前往", nil];
+        [alertView show];
+        childrenViews.hidden = YES;
     }else{
         [self setChildrenViews];
         currentChildren = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:0];
@@ -47,23 +52,24 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-//设置小孩头像
+//设置小孩
 -(void)setChildrenViews
 {
     for (int i =0; i< [[YjyxOverallData sharedInstance].parentInfo.childrens count]; i++) {
         ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:i];
-        UIButton *iconBtn =[[UIButton alloc] initWithFrame:CGRectMake(10+i*90, 5, 70, 70)];
-        [iconBtn setImageWithURL:[NSURL URLWithString:childrenEntity.childavatar] placeholderImage:[UIImage imageNamed:@"Personal_children.png"]];
-        [iconBtn addTarget:self action:@selector(seltectChildren:) forControlEvents:UIControlEventTouchUpInside];
-        iconBtn.tag = i;
-        UILabel *namelb = [UILabel labelWithFrame:CGRectMake(10+i*90, 78, 70, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:13] context:childrenEntity.name];
-        namelb.textAlignment = NSTextAlignmentCenter;
-        [childrenViews addSubview:iconBtn];
-        [childrenViews addSubview:namelb];
+        [segmentedControl setTitle:childrenEntity.name forSegmentAtIndex:i];
         [_childrenAry addObject:childrenEntity];
     }
+    segmentedControl.tintColor = RGBACOLOR(23, 155, 121, 1);
+    [segmentedControl addTarget:self action:@selector(seltectChildren:) forControlEvents:UIControlEventValueChanged];
+    if (_childrenAry.count <= 1) {
+        childrenViews.hidden = YES;
+        _childrenTab.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT -64);
+    }
+    
     [self setupRefresh];//刷新空间
 }
+
 
 //获取最新小孩信息
 -(void)getnewChildrenActivityWihtCid:(NSString *)cid
@@ -84,6 +90,15 @@
                         last_id = [NSString stringWithFormat:@"%@",children.activityID];
                     }
                 }
+                
+                ChildrenEntity *childrenEntity = [_childrenAry objectAtIndex:segmentedIndex];
+                [_activities removeAllObjects];
+                for (ChildrenActivity *entity in totalAry) {
+                    if ([entity.cid integerValue] == [childrenEntity.cid integerValue]) {
+                        [_activities addObject:entity];
+                    }
+                }
+                segmentedControl.selectedSegmentIndex = segmentedIndex;
                 [_childrenTab reloadData];
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
@@ -114,6 +129,15 @@
                         last_id = [NSString stringWithFormat:@"%@",children.activityID];
                     }
                 }
+                
+                ChildrenEntity *childrenEntity = [_childrenAry objectAtIndex:segmentedIndex];
+                [_activities removeAllObjects];
+                for (ChildrenActivity *entity in totalAry) {
+                    if ([entity.cid integerValue] == [childrenEntity.cid integerValue]) {
+                        [_activities addObject:entity];
+                    }
+                }
+                segmentedControl.selectedSegmentIndex = segmentedIndex;
                 [_childrenTab reloadData];
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
@@ -131,6 +155,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
+
     self.navigationController.navigationBarHidden = NO;
 }
 
@@ -180,27 +207,27 @@
         }
     }
     cell.timelb.text = children.update;
-    UILabel *titleLb = [UILabel labelWithFrame:CGRectMake(96, 28, SCREEN_WIDTH - 106 , 21) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:13] context:children.title];
+    UILabel *titleLb = [UILabel labelWithFrame:CGRectMake(85, 23, SCREEN_WIDTH - 106 , 21) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:children.title];
     if ([children.finished integerValue] == 1) {
         titleLb.textColor =RGBACOLOR(119, 162, 150, 1);
+        cell.finishedImage.hidden = NO;
     }else{
         titleLb.textColor =[UIColor blackColor];
+        cell.finishedImage.hidden = YES;
     }
     titleLb.numberOfLines = 0;
     [cell.contentView addSubview:titleLb];
     [titleLb sizeToFit];
     
-//    cell.titlelb.text = children.title;
-//    cell.titlelb.frame = CGRectMake(96, 28, SCREEN_WIDTH - 96, 22);
-//    [cell.titlelb sizeToFit];
+
     if ([children.tasktype integerValue] == 1) {
         [cell.typeImage setImage:[UIImage imageNamed:@"Parent_homework.png"] forState:UIControlStateNormal];
     }else{
         [cell.typeImage setImage:[UIImage imageNamed:@"Parent_weike.png"] forState:UIControlStateNormal];
     }
+    cell.iconImage.layer.cornerRadius = cell.iconImage.frame.size.height/2;
     
-    
-       return cell;
+    return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -233,17 +260,18 @@
 }
 
 #pragma mark -MyEvent
--(void)seltectChildren:(id)sender
+-(void)seltectChildren:(UISegmentedControl *)seg
 {
-    UIButton *btn =(UIButton *)sender;
-    ChildrenEntity *childrenEntity = [_childrenAry objectAtIndex:btn.tag];
-    [_activities removeAllObjects];
-    for (ChildrenActivity *entity in totalAry) {
-        if ([entity.cid integerValue] == [childrenEntity.cid integerValue]) {
-            [_activities addObject:entity];
-        }
-    }
-    [_childrenTab reloadData];
+    NSInteger index = seg.selectedSegmentIndex;
+    segmentedIndex = index;
+    
+    NSMutableArray *cids = [[NSMutableArray alloc] init];
+    ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:segmentedIndex];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:childrenEntity.cid forKey:@"id"];
+    [dic setObject:@"0" forKey:@"last_id"];
+    [cids addObject:dic];
+    [self getnewChildrenActivityWihtCid:[cids JSONString]];
 }
 
 /**
@@ -275,13 +303,11 @@
     // 1.添加假数据
    
     NSMutableArray *cids = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [[YjyxOverallData sharedInstance].parentInfo.childrens count]; i++) {
-        ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:i];
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        [dic setObject:childrenEntity.cid forKey:@"id"];
-        [dic setObject:@"0" forKey:@"last_id"];
-        [cids addObject:dic];
-    }
+    ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:segmentedIndex];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:childrenEntity.cid forKey:@"id"];
+    [dic setObject:@"0" forKey:@"last_id"];
+    [cids addObject:dic];
     [self getnewChildrenActivityWihtCid:[cids JSONString]];
     
 }
@@ -289,17 +315,25 @@
 - (void)footerRereshing
 {
     NSMutableArray *cids = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [[YjyxOverallData sharedInstance].parentInfo.childrens count]; i++) {
-        ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:i];
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        [dic setObject:childrenEntity.cid forKey:@"id"];
-        [dic setObject:last_id forKey:@"last_id"];
-        [cids addObject:dic];
-    }
+    
+    ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:segmentedIndex];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:childrenEntity.cid forKey:@"id"];
+    [dic setObject:last_id forKey:@"last_id"];
+    [cids addObject:dic];
+    
     [self getoldChildrenActivityWihtCid:[cids JSONString]];
 
 }
 
+#pragma mark -UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        AddChildrenViewController *vc = [[AddChildrenViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
 
 /*
 #pragma mark - Navigation

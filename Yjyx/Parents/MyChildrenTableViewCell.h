@@ -12,5 +12,6 @@
 @property(weak,nonatomic) IBOutlet UIImageView *iconImage;
 @property(weak,nonatomic) IBOutlet UIButton *typeImage;
 @property(weak,nonatomic) IBOutlet UILabel *timelb;
+@property(weak,nonatomic) IBOutlet UIImageView *finishedImage;
 //@property(weak,nonatomic) IBOutlet UILabel *titlelb;
 @end

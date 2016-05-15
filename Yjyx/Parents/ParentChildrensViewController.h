@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ParentChildrensViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
+@interface ParentChildrensViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
 @property(weak,nonatomic) IBOutlet UITableView *childrenTab;
 @property(strong,nonatomic) NSMutableArray *childrenAry;
 @property (strong,nonatomic) UIImagePickerController *picker;

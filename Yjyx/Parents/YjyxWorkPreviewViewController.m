@@ -38,8 +38,18 @@
     });
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
+    
+    self.navigationController.navigationBarHidden = NO;
+}
+
 -(void)viewWillDisappear:(BOOL)animated
 {
+    self.navigationController.navigationBarHidden = YES;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RCLabelReload" object:nil];
     [super viewWillDisappear:YES];
 }
@@ -124,7 +134,7 @@
             NSString *content = [[_choices objectAtIndex:indexPath.row] objectForKey:@"content"];
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
-            templabel.font = [UIFont systemFontOfSize:12];
+            templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
             templabel.componentsAndPlainText = componentsDS;
             CGSize optimalSize = [templabel optimumSize];
@@ -133,7 +143,7 @@
             NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
-            templabel.font = [UIFont systemFontOfSize:12];
+            templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
             templabel.componentsAndPlainText = componentsDS;
             CGSize optimalSize = [templabel optimumSize];
@@ -143,7 +153,7 @@
         NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
         content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
         RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
-        templabel.font = [UIFont systemFontOfSize:12];
+        templabel.font = [UIFont systemFontOfSize:14];
         RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
         templabel.componentsAndPlainText = componentsDS;
         CGSize optimalSize = [templabel optimumSize];
@@ -172,7 +182,7 @@
             NSString *content = [[_choices objectAtIndex:indexPath.row] objectForKey:@"content"];
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-            templabel.font = [UIFont systemFontOfSize:12];
+            templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
             templabel.componentsAndPlainText = componentsDS;
             CGSize optimalSize = [templabel optimumSize];
@@ -185,7 +195,7 @@
             NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-            templabel.font = [UIFont systemFontOfSize:12];
+            templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
             templabel.componentsAndPlainText = componentsDS;
             CGSize optimalSize = [templabel optimumSize];
@@ -198,7 +208,7 @@
         NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
         content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
         RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-        templabel.font = [UIFont systemFontOfSize:12];
+        templabel.font = [UIFont systemFontOfSize:14];
         RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
         templabel.componentsAndPlainText = componentsDS;
         CGSize optimalSize = [templabel optimumSize];

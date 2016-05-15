@@ -36,6 +36,7 @@
     openChildAry = [[NSMutableArray alloc] init];
     payBtn.hidden = YES;
     
+    titleLb.text = [NSString stringWithFormat:@"%@会员特权",self.productEntity.subject_name];
     NSString *content = [self.productEntity.content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     contentLb = [[RCLabel alloc] initWithFrame:CGRectMake(35, 46, SCREEN_WIDTH - 50, 999)];
     contentLb.font = [UIFont systemFontOfSize:12];
@@ -47,6 +48,12 @@
     
 
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 
@@ -226,7 +233,7 @@
 
     for (int i =0 ; i<[openChildAry count]; i++) {
         ChildrenEntity *entity = [openChildAry objectAtIndex:i];
-        UIButton *childrenBtn = [[UIButton alloc] initWithFrame:CGRectMake(68+i*42, 38, 35, 15)];
+        UIButton *childrenBtn = [[UIButton alloc] initWithFrame:CGRectMake(68+i*50, 38, 43, 15)];
         [childrenBtn setTitle:entity.name forState:UIControlStateNormal];
         [childrenBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         childrenBtn.titleLabel.font = [UIFont systemFontOfSize:12];
@@ -243,7 +250,7 @@
     
     for (int i = 0; i < [self.productEntity.price_pacakge count]; i++) {
         NSDictionary *dic = [self.productEntity.price_pacakge objectAtIndex:i];
-        UIButton *timeBtn = [[UIButton alloc] initWithFrame:CGRectMake(90+i*82, 63, 75, 15)];
+        UIButton *timeBtn = [[UIButton alloc] initWithFrame:CGRectMake(90+i*82, 63, 80, 15)];
         NSString *str = [NSString stringWithFormat:@"%@元/%@天",[dic objectForKey:@"price"],[dic objectForKey:@"days"]];
         [timeBtn setTitle:str forState:UIControlStateNormal];
         [timeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -424,6 +431,9 @@
         
         [self.view addSubview:paySuccessView];
         
+    }else{
+        [self.view makeToast:@"支付失败" duration:1.5 position:SHOW_CENTER complete:nil];
+
     }
 }
 

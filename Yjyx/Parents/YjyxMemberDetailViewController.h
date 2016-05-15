@@ -17,6 +17,7 @@
     IBOutlet UIButton *payBtn;
     UIView *productView;
     RCLabel *contentLb;
+    IBOutlet UILabel *titleLb;
 }
 
 @property (strong,nonatomic) ProductEntity *productEntity;
