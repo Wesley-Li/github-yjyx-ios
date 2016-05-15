@@ -339,12 +339,6 @@
     
 }
 
-- (void)handleButton {
-    
-    NSLog(@"点击了题目");
-
-    self.choiceTaskCellHeight = size.height + 60 + 30;
-}
 
 
 // 点击选择题
@@ -411,12 +405,7 @@
     
 }
 
-- (void)buttonClick {
-    
-    NSLog(@"点击了填空题");
-    self.blankfillTaskCellHeight = size.height + 60 + 30;
 
-}
 
 // 点击填空题
 - (void)blankfillBtnClick:(UIButton *)sender {

@@ -43,6 +43,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+
                             <view contentMode="scaleToFill" id="Pyt-xK-qW9">
                                 <rect key="frame" x="20" y="191" width="379" height="105"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
@@ -54,14 +55,11 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3mW-xK-CFq">
-                                        <rect key="frame" x="164" y="79" width="50" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <state key="normal" image="list_btn_More.png"/>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.89001827006980805" green="0.89001827006980805" blue="0.89001827006980805" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+
+
                             <view contentMode="scaleToFill" id="FAl-56-urz">
                                 <rect key="frame" x="20" y="38" width="379" height="110"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>

@@ -1802,15 +1802,12 @@
 				3BCF193A1CDCC2B500E2EA1A /* StuTaskTableViewController.m */,
 				3BCF193B1CDCC2B500E2EA1A /* TaskDetailTableViewController.h */,
 				3BCF193C1CDCC2B500E2EA1A /* TaskDetailTableViewController.m */,
-
 				743E1CCD1CE4E3F300B00033 /* StudentDetailViewController.h */,
 				743E1CCE1CE4E3F300B00033 /* StudentDetailViewController.m */,
-
 				3B35DB881CE0560F000B7F83 /* NextTableViewController.h */,
 				3B35DB891CE0560F000B7F83 /* NextTableViewController.m */,
 				3B831A271CE4B19D00724E6B /* OneStuTaskDetailViewController.h */,
 				3B831A281CE4B19D00724E6B /* OneStuTaskDetailViewController.m */,
-
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2737,6 +2734,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 			};
 			name = Debug;
 		};
@@ -2780,6 +2778,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 			};
 			name = Release;
 		};
