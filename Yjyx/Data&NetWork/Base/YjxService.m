@@ -396,7 +396,9 @@
         }else{
             block(nil,nil);
         }
-    }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
 }
      
 
