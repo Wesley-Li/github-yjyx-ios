@@ -63,7 +63,7 @@
                         <action selector="selectRoleRegist:" destination="-1" eventType="touchUpInside" id="vW2-7K-LwC"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" id="gfj-Sa-fwC">
+                <view hidden="YES" contentMode="scaleToFill" id="gfj-Sa-fwC">
                     <rect key="frame" x="0.0" y="232" width="320" height="150"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
