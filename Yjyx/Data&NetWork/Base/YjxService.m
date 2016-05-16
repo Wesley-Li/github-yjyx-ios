@@ -401,16 +401,19 @@
 // 老师从青牛云获取上传Token
 - (void)teacherGetAboutqinniu:(NSDictionary*)params withBlock:(void(^)(id result, NSError *error))block {
 
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
-//    [manager GET:[BaseURL stringByAppendingString:TEACHER_PIC_SETTING_CONNECT_GET] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
-//        
-//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//            block(responseObject,nil);
-//        }else{
-//            block(nil,nil);
-//        }
-//    }];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
+    [manager GET:[BaseURL stringByAppendingString:TEACHER_PIC_SETTING_CONNECT_GET] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+
 }
      
      
