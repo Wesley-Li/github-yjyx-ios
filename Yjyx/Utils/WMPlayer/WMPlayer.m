@@ -199,8 +199,10 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
             
         }];
         
-        
-        
+        _backBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 44, 44)];
+        [_backBtn setImage:[UIImage imageNamed:@"Parent_VideoBack"] forState:UIControlStateNormal];
+        [_backBtn addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_backBtn];
         
         // 单击的 Recognizer
         UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap)];
@@ -241,6 +243,12 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     [self.player pause];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"closeTheVideo" object:sender];
 }
+
+-(void)goBack:(UIButton *)sender{
+    [self.player pause];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"goBackBtnClickNotice" object:sender];
+}
+
 - (double)duration{
     AVPlayerItem *playerItem = self.player.currentItem;
     if (playerItem.status == AVPlayerItemStatusReadyToPlay){
@@ -283,10 +291,12 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         if (self.bottomView.alpha == 0.0) {
             self.bottomView.alpha = 1.0;
             self.closeBtn.alpha = 1.0;
+            self.backBtn.alpha = 1.0;
 
         }else{
             self.bottomView.alpha = 0.0;
             self.closeBtn.alpha = 0.0;
+            self.backBtn.alpha = 0.0;
 
         }
     } completion:^(BOOL finish){
@@ -424,6 +434,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
             [UIView animateWithDuration:0.5 animations:^{
                 self.bottomView.alpha = 0.0;
                 self.closeBtn.alpha = 0.0;
+                self.backBtn.alpha = 0.0;
 
             } completion:^(BOOL finish){
                 

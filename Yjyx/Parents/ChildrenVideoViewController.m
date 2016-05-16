@@ -14,6 +14,7 @@
     WMPlayer *wmPlayer;
     CGRect playerFrame;
     UIImageView *videoImage;
+    UIButton *backBtn;
 }
 
 @end
@@ -26,6 +27,7 @@
     if (self) {
         //注册播放完成通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:@"fullScreenBtnClickNotice" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goBack) name:@"goBackBtnClickNotice" object:nil];
         
     }
     return self;
@@ -163,6 +165,12 @@
         UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, playerFrame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - playerFrame.size.height - 64)];
        [web loadHTMLString:_explantionStr baseURL:nil];
        [self.view addSubview:web];
+       
+       backBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 44, 44)];
+       [backBtn setImage:[UIImage imageNamed:@"Parent_VideoBack"] forState:UIControlStateNormal];
+       [backBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+       [self.view addSubview:backBtn];
+       
    }else{
        UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
        [web loadHTMLString:_explantionStr baseURL:nil];
@@ -182,10 +190,15 @@
                                                object:nil
      ];
     
-    [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
-    
-    self.navigationController.navigationBarHidden = NO;
+    if (_URLString.length > 0) {
+        self.navigationController.navigationBarHidden = YES;
+    }else{
+        [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
+        [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
+        
+        self.navigationController.navigationBarHidden = NO;
+    }
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -194,8 +207,14 @@
     [super viewWillDisappear:YES];
 }
 
+-(void)goBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(void)playVideo
 {
+    backBtn.hidden = YES;
     [wmPlayer.player play];
     [videoImage removeFromSuperview];
     videoImage = nil;

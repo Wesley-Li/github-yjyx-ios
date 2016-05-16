@@ -308,7 +308,7 @@
             childrenAnswer.font = [UIFont systemFontOfSize:13];
             [cell.contentView addSubview:childrenAnswer];
             
-            UIButton *truebtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 35, optimalSize.height+12, 30, 28)];
+            UIButton *truebtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 35, optimalSize.height+15, 30, 28)];
             BOOL isture = [[[_resultchoices objectAtIndex:indexPath.row] objectAtIndex:2] boolValue];
             [truebtn setImage:[UIImage imageNamed:isture?@"homework_3":@"homework_4"] forState:UIControlStateNormal];
             [cell.contentView addSubview:truebtn];

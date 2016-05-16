@@ -88,6 +88,8 @@
 
 /* playItem */
 @property (nonatomic, retain) AVPlayerItem *currentItem;
+
+@property (nonatomic,retain) UIButton *backBtn;
 /**
  *  初始化WMPlayer的方法
  *
