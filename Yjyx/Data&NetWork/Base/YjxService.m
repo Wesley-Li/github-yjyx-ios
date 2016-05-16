@@ -167,11 +167,25 @@
 //题目统计
 -(void)getChildrenachievement:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
 {
+    NSString *cachePath = [USER_IMGCACHE stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[params objectForKey:@"cid"]]];
+    NSDictionary *dicContent = [NSDictionary dictionaryWithContentsOfFile:[cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[params objectForKey:@"action"]]]];
+    if (dicContent!=nil) {
+        block(dicContent,nil);
+        return;
+    }
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:@"/api/parents/children/statistic/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            if (![fileManager fileExistsAtPath:cachePath]) {
+                [fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:nil];
+            }
+            NSDictionary *dic = (NSDictionary *)responseObject;
+            [dic writeToFile:[cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[params objectForKey:@"action"]]] atomically:YES];
+            
             block(responseObject,nil);
         }else{
             block(nil,nil);

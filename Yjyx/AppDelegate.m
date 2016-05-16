@@ -167,6 +167,19 @@
 {
     if (application.applicationState == UIApplicationStateActive) {
         NSLog(@"前台 ＝ %@",userInfo);
+        
+        if ([userInfo[@"type"] isEqualToString:@"childstats"]) {//统计数据更新处理
+            NSString *cachePath = [USER_IMGCACHE stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[userInfo objectForKey:@"cid"]]];
+
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSArray *contents = [fileManager contentsOfDirectoryAtPath:cachePath error:nil];
+            NSEnumerator *e = [contents objectEnumerator];
+            NSString *fileName;
+            while (fileName = [e nextObject]) {
+                [fileManager removeItemAtPath:[cachePath stringByAppendingPathComponent:fileName] error:NULL];
+            }
+        }
+        
         if ([userInfo[@"type"] isEqualToString:@"childactivity"]) {
             
             if ([userInfo[@"finished"] integerValue] == 0 ) {
