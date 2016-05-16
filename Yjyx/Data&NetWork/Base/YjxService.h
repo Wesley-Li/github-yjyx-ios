@@ -119,7 +119,7 @@
 /*
  *老师获取所有学生列表
  */
-- (void)teacherGetAllStuList:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
+//- (void)teacherGetAllStuList:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 
 
 
