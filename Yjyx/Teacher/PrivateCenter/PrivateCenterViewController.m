@@ -11,8 +11,16 @@
 #import "LoginViewController.h"
 #import "NameChageViewController.h"
 #import "PhoneChangeViewController.h"
+#import "YjyxSoundViewController.h"
 
-@interface PrivateCenterViewController ()
+@interface PrivateCenterViewController ()<soundSelectDelegate>
+
+{
+    BOOL isNeednotifySet;
+    NSString *notify_sound;
+    NSString *notify_with_sound;
+    NSString *receive_notify;
+}
 
 @end
 
@@ -108,6 +116,31 @@
             cell.accessoryView = switchView;
         }else{
             cell.textLabel.text = @"消息提示音";
+            
+            cell.textLabel.text = @"消息提示音";
+            if ([[YjyxOverallData sharedInstance].teacherInfo.notify_sound isEqualToString:@"default"]) {
+                [cell.detailTextLabel setText:@"默认"];
+            }
+            if ([[YjyxOverallData sharedInstance].teacherInfo.notify_sound isEqualToString:@"push1.caf"]) {
+                [cell.detailTextLabel setText:@"三全音"];
+            }
+            if ([[YjyxOverallData sharedInstance].teacherInfo.notify_sound isEqualToString:@"push2.caf"]) {
+                [cell.detailTextLabel setText:@"管钟琴"];
+            }
+            if ([[YjyxOverallData sharedInstance].teacherInfo.notify_sound isEqualToString:@"push3.caf"]) {
+                [cell.detailTextLabel setText:@"玻璃"];
+            }
+            if ([[YjyxOverallData sharedInstance].teacherInfo.notify_sound isEqualToString:@"push4.caf"]) {
+                [cell.detailTextLabel setText:@"圆号"];
+            }
+            if ([[YjyxOverallData sharedInstance].teacherInfo.notify_sound isEqualToString:@"push5.caf"]) {
+                [cell.detailTextLabel setText:@"铃声"];
+            }
+            if ([[YjyxOverallData sharedInstance].teacherInfo.notify_sound isEqualToString:@"push6.caf"]) {
+                [cell.detailTextLabel setText:@"电子乐"];
+            }
+
+            
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         }
     }
@@ -128,6 +161,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    //    isNeednotifySet = NO;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             // 修改姓名
@@ -146,6 +182,12 @@
     
         if (indexPath.row == 2) {
             // 修改提示音
+            YjyxSoundViewController *sound = [[YjyxSoundViewController alloc] init];
+            [sound setAudio:cell.detailTextLabel.text];
+            sound.delegate = self;
+            [sound setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:sound animated:YES];
+        
         }
         
     }
@@ -156,8 +198,31 @@
 
 - (void)notifiChange:(id)sender {
 
-    NSLog(@"状态改变");
+    UISwitch *switchView =  (UISwitch *)sender;
+    if (switchView.tag == 100) {
+        [YjyxOverallData sharedInstance].parentInfo.receive_notify = switchView.isOn?@"1":@"0";
+        [self.tableView reloadData];
+    }else{
+        [YjyxOverallData sharedInstance].parentInfo.notify_with_sound = switchView.isOn?@"1":@"0";
+    }
+
 }
+
+// 上报消息通知设置
+-(void)notifySetting
+{
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"notify_setting",@"action",[YjyxOverallData sharedInstance].teacherInfo.receive_notify,@"receive_notify",[YjyxOverallData sharedInstance].teacherInfo.notify_with_sound,@"with_sound",[YjyxOverallData sharedInstance].teacherInfo.notify_sound,@"sound",[YjyxOverallData sharedInstance].teacherInfo.notify_shake,@"vibrate", nil];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
+    
+    [manager POST:[BaseURL stringByAppendingString:TEACHER_UPLOAD_SOUND_SETTING_CONNECT_POST] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"%@", responseObject);
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+    
+}
+
 
 - (void)loginOut {
 
@@ -186,7 +251,13 @@
         
     }];
     
+}
 
+#pragma mark - soundSelectDelegate
+-(void)selectSoundWith:(NSString *)soundName {
+    
+    [YjyxOverallData sharedInstance].teacherInfo.notify_sound = soundName;
+    [self.tableView reloadData];
 }
 
 

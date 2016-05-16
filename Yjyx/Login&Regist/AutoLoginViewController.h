@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface AutoLoginViewController : BaseViewController
-- (void)autoLogin:(NSString *)username password:(NSString *)password;
+
+/**
+ * 自动登录
+ */
+- (void)autoLoginWithRole:(NSString *)role username:(NSString *)username password:(NSString *)password;
+
 @end
