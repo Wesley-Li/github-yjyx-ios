@@ -28,6 +28,8 @@
     WMPlayer *wmPlayer;
     NSIndexPath *currentIndexPath;
     BOOL isSmallScreen;
+    BOOL isPlay;
+    
 }
 
 @property (nonatomic, strong) NSDictionary *dic;
@@ -76,6 +78,7 @@
 -(void)closeTheVideo:(NSNotification *)obj{
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
     currentCell.playBtn.hidden = NO;
+    isPlay = NO;
     [self releaseWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
 }
@@ -372,6 +375,16 @@
         
         _videoCell.playBtn.tag = indexPath.row;
         
+        // 按钮的显示
+        if (isPlay == YES) {
+            _videoCell.playBtn.hidden = YES;
+        }else {
+            
+            _videoCell.playBtn.hidden = NO;
+            [_videoCell.playBtn.superview bringSubviewToFront:_videoCell.playBtn];
+        }
+
+        
         if (wmPlayer&&wmPlayer.superview) {
             if (indexPath.row == currentIndexPath.row) {
                 [_videoCell.backgroundIV.superview sendSubviewToBack:_videoCell.backgroundIV];
@@ -438,6 +451,7 @@
     [self.videoCell.backgroundIV addSubview:wmPlayer];
     [self.videoCell.backgroundIV bringSubviewToFront:wmPlayer];
     //    [self.videoCell.playBtn.superview sendSubviewToBack:self.videoCell.playBtn];
+    isPlay = YES;
     self.videoCell.playBtn.hidden = YES;
     [self.tableView reloadData];
     
