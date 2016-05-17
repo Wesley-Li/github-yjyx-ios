@@ -64,21 +64,33 @@
 //判断是否可以观看解析视频
 -(void)isCanLookProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 
-//发送短信验证码
+/**
+ * 发送短信验证码
+ */
 -(void)getSMSsendcode:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
-
+/**
+ * 验证验证码
+ */
 -(void)checkOutVerfirycode:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
 
-//发送手机验证码至用户
+/**
+ * 发送手机验证码至用户
+ */
 -(void)getRestpasswordSms:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
 
-//重置密码信息提交
+/**
+ * 重置密码信息提交
+ */
 -(void)restPassWord:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
 
-//根据用户名获取手机号
+/**
+ * 根据用户名获取手机号
+ */
 -(void)getUserPhone:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
 
-//用户反馈
+/**
+ * 用户反馈
+ */
 -(void)feedBack:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block;
 
 //获取用户订单

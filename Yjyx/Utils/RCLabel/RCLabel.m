@@ -1513,8 +1513,7 @@ CGFloat MyGetWidthCallback( void* refCon ){
                     }else{
                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                             
-                            
-                            
+                    
                             NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:tempURL]];
                             tempURL = [tempURL stringByReplacingOccurrencesOfString:@"/" withString:@""];
 

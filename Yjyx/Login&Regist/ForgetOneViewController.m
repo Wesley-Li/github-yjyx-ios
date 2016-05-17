@@ -27,10 +27,10 @@
 
 -(IBAction)goSure:(id)sender
 {
-    if (![accountText.text isPhone]) {
-        [self.view makeToast:@"请输入正确的账号" duration:1.0 position:SHOW_CENTER complete:nil];
-        return;
-    }
+//    if (![accountText.text isPhone]) {
+//        [self.view makeToast:@"请输入正确的账号" duration:1.0 position:SHOW_CENTER complete:nil];
+//        return;
+//    }
     
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:accountText.text,@"username",nil];
     [[YjxService sharedInstance] getUserPhone:dic withBlock:^(id result, NSError *error){//验证验证码
@@ -56,6 +56,12 @@
 -(IBAction)goBack:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+// 回收键盘
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+
+    [self.view endEditing:YES];
 }
 
 /*
