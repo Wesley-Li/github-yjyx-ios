@@ -48,6 +48,7 @@
     [_teacherBtn setSelected:NO];
     [_stuBtn setSelected:NO];
     
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clicked:)];
     [self.view addGestureRecognizer:tap];
     
@@ -204,7 +205,9 @@
                             [(AppDelegate *)SYS_DELEGATE fillViews];
                             [YjyxOverallData sharedInstance].parentInfo = [ParentEntity wrapParentWithdic:result];
                             [YjyxOverallData sharedInstance].parentInfo.phone = _uesrNameTF.text;
-                            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text,@"username",_passWordTF.text,@"password", nil];
+                            
+                            // 在此处存储用户信息
+                            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", _uesrNameTF.text,@"username",_passWordTF.text,@"password", nil];
                             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
                             [SYS_CACHE synchronize];
                         }else{
@@ -234,7 +237,7 @@
                             [YjyxOverallData sharedInstance].teacherInfo = [TeacherEntity wrapTeacherWithDic:result];
                             
 //                            [YjyxOverallData sharedInstance].teacherInfo.name = _uesrNameTF.text;
-                            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text, @"username", _passWordTF.text, @"password", nil];
+                            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", _uesrNameTF.text,@"username",_passWordTF.text,@"password", nil];
                             
                             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
                             [SYS_CACHE synchronize];
@@ -258,7 +261,7 @@
                 
             }else if ([((AppDelegate*)SYS_DELEGATE).role isEqualToString:@"student"]){
                 // 学生
-                [self.view makeToast:@"正在建设中,敬请期待" duration:3.0 position:SHOW_CENTER complete:nil];
+                [self.view makeToast:@"正在建设中,敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
                 
                 [self.view hideToastActivity];
                 
@@ -274,7 +277,6 @@
     RegistOneViewController *registView = [[RegistOneViewController alloc] init];
     [self.navigationController pushViewController:registView animated:YES];
     
-    
 }
 
 
@@ -286,7 +288,7 @@
     [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:TEACHER_GETALLSTULIST_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject);
         // 创建数据库
         [[StuDataBase shareStuDataBase] deleteStuTable];
         [[StuDataBase shareStuDataBase] creatStuDataBase];
