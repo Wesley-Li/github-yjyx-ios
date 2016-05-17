@@ -2848,7 +2848,7 @@
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a92b8e4b-676b-46d4-ac1e-ef7c6104f66a";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -2898,7 +2898,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a92b8e4b-676b-46d4-ac1e-ef7c6104f66a";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

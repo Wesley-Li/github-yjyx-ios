@@ -29,6 +29,8 @@
     NSString *devicetoken = ((AppDelegate*)SYS_DELEGATE).deviceToken;
     NSString *model = [[UIDevice currentDevice] model];
     
+    NSLog(@"+++++++%@", role);
+    
     // 判断身份
     if ([role isEqualToString:@"parents"]) {
         // 家长的自动登录实现
