@@ -51,6 +51,8 @@
 		3A40570D1CCF732800258784 /* ForgetTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A40570B1CCF732800258784 /* ForgetTwoViewController.xib */; };
 		3A4057111CCF859B00258784 /* ForgetThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A40570F1CCF859B00258784 /* ForgetThreeViewController.m */; };
 		3A4057121CCF859B00258784 /* ForgetThreeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A4057101CCF859B00258784 /* ForgetThreeViewController.xib */; };
+		3A4166781CEAE014005D2032 /* YjyxShopMallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4166761CEAE014005D2032 /* YjyxShopMallViewController.m */; };
+		3A4166791CEAE014005D2032 /* YjyxShopMallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A4166771CEAE014005D2032 /* YjyxShopMallViewController.xib */; };
 		3A41974D1CD36178006BD7D2 /* common_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A41974B1CD36178006BD7D2 /* common_add@2x.png */; };
 		3A41974E1CD36178006BD7D2 /* common_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A41974C1CD36178006BD7D2 /* common_delete@2x.png */; };
 		3A4302041C61FDFB00B8D259 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4302021C61FDFB00B8D259 /* LoginViewController.m */; };
@@ -466,6 +468,9 @@
 		3A40570E1CCF859A00258784 /* ForgetThreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetThreeViewController.h; sourceTree = "<group>"; };
 		3A40570F1CCF859B00258784 /* ForgetThreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetThreeViewController.m; sourceTree = "<group>"; };
 		3A4057101CCF859B00258784 /* ForgetThreeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetThreeViewController.xib; sourceTree = "<group>"; };
+		3A4166751CEAE014005D2032 /* YjyxShopMallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxShopMallViewController.h; sourceTree = "<group>"; };
+		3A4166761CEAE014005D2032 /* YjyxShopMallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxShopMallViewController.m; sourceTree = "<group>"; };
+		3A4166771CEAE014005D2032 /* YjyxShopMallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxShopMallViewController.xib; sourceTree = "<group>"; };
 		3A41974B1CD36178006BD7D2 /* common_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "common_add@2x.png"; sourceTree = "<group>"; };
 		3A41974C1CD36178006BD7D2 /* common_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "common_delete@2x.png"; sourceTree = "<group>"; };
 		3A4302011C61FDFB00B8D259 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -1242,6 +1247,9 @@
 				3AD1FD9B1C72CE5000E362B9 /* CommonWebViewController.h */,
 				3AD1FD9C1C72CE5000E362B9 /* CommonWebViewController.m */,
 				3AD1FD9D1C72CE5000E362B9 /* CommonWebViewController.xib */,
+				3A4166751CEAE014005D2032 /* YjyxShopMallViewController.h */,
+				3A4166761CEAE014005D2032 /* YjyxShopMallViewController.m */,
+				3A4166771CEAE014005D2032 /* YjyxShopMallViewController.xib */,
 				3A91F4661C7606C3001568AA /* cell */,
 			);
 			name = Home;
@@ -2416,6 +2424,7 @@
 				3AD1FDA61C73149200E362B9 /* nav_operate@2x.png in Resources */,
 				3A44A1ED1CC0C76200B93F6A /* memberCenter_bg3@3x.png in Resources */,
 				3B35DB941CE06FE7000B7F83 /* AnswerSituationCell.xib in Resources */,
+				3A4166791CEAE014005D2032 /* YjyxShopMallViewController.xib in Resources */,
 				3B4864581CCF10C200D2DE3C /* tab_home_click@3x.png in Resources */,
 				3A66A8041C931BBA005E2D43 /* ChildrenExplantionViewController.xib in Resources */,
 				3AE894041C6C28C300E8BA97 /* login_textView_bg@3x.png in Resources */,
@@ -2616,6 +2625,7 @@
 				3B35DB8A1CE0560F000B7F83 /* NextTableViewController.m in Sources */,
 				3A91F4931C760CF4001568AA /* PNColor.m in Sources */,
 				3AD1FD9E1C72CE5000E362B9 /* CommonWebViewController.m in Sources */,
+				3A4166781CEAE014005D2032 /* YjyxShopMallViewController.m in Sources */,
 				3AEF27241C61F08A0028BE09 /* UICountingLabel.m in Sources */,
 				3AFE02B91CA291BD0097CC83 /* BaseViewController.m in Sources */,
 				3BFE3B841CD99E6100502769 /* StuDataBase.m in Sources */,

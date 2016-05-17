@@ -12,6 +12,7 @@
 #import "ChildrenResultViewController.h"
 #import "YjyxMicroClassViewController.h"
 #import "YjyxWorkPreviewViewController.h"
+#import "YjyxShopMallViewController.h"
 
 @interface ParentHomeViewController ()
 
@@ -146,6 +147,11 @@
             break;
         }
         case 102:
+        {
+            YjyxShopMallViewController *vc = [[YjyxShopMallViewController alloc] init];
+            [vc setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
             break;
         default:
             break;

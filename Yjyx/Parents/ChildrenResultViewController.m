@@ -209,10 +209,10 @@
         NSString *myanswer = [[NSString alloc] initWithFormat:@""];
         
         if ([isOpne isEqualToString:@"0"]) {
-            myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",1,[resultary objectAtIndex:0] ]];
+            myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d:)%@\n",1,[resultary objectAtIndex:0] ]];
         }else{
             for (int i = 0; i< [resultary count]; i++) {
-                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",(i+1),[resultary objectAtIndex:i] ]];
+                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d:)%@\n",(i+1),[resultary objectAtIndex:i] ]];
             }
         }
         RCLabel *templabel1 = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH/2 - 90, 999)];
@@ -329,10 +329,10 @@
             NSString *myanswer = [[NSString alloc] initWithFormat:@""];
             NSString *isOpne = [selectDic objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row+[_resultchoices count]]];
             if ([isOpne isEqualToString:@"0"]) {
-                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",1,[resultary objectAtIndex:0] ]];
+                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d:)%@\n",1,[resultary objectAtIndex:0] ]];
             }else{
                 for (int i = 0; i< [resultary count]; i++) {
-                    myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",(i+1),[resultary objectAtIndex:i] ]];
+                    myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d:)%@\n",(i+1),[resultary objectAtIndex:i] ]];
                 }
                 
             }
@@ -364,10 +364,10 @@
             NSString *tureAnswer = [[NSString alloc] initWithFormat:@""];
 
             if ([isOpne isEqualToString:@"0"]) {
-                tureAnswer = [tureAnswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@",1,[tureAnswerAry objectAtIndex:0] ]];
+                tureAnswer = [tureAnswer stringByAppendingString:[NSString stringWithFormat:@"%d:)%@",1,[tureAnswerAry objectAtIndex:0] ]];
             }else{
                 for (int i = 0; i< [resultary count]; i++) {
-                    tureAnswer = [tureAnswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",(i+1),[tureAnswerAry objectAtIndex:i] ]];
+                    tureAnswer = [tureAnswer stringByAppendingString:[NSString stringWithFormat:@"%d:)%@\n",(i+1),[tureAnswerAry objectAtIndex:i] ]];
                 }
                 
             }
@@ -453,10 +453,10 @@
         NSString *myanswer = [[NSString alloc] initWithFormat:@""];
         NSString *isOpne = [selectDic objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row+[_resultchoices count]]];
         if ([isOpne isEqualToString:@"0"]) {
-            myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",1,[resultary objectAtIndex:0] ]];
+            myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d:)%@\n",1,[resultary objectAtIndex:0] ]];
         }else{
             for (int i = 0; i< [resultary count]; i++) {
-                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",(i+1),[resultary objectAtIndex:i] ]];
+                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d:)%@\n",(i+1),[resultary objectAtIndex:i] ]];
             }
 
         }
@@ -490,10 +490,10 @@
         NSString *tureAnswer = [[NSString alloc] initWithFormat:@""];
         
         if ([isOpne isEqualToString:@"0"]) {
-            tureAnswer = [tureAnswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@",1,[tureAnswerAry objectAtIndex:0] ]];
+            tureAnswer = [tureAnswer stringByAppendingString:[NSString stringWithFormat:@"%d:)%@",1,[tureAnswerAry objectAtIndex:0] ]];
         }else{
             for (int i = 0; i< [resultary count]; i++) {
-                tureAnswer = [tureAnswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",(i+1),[tureAnswerAry objectAtIndex:i] ]];
+                tureAnswer = [tureAnswer stringByAppendingString:[NSString stringWithFormat:@"%d:)%@\n",(i+1),[tureAnswerAry objectAtIndex:i] ]];
             }
             
         }
