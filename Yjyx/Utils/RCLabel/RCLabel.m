@@ -54,6 +54,7 @@
 
 
 static NSMutableDictionary *imgSizeDict = NULL;
+static NSRecursiveLock *lock;
 
 @implementation RTLabelComponent
 
@@ -73,7 +74,8 @@ static NSMutableDictionary *imgSizeDict = NULL;
 		self.tagLabel = aTagLabel;
 		self.attributes = theAttributes;
         self.isClosure = NO;
-        
+        lock = [[NSRecursiveLock alloc] init];
+        lock.name = @"ImageDowLoad";
 	}
 	return self;
 }
@@ -1266,8 +1268,7 @@ CGFloat MyGetWidthCallback( void* refCon ){
 
 + (RTLabelComponentsStructure*)extractTextStyle:(NSString*)data
 {
-
-    NSScanner *scanner = nil; 
+    NSScanner *scanner = nil;
 	NSString *text = nil;
 	NSString *tag = nil;
     //These two variable are used to handle the unclosed tags.
@@ -1496,7 +1497,7 @@ CGFloat MyGetWidthCallback( void* refCon ){
                 NSString *inlineStyleHeight = [component.attributes objectForKey:@"height"];
                 */
                 
-                
+                [lock lock];
                 __block NSString *tempURL = [RCLabel stripURL:url];
                 if (tempURL) {
                     [component.attributes setObject:tempURL forKey:@"src"];
@@ -1536,6 +1537,8 @@ CGFloat MyGetWidthCallback( void* refCon ){
                     }
                     
                 }
+                [lock unlock];
+
                 
           
                 

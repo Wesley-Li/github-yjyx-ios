@@ -223,10 +223,6 @@
         
         return optimalSize.height + 50 + optimalSize1.height;
         
-//        NSArray *resultary = [[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:1];
-//        NSInteger answerCount = [resultary count]%3 == 0?([resultary count]/3):([resultary count]/3 +1);
-//        CGFloat answerHeight = 20*(answerCount-1);
-//        return optimalSize.height +55 + answerHeight;
     }
 }
 
