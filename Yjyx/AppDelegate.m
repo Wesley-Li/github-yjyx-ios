@@ -149,7 +149,7 @@
         NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
         
         NSLog(@"%@", dic);
-        [autologin autoLoginWithRole:dic[@"role"] username:dic[@"username"] password:@"password"];
+        [autologin autoLoginWithRole:dic[@"role"] username:dic[@"username"] password:dic[@"password"]];
         
         autologin = nil;
     }
