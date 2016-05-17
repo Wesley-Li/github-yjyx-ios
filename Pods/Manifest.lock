@@ -27,15 +27,18 @@ PODS:
   - Qiniu (7.0.18):
     - AFNetworking (~> 2.0)
     - HappyDNS (~> 0.2)
+  - TZImagePickerController (1.3.5)
 
 DEPENDENCIES:
   - FMDB (~> 2.6.2)
   - Qiniu (~> 7.0)
+  - TZImagePickerController (~> 1.3.5)
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   HappyDNS: 86ab4be498cc5cc884002b248979cd130cfbe10e
   Qiniu: 7a9c2a2bbdec02ae84b92051637e1e9ea3d182fb
+  TZImagePickerController: 21222862423a04931fae598b33de9c90787dbc16
 
 COCOAPODS: 0.39.0

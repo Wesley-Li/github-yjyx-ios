@@ -240,6 +240,7 @@
                             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", _uesrNameTF.text,@"username",_passWordTF.text,@"password", nil];
                             
                             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
+                            NSLog(@"------%@", dic);
                             [SYS_CACHE synchronize];
                             
                             NSLog(@"登录老师界面");

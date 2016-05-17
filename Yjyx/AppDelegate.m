@@ -38,7 +38,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
     ((AppDelegate*)SYS_DELEGATE).role = @"parents";
 
         //1.注册APNS推送通知
@@ -148,7 +147,8 @@
     if (autologin) {//获取到devicetoken后自动登录
         NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
         
-        NSLog(@"%@", dic);
+        NSLog(@"^^^^^^^%@", dic);
+        
         [autologin autoLoginWithRole:dic[@"role"] username:dic[@"username"] password:dic[@"password"]];
         
         autologin = nil;
@@ -277,7 +277,11 @@
 #pragma mark 登录成功根界面
 - (void)fillViews
 {
-    
+    NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
+    // 添加判断
+    if ([dic[@"username"] length] > 0) {
+        ((AppDelegate *)SYS_DELEGATE).role = dic[@"role"];
+    }
 
     if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {
         
