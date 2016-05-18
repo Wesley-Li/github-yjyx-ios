@@ -207,25 +207,19 @@
         NSString *isOpne = [selectDic objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row+[_resultchoices count]]];
         NSArray *resultary = [[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:1];
         
+        NSArray *cornerAry =[NSArray arrayWithObjects:@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨",@"⑩",@"⑪",@"⑫",@"⑬",@"⑭",@"⑮",@"⑯",@"⑰",@"⑱",@"⑲",@"⑳", nil];
         if ([isOpne isEqualToString:@"0"]) {
             return optimalSize.height + 50 + 10;
         }else{
             CGFloat height = 0;
             for (int i = 0; i< [resultary count]; i++) {
-                NSString *contentStr =[NSString stringWithFormat:@"%d:)%@",(i+1),[resultary objectAtIndex:i]];
+                NSString *contentStr =[NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:i],[resultary objectAtIndex:i]];
                 CGSize size = [contentStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH/2 - 90, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
                 height = height + size.height + 3;
             }
             return optimalSize.height + 50 + height;
 
         }
-//        RCLabel *templabel1 = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH/2 - 90, 999)];
-//        templabel1.font = [UIFont systemFontOfSize:14];
-//        RTLabelComponentsStructure *componentsDS1 = [RCLabel extractTextStyle:myanswer];
-//        templabel1.componentsAndPlainText = componentsDS1;
-//        CGSize optimalSize1 = [templabel1 optimumSize];
-        
-//        return optimalSize.height + 50 + optimalSize1.height;
         
     }
 }
@@ -333,27 +327,28 @@
             
             CGFloat height = optimalSize.height +22;
             
+            NSArray *cornerAry =[NSArray arrayWithObjects:@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨",@"⑩",@"⑪",@"⑫",@"⑬",@"⑭",@"⑮",@"⑯",@"⑰",@"⑱",@"⑲",@"⑳", nil];
             if ([isOpne isEqualToString:@"0"]) {
                 //正确答案
-                NSString *tureAnswer = [NSString stringWithFormat:@"%d:)%@\n",1,[tureAnswerAry objectAtIndex:0]];
+                NSString *tureAnswer = [NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:0],[tureAnswerAry objectAtIndex:0]];
                 UILabel *turemyanswerLb = [UILabel labelWithFrame:CGRectMake(45, optimalSize.height+22, SCREEN_WIDTH/2 - 90, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:tureAnswer];
                 [bg addSubview:turemyanswerLb];
                 
                 //自己答案
-                NSString *myanswer = [NSString stringWithFormat:@"%d:)%@\n",1,[resultary objectAtIndex:0]];
+                NSString *myanswer = [NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:0],[resultary objectAtIndex:0]];
                 UILabel *myanswerLb = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH/2+30, optimalSize.height+22, SCREEN_WIDTH/2 - 90, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:myanswer];
                 [bg addSubview:myanswerLb];
             }else{
                 for (int i = 0; i< [resultary count]; i++) {
                     //正确答案
-                    NSString *tureStr =[NSString stringWithFormat:@"%d:)%@",(i+1),[tureAnswerAry objectAtIndex:i]];
+                    NSString *tureStr =[NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:i],[tureAnswerAry objectAtIndex:i]];
                     UILabel *turecontentLb = [UILabel labelWithFrame:CGRectMake(45, height, SCREEN_WIDTH/2 - 90, 12) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:tureStr];
                     turecontentLb.numberOfLines = 0;
                     [turecontentLb sizeToFit];
                     CGSize turesize = [tureStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH/2 - 90, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
                     
                     //自己答案
-                    NSString *contentStr =[NSString stringWithFormat:@"%d:)%@",(i+1),[resultary objectAtIndex:i]];
+                    NSString *contentStr =[NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:i],[resultary objectAtIndex:i]];
                     UILabel *contentLb = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH/2+30, height, SCREEN_WIDTH/2 - 90, 12) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:contentStr];
                     contentLb.numberOfLines = 0;
                     [contentLb sizeToFit];
@@ -546,28 +541,28 @@
         NSString *isOpne = [selectDic objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row+[_resultchoices count]]];
         
         CGFloat height = optimalSize.height +22;
-
+        NSArray *cornerAry =[NSArray arrayWithObjects:@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨",@"⑩",@"⑪",@"⑫",@"⑬",@"⑭",@"⑮",@"⑯",@"⑰",@"⑱",@"⑲",@"⑳", nil];
         if ([isOpne isEqualToString:@"0"]) {
             //正确答案
-            NSString *tureAnswer = [NSString stringWithFormat:@"%d:)%@\n",1,[tureAnswerAry objectAtIndex:0]];
+            NSString *tureAnswer = [NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:0],[tureAnswerAry objectAtIndex:0]];
             UILabel *turemyanswerLb = [UILabel labelWithFrame:CGRectMake(45, optimalSize.height+22, SCREEN_WIDTH/2 - 90, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:tureAnswer];
             [bg addSubview:turemyanswerLb];
             
             //自己答案
-            NSString *myanswer = [NSString stringWithFormat:@"%d:)%@\n",1,[resultary objectAtIndex:0]];
+            NSString *myanswer = [NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:0],[resultary objectAtIndex:0]];
             UILabel *myanswerLb = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH/2+30, optimalSize.height+22, SCREEN_WIDTH/2 - 90, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:myanswer];
             [bg addSubview:myanswerLb];
         }else{
             for (int i = 0; i< [resultary count]; i++) {
                 //正确答案
-                NSString *tureStr =[NSString stringWithFormat:@"%d:)%@",(i+1),[tureAnswerAry objectAtIndex:i]];
+                NSString *tureStr =[NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:i],[tureAnswerAry objectAtIndex:i]];
                 UILabel *turecontentLb = [UILabel labelWithFrame:CGRectMake(45, height, SCREEN_WIDTH/2 - 90, 12) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:tureStr];
                 turecontentLb.numberOfLines = 0;
                 [turecontentLb sizeToFit];
                 CGSize turesize = [tureStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH/2 - 90, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
                 
                 //自己答案
-                NSString *contentStr =[NSString stringWithFormat:@"%d:)%@",(i+1),[resultary objectAtIndex:i]];
+                NSString *contentStr =[NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:i],[resultary objectAtIndex:i]];
                 UILabel *contentLb = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH/2+30, height, SCREEN_WIDTH/2 - 90, 12) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:contentStr];
                 contentLb.numberOfLines = 0;
                 [contentLb sizeToFit];
