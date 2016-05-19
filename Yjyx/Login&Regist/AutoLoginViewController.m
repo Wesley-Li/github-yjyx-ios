@@ -36,7 +36,7 @@
         // 家长的自动登录实现
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:username,@"username",[password md5],@"password",@"1",@"ostype",model,@"description",devicetoken,@"devicetoken",nil];
         
-        [[YjxService sharedInstance] parentsLogin:dic withBlock:^(id result,NSError *error){
+        [[YjxService sharedInstance] parentsLogin:dic autoLogin:YES withBlock:^(id result,NSError *error){
             [self.view hideToastActivity];
             if (result != nil) {
                 if ([[result objectForKey:@"retcode"] integerValue] == 0) {
@@ -63,11 +63,9 @@
     }else if ([role isEqualToString:@"teacher"]) {
         // 老师的自动登录实现
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:username,@"username",password,@"password",@"1",@"ostype",model,@"description",devicetoken,@"devicetoken", nil];
-        [[YjxService sharedInstance] teacherLogin:dic withBlock:^(id result, NSError *error) {
-           
+        [[YjxService sharedInstance] teacherLogin:dic autoLogin:YES withBlock:^(id result, NSError *error) {
             [self.view hideToastActivity];
             if (result != nil) {
-                
                 if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                     [(AppDelegate *)SYS_DELEGATE fillViews];
                     [YjyxOverallData sharedInstance].teacherInfo = [TeacherEntity wrapTeacherWithDic:result];

@@ -34,7 +34,7 @@
 
 -(void)parentsRegist:(NSDictionary*)params withBlock:(void(^)(id result,NSError *error))block;
 
--(void)parentsLogin:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
+-(void)parentsLogin:(NSDictionary *)params autoLogin:(BOOL)autoLogin withBlock:(void(^)(id result, NSError *error))block;
 
 -(void)parentsAboutChildrenSetting:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))blocK;
 
@@ -114,7 +114,7 @@
 /*
  *老师登录接口
  */
-- (void)teacherLogin:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
+- (void)teacherLogin:(NSDictionary *)params autoLogin:(BOOL)autoLogin withBlock:(void(^)(id result, NSError *error))block;
 /*
  *老师登出接口
  */

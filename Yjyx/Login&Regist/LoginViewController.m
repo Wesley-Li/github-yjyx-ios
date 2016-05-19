@@ -198,7 +198,7 @@
             // 调用登录接口
             if ([((AppDelegate*)SYS_DELEGATE).role isEqualToString:@"parents"]) {
                 // 家长
-                [[YjxService sharedInstance] parentsLogin:dic withBlock:^(id result,NSError *error){
+                [[YjxService sharedInstance] parentsLogin:dic autoLogin:NO withBlock:^(id result,NSError *error){
                     [self.view hideToastActivity];
                     if (result != nil) {
                         if ([[result objectForKey:@"retcode"] integerValue] == 0) {
@@ -224,7 +224,7 @@
                 NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text,@"username",_passWordTF.text,@"password",@"1",@"ostype",((AppDelegate*)SYS_DELEGATE).deviceToken,@"devicetoken",[[UIDevice currentDevice] model],@"description",nil];
                 
                 __weak typeof(self) weakself = self;
-                [[YjxService sharedInstance] teacherLogin:dic withBlock:^(id result, NSError *error) {
+                [[YjxService sharedInstance] teacherLogin:dic autoLogin:YES withBlock:^(id result, NSError *error) {
                     
                     [self.view hideToastActivity];
                     if (result != nil) {

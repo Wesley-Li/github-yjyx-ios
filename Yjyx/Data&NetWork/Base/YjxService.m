@@ -93,9 +93,12 @@
 }
 
 //家长登录
--(void)parentsLogin:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
+-(void)parentsLogin:(NSDictionary *)params autoLogin:(BOOL)autoLogin withBlock:(void(^)(id result, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    if (autoLogin) {
+        [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
+    }
     [manager POST:[BaseURL stringByAppendingString:@"/api/parents/login/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -364,9 +367,12 @@
 #pragma mark - 老师相关接口实现
 
 // 老师登录
-- (void)teacherLogin:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block {
+- (void)teacherLogin:(NSDictionary *)params autoLogin:(BOOL)autoLogin withBlock:(void(^)(id result, NSError *error))block {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    if (autoLogin) {
+        [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
+    }
     [manager POST:[BaseURL stringByAppendingString:TEACHER_LOGIN_CONECT_POST] parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject, nil);
