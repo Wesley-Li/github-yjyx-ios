@@ -170,27 +170,31 @@
             
             NSString *isOpne = [selectDic objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row+[_resultchoices count]]];
             NSArray *resultary = [[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:1];
-            NSString *myanswer = [[NSString alloc] initWithFormat:@""];
-            
+            NSArray *tureAnswerAry = [[[_blankfills objectForKey:key] objectForKey:@"answer"] JSONValue];
+
+            NSArray *cornerAry =[NSArray arrayWithObjects:@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨",@"⑩",@"⑪",@"⑫",@"⑬",@"⑭",@"⑮",@"⑯",@"⑰",@"⑱",@"⑲",@"⑳", nil];
             if ([isOpne isEqualToString:@"0"]) {
-                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",1,[resultary objectAtIndex:0] ]];
+                return optimalSize.height + 50;
             }else{
+                CGFloat height = 0;
                 for (int i = 0; i< [resultary count]; i++) {
-                    myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%d)%@\n",(i+1),[resultary objectAtIndex:i] ]];
+                    
+                    NSString *tureStr =[NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:i],[tureAnswerAry objectAtIndex:i]];
+                    CGSize turesize = [tureStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH/2 - 90, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
+                    
+                    //自己答案
+                    NSString *contentStr =[NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:i],[resultary objectAtIndex:i]];
+                    CGSize size = [contentStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH/2 - 90, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
+                    
+                    height = height + (turesize.height>size.height?turesize.height:size.height) +5;
+                    
+//                    NSString *contentStr =[NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:i],[resultary objectAtIndex:i]];
+//                    CGSize size = [contentStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH/2 - 90, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
+//                    height = height + size.height + 3;
                 }
+                return optimalSize.height + 50 + height;
+                
             }
-            RCLabel *templabel1 = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH/2 - 90, 999)];
-            templabel1.font = [UIFont systemFontOfSize:14];
-            RTLabelComponentsStructure *componentsDS1 = [RCLabel extractTextStyle:myanswer];
-            templabel1.componentsAndPlainText = componentsDS1;
-            CGSize optimalSize1 = [templabel1 optimumSize];
-            
-            return optimalSize.height + 50 + optimalSize1.height;
-            
-//            NSArray *resultary = [[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:1];
-//            NSInteger answerCount = [resultary count]%3 == 0?([resultary count]/3):([resultary count]/3 +1);
-//            CGFloat answerHeight = 20*(answerCount-1);
-//            return optimalSize.height +55 + answerHeight;
 
         }
     }else
@@ -206,16 +210,22 @@
         
         NSString *isOpne = [selectDic objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row+[_resultchoices count]]];
         NSArray *resultary = [[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:1];
-        
+        NSArray *tureAnswerAry = [[[_blankfills objectForKey:key] objectForKey:@"answer"] JSONValue];
+
         NSArray *cornerAry =[NSArray arrayWithObjects:@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨",@"⑩",@"⑪",@"⑫",@"⑬",@"⑭",@"⑮",@"⑯",@"⑰",@"⑱",@"⑲",@"⑳", nil];
         if ([isOpne isEqualToString:@"0"]) {
-            return optimalSize.height + 50 + 10;
+            return optimalSize.height + 50;
         }else{
             CGFloat height = 0;
             for (int i = 0; i< [resultary count]; i++) {
+                NSString *tureStr =[NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:i],[tureAnswerAry objectAtIndex:i]];
+                CGSize turesize = [tureStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH/2 - 90, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
+                
+                //自己答案
                 NSString *contentStr =[NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:i],[resultary objectAtIndex:i]];
                 CGSize size = [contentStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH/2 - 90, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
-                height = height + size.height + 3;
+                
+                height = height + (turesize.height>size.height?turesize.height:size.height) +5;
             }
             return optimalSize.height + 50 + height;
 
@@ -366,7 +376,7 @@
             }
             
             
-            bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 55 + height);
+            bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , 20 + height);
             [cell.contentView addSubview:bg];
             
             [bg addSubview:templabel];
@@ -580,7 +590,7 @@
         }
         
 
-        bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 55 + height);
+        bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , 20 + height);
         [cell.contentView addSubview:bg];
         
         [bg addSubview:templabel];
