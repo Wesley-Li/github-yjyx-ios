@@ -187,8 +187,10 @@
                 [fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:nil];
             }
             NSDictionary *dic = (NSDictionary *)responseObject;
-            [dic writeToFile:[cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[params objectForKey:@"action"]]] atomically:YES];
-            
+            if ([[dic objectForKey:@"retcode"] integerValue] == 0) {
+                [dic writeToFile:[cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[params objectForKey:@"action"]]] atomically:YES];
+            }
+
             block(responseObject,nil);
         }else{
             block(nil,nil);
