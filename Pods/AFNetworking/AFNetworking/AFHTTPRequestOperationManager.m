@@ -59,7 +59,6 @@
     self.baseURL = url;
 
     self.requestSerializer = [AFHTTPRequestSerializer serializer];
-    self.requestSerializer.timeoutInterval = 60;
     self.responseSerializer = [AFJSONResponseSerializer serializer];
 
     self.securityPolicy = [AFSecurityPolicy defaultPolicy];

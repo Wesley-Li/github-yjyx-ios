@@ -102,10 +102,11 @@
     [manager POST:[BaseURL stringByAppendingString:@"/api/parents/login/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:[responseObject objectForKey:@"sessionid"] forKey:@"SessionID"];
-            [defaults synchronize];
-
+            if ([[responseObject objectForKey:@"retcode"] integerValue] == 0) {
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:[responseObject objectForKey:@"sessionid"] forKey:@"SessionID"];
+                [defaults synchronize];
+            }
         }else{
             block(nil,nil);
         }
