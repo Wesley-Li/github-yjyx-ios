@@ -199,6 +199,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
             
         }];
         
+        
         _backBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 44, 44)];
         [_backBtn setImage:[UIImage imageNamed:@"Parent_VideoBack"] forState:UIControlStateNormal];
         [_backBtn addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];

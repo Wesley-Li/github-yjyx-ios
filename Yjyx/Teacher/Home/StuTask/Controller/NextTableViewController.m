@@ -231,7 +231,7 @@
     [wmPlayer removeFromSuperview];
     [UIView animateWithDuration:0.5f animations:^{
         wmPlayer.transform = CGAffineTransformIdentity;
-        wmPlayer.frame = CGRectMake(SCREEN_WIDTH/2,SCREEN_HEIGHT-60-(SCREEN_WIDTH/2)*0.75, SCREEN_WIDTH/2, (SCREEN_WIDTH/2)*0.75);
+        wmPlayer.frame = CGRectMake(SCREEN_WIDTH/2,SCREEN_HEIGHT-60-(SCREEN_WIDTH/2)*0.575, SCREEN_WIDTH/2, (SCREEN_WIDTH/2)*0.575);
         wmPlayer.playerLayer.frame =  wmPlayer.bounds;
         [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
         [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -479,11 +479,13 @@
     }
     if (wmPlayer) {
         [wmPlayer removeFromSuperview];
+        wmPlayer.backBtn.hidden = YES;
         [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
         [wmPlayer setVideoURLStr:[_dic[@"question"] objectForKey:@"videourl"]];
         [wmPlayer.player play];
     }else{
         wmPlayer = [[WMPlayer alloc]initWithFrame:self.videoCell.backgroundIV.bounds videoURLStr:[_dic[@"question"] objectForKey:@"videourl"]];
+        wmPlayer.backBtn.hidden = YES;
         
     }
     
