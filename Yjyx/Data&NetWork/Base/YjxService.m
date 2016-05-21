@@ -23,7 +23,6 @@
 -(void)getAboutqinniu:(NSDictionary*)params withBlock:(void(^)(id result, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:@"/api/parents/qiniu/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -40,7 +39,6 @@
 -(void)uploadFile:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager POST:[BaseURL stringByAppendingString:@"/api/teacher/avatar/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -95,36 +93,26 @@
 //家长登录
 -(void)parentsLogin:(NSDictionary *)params autoLogin:(BOOL)autoLogin withBlock:(void(^)(id result, NSError *error))block
 {
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
-//    [manager GET:[BaseURL stringByAppendingString:@"/api/parents/login/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
-//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-//            block(responseObject,nil);
-//            if ([[responseObject objectForKey:@"retcode"] integerValue] == 0) {
-//                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//                [defaults setObject:[responseObject objectForKey:@"sessionid"] forKey:@"SessionID"];
-//                [defaults synchronize];
-//            }
-//
-//        }else{
-//            block(nil,nil);
-//        }
-//    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
-//        block(nil,error);
-//    }];
-
-    
-    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    if (autoLogin) {
-        [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
-//    }
+    if (autoLogin) {
+    
+        NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"SessionID"];
+        if([cookiesdata length]) {
+            NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
+            NSHTTPCookie *cookie;
+            for (cookie in cookies) {
+                [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+            }  
+        }
+    }
     [manager POST:[BaseURL stringByAppendingString:@"/api/parents/login/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
             if ([[responseObject objectForKey:@"retcode"] integerValue] == 0) {
+                NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:[BaseURL stringByAppendingString:@"/api/parents/login/"]]];
+                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                [defaults setObject:[responseObject objectForKey:@"sessionid"] forKey:@"SessionID"];
+                [defaults setObject:data forKey:@"SessionID"];
                 [defaults synchronize];
             }
         }else{
@@ -140,7 +128,6 @@
 -(void)parentsAboutChildrenSetting:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))blocK
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager POST:[BaseURL stringByAppendingString:@"/api/parents/setting/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             blocK(responseObject,nil);
@@ -158,7 +145,6 @@
 -(void)parentsLoginout:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager POST:[BaseURL stringByAppendingString:@"/api/parents/logout/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -175,7 +161,6 @@
 -(void)getchildrenActivity:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:@"/api/parents/children/activity/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -198,7 +183,6 @@
     }
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:@"/api/parents/children/statistic/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -225,7 +209,6 @@
 -(void)getChildrenTaskResult:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:@"/api/parents/children/taskresult/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -242,7 +225,6 @@
 -(void)getChildrenPreviewResult:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:@"/api/parents/previewtask/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -259,7 +241,6 @@
 -(void)getProductList:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:@"/api/parents/product/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -275,7 +256,6 @@
 -(void)getsubjectStatus:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:@"/api/parents/product/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -292,7 +272,6 @@
 -(void)trialProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager POST:[BaseURL stringByAppendingString:@"/api/parents/product/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -308,7 +287,6 @@
 -(void)getOneMemberProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:@"/api/parents/product/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -324,7 +302,6 @@
 -(void)purchaseProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager POST:[BaseURL stringByAppendingString:@"/api/parents/product/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -340,7 +317,6 @@
 -(void)isCanLookProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:@"/api/parents/product/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -356,7 +332,6 @@
 -(void)getSMSsendcode:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:@"/api/sms/sendcode/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -372,7 +347,6 @@
 -(void)checkOutVerfirycode:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager GET:[BaseURL stringByAppendingString:@"/api/sms/checkcode/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -393,17 +367,26 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     if (autoLogin) {
-        [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
+        NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"TSessionID"];
+        if([cookiesdata length]) {
+            NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
+            NSHTTPCookie *cookie;
+            for (cookie in cookies) {
+                [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+            }
+        }
     }
     [manager POST:[BaseURL stringByAppendingString:TEACHER_LOGIN_CONECT_POST] parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            block(responseObject, nil);
-            
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:[responseObject objectForKey:@"sessionid"] forKey:@"TSessionID"];
-            [defaults synchronize];
-//            NSLog(@"########%@", T_SESSIONID);
+            if ([[responseObject objectForKey:@"retcode"] integerValue] == 0) {
+                NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:[BaseURL stringByAppendingString:@"/api/parents/login/"]]];
+                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:data forKey:@"TSessionID"];
+                [defaults synchronize];
+            }
 
+            block(responseObject, nil);
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         block(nil, error);
@@ -464,7 +447,6 @@
 -(void)restPassWord:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager POST:[BaseURL stringByAppendingString:@"/api/utils/password/reset_password/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -519,7 +501,6 @@
 -(void)feedBack:(NSDictionary *)params withBlock:(void(^)(id result,NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
     [manager POST:[BaseURL stringByAppendingString:@"/api/feedback/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         
         if ([responseObject isKindOfClass:[NSDictionary class]]) {

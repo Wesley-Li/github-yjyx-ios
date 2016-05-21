@@ -12,6 +12,8 @@
 #define BaseURL @"http://139.196.14.118"
 #define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
 
+//#define BaseURL @"http://qa.zgyjyx.com"
+
 //演示
 //#define BaseURL @"http://zgyjyx.com"
 //#define QiniuYunURL @"http://cdn-web-img.zgyjyx.com/"
