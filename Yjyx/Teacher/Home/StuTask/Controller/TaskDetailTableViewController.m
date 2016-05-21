@@ -312,13 +312,16 @@
             
         }
         
-        //        taskView.backgroundColor = [UIColor redColor];
+        // taskView.backgroundColor = [UIColor redColor];
         ChoiceModel *model = self.choiceDataSource[i];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, TWidth, 20)];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, TWidth, TWidth)];
         imageView.image = [UIImage imageNamed:@"corect_pic"];
         UIButton *choiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         choiceBtn.frame = CGRectMake(0, 20, TWidth, TWidth);
+        
+        NSLog(@"^^^^^%@", model.C_count);
+        
         NSString *titleString = [NSString stringWithFormat:@"%.f%%", [model.C_count floatValue]*100/([model.C_count floatValue] + [model.W_count floatValue])];
         [choiceBtn setTitle:[NSString stringWithFormat:@"%@", titleString] forState:UIControlStateNormal];
         choiceBtn.titleLabel.font = [UIFont systemFontOfSize:12];
