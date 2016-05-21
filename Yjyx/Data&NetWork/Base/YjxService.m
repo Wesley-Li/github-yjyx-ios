@@ -379,7 +379,7 @@
     [manager POST:[BaseURL stringByAppendingString:TEACHER_LOGIN_CONECT_POST] parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             if ([[responseObject objectForKey:@"retcode"] integerValue] == 0) {
-                NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:[BaseURL stringByAppendingString:@"/api/parents/login/"]]];
+                NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:[BaseURL stringByAppendingString:TEACHER_LOGIN_CONECT_POST]]];
                 NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 [defaults setObject:data forKey:@"TSessionID"];
