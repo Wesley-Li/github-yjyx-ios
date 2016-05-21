@@ -258,6 +258,7 @@
                 [_childrenAry removeObjectAtIndex:[index integerValue]];
                 [[YjyxOverallData sharedInstance].parentInfo.childrens removeObjectAtIndex:[index integerValue]];
                 [_childrenTab deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[index integerValue] inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+                [_childrenTab reloadData];
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }

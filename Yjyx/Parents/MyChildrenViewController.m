@@ -64,7 +64,7 @@
     [segmentedControl addTarget:self action:@selector(seltectChildren:) forControlEvents:UIControlEventValueChanged];
     if (_childrenAry.count <= 1) {
         childrenViews.hidden = YES;
-        _childrenTab.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT -64);
+        _childrenTab.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
     }
     
     [self setupRefresh];//刷新空间

@@ -41,6 +41,9 @@
         [self getChildrenAchievement:childrenEntity.cid];
         [self initView];
     }else{
+        segmentedControl1.hidden = YES;
+        segmentedControl2.hidden = YES;
+        segmentedControl3.hidden = YES;
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先关联您的孩子" delegate:self cancelButtonTitle:@"暂不" otherButtonTitles:@"前往", nil];
         [alertView show];
 
@@ -516,6 +519,8 @@
     if (buttonIndex == 1) {
         AddChildrenViewController *vc = [[AddChildrenViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
