@@ -366,6 +366,7 @@
 - (void)teacherLogin:(NSDictionary *)params autoLogin:(BOOL)autoLogin withBlock:(void(^)(id result, NSError *error))block {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
     if (autoLogin) {
         NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"TSessionID"];
         if([cookiesdata length]) {
