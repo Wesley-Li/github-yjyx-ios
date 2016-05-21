@@ -10,6 +10,7 @@
 #import "ClassDetailViewController.h"
 #import "StuDataBase.h"
 #import "StuClassEntity.h"
+#import "MJRefresh.h"
 
 
 @interface MyClassViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -31,6 +32,8 @@
 - (void)viewWillAppear:(BOOL)animated {
 
     self.dataSource = [[[StuDataBase shareStuDataBase]selectAllClass] mutableCopy];
+    
+    
 }
 
 - (void)viewDidLoad {
@@ -39,6 +42,9 @@
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:3/255.0 green:136/255.0 blue:227/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    
+    
+    
 
     self.title = @"我的班级";
     
@@ -46,13 +52,6 @@
    
 }
 
-// 从数据库读取数据
-
-//- (void)readDataFromDataBase {
-//
-//    self.dataSource = [[[StuDataBase shareStuDataBase]selectAllClass] mutableCopy];
-//    [self.classListTableView reloadData];
-//}
 
 #pragma mark - delegate
 
@@ -91,7 +90,7 @@
 
     ClassDetailViewController *detailVC = [[ClassDetailViewController alloc] initWithNibName:@"ClassDetailViewController" bundle:nil];
     detailVC.model = self.dataSource[indexPath.row];
-
+    detailVC.currentIndex = indexPath.row;
     [self.navigationController pushViewController:detailVC animated:YES];
     
 }

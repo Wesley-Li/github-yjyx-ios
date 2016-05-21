@@ -7,18 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DynamicScrollView.h"
+
 #import "FEPlaceHolderTextView.h"
 
-@interface YjyxFeedBackViewController : BaseViewController<UIActionSheetDelegate,pickerImageSelect,UIImagePickerControllerDelegate,UINavigationBarDelegate>
+@interface YjyxFeedBackViewController : BaseViewController
 {
-    DynamicScrollView *dynamicScrollView;
+    
     NSMutableArray *imageUrlAry;
     IBOutlet UIButton *finishBtn;
     IBOutlet UIView *feedView;
 //    IBOutlet UITextView *contentText;
     FEPlaceHolderTextView *contentText;
 }
-@property (strong,nonatomic) UIImagePickerController *picker;
 
 @end

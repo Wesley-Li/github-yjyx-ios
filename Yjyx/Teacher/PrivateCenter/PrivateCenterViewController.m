@@ -12,12 +12,16 @@
 #import "NameChageViewController.h"
 #import "PhoneChangeViewController.h"
 #import "YjyxSoundViewController.h"
+#import "FeedBackViewController.h"
+#import "SoundChangeViewController.h"
 
-@interface PrivateCenterViewController ()<soundSelectDelegate>
+@interface PrivateCenterViewController ()
 
 {
-    BOOL isNeednotifySet;
+    BOOL isRecieveSound;
+    BOOL soundIsOn;
     NSString *notify_sound;
+    
     NSString *notify_with_sound;
     NSString *receive_notify;
 }
@@ -58,7 +62,7 @@
             return 2;
             break;
         case 1:
-            return 3;
+            return 4;
             break;
         case 2:
             return 1;
@@ -102,19 +106,25 @@
         if (indexPath.row == 0) {
             cell.textLabel.text = @"接收新消息通知";
             UISwitch * switchView =  [[UISwitch alloc]initWithFrame:CGRectMake(0, 0, 80, 20)];
-            [switchView addTarget:self action:@selector(notifiChange:) forControlEvents:UIControlEventValueChanged];
-            switchView.tag = 100;
+            [switchView addTarget:self action:@selector(isRecieveSound:) forControlEvents:UIControlEventValueChanged];
+            if ([[YjyxOverallData sharedInstance].teacherInfo.receive_notify isEqualToString:@"1"]) {
+                // 打开状态
+                [switchView setOn:YES animated:YES];
+            }
             
             cell.accessoryView = switchView;
         }else if (indexPath.row == 1)
         {
             cell.textLabel.text = @"声音";
             UISwitch * switchView =  [[UISwitch alloc]initWithFrame:CGRectMake(0, 0, 80, 20)];
-            [switchView addTarget:self action:@selector(notifiChange:) forControlEvents:UIControlEventValueChanged];
-            switchView.tag =101;
+            [switchView addTarget:self action:@selector(soundIsOn:) forControlEvents:UIControlEventValueChanged];
+            if ([[YjyxOverallData sharedInstance].teacherInfo.notify_with_sound isEqualToString:@"1"]) {
+                // 打开状态
+                [switchView setOn:YES animated:YES];
+            }
             
             cell.accessoryView = switchView;
-        }else{
+        }else if (indexPath.row == 2){
             cell.textLabel.text = @"消息提示音";
             
             cell.textLabel.text = @"消息提示音";
@@ -140,7 +150,10 @@
                 [cell.detailTextLabel setText:@"电子乐"];
             }
 
-            
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        }else {
+        
+            cell.textLabel.text = @"我要吐槽";
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         }
     }
@@ -182,12 +195,23 @@
     
         if (indexPath.row == 2) {
             // 修改提示音
-            YjyxSoundViewController *sound = [[YjyxSoundViewController alloc] init];
-            [sound setAudio:cell.detailTextLabel.text];
-            sound.delegate = self;
-            [sound setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:sound animated:YES];
+            SoundChangeViewController *soundVC = [[SoundChangeViewController alloc] init];
+//            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            
+            [self.navigationController pushViewController:soundVC animated:YES];
+            /*
+            YjyxSoundViewController *soundVC = [[YjyxSoundViewController alloc] init];
+            [soundVC setAudio:cell.detailTextLabel.text];
+            soundVC.delegate = self;
+            [soundVC setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:soundVC animated:YES];
+             */
         
+        }else if (indexPath.row == 3) {
+            
+            // 我要吐槽
+            FeedBackViewController *feedBackVC = [[FeedBackViewController alloc] init];
+            [self.navigationController pushViewController:feedBackVC animated:YES];
         }
         
     }
@@ -196,32 +220,18 @@
 
 #pragma mark - event
 
-- (void)notifiChange:(id)sender {
+- (void)isRecieveSound:(UISwitch *)sender {
 
-    UISwitch *switchView =  (UISwitch *)sender;
-    if (switchView.tag == 100) {
-        [YjyxOverallData sharedInstance].parentInfo.receive_notify = switchView.isOn?@"1":@"0";
-        [self.tableView reloadData];
-    }else{
-        [YjyxOverallData sharedInstance].parentInfo.notify_with_sound = switchView.isOn?@"1":@"0";
-    }
+    [YjyxOverallData sharedInstance].teacherInfo.receive_notify = sender.isOn ? @"1":@"0";
+}
+
+- (void)soundIsOn:(UISwitch *)sender {
+
+    [YjyxOverallData sharedInstance].parentInfo.notify_with_sound = sender.isOn?@"1":@"0";
 
 }
 
-// 上报消息通知设置
--(void)notifySetting
-{
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"notify_setting",@"action",[YjyxOverallData sharedInstance].teacherInfo.receive_notify,@"receive_notify",[YjyxOverallData sharedInstance].teacherInfo.notify_with_sound,@"with_sound",[YjyxOverallData sharedInstance].teacherInfo.notify_sound,@"sound",[YjyxOverallData sharedInstance].teacherInfo.notify_shake,@"vibrate", nil];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
-    
-    [manager POST:[BaseURL stringByAppendingString:TEACHER_UPLOAD_SOUND_SETTING_CONNECT_POST] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"%@", responseObject);
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
-    }];
-    
-}
+
 
 
 - (void)loginOut {
@@ -236,7 +246,11 @@
         if (result != nil) {
             
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                // 退出时关闭定时器,并清除用户名密码等信息
                 [SYS_CACHE removeObjectForKey:@"AutoLogoin"];
+                // 定时器挂起
+                dispatch_suspend(((AppDelegate*)SYS_DELEGATE).timer);
+                
                 LoginViewController *loginVC = [[LoginViewController alloc] init];
                 UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
                 AppDelegate *mydelegate = (AppDelegate*)SYS_DELEGATE;
@@ -253,12 +267,6 @@
     
 }
 
-#pragma mark - soundSelectDelegate
--(void)selectSoundWith:(NSString *)soundName {
-    
-    [YjyxOverallData sharedInstance].teacherInfo.notify_sound = soundName;
-    [self.tableView reloadData];
-}
 
 
 - (void)didReceiveMemoryWarning {

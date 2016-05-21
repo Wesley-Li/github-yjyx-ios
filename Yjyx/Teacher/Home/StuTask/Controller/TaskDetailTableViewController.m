@@ -100,6 +100,7 @@
 // 网络请求
 - (void)readDataFromNetWork {
     
+    [SVProgressHUD showWithStatus:@"正在拼命加载数据"];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"gettasksubmitdetail", @"action", self.taskModel.t_id, @"taskid", nil];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
@@ -133,7 +134,8 @@
             [self.unfinishedArr addObject:model];
         }
         [self.tableView reloadData];
-        
+        [SVProgressHUD showSuccessWithStatus:@"数据加载成功"];
+        [SVProgressHUD dismissWithDelay:0.8];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
     }];

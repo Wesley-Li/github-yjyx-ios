@@ -30,6 +30,7 @@
 #import "BaseViewController.h"
 #import <CoreText/CoreText.h>
 #import "ChildrenEntity.h"
+#import "SVProgressHUD.h"
 //系统版本
 // 家长sessionid
 #define SESSIONID [[NSUserDefaults standardUserDefaults] objectForKey:@"SessionID"]
@@ -55,6 +56,9 @@
 #define APP_WINDOW (UIWindow*)[[UIApplication sharedApplication].windows objectAtIndex:0]
 //定义颜色
 #define RGBACOLOR(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+
+// 老师端统一色
+#define TEACHERCOLOR RGBACOLOR(3, 136, 227, 1)
 //随机颜色
 #define RANDOMCOLOR [UIColor colorWithRed:(arc4random() % 256)/255.0 green:(arc4random() % 256)/255.0 blue:(arc4random() % 256)/255.0 alpha:1.0]
 //屏幕大小
@@ -92,6 +96,10 @@
 // ******************接口部分***************
 // 家长部分
 
+// 获取七牛token
+#define PARENTS_GETQINIUTOKEN @"/api/parents/qiniu/"
+// 用户反馈
+#define PARENTS_FEEDBACK @"/api/feedback/"
 
 
 
@@ -119,6 +127,9 @@
 
 // 上报消息通知设置
 #define TEACHER_UPLOAD_SOUND_SETTING_CONNECT_POST @"/api/teacher/setting/"
+
+// 用户反馈
+#define TEACHER_FEEDBACK @"/api/feedback/"
 
 // 版本更新
 #define VERSION_UPLOAD_CONNECT_GET @"/api/teacher/version/"
