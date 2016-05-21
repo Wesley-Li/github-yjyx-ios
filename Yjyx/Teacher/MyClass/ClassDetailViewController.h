@@ -12,5 +12,6 @@
 @interface ClassDetailViewController : UIViewController
 
 @property (nonatomic, strong) StuClassEntity *model;
+@property (nonatomic, assign) NSInteger currentIndex;
 
 @end

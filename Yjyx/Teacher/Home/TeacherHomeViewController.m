@@ -69,13 +69,14 @@
 
 
 
-
+/*
 #pragma mark - 点击积分按钮
 - (IBAction)handleScoreBtn:(id)sender {
     
     [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
     
 }
+ */
 #pragma mark - 点击签到按钮
 - (IBAction)handleReport:(id)sender {
     

@@ -166,11 +166,13 @@
        [web loadHTMLString:_explantionStr baseURL:nil];
        [self.view addSubview:web];
        
+      
+       
        backBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 44, 44)];
        [backBtn setImage:[UIImage imageNamed:@"Parent_VideoBack"] forState:UIControlStateNormal];
        [backBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
        [self.view addSubview:backBtn];
-       
+      
    }else{
        UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
        [web loadHTMLString:_explantionStr baseURL:nil];

@@ -68,6 +68,10 @@
             if (result != nil) {
                 if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                     [(AppDelegate *)SYS_DELEGATE fillViews];
+                    
+                    // 开启GCD
+                    dispatch_resume(((AppDelegate*)SYS_DELEGATE).timer);
+                    
                     [YjyxOverallData sharedInstance].teacherInfo = [TeacherEntity wrapTeacherWithDic:result];
                     
                 }else {

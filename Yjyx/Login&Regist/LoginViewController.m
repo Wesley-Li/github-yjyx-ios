@@ -24,7 +24,7 @@
 }
 
 @property (nonatomic, strong) NSMutableArray *stuListArr;
-@property (nonatomic, strong) dispatch_source_t timer;// 定时器
+
 
 @end
 
@@ -60,16 +60,7 @@
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showURL:)];
     [self.view addGestureRecognizer:longPress];
-    
-    // 创建定时器,并行,24小时执行一次
-    dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
-    self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-    dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, 24*60*60 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
-    dispatch_source_set_event_handler(_timer, ^{
-        NSLog(@"我被调用了");
-        [self getStuList];
-    });
-    
+
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -223,13 +214,10 @@
                 // 参数字典
                 NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text,@"username",_passWordTF.text,@"password",@"1",@"ostype",((AppDelegate*)SYS_DELEGATE).deviceToken,@"devicetoken",[[UIDevice currentDevice] model],@"description",nil];
                 
-                __weak typeof(self) weakself = self;
                 [[YjxService sharedInstance] teacherLogin:dic autoLogin:YES withBlock:^(id result, NSError *error) {
                     
                     [self.view hideToastActivity];
                     if (result != nil) {
-                        
-//                        NSLog(@"%@", result);
                         
                         if ([result[@"retcode"] integerValue] == 0) {
                             [(AppDelegate *)SYS_DELEGATE fillViews];
@@ -240,21 +228,18 @@
                             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", _uesrNameTF.text,@"username",_passWordTF.text,@"password", nil];
                             
                             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
-                            NSLog(@"------%@", dic);
                             [SYS_CACHE synchronize];
                             
-                            NSLog(@"登录老师界面");
-                            
                              // GCD写定时器启动
-                            dispatch_resume(weakself.timer);
+                            dispatch_resume(((AppDelegate*)SYS_DELEGATE).timer);
 //
                         }else {
                             
-                            [self.view makeToast:[result objectForKey:@"msg"] duration:3.0 position:SHOW_CENTER complete:nil];
+                            [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
                         }
                     }else {
                         
-                        [self.view makeToast:[error description] duration:2.0 position:SHOW_CENTER complete:nil];
+                        [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
                     }
                     
                     
@@ -281,51 +266,6 @@
 }
 
 
-// 获取所有学生列表
-- (void)getStuList {
-
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"getstudents", @"action", nil];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
-    [manager GET:[BaseURL stringByAppendingString:TEACHER_GETALLSTULIST_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-//        NSLog(@"%@", responseObject);
-        // 创建数据库
-        [[StuDataBase shareStuDataBase] deleteStuTable];
-        [[StuDataBase shareStuDataBase] creatStuDataBase];
-        
-        if ([responseObject[@"retcode"] integerValue] == 0) {
-            
-            for (NSDictionary *dic in responseObject[@"allstudents"]) {
-                StudentEntity *model = [[StudentEntity alloc] init];
-                [model initStudentWithDic:dic];
-                [self.stuListArr addObject:model];
-                // 插入学生数据
-                [[StuDataBase shareStuDataBase] insertStudent:model];
-            }
-            
-            for (NSDictionary *dic in responseObject[@"classes"]) {
-                StuClassEntity *model = [[StuClassEntity alloc] init];
-                [model initStuClassWithDic:dic];
-                [[StuDataBase shareStuDataBase] insertStuClass:model];
-            }
-            
-            for (NSDictionary *dic in responseObject[@"groups"]) {
-                StuGroupEntity *model = [[StuGroupEntity alloc] init];
-                [model initStuGroupWithDic:dic];
-                [[StuDataBase shareStuDataBase] insertStuGroup:model];
-            }
-            
-        }else {
-        
-            [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
-        }
-        
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
-    }];
-
-}
 
 -(IBAction)forgetPassWord:(id)sender
 {
