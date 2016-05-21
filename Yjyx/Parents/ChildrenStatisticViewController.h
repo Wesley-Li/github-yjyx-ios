@@ -17,9 +17,9 @@
     IBOutlet UIButton *taskBtn;
     IBOutlet UIButton *billionBtn;
     
-    IBOutlet UISegmentedControl *segmentedControl1;
-    IBOutlet UISegmentedControl *segmentedControl2;
-    IBOutlet UISegmentedControl *segmentedControl3;
+    UISegmentedControl *segmentedControl1;
+    UISegmentedControl *segmentedControl2;
+    UISegmentedControl *segmentedControl3;
 
     
     IBOutlet UIView *subjectView;//题目页面,题目相关数据

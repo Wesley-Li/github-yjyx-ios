@@ -109,6 +109,17 @@
     billionCountLb = [UILabel labelWithFrame:CGRectMake((SCREEN_WIDTH -250)/2, 188, 250, 10) textColor:RGBACOLOR(230, 152, 66, 1) font:[UIFont systemFontOfSize:11] context:@""];
     billionCountLb.textAlignment = NSTextAlignmentCenter;
     [billionView addSubview:billionCountLb];
+    
+    NSMutableArray *segemtedAry = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [YjyxOverallData sharedInstance].parentInfo.childrens.count; i++) {
+        [segemtedAry addObject:@"1"];
+    }
+    segmentedControl1 = [[UISegmentedControl alloc] initWithItems:segemtedAry];
+    segmentedControl1.frame = CGRectMake(SCREEN_WIDTH/2-30*segemtedAry.count, 6, 60*segemtedAry.count, 30);
+    segmentedControl2 = [[UISegmentedControl alloc] initWithItems:segemtedAry];
+    segmentedControl2.frame = CGRectMake(SCREEN_WIDTH/2-30*segemtedAry.count, 6, 60*segemtedAry.count, 30);
+    segmentedControl3 = [[UISegmentedControl alloc] initWithItems:segemtedAry];
+    segmentedControl3.frame = CGRectMake(SCREEN_WIDTH/2-30*segemtedAry.count, 6, 60*segemtedAry.count, 30);
 
     //小孩切换UISegment
     for (int i =0; i< [[YjyxOverallData sharedInstance].parentInfo.childrens count]; i++) {
@@ -129,6 +140,14 @@
         segmentedControl1.hidden = YES;
         segmentedControl2.hidden = YES;
         segmentedControl3.hidden = YES;
+    }else{
+        segmentedControl1.selectedSegmentIndex = 0;
+        segmentedControl2.selectedSegmentIndex = 0;
+        segmentedControl3.selectedSegmentIndex = 0;
+
+        [subjectView addSubview:segmentedControl1];
+        [taskView addSubview:segmentedControl2];
+        [billionView addSubview:segmentedControl3];
     }
     
 }

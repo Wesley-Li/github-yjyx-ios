@@ -55,6 +55,12 @@
 //设置小孩
 -(void)setChildrenViews
 {
+    NSMutableArray *segemtedAry = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [YjyxOverallData sharedInstance].parentInfo.childrens.count; i++) {
+        [segemtedAry addObject:@"1"];
+    }
+    segmentedControl = [[UISegmentedControl alloc] initWithItems:segemtedAry];
+    segmentedControl.frame = CGRectMake(SCREEN_WIDTH/2-30*segemtedAry.count, 6, 60*segemtedAry.count, 30);
     for (int i =0; i< [[YjyxOverallData sharedInstance].parentInfo.childrens count]; i++) {
         ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:i];
         [segmentedControl setTitle:childrenEntity.name forSegmentAtIndex:i];
@@ -65,6 +71,9 @@
     if (_childrenAry.count <= 1) {
         childrenViews.hidden = YES;
         _childrenTab.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+    }else{
+        [self.view addSubview:segmentedControl];
+        _childrenTab.frame = CGRectMake(0, 46, SCREEN_WIDTH, SCREEN_HEIGHT - 110);
     }
     
     [self setupRefresh];//刷新空间
@@ -332,6 +341,8 @@
     if (buttonIndex == 1) {
         AddChildrenViewController *vc = [[AddChildrenViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
