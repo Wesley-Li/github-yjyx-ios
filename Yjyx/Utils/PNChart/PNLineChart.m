@@ -411,7 +411,7 @@
                 innerGrade = (yValue - _yValueMin) / (_yValueMax - _yValueMin);
             }
             
-            int x = i *  _xLabelWidth + _chartMarginLeft + _xLabelWidth /2.0;
+            int x = i *  _xLabelWidth + _chartMarginLeft + _xLabelWidth /2.0 + 10;
 
             int y = _chartCavanHeight - (innerGrade * _chartCavanHeight) + (_yLabelHeight / 2)  + _chartMarginTop - _chartMarginBottom;
             
