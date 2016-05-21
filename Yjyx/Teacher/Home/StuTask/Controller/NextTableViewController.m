@@ -314,7 +314,6 @@
     NSLog(@"%@", dic);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-    [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
     
     [manager GET:[BaseURL stringByAppendingString:TEACHER_SCAN_THE_TASK_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
