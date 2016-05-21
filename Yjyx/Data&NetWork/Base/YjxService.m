@@ -95,10 +95,30 @@
 //家长登录
 -(void)parentsLogin:(NSDictionary *)params autoLogin:(BOOL)autoLogin withBlock:(void(^)(id result, NSError *error))block
 {
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
+//    [manager GET:[BaseURL stringByAppendingString:@"/api/parents/login/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+//        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+//            block(responseObject,nil);
+//            if ([[responseObject objectForKey:@"retcode"] integerValue] == 0) {
+//                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//                [defaults setObject:[responseObject objectForKey:@"sessionid"] forKey:@"SessionID"];
+//                [defaults synchronize];
+//            }
+//
+//        }else{
+//            block(nil,nil);
+//        }
+//    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+//        block(nil,error);
+//    }];
+
+    
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    if (autoLogin) {
+//    if (autoLogin) {
         [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
-    }
+//    }
     [manager POST:[BaseURL stringByAppendingString:@"/api/parents/login/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
@@ -156,7 +176,6 @@
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setValue:SESSIONID  forHTTPHeaderField:@"sessionid"];
-    NSLog(@"SESSIONID == %@",SESSIONID);
     [manager GET:[BaseURL stringByAppendingString:@"/api/parents/children/activity/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
