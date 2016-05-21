@@ -99,7 +99,8 @@
 // 网络请求
 - (void)readDataFromNetWork {
     
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"getstudenttasks", @"action", @"20", @"count", self.direction, @"direction", self.last_id, @"last_id", nil];
+    [SVProgressHUD showWithStatus:@"正在拼命加载数据"];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"getstudenttasks", @"action", @"10", @"count", self.direction, @"direction", self.last_id, @"last_id", nil];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
@@ -129,10 +130,15 @@
                 [self.tableView footerEndRefreshing];
             }
         
-        [self.tableView reloadData];
+            [self.tableView reloadData];
+            [SVProgressHUD showSuccessWithStatus:@"数据加载成功"];
+            [SVProgressHUD dismissWithDelay:0.8];
+
         }else {
         
-            [self.view makeToast:[NSString stringWithFormat:@"%@", responseObject[@"msg"]] duration:1.0 position:SHOW_CENTER complete:nil];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+            [SVProgressHUD dismissWithDelay:0.8];
+
         }
 //        NSLog(@"%@", self.dataSource);
         

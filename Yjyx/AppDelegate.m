@@ -22,6 +22,11 @@
 #import "YjyxPMemberCenterViewController.h"
 #import <AlipaySDK/AlipaySDK.h>
 
+#import "StudentEntity.h"
+#import "StuDataBase.h"
+#import "StuClassEntity.h"
+#import "StuGroupEntity.h"
+
 
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define _IPHONE80_ 80000
@@ -39,6 +44,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     ((AppDelegate*)SYS_DELEGATE).role = @"parents";
+    ((AppDelegate*)SYS_DELEGATE).stuListArr = [NSMutableArray array];
+    
+    // 创建定时器,并行,24小时执行一次
+    dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
+    ((AppDelegate*)SYS_DELEGATE).timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, 24*60*60 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+    dispatch_source_set_event_handler(_timer, ^{
+        NSLog(@"我被调用了");
+        [(AppDelegate *)SYS_DELEGATE getStuList];
+    });
+
 
         //1.注册APNS推送通知
     if (SYS_VERSION >= 8.0) {
@@ -146,8 +162,6 @@
     [UMessage registerDeviceToken:deviceToken];
     if (autologin) {//获取到devicetoken后自动登录
         NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
-        
-        NSLog(@"^^^^^^^%@", dic);
         
         [autologin autoLoginWithRole:dic[@"role"] username:dic[@"username"] password:dic[@"password"]];
         
@@ -363,6 +377,51 @@
 
     
 }
+
+#pragma mark - 获取所有学生列表
+// 获取所有学生列表
+- (void)getStuList {
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"getstudents", @"action", nil];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
+    [manager GET:[BaseURL stringByAppendingString:TEACHER_GETALLSTULIST_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        //        NSLog(@"%@", responseObject);
+        // 创建数据库
+        [[StuDataBase shareStuDataBase] deleteStuTable];
+        [[StuDataBase shareStuDataBase] creatStuDataBase];
+        
+        if ([responseObject[@"retcode"] integerValue] == 0) {
+            
+            for (NSDictionary *dic in responseObject[@"allstudents"]) {
+                StudentEntity *model = [[StudentEntity alloc] init];
+                [model initStudentWithDic:dic];
+                [((AppDelegate*)SYS_DELEGATE).stuListArr addObject:model];
+                // 插入学生数据
+                [[StuDataBase shareStuDataBase] insertStudent:model];
+            }
+            
+            for (NSDictionary *dic in responseObject[@"classes"]) {
+                StuClassEntity *model = [[StuClassEntity alloc] init];
+                [model initStuClassWithDic:dic];
+                [[StuDataBase shareStuDataBase] insertStuClass:model];
+            }
+            
+            for (NSDictionary *dic in responseObject[@"groups"]) {
+                StuGroupEntity *model = [[StuGroupEntity alloc] init];
+                [model initStuGroupWithDic:dic];
+                [[StuDataBase shareStuDataBase] insertStuGroup:model];
+            }
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+    }];
+    
+}
+
 
 #pragma mark -UIAlertView
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{

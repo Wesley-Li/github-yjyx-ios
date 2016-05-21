@@ -306,6 +306,9 @@
 }
 
 - (void)readDataFromNetWork {
+    
+    [SVProgressHUD showWithStatus:@"正在拼命加载数据"];
+
 
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"gettaskonequestiondetail", @"action", self.taskid, @"taskid", self.qtype, @"qtype", self.qid, @"qid", nil];
     NSLog(@"%@", dic);
@@ -327,6 +330,8 @@
         }
         
         [self.tableView reloadData];
+        [SVProgressHUD showSuccessWithStatus:@"数据加载成功"];
+        [SVProgressHUD dismissWithDelay:0.8];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         
