@@ -132,7 +132,7 @@
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:contentText.text,@"description", urlArray,@"images", nil];
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager.requestSerializer setValue:T_SESSIONID forHTTPHeaderField:@"sessionid"];
+       
         [manager POST:[BaseURL stringByAppendingString:TEACHER_FEEDBACK] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             
             NSLog(@"%@", responseObject);
