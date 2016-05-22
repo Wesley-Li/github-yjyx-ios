@@ -103,7 +103,6 @@
     [SVProgressHUD showWithStatus:@"正在拼命加载数据"];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"gettasksubmitdetail", @"action", self.taskModel.t_id, @"taskid", nil];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-
     
     [manager GET:[BaseURL stringByAppendingString:TEACHER_SCAN_THE_TASK_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         

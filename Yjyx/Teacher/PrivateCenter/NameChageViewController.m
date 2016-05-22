@@ -40,6 +40,7 @@
     }else {
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+
         [manager POST:[BaseURL stringByAppendingString:TEACHER_NAME_AND_PHONE_CONNECT_POST] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
             if ([responseObject[@"retcode"] integerValue] == 0) {

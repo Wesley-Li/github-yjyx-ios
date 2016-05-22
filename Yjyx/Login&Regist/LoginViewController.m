@@ -214,7 +214,7 @@
                 // 参数字典
                 NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text,@"username",_passWordTF.text,@"password",@"1",@"ostype",((AppDelegate*)SYS_DELEGATE).deviceToken,@"devicetoken",[[UIDevice currentDevice] model],@"description",nil];
                 
-                [[YjxService sharedInstance] teacherLogin:dic autoLogin:YES withBlock:^(id result, NSError *error) {
+                [[YjxService sharedInstance] teacherLogin:dic autoLogin:NO withBlock:^(id result, NSError *error) {
                     
                     [self.view hideToastActivity];
                     if (result != nil) {

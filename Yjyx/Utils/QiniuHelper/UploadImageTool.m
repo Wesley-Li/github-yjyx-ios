@@ -17,6 +17,7 @@
     if ([((AppDelegate*)SYS_DELEGATE).role isEqualToString:@"teacher"]) {
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+
         [manager GET:[BaseURL stringByAppendingString:TEACHER_PIC_SETTING_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             
             if (responseObject) {
@@ -32,7 +33,7 @@
         
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager.requestSerializer setValue:SESSIONID forHTTPHeaderField:@"sessionid"];
+    
         [manager GET:[BaseURL stringByAppendingString:PARENTS_GETQINIUTOKEN] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             
             if (responseObject) {
@@ -134,9 +135,9 @@
     
     NSMutableArray*array = [[NSMutableArray alloc]init];
     
-    __block CGFloat totalProgress =0.0f;
-    
-    __block CGFloat partProgress =1.0f / [imageArray count];
+//    __block CGFloat totalProgress =0.0f;
+//    
+//    __block CGFloat partProgress =1.0f / [imageArray count];
     
     __block NSUInteger currentIndex =0;
     
