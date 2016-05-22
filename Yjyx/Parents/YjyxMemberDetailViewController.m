@@ -242,6 +242,9 @@
         [childrenBtn addTarget:self action:@selector(selectChildren:) forControlEvents:UIControlEventTouchUpInside];
         childrenBtn.tag = 100+i;
         [productView addSubview:childrenBtn];
+        if (i == 0) {
+            [self selectChildren:childrenBtn];
+        }
     }
     
     
@@ -260,6 +263,9 @@
         [timeBtn addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
         timeBtn.tag = 1000+i;
         [productView addSubview:timeBtn];
+        if (i == 0) {
+            [self selectTime:timeBtn];
+        }
     }
 
     
@@ -284,7 +290,7 @@
     childrenCid = [NSString stringWithFormat:@"%@",entity.cid];
     
     if (ppiIndex.length > 0&&childrenCid.length >0) {
-        [self getPayContent];
+        [self showPayView];
     }
 }
 
@@ -306,19 +312,25 @@
     ppiIndex = [NSString stringWithFormat:@"%ld",btn.tag-1000];
     
     if (ppiIndex.length > 0&&childrenCid.length >0) {
-        [self getPayContent];
+        [self showPayView];
     }
 
 }
 
 - (void)getPayContent
 {
+    [self.view makeToastActivity:SHOW_CENTER];
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"purchase",@"action",childrenCid
                          ,@"cid",self.productEntity.productID,@"productid", ppiIndex,@"ppi",nil];
     [[YjxService sharedInstance] purchaseProduct:dic withBlock:^(id result, NSError *error){
+        [self.view hideToastActivity];
         if (result != nil) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
-                [self showPayView:[result objectForKey:@"params"]];
+                AlipayStr = [result objectForKey:@"params"];
+                NSString *appScheme = @"yjyx";
+                [[AlipaySDK defaultService] payOrder:AlipayStr fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+                    [self dealPayResult:resultDic];
+                }];
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
@@ -329,9 +341,8 @@
 
 }
 
--(void)showPayView:(NSString *)str
+-(void)showPayView
 {
-    AlipayStr = str;
     [payView removeFromSuperview];
     payView = nil;
     payView = [[UIView alloc] initWithFrame:CGRectMake(0, productView.frame.origin.y + 110, SCREEN_WIDTH, 75)];
@@ -368,10 +379,8 @@
 
 -(IBAction)payBtnClicked:(id)sender
 {
-    NSString *appScheme = @"yjyx";
-    [[AlipaySDK defaultService] payOrder:AlipayStr fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-            [self dealPayResult:resultDic];
-    }];
+    [self getPayContent];
+    
 }
 
 -(void)dealPayResult:(NSDictionary *)dic
