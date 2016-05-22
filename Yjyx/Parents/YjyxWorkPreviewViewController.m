@@ -49,7 +49,6 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = YES;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RCLabelReload" object:nil];
     [super viewWillDisappear:YES];
 }

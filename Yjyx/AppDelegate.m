@@ -17,6 +17,10 @@
 #import "PrivateCenterViewController.h"
 #import "PublishHomeworkViewController.h"
 
+#import "ChildrenResultViewController.h"
+#import "YjyxMicroClassViewController.h"
+#import "YjyxWorkPreviewViewController.h"
+
 #import "AutoLoginViewController.h"
 #import "UMessage.h"
 #import "YjyxPMemberCenterViewController.h"
@@ -425,9 +429,60 @@
 #pragma mark -UIAlertView
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
-        [_tabBar setSelectedIndex:0];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
+        [self pushSwitch:_tabBar.selectedIndex];
+//        if (_tabBar.selectedIndex == 0) {
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
+//        }else{
+//            [_tabBar setSelectedIndex:0];
+//        }
     }
 }
+
+
+-(void)pushSwitch:(NSInteger)index
+{
+    UINavigationController * vc = [_tabBar.viewControllers objectAtIndex:index];
+    switch ([YjyxOverallData sharedInstance].pushType) {
+        case 1:{
+            YjyxWorkPreviewViewController *result = [[YjyxWorkPreviewViewController alloc] init];
+            result.previewRid = [YjyxOverallData sharedInstance].previewRid;
+            result.title = @"作业预览";
+            [result setHidesBottomBarWhenPushed:YES];
+            [vc pushViewController:result animated:YES];
+        }
+            break;
+        case 2:{
+            YjyxMicroClassViewController *result = [[YjyxMicroClassViewController alloc] init];
+            result.previewRid = [YjyxOverallData sharedInstance].previewRid;
+            result.title = @"微课预览";
+            [result setHidesBottomBarWhenPushed:YES];
+            [vc pushViewController:result animated:YES];
+        }
+            break;
+        case 3:{
+            ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
+            result.taskResultId = [YjyxOverallData sharedInstance].historyId;
+            result.title = @"结果详情";
+            [result setHidesBottomBarWhenPushed:YES];
+            [vc pushViewController:result animated:YES];
+            
+        }
+            break;
+        case 4:{
+            ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
+            result.taskResultId = [YjyxOverallData sharedInstance].historyId;
+            [result setHidesBottomBarWhenPushed:YES];
+            result.title = @"结果详情";
+            [vc pushViewController:result animated:YES];
+            
+        }
+            break;
+        default:
+            break;
+    }
+    
+}
+
+
 
 @end

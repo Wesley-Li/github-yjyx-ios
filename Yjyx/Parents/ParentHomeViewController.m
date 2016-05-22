@@ -35,44 +35,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    switch ([YjyxOverallData sharedInstance].pushType) {
-        case 1:{
-            YjyxWorkPreviewViewController *result = [[YjyxWorkPreviewViewController alloc] init];
-            result.previewRid = [YjyxOverallData sharedInstance].previewRid;
-            result.title = @"作业预览";
-            [result setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:result animated:YES];
-        }
-            break;
-        case 2:{
-            YjyxMicroClassViewController *result = [[YjyxMicroClassViewController alloc] init];
-            result.previewRid = [YjyxOverallData sharedInstance].previewRid;
-            result.title = @"微课预览";
-            [result setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:result animated:YES];
-        }
-            break;
-        case 3:{
-            ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
-            result.taskResultId = [YjyxOverallData sharedInstance].historyId;
-            result.title = @"结果详情";
-            [result setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:result animated:YES];
-
-        }
-            break;
-        case 4:{
-            ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
-            result.taskResultId = [YjyxOverallData sharedInstance].historyId;
-            result.title = @"结果详情";
-            [result setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:result animated:YES];
-
-        }
-            break;
-        default:
-            break;
-    }
+    self.navigationController.navigationBarHidden = YES;
 }
 
 
