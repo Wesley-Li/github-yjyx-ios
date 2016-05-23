@@ -440,6 +440,8 @@
         
         [self.view addSubview:paySuccessView];
         
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshjurisdiction" object:nil];
+        
     }else{
         [self.view makeToast:@"支付失败" duration:1.5 position:SHOW_CENTER complete:nil];
 

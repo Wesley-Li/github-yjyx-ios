@@ -41,12 +41,18 @@
     _resultchoices = [[NSArray alloc] init];
     selectDic = [[NSMutableDictionary alloc] init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTable) name:@"RCLabelReload" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshJurisdiction) name:@"refreshjurisdiction" object:nil];
     // Do any additional setup after loading the view from its nib.
 }
 
 -(void)reloadTable
 {
     [_resultTable reloadData];
+}
+
+-(void)refreshJurisdiction
+{
+    [self getchildResult:self.taskResultId];
 }
 
 - (void)viewWillAppear:(BOOL)animated
