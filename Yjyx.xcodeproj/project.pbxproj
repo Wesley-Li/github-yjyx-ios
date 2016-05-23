@@ -187,6 +187,7 @@
 		3AE8940C1C6C335D00E8BA97 /* login_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8940B1C6C335D00E8BA97 /* login_logo@3x.png */; };
 		3AE8940F1C6C47C400E8BA97 /* login_left_line@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8940D1C6C47C400E8BA97 /* login_left_line@3x.png */; };
 		3AE894101C6C47C400E8BA97 /* login_right_line@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE8940E1C6C47C400E8BA97 /* login_right_line@3x.png */; };
+		3AEC05AA1CF2E42300BDB2C6 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEC05A91CF2E42300BDB2C6 /* UMMobClick.framework */; };
 		3AEF271F1C61F08A0028BE09 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEF26F21C61F08A0028BE09 /* GTMBase64.m */; };
 		3AEF27201C61F08A0028BE09 /* RTSpinKitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEF26F71C61F08A0028BE09 /* RTSpinKitView.m */; };
 		3AEF27211C61F08A0028BE09 /* NSObject+category.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEF26F91C61F08A0028BE09 /* NSObject+category.m */; };
@@ -673,6 +674,7 @@
 		3AE8940B1C6C335D00E8BA97 /* login_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_logo@3x.png"; sourceTree = "<group>"; };
 		3AE8940D1C6C47C400E8BA97 /* login_left_line@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_left_line@3x.png"; sourceTree = "<group>"; };
 		3AE8940E1C6C47C400E8BA97 /* login_right_line@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_right_line@3x.png"; sourceTree = "<group>"; };
+		3AEC05A91CF2E42300BDB2C6 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
 		3AEF26D71C61AF4B0028BE09 /* pchFile.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pchFile.pch; sourceTree = "<group>"; };
 		3AEF26F11C61F08A0028BE09 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		3AEF26F21C61F08A0028BE09 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
@@ -1055,6 +1057,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AEC05AA1CF2E42300BDB2C6 /* UMMobClick.framework in Frameworks */,
 				3BC7DBE21CDB5E5A00E5E12F /* libsqlite3.0.tbd in Frameworks */,
 				3A44A92F1CBD10E000348B49 /* CoreGraphics.framework in Frameworks */,
 				3A44A92D1CBD10B200348B49 /* CoreText.framework in Frameworks */,
@@ -2039,6 +2042,7 @@
 		5B7C88DD048F57B9225E4451 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3AEC05A91CF2E42300BDB2C6 /* UMMobClick.framework */,
 				3BC7DBE11CDB5E5A00E5E12F /* libsqlite3.0.tbd */,
 				3A44A92E1CBD10E000348B49 /* CoreGraphics.framework */,
 				3A44A92C1CBD10B200348B49 /* CoreText.framework */,
@@ -2867,6 +2871,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)/Yjyx/Alipay",
+					"$(PROJECT_DIR)",
 				);
 				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2896,7 +2901,7 @@
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a92b8e4b-676b-46d4-ac1e-ef7c6104f66a";
+				PROVISIONING_PROFILE = "98b5ad7e-0ca5-49f7-9aee-8b975be21702";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -2919,6 +2924,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(PROJECT_DIR)/Yjyx/Alipay",
+					"$(PROJECT_DIR)",
 				);
 				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2946,7 +2952,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a92b8e4b-676b-46d4-ac1e-ef7c6104f66a";
+				PROVISIONING_PROFILE = "98b5ad7e-0ca5-49f7-9aee-8b975be21702";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

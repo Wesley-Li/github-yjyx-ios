@@ -31,6 +31,7 @@
 #import <CoreText/CoreText.h>
 #import "ChildrenEntity.h"
 #import "SVProgressHUD.h"
+#import <UMMobClick/MobClick.h>
 //系统版本
 // 家长sessionid
 #define SESSIONID [[NSUserDefaults standardUserDefaults] objectForKey:@"SessionID"]
