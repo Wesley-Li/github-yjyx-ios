@@ -575,6 +575,10 @@
     [_resultTable reloadData];
     
     NSInteger section = btn.tag>=[_resultchoices count]?1:0;
+    if (btn.tag == 0&&[_resultchoices count] == 0) {
+        section = 0;
+    }
+    
     NSInteger row = btn.tag -[_resultchoices count];
     [_resultTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
