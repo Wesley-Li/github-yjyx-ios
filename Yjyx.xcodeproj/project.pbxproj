@@ -90,6 +90,8 @@
 		3A6CA5A31CE32F7C00F6A7C0 /* deletbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6CA5A21CE32F7C00F6A7C0 /* deletbutton.png */; };
 		3A7864331C868062001BB65A /* ChildrenResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7864311C868062001BB65A /* ChildrenResultViewController.m */; };
 		3A7864341C868062001BB65A /* ChildrenResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7864321C868062001BB65A /* ChildrenResultViewController.xib */; };
+		3A87B7B51CF32FD300C3D991 /* YjyxPayDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A87B7B31CF32FD300C3D991 /* YjyxPayDetailViewController.m */; };
+		3A87B7B61CF32FD300C3D991 /* YjyxPayDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A87B7B41CF32FD300C3D991 /* YjyxPayDetailViewController.xib */; };
 		3A88276F1C6EE0DE0008367F /* ParentHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A88276D1C6EE0DE0008367F /* ParentHomeViewController.m */; };
 		3A8827701C6EE0DE0008367F /* ParentHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A88276E1C6EE0DE0008367F /* ParentHomeViewController.xib */; };
 		3A8827761C6EE1470008367F /* ParentCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8827741C6EE1470008367F /* ParentCommunityViewController.m */; };
@@ -526,6 +528,9 @@
 		3A7864301C868062001BB65A /* ChildrenResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildrenResultViewController.h; sourceTree = "<group>"; };
 		3A7864311C868062001BB65A /* ChildrenResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildrenResultViewController.m; sourceTree = "<group>"; };
 		3A7864321C868062001BB65A /* ChildrenResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChildrenResultViewController.xib; sourceTree = "<group>"; };
+		3A87B7B21CF32FD300C3D991 /* YjyxPayDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxPayDetailViewController.h; sourceTree = "<group>"; };
+		3A87B7B31CF32FD300C3D991 /* YjyxPayDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxPayDetailViewController.m; sourceTree = "<group>"; };
+		3A87B7B41CF32FD300C3D991 /* YjyxPayDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxPayDetailViewController.xib; sourceTree = "<group>"; };
 		3A88276C1C6EE0DE0008367F /* ParentHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentHomeViewController.h; sourceTree = "<group>"; };
 		3A88276D1C6EE0DE0008367F /* ParentHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentHomeViewController.m; sourceTree = "<group>"; };
 		3A88276E1C6EE0DE0008367F /* ParentHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParentHomeViewController.xib; sourceTree = "<group>"; };
@@ -1234,6 +1239,9 @@
 				3AF11DD61CB211D600F98A03 /* YjyxMemberDetailViewController.h */,
 				3AF11DD71CB211D600F98A03 /* YjyxMemberDetailViewController.m */,
 				3AF11DD81CB211D600F98A03 /* YjyxMemberDetailViewController.xib */,
+				3A87B7B21CF32FD300C3D991 /* YjyxPayDetailViewController.h */,
+				3A87B7B31CF32FD300C3D991 /* YjyxPayDetailViewController.m */,
+				3A87B7B41CF32FD300C3D991 /* YjyxPayDetailViewController.xib */,
 			);
 			name = MemberCenter;
 			sourceTree = "<group>";
@@ -2359,6 +2367,7 @@
 				3A4057081CCF6FAF00258784 /* ForgetOneViewController.xib in Resources */,
 				3A26EE631C71A81B009C3242 /* Parent_home_up@3x.png in Resources */,
 				3AFE02C71CA29D540097CC83 /* member_yuwen@3x.png in Resources */,
+				3A87B7B61CF32FD300C3D991 /* YjyxPayDetailViewController.xib in Resources */,
 				3BB7739E1CD86B3A00A24485 /* home_img_testPaper.png in Resources */,
 				3AE894031C6C28C300E8BA97 /* login_password_icon@3x.png in Resources */,
 				3BB773941CD86B3A00A24485 /* home_img_book.png in Resources */,
@@ -2724,6 +2733,7 @@
 				3A04A5D01C93E6290040D913 /* MASViewConstraint.m in Sources */,
 				3BFE3B811CD981AE00502769 /* StudentEntity.m in Sources */,
 				3BCF194D1CDCC2B500E2EA1A /* StuConditionTableViewCell.m in Sources */,
+				3A87B7B51CF32FD300C3D991 /* YjyxPayDetailViewController.m in Sources */,
 				3A442B961CE07E780037906A /* DynamicScrollView.m in Sources */,
 				3AF11DD91CB211D600F98A03 /* YjyxMemberDetailViewController.m in Sources */,
 				3A8827761C6EE1470008367F /* ParentCommunityViewController.m in Sources */,

@@ -11,6 +11,7 @@
 #import "APAuthV2Info.h"
 #import "DataSigner.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "YjyxPayDetailViewController.h"
 
 @interface YjyxMemberDetailViewController ()
 {
@@ -31,7 +32,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadBackBtn];
-    [self getChildrenStatus];
     trailChildAry = [[NSMutableArray alloc] init];
     openChildAry = [[NSMutableArray alloc] init];
     payBtn.hidden = YES;
@@ -53,6 +53,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    [self getChildrenStatus];
     self.navigationController.navigationBarHidden = NO;
 }
 
@@ -219,54 +220,61 @@
 //开通，支付
 - (IBAction)openClicked:(id)sender
 {
-    trailBtn.hidden = YES;
-    openBtn.hidden = YES;
-    productView = [[UIView alloc] initWithFrame:CGRectMake(0, _detailView.frame.size.height + 8, SCREEN_WIDTH, 90)];
-    productView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:productView];
-    UILabel *typeLb = [UILabel labelWithFrame:CGRectMake(35, 10, SCREEN_WIDTH-35, 20) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:12] context:[NSString stringWithFormat:@"会员种类：%@",_productEntity.subject_name]];
-    [productView addSubview:typeLb];
+    YjyxPayDetailViewController *vc =[[YjyxPayDetailViewController alloc] init];
+    vc.productEntity = self.productEntity;
+    vc.title = self.title;
+    [self.navigationController pushViewController:vc animated:YES];
+    return;
     
-    UILabel *childrenLb = [UILabel labelWithFrame:CGRectMake(35, 35, 60, 20) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:12] context:@"小孩:"];
-    [productView addSubview:childrenLb];
-    
-
-    for (int i =0 ; i<[openChildAry count]; i++) {
-        ChildrenEntity *entity = [openChildAry objectAtIndex:i];
-        UIButton *childrenBtn = [[UIButton alloc] initWithFrame:CGRectMake(68+i*50, 38, 43, 15)];
-        [childrenBtn setTitle:entity.name forState:UIControlStateNormal];
-        [childrenBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        childrenBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        childrenBtn.layer.borderWidth = 0.5;
-        childrenBtn.layer.cornerRadius = 2;
-        [childrenBtn addTarget:self action:@selector(selectChildren:) forControlEvents:UIControlEventTouchUpInside];
-        childrenBtn.tag = 100+i;
-        [productView addSubview:childrenBtn];
-        if (i == 0) {
-            [self selectChildren:childrenBtn];
-        }
-    }
-    
-    
-    UILabel *timeLb = [UILabel labelWithFrame:CGRectMake(35, 60, 80, 20) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:12] context:@"时间选择:"];
-    [productView addSubview:timeLb];
-    
-    for (int i = 0; i < [self.productEntity.price_pacakge count]; i++) {
-        NSDictionary *dic = [self.productEntity.price_pacakge objectAtIndex:i];
-        UIButton *timeBtn = [[UIButton alloc] initWithFrame:CGRectMake(90+i*82, 63, 80, 15)];
-        NSString *str = [NSString stringWithFormat:@"%@元/%@天",[dic objectForKey:@"price"],[dic objectForKey:@"days"]];
-        [timeBtn setTitle:str forState:UIControlStateNormal];
-        [timeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        timeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        timeBtn.layer.borderWidth = 0.5;
-        timeBtn.layer.cornerRadius = 2;
-        [timeBtn addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
-        timeBtn.tag = 1000+i;
-        [productView addSubview:timeBtn];
-        if (i == 0) {
-            [self selectTime:timeBtn];
-        }
-    }
+//    
+//    trailBtn.hidden = YES;
+//    openBtn.hidden = YES;
+//    productView = [[UIView alloc] initWithFrame:CGRectMake(0, _detailView.frame.size.height + 8, SCREEN_WIDTH, 90)];
+//    productView.backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:productView];
+//    UILabel *typeLb = [UILabel labelWithFrame:CGRectMake(35, 10, SCREEN_WIDTH-35, 20) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:12] context:[NSString stringWithFormat:@"会员种类：%@",_productEntity.subject_name]];
+//    [productView addSubview:typeLb];
+//    
+//    UILabel *childrenLb = [UILabel labelWithFrame:CGRectMake(35, 35, 60, 20) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:12] context:@"小孩:"];
+//    [productView addSubview:childrenLb];
+//    
+//
+//    for (int i =0 ; i<[openChildAry count]; i++) {
+//        ChildrenEntity *entity = [openChildAry objectAtIndex:i];
+//        UIButton *childrenBtn = [[UIButton alloc] initWithFrame:CGRectMake(68+i*50, 38, 43, 15)];
+//        [childrenBtn setTitle:entity.name forState:UIControlStateNormal];
+//        [childrenBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        childrenBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+//        childrenBtn.layer.borderWidth = 0.5;
+//        childrenBtn.layer.cornerRadius = 2;
+//        [childrenBtn addTarget:self action:@selector(selectChildren:) forControlEvents:UIControlEventTouchUpInside];
+//        childrenBtn.tag = 100+i;
+//        [productView addSubview:childrenBtn];
+//        if (i == 0) {
+//            [self selectChildren:childrenBtn];
+//        }
+//    }
+//    
+//    
+//    UILabel *timeLb = [UILabel labelWithFrame:CGRectMake(35, 60, 80, 20) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:12] context:@"时间选择:"];
+//    [productView addSubview:timeLb];
+//    
+//    for (int i = 0; i < [self.productEntity.price_pacakge count]; i++) {
+//        NSDictionary *dic = [self.productEntity.price_pacakge objectAtIndex:i];
+//        UIButton *timeBtn = [[UIButton alloc] initWithFrame:CGRectMake(90+i*82, 63, 80, 15)];
+//        NSString *str = [NSString stringWithFormat:@"%@元/%@天",[dic objectForKey:@"price"],[dic objectForKey:@"days"]];
+//        [timeBtn setTitle:str forState:UIControlStateNormal];
+//        [timeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        timeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+//        timeBtn.layer.borderWidth = 0.5;
+//        timeBtn.layer.cornerRadius = 2;
+//        [timeBtn addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
+//        timeBtn.tag = 1000+i;
+//        [productView addSubview:timeBtn];
+//        if (i == 0) {
+//            [self selectTime:timeBtn];
+//        }
+//    }
 
     
 }
