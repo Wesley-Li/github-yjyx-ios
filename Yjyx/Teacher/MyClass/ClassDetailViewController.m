@@ -51,9 +51,7 @@
 // 刷新
 - (void)refresh {
     
-    // 添加头部刷新控件
-    [self.stuListTableView addHeaderWithTarget:self action:@selector(headerRefresh)];
-    [self.stuListTableView headerBeginRefreshing];
+    
     // 刷新数据库
     [(AppDelegate *)SYS_DELEGATE getStuList];
     
@@ -61,12 +59,21 @@
     
     self.model = classArray[self.currentIndex];
     
+    [self viewDidLoad];
+    
+    [self.stuListTableView reloadData];
+    
+    [SVProgressHUD showWithStatus:@"正在刷新"];
+    [self performSelector:@selector(dismiss) withObject:nil afterDelay:2.0];
+    
+
+    
 }
 
-- (void)headerRefresh {
+- (void)dismiss {
+    
+    [SVProgressHUD dismiss];
 
-    [self.stuListTableView reloadData];
-    [self.stuListTableView headerEndRefreshing];
 }
 
 #pragma mark - delegate

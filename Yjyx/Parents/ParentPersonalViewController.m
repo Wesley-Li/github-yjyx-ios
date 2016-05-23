@@ -263,6 +263,7 @@
         [self.view hideToastActivity];
         if (result != nil) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                
                 [SYS_CACHE removeObjectForKey:@"AutoLogoin"];
                 LoginViewController *loginCtl = [[LoginViewController alloc] init];
                 UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginCtl];

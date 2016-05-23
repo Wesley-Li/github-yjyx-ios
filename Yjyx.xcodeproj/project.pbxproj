@@ -346,8 +346,6 @@
 		3BCF194A1CDCC2B500E2EA1A /* StuTaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCF193A1CDCC2B500E2EA1A /* StuTaskTableViewController.m */; };
 		3BCF194B1CDCC2B500E2EA1A /* TaskDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCF193C1CDCC2B500E2EA1A /* TaskDetailTableViewController.m */; };
 		3BCF194C1CDCC2B500E2EA1A /* TaskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCF193F1CDCC2B500E2EA1A /* TaskModel.m */; };
-		3BCF194D1CDCC2B500E2EA1A /* StuConditionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCF19421CDCC2B500E2EA1A /* StuConditionTableViewCell.m */; };
-		3BCF194E1CDCC2B500E2EA1A /* StuConditionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BCF19431CDCC2B500E2EA1A /* StuConditionTableViewCell.xib */; };
 		3BCF194F1CDCC2B500E2EA1A /* TaskConditionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCF19451CDCC2B500E2EA1A /* TaskConditionTableViewCell.m */; };
 		3BCF19501CDCC2B500E2EA1A /* TaskConditionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BCF19461CDCC2B500E2EA1A /* TaskConditionTableViewCell.xib */; };
 		3BCF19511CDCC2B500E2EA1A /* TaskListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCF19481CDCC2B500E2EA1A /* TaskListTableViewCell.m */; };
@@ -390,6 +388,12 @@
 		801F44B01CDF164800B7E7E1 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 801F44A41CDF164800B7E7E1 /* Order.m */; };
 		807959341CD217BC00C9B841 /* ClassDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 807959321CD217BC00C9B841 /* ClassDetailViewController.m */; };
 		807959351CD217BC00C9B841 /* ClassDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 807959331CD217BC00C9B841 /* ClassDetailViewController.xib */; };
+		80CCF43F1CF2F0EC000C93D9 /* UnSubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80CCF43D1CF2F0EC000C93D9 /* UnSubmitCell.m */; };
+		80CCF4401CF2F0EC000C93D9 /* UnSubmitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CCF43E1CF2F0EC000C93D9 /* UnSubmitCell.xib */; };
+		80F718C01CF28961007C0B75 /* StuConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BB1CF28961007C0B75 /* StuConditionCell.m */; };
+		80F718C11CF28961007C0B75 /* StuConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80F718BC1CF28961007C0B75 /* StuConditionCell.xib */; };
+		80F718C21CF28961007C0B75 /* SubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BE1CF28961007C0B75 /* SubmitCell.m */; };
+		80F718C31CF28961007C0B75 /* SubmitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80F718BF1CF28961007C0B75 /* SubmitCell.xib */; };
 		CB40047F1C609BCD00556AA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB40047E1C609BCD00556AA7 /* main.m */; };
 		CB4004821C609BCD00556AA7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4004811C609BCD00556AA7 /* AppDelegate.m */; };
 		CB4004851C609BCD00556AA7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4004841C609BCD00556AA7 /* ViewController.m */; };
@@ -886,9 +890,6 @@
 		3BCF193C1CDCC2B500E2EA1A /* TaskDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDetailTableViewController.m; sourceTree = "<group>"; };
 		3BCF193E1CDCC2B500E2EA1A /* TaskModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskModel.h; sourceTree = "<group>"; };
 		3BCF193F1CDCC2B500E2EA1A /* TaskModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskModel.m; sourceTree = "<group>"; };
-		3BCF19411CDCC2B500E2EA1A /* StuConditionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuConditionTableViewCell.h; sourceTree = "<group>"; };
-		3BCF19421CDCC2B500E2EA1A /* StuConditionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuConditionTableViewCell.m; sourceTree = "<group>"; };
-		3BCF19431CDCC2B500E2EA1A /* StuConditionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StuConditionTableViewCell.xib; sourceTree = "<group>"; };
 		3BCF19441CDCC2B500E2EA1A /* TaskConditionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskConditionTableViewCell.h; sourceTree = "<group>"; };
 		3BCF19451CDCC2B500E2EA1A /* TaskConditionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskConditionTableViewCell.m; sourceTree = "<group>"; };
 		3BCF19461CDCC2B500E2EA1A /* TaskConditionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskConditionTableViewCell.xib; sourceTree = "<group>"; };
@@ -1039,6 +1040,15 @@
 		807959311CD217BC00C9B841 /* ClassDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassDetailViewController.h; sourceTree = "<group>"; };
 		807959321CD217BC00C9B841 /* ClassDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassDetailViewController.m; sourceTree = "<group>"; };
 		807959331CD217BC00C9B841 /* ClassDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClassDetailViewController.xib; sourceTree = "<group>"; };
+		80CCF43C1CF2F0EC000C93D9 /* UnSubmitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnSubmitCell.h; sourceTree = "<group>"; };
+		80CCF43D1CF2F0EC000C93D9 /* UnSubmitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnSubmitCell.m; sourceTree = "<group>"; };
+		80CCF43E1CF2F0EC000C93D9 /* UnSubmitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnSubmitCell.xib; sourceTree = "<group>"; };
+		80F718BA1CF28961007C0B75 /* StuConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuConditionCell.h; sourceTree = "<group>"; };
+		80F718BB1CF28961007C0B75 /* StuConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuConditionCell.m; sourceTree = "<group>"; };
+		80F718BC1CF28961007C0B75 /* StuConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StuConditionCell.xib; sourceTree = "<group>"; };
+		80F718BD1CF28961007C0B75 /* SubmitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitCell.h; sourceTree = "<group>"; };
+		80F718BE1CF28961007C0B75 /* SubmitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitCell.m; sourceTree = "<group>"; };
+		80F718BF1CF28961007C0B75 /* SubmitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubmitCell.xib; sourceTree = "<group>"; };
 		CB40047A1C609BCD00556AA7 /* Yjyx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yjyx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB40047E1C609BCD00556AA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CB4004801C609BCD00556AA7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1946,12 +1956,18 @@
 		3BCF19401CDCC2B500E2EA1A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3BCF19411CDCC2B500E2EA1A /* StuConditionTableViewCell.h */,
-				3BCF19421CDCC2B500E2EA1A /* StuConditionTableViewCell.m */,
-				3BCF19431CDCC2B500E2EA1A /* StuConditionTableViewCell.xib */,
 				3BCF19441CDCC2B500E2EA1A /* TaskConditionTableViewCell.h */,
 				3BCF19451CDCC2B500E2EA1A /* TaskConditionTableViewCell.m */,
 				3BCF19461CDCC2B500E2EA1A /* TaskConditionTableViewCell.xib */,
+				80F718BA1CF28961007C0B75 /* StuConditionCell.h */,
+				80F718BB1CF28961007C0B75 /* StuConditionCell.m */,
+				80F718BC1CF28961007C0B75 /* StuConditionCell.xib */,
+				80F718BD1CF28961007C0B75 /* SubmitCell.h */,
+				80F718BE1CF28961007C0B75 /* SubmitCell.m */,
+				80F718BF1CF28961007C0B75 /* SubmitCell.xib */,
+				80CCF43C1CF2F0EC000C93D9 /* UnSubmitCell.h */,
+				80CCF43D1CF2F0EC000C93D9 /* UnSubmitCell.m */,
+				80CCF43E1CF2F0EC000C93D9 /* UnSubmitCell.xib */,
 				3BE01BDD1CDDC3A400781B86 /* TCustomView.h */,
 				3BE01BDE1CDDC3A400781B86 /* TCustomView.m */,
 				3BE01BE01CDDCA8200781B86 /* TCustomView.xib */,
@@ -2385,6 +2401,7 @@
 				3A3C1B441C9562A900514C32 /* YjyxMicroClassViewController.xib in Resources */,
 				3BB7739A1CD86B3A00A24485 /* home_img_private.png in Resources */,
 				3B35DBA31CE070DB000B7F83 /* VideoCell.xib in Resources */,
+				80CCF4401CF2F0EC000C93D9 /* UnSubmitCell.xib in Resources */,
 				3BCF191F1CDC66E600E2EA1A /* list_icon_note_nor.png in Resources */,
 				3AC1D1ED1CCDE7EE006291D0 /* regist_text_bg@3x.png in Resources */,
 				3A905D151C7F3587005AB12F /* YjyxSoundViewController.xib in Resources */,
@@ -2429,6 +2446,7 @@
 				3B35DB871CE02559000B7F83 /* tab_bg@3x.png in Resources */,
 				3A91F46B1C7606FB001568AA /* ChildrenStatisticViewController.xib in Resources */,
 				3A8827851C6EE5730008367F /* tab_community@3x.png in Resources */,
+				80F718C31CF28961007C0B75 /* SubmitCell.xib in Resources */,
 				3AE894101C6C47C400E8BA97 /* login_right_line@3x.png in Resources */,
 				3AFE02C61CA29D540097CC83 /* member_yingyu@3x.png in Resources */,
 				3B48646F1CCF117300D2DE3C /* TeacherHomeViewController.xib in Resources */,
@@ -2489,6 +2507,7 @@
 				3B4864591CCF10C200D2DE3C /* top_bg.png in Resources */,
 				3BB773981CD86B3A00A24485 /* home_img_midtest.png in Resources */,
 				3A8827701C6EE0DE0008367F /* ParentHomeViewController.xib in Resources */,
+				80F718C11CF28961007C0B75 /* StuConditionCell.xib in Resources */,
 				3B35DB851CE016BE000B7F83 /* corect_pic.png in Resources */,
 				3B4864731CCF117300D2DE3C /* MyClassViewController.xib in Resources */,
 				3B48644A1CCF10C200D2DE3C /* myclass@3x.png in Resources */,
@@ -2505,7 +2524,6 @@
 				3BCF19171CDC66E600E2EA1A /* list_btn_More@3x.png in Resources */,
 				3AA165671C91BCD6006B8756 /* homework_2@3x.png in Resources */,
 				3AF11DDE1CB2691A00F98A03 /* subject_kaitong@3x.png in Resources */,
-				3BCF194E1CDCC2B500E2EA1A /* StuConditionTableViewCell.xib in Resources */,
 				3BC68D8A1CEC572300FF7854 /* FeedBackViewController.xib in Resources */,
 				3B4864531CCF10C200D2DE3C /* report.png in Resources */,
 				3A26EE6B1C71CCDB009C3242 /* MyChildrenViewController.xib in Resources */,
@@ -2673,6 +2691,7 @@
 				3AB212B31CA2E11900DCC618 /* KWFormView.m in Sources */,
 				3AC1D1E31CCDE70E006291D0 /* RegistOneViewController.m in Sources */,
 				801F44A71CDF164800B7E7E1 /* base64.m in Sources */,
+				80CCF43F1CF2F0EC000C93D9 /* UnSubmitCell.m in Sources */,
 				3A188F9A1CE5C51600F055DD /* OrderTableViewCell.m in Sources */,
 				3AEF27271C61F08A0028BE09 /* UIImageEffects.m in Sources */,
 				3AD1FD931C72BD8F00E362B9 /* MyChildrenTableViewCell.m in Sources */,
@@ -2707,6 +2726,7 @@
 				3BFE3B781CD9816D00502769 /* YjxService.m in Sources */,
 				3A8CAEBA1C70B36200BDEB6B /* SDWebImageManager.m in Sources */,
 				3A6CA5A11CE32C2F00F6A7C0 /* FEPlaceHolderTextView.m in Sources */,
+				80F718C01CF28961007C0B75 /* StuConditionCell.m in Sources */,
 				3A91F49D1C760CF4001568AA /* PNScatterChartData.m in Sources */,
 				801F44AD1CDF164800B7E7E1 /* RSADataSigner.m in Sources */,
 				3A91F4941C760CF4001568AA /* PNGenericChart.m in Sources */,
@@ -2719,7 +2739,6 @@
 				3B48646E1CCF117300D2DE3C /* TeacherHomeViewController.m in Sources */,
 				3A04A5D01C93E6290040D913 /* MASViewConstraint.m in Sources */,
 				3BFE3B811CD981AE00502769 /* StudentEntity.m in Sources */,
-				3BCF194D1CDCC2B500E2EA1A /* StuConditionTableViewCell.m in Sources */,
 				3A442B961CE07E780037906A /* DynamicScrollView.m in Sources */,
 				3AF11DD91CB211D600F98A03 /* YjyxMemberDetailViewController.m in Sources */,
 				3A8827761C6EE1470008367F /* ParentCommunityViewController.m in Sources */,
@@ -2733,6 +2752,7 @@
 				3A5A00F61C79EA2A004584E6 /* MJRefreshBaseView.m in Sources */,
 				3A5A00F81C79EA2A004584E6 /* MJRefreshFooterView.m in Sources */,
 				3BFE3B791CD9816D00502769 /* YjyxOverallData.m in Sources */,
+				80F718C21CF28961007C0B75 /* SubmitCell.m in Sources */,
 				3AEF271F1C61F08A0028BE09 /* GTMBase64.m in Sources */,
 				801F44A91CDF164800B7E7E1 /* DataVerifier.m in Sources */,
 				3AEF27211C61F08A0028BE09 /* NSObject+category.m in Sources */,
@@ -2896,7 +2916,7 @@
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a92b8e4b-676b-46d4-ac1e-ef7c6104f66a";
+				PROVISIONING_PROFILE = "98b5ad7e-0ca5-49f7-9aee-8b975be21702";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -2946,7 +2966,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a92b8e4b-676b-46d4-ac1e-ef7c6104f66a";
+				PROVISIONING_PROFILE = "98b5ad7e-0ca5-49f7-9aee-8b975be21702";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

@@ -246,6 +246,7 @@
         if (result != nil) {
             
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                
                 // 退出时关闭定时器,并清除用户名密码等信息
                 [SYS_CACHE removeObjectForKey:@"AutoLogoin"];
                 // 定时器挂起

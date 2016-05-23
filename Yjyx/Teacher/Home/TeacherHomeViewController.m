@@ -47,7 +47,7 @@
     
     // 简介
 #warning 后续可能会加上老师的科目信息
-    _descriptionLabel.text = [NSString stringWithFormat:@"%@%@%@**老师", [YjyxOverallData sharedInstance].teacherInfo.school_province, [YjyxOverallData sharedInstance].teacherInfo.school_city, [YjyxOverallData sharedInstance].teacherInfo.school_name];
+    _descriptionLabel.text = [NSString stringWithFormat:@"%@%@%@老师", [YjyxOverallData sharedInstance].teacherInfo.school_province, [YjyxOverallData sharedInstance].teacherInfo.school_city, [YjyxOverallData sharedInstance].teacherInfo.school_name];
     
     
     [self addTapToPicImage];
