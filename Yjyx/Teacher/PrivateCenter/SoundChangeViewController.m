@@ -58,9 +58,11 @@
 
     
     [manager POST:[BaseURL stringByAppendingString:TEACHER_UPLOAD_SOUND_SETTING_CONNECT_POST] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"%@", responseObject);
+        
+//        NSLog(@"%@", responseObject);
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
+        
+//        NSLog(@"%@", error);
     }];
     
     // 返回

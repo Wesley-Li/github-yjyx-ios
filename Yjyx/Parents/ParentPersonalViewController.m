@@ -263,11 +263,13 @@
         [self.view hideToastActivity];
         if (result != nil) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+
                 NSArray *array = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BaseURL,@"/api/parents/login/"]]];
                 for (NSHTTPCookie *cookie in array)
                 {
                     [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
                 }
+
                 [SYS_CACHE removeObjectForKey:@"AutoLogoin"];
                 LoginViewController *loginCtl = [[LoginViewController alloc] init];
                 UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginCtl];

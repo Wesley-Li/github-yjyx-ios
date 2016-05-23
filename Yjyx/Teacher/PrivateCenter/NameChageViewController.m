@@ -24,8 +24,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _doneBtn.layer.cornerRadius = 8;
+    _nameTF.layer.cornerRadius = 20;
+    _doneBtn.layer.cornerRadius = 20;
+    _doneBtn.backgroundColor = [UIColor colorWithRed:3/255.0 green:136/255.0 blue:227/255.0 alpha:1.0];
+    _doneBtn.tintColor = [UIColor whiteColor];
     
+}
+
+// 点击屏幕回收键盘
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+
+    [_nameTF endEditing:YES];
 }
 
 // 点击完成按钮

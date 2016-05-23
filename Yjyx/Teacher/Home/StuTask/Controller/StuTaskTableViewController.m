@@ -48,6 +48,14 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
+    UIButton *goBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [goBackBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [goBackBtn setImage:[UIImage imageNamed:@"nav_btn_back"] forState:UIControlStateNormal];
+    [goBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:goBackBtn];
+    self.navigationItem.leftBarButtonItem = leftBtnItem;
+
+    
     [self readDataFromNetWork];
     [self refreshAll];
     
@@ -145,6 +153,11 @@
         [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
     }];
     
+}
+
+- (void)goBack {
+
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

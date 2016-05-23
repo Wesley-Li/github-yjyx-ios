@@ -8,21 +8,30 @@
 
 #import "TaskDetailTableViewController.h"
 #import "TaskModel.h"
-#import "StuConditionTableViewCell.h"
+
 #import "TaskConditionTableViewCell.h"
+#import "StuConditionCell.h"
+#import "SubmitCell.h"
+#import "UnSubmitCell.h"
+
 #import "BlankFillModel.h"
 #import "ChoiceModel.h"
 #import "FinshedModel.h"
-#import "PNChart.h"
-#import "TCustomView.h"
+
 #import "UIImageView+WebCache.h"
 #import "StudentDetailViewController.h"
 #import "NextTableViewController.h"
 
 #define stuCondition @"stuConditionCell"
 #define taskConditon @"taskConditonCell"
+#define submit @"submitCell"
+#define unSubmit @"unSubmitcell"
 
 @interface TaskDetailTableViewController ()
+
+{
+    CGFloat headerHeight;
+}
 
 @property (nonatomic, strong) NSMutableArray *choiceDataSource;
 @property (nonatomic, strong) NSMutableArray *blankFillDataSource;
@@ -34,14 +43,7 @@
 @property (nonatomic, assign) NSInteger finishedCellHeight;
 @property (nonatomic, assign) NSInteger unfinishedCellHeight;
 
-@property (nonatomic, strong) StuConditionTableViewCell *stuCell;
-
-
-@property (nonatomic)BOOL showmoreBtn;
-@property (nonatomic)BOOL unShowmoreBtn;
-
 @property (nonatomic, strong) TaskConditionTableViewCell *tcell;
-
 
 
 @end
@@ -83,17 +85,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.showmoreBtn = YES;
-    self.unShowmoreBtn = YES;
+    headerHeight = 50;
+    
     self.title = self.taskModel.t_description;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    UIButton *goBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [goBackBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [goBackBtn setImage:[UIImage imageNamed:@"nav_btn_back"] forState:UIControlStateNormal];
+    [goBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:goBackBtn];
+    self.navigationItem.leftBarButtonItem = leftBtnItem;
+
     
     [self readDataFromNetWork];
     
     // 注册
     [self.tableView registerNib:[UINib nibWithNibName:@"TaskConditionTableViewCell" bundle:nil] forCellReuseIdentifier:taskConditon];
-    //    [self.tableView registerNib:[UINib nibWithNibName:@"StuConditionTableViewCell" bundle:nil] forCellReuseIdentifier:stuCondition];
-    [self.tableView registerClass:[StuConditionTableViewCell class] forCellReuseIdentifier:stuCondition];
+    [self.tableView registerNib:[UINib nibWithNibName:@"StuConditionCell" bundle:nil] forCellReuseIdentifier:stuCondition];
+    [self.tableView registerNib:[UINib nibWithNibName:@"SubmitCell" bundle:nil] forCellReuseIdentifier:submit];
+    [self.tableView registerNib:[UINib nibWithNibName:@"UnSubmitCell" bundle:nil] forCellReuseIdentifier:unSubmit];
+    
+   
     self .automaticallyAdjustsScrollViewInsets = YES;
 }
 
@@ -133,11 +146,17 @@
         }
         [self.tableView reloadData];
         [SVProgressHUD showSuccessWithStatus:@"数据加载成功"];
-        [SVProgressHUD dismissWithDelay:0.8];
+        [SVProgressHUD dismissWithDelay:1.0];
+        
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
     }];
     
+}
+
+- (void)goBack {
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -148,146 +167,406 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
+
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    
+
+    // 选择题或者填空题
     if (_choiceDataSource.count == 0 || _blankFillDataSource.count == 0) {
-        return 2;
-    }
-    
-    return 3;
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    if (_choiceDataSource.count != 0 && _blankFillDataSource.count == 0) {
-        if (indexPath.row == 0) {
-            self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
-            _tcell.descriptionLabel.text = @"选择题正确率";
-            [self cell:_tcell addSubViewsWithChoiceArr:self.choiceDataSource];
-            return _tcell;
+        
+        if (_finishedArr.count == 0 || _unfinishedArr.count == 0) {
+            // 全部上交或者全部未交
+            return 3;
         }else {
-            
-           
-            self.stuCell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
-            
-           
-            
-            
-            
-            self.stuCell.descriptionLabel.text = @"作业上交情况";
-            self.stuCell.descriptionLabel.font = [UIFont fontWithName:@"Arial" size:14];
-            
-            self.stuCell.submitLabel.text = [NSString stringWithFormat:@"已交作业的同学数(%ld/%ld)", self.finishedArr.count, self.unfinishedArr.count + self.finishedArr.count];
-            self.stuCell.unsubmitLabel.text =[NSString stringWithFormat:@"未交作业的同学数(%ld/%ld)", self.unfinishedArr.count, self.unfinishedArr.count + self.finishedArr.count];
-            
-            self.stuCell.submitLabel.font = [UIFont fontWithName:@"Arial" size:14];
-            self.stuCell.unsubmitLabel.font = [UIFont fontWithName:@"Arial" size:14];
-            
-            
-            self.stuCell.showView1.tag = 201;
-            // 设置选中未选中
-            [self addshowMoreStuFinished];
-            
-            [self cell: _stuCell  addSubViewsWithfinishedfillArr:self.finishedArr];
-            [self cell:_stuCell addSubViewsWithUnfinishedfillArr:self.unfinishedArr];
-            //            self.stuCell.userInteractionEnabled = NO;
-            //             [_stuCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            
-            [self.stuCell.showmoreBtn addTarget:self action:@selector(showMoreStuWithFinishedArr:) forControlEvents:UIControlEventTouchUpInside];
-            [self.stuCell.showUnsubmitBtn addTarget:self action:@selector(showMoreStuWithUnFinishedArr) forControlEvents:UIControlEventTouchUpInside];
-            
-            return self.stuCell;
-            
-        }
-    }else if (_blankFillDataSource != 0 && _choiceDataSource == 0) {
-        if (indexPath.row == 0) {
-            self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
-            [self cell:_tcell addSubViewsWithBlankfillArr:self.blankFillDataSource];
-            _tcell.descriptionLabel.text = @"填空题正确率";
-            return _tcell;
-        }else {
-            
-            self.stuCell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
-            _stuCell.descriptionLabel.text = @"作业上交情况";
-            self.stuCell.descriptionLabel.font = [UIFont fontWithName:@"Arial" size:14];
-            
-            return _stuCell;
+            // 既有上交又有未交
+            return 4;
         }
         
     }else {
         
-        if (indexPath.row == 0 || indexPath.row == 1) {
-            self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
+        if (_finishedArr.count == 0 || _unfinishedArr.count == 0) {
+            return 4;
+        }else {
+        
+            return 5;
+        }
+        
+    
+    }
+    
+
+}
+
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    if (_choiceDataSource.count != 0 && _blankFillDataSource.count == 0) {
+        
+
+        
+        if (_unfinishedArr.count == 0 || _finishedArr.count == 0) {
             
             if (indexPath.row == 0) {
-                //            cell.choiceArr = self.choiceDataSource;
+                self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
+                [_tcell setSelectionStyle:UITableViewCellSelectionStyleNone];
                 _tcell.descriptionLabel.text = @"选择题正确率";
-                
                 [self cell:_tcell addSubViewsWithChoiceArr:self.choiceDataSource];
-                //            [cell setValuesWithChoiceModelArr:self.choiceDataSource];
                 return _tcell;
+            }else if(indexPath.row == 1) {
+                StuConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                return cell;
             }else {
-                //            cell.blankArr = self.blankFillDataSource;
-                [self cell:_tcell addSubViewsWithBlankfillArr:self.blankFillDataSource];
-                _tcell.descriptionLabel.text = @"填空题正确率";
+                
+                if (_unfinishedArr.count == 0) {
+                    SubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:submit forIndexPath:indexPath];
+                    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                    [self cell:cell addSubViewsWithFinishedArr:_finishedArr];
+                    return cell;
+
+                }else {
+                
+                    UnSubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:unSubmit forIndexPath:indexPath];
+                    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                    [self cell:cell addSubViewsWithUnfinishedArr:_unfinishedArr];
+                    return cell;
+                    
+                }
+                
+            }
+        }else {
+            
+            if (indexPath.row == 0) {
+                self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
+                [_tcell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                
+                _tcell.descriptionLabel.text = @"选择题正确率";
+                [self cell:_tcell addSubViewsWithChoiceArr:self.choiceDataSource];
                 return _tcell;
+            }else if(indexPath.row == 1) {
+                StuConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                return cell;
+            }else if (indexPath.row == 2) {
+                
+                SubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:submit forIndexPath:indexPath];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                [self cell:cell addSubViewsWithFinishedArr:_finishedArr];
+                return cell;
+                
+            }else {
+                
+                
+                UnSubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:unSubmit forIndexPath:indexPath];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                [self cell:cell addSubViewsWithUnfinishedArr:_unfinishedArr];
+                return cell;
                 
             }
             
+        }
+
+        
+        
+    }else if (_choiceDataSource.count == 0 && _blankFillDataSource.count != 0){
+        
+        if (_unfinishedArr.count == 0 || _finishedArr.count == 0) {
+            
+            if (indexPath.row == 0) {
+                self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
+                [_tcell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                
+                [self cell:_tcell addSubViewsWithBlankfillArr:self.blankFillDataSource];
+                _tcell.descriptionLabel.text = @"填空题正确率";
+                return _tcell;
+            }else if(indexPath.row == 1) {
+                StuConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                return cell;
+            }else {
+                
+                if (_unfinishedArr.count == 0) {
+                    SubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:submit forIndexPath:indexPath];
+                    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                    [self cell:cell addSubViewsWithFinishedArr:_finishedArr];
+                    return cell;
+                    
+                }else {
+                    
+                    UnSubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:unSubmit forIndexPath:indexPath];
+                    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                    [self cell:cell addSubViewsWithUnfinishedArr:_unfinishedArr];
+                    return cell;
+                    
+                }
+            }
         }else {
             
-            self.stuCell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
-            _stuCell.descriptionLabel.text = @"作业上交情况";
-            self.stuCell.descriptionLabel.font = [UIFont fontWithName:@"Arial" size:14];
-            
-            return _stuCell;
+            if (indexPath.row == 0) {
+                self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
+                [_tcell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                
+                [self cell:_tcell addSubViewsWithBlankfillArr:self.blankFillDataSource];
+                _tcell.descriptionLabel.text = @"填空题正确率";
+                return _tcell;
+            }else if(indexPath.row == 1) {
+                StuConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                return cell;
+            }else if (indexPath.row == 2) {
+                
+                SubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:submit forIndexPath:indexPath];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                [self cell:cell addSubViewsWithFinishedArr:_finishedArr];
+                return cell;
+                
+            }else {
+                
+                UnSubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:unSubmit forIndexPath:indexPath];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                [self cell:cell addSubViewsWithUnfinishedArr:_unfinishedArr];
+                return cell;
+                
+            }
             
         }
+
         
+    
+    }else {
+        
+        if (_unfinishedArr.count == 0 || _finishedArr.count == 0) {
+            
+            if (indexPath.row == 0 || indexPath.row == 1) {
+                self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
+                [_tcell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                
+                if (indexPath.row == 0) {
+                    //            cell.choiceArr = self.choiceDataSource;
+                    _tcell.descriptionLabel.text = @"选择题正确率";
+                    
+                    [self cell:_tcell addSubViewsWithChoiceArr:self.choiceDataSource];
+                    //            [cell setValuesWithChoiceModelArr:self.choiceDataSource];
+                    return _tcell;
+                }else {
+                    //            cell.blankArr = self.blankFillDataSource;
+                    [self cell:_tcell addSubViewsWithBlankfillArr:self.blankFillDataSource];
+                    _tcell.descriptionLabel.text = @"填空题正确率";
+                    return _tcell;
+                    
+                }
+                
+            }else if(indexPath.row == 2) {
+                
+                StuConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                return cell;
+                
+            }else {
+                
+                if (_unfinishedArr.count == 0) {
+                    SubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:submit forIndexPath:indexPath];
+                    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                    [self cell:cell addSubViewsWithFinishedArr:_finishedArr];
+                    return cell;
+                    
+                }else {
+                    
+                    UnSubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:unSubmit forIndexPath:indexPath];
+                    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                    [self cell:cell addSubViewsWithUnfinishedArr:_unfinishedArr];
+                    return cell;
+                    
+                }
+
+            }
+            
+            
+        }else {
+            
+            if (indexPath.row == 0 || indexPath.row == 1) {
+                self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
+                [_tcell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                
+                if (indexPath.row == 0) {
+                    //            cell.choiceArr = self.choiceDataSource;
+                    _tcell.descriptionLabel.text = @"选择题正确率";
+                    
+                    [self cell:_tcell addSubViewsWithChoiceArr:self.choiceDataSource];
+                    //            [cell setValuesWithChoiceModelArr:self.choiceDataSource];
+                    return _tcell;
+                }else {
+                    //            cell.blankArr = self.blankFillDataSource;
+                    [self cell:_tcell addSubViewsWithBlankfillArr:self.blankFillDataSource];
+                    _tcell.descriptionLabel.text = @"填空题正确率";
+                    return _tcell;
+                    
+                }
+                
+            }else if (indexPath.row == 2) {
+                
+                StuConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                return cell;
+                
+                
+            }else if (indexPath.row == 3) {
+                
+                SubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:submit forIndexPath:indexPath];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                [self cell:cell addSubViewsWithFinishedArr:_finishedArr];
+                return cell;
+                
+            }else {
+                
+                UnSubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:unSubmit forIndexPath:indexPath];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                [self cell:cell addSubViewsWithUnfinishedArr:_unfinishedArr];
+                return cell;
+            }
+            
+            
+        }
+
+    
     }
-    
-    
-    /*
-     
-     TaskConditionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:taskConditon forIndexPath:indexPath];
-     TCustomView *view = [[[NSBundle mainBundle] loadNibNamed:@"TCustomView" owner:nil options:nil] lastObject];
-     
-     view.taskidlabel.text = @"测试";
-     [cell addSubview:view];
-     */
-    
-    
-    
+
+
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+#pragma mark - 返回高度的方法
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    //cell  不可点击事件
-    [_stuCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    //
-    //    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //    self.showmoreBtn = !self.showmoreBtn;
-    //    NSIndexPath *index = [NSIndexPath indexPathForRow:1 inSection:0];
-    //    [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
-    //
+    if (_blankFillDataSource.count == 0 && _choiceDataSource != 0) {
+        
+                        if (_unfinishedArr.count == 0 || _finishedArr.count == 0) {
+                            if (indexPath.row == 0) {
+                                return _choiceTaskCellHeight;
+                            }else if (indexPath.row == 1) {
+                            
+                                return headerHeight;
+                            
+                            }else {
+                            
+                                if (_finishedArr.count == 0) {
+                                    return _unfinishedCellHeight;
+                                }else {
+                                
+                                    return _finishedCellHeight;
+                                }
+                            }
+                        }else {
+                        
+                            if (indexPath.row == 0) {
+                                return _choiceTaskCellHeight;
+                            }else if (indexPath.row == 1) {
+                            
+                                return headerHeight;
+                            }else if (indexPath.row == 2) {
+                            
+                                return _finishedCellHeight;
+                            }else {
+                            
+                                return _unfinishedCellHeight;
+                            }
+                        }
+        
+    }else if (_blankFillDataSource.count != 0 && _choiceDataSource == 0) {
+        
+                    if (_unfinishedArr.count == 0 || _finishedArr.count == 0) {
+                        if (indexPath.row == 0) {
+                            return _blankfillTaskCellHeight;
+                        }else if (indexPath.row == 1) {
+                            
+                            return headerHeight;
+                            
+                        }else {
+                            
+                            if (_finishedArr.count == 0) {
+                                return _unfinishedCellHeight;
+                            }else {
+                                
+                                return _finishedCellHeight;
+                            }
+                        }
+                    }else {
+                    
+                        if (indexPath.row == 0) {
+                            return _blankfillTaskCellHeight;
+                        }else if (indexPath.row == 1) {
+                            
+                            return headerHeight;
+                        }else if (indexPath.row == 2) {
+                            
+                            return _finishedCellHeight;
+                        }else {
+                            
+                            return _unfinishedCellHeight;
+                        }
+
+                    }
+
+    }else {
+        
+        
+        if (_unfinishedArr.count == 0 || _finishedArr.count == 0) {
+            if (indexPath.row == 0) {
+                return _choiceTaskCellHeight;
+            }else if (indexPath.row == 1) {
+            
+                return _blankfillTaskCellHeight;
+            }else if (indexPath.row == 2) {
+            
+                return headerHeight;
+            }else {
+            
+                if (_unfinishedArr.count == 0) {
+                    return _finishedCellHeight;
+                }else {
+                
+                    return _unfinishedCellHeight;
+                }
+            }
+        }else {
+        
+            if (indexPath.row == 0) {
+                return _choiceTaskCellHeight;
+            }else if (indexPath.row == 1) {
+            
+                return _blankfillTaskCellHeight;
+            }else if (indexPath.row == 2) {
+            
+                return headerHeight;
+            }else if (indexPath.row == 3) {
+            
+                return _finishedCellHeight;
+            }else {
+            
+                return _unfinishedCellHeight;
+            }
+        }
     
+    }
+
 }
 
+
+
+
+
+#pragma mark - 选择题cell赋值方法
 - (void)cell:(TaskConditionTableViewCell *)cell addSubViewsWithChoiceArr:(NSMutableArray *)arr {
     
     CGSize size = CGSizeMake(10, 25);// 初始位置
-    CGFloat padding = 5;// 间距
+    CGFloat padding = 10;// 间距
     CGFloat TWidth = 40;
     CGFloat Theight = 60;
-
-
+    
+    
     
     //    NSLog(@"%@", self.choiceArr);
     
@@ -320,7 +599,16 @@
         
         NSLog(@"^^^^^%@", model.C_count);
         
-        NSString *titleString = [NSString stringWithFormat:@"%.f%%", [model.C_count floatValue]*100/([model.C_count floatValue] + [model.W_count floatValue])];
+        
+        NSString *titleString;
+        if (_finishedArr.count == 0) {
+            titleString = [NSString stringWithFormat:@"0%%"];
+        }else {
+        
+            titleString = [NSString stringWithFormat:@"%.f%%", [model.C_count floatValue]*100/([model.C_count floatValue] + [model.W_count floatValue])];
+        }
+        
+        
         [choiceBtn setTitle:[NSString stringWithFormat:@"%@", titleString] forState:UIControlStateNormal];
         choiceBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         [choiceBtn setTitleColor:[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:51.0/255.0 alpha:1.0] forState:UIControlStateNormal];
@@ -342,9 +630,7 @@
     
 }
 
-
-
-// 点击选择题
+#pragma mark - 点击选择题方法
 - (void)handleButton:(UIButton *)sender {
     
     
@@ -353,14 +639,15 @@
     NextVC.taskid = self.taskModel.t_id;
     NextVC.qtype = @1;
     NextVC.qid = [self.choiceDataSource[sender.tag - 300] b_id];
-
+    
     [self.navigationController pushViewController:NextVC animated:YES];
 }
 
+#pragma mark - 填空题cell赋值方法
 - (void)cell:(TaskConditionTableViewCell *)cell addSubViewsWithBlankfillArr:(NSMutableArray *)arr{
     
     CGSize size = CGSizeMake(10, 25);
-    CGFloat padding = 5;
+    CGFloat padding = 10;
     
     CGFloat TWidth = 40;
     CGFloat Theight = 60;
@@ -387,7 +674,17 @@
         imageView.image = [UIImage imageNamed:@"corect_pic"];
         UIButton *blankfillBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         blankfillBtn.frame = CGRectMake(0, 20, TWidth, TWidth);
-        NSString *titleString = [NSString stringWithFormat:@"%.f%%", [model.C_count floatValue]*100/([model.C_count floatValue] + [model.W_count floatValue])];
+        
+        
+        NSString *titleString;
+        if (_finishedArr.count == 0) {
+            titleString = [NSString stringWithFormat:@"0%%"];
+        }else {
+            
+            titleString = [NSString stringWithFormat:@"%.f%%", [model.C_count floatValue]*100/([model.C_count floatValue] + [model.W_count floatValue])];
+        }
+
+        
         [blankfillBtn setTitle:[NSString stringWithFormat:@"%@", titleString] forState:UIControlStateNormal];
         blankfillBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         [blankfillBtn setTitleColor:[UIColor colorWithRed:255.0/255.0 green:204.0/255.0 blue:51.0/255.0 alpha:1.0] forState:UIControlStateNormal];
@@ -408,380 +705,161 @@
     
 }
 
-
-
-// 点击填空题
+#pragma mark - 点击填空题方法
 - (void)blankfillBtnClick:(UIButton *)sender {
-
-
+    
+    
     NextTableViewController *NextVC = [[NextTableViewController alloc] init];
     NextVC.taskid = self.taskModel.t_id;
-
+    
     NextVC.qtype = @2;
     NextVC.qid = [self.blankFillDataSource[sender.tag - 200] b_id];
-
+    
     [self.navigationController pushViewController:NextVC animated:YES];
-
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (_blankFillDataSource.count == 0 && _choiceDataSource != 0) {
-        if (indexPath.row == 0) {
-            return _choiceTaskCellHeight;
-        }else {
-            
-            CGFloat height = 185;
-            CGFloat viewW = self.view.frame.size.width;
-            if (_finishedArr.count != 0) {
-                if (!self.showmoreBtn) {
-                    NSInteger row = ((NSInteger)_finishedArr.count * (60 + 10) + 10 )/ (viewW - 40) + 0.9;
-                    height = height + row * 80;
-                }
-                
-            }
-            if (_unfinishedArr.count != 0) {
-                height += 165;
-                if (!self.unShowmoreBtn) {
-                    NSInteger row = ((NSInteger)_unfinishedArr.count * (60 + 10) + 10) / (viewW - 40) + 0.9;
-                    height = height + row * 80;
-                }
-            }
-            
-            return height;
-        }
-        
-    }else if (_blankFillDataSource.count != 0 && _choiceDataSource == 0) {
-        
-        if (indexPath.row == 0) {
-            return _blankfillTaskCellHeight;
-        }else {
-            
-            CGFloat height = 185;
-            CGFloat viewW = self.view.frame.size.width;
-            if (_finishedArr.count != 0) {
-                if (!self.showmoreBtn) {
-                    NSInteger row = ((NSInteger)_finishedArr.count * (60 + 10) + 10) / (viewW - 40) + 0.9;
-                    height = height + row * 80;
-                }
-                
-            }
-            if (_unfinishedArr.count != 0) {
-                height += 165;
-                if (!self.unShowmoreBtn) {
-                    NSInteger row = ((NSInteger)_unfinishedArr.count * (60 + 10))+ 10 / (viewW - 40) + 0.9;
-                    height = height + row * 80;
-                }
-            }
-            
-            return height;
-        }
-        
-    }
-    
-    if (indexPath.row == 0) {
-        return _choiceTaskCellHeight;
-    }else if (indexPath.row == 1){
-        
-        return _blankfillTaskCellHeight;
-    }
-    else {
-        CGFloat height = 185;
-        CGFloat viewW = self.view.frame.size.width;
-        if (_finishedArr.count != 0) {
-            if (!self.showmoreBtn) {
-                NSInteger row = ((NSInteger)_finishedArr.count * (60 + 10) + 10 )/ (viewW - 40) + 0.9;
-                height = height + row * 80;
-            }
-            
-        }
-        if (_unfinishedArr.count != 0) {
-            height += 165;
-            if (!self.unShowmoreBtn) {
-                NSInteger row =((NSInteger)_unfinishedArr.count * (60 + 10)) + 10 / (viewW - 40) + 0.9;
-                height = height + row * 80;
-            }
-        }
-        
-        return height;
-    }
-    
-    
     
 }
-//上交作业的同学数
-- (void)cell:(StuConditionTableViewCell *)cell addSubViewsWithfinishedfillArr:(NSMutableArray *)arr{
-    _stuCell.showView1.backgroundColor = [UIColor whiteColor];
-       NSInteger row = ((NSInteger)_finishedArr.count * (60 + 10) + 10) / (self.view.frame.size.width - 40) + 0.9;
-    if (row-1> 0) {
-        self.stuCell.showmoreBtn.hidden = NO;
-    }else{
-        self.stuCell.showmoreBtn.hidden = YES;
-    }
+
+#pragma mark - 已上交作业cell赋值方法
+- (void)cell:(SubmitCell *)cell addSubViewsWithFinishedArr:(NSMutableArray *)arr {
     
-    CGSize size = CGSizeMake(10, 5);
-    CGFloat padding = 5;
+    cell.submitLabel.text = [NSString stringWithFormat:@"已交作业的同学数(%ld/%ld)", _finishedArr.count, _unfinishedArr.count + _finishedArr.count];
     
-    CGFloat FWidth = 60;
-    CGFloat Fheight = 80;
-    NSLog(@"%@",_finishedArr);
+    CGSize size = CGSizeMake(10, 30);
+    CGFloat padding = 10;
     
-    [cell.showView1.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[UIView class]] && ![obj isKindOfClass:[UILabel class]] && ![obj isKindOfClass:[UIButton class]] && obj != cell.line1) {
-            [(UIView *)obj removeFromSuperview];
-        }
-    }];
-//    if (!self.showmoreBtn) {
+    CGFloat TWidth = 40;
+    CGFloat Theight = 60;
     
-//        //TODO: 要显示数组的个数
-//        
-//        num = 8;
-//    } else {
-//        num = 4;
-//    }
+    //      NSLog(@"%@", self.choiceArr);
+    
     for (int i = 0; i < arr.count; i++) {
         
         UIView *taskView = [[UIView alloc] init];
-        taskView.frame = CGRectMake(size.width, size.height + 20, FWidth, Fheight);
+        taskView.frame = CGRectMake(size.width, size.height, TWidth, Theight);
         
-        size.width += FWidth + padding;
+        size.width += TWidth + padding;
         
-        if (cell.showView1.width - size.width < FWidth + padding) {
-            size.height += Fheight + padding;
+        if (cell.bg_view.width - size.width < TWidth + padding) {
+            // 换行
             size.width = 10;
-            //            return ;
+            size.height += Theight;
         }
         
-        FinshedModel * model = self.finishedArr[i];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 70, FWidth, 10)];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, FWidth, FWidth)];
+        //        taskView.backgroundColor = [UIColor redColor];
+        FinshedModel *model = arr[i];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, TWidth, 20)];
         
-                if ([model.ImageAvatar isEqual:[NSNull null]]) {
-                    imageView.image = [UIImage imageNamed:@"pic"];
-                }else {
+        UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
-                    [imageView setImageWithURL:[NSURL URLWithString:model.ImageAvatar] placeholderImage:[UIImage imageNamed:@"pic"]];
-                }
-//        imageView.image = [UIImage imageNamed:@"pic"];
-        
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(0, 5, FWidth, FWidth);
-                NSString *titleString = [NSString stringWithFormat:@"%@", model.Name ];
-        
-                [button setTitle:[NSString stringWithFormat:@"%@", titleString] forState:UIControlStateNormal];
-        button.tag = 200 + i;
-        [button addTarget:self action:@selector(buttonfinishedImgClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-                label.text = [NSString stringWithFormat:@"%@",model.Name ];
-//        label.text= @"丁三";
-        label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont fontWithName:@"Arial" size:10];
-        [taskView addSubview:label];
-        [taskView addSubview:imageView];
-        [taskView addSubview:button];
-        
-        [cell.showView1 addSubview:taskView];
-    }
-    [self.stuCell.contentView addSubview:self.stuCell.showmoreBtn];
-    
-    
-}
-
-//未上交作业的同学数
-- (void) cell : (StuConditionTableViewCell *)cell addSubViewsWithUnfinishedfillArr:(NSMutableArray *)arr{
-    _stuCell.showView2.backgroundColor = [UIColor whiteColor];
-    
-    NSInteger row = ((NSInteger)_unfinishedArr.count * (60 + 10) + 10) / (self.view.frame.size.width - 40) + 0.9;
-    if (row-1> 0) {
-        self.stuCell.showUnsubmitBtn.hidden = NO;
-    }else{
-        self.stuCell.showUnsubmitBtn.hidden = YES;
-    }
-    
-    CGSize size = CGSizeMake(10, 5);
-    CGFloat padding = 5;
-    
-    CGFloat FWidth = 60;
-    CGFloat Fheight = 80;
-    //    NSLog(@"%@",_unfinishedArr);
-    for (int i = 0; i < arr.count; i++) {
-        
-        UIView *taskView = [[UIView alloc] init];
-        taskView.frame = CGRectMake(size.width, size.height, FWidth, Fheight);
-        
-        size.width += FWidth + padding;
-        
-        if (cell.showView1.width - size.width < FWidth + padding) {
-            
-            return ;
-        }
-        
-        FinshedModel * model = self.unfinishedArr[i];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, FWidth, 10)];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 30, FWidth, FWidth)];
+        imageBtn.frame = CGRectMake(0, 0, TWidth, TWidth);
         
         if ([model.ImageAvatar isEqual:[NSNull null]]) {
-            imageView.image = [UIImage imageNamed:@"pic"];
+            [imageBtn setImage:[UIImage imageNamed:@"stu_pic"] forState:UIControlStateNormal];
         }else {
             
-            [imageView setImageWithURL:[NSURL URLWithString:model.ImageAvatar] placeholderImage:[UIImage imageNamed:@"pic"]];
+            [imageBtn setImageWithURL:[NSURL URLWithString:model.ImageAvatar] placeholderImage:[UIImage imageNamed:@"stu_pic"]];
+        
         }
-        imageView.image = [UIImage imageNamed:@"pic"];
         
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(0, 5, FWidth, FWidth);
-        button.tag = 201 + i;
-        [button addTarget:self action:@selector(buttonUnfinishedImgClick) forControlEvents:UIControlEventTouchUpInside];
         
-        label.text = [NSString stringWithFormat:@"%@",model.Name ];
-        //        label.text= @"丁三";
+        imageBtn.tag = 200 + i;
+        [imageBtn addTarget:self action:@selector(imageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        label.text = [NSString stringWithFormat:@"%@", model.Name];
+        label.font = [UIFont systemFontOfSize:12];
         label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont fontWithName:@"Arial" size:10];
         [taskView addSubview:label];
-        [taskView addSubview:imageView];
-        [taskView addSubview:button];
+        [taskView addSubview:imageBtn];
         
-        [cell.showView2 addSubview:taskView];
+        [cell.bg_view addSubview:taskView];
     }
+    self.finishedCellHeight = size.height + 80 + 30;
     
-    
-    
-    if (!self.unShowmoreBtn) {
-        
-       
-        
-        [self.stuCell.showUnsubmitBtn setImage:[UIImage imageNamed:@"list_btn_shutdown.png"] forState:UIControlStateNormal];
-        
-        
-        
-        NSInteger row = ((NSInteger)_unfinishedArr.count * (60 + 10) + 10) / (self.view.frame.size.width - 40) + 0.9;
-        
-        
-        CGFloat height =  (row-1) * 85 + 85;
-        
-        if (row -1 > 0){
-            
-            self.stuCell.showView1.frame = CGRectMake(10, 40, self.view.frame.size.width-20,height);
+}
 
+#pragma mark - 未上交作业cell赋值方法
+- (void)cell:(UnSubmitCell *)cell addSubViewsWithUnfinishedArr:(NSMutableArray *)arr {
+    
+    cell.submitLabel.text = [NSString stringWithFormat:@"未交作业的同学数(%ld/%ld)", _unfinishedArr.count, _unfinishedArr.count + _finishedArr.count];
+    
+    CGSize size = CGSizeMake(10, 30);
+    CGFloat padding = 10;
+    
+    CGFloat TWidth = 40;
+    CGFloat Theight = 60;
+    
+    //      NSLog(@"%@", self.choiceArr);
+    
+    for (int i = 0; i < arr.count; i++) {
+        
+        UIView *taskView = [[UIView alloc] init];
+        taskView.frame = CGRectMake(size.width, size.height, TWidth, Theight);
+        
+        size.width += TWidth + padding;
+        
+        if (cell.bg_view.width - size.width < TWidth + padding) {
+            // 换行
+            size.width = 10;
+            size.height += Theight;
+        }
+        
+        //        taskView.backgroundColor = [UIColor redColor];
+        FinshedModel *model = arr[i];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, TWidth, 20)];
+        
+        UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        imageBtn.frame = CGRectMake(0, 0, TWidth, TWidth);
+        
+        if ([model.ImageAvatar isEqual:[NSNull null]]) {
+            [imageBtn setImage:[UIImage imageNamed:@"stu_pic"] forState:UIControlStateNormal];
+        }else {
             
-        }else{
-            height = 85;
-            self.stuCell.showView1.frame = CGRectMake(10, 40, self.view.frame.size.width-20,height);
-
+            [imageBtn setImageWithURL:[NSURL URLWithString:model.ImageAvatar] placeholderImage:[UIImage imageNamed:@"stu_pic"]];
             
         }
+        
+        imageBtn.tag = 200 + i;
+        [imageBtn addTarget:self action:@selector(unImageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        label.text = [NSString stringWithFormat:@"%@", model.Name];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont systemFontOfSize:12];
 
-        self.stuCell.showView1.backgroundColor = [UIColor whiteColor];
+        [taskView addSubview:label];
+        [taskView addSubview:imageBtn];
         
-        
-    } else {
-        //        self.stuCell.showUnsubmitBtn.frame = CGRectMake(self.view.frame.size.width * 0.5 - 25, 120, 50, 30);
-        self.stuCell.showView2.frame = CGRectMake(10, CGRectGetMaxY(self.stuCell.showView1.frame)+50, self.view.frame.size.width-20, 100);
-        [self.stuCell.showUnsubmitBtn setImage:[UIImage imageNamed:@"list_btn_More.png"] forState:UIControlStateNormal];
+        [cell.bg_view addSubview:taskView];
     }
-    
-    
-    NSLog(@"  %f     %f   %f",self.stuCell.showView1.frame.origin.y,self.stuCell.showView2.frame.origin.y,self.stuCell.showUnsubmitBtn.frame.origin.y);
-    
-    
-    //    self.stuCell.showView2.frame = CGRectMake(10, CGRectGetMaxY(self.stuCell.showView1.frame)+50, self.view.frame.size.width-20, 100);
-    
-    self.stuCell.showUnsubmitBtn.frame = CGRectMake(self.view.frame.size.width * 0.5 - 25, CGRectGetMaxY(self.stuCell.showView2.frame)+10, 50, 30);
-    self.unfinishedCellHeight =   self.stuCell.showView2.frame.size.height + 40 ;
-    
-    
-    [self.stuCell.contentView addSubview:self.stuCell.showUnsubmitBtn];
-    
-    
-}
-- (void) buttonfinishedImgClick:(UIButton *)sender{
-    
-    NSLog(@"点击了头像");
-    StudentDetailViewController * StudentVC = [[StudentDetailViewController  alloc]init];
-    //TODO:界面跳转需传值
-    //    StudentVC.finshedModel = _finishedArr[sender.tag - 200];
-    //    StudentVC.taskID  = self.taskModel.t_id;
-    //    NSLog(@"%@-------",StudentVC);
-    //    NSLog(@"%@====",self.taskModel.t_id);
-    
-    [self.navigationController pushViewController:StudentVC animated:YES];
-    UIBarButtonItem *returnButtonItem = [[UIBarButtonItem alloc] init];
-    returnButtonItem.title = @"";
-    self.navigationItem.backBarButtonItem = returnButtonItem;
-    
-}
-- (void)buttonUnfinishedImgClick{
-    
-    //     [self.stuCell.showView2 makeToast:@"该学生没完成作业" duration:1.0 position:SHOW_CENTER complete:nil];
+    self.unfinishedCellHeight = size.height + 80 + 30;
     
 }
 
-- (void)showMoreStuWithFinishedArr:(NSMutableArray *)arr {
+
+#pragma mark - 点击已交头像进入详情
+- (void)imageBtnClick:(UIButton *)sender {
     
+    StudentDetailViewController *stuDetailVC = [[StudentDetailViewController alloc] init];
+    FinshedModel *model = _finishedArr[sender.tag - 200];
+    stuDetailVC.finshedModel = model;
+    stuDetailVC.taskID = self.taskModel.t_id;
     
-    self.showmoreBtn = !self.showmoreBtn;
-    NSIndexPath *index = [NSIndexPath indexPathForRow:1 inSection:0];
-    [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
+    [self.navigationController pushViewController:stuDetailVC animated:YES];
+    
 }
 
-- (void)addshowMoreStuFinished {
-    if (!self.showmoreBtn) {
-        //        [self.stuCell.showmoreBtn removeFromSuperview];
-        
-        
-        [self.stuCell.showmoreBtn setImage:[UIImage imageNamed:@"list_btn_shutdown.png"] forState:UIControlStateNormal];
-        
-        //TODO:   Y值需要计算
-        
-        NSInteger row = ((NSInteger)_finishedArr.count * (60 + 10) + 10) / (self.view.frame.size.width - 40) + 0.9;
-        
-        
-        CGFloat height =  (row-1) * 85 + 85;
-        
-        if (row -1 > 0){
-            
-            self.stuCell.showView1.frame = CGRectMake(10, 40, self.view.frame.size.width-20,height);
-            
-            
-        }else{
-            height = 85;
-            self.stuCell.showView1.frame = CGRectMake(10, 40, self.view.frame.size.width-20,height);
-            
-            
-        }
-        NSLog(@"%f******",height-35);
-        
-        //        self.stuCell.showView2.frame = CGRectMake(10, CGRectGetMaxY(self.stuCell.showView1.frame)+50, self.view.frame.size.width-20, 100);
-        //        self.stuCell.showView2.frame = CGRectMake(10,  CGRectGetMaxY(self.stuCell.showView1.frame)+50, self.view.frame.size.width-20, 200);
-        
-        self.stuCell.showView1.backgroundColor = [UIColor whiteColor];
-    } else {
-        
-        [self.stuCell.showmoreBtn setImage:[UIImage imageNamed:@"list_btn_More.png"] forState:UIControlStateNormal];
-        
-        self.stuCell.showView1.frame = CGRectMake(10, 40, self.view.frame.size.width-40, 100);
-        //        [self.stuCell addSubview:self.stuCell.showView1];
-        //        self.stuCell.showView2.frame = CGRectMake(10, CGRectGetMaxY(self.stuCell.showView1.frame)+50, self.view.frame.size.width-20, 100);
-        
-        
-    }
+#pragma mark - 点击未交头像进入详情
+- (void)unImageBtnClick:(UIButton *)sender {
     
-    self.stuCell.showmoreBtn.frame = CGRectMake(self.view.frame.size.width * 0.5 - 25, CGRectGetMaxY(self.stuCell.showView1.frame)+15, 50, 30);
+    StudentDetailViewController *stuDetailVC = [[StudentDetailViewController alloc] init];
+    FinshedModel *model = _unfinishedArr[sender.tag - 200];
+    stuDetailVC.finshedModel = model;
+    stuDetailVC.taskID = self.taskModel.t_id;
     
-    
-    self.finishedCellHeight =   self.stuCell.showView1.frame.size.height + 40 ;
+    [self.navigationController pushViewController:stuDetailVC animated:YES];
     
     
 }
 
-- (void)showMoreStuWithUnFinishedArr{
-    self.unShowmoreBtn=!self.unShowmoreBtn;
-    //    [self addshowMoreUnStuFinished];
-    [self.tableView reloadData];
-}
-
-//- (void)addshowMoreUnStuFinished {
-//   
-//}
 
 @end
