@@ -21,7 +21,7 @@
 /**
  * QA环境地址
  * **/
-//#define BaseURL @"http://qa.zgyjyx.com"
+//#define BaseURL @"http://120.26.111.106"
 //#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
 
 @interface YjxService : NSObject
