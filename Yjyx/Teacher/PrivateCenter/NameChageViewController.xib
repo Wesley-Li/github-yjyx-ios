@@ -18,18 +18,18 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请在此输入姓名" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yDZ-nm-sym">
-                    <rect key="frame" x="20" y="70" width="280" height="30"/>
+                    <rect key="frame" x="20" y="85" width="280" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="OBG-ZS-IzD"/>
+                        <constraint firstAttribute="height" constant="40" id="OBG-ZS-IzD"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lki-30-JtE">
-                    <rect key="frame" x="20" y="120" width="280" height="30"/>
+                    <rect key="frame" x="20" y="155" width="280" height="40"/>
                     <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="NWs-aq-Tme"/>
+                        <constraint firstAttribute="height" constant="40" id="NWs-aq-Tme"/>
                     </constraints>
                     <state key="normal" title="完成"/>
                     <connections>
@@ -40,8 +40,8 @@
             <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="lki-30-JtE" secondAttribute="trailing" constant="20" id="6ju-ct-bEr"/>
-                <constraint firstItem="yDZ-nm-sym" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="70" id="SZV-kf-uTl"/>
-                <constraint firstItem="lki-30-JtE" firstAttribute="top" secondItem="yDZ-nm-sym" secondAttribute="bottom" constant="20" id="Z1g-4c-UMu"/>
+                <constraint firstItem="yDZ-nm-sym" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="85" id="SZV-kf-uTl"/>
+                <constraint firstItem="lki-30-JtE" firstAttribute="top" secondItem="yDZ-nm-sym" secondAttribute="bottom" constant="30" id="Z1g-4c-UMu"/>
                 <constraint firstItem="yDZ-nm-sym" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="dbV-6S-gIi"/>
                 <constraint firstItem="lki-30-JtE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="qpT-pv-Mrq"/>
                 <constraint firstAttribute="trailing" secondItem="yDZ-nm-sym" secondAttribute="trailing" constant="20" id="rMO-0Y-oTF"/>

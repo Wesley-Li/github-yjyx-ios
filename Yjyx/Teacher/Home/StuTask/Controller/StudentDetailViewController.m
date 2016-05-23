@@ -34,6 +34,14 @@
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:24/255.0 green:138/255.0 blue:224/255.0 alpha:1.0]];
     self.navigationItem.title = @"卷子";
     
+    UIButton *goBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [goBackBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [goBackBtn setImage:[UIImage imageNamed:@"nav_btn_back"] forState:UIControlStateNormal];
+    [goBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:goBackBtn];
+    self.navigationItem.leftBarButtonItem = leftBtnItem;
+
+    
    
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64-49) style:UITableViewStylePlain];
@@ -63,6 +71,11 @@
         [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
     }];
     
+}
+
+- (void)goBack {
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

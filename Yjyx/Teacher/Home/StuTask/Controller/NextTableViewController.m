@@ -268,6 +268,14 @@
  */
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIButton *goBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [goBackBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [goBackBtn setImage:[UIImage imageNamed:@"nav_btn_back"] forState:UIControlStateNormal];
+    [goBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:goBackBtn];
+    self.navigationItem.leftBarButtonItem = leftBtnItem;
+    
     // 初始状态
     isSmallScreen = NO;
     isPlay = NO;
@@ -337,6 +345,11 @@
         
     }];
 
+}
+
+- (void)goBack {
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
