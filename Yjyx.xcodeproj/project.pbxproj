@@ -375,8 +375,19 @@
 		3FEF7EB31CE568EE0061AB04 /* studentDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEF7EB21CE568EE0061AB04 /* studentDetail.m */; };
 		3FF740601CE308DD00D3C0F7 /* list_btn_shutdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */; };
 		3FF740621CE3090500D3C0F7 /* list_btn_shutdown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF740611CE3090500D3C0F7 /* list_btn_shutdown@3x.png */; };
-		743E1CCF1CE4E3F300B00033 /* StudentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 743E1CCE1CE4E3F300B00033 /* StudentDetailViewController.m */; };
 		7D453D9CA19A8B9493453E33 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D2260EAA2B915029186C49 /* libPods.a */; };
+		8013D32F1CF4495300F82301 /* SpendTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8013D32D1CF4495300F82301 /* SpendTimeCell.m */; };
+		8013D3301CF4495300F82301 /* SpendTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8013D32E1CF4495300F82301 /* SpendTimeCell.xib */; };
+		8013D3391CF4521100F82301 /* CardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8013D3371CF4521100F82301 /* CardCell.m */; };
+		8013D33A1CF4521100F82301 /* CardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8013D3381CF4521100F82301 /* CardCell.xib */; };
+		8013D33D1CF4552700F82301 /* StudentDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8013D33C1CF4552700F82301 /* StudentDetailController.m */; };
+		8013D3411CF45A3E00F82301 /* SubTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8013D33F1CF45A3E00F82301 /* SubTimeCell.m */; };
+		8013D3421CF45A3E00F82301 /* SubTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8013D3401CF45A3E00F82301 /* SubTimeCell.xib */; };
+		8013D3461CF46B8700F82301 /* ChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8013D3441CF46B8700F82301 /* ChoiceCell.m */; };
+		8013D3471CF46B8700F82301 /* ChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8013D3451CF46B8700F82301 /* ChoiceCell.xib */; };
+		8013D34A1CF47CB700F82301 /* TaskConditonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8013D3491CF47CB700F82301 /* TaskConditonModel.m */; };
+		8013D34E1CF4815300F82301 /* BlankfillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8013D34C1CF4815300F82301 /* BlankfillCell.m */; };
+		8013D34F1CF4815300F82301 /* BlankfillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8013D34D1CF4815300F82301 /* BlankfillCell.xib */; };
 		801F44A51CDF164800B7E7E1 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 801F44401CDF164800B7E7E1 /* AlipaySDK.bundle */; };
 		801F44A61CDF164800B7E7E1 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 801F44411CDF164800B7E7E1 /* AlipaySDK.framework */; };
 		801F44A71CDF164800B7E7E1 /* base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 801F44451CDF164800B7E7E1 /* base64.m */; };
@@ -944,8 +955,25 @@
 		3FEF7EB21CE568EE0061AB04 /* studentDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = studentDetail.m; sourceTree = "<group>"; };
 		3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_btn_shutdown.png; sourceTree = "<group>"; };
 		3FF740611CE3090500D3C0F7 /* list_btn_shutdown@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_btn_shutdown@3x.png"; sourceTree = "<group>"; };
-		743E1CCD1CE4E3F300B00033 /* StudentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentDetailViewController.h; sourceTree = "<group>"; };
-		743E1CCE1CE4E3F300B00033 /* StudentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentDetailViewController.m; sourceTree = "<group>"; };
+		8013D32C1CF4495300F82301 /* SpendTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpendTimeCell.h; sourceTree = "<group>"; };
+		8013D32D1CF4495300F82301 /* SpendTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpendTimeCell.m; sourceTree = "<group>"; };
+		8013D32E1CF4495300F82301 /* SpendTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpendTimeCell.xib; sourceTree = "<group>"; };
+		8013D3361CF4521100F82301 /* CardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardCell.h; sourceTree = "<group>"; };
+		8013D3371CF4521100F82301 /* CardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardCell.m; sourceTree = "<group>"; };
+		8013D3381CF4521100F82301 /* CardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardCell.xib; sourceTree = "<group>"; };
+		8013D33B1CF4552700F82301 /* StudentDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentDetailController.h; sourceTree = "<group>"; };
+		8013D33C1CF4552700F82301 /* StudentDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentDetailController.m; sourceTree = "<group>"; };
+		8013D33E1CF45A3E00F82301 /* SubTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubTimeCell.h; sourceTree = "<group>"; };
+		8013D33F1CF45A3E00F82301 /* SubTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubTimeCell.m; sourceTree = "<group>"; };
+		8013D3401CF45A3E00F82301 /* SubTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubTimeCell.xib; sourceTree = "<group>"; };
+		8013D3431CF46B8700F82301 /* ChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceCell.h; sourceTree = "<group>"; };
+		8013D3441CF46B8700F82301 /* ChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceCell.m; sourceTree = "<group>"; };
+		8013D3451CF46B8700F82301 /* ChoiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoiceCell.xib; sourceTree = "<group>"; };
+		8013D3481CF47CB700F82301 /* TaskConditonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskConditonModel.h; sourceTree = "<group>"; };
+		8013D3491CF47CB700F82301 /* TaskConditonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskConditonModel.m; sourceTree = "<group>"; };
+		8013D34B1CF4815300F82301 /* BlankfillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlankfillCell.h; sourceTree = "<group>"; };
+		8013D34C1CF4815300F82301 /* BlankfillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlankfillCell.m; sourceTree = "<group>"; };
+		8013D34D1CF4815300F82301 /* BlankfillCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlankfillCell.xib; sourceTree = "<group>"; };
 		801F44401CDF164800B7E7E1 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		801F44411CDF164800B7E7E1 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		801F44441CDF164800B7E7E1 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
@@ -1937,8 +1965,8 @@
 				3BCF193A1CDCC2B500E2EA1A /* StuTaskTableViewController.m */,
 				3BCF193B1CDCC2B500E2EA1A /* TaskDetailTableViewController.h */,
 				3BCF193C1CDCC2B500E2EA1A /* TaskDetailTableViewController.m */,
-				743E1CCD1CE4E3F300B00033 /* StudentDetailViewController.h */,
-				743E1CCE1CE4E3F300B00033 /* StudentDetailViewController.m */,
+				8013D33B1CF4552700F82301 /* StudentDetailController.h */,
+				8013D33C1CF4552700F82301 /* StudentDetailController.m */,
 				3B35DB881CE0560F000B7F83 /* NextTableViewController.h */,
 				3B35DB891CE0560F000B7F83 /* NextTableViewController.m */,
 				3B831A271CE4B19D00724E6B /* OneStuTaskDetailViewController.h */,
@@ -1958,6 +1986,8 @@
 				3BE01BD61CDD7DD700781B86 /* ChoiceModel.m */,
 				3F4CA6261CE17FC000F4B791 /* FinshedModel.h */,
 				3F4CA6271CE17FC000F4B791 /* FinshedModel.m */,
+				8013D3481CF47CB700F82301 /* TaskConditonModel.h */,
+				8013D3491CF47CB700F82301 /* TaskConditonModel.m */,
 				3FEF7EB11CE568EE0061AB04 /* studentDetail.h */,
 				3FEF7EB21CE568EE0061AB04 /* studentDetail.m */,
 			);
@@ -1979,6 +2009,21 @@
 				80CCF43C1CF2F0EC000C93D9 /* UnSubmitCell.h */,
 				80CCF43D1CF2F0EC000C93D9 /* UnSubmitCell.m */,
 				80CCF43E1CF2F0EC000C93D9 /* UnSubmitCell.xib */,
+				8013D32C1CF4495300F82301 /* SpendTimeCell.h */,
+				8013D32D1CF4495300F82301 /* SpendTimeCell.m */,
+				8013D32E1CF4495300F82301 /* SpendTimeCell.xib */,
+				8013D33E1CF45A3E00F82301 /* SubTimeCell.h */,
+				8013D33F1CF45A3E00F82301 /* SubTimeCell.m */,
+				8013D3401CF45A3E00F82301 /* SubTimeCell.xib */,
+				8013D3361CF4521100F82301 /* CardCell.h */,
+				8013D3371CF4521100F82301 /* CardCell.m */,
+				8013D3381CF4521100F82301 /* CardCell.xib */,
+				8013D3431CF46B8700F82301 /* ChoiceCell.h */,
+				8013D3441CF46B8700F82301 /* ChoiceCell.m */,
+				8013D3451CF46B8700F82301 /* ChoiceCell.xib */,
+				8013D34B1CF4815300F82301 /* BlankfillCell.h */,
+				8013D34C1CF4815300F82301 /* BlankfillCell.m */,
+				8013D34D1CF4815300F82301 /* BlankfillCell.xib */,
 				3BE01BDD1CDDC3A400781B86 /* TCustomView.h */,
 				3BE01BDE1CDDC3A400781B86 /* TCustomView.m */,
 				3BE01BE01CDDCA8200781B86 /* TCustomView.xib */,
@@ -2356,6 +2401,7 @@
 				3A905D201C7F3A51005AB12F /* push4.caf in Resources */,
 				3A905D211C7F3A51005AB12F /* push5.caf in Resources */,
 				3BB773991CD86B3A00A24485 /* home_img_midtest@3x.png in Resources */,
+				8013D33A1CF4521100F82301 /* CardCell.xib in Resources */,
 				3A905D221C7F3A51005AB12F /* push6.caf in Resources */,
 				3B4864771CCF117300D2DE3C /* PublishHomeworkViewController.xib in Resources */,
 				3A44A1EC1CC0C76200B93F6A /* memberCenter_bg2@3x.png in Resources */,
@@ -2399,6 +2445,7 @@
 				3AD1FD9F1C72CE5000E362B9 /* CommonWebViewController.xib in Resources */,
 				3AC1D1EB1CCDE7EE006291D0 /* regist_parent_logo@3x.png in Resources */,
 				3A8B7FA81C75C3A900E990F2 /* LaunchScreen.storyboard in Resources */,
+				8013D3421CF45A3E00F82301 /* SubTimeCell.xib in Resources */,
 				3A188F9B1CE5C51600F055DD /* OrderTableViewCell.xib in Resources */,
 				3A44AA021CBE489500348B49 /* member_paysuccess@3x.png in Resources */,
 				3B4864461CCF10C200D2DE3C /* hw_stats.png in Resources */,
@@ -2444,6 +2491,7 @@
 				3BCF191B1CDC66E600E2EA1A /* list_btn_right@3x.png in Resources */,
 				3A26EE621C71A81B009C3242 /* Parent_Exchange_goods@3x.png in Resources */,
 				3BCF191E1CDC66E600E2EA1A /* list_def.png in Resources */,
+				8013D34F1CF4815300F82301 /* BlankfillCell.xib in Resources */,
 				3AFE02C21CA29D540097CC83 /* member_kexue@3x.png in Resources */,
 				3B91A6F31CE5B8BB0082A92C /* video_pic.png in Resources */,
 				3AE894091C6C306700E8BA97 /* login_select@3x.png in Resources */,
@@ -2514,6 +2562,7 @@
 				3A41974D1CD36178006BD7D2 /* common_add@2x.png in Resources */,
 				3AC1D1E41CCDE70E006291D0 /* RegistOneViewController.xib in Resources */,
 				3BCF19221CDC66E600E2EA1A /* list_icon_note_nor@3x.png in Resources */,
+				8013D3301CF4495300F82301 /* SpendTimeCell.xib in Resources */,
 				3AE8940A1C6C306700E8BA97 /* login_unselect@3x.png in Resources */,
 				3B48644E1CCF10C200D2DE3C /* pic.png in Resources */,
 				3A04A5DA1C93E6590040D913 /* ChildrenVideoViewController.xib in Resources */,
@@ -2529,6 +2578,7 @@
 				3B4864521CCF10C200D2DE3C /* publishhw_click@3x.png in Resources */,
 				3AC1D1E21CCDE70E006291D0 /* RegistFinalViewController.xib in Resources */,
 				3A04A5E01C9406850040D913 /* YjyxWorkPreviewViewController.xib in Resources */,
+				8013D3471CF46B8700F82301 /* ChoiceCell.xib in Resources */,
 				3BCF19261CDC66E600E2EA1A /* brooch.png in Resources */,
 				3AD1FD961C72C72E00E362B9 /* Parent_homework@3x.png in Resources */,
 				3B4864481CCF10C200D2DE3C /* message@3x.png in Resources */,
@@ -2626,6 +2676,7 @@
 				3AF339461C770FDC00586A37 /* AutoLoginViewController.m in Sources */,
 				3BB773B71CD8789800A24485 /* CameraViewController.m in Sources */,
 				3AC1D1E11CCDE70E006291D0 /* RegistFinalViewController.m in Sources */,
+				8013D34A1CF47CB700F82301 /* TaskConditonModel.m in Sources */,
 				3B4864741CCF117300D2DE3C /* PrivateCenterViewController.m in Sources */,
 				3BB773A81CD8784000A24485 /* BookViewController.m in Sources */,
 				3A5A00FC1C79EA2A004584E6 /* UIView+MJExtension.m in Sources */,
@@ -2668,6 +2719,7 @@
 				3B84D5841CEC6E9D003F659B /* LxGridViewFlowLayout.m in Sources */,
 				3B831A291CE4B19D00724E6B /* OneStuTaskDetailViewController.m in Sources */,
 				801F44A81CDF164800B7E7E1 /* DataSigner.m in Sources */,
+				8013D33D1CF4552700F82301 /* StudentDetailController.m in Sources */,
 				807959341CD217BC00C9B841 /* ClassDetailViewController.m in Sources */,
 				3AA1655D1C91AB40006B8756 /* RegexKitLite.m in Sources */,
 				3A8CAE911C70A11800BDEB6B /* ParentMoifyNameViewController.m in Sources */,
@@ -2699,9 +2751,11 @@
 				3A91F46A1C7606FB001568AA /* ChildrenStatisticViewController.m in Sources */,
 				3A38278A1CDF185F00EAB979 /* YjyxFeedBackViewController.m in Sources */,
 				3A91F48F1C760CF4001568AA /* PNBar.m in Sources */,
+				8013D3391CF4521100F82301 /* CardCell.m in Sources */,
 				3AEF27201C61F08A0028BE09 /* RTSpinKitView.m in Sources */,
 				3BCF194B1CDCC2B500E2EA1A /* TaskDetailTableViewController.m in Sources */,
 				3AB212B31CA2E11900DCC618 /* KWFormView.m in Sources */,
+				8013D3461CF46B8700F82301 /* ChoiceCell.m in Sources */,
 				3AC1D1E31CCDE70E006291D0 /* RegistOneViewController.m in Sources */,
 				801F44A71CDF164800B7E7E1 /* base64.m in Sources */,
 				80CCF43F1CF2F0EC000C93D9 /* UnSubmitCell.m in Sources */,
@@ -2710,6 +2764,7 @@
 				3AD1FD931C72BD8F00E362B9 /* MyChildrenTableViewCell.m in Sources */,
 				3AD1FDA31C73113700E362B9 /* ParentChildrenTableViewCell.m in Sources */,
 				3FEF7EB31CE568EE0061AB04 /* studentDetail.m in Sources */,
+				8013D34E1CF4815300F82301 /* BlankfillCell.m in Sources */,
 				3A26EE6A1C71CCDB009C3242 /* MyChildrenViewController.m in Sources */,
 				3BC68D891CEC572300FF7854 /* FeedBackViewController.m in Sources */,
 				3AEF27261C61F08A0028BE09 /* UIImage+BlurGlass.m in Sources */,
@@ -2722,10 +2777,10 @@
 				3A04A5D31C93E6290040D913 /* View+MASAdditions.m in Sources */,
 				3BE01BD71CDD7DD700781B86 /* ChoiceModel.m in Sources */,
 				3A88277C1C6EE1820008367F /* ParentPersonalViewController.m in Sources */,
-				743E1CCF1CE4E3F300B00033 /* StudentDetailViewController.m in Sources */,
 				3A04A5D11C93E6290040D913 /* NSArray+MASAdditions.m in Sources */,
 				3BCF194C1CDCC2B500E2EA1A /* TaskModel.m in Sources */,
 				3BFE3B871CDA0D4A00502769 /* StuClassEntity.m in Sources */,
+				8013D3411CF45A3E00F82301 /* SubTimeCell.m in Sources */,
 				3A188F9F1CE5D60B00F055DD /* YjyxOrderViewController.m in Sources */,
 				CB40047F1C609BCD00556AA7 /* main.m in Sources */,
 				3A8CAEC11C70B3C200BDEB6B /* ParentChildrensViewController.m in Sources */,
@@ -2752,9 +2807,7 @@
 				3B48646E1CCF117300D2DE3C /* TeacherHomeViewController.m in Sources */,
 				3A04A5D01C93E6290040D913 /* MASViewConstraint.m in Sources */,
 				3BFE3B811CD981AE00502769 /* StudentEntity.m in Sources */,
-				3BCF194D1CDCC2B500E2EA1A /* StuConditionTableViewCell.m in Sources */,
 				3A87B7B51CF32FD300C3D991 /* YjyxPayDetailViewController.m in Sources */,
-
 				3A442B961CE07E780037906A /* DynamicScrollView.m in Sources */,
 				3AF11DD91CB211D600F98A03 /* YjyxMemberDetailViewController.m in Sources */,
 				3A8827761C6EE1470008367F /* ParentCommunityViewController.m in Sources */,
@@ -2765,6 +2818,7 @@
 				3A2E87091C8C079F00C3CD6C /* ChildrenResultTableViewController.m in Sources */,
 				3AA1655C1C91AB40006B8756 /* RCLabel.m in Sources */,
 				3A40570C1CCF732800258784 /* ForgetTwoViewController.m in Sources */,
+				8013D32F1CF4495300F82301 /* SpendTimeCell.m in Sources */,
 				3A5A00F61C79EA2A004584E6 /* MJRefreshBaseView.m in Sources */,
 				3A5A00F81C79EA2A004584E6 /* MJRefreshFooterView.m in Sources */,
 				3BFE3B791CD9816D00502769 /* YjyxOverallData.m in Sources */,
@@ -2894,8 +2948,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -2921,7 +2975,7 @@
 					"\"$(PROJECT_DIR)/Yjyx/Alipay/AliSDK/openssl\"",
 				);
 				INFOPLIST_FILE = Yjyx/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2933,7 +2987,7 @@
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "98b5ad7e-0ca5-49f7-9aee-8b975be21702";
+				PROVISIONING_PROFILE = "2f8ad128-e076-49ad-a75a-bbfaa50c0de7";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -2946,8 +3000,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -2973,7 +3027,7 @@
 					"\"$(PROJECT_DIR)/Yjyx/Alipay/AliSDK/openssl\"",
 				);
 				INFOPLIST_FILE = Yjyx/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2984,7 +3038,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "98b5ad7e-0ca5-49f7-9aee-8b975be21702";
+				PROVISIONING_PROFILE = "2f8ad128-e076-49ad-a75a-bbfaa50c0de7";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

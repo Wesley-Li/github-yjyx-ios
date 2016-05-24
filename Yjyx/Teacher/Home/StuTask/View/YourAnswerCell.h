@@ -10,4 +10,11 @@
 
 @interface YourAnswerCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *yourAnswerLable;
+
+
+
+- (void)setValueWithArray:(NSArray *)arr;
+
+
 @end

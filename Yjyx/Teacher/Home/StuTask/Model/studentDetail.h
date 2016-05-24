@@ -10,8 +10,7 @@
 
 @interface studentDetail : NSObject
 
-@property (nonatomic, strong) NSString * submittime; //作业提交时间
-@property (nonatomic,strong ) NSString * SpendTime;  // 作业用时
+
 @property (nonatomic,strong)  NSString * subjectId; // 科目
 @property (nonatomic,strong)  NSArray  *  ChoiceArry;// 选择题结果信息
 @property (nonatomic,strong) NSNumber * studentId;// 学生ID
@@ -21,6 +20,6 @@
 
 
 
-- (void)initstudentDetailModelWithDic: (NSArray *)Arr;
+- (void)initStudentDetailModelWithDic: (NSArray *)Arr;
 
 @end
