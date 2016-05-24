@@ -1498,7 +1498,7 @@ CGFloat MyGetWidthCallback( void* refCon ){
                 */
                 
                 [lock lock];
-                __block NSString *tempURL = [RCLabel stripURL:url];
+                __block NSString *tempURL = [[NSString alloc] initWithFormat:@"%@",[RCLabel stripURL:url]];
                 if (tempURL) {
                     [component.attributes setObject:tempURL forKey:@"src"];
                     
@@ -1513,9 +1513,6 @@ CGFloat MyGetWidthCallback( void* refCon ){
                     }else{
                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                             
-                            if (![tempURL isKindOfClass:[NSString class]]) {
-                                return ;
-                            }
                             NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:tempURL]];
                             tempURL = [tempURL stringByReplacingOccurrencesOfString:@"/" withString:@""];
 
