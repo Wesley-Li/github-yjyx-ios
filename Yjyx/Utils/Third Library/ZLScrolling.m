@@ -188,6 +188,7 @@ static NSInteger pageCount = 1000;
         _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, self.frame.size.height-20,SCREEN_WIDTH, 20)];
         _pageControl.numberOfPages = _photos.count;
         _pageControl.currentPage = 0;
+        _pageControl.autoresizingMask = UIViewAutoresizingNone;
     }
     return _pageControl;
 }

@@ -231,7 +231,6 @@
         if ([[ary objectAtIndex:0] isEqualToString:@"out_trade_no"]) {
             tradeNo = [ary objectAtIndex:1];
         }
-        
     }
     
     if ([[dic objectForKey:@"resultStatus"] integerValue] == 9000) {
