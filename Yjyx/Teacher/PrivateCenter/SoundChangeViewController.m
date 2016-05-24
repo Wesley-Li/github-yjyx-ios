@@ -10,7 +10,10 @@
 
 @interface SoundChangeViewController ()
 
+{
 
+    NSNumber *number;
+}
 
 @end
 
@@ -51,6 +54,9 @@
 // 确定,并上报消息通知设置
 - (void)goSure
 {
+    // 存储
+    [[NSUserDefaults standardUserDefaults]setValue:[YjyxOverallData sharedInstance].teacherInfo.notify_sound forKey:@"T_SOUND"];
+    
     // 上报消息设置
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"notify_setting",@"action",[YjyxOverallData sharedInstance].teacherInfo.receive_notify,@"receive_notify",[YjyxOverallData sharedInstance].teacherInfo.notify_with_sound,@"with_sound",_audio,@"sound",[YjyxOverallData sharedInstance].teacherInfo.notify_shake,@"vibrate", nil];
     
@@ -96,13 +102,13 @@
         [cell.textLabel setFont:[UIFont systemFontOfSize:17]];
     }
     
-    if ([_audio isEqualToString:NSLocalizedString(@"push7", nil)]) {
+    if (indexPath.row == [[[NSUserDefaults standardUserDefaults] objectForKey:@"T_SOUNDS"] integerValue]) {
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
         defaultIndex = indexPath;
     }
     
     if([_audio isEqualToString:[sounds objectAtIndex:indexPath.row]]){
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
         defaultIndex = indexPath;
     }
     return cell;
@@ -139,10 +145,14 @@
     if (indexPath.row == 0) {
         _audio = @"default";
         [YjyxOverallData sharedInstance].teacherInfo.notify_sound = _audio;
+        number = [NSNumber numberWithInteger:indexPath.row];
+        [[NSUserDefaults standardUserDefaults] setObject:number forKey:@"T_SOUNDS"];
         
     }else{
         _audio = [NSString stringWithFormat:@"push%ld.caf",(long)indexPath.row];
         [YjyxOverallData sharedInstance].teacherInfo.notify_sound = _audio;
+        number = [NSNumber numberWithInteger:indexPath.row];
+        [[NSUserDefaults standardUserDefaults] setObject:number forKey:@"T_SOUNDS"];
 
     }
 
