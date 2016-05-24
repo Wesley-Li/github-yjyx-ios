@@ -270,12 +270,13 @@
         
         NSLog(@"%@", urlArray);
         
+        NSString *jsonString = [urlArray JSONString];
         // 上传给自己的服务器
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:contentText.text,@"description", urlArray,@"images", nil];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:contentText.text,@"description", jsonString,@"images", nil];
         
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager.requestSerializer setValue:SESSIONID forHTTPHeaderField:@"sessionid"];
+
         [manager POST:[BaseURL stringByAppendingString:PARENTS_FEEDBACK] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             
             NSLog(@"%@", responseObject);
