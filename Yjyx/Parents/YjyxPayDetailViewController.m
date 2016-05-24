@@ -165,7 +165,7 @@
                 AlipayStr = [result objectForKey:@"params"];
                 NSString *appScheme = @"yjyx";
                 [[AlipaySDK defaultService] payOrder:AlipayStr fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-                    [self dealPayResult:resultDic];
+                    [self dealPayResult:resultDic resultstr:AlipayStr];
                 }];
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
@@ -219,9 +219,9 @@
     
 }
 
--(void)dealPayResult:(NSDictionary *)dic
+-(void)dealPayResult:(NSDictionary *)dic resultstr:(NSString*)resultstr
 {
-    NSString *resultString = [dic objectForKey:@"result"];
+    NSString *resultString = resultstr;
     NSString *tradeNo;
     NSArray *resultStringArray = [resultString componentsSeparatedByString:@"&"];
     for (NSString *str in resultStringArray) {
