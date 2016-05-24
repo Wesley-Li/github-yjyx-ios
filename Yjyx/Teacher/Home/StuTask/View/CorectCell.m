@@ -43,6 +43,7 @@
     UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 25, SCREEN_WIDTH - 20, 40)];
     answerLabel.font = [UIFont systemFontOfSize:13];
     
+#warning 此处可能是多选
     switch (answer) {
         case 0:
             answerLabel.text = @"A";

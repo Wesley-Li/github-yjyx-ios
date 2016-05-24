@@ -11,9 +11,40 @@
             <rect key="frame" x="0.0" y="0.0" width="390" height="132"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="390" height="131.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="390" height="131"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你的答案是:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1N-OQ-znx">
+                        <rect key="frame" x="10" y="56" width="70" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="53N-pG-Rtl"/>
+                            <constraint firstAttribute="height" constant="20" id="ldJ-ia-cE8"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Epl-2U-Nbg">
+                        <rect key="frame" x="85" y="56" width="295" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="fb1-e4-Ryo"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Epl-2U-Nbg" secondAttribute="trailing" constant="10" id="Qnh-ba-Ax2"/>
+                    <constraint firstItem="C1N-OQ-znx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eAL-Bf-lsD"/>
+                    <constraint firstItem="C1N-OQ-znx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="fcO-bg-AZL"/>
+                    <constraint firstItem="Epl-2U-Nbg" firstAttribute="leading" secondItem="C1N-OQ-znx" secondAttribute="trailing" constant="5" id="qg9-6k-wVO"/>
+                    <constraint firstItem="Epl-2U-Nbg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ulj-aH-57w"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="yourAnswerLable" destination="Epl-2U-Nbg" id="qCn-kf-GWa"/>
+            </connections>
             <point key="canvasLocation" x="282" y="437"/>
         </tableViewCell>
     </objects>

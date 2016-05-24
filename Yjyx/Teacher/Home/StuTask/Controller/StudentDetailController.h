@@ -1,8 +1,8 @@
 //
-//  StudentDetailViewController.h
+//  StudentDetailController.h
 //  Yjyx
 //
-//  Created by peng on 16/5/13.
+//  Created by liushaochang on 16/5/24.
 //  Copyright © 2016年 Alibaba. All rights reserved.
 //
 
@@ -10,10 +10,11 @@
 
 
 @class FinshedModel;
-@interface StudentDetailViewController : UIViewController
-    
+
+@interface StudentDetailController : UITableViewController
 
 
 @property (nonatomic, strong) NSNumber *taskID;
 @property (nonatomic,strong)  FinshedModel * finshedModel;
+
 @end

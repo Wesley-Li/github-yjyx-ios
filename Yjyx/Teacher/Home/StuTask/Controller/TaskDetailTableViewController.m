@@ -19,7 +19,7 @@
 #import "FinshedModel.h"
 
 #import "UIImageView+WebCache.h"
-#import "StudentDetailViewController.h"
+#import "StudentDetailController.h"
 #import "NextTableViewController.h"
 
 #define stuCondition @"stuConditionCell"
@@ -273,6 +273,7 @@
         
     }else if (_choiceDataSource.count == 0 && _blankFillDataSource.count != 0){
         
+        
         if (_unfinishedArr.count == 0 || _finishedArr.count == 0) {
             
             if (indexPath.row == 0) {
@@ -486,11 +487,11 @@
                             
                         }else {
                             
-                            if (_finishedArr.count == 0) {
-                                return _unfinishedCellHeight;
+                            if (_unfinishedArr.count == 0) {
+                                return _finishedCellHeight;
                             }else {
                                 
-                                return _finishedCellHeight;
+                                return _unfinishedCellHeight;
                             }
                         }
                     }else {
@@ -773,6 +774,10 @@
         
         [cell.bg_view addSubview:taskView];
     }
+    
+    cell.showMoreBtn.hidden = YES;
+    
+    
     self.finishedCellHeight = size.height + 80 + 30;
     
 }
@@ -820,7 +825,7 @@
         }
         
         imageBtn.tag = 200 + i;
-        [imageBtn addTarget:self action:@selector(unImageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//        [imageBtn addTarget:self action:@selector(unImageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         
         label.text = [NSString stringWithFormat:@"%@", model.Name];
         label.textAlignment = NSTextAlignmentCenter;
@@ -831,7 +836,9 @@
         
         [cell.bg_view addSubview:taskView];
     }
-    self.unfinishedCellHeight = size.height + 80 + 30;
+    self.unfinishedCellHeight = size.height + 80 + 50;
+    cell.showMoreBtn.hidden = YES;
+
     
 }
 
@@ -839,7 +846,7 @@
 #pragma mark - 点击已交头像进入详情
 - (void)imageBtnClick:(UIButton *)sender {
     
-    StudentDetailViewController *stuDetailVC = [[StudentDetailViewController alloc] init];
+    StudentDetailController *stuDetailVC = [[StudentDetailController alloc] init];
     FinshedModel *model = _finishedArr[sender.tag - 200];
     stuDetailVC.finshedModel = model;
     stuDetailVC.taskID = self.taskModel.t_id;
@@ -849,17 +856,17 @@
 }
 
 #pragma mark - 点击未交头像进入详情
-- (void)unImageBtnClick:(UIButton *)sender {
-    
-    StudentDetailViewController *stuDetailVC = [[StudentDetailViewController alloc] init];
-    FinshedModel *model = _unfinishedArr[sender.tag - 200];
-    stuDetailVC.finshedModel = model;
-    stuDetailVC.taskID = self.taskModel.t_id;
-    
-    [self.navigationController pushViewController:stuDetailVC animated:YES];
-    
-    
-}
+//- (void)unImageBtnClick:(UIButton *)sender {
+//    
+//    StudentDetailViewController *stuDetailVC = [[StudentDetailViewController alloc] init];
+//    FinshedModel *model = _unfinishedArr[sender.tag - 200];
+//    stuDetailVC.finshedModel = model;
+//    stuDetailVC.taskID = self.taskModel.t_id;
+//    
+//    [self.navigationController pushViewController:stuDetailVC animated:YES];
+//    
+//    
+//}
 
 
 @end

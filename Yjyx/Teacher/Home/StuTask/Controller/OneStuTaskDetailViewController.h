@@ -17,4 +17,7 @@
 @property (nonatomic, strong) NSNumber *qid; // 题目id
 
 
+@property (nonatomic, copy) NSString *answer;// 答案
+@property (nonatomic, copy) NSArray *answerArr;// 答案数组
+
 @end
