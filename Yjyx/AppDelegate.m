@@ -84,16 +84,16 @@
     }
     
     // 自动登录,从本地取值
-    NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
-    if ([[dic objectForKey:@"username"] length] > 0) {
-        autologin = [[AutoLoginViewController alloc] init];
-        _navigation = [[NavRootViewController alloc] initWithRootViewController:autologin];
-        _navigation.navigationBar.hidden = YES;
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        self.window.backgroundColor = [UIColor whiteColor];
-        self.window.rootViewController = _navigation;
-        [self.window makeKeyAndVisible];
-    }else{
+//    NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
+//    if ([[dic objectForKey:@"username"] length] > 0) {
+//        autologin = [[AutoLoginViewController alloc] init];
+//        _navigation = [[NavRootViewController alloc] initWithRootViewController:autologin];
+//        _navigation.navigationBar.hidden = YES;
+//        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//        self.window.backgroundColor = [UIColor whiteColor];
+//        self.window.rootViewController = _navigation;
+//        [self.window makeKeyAndVisible];
+//    }else{
         _deviceToken = @"1231231312da1231sqwc1213";
         LoginViewController *loginView = [[LoginViewController alloc] init];
         _navigation = [[NavRootViewController alloc] initWithRootViewController:loginView];
@@ -102,7 +102,7 @@
         self.window.backgroundColor = [UIColor whiteColor];
         self.window.rootViewController = _navigation;
         [self.window makeKeyAndVisible];
-    }
+//    }
 
     return YES;
 }
@@ -244,7 +244,7 @@
     if ([dic[@"username"] length] > 0) {
         ((AppDelegate *)SYS_DELEGATE).role = dic[@"role"];
     }
-
+    
     if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {
         
         if (!_tabBar) {
@@ -436,6 +436,7 @@
             result.title = @"作业预览";
             [result setHidesBottomBarWhenPushed:YES];
             [vc pushViewController:result animated:YES];
+            [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
         }
             break;
         case 2:{
@@ -444,6 +445,7 @@
             result.title = @"微课预览";
             [result setHidesBottomBarWhenPushed:YES];
             [vc pushViewController:result animated:YES];
+            [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
         }
             break;
         case 3:{
@@ -452,6 +454,8 @@
             result.title = @"结果详情";
             [result setHidesBottomBarWhenPushed:YES];
             [vc pushViewController:result animated:YES];
+            [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+            break;
             
         }
             break;
@@ -461,7 +465,8 @@
             [result setHidesBottomBarWhenPushed:YES];
             result.title = @"结果详情";
             [vc pushViewController:result animated:YES];
-            
+            [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+            break;
         }
             break;
         default:
