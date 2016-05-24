@@ -22,7 +22,7 @@
     parentNameText.placeholder = @"家长姓名";
     parentPasswordText.placeholder = @"家长密码";
     relationText.placeholder = [NSString stringWithFormat:@"是%@的(称谓,譬如父亲,母亲...)",_childrenEntity.name];
-    phoneText.placeholder = @"手机号码";
+    phoneText.placeholder = @"手机号码(作为登录账户)";
     codeText.placeholder = @"4位验证码";
     // Do any additional setup after loading the view from its nib.
 }

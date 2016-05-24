@@ -132,7 +132,7 @@
     }else {
         
         [_teacherBtn setSelected:YES];
-        _uesrNameTF.placeholder = @"用户名";
+        _uesrNameTF.placeholder = @"账户名";
         ((AppDelegate*)SYS_DELEGATE).role = @"teacher";
         [_parentsBtn setSelected:NO];
         [_stuBtn setSelected:NO];
@@ -149,7 +149,7 @@
     }else {
         
         [_parentsBtn setSelected:YES];
-        _uesrNameTF.placeholder = @"手机号";
+        _uesrNameTF.placeholder = @"账户号";
         ((AppDelegate*)SYS_DELEGATE).role = @"parents";
         [_teacherBtn setSelected:NO];
         [_stuBtn setSelected:NO];
@@ -165,7 +165,7 @@
     }else {
         
         [_stuBtn setSelected:YES];
-        _uesrNameTF.placeholder = @"用户名";
+        _uesrNameTF.placeholder = @"账户名";
         ((AppDelegate*)SYS_DELEGATE).role = @"student";
         [_parentsBtn setSelected:NO];
         [_teacherBtn setSelected:NO];

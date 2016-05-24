@@ -261,29 +261,43 @@
     [self.view makeToastActivity:SHOW_CENTER];
     [[YjxService sharedInstance] parentsLoginout:dic withBlock:^(id result, NSError *error){
         [self.view hideToastActivity];
-        if (result != nil) {
-            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
-
-                NSArray *array = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BaseURL,@"/api/parents/login/"]]];
-                for (NSHTTPCookie *cookie in array)
-                {
-                    [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
-                }
-
-                [SYS_CACHE removeObjectForKey:@"AutoLogoin"];
-                LoginViewController *loginCtl = [[LoginViewController alloc] init];
-                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginCtl];
-                AppDelegate *mydelegate = (AppDelegate*)SYS_DELEGATE;
-                nav.navigationBarHidden = YES;
-                [mydelegate.window setRootViewController:nav];
-                [YjyxOverallData sharedInstance].parentInfo = nil;
-                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
-            }else{
-                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
-            }
-        }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+        NSArray *array = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BaseURL,@"/api/parents/login/"]]];
+        for (NSHTTPCookie *cookie in array)
+        {
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
         }
+        
+        [SYS_CACHE removeObjectForKey:@"AutoLogoin"];
+        LoginViewController *loginCtl = [[LoginViewController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginCtl];
+        AppDelegate *mydelegate = (AppDelegate*)SYS_DELEGATE;
+        nav.navigationBarHidden = YES;
+        [mydelegate.window setRootViewController:nav];
+        [YjyxOverallData sharedInstance].parentInfo = nil;
+        [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+//        if (result != nil) {
+//            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+//
+//                NSArray *array = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BaseURL,@"/api/parents/login/"]]];
+//                for (NSHTTPCookie *cookie in array)
+//                {
+//                    [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+//                }
+//
+//                [SYS_CACHE removeObjectForKey:@"AutoLogoin"];
+//                LoginViewController *loginCtl = [[LoginViewController alloc] init];
+//                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginCtl];
+//                AppDelegate *mydelegate = (AppDelegate*)SYS_DELEGATE;
+//                nav.navigationBarHidden = YES;
+//                [mydelegate.window setRootViewController:nav];
+//                [YjyxOverallData sharedInstance].parentInfo = nil;
+//                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+//            }else{
+//                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+//            }
+//        }else{
+//            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+//        }
     }];
 }
 

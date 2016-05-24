@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -95,7 +95,7 @@
                             <rect key="frame" x="15" y="13" width="16" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号" textAlignment="natural" minimumFontSize="17" id="c9u-WE-1ih">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="账户名" textAlignment="natural" minimumFontSize="17" id="c9u-WE-1ih">
                             <rect key="frame" x="39" y="7" width="199" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -188,7 +188,7 @@
         <image name="login_bg.png" width="360" height="640"/>
         <image name="login_btn.png" width="277" height="41"/>
         <image name="login_left_line.png" width="1" height="1"/>
-        <image name="login_logo.png" width="135" height="131"/>
+        <image name="login_logo.png" width="135" height="135"/>
         <image name="login_password_icon.png" width="19" height="21"/>
         <image name="login_right_line.png" width="1" height="1"/>
         <image name="login_select.png" width="14" height="14"/>
