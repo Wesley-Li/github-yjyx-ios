@@ -355,7 +355,9 @@
     
         self.yourAnswerCell = [tableView dequeueReusableCellWithIdentifier:kidentifier2 forIndexPath:indexPath];
         _yourAnswerCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        // 赋值方法
+        
+        [_yourAnswerCell setValueWithArray:self.answerArr];
+        
         return _yourAnswerCell;
     }else if (indexPath.row == 2) {
         
@@ -550,7 +552,7 @@
     if (indexPath.row == 0) {
         return _taskCell.height;
     }else if (indexPath.row == 1) {
-        return _yourAnswerCell.height;
+        return 50;
     }else if (indexPath.row == 2) {
         return _corectCell.height;
     }else if (indexPath.row == 3) {
