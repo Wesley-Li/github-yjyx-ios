@@ -13,7 +13,7 @@
 #define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
 
 
-//演示
+//正式环境
 //#define BaseURL @"http://zgyjyx.com"
 //#define QiniuYunURL @"http://cdn-web-img.zgyjyx.com/"
 //#define QiniuYunURL @"http://cdn-web-video.zgyjyx.com/"

@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) NSNumber *t_id;// 题目id
 @property (nonatomic, strong) NSArray *answerArr;// 答案数组
-@property (nonatomic, assign) BOOL rightOrWrong;// 对错
+@property (nonatomic, assign) NSNumber *rightOrWrong;// 对错
 @property (nonatomic, strong) NSNumber *time;// 用时
 
 

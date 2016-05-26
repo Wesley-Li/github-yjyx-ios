@@ -372,7 +372,6 @@
 		3BFE3B871CDA0D4A00502769 /* StuClassEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B861CDA0D4A00502769 /* StuClassEntity.m */; };
 		3BFE3B8A1CDA0D6F00502769 /* StuGroupEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B891CDA0D6F00502769 /* StuGroupEntity.m */; };
 		3F4CA6281CE17FC000F4B791 /* FinshedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4CA6271CE17FC000F4B791 /* FinshedModel.m */; };
-		3FEF7EB31CE568EE0061AB04 /* studentDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FEF7EB21CE568EE0061AB04 /* studentDetail.m */; };
 		3FF740601CE308DD00D3C0F7 /* list_btn_shutdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */; };
 		3FF740621CE3090500D3C0F7 /* list_btn_shutdown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF740611CE3090500D3C0F7 /* list_btn_shutdown@3x.png */; };
 		7D453D9CA19A8B9493453E33 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D2260EAA2B915029186C49 /* libPods.a */; };
@@ -951,8 +950,6 @@
 		3BFE3B891CDA0D6F00502769 /* StuGroupEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuGroupEntity.m; sourceTree = "<group>"; };
 		3F4CA6261CE17FC000F4B791 /* FinshedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinshedModel.h; sourceTree = "<group>"; };
 		3F4CA6271CE17FC000F4B791 /* FinshedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinshedModel.m; sourceTree = "<group>"; };
-		3FEF7EB11CE568EE0061AB04 /* studentDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = studentDetail.h; sourceTree = "<group>"; };
-		3FEF7EB21CE568EE0061AB04 /* studentDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = studentDetail.m; sourceTree = "<group>"; };
 		3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_btn_shutdown.png; sourceTree = "<group>"; };
 		3FF740611CE3090500D3C0F7 /* list_btn_shutdown@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_btn_shutdown@3x.png"; sourceTree = "<group>"; };
 		8013D32C1CF4495300F82301 /* SpendTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpendTimeCell.h; sourceTree = "<group>"; };
@@ -1988,8 +1985,6 @@
 				3F4CA6271CE17FC000F4B791 /* FinshedModel.m */,
 				8013D3481CF47CB700F82301 /* TaskConditonModel.h */,
 				8013D3491CF47CB700F82301 /* TaskConditonModel.m */,
-				3FEF7EB11CE568EE0061AB04 /* studentDetail.h */,
-				3FEF7EB21CE568EE0061AB04 /* studentDetail.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2763,7 +2758,6 @@
 				3AEF27271C61F08A0028BE09 /* UIImageEffects.m in Sources */,
 				3AD1FD931C72BD8F00E362B9 /* MyChildrenTableViewCell.m in Sources */,
 				3AD1FDA31C73113700E362B9 /* ParentChildrenTableViewCell.m in Sources */,
-				3FEF7EB31CE568EE0061AB04 /* studentDetail.m in Sources */,
 				8013D34E1CF4815300F82301 /* BlankfillCell.m in Sources */,
 				3A26EE6A1C71CCDB009C3242 /* MyChildrenViewController.m in Sources */,
 				3BC68D891CEC572300FF7854 /* FeedBackViewController.m in Sources */,

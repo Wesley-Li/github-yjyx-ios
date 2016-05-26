@@ -15,7 +15,6 @@
 #import "ChoiceCell.h"
 #import "BlankfillCell.h"
 
-#import "studentDetail.h"
 #import "FinshedModel.h"
 #import "TaskConditonModel.h"
 
@@ -97,37 +96,48 @@
         
         NSLog(@"%@", responseObject);
         
-        
-        NSString *jsonString = [responseObject[@"result"] objectForKey:@"choice"];
-        NSString *jsonS = [jsonString stringByReplacingOccurrencesOfString:@"False" withString:@"false"];
-        NSString *jsonA = [jsonS stringByReplacingOccurrencesOfString:@"True" withString:@"true"];
-        
-        NSData *data = [jsonA dataUsingEncoding:NSUTF8StringEncoding];
-        NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        
-//        NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil ];
-        
-        for (NSMutableArray *arr in array) {
+        if ([[responseObject[@"result"] allKeys] containsObject:@"choice"]) {
             
-            TaskConditonModel *model = [[TaskConditonModel alloc] init];
-            [model initModelWithArray:arr];
-            [self.choiceArray addObject:model];
+            NSString *jsonString = [responseObject[@"result"] objectForKey:@"choice"];
+            NSString *jsonS = [jsonString stringByReplacingOccurrencesOfString:@"False" withString:@"false"];
+            NSString *jsonA = [jsonS stringByReplacingOccurrencesOfString:@"True" withString:@"true"];
+            
+            NSData *data = [jsonA dataUsingEncoding:NSUTF8StringEncoding];
+            NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            
+            NSLog(@"%@", array);
+            
+            //        NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil ];
+            
+            for (NSMutableArray *arr in array) {
+                
+                TaskConditonModel *model = [[TaskConditonModel alloc] init];
+                [model initModelWithArray:arr];
+                [self.choiceArray addObject:model];
+            }
+
+            
         }
         
-        
-        NSString *jsonStringB = [responseObject[@"result"] objectForKey:@"blankfill"];
-        NSString *jsonSB = [jsonStringB stringByReplacingOccurrencesOfString:@"False" withString:@"false"];
-        NSString *jsonSBA = [jsonSB stringByReplacingOccurrencesOfString:@"True" withString:@"true"];
-        
-        NSData *dataB = [jsonSBA dataUsingEncoding:NSUTF8StringEncoding];
-        NSArray *arrayB = [NSJSONSerialization JSONObjectWithData:dataB options:NSJSONReadingMutableContainers error:nil];
-        
-        for (NSArray *arr in arrayB) {
-            TaskConditonModel *model = [[TaskConditonModel alloc] init];
-            [model initModelWithArray:arr];
-            [self.blankfillArray addObject:model];
+        if ([[responseObject[@"result"] allKeys] containsObject:@"blankfill"]) {
+            
+            
+            NSString *jsonStringB = [responseObject[@"result"] objectForKey:@"blankfill"];
+//            NSString *jsonStringB2 = [jsonStringB stringByReplacingOccurrencesOfString:@"''" withString:@"'"];
+            NSString *jsonSB = [jsonStringB stringByReplacingOccurrencesOfString:@"False" withString:@"false"];
+            NSString *jsonSBA = [jsonSB stringByReplacingOccurrencesOfString:@"True" withString:@"true"];
+            
+            NSData *dataB = [jsonSB dataUsingEncoding:NSUTF8StringEncoding];
+            NSArray *arrayB = [NSJSONSerialization JSONObjectWithData:dataB options:NSJSONReadingMutableContainers error:nil];
+            
+            for (NSArray *arr in arrayB) {
+                TaskConditonModel *model = [[TaskConditonModel alloc] init];
+                [model initModelWithArray:arr];
+                [self.blankfillArray addObject:model];
+            }
+            
+            
         }
-        
         
         [self.tableView reloadData];
         
@@ -342,12 +352,11 @@
         imageBtn.frame = CGRectMake(0, 20, TWidth, TWidth);
         
         
-        
-        if (model.rightOrWrong) {
-            [imageBtn setImage:[UIImage imageNamed:@"list_btn_right"] forState:UIControlStateNormal];
+        if ([model.rightOrWrong isEqual:@0]) {
+            [imageBtn setImage:[UIImage imageNamed:@"list_btn_wrong"] forState:UIControlStateNormal];
         }else {
             
-            [imageBtn setImage:[UIImage imageNamed:@"list_btn_wrong"] forState:UIControlStateNormal];
+            [imageBtn setImage:[UIImage imageNamed:@"list_btn_right"] forState:UIControlStateNormal];
             
         }
         

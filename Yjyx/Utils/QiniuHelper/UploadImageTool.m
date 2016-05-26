@@ -180,7 +180,15 @@
         
     };
     
-    [UploadImageTool uploadImage:imageArray[0] progress:nil success:weakHelper.singleSuccessBlock failure:weakHelper.singleFailureBlock];
+    if (imageArray.count != 0) {
+        
+        [UploadImageTool uploadImage:imageArray[0] progress:nil success:weakHelper.singleSuccessBlock failure:weakHelper.singleFailureBlock];
+    }else {
+    
+        success(nil);
+    }
+    
+    
     
 }
 
