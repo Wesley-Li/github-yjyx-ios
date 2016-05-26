@@ -23,7 +23,6 @@
 
 {
     NSMutableArray *_selectedPhotos;
-    NSMutableArray *_selectedPhotosUrl;
     NSMutableArray *_selectedAssets;
     BOOL _isSelectOriginalPhoto;
     
@@ -35,10 +34,13 @@
 }
 @property (weak, nonatomic) IBOutlet UIView *bg_view;
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) NSMutableArray *imageArr;
 
 @end
 
 @implementation YjyxFeedBackViewController
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -255,7 +257,7 @@
 
 -(IBAction)submitFeedBack:(id)sender
 {
-    [SVProgressHUD showWithStatus:@"正在拼命上传"];
+    
     // 判断字数超出300提示
     if (contentText.text.length > 300) {
         [self.view makeToast:@"您输入的内容超过了300字数限制" duration:1.0 position:SHOW_CENTER complete:nil];
@@ -266,17 +268,39 @@
         return;
     }
     
-    [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArray) {
+    [SVProgressHUD showWithStatus:@"正在拼命上传"];
+    
+    
+    // 添加到串行队列
+    dispatch_queue_t serialQueue = dispatch_queue_create("mySerialQueue", DISPATCH_QUEUE_SERIAL);
+    
+    dispatch_async(serialQueue, ^{
         
-        NSLog(@"%@", urlArray);
+        [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArray) {
+            
+            NSLog(@"%@", urlArray);
+            self.imageArr = [urlArray mutableCopy];
+            
+            
+        } failure:^{
+            
+            [SVProgressHUD showErrorWithStatus:@"上传失败"];
+            
+        }];
+
         
-        NSString *jsonString = [urlArray JSONString];
+    });
+    
+    dispatch_async(serialQueue, ^{
+        
+        
+        NSString *jsonString = [self.imageArr JSONString];
+        
         // 上传给自己的服务器
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:contentText.text,@"description", jsonString,@"images", nil];
         
-        
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-
+        
         [manager POST:[BaseURL stringByAppendingString:PARENTS_FEEDBACK] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             
             NSLog(@"%@", responseObject);
@@ -295,13 +319,12 @@
         } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
             [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
         }];
-        
-    } failure:^{
-        
-        [SVProgressHUD showErrorWithStatus:@"上传失败"];
-        
-    }];
 
+        
+    });
+    
+    
+    
 }
 
 

@@ -17,13 +17,13 @@
 #import "TZImageManager.h"
 #import "SVProgressHUD.h"
 #import "UploadImageTool.h"
+#import "YjxService.h"
 
 
 @interface FeedBackViewController ()<TZImagePickerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 
 {
     NSMutableArray *_selectedPhotos;
-    NSMutableArray *_selectedPhotosUrl;
     NSMutableArray *_selectedAssets;
     BOOL _isSelectOriginalPhoto;
     
@@ -42,17 +42,27 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *finishBtn;
 
+@property (nonatomic, strong) NSMutableArray *imageArr;
+@property (nonatomic, copy) NSString *token;
+
 
 @end
 
 @implementation FeedBackViewController
+
+- (NSMutableArray *)imageArr {
+
+    if (!_imageArr) {
+        self.imageArr = [NSMutableArray array];
+    }
+    return _imageArr;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     _selectedPhotos = [NSMutableArray array];
     _selectedAssets = [NSMutableArray array];
-    _selectedPhotosUrl = [NSMutableArray array];
     
     // finishBtn设置
     self.finishBtn.layer.cornerRadius = 20;
@@ -124,17 +134,59 @@
         return;
     }
     
-    [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArray) {
+    // 获取token
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
+    [[YjxService sharedInstance] teacherGetAboutqinniu:dic withBlock:^(id result, NSError *error) {
         
-        NSLog(@"%@", urlArray);
+        NSLog(@"%@", result);
         
-        NSString *jsonString = [urlArray JSONString];
+        self.token = [NSString stringWithFormat:@"%@", result[@"uptoken"]];
+        
+    }];
+    
+    
+    // 添加到串行队列
+    dispatch_queue_t serialQueue = dispatch_queue_create("T_SERILQUEUE", DISPATCH_QUEUE_SERIAL);
+    
+    for (int i = 0; i < _selectedPhotos.count; i++) {
+        dispatch_async(serialQueue, ^{
+            
+            [self upfiletoQiniu:self.token image:_selectedPhotos[i]];
+            
+        });
+    }
+    
+    /*
+    
+    dispatch_async(serialQueue, ^{
+        
+        [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArray) {
+            
+            NSLog(@"%@", urlArray);
+            
+            self.imageArr = [urlArray mutableCopy];
+            
+        } failure:^{
+            
+            [SVProgressHUD showErrorWithStatus:@"上传失败"];
+            
+        }];
+        
+    });
+     
+     */
+    
+    dispatch_async(serialQueue, ^{
+        
+        NSLog(@"%@", self.imageArr);
+        
+        NSString *jsonString = [self.imageArr JSONString];
         
         // 上传给自己的服务器
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:contentText.text,@"description", jsonString,@"images", nil];
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-
+        
         [manager POST:[BaseURL stringByAppendingString:TEACHER_FEEDBACK] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             
             NSLog(@"%@", responseObject);
@@ -145,25 +197,41 @@
                 
                 
             }else {
-            
-//                [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
+                
+                //                [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
                 [SVProgressHUD showErrorWithStatus:responseObject[@"reason"]];
             }
             
         } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
             [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
         }];
+        
 
-    } failure:^{
         
-        [SVProgressHUD showErrorWithStatus:@"上传失败"];
         
-    }];
+    });
     
+       
     
 }
 
-
+-(void)upfiletoQiniu:(NSString *)token image:(UIImage*)image
+{
+    NSData *data = UIImageJPEGRepresentation(image, 0.02);
+    QNUploadManager *upManager = [[QNUploadManager alloc] init];
+    [upManager putData:data key:nil token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resq){
+        if (info.error == nil) {
+            NSString *imageUrl = [NSString stringWithFormat:@"%@%@",QiniuYunURL,[resq objectForKey:@"key"]];
+            
+            [self.imageArr addObject:imageUrl];
+            
+        }else{
+            [self.view hideToastActivity];
+            [self.view makeToast:[info.error description] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+    } option:nil];
+    
+}
 
 
 #pragma mark UICollectionView
