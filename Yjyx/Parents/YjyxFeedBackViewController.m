@@ -34,7 +34,7 @@
 }
 @property (weak, nonatomic) IBOutlet UIView *bg_view;
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) NSMutableArray *imageArr;
+
 
 @end
 
@@ -271,30 +271,10 @@
     [SVProgressHUD showWithStatus:@"正在拼命上传"];
     
     
-    // 添加到串行队列
-    dispatch_queue_t serialQueue = dispatch_queue_create("mySerialQueue", DISPATCH_QUEUE_SERIAL);
-    
-    dispatch_async(serialQueue, ^{
-        
-        [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArray) {
-            
-            NSLog(@"%@", urlArray);
-            self.imageArr = [urlArray mutableCopy];
-            
-            
-        } failure:^{
-            
-            [SVProgressHUD showErrorWithStatus:@"上传失败"];
-            
-        }];
-
-        
-    });
-    
-    dispatch_async(serialQueue, ^{
+    [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArray) {
         
         
-        NSString *jsonString = [self.imageArr JSONString];
+        NSString *jsonString = [urlArray JSONString];
         
         // 上传给自己的服务器
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:contentText.text,@"description", jsonString,@"images", nil];
@@ -321,8 +301,14 @@
         }];
 
         
-    });
-    
+        
+    } failure:^{
+        
+        [SVProgressHUD showErrorWithStatus:@"上传失败"];
+        
+    }];
+
+
     
     
 }

@@ -42,21 +42,12 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *finishBtn;
 
-@property (nonatomic, strong) NSMutableArray *imageArr;
-@property (nonatomic, copy) NSString *token;
 
 
 @end
 
 @implementation FeedBackViewController
 
-- (NSMutableArray *)imageArr {
-
-    if (!_imageArr) {
-        self.imageArr = [NSMutableArray array];
-    }
-    return _imageArr;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -133,38 +124,38 @@
         [self.view makeToast:@"请输入您的意见反馈" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
+
     
-    // 获取token
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
-    [[YjxService sharedInstance] teacherGetAboutqinniu:dic withBlock:^(id result, NSError *error) {
+    [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArray) {
         
-        NSLog(@"%@", result);
-        
-        self.token = [NSString stringWithFormat:@"%@", result[@"uptoken"]];
-        
-    }];
-    
-    
-    // 添加到串行队列
-    dispatch_queue_t serialQueue = dispatch_queue_create("T_SERILQUEUE", DISPATCH_QUEUE_SERIAL);
-    
-    for (int i = 0; i < _selectedPhotos.count; i++) {
-        dispatch_async(serialQueue, ^{
             
-            [self upfiletoQiniu:self.token image:_selectedPhotos[i]];
+            NSString *jsonString = [urlArray JSONString];
             
-        });
-    }
-    
-    /*
-    
-    dispatch_async(serialQueue, ^{
-        
-        [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArray) {
+            // 上传给自己的服务器
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:contentText.text,@"description", jsonString,@"images", nil];
             
-            NSLog(@"%@", urlArray);
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             
-            self.imageArr = [urlArray mutableCopy];
+            [manager POST:[BaseURL stringByAppendingString:TEACHER_FEEDBACK] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                
+                NSLog(@"%@", responseObject);
+                
+                if ([responseObject[@"retcode"] isEqual:@0]) {
+                    
+                    [SVProgressHUD showSuccessWithStatus:@"感谢您的反馈"];
+                    
+                    
+                }else {
+                    
+                    //                [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
+                    [SVProgressHUD showErrorWithStatus:responseObject[@"reason"]];
+                }
+                
+            } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+                [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            }];
+            
+
             
         } failure:^{
             
@@ -172,66 +163,10 @@
             
         }];
         
-    });
-     
-     */
-    
-    dispatch_async(serialQueue, ^{
-        
-        NSLog(@"%@", self.imageArr);
-        
-        NSString *jsonString = [self.imageArr JSONString];
-        
-        // 上传给自己的服务器
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:contentText.text,@"description", jsonString,@"images", nil];
-        
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        
-        [manager POST:[BaseURL stringByAppendingString:TEACHER_FEEDBACK] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-            
-            NSLog(@"%@", responseObject);
-            
-            if ([responseObject[@"retcode"] isEqual:@0]) {
-                
-                [SVProgressHUD showSuccessWithStatus:@"感谢您的反馈"];
-                
-                
-            }else {
-                
-                //                [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
-                [SVProgressHUD showErrorWithStatus:responseObject[@"reason"]];
-            }
-            
-        } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
-        }];
-        
 
-        
-        
-    });
-    
-       
     
 }
 
--(void)upfiletoQiniu:(NSString *)token image:(UIImage*)image
-{
-    NSData *data = UIImageJPEGRepresentation(image, 0.02);
-    QNUploadManager *upManager = [[QNUploadManager alloc] init];
-    [upManager putData:data key:nil token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resq){
-        if (info.error == nil) {
-            NSString *imageUrl = [NSString stringWithFormat:@"%@%@",QiniuYunURL,[resq objectForKey:@"key"]];
-            
-            [self.imageArr addObject:imageUrl];
-            
-        }else{
-            [self.view hideToastActivity];
-            [self.view makeToast:[info.error description] duration:1.0 position:SHOW_CENTER complete:nil];
-        }
-    } option:nil];
-    
-}
 
 
 #pragma mark UICollectionView

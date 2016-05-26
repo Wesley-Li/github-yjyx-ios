@@ -36,31 +36,57 @@
         return;
     }
     NSString *answerString = [NSString stringWithFormat:@"%@", [dic[@"question"] objectForKey:@"answer"]];
-    NSNumberFormatter *numberF = [[NSNumberFormatter alloc] init];
-    NSNumber *answerNumber = [numberF numberFromString:answerString];
-    NSInteger answer = [answerNumber integerValue];
-    NSLog(@"%ld", answer);
-    UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 25, SCREEN_WIDTH - 20, 40)];
-    answerLabel.font = [UIFont systemFontOfSize:13];
+    NSArray *answerArr = [answerString componentsSeparatedByString:@"|"];
+    NSMutableArray *arr = [NSMutableArray array];
     
-#warning 此处可能是多选
-    switch (answer) {
-        case 0:
-            answerLabel.text = @"A";
-            break;
-        case 1:
-            answerLabel.text = @"B";
-            break;
-        case 2:
-            answerLabel.text = @"C";
-            break;
-        case 3:
-            answerLabel.text = @"D";
-            break;
+    for (int i = 0; i < answerArr.count; i++) {
+        
+
+        NSString *aString = [NSString stringWithFormat:@"%@", answerArr[i]];
+        
+        if ([answerArr[i] isEqualToString:@"0"]) {
+            NSString *AString = [aString stringByReplacingOccurrencesOfString:answerArr[i] withString:@"A"];
+            [arr addObject:AString];
+        }else if ([answerArr[i] isEqualToString:@"1"]) {
+        
+            NSString *BString = [aString stringByReplacingOccurrencesOfString:answerArr[i] withString:@"B"];
+            [arr addObject:BString];
+        }else if ([answerArr[i] isEqualToString:@"2"]) {
+        
+            NSString *CString = [aString stringByReplacingOccurrencesOfString:answerArr[i] withString:@"C"];
+            [arr addObject:CString];
+
+        }else if ([answerArr[i] isEqualToString:@"3"]) {
+        
+            NSString *DString = [aString stringByReplacingOccurrencesOfString:answerArr[i] withString:@"D"];
+            [arr addObject:DString];
+
+        }else if ([answerArr[i] isEqualToString:@"4"]) {
+        
+            NSString *EString = [aString stringByReplacingOccurrencesOfString:answerArr[i] withString:@"E"];
+            [arr addObject:EString];
+
+        }else if ([answerArr[i] isEqualToString:@"5"]) {
             
-        default:
-            break;
+            NSString *FString = [aString stringByReplacingOccurrencesOfString:answerArr[i] withString:@"F"];
+            [arr addObject:FString];
+
+        }else if ([answerArr[i] isEqualToString:@"6"]) {
+        
+            NSString *GString = [aString stringByReplacingOccurrencesOfString:answerArr[i] withString:@"G"];
+            [arr addObject:GString];
+
+        }
+        
     }
+    
+    
+    NSLog(@"%@", arr);
+    NSString *ansString = [arr componentsJoinedByString:@","];
+
+    UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 25, SCREEN_WIDTH - 20, 40)];
+    answerLabel.text = ansString;
+    answerLabel.font = [UIFont systemFontOfSize:13];
     
     
     [self.contentView addSubview:answerLabel];
