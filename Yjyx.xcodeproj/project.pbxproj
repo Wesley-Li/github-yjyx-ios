@@ -2988,8 +2988,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8738e8ea-9b10-4c1a-9734-06599c5639a1";
-				PROVISIONING_PROFILE = "2f8ad128-e076-49ad-a75a-bbfaa50c0de7";
-
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -3041,8 +3039,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8738e8ea-9b10-4c1a-9734-06599c5639a1";
-				PROVISIONING_PROFILE = "2f8ad128-e076-49ad-a75a-bbfaa50c0de7";
-
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
