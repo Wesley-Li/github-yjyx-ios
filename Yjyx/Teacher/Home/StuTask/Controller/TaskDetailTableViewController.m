@@ -567,6 +567,11 @@
     
     CGSize size = CGSizeMake(10, 25);// 初始位置
     CGFloat padding = 10;// 间距
+//    NSInteger num = 6;
+//    
+//    CGFloat tWidth = (cell.bg_view.frame.size.width - 20) / num;
+//    CGFloat tHeigh = tWidth + 20;
+    
     CGFloat TWidth = 40;
     CGFloat Theight = 60;
     
