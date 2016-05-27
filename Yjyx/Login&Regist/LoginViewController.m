@@ -184,7 +184,7 @@
         }else{
             [self.view makeToastActivity:SHOW_CENTER];
             
-            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text,@"username",[_passWordTF.text md5],@"password",@"1",@"ostype",((AppDelegate*)SYS_DELEGATE).deviceToken,@"devicetoken",[[UIDevice currentDevice] model],@"description",nil];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text,@"username",_passWordTF.text,@"password",@"1",@"ostype",((AppDelegate*)SYS_DELEGATE).deviceToken,@"devicetoken",[[UIDevice currentDevice] model],@"description",nil];
             
             // 调用登录接口
             if ([((AppDelegate*)SYS_DELEGATE).role isEqualToString:@"parents"]) {
@@ -198,7 +198,10 @@
                             [YjyxOverallData sharedInstance].parentInfo.phone = _uesrNameTF.text;
                             
                             // 在此处存储用户信息
-                            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", _uesrNameTF.text,@"username",_passWordTF.text,@"password", nil];
+                            
+                            NSString *desPassWord = [_passWordTF.text des3:kCCEncrypt withPass:@"12345678asdf"];
+                            
+                            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", desPassWord,@"username",_passWordTF.text,@"password", nil];
                             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
                             [SYS_CACHE synchronize];
                         }else{
@@ -227,7 +230,8 @@
                             [YjyxOverallData sharedInstance].teacherInfo = [TeacherEntity wrapTeacherWithDic:result];
                             
 //                            [YjyxOverallData sharedInstance].teacherInfo.name = _uesrNameTF.text;
-                            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", _uesrNameTF.text,@"username",_passWordTF.text,@"password", nil];
+                            NSString *desPassWord = [_passWordTF.text des3:kCCEncrypt withPass:@"12345678asdf"];
+                            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", _uesrNameTF.text,@"username",desPassWord,@"password", nil];
                             
                             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
                             [SYS_CACHE synchronize];

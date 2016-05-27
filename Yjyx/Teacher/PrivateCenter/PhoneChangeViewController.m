@@ -139,7 +139,7 @@
         return;
     }
     NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",_phoneTF.text];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneTF.text,@"target",[sign md5],@"sign",@"MPASSWDCHG",@"stype",nil];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneTF.text,@"target",sign,@"sign",@"MPASSWDCHG",@"stype",nil];
     [[YjxService sharedInstance] getSMSsendcode:dic withBlock:^(id result, NSError *error){//验证验证码
         [self.view hideToastActivity];
         if (result) {

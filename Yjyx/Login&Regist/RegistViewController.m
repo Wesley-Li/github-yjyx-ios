@@ -168,7 +168,7 @@
         [self.view makeToast:@"请输入完整信息" duration:1.0 position:SHOW_CENTER complete:nil];
     }else{
         [self.view makeToastActivity:SHOW_CENTER];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:codeTextField.text,@"code",textField1.text,@"name",[textField2.text md5],@"password",textField3.text,@"phone",textField4.text,@"relation",childrenCid,@"cid",@"",@"sessionid",@"1",@"ostype",@"123456734",@"devicetoken",[[UIDevice currentDevice] model],@"description",nil];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:codeTextField.text,@"code",textField1.text,@"name",textField2.text,@"password",textField3.text,@"phone",textField4.text,@"relation",childrenCid,@"cid",@"",@"sessionid",@"1",@"ostype",@"123456734",@"devicetoken",[[UIDevice currentDevice] model],@"description",nil];
         [[YjxService sharedInstance] parentsRegist:dic withBlock:^(id result, NSError *error){
             [self.view hideToastActivity];
             if (result) {

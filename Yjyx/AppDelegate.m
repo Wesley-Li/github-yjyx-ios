@@ -84,16 +84,16 @@
     }
     
     // 自动登录,从本地取值
-//    NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
-//    if ([[dic objectForKey:@"username"] length] > 0) {
-//        autologin = [[AutoLoginViewController alloc] init];
-//        _navigation = [[NavRootViewController alloc] initWithRootViewController:autologin];
-//        _navigation.navigationBar.hidden = YES;
-//        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//        self.window.backgroundColor = [UIColor whiteColor];
-//        self.window.rootViewController = _navigation;
-//        [self.window makeKeyAndVisible];
-//    }else{
+    NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
+    if ([[dic objectForKey:@"username"] length] > 0) {
+        autologin = [[AutoLoginViewController alloc] init];
+        _navigation = [[NavRootViewController alloc] initWithRootViewController:autologin];
+        _navigation.navigationBar.hidden = YES;
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.window.backgroundColor = [UIColor whiteColor];
+        self.window.rootViewController = _navigation;
+        [self.window makeKeyAndVisible];
+    }else{
         _deviceToken = @"1231231312da1231sqwc1213";
         LoginViewController *loginView = [[LoginViewController alloc] init];
         _navigation = [[NavRootViewController alloc] initWithRootViewController:loginView];
@@ -102,7 +102,7 @@
         self.window.backgroundColor = [UIColor whiteColor];
         self.window.rootViewController = _navigation;
         [self.window makeKeyAndVisible];
-//    }
+    }
 
     return YES;
 }
@@ -114,7 +114,9 @@
     if (autologin) {//获取到devicetoken后自动登录
         NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
         
-        [autologin autoLoginWithRole:dic[@"role"] username:dic[@"username"] password:dic[@"password"]];
+        NSString *desPassword = [dic[@"password"] des3:kCCDecrypt withPass:@"12345678asdf"];
+        
+        [autologin autoLoginWithRole:dic[@"role"] username:dic[@"username"] password:desPassword];
         
         autologin = nil;
     }

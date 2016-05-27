@@ -18,9 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
-//    [self autoLogin:[dic objectForKey:@"username"] password:[dic objectForKey:@"password"]];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)autoLoginWithRole:(NSString *)role username:(NSString *)username password:(NSString *)password {
@@ -29,12 +26,11 @@
     NSString *devicetoken = ((AppDelegate*)SYS_DELEGATE).deviceToken;
     NSString *model = [[UIDevice currentDevice] model];
     
-    NSLog(@"+++++++%@", role);
     
     // 判断身份
     if ([role isEqualToString:@"parents"]) {
         // 家长的自动登录实现
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:username,@"username",[password md5],@"password",@"1",@"ostype",model,@"description",devicetoken,@"devicetoken",nil];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:username,@"username",password,@"password",@"1",@"ostype",model,@"description",devicetoken,@"devicetoken",nil];
         
         [[YjxService sharedInstance] parentsLogin:dic autoLogin:YES withBlock:^(id result,NSError *error){
             [self.view hideToastActivity];

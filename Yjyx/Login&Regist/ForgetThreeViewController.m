@@ -50,7 +50,7 @@
         return;
     }
     
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_userName,@"username",codeText.text,@"smscode",[confrimPassWord.text md5],@"password",nil];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_userName,@"username",codeText.text,@"smscode",confrimPassWord.text,@"password",nil];
     [[YjxService sharedInstance] restPassWord:dic withBlock:^(id result, NSError *error){//重置密码
         [self.view hideToastActivity];
         if (result) {
