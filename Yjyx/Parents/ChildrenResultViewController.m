@@ -131,6 +131,27 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if (section == 0 ) {
+        if ([_resultchoices count]>0) {
+            if ([self isShowTitle:_resultchoices type:1]) {
+                return 25;
+            }else{
+                return 0;
+            }
+        }else{
+            if ([self isShowTitle:_resultblankfills type:2]) {
+                return 25;
+            }else{
+                return 0;
+            }
+        }
+    }else{
+        if ([self isShowTitle:_resultblankfills type:2]) {
+            return 25;
+        }else{
+            return 0;
+        }
+    }
     return 25;
 }
 
@@ -138,15 +159,29 @@
 {
     if (section == 0) {
         if ([_resultchoices count]>0) {
-            UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    选择题"];
-            return titlelb;
+            if ([self isShowTitle:_resultchoices type:1]) {
+                UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    选择题"];
+                return titlelb;
+            }else{
+                return nil;
+            }
+
         }else{
-            UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    填空题"];
-            return titlelb;
+            if ([self isShowTitle:_resultblankfills type:2]) {
+                UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    填空题"];
+                return titlelb;
+            }else{
+                return nil;
+            }
+
         }
     }else{
-        UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    填空题"];
-        return titlelb;
+        if ([self isShowTitle:_resultblankfills type:2]) {
+            UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    填空题"];
+            return titlelb;
+        }else{
+            return nil;
+        }
     }
 }
 
@@ -200,9 +235,6 @@
                     
                     height = height + (turesize.height>size.height?turesize.height:size.height) +5;
                     
-//                    NSString *contentStr =[NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:i],[resultary objectAtIndex:i]];
-//                    CGSize size = [contentStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH/2 - 90, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
-//                    height = height + size.height + 3;
                 }
                 return optimalSize.height + 50 + height;
                 
@@ -676,6 +708,9 @@
     }
 }
 
+/*
+是否现实展开箭头
+*/
 -(BOOL)showArrow:(NSInteger)index
 {
     NSString *key = [NSString stringWithFormat:@"%@",[[_resultblankfills objectAtIndex:index] firstObject]];
@@ -705,6 +740,28 @@
     }else{
         return YES;
     }
+}
+
+
+/*
+是否显示标题
+*/
+-(BOOL)isShowTitle:(NSArray *)array type:(NSInteger)type
+{
+    BOOL showTitle = NO;
+    for (int i = 0; i< [array count]; i++) {
+        NSString *key = [NSString stringWithFormat:@"%@",[[array objectAtIndex:i] firstObject]];
+        NSString *content;
+        if (type == 1) {
+            content = [[_choices objectForKey:key] objectForKey:@"content"];
+        }else{
+            content = [[_blankfills objectForKey:key] objectForKey:@"content"];
+        }
+        if (content.length > 0) {
+            return YES;
+        }
+    }
+    return showTitle;
 }
 
 /*
