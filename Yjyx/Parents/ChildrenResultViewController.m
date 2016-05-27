@@ -156,6 +156,9 @@
         if ([_resultchoices count]>0) {//有选择题
             NSString *key = [NSString stringWithFormat:@"%@",[[_resultchoices objectAtIndex:indexPath.row] firstObject]];
             NSString *content = [[_choices objectForKey:key] objectForKey:@"content"];
+            if (content == nil) {
+                return 0;
+            }
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
             templabel.font = [UIFont systemFontOfSize:14];
@@ -168,6 +171,9 @@
             NSString *key = [NSString stringWithFormat:@"%@",[[_resultblankfills objectAtIndex:indexPath.row] firstObject]];
             NSString *content = [[_blankfills objectForKey:key] objectForKey:@"content"];
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+            if (content == nil) {
+                return 0;
+            }
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
             templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
@@ -208,6 +214,9 @@
         NSString *key = [NSString stringWithFormat:@"%@",[[_resultblankfills objectAtIndex:indexPath.row] firstObject]];
         NSString *content = [[_blankfills objectForKey:key] objectForKey:@"content"];
         content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+        if (content == nil) {
+            return 0;
+        }
         RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
         templabel.font = [UIFont systemFontOfSize:14];
         RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
@@ -262,12 +271,14 @@
             NSString *key = [NSString stringWithFormat:@"%@",[[_resultchoices objectAtIndex:indexPath.row] firstObject]];
             NSString *content = [[_choices objectForKey:key] objectForKey:@"content"];
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+            if (content == nil) {
+                return cell;
+            }
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
             templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
             templabel.componentsAndPlainText = componentsDS;
             CGSize optimalSize = [templabel optimumSize];
-            
             bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 50);
             [cell.contentView addSubview:bg];
             
@@ -330,6 +341,9 @@
             //题目内容
             NSString *content = [[_blankfills objectForKey:key] objectForKey:@"content"];
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+            if (content == nil) {
+                return cell;
+            }
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
             templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
@@ -450,6 +464,9 @@
         //题目内容
         NSString *content = [[_blankfills objectForKey:key] objectForKey:@"content"];
         content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+        if (content == nil) {
+            return cell;
+        }
         RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
         templabel.font = [UIFont systemFontOfSize:14];
         RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];

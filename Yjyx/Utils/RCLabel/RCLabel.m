@@ -1268,6 +1268,10 @@ CGFloat MyGetWidthCallback( void* refCon ){
 
 + (RTLabelComponentsStructure*)extractTextStyle:(NSString*)data
 {
+    
+    if (data == nil) {
+        return nil;
+    }
     NSScanner *scanner = nil;
 	NSString *text = nil;
 	NSString *tag = nil;
