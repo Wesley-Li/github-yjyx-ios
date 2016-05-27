@@ -33,7 +33,17 @@
     
 
     // 头像
-    [self.picImage setImageWithURL:[NSURL URLWithString:[YjyxOverallData sharedInstance].teacherInfo.avatar] placeholderImage:[UIImage imageNamed:@"pic"]];
+    if ([[YjyxOverallData sharedInstance].teacherInfo.avatar isEqual:[NSNull null]]) {
+        
+        [self.picImage setImage:[UIImage imageNamed:@"teacher_p"]];
+        
+    }else {
+    
+        [self.picImage setImageWithURL:[NSURL URLWithString:[YjyxOverallData sharedInstance].teacherInfo.avatar] placeholderImage:[UIImage imageNamed:@"pic"]];
+    }
+    
+    
+    
     self.picImage.contentMode = UIViewContentModeScaleAspectFit;
 
     self.picImage.layer.borderColor = [UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
