@@ -89,6 +89,7 @@
     
     self.title = self.taskModel.t_description;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = RGBACOLOR(239, 239, 244,1);
     
     UIButton *goBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     [goBackBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -172,6 +173,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    
 
     // 选择题或者填空题
     if (_choiceDataSource.count == 0 || _blankFillDataSource.count == 0) {
@@ -442,7 +445,7 @@
 #pragma mark - 返回高度的方法
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (_blankFillDataSource.count == 0 && _choiceDataSource != 0) {
+    if (_blankFillDataSource.count == 0 && _choiceDataSource.count != 0) {
         
                         if (_unfinishedArr.count == 0 || _finishedArr.count == 0) {
                             if (indexPath.row == 0) {
@@ -476,7 +479,7 @@
                             }
                         }
         
-    }else if (_blankFillDataSource.count != 0 && _choiceDataSource == 0) {
+    }else if (_blankFillDataSource.count != 0 && _choiceDataSource.count == 0) {
         
                     if (_unfinishedArr.count == 0 || _finishedArr.count == 0) {
                         if (indexPath.row == 0) {

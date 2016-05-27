@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,19 +16,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66f-M0-6ms">
-                        <rect key="frame" x="10" y="0.0" width="386" height="152"/>
+                        <rect key="frame" x="10" y="0.0" width="386" height="172"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未交同学数" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JT8-hy-ova">
-                                <rect key="frame" x="20" y="5" width="346" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="iCH-OB-BZ4"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R3Q-t7-7l0">
-                                <rect key="frame" x="170" y="117" width="46" height="30"/>
+                                <rect key="frame" x="170" y="137" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="HGD-L4-5Fu"/>
                                     <constraint firstAttribute="height" constant="30" id="WqT-ZZ-IKL"/>
@@ -35,25 +27,40 @@
                                 <state key="normal" image="list_btn_More.png"/>
                                 <state key="selected" image="list_btn_shutdown.png"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未交同学数" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JT8-hy-ova">
+                                <rect key="frame" x="20" y="5" width="193" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="iCH-OB-BZ4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="JT8-hy-ova" firstAttribute="width" secondItem="66f-M0-6ms" secondAttribute="width" multiplier="1:2" id="FKE-lr-UlT"/>
                             <constraint firstAttribute="bottom" secondItem="R3Q-t7-7l0" secondAttribute="bottom" constant="5" id="MH3-Ea-Z7r"/>
                             <constraint firstItem="JT8-hy-ova" firstAttribute="leading" secondItem="66f-M0-6ms" secondAttribute="leading" constant="20" id="X3Q-mB-MkM"/>
                             <constraint firstItem="JT8-hy-ova" firstAttribute="top" secondItem="66f-M0-6ms" secondAttribute="top" constant="5" id="lkA-4h-gbo"/>
                             <constraint firstItem="R3Q-t7-7l0" firstAttribute="centerX" secondItem="66f-M0-6ms" secondAttribute="centerX" id="qTb-Af-W0c"/>
                             <constraint firstAttribute="trailing" secondItem="JT8-hy-ova" secondAttribute="trailing" constant="20" id="ypk-h8-3km"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ypk-h8-3km"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="66f-M0-6ms" secondAttribute="bottom" constant="20" id="0Ig-Ej-Ngm"/>
+                    <constraint firstAttribute="bottom" secondItem="66f-M0-6ms" secondAttribute="bottom" id="0Ig-Ej-Ngm"/>
                     <constraint firstAttribute="trailing" secondItem="66f-M0-6ms" secondAttribute="trailing" constant="10" id="26m-fh-A4L"/>
                     <constraint firstItem="66f-M0-6ms" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gzt-Ww-upE"/>
                     <constraint firstItem="66f-M0-6ms" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="hZY-O3-Fnq"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="bg_view" destination="66f-M0-6ms" id="dhK-Ub-r94"/>
                 <outlet property="showMoreBtn" destination="R3Q-t7-7l0" id="eLM-Iw-szr"/>

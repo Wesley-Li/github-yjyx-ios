@@ -14,7 +14,15 @@
 
 
 
-- (void)setValueWithArray:(NSArray *)arr;
+/**
+ *选择题赋值方法
+ */
+- (void)setChoiceValueWithDictionary:(NSDictionary *)dic;
+
+/**
+ *提空题赋值方法
+ */
+- (void)setBlankfillValueWithDictionary:(NSDictionary *)dic;
 
 
 @end

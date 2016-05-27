@@ -54,7 +54,6 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="IiT-xw-MrR" secondAttribute="bottom" constant="10" id="C88-4a-2gX"/>
                     <constraint firstItem="IiT-xw-MrR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Ne9-vM-aPY"/>
@@ -62,6 +61,7 @@
                     <constraint firstItem="IiT-xw-MrR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="RQ6-GS-KAI"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="bg_view" destination="IiT-xw-MrR" id="GF7-M9-MwO"/>
                 <outlet property="descriptionLabel" destination="xre-9O-JiW" id="dsN-Oe-6Kf"/>
