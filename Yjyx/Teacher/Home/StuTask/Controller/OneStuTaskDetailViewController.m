@@ -356,7 +356,13 @@
         self.yourAnswerCell = [tableView dequeueReusableCellWithIdentifier:kidentifier2 forIndexPath:indexPath];
         _yourAnswerCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        [_yourAnswerCell setValueWithArray:self.answerArr];
+        if ([self.qtype isEqual:@1]) {
+            
+            [_yourAnswerCell setChoiceValueWithDictionary:_dic];
+        }else if ([self.qtype isEqual:@2]) {
+        
+            [_yourAnswerCell setBlankfillValueWithDictionary:_dic];
+        }
         
         return _yourAnswerCell;
     }else if (indexPath.row == 2) {

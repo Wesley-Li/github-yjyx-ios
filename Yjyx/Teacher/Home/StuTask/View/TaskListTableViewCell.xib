@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="453" height="126"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="453" height="125.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="453" height="125"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rxZ-HC-ll5">
@@ -119,7 +119,6 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="rxZ-HC-ll5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="58K-OY-BM4"/>
                     <constraint firstAttribute="bottom" secondItem="rxZ-HC-ll5" secondAttribute="bottom" constant="5" id="AC6-rp-PNd"/>
@@ -127,6 +126,7 @@
                     <constraint firstItem="rxZ-HC-ll5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="paZ-Lh-Zr2"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="deadlineLabel" destination="5Yd-Xe-jdI" id="xGb-O1-2ia"/>
                 <outlet property="descriptionLabel" destination="cM1-tp-vxw" id="3bI-9f-Qg1"/>

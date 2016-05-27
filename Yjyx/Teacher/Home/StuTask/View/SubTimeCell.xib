@@ -57,7 +57,6 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="yZH-6a-Umb" secondAttribute="trailing" id="Dv1-gB-lMX"/>
                     <constraint firstAttribute="bottom" secondItem="yZH-6a-Umb" secondAttribute="bottom" constant="20" id="dUR-Wv-Q1g"/>
@@ -65,6 +64,7 @@
                     <constraint firstItem="yZH-6a-Umb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="z6l-HC-igt"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="subTimeLabel" destination="uMR-1L-TnM" id="953-ky-t8a"/>
             </connections>

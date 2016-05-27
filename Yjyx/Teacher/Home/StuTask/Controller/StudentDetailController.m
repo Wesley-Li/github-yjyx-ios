@@ -99,10 +99,10 @@
         if ([[responseObject[@"result"] allKeys] containsObject:@"choice"]) {
             
             NSString *jsonString = [responseObject[@"result"] objectForKey:@"choice"];
-            NSString *jsonS = [jsonString stringByReplacingOccurrencesOfString:@"False" withString:@"false"];
-            NSString *jsonA = [jsonS stringByReplacingOccurrencesOfString:@"True" withString:@"true"];
+//            NSString *jsonS = [jsonString stringByReplacingOccurrencesOfString:@"False" withString:@"false"];
+//            NSString *jsonA = [jsonS stringByReplacingOccurrencesOfString:@"True" withString:@"true"];
             
-            NSData *data = [jsonA dataUsingEncoding:NSUTF8StringEncoding];
+            NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
             NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             
             NSLog(@"%@", array);
@@ -122,12 +122,15 @@
         if ([[responseObject[@"result"] allKeys] containsObject:@"blankfill"]) {
             
             
-            NSString *jsonStringB = [responseObject[@"result"] objectForKey:@"blankfill"];
-//            NSString *jsonStringB2 = [jsonStringB stringByReplacingOccurrencesOfString:@"''" withString:@"'"];
-            NSString *jsonSB = [jsonStringB stringByReplacingOccurrencesOfString:@"False" withString:@"false"];
-            NSString *jsonSBA = [jsonSB stringByReplacingOccurrencesOfString:@"True" withString:@"true"];
             
-            NSData *dataB = [jsonSB dataUsingEncoding:NSUTF8StringEncoding];
+            
+            NSString *jsonStringB = [responseObject[@"result"] objectForKey:@"blankfill"];
+//            NSString *jsonStringB2 = [jsonStringB stringByReplacingOccurrencesOfString:@"u''" withString:@"2"];
+//            NSString *jsonSB = [jsonStringB stringByReplacingOccurrencesOfString:@"False" withString:@"false"];
+//            NSString *jsonSBA = [jsonSB stringByReplacingOccurrencesOfString:@"True" withString:@"true"];
+            
+            NSData *dataB = [jsonStringB dataUsingEncoding:NSUTF8StringEncoding];
+            
             NSArray *arrayB = [NSJSONSerialization JSONObjectWithData:dataB options:NSJSONReadingMutableContainers error:nil];
             
             for (NSArray *arr in arrayB) {
@@ -397,7 +400,7 @@
 - (void)cell:(BlankfillCell *)cell addSubviewsWithBlankfillArray:(NSMutableArray *)array {
 
 
-    cell.titleLabel.text = [NSString stringWithFormat:@"填空题答题情况(%ld)", _choiceArray.count];
+    cell.titleLabel.text = [NSString stringWithFormat:@"填空题答题情况(%ld)", _blankfillArray.count];
     
     CGSize size = CGSizeMake(10, 30);
     CGFloat padding = 10;
@@ -430,11 +433,11 @@
         
         
         
-        if (model.rightOrWrong) {
-            [imageBtn setImage:[UIImage imageNamed:@"list_btn_right"] forState:UIControlStateNormal];
+        if ([model.rightOrWrong isEqual:@0]) {
+            [imageBtn setImage:[UIImage imageNamed:@"list_btn_wrong"] forState:UIControlStateNormal];
         }else {
             
-            [imageBtn setImage:[UIImage imageNamed:@"list_btn_wrong"] forState:UIControlStateNormal];
+            [imageBtn setImage:[UIImage imageNamed:@"list_btn_right"] forState:UIControlStateNormal];
             
         }
         
@@ -450,7 +453,7 @@
         
         [cell.contentView addSubview:taskView];
     }
-    self.choiceCellHeight = size.height + 80 + 30;
+    self.blankfillCellHeight = size.height + 80 + 30;
     
 
     
