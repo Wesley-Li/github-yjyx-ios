@@ -216,6 +216,8 @@
                 
                 [[YjxService sharedInstance] teacherLogin:dic autoLogin:NO withBlock:^(id result, NSError *error) {
                     
+                    NSLog(@"%@", result);
+                    
                     [self.view hideToastActivity];
                     if (result != nil) {
                         
