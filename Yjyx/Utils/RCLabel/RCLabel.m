@@ -39,9 +39,9 @@
 #import "RegexKitLite.h"
 #define LINK_PADDING 2
 #define IMAGE_PADDING 2
-#define IMAGE_USER_WIDTH 180.0
+#define IMAGE_USER_WIDTH [UIScreen mainScreen].bounds.size.width * 0.8
 #define IMAGE_MAX_WIDTH ((IMAGE_USER_WIDTH) - 4 *(IMAGE_PADDING))
-#define IMAGE_USER_HEIGHT 80.0
+#define IMAGE_USER_HEIGHT [UIScreen mainScreen].bounds.size.height / 3
 #define IMAGE_LINK_BOUND_MIN_HEIGHT 30
 #define IMAGE_USER_DESCENT ((IMAGE_USER_HEIGHT) / 20.0)
 #define IMAGE_MAX_HEIGHT ((IMAGE_USER_HEIGHT + IMAGE_USER_DESCENT) - 2 * (IMAGE_PADDING))
@@ -82,6 +82,7 @@ static NSRecursiveLock *lock;
 
 + (id)componentWithString:(NSString*)aText tag:(NSString*)aTagLabel attributes:(NSMutableDictionary*)theAttributes
 {
+    
 	return [[[self alloc] initWithString:aText tag:aTagLabel attributes:theAttributes] autorelease];
 }
 
@@ -393,6 +394,10 @@ CGSize MyGetSize(void* refCon) {
             
             if (size.height > IMAGE_MAX_HEIGHT) {
                 size.height = IMAGE_MAX_HEIGHT;
+                size.width = size.height * ratio;
+            }
+            if (size.height > 10 && size.height < 80) {
+                size.height = 20;
                 size.width = size.height * ratio;
             }
             

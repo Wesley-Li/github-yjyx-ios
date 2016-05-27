@@ -76,7 +76,23 @@
             NSString *GString = [aString stringByReplacingOccurrencesOfString:answerArr[i] withString:@"G"];
             [arr addObject:GString];
 
+        }else if ([answerArr[i] isEqualToString:@"7"]) {
+            
+            NSString *EString = [aString stringByReplacingOccurrencesOfString:answerArr[i] withString:@"H"];
+            [arr addObject:EString];
+            
+        }else if ([answerArr[i] isEqualToString:@"8"]) {
+            
+            NSString *FString = [aString stringByReplacingOccurrencesOfString:answerArr[i] withString:@"I"];
+            [arr addObject:FString];
+            
+        }else if ([answerArr[i] isEqualToString:@"9"]) {
+            
+            NSString *GString = [aString stringByReplacingOccurrencesOfString:answerArr[i] withString:@"J"];
+            [arr addObject:GString];
+            
         }
+
         
     }
     

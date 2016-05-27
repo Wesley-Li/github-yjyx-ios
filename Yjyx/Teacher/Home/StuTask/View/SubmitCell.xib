@@ -14,11 +14,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="413" height="149"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ixz-iM-MPg">
-                        <rect key="frame" x="10" y="0.0" width="393" height="150"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ixz-iM-MPg">
+                        <rect key="frame" x="10" y="0.0" width="393" height="149"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Bi-h6-tz7">
-                                <rect key="frame" x="171" y="120" width="50" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Bi-h6-tz7">
+                                <rect key="frame" x="171" y="119" width="50" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Naf-Rl-r1B"/>
                                     <constraint firstAttribute="width" constant="50" id="Pgo-Zv-AdE"/>
@@ -53,7 +53,7 @@
                     <constraint firstAttribute="bottom" secondItem="ixz-iM-MPg" secondAttribute="bottom" id="RRO-tm-H70"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="bg_view" destination="ixz-iM-MPg" id="gD6-Na-065"/>
                 <outlet property="showMoreBtn" destination="2Bi-h6-tz7" id="iOI-4u-UUl"/>

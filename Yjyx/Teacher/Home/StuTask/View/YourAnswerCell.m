@@ -16,23 +16,81 @@
 }
 
 
-- (void)setValueWithArray:(NSArray *)arr {
+- (void)setChoiceValueWithDictionary:(NSDictionary *)dic {
 
-    NSString *aString;
-    for (int i = 0; i < arr.count; i++) {
-        NSNumber *numer = arr[i];
-        NSLog(@"%@", arr[i]);
+    NSMutableArray *yAnswerArr = [dic[@"summary"][1] mutableCopy];
+    NSMutableArray *arr = [NSMutableArray array];
+    
+    for (int i = 0; i < yAnswerArr.count; i++) {
+        NSString *aString = [NSString stringWithFormat:@"%@", yAnswerArr[i]];
         
-        aString = [NSString stringWithFormat:@"%@", numer];
-        
+        if ([aString isEqualToString:@"0"]) {
+            NSString *AString = [NSString stringWithFormat: @"A"];
+            [arr addObject:AString];
+        }else if ([aString isEqualToString:@"1"]) {
+            
+            NSString *BString = [NSString stringWithFormat: @"B"];
+            [arr addObject:BString];
+        }else if ([aString isEqualToString:@"2"]) {
+            
+            NSString *CString = [NSString stringWithFormat: @"C"];
+            [arr addObject:CString];
+            
+        }else if ([aString isEqualToString:@"3"]) {
+            
+            NSString *DString = [NSString stringWithFormat: @"D"];
+            [arr addObject:DString];
+            
+        }else if ([aString isEqualToString:@"4"]) {
+            
+            NSString *EString = [NSString stringWithFormat: @"E"];
+            [arr addObject:EString];
+            
+        }else if ([aString isEqualToString:@"5"]) {
+            
+            NSString *FString = [NSString stringWithFormat: @"F"];
+            [arr addObject:FString];
+            
+        }else if ([aString isEqualToString:@"6"]) {
+            
+            NSString *GString = [NSString stringWithFormat: @"G"];
+            [arr addObject:GString];
+            
+        }else if ([aString isEqualToString:@"7"]) {
+            
+            NSString *HString = [NSString stringWithFormat: @"H"];
+            [arr addObject:HString];
+            
+        }else if ([aString isEqualToString:@"8"]) {
+            
+            NSString *IString = [NSString stringWithFormat: @"I"];
+            [arr addObject:IString];
+            
+        }else if ([aString isEqualToString:@"9"]) {
+            
+            NSString *JString = [NSString stringWithFormat: @"J"];
+            [arr addObject:JString];
+            
+        }
+
     }
     
-    NSString *stringA = [aString stringByReplacingOccurrencesOfString:@"0" withString:@"A"];
-    NSString *stringB = [stringA stringByReplacingOccurrencesOfString:@"1" withString:@"B"];
-    NSString *stringC = [stringB stringByReplacingOccurrencesOfString:@"2" withString:@"C"];
-    NSString *stringD = [stringC stringByReplacingOccurrencesOfString:@"3" withString:@"D"];
+    NSString *ansString = [arr componentsJoinedByString:@","];
     
-    self.yourAnswerLable.text = [NSString stringWithFormat:@"%@", stringD];
+    NSLog(@"%@", ansString);
+    
+    self.yourAnswerLable.text = [NSString stringWithFormat:@"%@", ansString];
+    
+
+}
+
+
+- (void)setBlankfillValueWithDictionary:(NSDictionary *)dic {
+
+    NSString *ansString = [dic[@"summary"][1] componentsJoinedByString:@","];
+    
+    self.yourAnswerLable.text = [NSString stringWithFormat:@"%@", ansString];
+
 
 }
 
