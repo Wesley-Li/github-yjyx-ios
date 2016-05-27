@@ -565,17 +565,12 @@
 #pragma mark - 选择题cell赋值方法
 - (void)cell:(TaskConditionTableViewCell *)cell addSubViewsWithChoiceArr:(NSMutableArray *)arr {
     
-    CGSize size = CGSizeMake(10, 25);// 初始位置
+    CGSize size = CGSizeMake(10, 30);// 初始位置
     CGFloat padding = 10;// 间距
-//    NSInteger num = 6;
-//    
-//    CGFloat tWidth = (cell.bg_view.frame.size.width - 20) / num;
-//    CGFloat tHeigh = tWidth + 20;
+    NSInteger num = 6;
     
-    CGFloat TWidth = 40;
-    CGFloat Theight = 60;
-    
-    
+    CGFloat tWidth = (cell.bg_view.width - padding *(num + 1)) / num;
+    CGFloat tHeigh = tWidth + 20;
     
     //    NSLog(@"%@", self.choiceArr);
     
@@ -583,28 +578,28 @@
         
         UIView *taskView = [[UIView alloc] init];
         taskView.tag = 200 + i;
-        taskView.frame = CGRectMake(size.width, size.height, TWidth, Theight);
+        taskView.frame = CGRectMake(size.width, size.height, tWidth, tHeigh);
         
-        size.width += TWidth + padding;
+        size.width += tWidth + padding;
         
-        if (cell.bg_view.width - size.width < TWidth + padding) {
+        if (cell.bg_view.width - size.width < tWidth + padding) {
             // 换行
             size.width = 10;
             
             // 再做一步判断,即刚好排一排,或者剩余的空间不够排一个,但是已经排完,此时就不用换行了
             if (arr.count - i > 1) {
-                size.height += Theight;
+                size.height += tHeigh + 10;
             }
             
         }
         
         // taskView.backgroundColor = [UIColor redColor];
         ChoiceModel *model = self.choiceDataSource[i];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, TWidth, 20)];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, TWidth, TWidth)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tWidth, 20)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, tWidth, tWidth)];
         imageView.image = [UIImage imageNamed:@"corect_pic"];
         UIButton *choiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        choiceBtn.frame = CGRectMake(0, 20, TWidth, TWidth);
+        choiceBtn.frame = CGRectMake(0, 20, tWidth, tWidth);
         
         NSLog(@"^^^^^%@", model.C_count);
         
@@ -655,34 +650,36 @@
 #pragma mark - 填空题cell赋值方法
 - (void)cell:(TaskConditionTableViewCell *)cell addSubViewsWithBlankfillArr:(NSMutableArray *)arr{
     
-    CGSize size = CGSizeMake(10, 25);
+    CGSize size = CGSizeMake(10, 30);
     CGFloat padding = 10;
     
-    CGFloat TWidth = 40;
-    CGFloat Theight = 60;
+    NSInteger num = 6;
+    
+    CGFloat tWidth = (cell.bg_view.width - padding *(num + 1)) / num;
+    CGFloat tHeigh = tWidth + 20;
     
     //      NSLog(@"%@", self.choiceArr);
     
     for (int i = 0; i < arr.count; i++) {
         
         UIView *taskView = [[UIView alloc] init];
-        taskView.frame = CGRectMake(size.width, size.height, TWidth, Theight);
+        taskView.frame = CGRectMake(size.width, size.height, tWidth, tHeigh);
         
-        size.width += TWidth + padding;
+        size.width += tWidth + padding;
         
-        if (cell.bg_view.width - size.width < TWidth + padding) {
+        if (cell.bg_view.width - size.width < tWidth + padding) {
             // 换行
             size.width = 10;
-            size.height += Theight;
+            size.height += tHeigh + 10;
         }
         
         //        taskView.backgroundColor = [UIColor redColor];
         BlankFillModel *model = self.blankFillDataSource[i];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, TWidth, 20)];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, TWidth, TWidth)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tWidth, 20)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, tWidth, tWidth)];
         imageView.image = [UIImage imageNamed:@"corect_pic"];
         UIButton *blankfillBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        blankfillBtn.frame = CGRectMake(0, 20, TWidth, TWidth);
+        blankfillBtn.frame = CGRectMake(0, 20, tWidth, tWidth);
         
         
         NSString *titleString;
@@ -736,31 +733,33 @@
     CGSize size = CGSizeMake(10, 30);
     CGFloat padding = 10;
     
-    CGFloat TWidth = 40;
-    CGFloat Theight = 60;
+    NSInteger num = 6;
+    
+    CGFloat tWidth = (cell.bg_view.width - padding *(num + 1)) / num;
+    CGFloat tHeigh = tWidth + 20;
     
     //      NSLog(@"%@", self.choiceArr);
     
     for (int i = 0; i < arr.count; i++) {
         
         UIView *taskView = [[UIView alloc] init];
-        taskView.frame = CGRectMake(size.width, size.height, TWidth, Theight);
+        taskView.frame = CGRectMake(size.width, size.height, tWidth, tHeigh);
         
-        size.width += TWidth + padding;
+        size.width += tWidth + padding;
         
-        if (cell.bg_view.width - size.width < TWidth + padding) {
+        if (cell.bg_view.width - size.width < tWidth + padding) {
             // 换行
             size.width = 10;
-            size.height += Theight;
+            size.height += tHeigh + 10;
         }
         
         //        taskView.backgroundColor = [UIColor redColor];
         FinshedModel *model = arr[i];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, TWidth, 20)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, tWidth, tWidth, 20)];
         
         UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        imageBtn.frame = CGRectMake(0, 0, TWidth, TWidth);
+        imageBtn.frame = CGRectMake(0, 0, tWidth, tWidth);
         
         if ([model.ImageAvatar isEqual:[NSNull null]]) {
             [imageBtn setImage:[UIImage imageNamed:@"stu_pic"] forState:UIControlStateNormal];
@@ -798,31 +797,33 @@
     CGSize size = CGSizeMake(10, 30);
     CGFloat padding = 10;
     
-    CGFloat TWidth = 40;
-    CGFloat Theight = 60;
+    NSInteger num = 6;
+    
+    CGFloat tWidth = (cell.bg_view.width - padding *(num + 1)) / num;
+    CGFloat tHeigh = tWidth + 20;
     
     //      NSLog(@"%@", self.choiceArr);
     
     for (int i = 0; i < arr.count; i++) {
         
         UIView *taskView = [[UIView alloc] init];
-        taskView.frame = CGRectMake(size.width, size.height, TWidth, Theight);
+        taskView.frame = CGRectMake(size.width, size.height, tWidth, tHeigh);
         
-        size.width += TWidth + padding;
+        size.width += tWidth + padding;
         
-        if (cell.bg_view.width - size.width < TWidth + padding) {
+        if (cell.bg_view.width - size.width < tWidth + padding) {
             // 换行
             size.width = 10;
-            size.height += Theight;
+            size.height += tHeigh;
         }
         
         //        taskView.backgroundColor = [UIColor redColor];
         FinshedModel *model = arr[i];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, TWidth, 20)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, tWidth, tWidth, 20)];
         
         UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        imageBtn.frame = CGRectMake(0, 0, TWidth, TWidth);
+        imageBtn.frame = CGRectMake(0, 0, tWidth, tWidth);
         
         if ([model.ImageAvatar isEqual:[NSNull null]]) {
             [imageBtn setImage:[UIImage imageNamed:@"stu_pic"] forState:UIControlStateNormal];
@@ -844,7 +845,7 @@
         
         [cell.bg_view addSubview:taskView];
     }
-    self.unfinishedCellHeight = size.height + 80 + 50;
+    self.unfinishedCellHeight = size.height + 80 + 30;
     cell.showMoreBtn.hidden = YES;
 
     
