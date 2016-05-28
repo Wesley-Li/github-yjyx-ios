@@ -328,31 +328,33 @@
     CGSize size = CGSizeMake(10, 30);
     CGFloat padding = 10;
     
-    CGFloat TWidth = 40;
-    CGFloat Theight = 60;
+    NSInteger num = 7;
+    
+    CGFloat tWidth = (cell.contentView.width - padding *(num + 1)) / num;
+    CGFloat tHeigh = tWidth + 20;
     
     //      NSLog(@"%@", self.choiceArr);
     
     for (int i = 0; i < array.count; i++) {
         
         UIView *taskView = [[UIView alloc] init];
-        taskView.frame = CGRectMake(size.width, size.height, TWidth, Theight);
+        taskView.frame = CGRectMake(size.width, size.height, tWidth, tHeigh);
         
-        size.width += TWidth + padding;
+        size.width += tWidth + padding;
         
-        if (cell.contentView.width - size.width < TWidth + padding) {
+        if (cell.contentView.width - size.width < tWidth + padding) {
             // 换行
             size.width = 10;
-            size.height += Theight;
+            size.height += tHeigh;
         }
         
         //        taskView.backgroundColor = [UIColor redColor];
         TaskConditonModel *model = array[i];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, TWidth, 20)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tWidth, 20)];
         
         UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        imageBtn.frame = CGRectMake(0, 20, TWidth, TWidth);
+        imageBtn.frame = CGRectMake(0, 20, tWidth, tWidth);
         
         
         if ([model.rightOrWrong isEqual:@0]) {
@@ -404,32 +406,33 @@
     
     CGSize size = CGSizeMake(10, 30);
     CGFloat padding = 10;
+    NSInteger num = 7;
     
-    CGFloat TWidth = 40;
-    CGFloat Theight = 60;
+    CGFloat tWidth = (cell.contentView.width - padding *(num + 1)) / num;
+    CGFloat tHeigh = tWidth + 20;
     
     //      NSLog(@"%@", self.choiceArr);
     
     for (int i = 0; i < array.count; i++) {
         
         UIView *taskView = [[UIView alloc] init];
-        taskView.frame = CGRectMake(size.width, size.height, TWidth, Theight);
+        taskView.frame = CGRectMake(size.width, size.height, tWidth, tHeigh);
         
-        size.width += TWidth + padding;
+        size.width += tWidth + padding;
         
-        if (cell.contentView.width - size.width < TWidth + padding) {
+        if (cell.contentView.width - size.width < tWidth + padding) {
             // 换行
             size.width = 10;
-            size.height += Theight;
+            size.height += tHeigh;
         }
         
         //        taskView.backgroundColor = [UIColor redColor];
         TaskConditonModel *model = array[i];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, TWidth, 20)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tWidth, 20)];
         
         UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        imageBtn.frame = CGRectMake(0, 20, TWidth, TWidth);
+        imageBtn.frame = CGRectMake(0, 20, tWidth, tWidth);
         
         
         
