@@ -288,6 +288,9 @@
             if ([responseObject[@"retcode"] isEqual:@0]) {
                 
                 [SVProgressHUD showSuccessWithStatus:@"感谢您的反馈"];
+                [SVProgressHUD dismissWithDelay:1.5];
+
+                [self performSelector:@selector(goBack) withObject:nil afterDelay:2.0];
                 
                 
             }else {
@@ -312,6 +315,8 @@
     
     
 }
+
+
 
 
 

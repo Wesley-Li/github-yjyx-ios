@@ -201,11 +201,18 @@
                             
                             NSString *desPassWord = [_passWordTF.text des3:kCCEncrypt withPass:@"12345678asdf"];
                             
-                            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", desPassWord,@"username",_passWordTF.text,@"password", nil];
+                            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", _uesrNameTF.text,@"username",desPassWord,@"password", nil];
                             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
                             [SYS_CACHE synchronize];
                         }else{
-                            [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                            if ([result[@"msg"] length] > 20) {
+                                [self.view makeToast:@"您的网络可能不太好,请重试!" duration:1.0 position:SHOW_CENTER complete:nil];
+
+                            }else {
+                                
+                                [self.view makeToast:result[@"msg"]duration:1.0 position:SHOW_CENTER complete:nil];
+                            
+                            }
                         }
                     }else{
                         [self.view makeToast:[error description] duration:3.0 position:SHOW_CENTER complete:nil];
@@ -241,7 +248,15 @@
 //
                         }else {
                             
-                            [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                            if ([result[@"msg"] length] > 20) {
+                                [self.view makeToast:@"您的网络可能不太好,请重试!" duration:1.0 position:SHOW_CENTER complete:nil];
+                                
+                            }else {
+                                
+                                [self.view makeToast:result[@"msg"]duration:1.0 position:SHOW_CENTER complete:nil];
+                                
+                            }
+
                         }
                     }else {
                         
