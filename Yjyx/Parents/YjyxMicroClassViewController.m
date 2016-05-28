@@ -231,6 +231,7 @@
     [videoImage addGestureRecognizer:tap];
     [self.view addSubview:videoImage];
     
+    // scrollview
     UIScrollView *contentScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + playerFrame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - playerFrame.size.height -64)];
     [self.view addSubview:contentScroll];
     
@@ -261,6 +262,7 @@
     _choices= [[questionDic objectForKey:@"choice"] objectForKey:@"questionlist"];
     _blankfills = [[questionDic objectForKey:@"blankfill"] objectForKey:@"questionlist"];
     
+    // 选择题和填空题的内容,tableviw
     if (_choices.count > 0 || _blankfills.count > 0) {
         _subjectTable = [[UITableView alloc] initWithFrame:CGRectMake(0, knowledgeView.frame.origin.y+knowledgeView.frame.size.height +10, SCREEN_WIDTH, 999) style:UITableViewStylePlain];
         _subjectTable.dataSource = self;
@@ -288,8 +290,9 @@
         [contentStr appendString:[NSString stringWithFormat:@"%d、 %@\n",(i+1),[[blankfillAry objectAtIndex:i] objectForKey:@"content"]]];
     }
     
+    // 问题背景view
     UIView *questionView = [[UIView alloc] initWithFrame:CGRectMake(0, knowledgeView.frame.origin.y+knowledgeView.frame.size.height+10, SCREEN_WIDTH , 10000)];
-    questionView.backgroundColor = [UIColor whiteColor];
+    questionView.backgroundColor = [UIColor redColor];
     
     UILabel *hometitle = [UILabel labelWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"作业内容"];
     [questionView addSubview:hometitle];
@@ -305,9 +308,10 @@
     tempLable1.componentsAndPlainText = componentsDS1;
     CGSize optimalSize1 = [tempLable1 optimumSize];
     
+    
     CGFloat height = ([_choices count]+[_blankfills count]) *10;
     
-    contentScroll.contentSize = CGSizeMake(SCREEN_WIDTH, questionView.frame.origin.y + optimalSize1.height+height + 30);
+    contentScroll.contentSize = CGSizeMake(SCREEN_WIDTH, questionView.frame.origin.y + optimalSize1.height + height + 30);
     
 }
 #pragma mark -UITableViewDelegate
