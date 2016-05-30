@@ -28,6 +28,8 @@
     NSIndexPath *currentIndexPath;
     BOOL isSmallScreen;
     BOOL isPlay;
+    
+    NSInteger rows;
 }
 
 @property (nonatomic, strong) NSDictionary *dic;
@@ -319,9 +321,9 @@
 
 
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"gettaskonequestiondetail", @"action", self.taskid, @"taskid", self.qtype, @"qtype", self.qid, @"qid", nil];
-    NSLog(@"%@", dic);
+    NSLog(@"--------%@", dic);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
+
     [manager GET:[BaseURL stringByAppendingString:TEACHER_SCAN_THE_TASK_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         NSLog(@"%@", responseObject);
@@ -329,6 +331,23 @@
         if ([responseObject[@"retcode"] isEqual: @0]) {
             
             self.dic = [NSDictionary dictionaryWithDictionary:responseObject];
+            
+            if ([responseObject[@"question"] allKeys].count == 0) {
+                
+                rows = 0;
+                
+                UIImageView *wrongImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wrong"]];
+                wrongImage.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+                
+                self.tableView.tableFooterView = wrongImage;
+                self.tableView.scrollEnabled = NO;
+
+                
+            }else {
+            
+                rows = 5;
+            }
+           
             
         }else {
             
@@ -338,6 +357,7 @@
         [self.tableView reloadData];
         [SVProgressHUD showSuccessWithStatus:@"数据加载成功"];
         [SVProgressHUD dismissWithDelay:0.8];
+        
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         
@@ -367,7 +387,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 5;
+    return rows;
 }
 
 
@@ -471,7 +491,7 @@
 
 -(void)startPlayVideo:(UIButton *)sender{
     currentIndexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
-    NSLog(@"currentIndexPath.row = %ld",currentIndexPath.row);
+    NSLog(@"currentIndexPath.row = %ld",(long)currentIndexPath.row);
     
     isPlay = YES;
     
