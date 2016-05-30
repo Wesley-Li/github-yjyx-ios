@@ -323,29 +323,36 @@
 - (void)cell:(ChoiceCell *)cell addSubviewsWithChoiceArray:(NSMutableArray *)array {
 
     
-    cell.titleLabel.text = [NSString stringWithFormat:@"选择题答题情况(%ld)", _choiceArray.count];
+    cell.titleLabel.text = [NSString stringWithFormat:@"选择题答题情况(%ld)", (unsigned long)array.count];
     
     CGSize size = CGSizeMake(10, 30);
     CGFloat padding = 10;
     
     NSInteger num = 7;
     
-    CGFloat tWidth = (cell.contentView.width - padding *(num + 1)) / num;
+    CGFloat tWidth = (cell.contentView.frame.size.width - padding *(num + 1)) / num;
     CGFloat tHeigh = tWidth + 20;
     
     //      NSLog(@"%@", self.choiceArr);
     
     for (int i = 0; i < array.count; i++) {
         
-        UIView *taskView = [[UIView alloc] init];
+        UIView *taskView = [[UIView alloc] init];        
         taskView.frame = CGRectMake(size.width, size.height, tWidth, tHeigh);
         
         size.width += tWidth + padding;
+        NSLog(@"%f", size.width);
         
-        if (cell.contentView.width - size.width < tWidth + padding) {
+        if (cell.contentView.width - size.width <= 0) {
+            
+            NSLog(@"%f-----%f", cell.contentView.width - size.width, tWidth + padding);
+            
             // 换行
             size.width = 10;
-            size.height += tHeigh;
+            if (array.count - i > 1) {
+                size.height += tHeigh + 10;
+            }
+
         }
         
         //        taskView.backgroundColor = [UIColor redColor];
@@ -402,7 +409,7 @@
 - (void)cell:(BlankfillCell *)cell addSubviewsWithBlankfillArray:(NSMutableArray *)array {
 
 
-    cell.titleLabel.text = [NSString stringWithFormat:@"填空题答题情况(%ld)", _blankfillArray.count];
+    cell.titleLabel.text = [NSString stringWithFormat:@"填空题答题情况(%ld)", (unsigned long)array.count];
     
     CGSize size = CGSizeMake(10, 30);
     CGFloat padding = 10;
@@ -420,7 +427,7 @@
         
         size.width += tWidth + padding;
         
-        if (cell.contentView.width - size.width < tWidth + padding) {
+        if (cell.contentView.width - size.width <= 0) {
             // 换行
             size.width = 10;
             size.height += tHeigh;

@@ -582,7 +582,7 @@
         
         size.width += tWidth + padding;
         
-        if (cell.bg_view.width - size.width < tWidth + padding) {
+        if (cell.bg_view.width - size.width <= 0) {
             // 换行
             size.width = 10;
             
@@ -667,7 +667,7 @@
         
         size.width += tWidth + padding;
         
-        if (cell.bg_view.width - size.width < tWidth + padding) {
+        if (cell.bg_view.width - size.width <= 0) {
             // 换行
             size.width = 10;
             size.height += tHeigh + 10;
@@ -728,7 +728,7 @@
 #pragma mark - 已上交作业cell赋值方法
 - (void)cell:(SubmitCell *)cell addSubViewsWithFinishedArr:(NSMutableArray *)arr {
     
-    cell.submitLabel.text = [NSString stringWithFormat:@"已交作业的同学数(%ld/%ld)", _finishedArr.count, _unfinishedArr.count + _finishedArr.count];
+    cell.submitLabel.text = [NSString stringWithFormat:@"已交作业的同学数(%ld/%ld)", (unsigned long)_finishedArr.count, (unsigned long)_unfinishedArr.count + (unsigned long)_finishedArr.count];
     
     CGSize size = CGSizeMake(10, 30);
     CGFloat padding = 10;
@@ -747,7 +747,7 @@
         
         size.width += tWidth + padding;
         
-        if (cell.bg_view.width - size.width < tWidth + padding) {
+        if (cell.bg_view.width - size.width <= 0) {
             // 换行
             size.width = 10;
             size.height += tHeigh + 10;
@@ -792,7 +792,7 @@
 #pragma mark - 未上交作业cell赋值方法
 - (void)cell:(UnSubmitCell *)cell addSubViewsWithUnfinishedArr:(NSMutableArray *)arr {
     
-    cell.submitLabel.text = [NSString stringWithFormat:@"未交作业的同学数(%ld/%ld)", _unfinishedArr.count, _unfinishedArr.count + _finishedArr.count];
+    cell.submitLabel.text = [NSString stringWithFormat:@"未交作业的同学数(%ld/%ld)", (unsigned long)_unfinishedArr.count, (unsigned long)_unfinishedArr.count + (unsigned long)_finishedArr.count];
     
     CGSize size = CGSizeMake(10, 30);
     CGFloat padding = 10;
@@ -811,7 +811,7 @@
         
         size.width += tWidth + padding;
         
-        if (cell.bg_view.width - size.width < tWidth + padding) {
+        if (cell.bg_view.width - size.width <= 0) {
             // 换行
             size.width = 10;
             size.height += tHeigh;
