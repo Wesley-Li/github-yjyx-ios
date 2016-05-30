@@ -643,6 +643,8 @@
     NextVC.taskid = self.taskModel.t_id;
     NextVC.qtype = @1;
     NextVC.qid = [self.choiceDataSource[sender.tag - 300] b_id];
+    NextVC.C_count = [self.choiceDataSource[sender.tag - 300] C_count];
+    NextVC.W_count = [self.choiceDataSource[sender.tag - 300] W_count];
     
     [self.navigationController pushViewController:NextVC animated:YES];
 }
@@ -720,7 +722,8 @@
     
     NextVC.qtype = @2;
     NextVC.qid = [self.blankFillDataSource[sender.tag - 200] b_id];
-    
+    NextVC.C_count = [self.blankFillDataSource[sender.tag - 200] C_count];
+    NextVC.W_count = [self.blankFillDataSource[sender.tag - 200] W_count];
     [self.navigationController pushViewController:NextVC animated:YES];
     
 }
