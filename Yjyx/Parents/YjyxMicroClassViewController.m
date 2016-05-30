@@ -15,6 +15,9 @@
     WMPlayer *wmPlayer;
     CGRect playerFrame;
     UIImageView *videoImage;
+    UIScrollView *_contentScroll;
+    UIView *_knowledgeView;
+    UILabel *_namelb;
 
 }
 
@@ -221,11 +224,13 @@
     playerFrame = CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
     wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:videoStr];
     wmPlayer.closeBtn.hidden = YES;
+    wmPlayer.layer.masksToBounds = YES;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
     [self.view addSubview:wmPlayer];
     [wmPlayer.player pause];
     
    videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
     videoImage.image = [UIImage imageNamed:@"Common_video.png"];
+    videoImage.layer.masksToBounds = YES;
     videoImage.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playVideo)];
     [videoImage addGestureRecognizer:tap];
@@ -234,15 +239,16 @@
     // scrollview
     UIScrollView *contentScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + playerFrame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - playerFrame.size.height -64)];
     [self.view addSubview:contentScroll];
-    
+    _contentScroll = contentScroll;
     UILabel * namelb = [UILabel labelWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:[lessionDic objectForKey:@"name"]];
+    _namelb = namelb;
     namelb.backgroundColor = [UIColor whiteColor];
     
     [contentScroll addSubview:namelb];
     
     UIView *knowledgeView = [[UIView alloc] initWithFrame:CGRectMake(0, namelb.frame.origin.y + 50, SCREEN_WIDTH, 60)];
     knowledgeView.backgroundColor = [UIColor whiteColor];
-    
+    _knowledgeView = knowledgeView;
     UILabel *title = [UILabel labelWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"知识清单"];
     [knowledgeView addSubview:title];
     
@@ -264,11 +270,12 @@
     
     // 选择题和填空题的内容,tableviw
     if (_choices.count > 0 || _blankfills.count > 0) {
-        _subjectTable = [[UITableView alloc] initWithFrame:CGRectMake(0, knowledgeView.frame.origin.y+knowledgeView.frame.size.height +10, SCREEN_WIDTH, 999) style:UITableViewStylePlain];
+        _subjectTable = [[UITableView alloc] initWithFrame:CGRectMake(0, knowledgeView.frame.origin.y+knowledgeView.frame.size.height +10, SCREEN_WIDTH, 1500) style:UITableViewStylePlain];
         _subjectTable.dataSource = self;
         _subjectTable.delegate = self;
         _subjectTable.userInteractionEnabled = NO;
         _subjectTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.automaticallyAdjustsScrollViewInsets = NO;
         [contentScroll addSubview:_subjectTable];
     }
     
@@ -392,6 +399,7 @@
         CGSize optimalSize = [templabel optimumSize];
         return optimalSize.height + 10;
     }
+  
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -422,7 +430,7 @@
             
             bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 5);
             [cell.contentView addSubview:bg];
-            
+            _contentScroll.contentSize = CGSizeMake(SCREEN_WIDTH, _subjectTable.contentSize.height + _namelb.frame.size.height + _knowledgeView.frame.size.height + 20);
             [bg addSubview:templabel];
         }else{
             NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
@@ -435,6 +443,7 @@
             
             bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 5);
             [cell.contentView addSubview:bg];
+            _contentScroll.contentSize = CGSizeMake(SCREEN_WIDTH, _subjectTable.contentSize.height + _namelb.frame.size.height + _knowledgeView.frame.size.height + 20);
             [bg addSubview:templabel];
         }
     }else{
@@ -447,9 +456,10 @@
         CGSize optimalSize = [templabel optimumSize];
         bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 5);
         [cell.contentView addSubview:bg];
+        _contentScroll.contentSize = CGSizeMake(SCREEN_WIDTH, _subjectTable.contentSize.height + _namelb.frame.size.height + _knowledgeView.frame.size.height + 20);
         [bg addSubview:templabel];
     }
-    
+   
     
     return cell;
 }
