@@ -204,6 +204,31 @@
     }];
 }
 
+//每次登陆异步获取题目统计
+-(void)asyncGetChildrenachievement:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
+{
+    NSString *cachePath = [USER_IMGCACHE stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[params objectForKey:@"cid"]]];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/parents/children/statistic/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            if (![fileManager fileExistsAtPath:cachePath]) {
+                [fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:nil];
+            }
+            NSDictionary *dic = (NSDictionary *)responseObject;
+            if ([[dic objectForKey:@"retcode"] integerValue] == 0) {
+                [dic writeToFile:[cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[params objectForKey:@"action"]]] atomically:YES];
+            }
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+}
+
 
 //获取小孩作业结构
 -(void)getChildrenTaskResult:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block

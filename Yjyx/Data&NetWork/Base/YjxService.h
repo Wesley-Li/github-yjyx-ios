@@ -49,6 +49,9 @@
 
 -(void)getChildrenachievement:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 
+//每次登陆异步获取题目统计
+-(void)asyncGetChildrenachievement:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
+
 -(void)getchildrenActivity:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 
 -(void)getChildrenTaskResult:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;

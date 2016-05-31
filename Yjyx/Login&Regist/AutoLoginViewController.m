@@ -39,6 +39,7 @@
                     [(AppDelegate *)SYS_DELEGATE fillViews];
                     [YjyxOverallData sharedInstance].parentInfo = [ParentEntity wrapParentWithdic:result];
                     [YjyxOverallData sharedInstance].parentInfo.phone = username;
+                    [self asyncGetChildrenStatistic];
                 }else{
                     LoginViewController *loginView = [[LoginViewController alloc] init];
                     UINavigationController* navigation = [[NavRootViewController alloc] initWithRootViewController:loginView];
@@ -93,9 +94,33 @@
         
     
     }
-    
-    
 }
+
+
+- (void)asyncGetChildrenStatistic
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        for (ChildrenEntity *entity in [YjyxOverallData sharedInstance].parentInfo.childrens) {
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"question",@"action",entity.cid,@"cid",@"20",@"count",nil];
+            [[YjxService sharedInstance] getChildrenachievement:dic withBlock:^(id result, NSError *error){
+            }];
+        }
+        
+        for (ChildrenEntity *entity in [YjyxOverallData sharedInstance].parentInfo.childrens) {
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"task",@"action",entity.cid,@"cid",@"20",@"count",nil];
+            [[YjxService sharedInstance] getChildrenachievement:dic withBlock:^(id result, NSError *error){
+            }];
+        }
+        
+        for (ChildrenEntity *entity in [YjyxOverallData sharedInstance].parentInfo.childrens) {
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"yjlesson",@"action",entity.cid,@"cid",@"20",@"count",nil];
+            [[YjxService sharedInstance] getChildrenachievement:dic withBlock:^(id result, NSError *error){
+            }];
+        }
+    });
+}
+
 
 /*
 

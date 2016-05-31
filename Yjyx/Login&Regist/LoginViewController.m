@@ -58,10 +58,6 @@
     _uesrNameTF.delegate = self;
     _passWordTF.delegate = self;
     
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showURL:)];
-    [self.view addGestureRecognizer:longPress];
-
-    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -197,6 +193,7 @@
                             [YjyxOverallData sharedInstance].parentInfo = [ParentEntity wrapParentWithdic:result];
                             [YjyxOverallData sharedInstance].parentInfo.phone = _uesrNameTF.text;
                             
+                            [self asyncGetChildrenStatistic];
                             // 在此处存储用户信息
                             
                             NSString *desPassWord = [_passWordTF.text des3:kCCEncrypt withPass:@"12345678asdf"];
@@ -279,23 +276,28 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
--(void)showURL:(UILongPressGestureRecognizer *)gesture
+- (void)asyncGetChildrenStatistic
 {
-//    if (serverView == nil) {
-//        serverView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
-//        serverView.backgroundColor = RGBACOLOR(220, 220, 220, 1);
-//        serverTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 150, SCREEN_WIDTH-40, 50)];
-//        serverTextField.borderStyle = UITextBorderStyleRoundedRect;
-//        serverTextField.placeholder = @"请输入服务器地址";
-//        serverTextField.delegate = self;
-//        [serverView addSubview:serverTextField];
-//        [self.view addSubview:serverView];
-//        [UIView animateWithDuration:0.3 animations:^{
-//            serverView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-//        } completion:^(BOOL finished){
-//        }];
-//    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        
+        for (ChildrenEntity *entity in [YjyxOverallData sharedInstance].parentInfo.childrens) {
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"question",@"action",entity.cid,@"cid",@"20",@"count",nil];
+            [[YjxService sharedInstance] getChildrenachievement:dic withBlock:^(id result, NSError *error){
+            }];
+        }
+        
+        for (ChildrenEntity *entity in [YjyxOverallData sharedInstance].parentInfo.childrens) {
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"task",@"action",entity.cid,@"cid",@"20",@"count",nil];
+            [[YjxService sharedInstance] getChildrenachievement:dic withBlock:^(id result, NSError *error){
+            }];
+        }
+        
+        for (ChildrenEntity *entity in [YjyxOverallData sharedInstance].parentInfo.childrens) {
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"yjlesson",@"action",entity.cid,@"cid",@"20",@"count",nil];
+            [[YjxService sharedInstance] getChildrenachievement:dic withBlock:^(id result, NSError *error){
+            }];
+        }
+    });
 }
 
 
