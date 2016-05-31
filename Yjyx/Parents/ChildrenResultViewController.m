@@ -655,7 +655,7 @@
     NSString *videoUrl;
     NSString *explantionStr;
     if (btn.tag/100 == 0) {//选择题
-        NSInteger index = btn.tag%100;
+        NSInteger index = btn.tag;
         NSString *key = [NSString stringWithFormat:@"%@",[[_resultchoices objectAtIndex:index] firstObject]];
         videoUrl = [[_choices objectForKey:key] objectForKey:@"videourl"];
         explantionStr = [[_choices objectForKey:key] objectForKey:@"explanation"];
