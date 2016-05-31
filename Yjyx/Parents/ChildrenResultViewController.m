@@ -327,7 +327,7 @@
             [cell.contentView addSubview:answerLb];
             
             UIButton *explainText = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 40, optimalSize.height+12, 60, 38)];
-            explainText.tag = indexPath.row+indexPath.section *10;
+            explainText.tag = indexPath.row;
             [explainText addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
             [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
             [cell.contentView addSubview:explainText];
@@ -447,7 +447,7 @@
             
             //解析图标显示
             UIButton *explainText = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 35, optimalSize.height+12, 60, 38)];
-            explainText.tag = indexPath.row+indexPath.section *100;
+            explainText.tag = indexPath.row+100;
             [explainText addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
             [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
             [cell.contentView addSubview:explainText];
@@ -569,7 +569,7 @@
 
         //解析图标显示
         UIButton *explainText = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 35, optimalSize.height+12, 60, 38)];
-        explainText.tag = indexPath.row+indexPath.section *100;
+        explainText.tag = indexPath.row+100;
         [explainText addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
         [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
         [cell.contentView addSubview:explainText];
