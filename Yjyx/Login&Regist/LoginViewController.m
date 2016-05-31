@@ -297,19 +297,19 @@
         
         for (ChildrenEntity *entity in [YjyxOverallData sharedInstance].parentInfo.childrens) {
             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"question",@"action",entity.cid,@"cid",@"20",@"count",nil];
-            [[YjxService sharedInstance] getChildrenachievement:dic withBlock:^(id result, NSError *error){
+            [[YjxService sharedInstance] asyncGetChildrenachievement:dic withBlock:^(id result, NSError *error){
             }];
         }
         
         for (ChildrenEntity *entity in [YjyxOverallData sharedInstance].parentInfo.childrens) {
             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"task",@"action",entity.cid,@"cid",@"20",@"count",nil];
-            [[YjxService sharedInstance] getChildrenachievement:dic withBlock:^(id result, NSError *error){
+            [[YjxService sharedInstance] asyncGetChildrenachievement:dic withBlock:^(id result, NSError *error){
             }];
         }
         
         for (ChildrenEntity *entity in [YjyxOverallData sharedInstance].parentInfo.childrens) {
             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"yjlesson",@"action",entity.cid,@"cid",@"20",@"count",nil];
-            [[YjxService sharedInstance] getChildrenachievement:dic withBlock:^(id result, NSError *error){
+            [[YjxService sharedInstance] asyncGetChildrenachievement:dic withBlock:^(id result, NSError *error){
             }];
         }
     });
