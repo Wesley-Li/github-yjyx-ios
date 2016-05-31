@@ -582,7 +582,7 @@
         
         size.width += tWidth + padding;
         
-        if (cell.bg_view.width - size.width < tWidth + padding) {
+        if (cell.bg_view.width - size.width <= 0) {
             // 换行
             size.width = 10;
             
@@ -643,6 +643,8 @@
     NextVC.taskid = self.taskModel.t_id;
     NextVC.qtype = @1;
     NextVC.qid = [self.choiceDataSource[sender.tag - 300] b_id];
+    NextVC.C_count = [self.choiceDataSource[sender.tag - 300] C_count];
+    NextVC.W_count = [self.choiceDataSource[sender.tag - 300] W_count];
     
     [self.navigationController pushViewController:NextVC animated:YES];
 }
@@ -667,7 +669,7 @@
         
         size.width += tWidth + padding;
         
-        if (cell.bg_view.width - size.width < tWidth + padding) {
+        if (cell.bg_view.width - size.width <= 0) {
             // 换行
             size.width = 10;
             size.height += tHeigh + 10;
@@ -720,7 +722,8 @@
     
     NextVC.qtype = @2;
     NextVC.qid = [self.blankFillDataSource[sender.tag - 200] b_id];
-    
+    NextVC.C_count = [self.blankFillDataSource[sender.tag - 200] C_count];
+    NextVC.W_count = [self.blankFillDataSource[sender.tag - 200] W_count];
     [self.navigationController pushViewController:NextVC animated:YES];
     
 }
@@ -728,7 +731,7 @@
 #pragma mark - 已上交作业cell赋值方法
 - (void)cell:(SubmitCell *)cell addSubViewsWithFinishedArr:(NSMutableArray *)arr {
     
-    cell.submitLabel.text = [NSString stringWithFormat:@"已交作业的同学数(%ld/%ld)", _finishedArr.count, _unfinishedArr.count + _finishedArr.count];
+    cell.submitLabel.text = [NSString stringWithFormat:@"已交作业的同学数(%ld/%ld)", (unsigned long)_finishedArr.count, (unsigned long)_unfinishedArr.count + (unsigned long)_finishedArr.count];
     
     CGSize size = CGSizeMake(10, 30);
     CGFloat padding = 10;
@@ -747,7 +750,7 @@
         
         size.width += tWidth + padding;
         
-        if (cell.bg_view.width - size.width < tWidth + padding) {
+        if (cell.bg_view.width - size.width <= 0) {
             // 换行
             size.width = 10;
             size.height += tHeigh + 10;
@@ -792,7 +795,7 @@
 #pragma mark - 未上交作业cell赋值方法
 - (void)cell:(UnSubmitCell *)cell addSubViewsWithUnfinishedArr:(NSMutableArray *)arr {
     
-    cell.submitLabel.text = [NSString stringWithFormat:@"未交作业的同学数(%ld/%ld)", _unfinishedArr.count, _unfinishedArr.count + _finishedArr.count];
+    cell.submitLabel.text = [NSString stringWithFormat:@"未交作业的同学数(%ld/%ld)", (unsigned long)_unfinishedArr.count, (unsigned long)_unfinishedArr.count + (unsigned long)_finishedArr.count];
     
     CGSize size = CGSizeMake(10, 30);
     CGFloat padding = 10;
@@ -811,7 +814,7 @@
         
         size.width += tWidth + padding;
         
-        if (cell.bg_view.width - size.width < tWidth + padding) {
+        if (cell.bg_view.width - size.width <= 0) {
             // 换行
             size.width = 10;
             size.height += tHeigh;

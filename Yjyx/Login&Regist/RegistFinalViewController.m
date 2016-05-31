@@ -32,7 +32,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+#pragma mark - 获取验证码
 -(IBAction)getRegisterCode:(id)sender
 {
     if (phoneText.text.length == 0) {
@@ -40,7 +40,7 @@
         return;
     }
     NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",phoneText.text];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",sign,@"sign",@"MREGISTER",@"stype",nil];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",[sign md5],@"sign",@"MREGISTER",@"stype",nil];
     [[YjxService sharedInstance] getSMSsendcode:dic withBlock:^(id result, NSError *error){//验证验证码
         [self.view hideToastActivity];
         if (result) {
@@ -57,6 +57,7 @@
     }];
 }
 
+#pragma mark - 倒计时走完
 -(void)checkCodeTimeout
 {
     timeLb.text = [NSString stringWithFormat:@"%ds",_second--];
@@ -64,16 +65,18 @@
         [self resetTimer];
     }
 }
-
+#pragma mark - 重置定时器
 -(void)resetTimer
 {
     _second = 60;
     codeText.text = @"";
     timeLb.text = @"获取验证码";
+    [verifyBtn setEnabled:YES];
     [_timer invalidate];
     _timer = nil;
 }
 
+#pragma mark - 确定
 -(IBAction)gosure:(id)sender
 {
     
@@ -97,6 +100,7 @@
     }
 }
 
+#pragma mark - 注册
 -(void)regist
 {
     [self.view makeToastActivity:SHOW_CENTER];

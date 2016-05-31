@@ -64,6 +64,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - 确定
 -(void)goSure
 {
     
@@ -88,6 +89,7 @@
     }
 }
 
+#pragma mark - 更改手机号
 -(void)changePhone
 {
     NSString *nickName = [_phoneTextfield.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -115,7 +117,7 @@
 
 }
 
-
+#pragma mark - 获取验证码
 -(IBAction)getChangeCode:(id)sender
 {
     if (![_phoneTextfield.text isPhone]) {
@@ -142,6 +144,7 @@
     }];
 }
 
+#pragma mark - 倒计时时间走完
 -(void)checkCodeTimeout
 {
     timeLb.text = [NSString stringWithFormat:@"%ds",_second--];
@@ -150,6 +153,7 @@
     }
 }
 
+#pragma mark - 重置定时器
 -(void)resetTimer
 {
     _second = 60;

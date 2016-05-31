@@ -33,7 +33,7 @@
     
 }
 
-// 配置导航栏按钮
+#pragma mark - 配置导航栏
 - (void)configureNavBar {
     
     self.title = @"修改手机号";
@@ -62,7 +62,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-// 确定
+#pragma mark - 确定
 - (void)goSure {
     
     if (_phoneTF.text.length == 0||_verificationTF.text.length == 0) {
@@ -89,7 +89,7 @@
     
 }
 
-// 更改手机号
+#pragma mark - 更改手机号
 - (void)changePhone {
 
     
@@ -131,7 +131,7 @@
 
 }
 
-
+#pragma mark - 获取验证码
 - (IBAction)getCodeBtn:(UIButton *)sender {
     
     if (![_phoneTF.text isPhone]) {
@@ -139,14 +139,14 @@
         return;
     }
     NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",_phoneTF.text];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneTF.text,@"target",sign,@"sign",@"MPASSWDCHG",@"stype",nil];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneTF.text,@"target",[sign md5],@"sign",@"MPASSWDCHG",@"stype",nil];
     [[YjxService sharedInstance] getSMSsendcode:dic withBlock:^(id result, NSError *error){//验证验证码
         [self.view hideToastActivity];
         if (result) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
                 //发送注册码按钮失效，防止频繁请求
-                self.timeLabel.text = [NSString stringWithFormat:@"%lds",_second--];
+                self.timeLabel.text = [NSString stringWithFormat:@"%lds",(long)_second--];
                 [self.getCodeBtn setEnabled:false];
             }else{
                 [self.view makeToast:@"获取验证码失败，请稍后重试" duration:1.0 position:SHOW_CENTER complete:nil];
@@ -160,15 +160,16 @@
     
 }
 
-
+#pragma mark - 倒计时时间走完
 -(void)checkCodeTimeout
 {
-    _timeLabel.text = [NSString stringWithFormat:@"%lds",_second--];
+    _timeLabel.text = [NSString stringWithFormat:@"%lds",(long)_second--];
     if (_second < 0) {
         [self resetTimer];
     }
 }
 
+#pragma mark - 重置时间器
 -(void)resetTimer
 {
     _second = 60;
