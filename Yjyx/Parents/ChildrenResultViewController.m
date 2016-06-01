@@ -323,7 +323,7 @@
           
             NSString *tureAnswer = [letterAry objectAtIndex:[[[_choices objectForKey:key] objectForKey:@"answer"] integerValue]];
             
-            UILabel *answerLb = [UILabel labelWithFrame:CGRectMake(10, optimalSize.height + 12, 70, 38) textColor:RGBACOLOR(100, 174, 99, 1) font:[UIFont systemFontOfSize:14] context:[NSString stringWithFormat:@"正确答案:%@",tureAnswer]];
+            UILabel *answerLb = [UILabel labelWithFrame:CGRectMake(10, optimalSize.height + 12, 110, 38) textColor:RGBACOLOR(100, 174, 99, 1) font:[UIFont systemFontOfSize:14] context:[NSString stringWithFormat:@"正确答案:%@",tureAnswer]];
             [cell.contentView addSubview:answerLb];
             
             UIButton *explainText = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 40, optimalSize.height+19, 60, 20)];
