@@ -326,18 +326,23 @@
             UILabel *answerLb = [UILabel labelWithFrame:CGRectMake(10, optimalSize.height + 12, 70, 38) textColor:RGBACOLOR(100, 174, 99, 1) font:[UIFont systemFontOfSize:14] context:[NSString stringWithFormat:@"正确答案:%@",tureAnswer]];
             [cell.contentView addSubview:answerLb];
             
-            UIButton *explainText = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 40, optimalSize.height+12, 60, 38)];
+            UIButton *explainText = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 40, optimalSize.height+19, 60, 20)];
             explainText.tag = indexPath.row;
             [explainText addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
-            [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
+//            [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
+            [explainText setTitle:@"解题方法" forState:UIControlStateNormal];
+            [explainText setCornerRadius:5];
+            explainText.titleLabel.font = [UIFont systemFontOfSize:12];
+            explainText.backgroundColor = RGBACOLOR(22, 156, 111, 1);
             [cell.contentView addSubview:explainText];
             
-            if ([[[_choices objectForKey:key] objectForKey:@"showview"] integerValue] == 0) {
+            
+            if ([[[_choices objectForKey:key] objectForKey:@"videourl"] length] == 0&&[[[_choices objectForKey:key] objectForKey:@"explanation"] length] == 0) {
                 explainText.hidden = YES;
             }else{
                 explainText.hidden = NO;
             }
-            
+
             NSString *myanswer1 = [[NSString alloc] initWithFormat:@""];
             NSArray *resultary = [[_resultchoices objectAtIndex:indexPath.row] objectAtIndex:1];
             for (int i = 0; i< [resultary count]; i++) {
@@ -355,7 +360,7 @@
 
             NSRange range = [myanswer rangeOfString:myanswer1];
             if (isture) {
-                [attributeString addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:range];
+                [attributeString addAttribute:NSForegroundColorAttributeName value:RGBACOLOR(100, 174, 99, 1) range:range];
             }else{
                 [attributeString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:range];
             }
@@ -450,10 +455,14 @@
             
             
             //解析图标显示
-            UIButton *explainText = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 35, optimalSize.height+12, 60, 38)];
+            UIButton *explainText = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 35, optimalSize.height+19, 60, 20)];
             explainText.tag = indexPath.row+100;
             [explainText addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
-            [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
+            [explainText setTitle:@"解题方法" forState:UIControlStateNormal];
+            [explainText setCornerRadius:5];
+            explainText.titleLabel.font = [UIFont systemFontOfSize:12];
+            explainText.backgroundColor = RGBACOLOR(22, 156, 111, 1);
+//            [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
             [cell.contentView addSubview:explainText];
             
             if ([[[_blankfills objectForKey:key] objectForKey:@"videourl"] length] == 0&&[[[_blankfills objectForKey:key] objectForKey:@"explanation"] length] == 0) {
@@ -572,10 +581,14 @@
         
 
         //解析图标显示
-        UIButton *explainText = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 35, optimalSize.height+12, 60, 38)];
+        UIButton *explainText = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 35, optimalSize.height+19, 60, 20)];
         explainText.tag = indexPath.row+100;
         [explainText addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
-        [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
+        [explainText setTitle:@"解题方法" forState:UIControlStateNormal];
+        [explainText setCornerRadius:5];
+        explainText.titleLabel.font = [UIFont systemFontOfSize:12];
+        explainText.backgroundColor = RGBACOLOR(22, 156, 111, 1);
+//        [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
         [cell.contentView addSubview:explainText];
         
         if ([[[_blankfills objectForKey:key] objectForKey:@"videourl"] length] == 0&&[[[_blankfills objectForKey:key] objectForKey:@"explanation"] length] == 0) {
