@@ -28,7 +28,8 @@
     NSIndexPath *currentIndexPath;
     BOOL isSmallScreen;
     BOOL isPlay;
-    
+    NSString *_explanation;
+    NSString *_videourl;
     NSInteger rows;
 }
 
@@ -270,8 +271,11 @@
  */
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     
+    self.view.backgroundColor = RGBACOLOR(239, 239, 244,1);
     UIButton *goBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    goBackBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
     [goBackBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [goBackBtn setImage:[UIImage imageNamed:@"nav_btn_back"] forState:UIControlStateNormal];
     [goBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -311,7 +315,7 @@
                                                object:nil
      ];
     
-    
+//    self.tableView.tableFooterView = [[UIView alloc] init];
 
 }
 
@@ -324,10 +328,14 @@
     NSLog(@"--------%@", dic);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
-    [manager GET:[BaseURL stringByAppendingString:TEACHER_SCAN_THE_TASK_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [manager GET:[BaseURL stringByAppendingString:TEACHER_SCAN_THE_TASK_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, NSDictionary *_Nonnull responseObject) {
         
         NSLog(@"%@", responseObject);
-        
+        _explanation = responseObject[@"question"][@"explanation"];
+        _videourl = responseObject[@"question"][@"videourl"];
+        BOOL isSuccess = [responseObject writeToFile:@"/Users/wangdapeng/Desktop/yangbo/12.plist" atomically:NO];
+        [responseObject writeToFile:@"/Users/wangdapeng/Desktop/文件/12.plist" atomically:YES];
+        NSLog(@"%zd", isSuccess);
         if ([responseObject[@"retcode"] isEqual: @0]) {
             
             self.dic = [NSDictionary dictionaryWithDictionary:responseObject];
@@ -343,7 +351,15 @@
                 self.tableView.scrollEnabled = NO;
 
                 
-            }else {
+            }
+//            else if([responseObject[@"question"][@"videourl"] isEqualToString: @"" ]&& [responseObject[@"question"][@"explanation"] isEqualToString: @""]){
+//                rows = 3;
+//            
+//            }else if([responseObject[@"question"][@"videourl"] isEqualToString: @"" ]|| [responseObject[@"question"][@"explanation"] isEqualToString: @""]){
+//                rows = 4;
+//                
+//            }
+            else {
             
                 rows = 5;
             }
@@ -424,11 +440,11 @@
     
         self.solutionCell = [tableView dequeueReusableCellWithIdentifier:KSolutionCell forIndexPath:indexPath];
         self.solutionCell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_solutionCell setSolutionValueWithDiction:_dic];
        
         return _solutionCell;
-    }else {
+    }else{
     
         self.videoCell = [tableView dequeueReusableCellWithIdentifier:KVideoCell forIndexPath:indexPath];
         
@@ -484,7 +500,7 @@
         }
         return _videoCell;
     }
-   
+    
     
 }
 
@@ -613,17 +629,22 @@
         return _taskCell.height;
     }else if (indexPath.row == 1) {
 
-        
+        return 0;
         return _AnswerSituationCell.height;
     }else if (indexPath.row == 2) {
-
+//        return 0   ;
         return _correctCell.height;
     }else if (indexPath.row == 3) {
+        if ([_explanation isEqualToString:@""]) {
 
+            return 0;
+        }
         return _solutionCell.height;
     }else {
-
-        return (SCREEN_WIDTH)*184/320;
+        if([_videourl isEqualToString:@""] ){
+            return 0;
+        }
+        return (SCREEN_WIDTH)*184/320 + 20;
     }
 
 }

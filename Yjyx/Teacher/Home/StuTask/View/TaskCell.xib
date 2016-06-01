@@ -14,8 +14,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="493" height="159"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="难度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmq-3K-3I2">
-                        <rect key="frame" x="10" y="134" width="473" height="20"/>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrt-Ze-wYQ">
+                        <rect key="frame" x="0.0" y="158" width="493" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="OQv-ND-tmR"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="难度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmq-3K-3I2">
+                        <rect key="frame" x="8" y="131" width="473" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="mED-Lw-4IL"/>
                         </constraints>
@@ -25,9 +32,12 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="xrt-Ze-wYQ" secondAttribute="trailing" id="3ZA-Io-CDE"/>
+                    <constraint firstItem="xrt-Ze-wYQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Hz4-d9-vUd"/>
                     <constraint firstAttribute="trailing" secondItem="wmq-3K-3I2" secondAttribute="trailing" constant="10" id="VMv-gR-8QF"/>
                     <constraint firstItem="wmq-3K-3I2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="jS3-Kp-7Fb"/>
                     <constraint firstAttribute="bottom" secondItem="wmq-3K-3I2" secondAttribute="bottom" constant="5" id="vHU-iu-1A8"/>
+                    <constraint firstAttribute="bottom" secondItem="xrt-Ze-wYQ" secondAttribute="bottom" id="xyP-wO-8A6"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

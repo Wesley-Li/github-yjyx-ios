@@ -110,6 +110,14 @@
     
     
 }
+- (void)setFrame:(CGRect)frame
+{
+    CGRect rect = frame;
+    rect.size.height -= 1;
+    frame = rect;
+    [super setFrame: frame];
+}
+
 
 - (void)setBlankfillValueWithDictionary:(NSDictionary *)dic {
     

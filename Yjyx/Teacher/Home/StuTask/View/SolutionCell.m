@@ -12,6 +12,7 @@
 @interface SolutionCell ()
 
 
+@property (weak, nonatomic) IBOutlet UILabel *title_label;
 
 
 @end
@@ -31,8 +32,12 @@
     }
     
     NSString *htmlString = [dic[@"question"] objectForKey:@"explanation"];
+    if ([htmlString isEqualToString:@""]) {
+        self.title_label.text = @"";
+    }
     NSString *content = [htmlString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     RCLabel *contentLabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 40, SCREEN_WIDTH - 20, 500)];
+    
     contentLabel.font = [UIFont systemFontOfSize:12];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
     contentLabel.componentsAndPlainText = componentsDS;

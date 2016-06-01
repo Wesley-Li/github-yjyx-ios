@@ -3,26 +3,25 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="173" id="KGk-i7-Jjw" customClass="UnSubmitCell">
-            <rect key="frame" x="0.0" y="0.0" width="406" height="173"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="168" id="KGk-i7-Jjw" customClass="UnSubmitCell">
+            <rect key="frame" x="0.0" y="0.0" width="464" height="168"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="406" height="172"/>
+                <rect key="frame" x="0.0" y="0.0" width="464" height="167"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66f-M0-6ms">
-                        <rect key="frame" x="10" y="0.0" width="386" height="172"/>
+                        <rect key="frame" x="10" y="0.0" width="444" height="167"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R3Q-t7-7l0">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R3Q-t7-7l0">
                                 <rect key="frame" x="170" y="137" width="46" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="HGD-L4-5Fu"/>
-                                    <constraint firstAttribute="height" constant="30" id="WqT-ZZ-IKL"/>
+                                    <constraint firstAttribute="height" constant="30" id="Kjd-It-4wR"/>
+                                    <constraint firstAttribute="width" constant="46" id="wnr-Wg-bhK"/>
                                 </constraints>
                                 <state key="normal" image="list_btn_More.png"/>
                                 <state key="selected" image="list_btn_shutdown.png"/>
@@ -30,34 +29,29 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未交同学数" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JT8-hy-ova">
                                 <rect key="frame" x="20" y="5" width="193" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="iCH-OB-BZ4"/>
+                                    <constraint firstAttribute="height" constant="20" id="d9P-dk-uIK"/>
+                                    <constraint firstAttribute="width" constant="193" id="ygf-RT-fOV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="JT8-hy-ova" firstAttribute="width" secondItem="66f-M0-6ms" secondAttribute="width" multiplier="1:2" id="FKE-lr-UlT"/>
-                            <constraint firstAttribute="bottom" secondItem="R3Q-t7-7l0" secondAttribute="bottom" constant="5" id="MH3-Ea-Z7r"/>
-                            <constraint firstItem="JT8-hy-ova" firstAttribute="leading" secondItem="66f-M0-6ms" secondAttribute="leading" constant="20" id="X3Q-mB-MkM"/>
-                            <constraint firstItem="JT8-hy-ova" firstAttribute="top" secondItem="66f-M0-6ms" secondAttribute="top" constant="5" id="lkA-4h-gbo"/>
-                            <constraint firstItem="R3Q-t7-7l0" firstAttribute="centerX" secondItem="66f-M0-6ms" secondAttribute="centerX" id="qTb-Af-W0c"/>
-                            <constraint firstAttribute="trailing" secondItem="JT8-hy-ova" secondAttribute="trailing" constant="20" id="ypk-h8-3km"/>
+                            <constraint firstItem="JT8-hy-ova" firstAttribute="top" secondItem="66f-M0-6ms" secondAttribute="top" constant="5" id="5dA-hF-siY"/>
+                            <constraint firstItem="JT8-hy-ova" firstAttribute="leading" secondItem="66f-M0-6ms" secondAttribute="leading" constant="20" id="QGP-OA-jrn"/>
+                            <constraint firstAttribute="bottom" secondItem="R3Q-t7-7l0" secondAttribute="bottom" constant="5" id="RYX-Jt-NpT"/>
+                            <constraint firstItem="R3Q-t7-7l0" firstAttribute="centerX" secondItem="66f-M0-6ms" secondAttribute="centerX" id="hIq-ln-VER"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="ypk-h8-3km"/>
-                            </mask>
-                        </variation>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="66f-M0-6ms" secondAttribute="bottom" id="0Ig-Ej-Ngm"/>
-                    <constraint firstAttribute="trailing" secondItem="66f-M0-6ms" secondAttribute="trailing" constant="10" id="26m-fh-A4L"/>
-                    <constraint firstItem="66f-M0-6ms" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gzt-Ww-upE"/>
-                    <constraint firstItem="66f-M0-6ms" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="hZY-O3-Fnq"/>
+                    <constraint firstItem="66f-M0-6ms" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="KKH-Ft-0ny"/>
+                    <constraint firstAttribute="trailing" secondItem="66f-M0-6ms" secondAttribute="trailing" constant="10" id="NK0-ME-Z9i"/>
+                    <constraint firstItem="66f-M0-6ms" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="YRx-qs-4QC"/>
+                    <constraint firstAttribute="bottom" secondItem="66f-M0-6ms" secondAttribute="bottom" id="qI9-Q6-UWt"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -66,7 +60,7 @@
                 <outlet property="showMoreBtn" destination="R3Q-t7-7l0" id="eLM-Iw-szr"/>
                 <outlet property="submitLabel" destination="JT8-hy-ova" id="7Sp-hk-smS"/>
             </connections>
-            <point key="canvasLocation" x="320" y="430.5"/>
+            <point key="canvasLocation" x="335" y="359"/>
         </tableViewCell>
     </objects>
     <resources>
