@@ -45,8 +45,12 @@
     CGSize optimalSize = [contentLabel optimumSize];
     self.height = optimalSize.height + 15 + 30;
     [self.contentView addSubview:contentLabel];
-    
-    NSInteger level = [[dic[@"question"] objectForKey:@"level"] integerValue];
+    NSInteger level;
+    if (dic[@"question"][@"level"] == [NSNull null]) {
+         level = 1;
+    }else{
+     level = [[dic[@"question"] objectForKey:@"level"] integerValue];
+    }
     switch (level) {
         case 1:
             self.dificultyLabel.text = @"难度:简单";
@@ -67,7 +71,13 @@
 
 
 
-
+- (void)setFrame:(CGRect)frame
+{
+    CGRect rect = frame;
+    rect.size.height -= 1;
+    frame = rect;
+    [super setFrame: frame];
+}
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

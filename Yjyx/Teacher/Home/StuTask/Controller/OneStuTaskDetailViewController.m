@@ -251,6 +251,7 @@
     [super viewDidLoad];
     
     UIButton *goBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    goBackBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
     [goBackBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [goBackBtn setImage:[UIImage imageNamed:@"nav_btn_back"] forState:UIControlStateNormal];
     [goBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

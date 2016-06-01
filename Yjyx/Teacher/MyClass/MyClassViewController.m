@@ -16,6 +16,7 @@
 @interface MyClassViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -45,12 +46,26 @@
 
 
     self.title = @"我的班级";
-    
+    [self refreshAll];
 //    [self.classListTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"1"];
+    
    
 }
-
-
+// 刷新
+- (void)refreshAll {
+    
+    // 头部刷新
+    [self.tableView addHeaderWithTarget:self action:@selector(headerRefresh)];
+  
+}
+- (void)headerRefresh
+{
+    self.dataSource = [[[StuDataBase shareStuDataBase]selectAllClass] mutableCopy];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView headerEndRefreshing];
+    });
+}
 #pragma mark - delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

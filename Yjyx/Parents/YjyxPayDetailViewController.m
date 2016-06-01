@@ -74,6 +74,10 @@
         childrenBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         childrenBtn.layer.borderWidth = 0.5;
         childrenBtn.layer.cornerRadius = 2;
+        CGRect childBtnTitle = [childrenBtn.titleLabel.text boundingRectWithSize:CGSizeMake(0, 0) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12]} context:nil];
+        CGRect rect = childrenBtn.frame;
+        rect.size.width = childBtnTitle.size.width + 5;
+        childrenBtn.frame = rect;
         [childrenBtn addTarget:self action:@selector(selectChildren:) forControlEvents:UIControlEventTouchUpInside];
         childrenBtn.tag = 100+i;
         [productView addSubview:childrenBtn];

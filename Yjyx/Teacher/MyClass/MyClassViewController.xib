@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyClassViewController">
             <connections>
                 <outlet property="classListTableView" destination="vgb-Kp-VaN" id="Pdw-f3-2Ui"/>
+                <outlet property="tableView" destination="vgb-Kp-VaN" id="Nar-eH-FSc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,7 +33,7 @@
                 <constraint firstItem="vgb-Kp-VaN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Eoc-a9-flx"/>
                 <constraint firstItem="vgb-Kp-VaN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ylK-Gj-RqY"/>
             </constraints>
-            <point key="canvasLocation" x="455" y="375"/>
+            <point key="canvasLocation" x="237" y="338"/>
         </view>
     </objects>
 </document>

@@ -38,10 +38,10 @@
 @property (nonatomic, strong) NSMutableArray *finishedArr;
 @property (nonatomic, strong) NSMutableArray *unfinishedArr;
 
-@property (nonatomic, assign) NSInteger choiceTaskCellHeight;
-@property (nonatomic, assign) NSInteger blankfillTaskCellHeight;
-@property (nonatomic, assign) NSInteger finishedCellHeight;
-@property (nonatomic, assign) NSInteger unfinishedCellHeight;
+@property (nonatomic, assign) CGFloat choiceTaskCellHeight;
+@property (nonatomic, assign) CGFloat blankfillTaskCellHeight;
+@property (nonatomic, assign) CGFloat submitCellHeight;
+@property (nonatomic, assign) CGFloat unsubmitCellHeight;
 
 @property (nonatomic, strong) TaskConditionTableViewCell *tcell;
 
@@ -82,6 +82,8 @@
     }
     return _unfinishedArr;
 }
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -92,6 +94,7 @@
     self.tableView.backgroundColor = RGBACOLOR(239, 239, 244,1);
     
     UIButton *goBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    goBackBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
     [goBackBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [goBackBtn setImage:[UIImage imageNamed:@"nav_btn_back"] forState:UIControlStateNormal];
     [goBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -457,10 +460,10 @@
                             }else {
                             
                                 if (_finishedArr.count == 0) {
-                                    return _unfinishedCellHeight;
+                                    return _unsubmitCellHeight;
                                 }else {
                                 
-                                    return _finishedCellHeight;
+                                    return _submitCellHeight;
                                 }
                             }
                         }else {
@@ -472,10 +475,10 @@
                                 return headerHeight;
                             }else if (indexPath.row == 2) {
                             
-                                return _finishedCellHeight;
+                                return _submitCellHeight;
                             }else {
                             
-                                return _unfinishedCellHeight;
+                                return _unsubmitCellHeight;
                             }
                         }
         
@@ -491,10 +494,10 @@
                         }else {
                             
                             if (_unfinishedArr.count == 0) {
-                                return _finishedCellHeight;
+                                return _submitCellHeight;
                             }else {
                                 
-                                return _unfinishedCellHeight;
+                                return _unsubmitCellHeight;
                             }
                         }
                     }else {
@@ -506,10 +509,10 @@
                             return headerHeight;
                         }else if (indexPath.row == 2) {
                             
-                            return _finishedCellHeight;
+                            return _submitCellHeight;
                         }else {
                             
-                            return _unfinishedCellHeight;
+                            return _unsubmitCellHeight;
                         }
 
                     }
@@ -529,16 +532,17 @@
             }else {
             
                 if (_unfinishedArr.count == 0) {
-                    return _finishedCellHeight;
+                    return _submitCellHeight;
                 }else {
                 
-                    return _unfinishedCellHeight;
+                    return _unsubmitCellHeight;
                 }
             }
         }else {
         
             if (indexPath.row == 0) {
                 return _choiceTaskCellHeight;
+                
             }else if (indexPath.row == 1) {
             
                 return _blankfillTaskCellHeight;
@@ -547,10 +551,10 @@
                 return headerHeight;
             }else if (indexPath.row == 3) {
             
-                return _finishedCellHeight;
+                return _submitCellHeight;
             }else {
             
-                return _unfinishedCellHeight;
+                return _unsubmitCellHeight;
             }
         }
     
@@ -570,6 +574,8 @@
     NSInteger num = 6;
     
     CGFloat tWidth = (cell.bg_view.width - padding *(num + 1)) / num;
+    NSLog(@"%.f", cell.bg_view.width);
+    NSLog(@"#######%.f", tWidth);
     CGFloat tHeigh = tWidth + 20;
     
     //    NSLog(@"%@", self.choiceArr);
@@ -658,6 +664,9 @@
     NSInteger num = 6;
     
     CGFloat tWidth = (cell.bg_view.width - padding *(num + 1)) / num;
+    
+    
+    
     CGFloat tHeigh = tWidth + 20;
     
     //      NSLog(@"%@", self.choiceArr);
@@ -731,6 +740,7 @@
 #pragma mark - 已上交作业cell赋值方法
 - (void)cell:(SubmitCell *)cell addSubViewsWithFinishedArr:(NSMutableArray *)arr {
     
+    
     cell.submitLabel.text = [NSString stringWithFormat:@"已交作业的同学数(%ld/%ld)", (unsigned long)_finishedArr.count, (unsigned long)_unfinishedArr.count + (unsigned long)_finishedArr.count];
     
     CGSize size = CGSizeMake(10, 30);
@@ -738,7 +748,7 @@
     
     NSInteger num = 6;
     
-    CGFloat tWidth = (cell.bg_view.width - padding *(num + 1)) / num;
+    CGFloat tWidth = (SCREEN_WIDTH - 20 - padding *(num + 1)) / num;
     CGFloat tHeigh = tWidth + 20;
     
     //      NSLog(@"%@", self.choiceArr);
@@ -750,14 +760,13 @@
         
         size.width += tWidth + padding;
         
-        if (cell.bg_view.width - size.width <= 0) {
+        if (SCREEN_WIDTH - 20 - size.width <= 0) {
             // 换行
             size.width = 10;
             size.height += tHeigh + 10;
         }
         
-        //        taskView.backgroundColor = [UIColor redColor];
-        FinshedModel *model = arr[i];
+        FinshedModel *model = _finishedArr[i];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, tWidth, tWidth, 20)];
         
         UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -788,7 +797,7 @@
     cell.showMoreBtn.hidden = YES;
     
     
-    self.finishedCellHeight = size.height + 80 + 30;
+    self.submitCellHeight = size.height + 80 + 30;
     
 }
 
@@ -801,8 +810,9 @@
     CGFloat padding = 10;
     
     NSInteger num = 6;
+   
+    CGFloat tWidth = (SCREEN_WIDTH - 20 - padding *(num + 1)) / num;
     
-    CGFloat tWidth = (cell.bg_view.width - padding *(num + 1)) / num;
     CGFloat tHeigh = tWidth + 20;
     
     //      NSLog(@"%@", self.choiceArr);
@@ -810,18 +820,20 @@
     for (int i = 0; i < arr.count; i++) {
         
         UIView *taskView = [[UIView alloc] init];
-        taskView.frame = CGRectMake(size.width, size.height, tWidth, tHeigh);
+        [cell.bg_view addSubview:taskView];
+        taskView.frame = CGRectMake(size.width, size.height, tWidth , tHeigh);
         
+        NSLog(@"%f", size.width );
         size.width += tWidth + padding;
-        
-        if (cell.bg_view.width - size.width <= 0) {
+        if (SCREEN_WIDTH - 20 - size.width <= 0) {
             // 换行
             size.width = 10;
             size.height += tHeigh;
         }
         
         //        taskView.backgroundColor = [UIColor redColor];
-        FinshedModel *model = arr[i];
+        FinshedModel *model = _unfinishedArr[i];
+      
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, tWidth, tWidth, 20)];
         
         UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -836,6 +848,7 @@
             
         }
         
+        
         imageBtn.tag = 200 + i;
 //        [imageBtn addTarget:self action:@selector(unImageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -846,13 +859,14 @@
         [taskView addSubview:label];
         [taskView addSubview:imageBtn];
         
-        [cell.bg_view addSubview:taskView];
+//        [cell.bg_view addSubview:taskView];
     }
-    self.unfinishedCellHeight = size.height + 80 + 30;
+    self.unsubmitCellHeight = size.height + 80 + 30 - 40;
     cell.showMoreBtn.hidden = YES;
-
     
+
 }
+
 
 
 #pragma mark - 点击已交头像进入详情

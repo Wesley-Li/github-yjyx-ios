@@ -24,24 +24,15 @@
                         <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="解题视频" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ke-71-cFN">
-                        <rect key="frame" x="10" y="156" width="100" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="100" id="3qi-uS-l7m"/>
-                            <constraint firstAttribute="height" constant="20" id="bu4-e6-tuQ"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="3ke-71-cFN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="2Ge-4x-ZV8"/>
                     <constraint firstItem="mCd-v8-pfp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="9ia-t6-5qj"/>
                     <constraint firstItem="mCd-v8-pfp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Cl1-Xe-0Pe"/>
-                    <constraint firstAttribute="bottom" secondItem="3ke-71-cFN" secondAttribute="bottom" constant="5" id="RdM-YX-nYF"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="title_label" destination="mCd-v8-pfp" id="U9a-4e-BX4"/>
+            </connections>
             <point key="canvasLocation" x="223.5" y="395"/>
         </tableViewCell>
     </objects>

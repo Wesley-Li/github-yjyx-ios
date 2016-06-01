@@ -14,8 +14,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="426" height="209"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IiT-xw-MrR">
-                        <rect key="frame" x="10" y="10" width="406" height="190"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IiT-xw-MrR">
+                        <rect key="frame" x="10" y="10" width="406" height="189"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="brooch.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y8m-Fp-I5E">
                                 <rect key="frame" x="-13" y="-5" width="35" height="35"/>
