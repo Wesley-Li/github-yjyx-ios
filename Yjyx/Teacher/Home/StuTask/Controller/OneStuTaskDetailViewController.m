@@ -29,6 +29,9 @@
     NSIndexPath *currentIndexPath;
     BOOL isSmallScreen;
     BOOL isPlay;
+    NSInteger _rows;
+    NSString *_explanation;
+    NSString *_videourl;
     
 }
 
@@ -285,7 +288,7 @@
      ];
     
 
-    
+    self.view.backgroundColor = RGBACOLOR(239, 239, 244,1);
 
 }
 
@@ -300,7 +303,8 @@
     [manager GET:[BaseURL stringByAppendingString:TEACHER_DETAIL_ONESTU_ONETASK_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         NSLog(@"%@", responseObject);
-        
+        _explanation = responseObject[@"question"][@"explanation"];
+        _videourl = responseObject[@"question"][@"videourl"];
         if ([responseObject[@"retcode"] isEqual: @0]) {
             
             self.dic = [NSDictionary dictionaryWithDictionary:responseObject];
@@ -309,11 +313,28 @@
             
             [self.tableView makeToast:[NSString stringWithFormat:@"%@", responseObject[@"msg"]] duration:1.0 position:SHOW_CENTER complete:nil];
         }
-        
+//        if ([responseObject[@"question"][@"videourl"] isEqualToString: @""]&&[responseObject[@"question"][@"explanation"] isEqualToString:@""]) {
+//            _rows = 0;
+//            UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+//            imageV.image = [UIImage imageNamed:@"wrong"];
+//            self.tableView.tableFooterView = (UIView *)imageV;
+//        }else{
+//            _rows = 5;
+//        }
+        _rows = 5;
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
+       
         
+        _rows = 0;
+        [self.tableView reloadData];
+        UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        
+        imageV.image = [UIImage imageNamed:@"wrong"];
+        
+        self.tableView.tableFooterView = (UIView *)imageV;
+        self.tableView.scrollEnabled = NO;
         NSLog(@"%@", error);
         
     }];
@@ -341,7 +362,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 5;
+    return _rows;
 }
 
 
@@ -350,6 +371,7 @@
     if (indexPath.row == 0) {
         self.taskCell = [tableView dequeueReusableCellWithIdentifier:kidentifier1 forIndexPath:indexPath];
         _taskCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_taskCell setValueWithDictionary:self.dic];
         return _taskCell;
     }else if (indexPath.row == 1) {
@@ -563,8 +585,14 @@
     }else if (indexPath.row == 2) {
         return _corectCell.height;
     }else if (indexPath.row == 3) {
+        if ([_explanation isEqualToString:@""]) {
+            return 0;
+        }
         return _solutionCell.height;
     }else {
+        if ([_videourl isEqualToString:@""]) {
+            return 0;
+        }
         return (SCREEN_WIDTH)*184/320;
     }
 }
