@@ -105,7 +105,11 @@
     
 }
 
-
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//
+//{
+//    NSLog(@"%@", NSStringFromCGPoint(scrollView.contentOffset) );
+//}
 // 网络请求
 - (void)readDataFromNetWork {
     
@@ -152,7 +156,9 @@
 //        NSLog(@"%@", self.dataSource);
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+        [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
+        [SVProgressHUD dismiss];
+        [self.tableView headerEndRefreshing];
     }];
     
 }
@@ -189,7 +195,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    return 130;
+    return 140;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -202,7 +208,10 @@
 }
 
 
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [SVProgressHUD dismiss];
+}
 
 
 /*

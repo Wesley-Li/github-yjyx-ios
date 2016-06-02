@@ -7,27 +7,27 @@
     "30601c35-41e7-4d48-a41e-12cc53115c56++7361+++59AB345" : {
 
     },
-    "30601c35-41e7-4d48-a41e-12cc53115c56++2934+++41647B6" : {
+    "30601c35-41e7-4d48-a41e-12cc53115c56++7361+++62B34AB" : {
 
     },
-    "30601c35-41e7-4d48-a41e-12cc53115c56++7361+++62B34AB" : {
+    "30601c35-41e7-4d48-a41e-12cc53115c56++2934+++41647B6" : {
 
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "30601c35-41e7-4d48-a41e-12cc53115c56++7361+++62B34AB" : 0,
+    "30601c35-41e7-4d48-a41e-12cc53115c56++2934+++41647B6" : 0,
     "30601c35-41e7-4d48-a41e-12cc53115c56++7361+++5FC8728" : 0,
     "30601c35-41e7-4d48-a41e-12cc53115c56++7361+++59AB345" : 0,
     "258496B11A87E95931F442E0B54B2D47FE24E567+++A93AFBC" : 0,
-    "30601c35-41e7-4d48-a41e-12cc53115c56++2934+++41647B6" : 0
+    "30601c35-41e7-4d48-a41e-12cc53115c56++7361+++62B34AB" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "BFCA7428-96A6-4C1C-879E-A51B748A8765",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "30601c35-41e7-4d48-a41e-12cc53115c56++7361+++62B34AB" : "Yjyx\/Alipay\/AlipaySDK.framework\/",
+    "30601c35-41e7-4d48-a41e-12cc53115c56++2934+++41647B6" : "Yjyx.xcodeproj\/",
     "30601c35-41e7-4d48-a41e-12cc53115c56++7361+++5FC8728" : "Yjyx\/Alipay\/AlipaySDK.framework\/",
     "30601c35-41e7-4d48-a41e-12cc53115c56++7361+++59AB345" : "Yjyx\/Alipay\/AlipaySDK.bundle\/",
     "258496B11A87E95931F442E0B54B2D47FE24E567+++A93AFBC" : "",
-    "30601c35-41e7-4d48-a41e-12cc53115c56++2934+++41647B6" : "Yjyx.xcodeproj\/"
+    "30601c35-41e7-4d48-a41e-12cc53115c56++7361+++62B34AB" : "Yjyx\/Alipay\/AlipaySDK.framework\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : ".",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,

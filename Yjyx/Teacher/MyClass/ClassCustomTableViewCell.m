@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *picImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *vipImageView;
 
 @end
 
@@ -28,8 +29,27 @@
 }
 
 - (void)setValueWithStudentEntity:(StudentEntity *)model {
+    
+    NSLog(@"######%@", model.isyjmember);
 
     [self.picImage setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:[UIImage imageNamed:@"hpic_placeholder"]];
+    
+    if ([model.isyjmember isEqual:[NSNull null]]) {
+        self.vipImageView.hidden = YES;
+    }else {
+    
+        if ([model.isyjmember isEqual:@0]) {
+            
+            self.vipImageView.hidden = YES;
+        }else {
+            
+            self.vipImageView.hidden = NO;
+            
+        }
+
+    
+    }
+    
     
     self.nameLabel.text = model.realname;
 
