@@ -39,15 +39,18 @@
     NSString *htmlString = [NSString stringWithFormat:@"%@", [dic[@"question"] objectForKey:@"content"]];
     NSString *content = [htmlString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     RCLabel *contentLabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 5, SCREEN_WIDTH - 20, 500)];
+    contentLabel.userInteractionEnabled = NO;
     contentLabel.font = [UIFont systemFontOfSize:12];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
     contentLabel.componentsAndPlainText = componentsDS;
     CGSize optimalSize = [contentLabel optimumSize];
     self.height = optimalSize.height + 15 + 30;
     [self.contentView addSubview:contentLabel];
+
     NSInteger level;
-    if (dic[@"question"][@"level"] == [NSNull null]) {
+    if ([dic[@"question"][@"level"] isEqual:[NSNull null]]) {
          level = 1;
+         self.dificultyLabel.hidden = YES;
     }else{
      level = [[dic[@"question"] objectForKey:@"level"] integerValue];
     }
@@ -63,7 +66,9 @@
             break;
         default:
             break;
+
     }
+    
     
     
 }

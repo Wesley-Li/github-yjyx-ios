@@ -12,4 +12,12 @@
 
 @property (nonatomic, assign) CGFloat height;
 
+@property (weak, nonatomic) IBOutlet UILabel *summaryLabel;
+
+/**
+ *本班答题情况赋值方法
+ */
+
+- (void)setValueWithCorrectArray:(NSArray *)correctArray andWrongArray:(NSArray *)wrongArray;
+
 @end

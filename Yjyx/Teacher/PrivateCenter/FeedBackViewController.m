@@ -114,7 +114,6 @@
 - (IBAction)finishBtnClick:(UIButton *)sender {
     
     
-    [SVProgressHUD showWithStatus:@"正在拼命上传"];
     // 判断字数超出300提示
     if (contentText.text.length > 300) {
         [self.view makeToast:@"您输入的内容超过了300字数限制" duration:1.0 position:SHOW_CENTER complete:nil];
@@ -125,7 +124,7 @@
         return;
     }
 
-    
+    [SVProgressHUD showWithStatus:@"正在拼命上传"];
     [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArray) {
         
             
