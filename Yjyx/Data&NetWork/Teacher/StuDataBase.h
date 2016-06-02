@@ -28,7 +28,7 @@
 - (NSMutableArray *)selectAllClass;
 // 查询所有群组
 - (NSMutableArray *)selectAllGroup;
-
+// 根据id查询学生
 - (StudentEntity *)selectStuById:(NSString *)Sid;
 
 

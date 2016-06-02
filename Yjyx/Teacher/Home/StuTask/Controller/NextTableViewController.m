@@ -260,14 +260,14 @@
     }];
     
 }
-/*
+
 // 强制重载
 - (void)viewDidAppear:(BOOL)animated {
 
     [self.tableView reloadData];
 }
  
- */
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -381,12 +381,12 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
+    
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
+
     return rows;
 }
 
@@ -404,7 +404,7 @@
     }else if (indexPath.row == 1) {
     
         self.AnswerSituationCell = [tableView dequeueReusableCellWithIdentifier:KAnswerSituationCell forIndexPath:indexPath];
-        
+        [_AnswerSituationCell setValueWithCorrectArray:[_dic[@"summary"] objectForKey:@"CNL"] andWrongArray:[_dic[@"summary"] objectForKey:@"WNL"]];
         return _AnswerSituationCell;
     }else if (indexPath.row == 2) {
     
@@ -599,7 +599,7 @@
 -(void)dealloc{
     [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSLog(@"player deallco");
+//    NSLog(@"player deallco");
 }
 
 

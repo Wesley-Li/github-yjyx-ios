@@ -122,6 +122,7 @@
     
     NSString *content = [htmlString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     RCLabel *contentLabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 30, SCREEN_WIDTH - 20, 500)];
+    contentLabel.userInteractionEnabled = NO;
     contentLabel.font = [UIFont systemFontOfSize:12];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
     contentLabel.componentsAndPlainText = componentsDS;

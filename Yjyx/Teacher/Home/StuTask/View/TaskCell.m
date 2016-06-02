@@ -39,6 +39,7 @@
     NSString *htmlString = [NSString stringWithFormat:@"%@", [dic[@"question"] objectForKey:@"content"]];
     NSString *content = [htmlString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     RCLabel *contentLabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 5, SCREEN_WIDTH - 20, 500)];
+    contentLabel.userInteractionEnabled = NO;
     contentLabel.font = [UIFont systemFontOfSize:12];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
     contentLabel.componentsAndPlainText = componentsDS;
@@ -46,20 +47,28 @@
     self.height = optimalSize.height + 15 + 30;
     [self.contentView addSubview:contentLabel];
     
-    NSInteger level = [[dic[@"question"] objectForKey:@"level"] integerValue];
-    switch (level) {
-        case 1:
-            self.dificultyLabel.text = @"难度:简单";
-            break;
-        case 2:
-            self.dificultyLabel.text = @"难度:中等";
-            break;
-        case 3:
-            self.dificultyLabel.text = @"难度:较难";
-            break;
-        default:
-            break;
+    if ([[dic[@"question"] objectForKey:@"level"] isEqual:[NSNull null]]) {
+        self.dificultyLabel.hidden = YES;
+    }else {
+    
+        NSInteger level = [[dic[@"question"] objectForKey:@"level"] integerValue];
+        switch (level) {
+            case 1:
+                self.dificultyLabel.text = @"难度:简单";
+                break;
+            case 2:
+                self.dificultyLabel.text = @"难度:中等";
+                break;
+            case 3:
+                self.dificultyLabel.text = @"难度:较难";
+                break;
+            default:
+                break;
+        }
+
+    
     }
+    
     
     
 }

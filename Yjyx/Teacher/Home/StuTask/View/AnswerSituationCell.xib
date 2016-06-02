@@ -14,18 +14,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="446" height="239"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohN-PH-PlW">
-                        <rect key="frame" x="10" y="5" width="426" height="229"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本题答题情况:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yv8-eP-5bh">
+                        <rect key="frame" x="10" y="5" width="150" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="qGi-RG-Tw0"/>
+                            <constraint firstAttribute="width" constant="150" id="rIp-vq-zTm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ohN-PH-PlW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Qo1-uA-p8g"/>
-                    <constraint firstAttribute="trailing" secondItem="ohN-PH-PlW" secondAttribute="trailing" constant="10" id="QpW-FC-S53"/>
-                    <constraint firstAttribute="bottom" secondItem="ohN-PH-PlW" secondAttribute="bottom" constant="5" id="juW-Rd-saw"/>
-                    <constraint firstItem="ohN-PH-PlW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="uGw-3g-Hfe"/>
+                    <constraint firstItem="yv8-eP-5bh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="PTN-x0-eWA"/>
+                    <constraint firstItem="yv8-eP-5bh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ePh-RX-Yic"/>
                 </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="497" y="424"/>

@@ -26,8 +26,8 @@
                                 <state key="normal" backgroundImage="list_btn_More.png"/>
                                 <state key="selected" backgroundImage="list_btn_shutdown.png"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已上交同学" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7Q-HJ-xti">
-                                <rect key="frame" x="20" y="0.0" width="368" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="已上交同学" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7Q-HJ-xti">
+                                <rect key="frame" x="17" y="0.0" width="368" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="V9g-EU-CCS"/>
                                 </constraints>
