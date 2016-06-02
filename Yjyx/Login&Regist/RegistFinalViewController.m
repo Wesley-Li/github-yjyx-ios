@@ -31,12 +31,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-#pragma mark - 获取验证码
--(IBAction)getRegisterCode:(id)sender
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    if (phoneText.text.length == 0) {
-        [self.view makeToast:@"请输入正确的账号" duration:1.0 position:SHOW_BOTTOM complete:nil];
+    [self.view endEditing:YES];
+}
+#pragma mark - 获取验证码
+-(IBAction)getRegisterCode:(UIButton *)sender
+{
+    if (phoneText.text.length == 0 || phoneText.text.length < 11) {
+        [self.view makeToast:@"请输入正确的账号" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
     NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",phoneText.text];
@@ -45,14 +48,17 @@
         [self.view hideToastActivity];
         if (result) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                timeLb.backgroundColor = RGBACOLOR(229.0, 230.0, 231.0, 1);
+                
                 _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
+                [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
                 //发送注册码按钮失效，防止频繁请求
                 [verifyBtn setEnabled:false];
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:@"电话号码不存在" duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
 }
@@ -70,8 +76,11 @@
 {
     _second = 60;
     codeText.text = @"";
-    timeLb.text = @"获取验证码";
     [verifyBtn setEnabled:YES];
+
+    timeLb.text = @"获取验证码";
+    timeLb.backgroundColor = RGBACOLOR(19.0, 141.0, 101.0, 1);
+   
     [_timer invalidate];
     _timer = nil;
 }
