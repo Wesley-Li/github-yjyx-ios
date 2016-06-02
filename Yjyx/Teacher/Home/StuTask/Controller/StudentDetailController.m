@@ -403,7 +403,7 @@
     TaskConditonModel *model = _choiceArray[sender.tag - 200];
     oneTaskVC.qid = model.t_id;
     oneTaskVC.title = [NSString stringWithFormat:@"%@", self.finshedModel.Name];
-    oneTaskVC.answerArr = model.answerArr;
+//    oneTaskVC.answerArr = model.answerArr;
     [self.navigationController pushViewController:oneTaskVC animated:YES];
     
 }
@@ -481,7 +481,7 @@
     TaskConditonModel *model = _blankfillArray[sender.tag - 200];
     oneTaskVC.qid = model.t_id;
     oneTaskVC.title = [NSString stringWithFormat:@"%@", self.finshedModel.Name];
-    oneTaskVC.answerArr = model.answerArr;
+//    oneTaskVC.answerArr = model.answerArr;
     [self.navigationController pushViewController:oneTaskVC animated:YES];
 
 }

@@ -167,7 +167,7 @@
 -(void)toCell{
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
     [wmPlayer removeFromSuperview];
-    NSLog(@"row = %ld",currentIndexPath.row);
+    NSLog(@"row = %ld",(long)currentIndexPath.row);
     [UIView animateWithDuration:0.5f animations:^{
         wmPlayer.transform = CGAffineTransformIdentity;
         wmPlayer.frame = currentCell.backgroundIV.bounds;
@@ -262,12 +262,18 @@
     
 }
 
-// 强制重载
+// 强制重载单个cell
 - (void)viewDidAppear:(BOOL)animated {
 
-    [self.tableView reloadData];
+    if (rows != 0) {
+        NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:0 inSection:0];
+        NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:3 inSection:0];
+        NSArray *indexPathArray = [NSArray arrayWithObjects:indexPath1,indexPath2, nil];
+        [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+    }
+    
 }
- 
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -420,6 +426,14 @@
     }else if (indexPath.row == 1) {
     
         self.AnswerSituationCell = [tableView dequeueReusableCellWithIdentifier:KAnswerSituationCell forIndexPath:indexPath];
+        
+        _AnswerSituationCell.r_arr = [_dic[@"summary"] objectForKey:@"CNL"];
+        _AnswerSituationCell.w_arr = [_dic[@"summary"] objectForKey:@"WNL"];
+        _AnswerSituationCell.qtype = self.qtype;
+        _AnswerSituationCell.taskid = self.taskid;
+        _AnswerSituationCell.navi = self;
+        _AnswerSituationCell.qid = self.qid;
+        
         [_AnswerSituationCell setValueWithCorrectArray:[_dic[@"summary"] objectForKey:@"CNL"] andWrongArray:[_dic[@"summary"] objectForKey:@"WNL"]];
         return _AnswerSituationCell;
     }else if (indexPath.row == 2) {
@@ -629,10 +643,9 @@
         return _taskCell.height;
     }else if (indexPath.row == 1) {
 
-        return 0;
         return _AnswerSituationCell.height;
     }else if (indexPath.row == 2) {
-//        return 0   ;
+
         return _correctCell.height;
     }else if (indexPath.row == 3) {
         if ([_explanation isEqualToString:@""]) {

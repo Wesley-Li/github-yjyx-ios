@@ -871,7 +871,7 @@
         
 //        [cell.bg_view addSubview:taskView];
     }
-    self.unsubmitCellHeight = size.height + 80 + 30 - 40;
+    self.unsubmitCellHeight = size.height + 80 + 30;
     cell.showMoreBtn.hidden = YES;
     
 

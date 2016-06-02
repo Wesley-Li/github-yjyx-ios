@@ -154,7 +154,7 @@
 -(void)toCell{
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
     [wmPlayer removeFromSuperview];
-    NSLog(@"row = %ld",currentIndexPath.row);
+    NSLog(@"row = %ld",(long)currentIndexPath.row);
     [UIView animateWithDuration:0.5f animations:^{
         wmPlayer.transform = CGAffineTransformIdentity;
         wmPlayer.frame = currentCell.backgroundIV.bounds;
@@ -463,7 +463,7 @@
  */
 -(void)startPlayVideo:(UIButton *)sender{
     currentIndexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
-    NSLog(@"currentIndexPath.row = %ld",currentIndexPath.row);
+    NSLog(@"currentIndexPath.row = %ld",(long)currentIndexPath.row);
     
     if ([UIDevice currentDevice].systemVersion.floatValue>=8||[UIDevice currentDevice].systemVersion.floatValue<7) {
         self.videoCell = (VideoCell *)sender.superview.superview;
@@ -593,7 +593,7 @@
         if ([_videourl isEqualToString:@""]) {
             return 0;
         }
-        return (SCREEN_WIDTH)*184/320;
+        return (SCREEN_WIDTH)*184/320 + 20;
     }
 }
 

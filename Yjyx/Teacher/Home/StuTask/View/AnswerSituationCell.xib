@@ -24,10 +24,20 @@
                         <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gmg-iC-GSU">
+                        <rect key="frame" x="0.0" y="238" width="446" height="1"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="qhT-Eq-Kga"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="gmg-iC-GSU" secondAttribute="trailing" id="5bi-Q8-qiA"/>
+                    <constraint firstAttribute="bottom" secondItem="gmg-iC-GSU" secondAttribute="bottom" id="7VY-AO-sQJ"/>
                     <constraint firstItem="yv8-eP-5bh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="PTN-x0-eWA"/>
                     <constraint firstItem="yv8-eP-5bh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ePh-RX-Yic"/>
+                    <constraint firstItem="gmg-iC-GSU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="sX1-qG-50S"/>
                 </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="311" y="387"/>
