@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundIV;
 
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
+@property (weak, nonatomic) IBOutlet UILabel *videoLabel;
 
 
 //- (void)setVideoValueWithDic:(NSDictionary *)dic;

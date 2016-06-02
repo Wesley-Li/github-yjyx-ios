@@ -57,8 +57,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     _uesrNameTF.delegate = self;
     _passWordTF.delegate = self;
-    
+    [_uesrNameTF addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [_passWordTF addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     // Do any additional setup after loading the view from its nib.
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -113,6 +115,15 @@
     [textField resignFirstResponder];
     return YES;
 }
+// 限制输入的长度
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    
+        if (textField.text.length > 20) {
+            textField.text = [textField.text substringToIndex:20];
+        }
+    
+}
 
 -(void)clicked:(id)sender
 {
@@ -121,51 +132,51 @@
 
 // 点击老师按钮
 - (IBAction)teacherBtnClicked:(id)sender {
-    if (_teacherBtn.isSelected) {
-        [_teacherBtn setSelected:NO];
-        ((AppDelegate*)SYS_DELEGATE).role = @"none";
-        _uesrNameTF.placeholder = @"";
-    }else {
-        
+//    if (_teacherBtn.isSelected) {
+//        [_teacherBtn setSelected:NO];
+//        ((AppDelegate*)SYS_DELEGATE).role = @"none";
+//        _uesrNameTF.placeholder = @"";
+//    }else {
+    
         [_teacherBtn setSelected:YES];
-        _uesrNameTF.placeholder = @"账户名";
+        _uesrNameTF.placeholder = @"用户名";
         ((AppDelegate*)SYS_DELEGATE).role = @"teacher";
         [_parentsBtn setSelected:NO];
         [_stuBtn setSelected:NO];
-    }
+//    }
     
 }
 
 - (IBAction)parentsBtnClicked:(id)sender {
-    if (_parentsBtn.isSelected) {
-        [_parentsBtn setSelected:NO];
-        ((AppDelegate*)SYS_DELEGATE).role = @"none";
-        _uesrNameTF.placeholder = @"";
-        
-    }else {
-        
+//    if (_parentsBtn.isSelected) {
+//        [_parentsBtn setSelected:NO];
+//        ((AppDelegate*)SYS_DELEGATE).role = @"none";
+//        _uesrNameTF.placeholder = @"";
+//        
+//    }else {
+    
         [_parentsBtn setSelected:YES];
-        _uesrNameTF.placeholder = @"账户号";
+        _uesrNameTF.placeholder = @"用户名";
         ((AppDelegate*)SYS_DELEGATE).role = @"parents";
         [_teacherBtn setSelected:NO];
         [_stuBtn setSelected:NO];
-    }
+//    }
 }
 
 - (IBAction)stuBtnClicked:(id)sender {
-    if (_stuBtn.isSelected) {
-        [_stuBtn setSelected:NO];
-        ((AppDelegate*)SYS_DELEGATE).role = @"none";
-        _uesrNameTF.placeholder = @"";
-        
-    }else {
-        
+//    if (_stuBtn.isSelected) {
+//        [_stuBtn setSelected:NO];
+//        ((AppDelegate*)SYS_DELEGATE).role = @"none";
+//        _uesrNameTF.placeholder = @"";
+//        
+//    }else {
+    
         [_stuBtn setSelected:YES];
-        _uesrNameTF.placeholder = @"账户名";
+        _uesrNameTF.placeholder = @"用户名";
         ((AppDelegate*)SYS_DELEGATE).role = @"student";
         [_parentsBtn setSelected:NO];
         [_teacherBtn setSelected:NO];
-    }
+//    }
     
 }
 
@@ -177,6 +188,8 @@
     }else {
         if (_uesrNameTF.text.length == 0||_passWordTF.text.length == 0) {
             [self.view makeToast:@"请输入用户名或者密码" duration:1.0 position:SHOW_CENTER complete:nil];
+        }else if([_passWordTF.text containsString:@" "]){
+            [self.view makeToast:@"密码不能输入空格" duration:1.0 position:SHOW_CENTER complete:nil];
         }else{
             [self.view makeToastActivity:SHOW_CENTER];
             
@@ -212,7 +225,11 @@
                             }
                         }
                     }else{
-                        [self.view makeToast:[error description] duration:3.0 position:SHOW_CENTER complete:nil];
+                        if (error.code == -1009) {
+                            [self.view makeToast:@"您的网络可能不太好,请重试!" duration:3.0 position:SHOW_CENTER complete:nil];
+                            return;
+                        }
+                        [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:3.0 position:SHOW_CENTER complete:nil];
                     }
                 }];
                 
@@ -257,7 +274,11 @@
                         }
                     }else {
                         
-                        [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+                        if (error.code == -1009) {
+                            [self.view makeToast:@"您的网络可能不太好,请重试!" duration:3.0 position:SHOW_CENTER complete:nil];
+                            return;
+                        }
+                        [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:3.0 position:SHOW_CENTER complete:nil];
                     }
                     
                     

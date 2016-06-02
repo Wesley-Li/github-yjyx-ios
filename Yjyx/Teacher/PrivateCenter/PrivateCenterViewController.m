@@ -240,7 +240,11 @@
     NSLog(@"退出登录");
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:[YjyxOverallData sharedInstance].parentInfo.pid,@"pid", nil];
     [self.view makeToastActivity:SHOW_CENTER];
-    
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    AppDelegate *mydelegate = (AppDelegate*)SYS_DELEGATE;
+    nav.navigationBarHidden = YES;
+    [mydelegate.window setRootViewController:nav];
     [[YjxService sharedInstance] teacherLogout:dic withBlock:^(id result, NSError *error) {
         [self.view hideToastActivity];
         
@@ -260,15 +264,15 @@
                 // 定时器挂起
                 dispatch_suspend(((AppDelegate*)SYS_DELEGATE).timer);
                 
-                LoginViewController *loginVC = [[LoginViewController alloc] init];
-                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
-                AppDelegate *mydelegate = (AppDelegate*)SYS_DELEGATE;
-                nav.navigationBarHidden = YES;
-                [mydelegate.window setRootViewController:nav];
+//                LoginViewController *loginVC = [[LoginViewController alloc] init];
+//                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+//                AppDelegate *mydelegate = (AppDelegate*)SYS_DELEGATE;
+//                nav.navigationBarHidden = YES;
+//                [mydelegate.window setRootViewController:nav];
             }
         }else {
-        
-            [self.view makeToast:[error description] duration:2.0 position:SHOW_CENTER complete:nil];
+            NSLog(@"%@", error.userInfo[NSLocalizedDescriptionKey]);
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2.0 position:SHOW_CENTER complete:nil];
         }
         
         

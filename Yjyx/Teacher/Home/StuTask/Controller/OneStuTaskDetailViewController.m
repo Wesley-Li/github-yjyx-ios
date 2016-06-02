@@ -405,17 +405,22 @@
     }else if (indexPath.row == 3) {
         
         self.solutionCell = [tableView dequeueReusableCellWithIdentifier:Kidentifier4 forIndexPath:indexPath];
+        if([_explanation isEqualToString:@""]  ){
+            _solutionCell.solutionLabel.hidden = YES;
+        }
         _solutionCell.selectionStyle = UITableViewCellSelectionStyleNone;
         [_solutionCell setSolutionValueWithDiction:self.dic];
         return _solutionCell;
     }else {
-    
+        
         self.videoCell = [tableView dequeueReusableCellWithIdentifier:Kidentifier5 forIndexPath:indexPath];
         
         [_videoCell.playBtn addTarget:self action:@selector(startPlayVideo:) forControlEvents:UIControlEventTouchUpInside];
         
         _videoCell.playBtn.tag = indexPath.row;
-        
+        if([_videourl isEqualToString:@""]  ){
+            _videoCell.videoLabel.hidden = YES;
+        }
         // 按钮的显示
         if (isPlay == YES) {
             _videoCell.playBtn.hidden = YES;

@@ -17,7 +17,7 @@
     self.avatar_url = dic[@"avatar_url"];
     self.user_id = dic[@"user_id"];
     self.realname = dic[@"realname"];
-
+    self.isyjmember = dic[@"isyjmember"];
 }
 
 @end

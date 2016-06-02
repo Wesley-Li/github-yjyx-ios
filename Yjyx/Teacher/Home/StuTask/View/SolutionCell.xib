@@ -31,6 +31,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="solutionLabel" destination="mCd-v8-pfp" id="7Iu-CN-yBp"/>
                 <outlet property="title_label" destination="mCd-v8-pfp" id="U9a-4e-BX4"/>
             </connections>
             <point key="canvasLocation" x="223.5" y="395"/>
