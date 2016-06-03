@@ -68,12 +68,43 @@ static const CGFloat CSToastActivityHeight      = 100.0;
 {
     return self.frame.size.width;
 }
-
+- (void)setWidth:(CGFloat)width
+{
+    CGRect rect = self.frame;
+    rect.size.width = width;
+    self.frame = rect;
+    
+}
+- (void)setHeight:(CGFloat)height
+{
+    CGRect rect = self.frame;
+    rect.size.height = height;
+    self.frame = rect;
+}
 - (CGFloat)height
 {
     return self.frame.size.height;
 }
-
+- (CGFloat)centerX
+{
+    return self.center.x;
+}
+- (void)setCenterX:(CGFloat)centerX
+{
+    CGPoint center = self.center;
+    center.x = centerX;
+    self.center = center;
+}
+- (CGFloat)y
+{
+    return self.frame.origin.y;
+}
+- (void)setY:(CGFloat)y
+{
+    CGRect rect = self.frame;
+    rect.origin.y = y;
+    self.frame = rect;
+}
 #pragma mark 隐藏键盘
 - (void)hideKeyboard
 {

@@ -11,6 +11,12 @@
 
 @interface ForgetOneViewController ()
 
+@property (weak, nonatomic) IBOutlet UIView *roleView;
+@property (weak, nonatomic) IBOutlet UIButton *parentBtn;
+@property (weak, nonatomic) IBOutlet UIView *underLineV;
+@property (strong, nonatomic) UIButton *preSelectBtn;
+@property (weak, nonatomic) IBOutlet UIButton *studentBtn;
+@property (weak, nonatomic) IBOutlet UIButton *teacherBtn;
 @end
 
 @implementation ForgetOneViewController
@@ -18,11 +24,42 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.preSelectBtn = self.parentBtn;
+    
 }
 
+
+
+- (void)moveUnderLine:(UIButton *)sender
+{
+    
+    _underLineV.centerX = sender.centerX;
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)parentBtnClick:(UIButton *)sender {
+    self.preSelectBtn.selected = NO;
+    sender.selected = YES;
+    
+    self.preSelectBtn = sender;
+    [self moveUnderLine:sender];
+}
+- (IBAction)stuBtnClick:(UIButton *)sender {
+    self.preSelectBtn.selected = NO;
+    sender.selected = YES;
+    
+    self.preSelectBtn = sender;
+    [self moveUnderLine:sender];
+}
+- (IBAction)teacherBtnClick:(UIButton *)sender {
+    self.preSelectBtn.selected = NO;
+    sender.selected = YES;
+    
+    self.preSelectBtn = sender;
+    [self moveUnderLine:sender];
 }
 
 -(IBAction)goSure:(id)sender
@@ -41,6 +78,7 @@
                 ForgetTwoViewController *vc = [[ForgetTwoViewController alloc] init];
                 vc.phoneStr = [result objectForKey:@"phone"];
                 vc.userName = accountText.text;
+                vc.roleType = self.parentBtn.selected ? 0 : 1;
                 [self.navigationController pushViewController:vc animated:YES];
 
             }else{
@@ -58,7 +96,7 @@
 
 -(IBAction)goBack:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 // 回收键盘

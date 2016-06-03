@@ -13,9 +13,9 @@
 #import "StuClassEntity.h"
 #import "StuGroupEntity.h"
 #import "StuDataBase.h"
-
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "ForgetOneViewController.h"
-
+#import "ForgetTwoViewController.h"
 
 @interface LoginViewController ()
 {
@@ -188,8 +188,6 @@
     }else {
         if (_uesrNameTF.text.length == 0||_passWordTF.text.length == 0) {
             [self.view makeToast:@"请输入用户名或者密码" duration:1.0 position:SHOW_CENTER complete:nil];
-        }else if([_passWordTF.text containsString:@" "]){
-            [self.view makeToast:@"密码不能输入空格" duration:1.0 position:SHOW_CENTER complete:nil];
         }else{
             [self.view makeToastActivity:SHOW_CENTER];
             
@@ -306,10 +304,70 @@
 
 
 
--(IBAction)forgetPassWord:(id)sender
+-(IBAction)forgetPassWord:(UIButton *)sender
 {
-    ForgetOneViewController *vc = [[ForgetOneViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+//    ForgetOneViewController *vc = [[ForgetOneViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+    sender.enabled = NO;
+   
+    [SVProgressHUD showWithStatus:@"加载中..."];
+    if([_uesrNameTF.text isEqualToString:@""]){
+        ForgetOneViewController *vc = [[ForgetOneViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        [SVProgressHUD dismiss];
+        sender.enabled = YES;
+        return;
+    }
+    NSString *str = _uesrNameTF.text;
+    if (self.parentsBtn.selected) {
+        str = [NSString stringWithFormat:@"4*#*_%@", _uesrNameTF.text];
+    }
+    NSLog(@"%@", str);
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:str,@"username",nil];
+    [[YjxService sharedInstance] getUserPhone:dic withBlock:^(id result, NSError *error){//验证验证码
+//        [self.view hideToastActivity];
+        
+        if (result) {
+//            NSLog(@"%@", result);
+//            NSLog(@"%@", result[@"reason"]);
+//            
+//            if([result[@"msg"] isEqualToString:@"操作过快, 稍后再试"]){
+//                [SVProgressHUD dismiss];
+//                [self.view makeToast:@"操作过快, 稍后再试" duration:1.0 position:SHOW_CENTER complete:nil];
+//                sender.enabled = YES;
+//                return ;
+//            }
+            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+             
+                ForgetTwoViewController *vc = [[ForgetTwoViewController alloc] init];
+                vc.phoneStr = [result objectForKey:@"phone"];
+                vc.accountText.text = [result objectForKey:@"phone"];
+                vc.userName = str;
+                vc.roleType = _parentsBtn.selected ? 1 : 0;
+                [self.navigationController pushViewController:vc animated:YES];
+                sender.enabled = YES;
+                [SVProgressHUD dismiss];
+            }else{
+//                [self.view makeToast:@"请输入正确的账号" duration:1.0 position:SHOW_CENTER complete:nil];
+                [SVProgressHUD showWithStatus:@"帐号不存在"];
+                [SVProgressHUD dismiss];
+                ForgetOneViewController *vc = [[ForgetOneViewController alloc] init];
+                sender.enabled = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }else{
+            if (error.code == -1009) {
+                [self.view makeToast:@"您的网络可能不太好,请重试!" duration:3.0 position:SHOW_CENTER complete:nil];
+                [SVProgressHUD dismiss];
+                sender.enabled = YES;
+                return;
+            }
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:3.0 position:SHOW_CENTER complete:nil];
+            sender.enabled = YES;
+            [SVProgressHUD dismiss];
+        }
+    }];
+    
 }
 
 - (void)asyncGetChildrenStatistic
