@@ -321,7 +321,7 @@
                                                object:nil
      ];
     
-//    self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.tableFooterView = [[UIView alloc] init];
 
 }
 
@@ -358,13 +358,7 @@
 
                 
             }
-//            else if([responseObject[@"question"][@"videourl"] isEqualToString: @"" ]&& [responseObject[@"question"][@"explanation"] isEqualToString: @""]){
-//                rows = 3;
-//            
-//            }else if([responseObject[@"question"][@"videourl"] isEqualToString: @"" ]|| [responseObject[@"question"][@"explanation"] isEqualToString: @""]){
-//                rows = 4;
-//                
-//            }
+
             else {
             
                 rows = 5;
@@ -381,14 +375,17 @@
         [SVProgressHUD dismissWithDelay:0.8];
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
-        
+         [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:3.0 position:SHOW_CENTER complete:nil];
+        [SVProgressHUD dismiss];
         NSLog(@"%@", error);
         
     }];
 
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [SVProgressHUD dismiss];
+}
 - (void)goBack {
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -453,6 +450,9 @@
     }else if (indexPath.row == 3) {
     
         self.solutionCell = [tableView dequeueReusableCellWithIdentifier:KSolutionCell forIndexPath:indexPath];
+        if([_explanation isEqualToString:@""]  ){
+            _solutionCell.solutionLabel.hidden = YES;
+        }
         self.solutionCell.selectionStyle = UITableViewCellSelectionStyleNone;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_solutionCell setSolutionValueWithDiction:_dic];
@@ -470,6 +470,9 @@
         [_videoCell.playBtn addTarget:self action:@selector(startPlayVideo:) forControlEvents:UIControlEventTouchUpInside];
         
         _videoCell.playBtn.tag = indexPath.row;
+        if([_videourl isEqualToString:@""]  ){
+            _videoCell.videoLabel.hidden = YES;
+        }
         // 按钮的显示
         if (isPlay == YES) {
             _videoCell.playBtn.hidden = YES;
@@ -642,6 +645,7 @@
         
         return _taskCell.height;
     }else if (indexPath.row == 1) {
+
 
         return _AnswerSituationCell.height;
     }else if (indexPath.row == 2) {

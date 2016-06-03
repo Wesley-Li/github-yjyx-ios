@@ -63,6 +63,7 @@
             <connections>
                 <outlet property="backgroundIV" destination="KlW-Mz-v4a" id="8f7-kp-xJA"/>
                 <outlet property="playBtn" destination="Im0-i8-5gX" id="FlL-tl-GzU"/>
+                <outlet property="videoLabel" destination="iVj-wm-rsa" id="IEW-3i-WAw"/>
             </connections>
             <point key="canvasLocation" x="439" y="286"/>
         </tableViewCell>

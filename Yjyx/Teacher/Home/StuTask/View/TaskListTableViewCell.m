@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *finishedLabel;
 @property (weak, nonatomic) IBOutlet UILabel *deadlineLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *resourcenameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *statusImage;
 
 
@@ -37,8 +38,23 @@
     NSArray *arr2 = [arr[1] componentsSeparatedByString:@":"];
     NSString *timeString = [NSString stringWithFormat:@"%@日%@:%@", arr[0], arr2[0], arr2[1]];
     self.timeLabel.text = timeString;
-    
-    self.descriptionLabel.text = model.t_description;
+    NSString *mainName = model.resourcename;
+    if([model.resourcename isEqual:[NSNull null]] || [model.t_description isEqual:[NSNull null]]){
+        if ([model.t_description isEqual:[NSNull null]] && ![model.resourcename isEqual:[NSNull null]]) {
+            mainName = model.resourcename;
+        }
+        mainName = @"学生作业";
+    }else if ([model.resourcename isEqualToString:@""] && [model.t_description isEqualToString:@""]) {
+        mainName = @"学生作业";
+    }else if([model.resourcename isEqualToString:@""]){
+        mainName = model.t_description;
+    }
+    self.descriptionLabel.text = mainName;
+    if([model.t_description isEqualToString:@""]){
+        self.resourcenameLabel.hidden = YES;
+    }
+    self.resourcenameLabel.hidden = NO;
+    self.resourcenameLabel.text = model.t_description;
     NSNumberFormatter *numberF = [[NSNumberFormatter alloc] init];
     if ([model.finished isEqual:model.total]) {
         self.finishedLabel.text = @"全部已交";
@@ -50,8 +66,10 @@
     
     if ([model.deadlinetime isEqual:[NSNull null]]) {
         self.deadlineLabel.text = @"";
+        _deadlineLabel.hidden = YES;
     }else {
         self.deadlineLabel.text = model.deadlinetime;
+        _deadlineLabel.hidden = YES;
     }
     
     

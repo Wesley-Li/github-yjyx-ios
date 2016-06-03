@@ -20,6 +20,7 @@
     self.tasktype = dic[@"tasktype"];
     self.t_id = dic[@"id"];
     self.relatedresourceid = dic[@"relatedresourceid"];
+    self.resourcename = dic[@"resourcename"];
 
 }
 
