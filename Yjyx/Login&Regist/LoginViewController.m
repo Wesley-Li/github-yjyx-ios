@@ -66,6 +66,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
+
 #pragma mark - 键盘处理
 #pragma mark 键盘即将显示
 - (void)keyBoardWillShow:(NSNotification *)note{

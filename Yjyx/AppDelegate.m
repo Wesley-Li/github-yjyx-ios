@@ -273,6 +273,9 @@
         
         [_tabBar setSelectedIndex:0];
         [self.window setRootViewController:_tabBar];
+        
+        // 判断版本更新
+        [self judgeDate];
 
         
     }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"teacher"]) {
@@ -318,13 +321,122 @@
         [_cusTBViewController.tabBar setShadowImage:img];
         _cusTBViewController.selectedIndex = 0;
         self.window.rootViewController = _cusTBViewController;
+        // 判断版本更新
+        [self judgeDate];
     
     }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"student"]) {
         
         // 学生登录
     
     }
+    
+    
 
+    
+}
+
+// 判断日期并更新
+- (void)judgeDate {
+
+    NSDate *nowDate = [NSDate date];
+    
+    NSDate *oldDate = [SYS_CACHE objectForKey:@"date"];
+    
+    if (oldDate == nil) {
+        
+        [self judgeAppVersionAndUploadWithRole:((AppDelegate *)SYS_DELEGATE).role andCurrentVersion:APP_VERSION];
+        
+        [SYS_CACHE setObject:nowDate forKey:@"date"];
+        
+    }else {
+        
+        NSTimeInterval timeInterval = [nowDate timeIntervalSinceDate:oldDate];
+        
+        if (timeInterval > 60*60*24) {
+            [self judgeAppVersionAndUploadWithRole:((AppDelegate *)SYS_DELEGATE).role andCurrentVersion:APP_VERSION];
+        }else {
+        
+            return;
+        }
+        
+    }
+    
+}
+
+#pragma mark - 版本更新
+- (void)judgeAppVersionAndUploadWithRole:(NSString *)role andCurrentVersion:(NSString *)currentVerdion{
+    
+
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"checkupgrade", @"action", @1, @"ostype", currentVerdion, @"currver", nil];
+    
+    [manager GET:[BaseURL stringByAppendingString:[NSString stringWithFormat:@"/api/%@/version/", role]] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        NSLog(@"%@", responseObject);
+        
+        if ([responseObject[@"force"] isEqual:@0]) {
+            
+            if (![responseObject[@"version"] isEqualToString:APP_VERSION]) {
+                UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"版本更新提示" message:[NSString stringWithFormat:@"发现新版本:%@,是否升级?", responseObject[@"version"]] preferredStyle:UIAlertControllerStyleAlert];
+                [alertVC addAction:[UIAlertAction actionWithTitle:@"不了" style:UIAlertActionStyleCancel handler:nil]];
+                [alertVC addAction:[UIAlertAction actionWithTitle:@"升级" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    // 前往更新
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:responseObject[@"url"]]];
+                    
+                    [SYS_CACHE removeObjectForKey:@"date"];
+                    
+                }]];
+                
+                [self.window.rootViewController presentViewController:alertVC animated:YES completion:nil];
+                
+            }
+
+            
+        }else {
+            
+            if (![responseObject[@"version"] isEqualToString:APP_VERSION]) {
+                UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"版本更新提示" message:[NSString stringWithFormat:@"发现新版本:%@,该版本有重要升级,请您升级,否则可能会导致程序某些功能无法正常使用!", responseObject[@"version"]] preferredStyle:UIAlertControllerStyleAlert];
+                
+                [alertVC addAction:[UIAlertAction actionWithTitle:@"不了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    // 在此杀掉程序
+                    int i = 0;
+                    exit(i);
+                    
+                    /*
+                    [UIView animateWithDuration:1.0f animations:^{
+                        self.window.alpha = 0;
+                        self.window.frame = CGRectMake(0, self.window.bounds.size.width, 0, 0);
+                    } completion:^(BOOL finished) {
+                        exit(0);
+                    }];
+                     */
+                    
+                }]];
+                
+                [alertVC addAction:[UIAlertAction actionWithTitle:@"升级" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    // 前往更新
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:responseObject[@"url"]]];
+                    [SYS_CACHE removeObjectForKey:@"date"];
+                    
+                }]];
+                
+                [self.window.rootViewController presentViewController:alertVC animated:YES completion:nil];
+                
+            }
+        
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+    
     
 }
 
