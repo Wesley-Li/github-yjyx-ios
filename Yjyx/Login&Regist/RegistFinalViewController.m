@@ -91,6 +91,10 @@
     
     if (parentNameText.text.length == 0||parentPasswordText.text.length == 0||relationText.text.length == 0||phoneText.text.length == 0||codeText.text.length == 0) {
         [self.view makeToast:@"请输入完整信息" duration:1.0 position:SHOW_CENTER complete:nil];
+    }else if([parentPasswordText.text containsString:@" "]){
+        [self.view makeToast:@"密码不能含有空格" duration:1.0 position:SHOW_CENTER complete:nil];
+    }else if(parentPasswordText.text.length < 6 || parentPasswordText.text.length > 20){
+        [self.view makeToast:@"密码长度不能小于6位或大于20位" duration:1.0 position:SHOW_CENTER complete:nil];
     }else{
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",codeText.text,@"code",@"MREGISTER",@"stype",nil];
         [[YjxService sharedInstance] checkOutVerfirycode:dic withBlock:^(id result, NSError *error){//验证验证码

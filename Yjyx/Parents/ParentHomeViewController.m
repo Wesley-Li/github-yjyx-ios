@@ -22,6 +22,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics: UIBarMetricsDefault];
+//    self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
+//    self.navigationController.navigationBar.translucent = YES;
     [_iconImage setImageWithURL:[NSURL URLWithString:[YjyxOverallData sharedInstance].parentInfo.avatar] placeholderImage:[UIImage imageNamed:@"Parent_default.png"]];
     [_iconImage setCornerRadius:_iconImage.height /2];
     _iconImage.userInteractionEnabled = YES;
@@ -38,7 +41,10 @@
     self.navigationController.navigationBarHidden = YES;
 }
 
-
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    self.navigationController.navigationBarHidden = YES;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
