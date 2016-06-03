@@ -13,12 +13,14 @@
 #import "MJRefresh.h"
 
 
+
 #define kk @"Task"
 @interface StuTaskTableViewController ()
 @property (nonatomic, strong) NSNumber *direction;//0,1
 @property (nonatomic, strong) NSNumber *last_id;
 @property (nonatomic, strong) NSNumber *hasmore;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+
 
 @end
 
@@ -35,6 +37,9 @@
 - (void)viewWillAppear:(BOOL)animated {
 
     self.navigationController.navigationBarHidden = NO;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
 }
 
 - (void)viewDidLoad {
@@ -99,6 +104,7 @@
     
     if ([self.hasmore isEqual:@0]) {
         self.tableView.footerRefreshingText = @"没有更多了!!!";
+        [self.tableView setFooterHidden:YES];
     }
     
     [self readDataFromNetWork];
@@ -141,6 +147,8 @@
             
                 [self.dataSource addObjectsFromArray:currentArr];
                 [self.tableView footerEndRefreshing];
+                
+                
             }
         
             [self.tableView reloadData];

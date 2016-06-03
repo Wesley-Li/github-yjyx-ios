@@ -24,6 +24,10 @@
 
      _nameLabel.text = [YjyxOverallData sharedInstance].teacherInfo.name;
     self.navigationController.navigationBarHidden = YES;
+    
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = NO;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = NO;
 }
 
 

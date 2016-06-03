@@ -63,12 +63,12 @@
         _customButton.center = center;
     }
     
-    UIImageView *tab_bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 60, SCREEN_WIDTH, 60)];
-    tab_bgImage.image = [UIImage imageNamed:@"tab_bg"];
-    [self.view addSubview:tab_bgImage];
+    self.tab_bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 60, SCREEN_WIDTH, 60)];
+    _tab_bgImage.image = [UIImage imageNamed:@"tab_bg"];
+    [self.view addSubview:_tab_bgImage];
 //    [self.view sendSubviewToBack:tab_bgImage];
     
-    [self.view insertSubview:tab_bgImage atIndex:1];
+    [self.view insertSubview:_tab_bgImage atIndex:1];
     
     [self.view addSubview:_customButton];
     

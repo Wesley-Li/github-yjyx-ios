@@ -33,6 +33,11 @@
 - (void)viewWillAppear:(BOOL)animated {
 
     [super viewWillAppear:YES];
+    
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = NO;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = NO;
+    
     [_tableView reloadData];
 }
 
@@ -161,9 +166,9 @@
     else{
         UIButton *loginOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         [loginOutBtn addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
-        loginOutBtn.backgroundColor = [UIColor redColor];
+        loginOutBtn.backgroundColor = [UIColor whiteColor];
         [loginOutBtn setTitle:@"退出登录" forState:UIControlStateNormal];
-        [loginOutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [loginOutBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         cell.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:loginOutBtn];
     }

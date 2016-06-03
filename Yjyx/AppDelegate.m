@@ -352,7 +352,7 @@
         
         NSTimeInterval timeInterval = [nowDate timeIntervalSinceDate:oldDate];
         
-        if (timeInterval > 60*60*24) {
+        if (timeInterval > 60*5) {
             [self judgeAppVersionAndUploadWithRole:((AppDelegate *)SYS_DELEGATE).role andCurrentVersion:APP_VERSION];
         }else {
         

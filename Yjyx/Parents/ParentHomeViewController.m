@@ -27,6 +27,8 @@
 //    self.navigationController.navigationBar.translucent = YES;
     [_iconImage setImageWithURL:[NSURL URLWithString:[YjyxOverallData sharedInstance].parentInfo.avatar] placeholderImage:[UIImage imageNamed:@"Parent_default.png"]];
     [_iconImage setCornerRadius:_iconImage.height /2];
+    _iconImage.layer.borderColor = [UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
+    _iconImage.layer.borderWidth = 4.0f;
     _iconImage.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeIcon)];
     [_iconImage addGestureRecognizer:tap];
@@ -152,7 +154,7 @@
             return;
         }
         [_picker setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [_picker setAllowsEditing:NO];
+        [_picker setAllowsEditing:YES];
         [self.navigationController presentViewController:_picker animated:YES completion:nil];
 
     } else if(buttonIndex == 1){
@@ -163,7 +165,7 @@
             return;
         }
         [_picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-        [_picker setAllowsEditing:NO];
+        [_picker setAllowsEditing:YES];
         [self.navigationController presentViewController:_picker animated:YES completion:nil];
 
     }
@@ -173,7 +175,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     [self.view makeToastActivity:SHOW_CENTER];
-    UIImage *image = [info[UIImagePickerControllerOriginalImage] fixOrientation];
+    UIImage *image = info[@"UIImagePickerControllerEditedImage"];;
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
     [[YjxService sharedInstance] getAboutqinniu:dic withBlock:^(id result, NSError *error){
         if (result != nil) {

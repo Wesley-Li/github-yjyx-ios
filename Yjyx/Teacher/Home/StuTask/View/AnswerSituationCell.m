@@ -235,7 +235,7 @@
     oneTaskVC.suid = _w_arr[sender.tag - 200];
 //    TaskConditonModel *model = _w_arr[sender.tag - 200];
     oneTaskVC.qid = self.qid;
-    StudentEntity *stu = [[StuDataBase shareStuDataBase] selectStuById:_r_arr[sender.tag - 200]];
+    StudentEntity *stu = [[StuDataBase shareStuDataBase] selectStuById:_w_arr[sender.tag - 200]];
     oneTaskVC.title = [NSString stringWithFormat:@"%@", stu.realname];
 //    oneTaskVC.answerArr = model.answerArr;
     [self.navi.navigationController pushViewController:oneTaskVC animated:YES];

@@ -22,6 +22,13 @@
 
 @implementation ClassDetailViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
