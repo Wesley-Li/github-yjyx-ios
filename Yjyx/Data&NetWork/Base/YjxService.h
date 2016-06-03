@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 //开发环境
-#define BaseURL @"http://139.196.14.118"
-#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
+//#define BaseURL @"http://139.196.14.118"
+//#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
 
 
 //正式环境
@@ -21,8 +21,8 @@
 /**
  * QA环境地址
  * **/
-//#define BaseURL @"http://120.26.111.106"
-//#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
+#define BaseURL @"http://120.26.111.106"
+#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
 
 @interface YjxService : NSObject
 
