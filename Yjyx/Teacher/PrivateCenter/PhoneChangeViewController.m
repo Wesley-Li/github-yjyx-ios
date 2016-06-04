@@ -29,10 +29,15 @@
     _second = 60;
     
     [self configureNavBar];
-    
+       [_phoneTF addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
 }
-
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if(textField.text.length > 11){
+        textField.text = [textField.text substringToIndex:11];
+    }
+}
 #pragma mark - 配置导航栏
 - (void)configureNavBar {
     

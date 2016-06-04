@@ -68,8 +68,11 @@
 //        [self.view makeToast:@"请输入正确的账号" duration:1.0 position:SHOW_CENTER complete:nil];
 //        return;
 //    }
-    
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:accountText.text,@"username",nil];
+    NSString *str = accountText.text;
+    if(self.parentBtn.selected == YES){
+        str = [NSString stringWithFormat:@"4*#*_%@", accountText.text];
+    }
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:str,@"username",nil];
     [[YjxService sharedInstance] getUserPhone:dic withBlock:^(id result, NSError *error){//验证验证码
         [self.view hideToastActivity];
         if (result) {
@@ -77,7 +80,7 @@
                 
                 ForgetTwoViewController *vc = [[ForgetTwoViewController alloc] init];
                 vc.phoneStr = [result objectForKey:@"phone"];
-                vc.userName = accountText.text;
+                vc.userName = str;
                 vc.roleType = self.parentBtn.selected ? 0 : 1;
                 [self.navigationController pushViewController:vc animated:YES];
 
