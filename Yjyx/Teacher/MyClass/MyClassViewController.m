@@ -48,8 +48,8 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
 
-
-    self.title = @"我的班级";
+    self.navigationItem.title = @"我的班级";
+//    self.title = @"我的班级";
     [self refreshAll];
 //    [self.classListTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"1"];
     

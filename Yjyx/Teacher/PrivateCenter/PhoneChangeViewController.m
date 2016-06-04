@@ -157,6 +157,7 @@
         if (result) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
+                _timeLabel.backgroundColor = [UIColor grayColor];
                 //发送注册码按钮失效，防止频繁请求
                 self.timeLabel.text = [NSString stringWithFormat:@"%lds",(long)_second--];
                 [self.getCodeBtn setEnabled:false];
@@ -184,6 +185,7 @@
 #pragma mark - 重置时间器
 -(void)resetTimer
 {
+    _timeLabel.backgroundColor = RGBACOLOR(11.0, 102.0, 254.0, 1);
     _second = 60;
     _timeLabel.text = @"获取验证码";
     [_timer invalidate];

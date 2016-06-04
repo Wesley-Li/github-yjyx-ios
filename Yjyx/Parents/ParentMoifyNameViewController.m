@@ -38,6 +38,7 @@
     self.navigationItem.rightBarButtonItem = rightBtnItem;
     
     [self.nickeNameTextfield addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    _nickeNameTextfield.delegate = self;
     self.title = @"修改姓名";
     // Do any additional setup after loading the view from its nib.
 }
@@ -69,9 +70,11 @@
                 }
                 
             }
-            
-        
-    }
+        }else{
+            if(textField.text.length > 10){
+                textField.text = [toBeString substringToIndex:10];
+            }
+        }
     
 }
 -(void)goSure
