@@ -51,13 +51,13 @@
     ((AppDelegate*)SYS_DELEGATE).stuListArr = [NSMutableArray array];
     
     // 创建定时器,并行,24小时执行一次
-    dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
-    ((AppDelegate*)SYS_DELEGATE).timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-    dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, 24*60*60 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
-    dispatch_source_set_event_handler(_timer, ^{
-        NSLog(@"我被调用了");
-        [(AppDelegate *)SYS_DELEGATE getStuList];
-    });
+//    dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
+//    ((AppDelegate*)SYS_DELEGATE).timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+//    dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, 24*60*60 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+//    dispatch_source_set_event_handler(_timer, ^{
+//        NSLog(@"我被调用了");
+//        [(AppDelegate *)SYS_DELEGATE getStuList];
+//    });
 
     [self initUmeng:launchOptions];
     // Override point for customization after application launch.
@@ -215,8 +215,19 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
+// 进入激活状态
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    // 判断日期获取学生列表
+    if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"teacher"]) {
+        [self judgeGetStuListDate];
+    }
+    
+    // 判断版本更新,如果是老师身份就拉取学生列表
+    [self judgeDate];
+    
+    
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -321,8 +332,14 @@
         [_cusTBViewController.tabBar setShadowImage:img];
         _cusTBViewController.selectedIndex = 0;
         self.window.rootViewController = _cusTBViewController;
-        // 判断版本更新
+        
+        // 判断日期获取学生列表
+        [self judgeGetStuListDate];
+        
+        // 判断版本更新并获取学生列表
         [self judgeDate];
+        
+        
     
     }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"student"]) {
         
@@ -335,31 +352,88 @@
     
 }
 
+// 判断日期获取学生列表
+- (void)judgeGetStuListDate {
+
+    NSDate *currentDate = [NSDate date];
+    NSDate *oldDate = [SYS_CACHE objectForKey:@"getDate"];
+    if (oldDate == nil) {
+        
+        
+        [self getStuList];
+        [SYS_CACHE setObject:currentDate forKey:@"getDate"];
+        
+    }else {
+    
+        NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:oldDate];
+        
+        if (timeInterval > 60*60*24) {
+            [self getStuList];
+            
+        }else {
+            
+            return;
+        }
+
+        
+    }
+
+}
+
 // 判断日期并更新
 - (void)judgeDate {
 
     NSDate *nowDate = [NSDate date];
     
-    NSDate *oldDate = [SYS_CACHE objectForKey:@"date"];
+    NSLog(@"%@", nowDate);
     
-    if (oldDate == nil) {
+    if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"teacher"]) {
+        NSDate *oldDate = [SYS_CACHE objectForKey:@"t_date"];
         
-        [self judgeAppVersionAndUploadWithRole:((AppDelegate *)SYS_DELEGATE).role andCurrentVersion:APP_VERSION];
-        
-        [SYS_CACHE setObject:nowDate forKey:@"date"];
-        
-    }else {
-        
-        NSTimeInterval timeInterval = [nowDate timeIntervalSinceDate:oldDate];
-        
-        if (timeInterval > 60*60*24) {
+        if (oldDate == nil) {
+            
             [self judgeAppVersionAndUploadWithRole:((AppDelegate *)SYS_DELEGATE).role andCurrentVersion:APP_VERSION];
+            [SYS_CACHE setObject:nowDate forKey:@"t_date"];
+            
         }else {
-        
-            return;
+            
+            NSTimeInterval timeInterval = [nowDate timeIntervalSinceDate:oldDate];
+            
+            if (timeInterval > 60*60*24) {
+                
+                [self judgeAppVersionAndUploadWithRole:((AppDelegate *)SYS_DELEGATE).role andCurrentVersion:APP_VERSION];
+            }else {
+                
+                return;
+            }
+            
         }
-        
+
+    }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {
+    
+        NSDate *oldDate = [SYS_CACHE objectForKey:@"p_date"];
+        if (oldDate == nil) {
+            
+            [self judgeAppVersionAndUploadWithRole:((AppDelegate *)SYS_DELEGATE).role andCurrentVersion:APP_VERSION];
+            [SYS_CACHE setObject:nowDate forKey:@"p_date"];
+            
+        }else {
+            
+            NSTimeInterval timeInterval = [nowDate timeIntervalSinceDate:oldDate];
+            
+            if (timeInterval > 60*60*24) {
+                
+                [self judgeAppVersionAndUploadWithRole:((AppDelegate *)SYS_DELEGATE).role andCurrentVersion:APP_VERSION];
+            }else {
+                
+                return;
+            }
+            
+        }
+
+    
     }
+    
     
 }
 
@@ -375,59 +449,84 @@
         
         NSLog(@"%@", responseObject);
         
-        if ([responseObject[@"force"] isEqual:@0]) {
+        if ([responseObject[@"retcode"] isEqual:@0]) {
             
-            if (![responseObject[@"version"] isEqualToString:APP_VERSION]) {
-                UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"版本更新提示" message:[NSString stringWithFormat:@"发现新版本:%@,是否升级?", responseObject[@"version"]] preferredStyle:UIAlertControllerStyleAlert];
-                [alertVC addAction:[UIAlertAction actionWithTitle:@"不了" style:UIAlertActionStyleCancel handler:nil]];
-                [alertVC addAction:[UIAlertAction actionWithTitle:@"升级" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    
-                    // 前往更新
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:responseObject[@"url"]]];
-                    
-                    [SYS_CACHE removeObjectForKey:@"date"];
-                    
-                }]];
+            
+            if ([responseObject[@"version"] isEqual:[NSNull null]]) {
                 
-                [self.window.rootViewController presentViewController:alertVC animated:YES completion:nil];
+                // 如果是空不做处理
                 
+            }else {
+                // 版本不同
+                if (![responseObject[@"version"] isEqualToString:APP_VERSION]) {
+                    
+                    if ([responseObject[@"force"] isEqual:@0]) {
+                        
+                        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"版本更新提示" message:[NSString stringWithFormat:@"发现新版本:%@,是否升级?", responseObject[@"version"]] preferredStyle:UIAlertControllerStyleAlert];
+                        [alertVC addAction:[UIAlertAction actionWithTitle:@"不了" style:UIAlertActionStyleCancel handler:nil]];
+                        [alertVC addAction:[UIAlertAction actionWithTitle:@"升级" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                            
+                            // 前往更新
+                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:responseObject[@"url"]]];
+                            
+                            [SYS_CACHE removeObjectForKey:@"date"];
+                            
+                        }]];
+                        
+                        [self.window.rootViewController presentViewController:alertVC animated:YES completion:nil];
+                        
+                    }else {
+                    
+                        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"版本更新提示" message:[NSString stringWithFormat:@"发现新版本:%@,该版本有重要升级,请您升级,否则可能会导致程序某些功能无法正常使用!", responseObject[@"version"]] preferredStyle:UIAlertControllerStyleAlert];
+                        
+                        [alertVC addAction:[UIAlertAction actionWithTitle:@"不了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                            
+                            if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {
+                                [SYS_CACHE removeObjectForKey:@"p_date"];
+                            }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"teacher"]) {
+                            
+                                [SYS_CACHE removeObjectForKey:@"t_date"];
+                            
+                            }
+                            
+                            // 在此杀掉程序
+                            int i = 0;
+                            exit(i);
+                            
+                            /*
+                             [UIView animateWithDuration:1.0f animations:^{
+                             self.window.alpha = 0;
+                             self.window.frame = CGRectMake(0, self.window.bounds.size.width, 0, 0);
+                             } completion:^(BOOL finished) {
+                             exit(0);
+                             }];
+                             */
+                            
+                        }]];
+                        
+                        [alertVC addAction:[UIAlertAction actionWithTitle:@"升级" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                            
+                            // 前往更新
+                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:responseObject[@"url"]]];
+                            [SYS_CACHE removeObjectForKey:@"date"];
+                            
+                        }]];
+                        
+                        [self.window.rootViewController presentViewController:alertVC animated:YES completion:nil];
+                        
+
+                    
+                    }
+                    
+                }
+                
+            
             }
 
-            
-        }else {
-            
-            if (![responseObject[@"version"] isEqualToString:APP_VERSION]) {
-                UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"版本更新提示" message:[NSString stringWithFormat:@"发现新版本:%@,该版本有重要升级,请您升级,否则可能会导致程序某些功能无法正常使用!", responseObject[@"version"]] preferredStyle:UIAlertControllerStyleAlert];
-                
-                [alertVC addAction:[UIAlertAction actionWithTitle:@"不了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    
-                    // 在此杀掉程序
-                    int i = 0;
-                    exit(i);
-                    
-                    /*
-                    [UIView animateWithDuration:1.0f animations:^{
-                        self.window.alpha = 0;
-                        self.window.frame = CGRectMake(0, self.window.bounds.size.width, 0, 0);
-                    } completion:^(BOOL finished) {
-                        exit(0);
-                    }];
-                     */
-                    
-                }]];
-                
-                [alertVC addAction:[UIAlertAction actionWithTitle:@"升级" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    
-                    // 前往更新
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:responseObject[@"url"]]];
-                    [SYS_CACHE removeObjectForKey:@"date"];
-                    
-                }]];
-                
-                [self.window.rootViewController presentViewController:alertVC animated:YES completion:nil];
-                
-            }
         
+        }else {
+        
+            NSLog(@"%@", responseObject[@"msg"]);
         }
         
         
@@ -526,7 +625,14 @@
                 [model initStuGroupWithDic:dic];
                 [[StuDataBase shareStuDataBase] insertStuGroup:model];
             }
+            
+            [SYS_CACHE removeObjectForKey:@"getDate"];
+            
+        }else {
+        
+            NSLog(@"%@", responseObject[@"msg"]);
         }
+        
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
     }];

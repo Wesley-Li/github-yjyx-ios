@@ -48,7 +48,7 @@
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
 
     self.invitecodeLabel.text = [NSString stringWithFormat:@"班级邀请码:%@" ,[numberFormatter stringFromNumber:self.model.invitecode]];
-    self.stuCountLabel.text = [NSString stringWithFormat:@"%ld人", self.model.memberlist.count];
+    self.stuCountLabel.text = [NSString stringWithFormat:@"%ld人", (unsigned long)self.model.memberlist.count];
     
     // 注册
     [self.stuListTableView registerNib:[UINib nibWithNibName:@"ClassCustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"CC"];

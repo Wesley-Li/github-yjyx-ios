@@ -267,7 +267,7 @@
                 
                 [SYS_CACHE removeObjectForKey:@"AutoLogoin"];
                 // 定时器挂起
-                dispatch_suspend(((AppDelegate*)SYS_DELEGATE).timer);
+//                dispatch_suspend(((AppDelegate*)SYS_DELEGATE).timer);
                 
 //                LoginViewController *loginVC = [[LoginViewController alloc] init];
 //                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];

@@ -241,7 +241,7 @@
                 
                 [[YjxService sharedInstance] teacherLogin:dic autoLogin:NO withBlock:^(id result, NSError *error) {
                     
-                    NSLog(@"%@", result);
+//                    NSLog(@"%@", result);
                     
                     [self.view hideToastActivity];
                     if (result != nil) {
@@ -259,7 +259,7 @@
                             [SYS_CACHE synchronize];
                             
                              // GCD写定时器启动
-                            dispatch_resume(((AppDelegate*)SYS_DELEGATE).timer);
+//                            dispatch_resume(((AppDelegate*)SYS_DELEGATE).timer);
 //
                         }else {
                             

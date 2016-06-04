@@ -30,7 +30,7 @@
 
 - (void)setValueWithStudentEntity:(StudentEntity *)model {
     
-    NSLog(@"######%@", model.isyjmember);
+//    NSLog(@"######%@", model.isyjmember);
 
     [self.picImage setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:[UIImage imageNamed:@"hpic_placeholder"]];
     
