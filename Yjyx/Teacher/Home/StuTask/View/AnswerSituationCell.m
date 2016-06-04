@@ -206,7 +206,7 @@
 
 - (void)imageBtnClick:(UIButton *)sender {
     
-    NSLog(@"点击了正确头像");
+//    NSLog(@"点击了正确头像");
     
     OneStuTaskDetailViewController *oneTaskVC = [[OneStuTaskDetailViewController alloc] init];
     oneTaskVC.taskid = self.taskid;
@@ -227,7 +227,7 @@
 
 - (void)handleImageBtn:(UIButton *)sender {
 
-    NSLog(@"点击了错误头像");
+//    NSLog(@"点击了错误头像");
     
     OneStuTaskDetailViewController *oneTaskVC = [[OneStuTaskDetailViewController alloc] init];
     oneTaskVC.taskid = self.taskid;

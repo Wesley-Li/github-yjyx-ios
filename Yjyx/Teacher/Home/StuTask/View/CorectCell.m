@@ -97,7 +97,7 @@
     }
     
     
-    NSLog(@"%@", arr);
+//    NSLog(@"%@", arr);
     NSString *ansString = [arr componentsJoinedByString:@","];
 
     UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 25, SCREEN_WIDTH - 20, 40)];
