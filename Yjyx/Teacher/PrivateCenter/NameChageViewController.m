@@ -36,8 +36,30 @@
     _doneBtn.backgroundColor = [UIColor colorWithRed:3/255.0 green:136/255.0 blue:227/255.0 alpha:1.0];
     _doneBtn.tintColor = [UIColor whiteColor];
     
+    [_nameTF addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 }
-
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    
+    
+    NSString *toBeString = textField.text;
+    NSString *lang = [[UITextInputMode currentInputMode] primaryLanguage]; // 键盘输入模式
+    if ([lang isEqualToString:@"zh-Hans"]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写
+        UITextRange *selectedRange = [textField markedTextRange];
+        //获取高亮部分
+        UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if (!position) {
+            if (toBeString.length > 10) {
+                textField.text = [toBeString substringToIndex:10];
+            }
+            
+        }
+        
+        
+    }
+    
+}
 // 点击屏幕回收键盘
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
 

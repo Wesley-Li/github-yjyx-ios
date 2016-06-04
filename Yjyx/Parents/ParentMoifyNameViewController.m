@@ -37,6 +37,7 @@
     UIBarButtonItem *rightBtnItem = [[UIBarButtonItem alloc] initWithCustomView:sureBtn];
     self.navigationItem.rightBarButtonItem = rightBtnItem;
     
+    [self.nickeNameTextfield addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     self.title = @"修改姓名";
     // Do any additional setup after loading the view from its nib.
 }
@@ -51,7 +52,28 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    
+    
+        NSString *toBeString = textField.text;
+        NSString *lang = [[UITextInputMode currentInputMode] primaryLanguage]; // 键盘输入模式
+        if ([lang isEqualToString:@"zh-Hans"]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写
+            UITextRange *selectedRange = [textField markedTextRange];
+            //获取高亮部分
+            UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+            // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+            if (!position) {
+                if (toBeString.length > 10) {
+                    textField.text = [toBeString substringToIndex:10];
+                }
+                
+            }
+            
+        
+    }
+    
+}
 -(void)goSure
 {
     [self.view hideKeyboard];
@@ -59,7 +81,7 @@
     if (nickName.length == 0 ) {
         [self.view makeToast:@"请输入姓名"
                     duration:1.0
-                    position:SHOW_BOTTOM
+                    position:SHOW_TOP
                     complete:nil];
         return;
     }
@@ -94,7 +116,6 @@
     [self goSure];
     return YES;
 }
-
 
 /*
 #pragma mark - Navigation

@@ -33,19 +33,24 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeIcon)];
     [_iconImage addGestureRecognizer:tap];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushSwitch) name:@"ChildActivityNotification" object:nil];
+    [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
     // Do any additional setup after loading the view from its nib.
+    
 }
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.navigationController.navigationBarHidden = YES;
+    self.view.backgroundColor = RGBACOLOR(23, 155, 121, 1);
+    self.navigationController.navigationBarHidden = YES ;
 }
 
 //- (void)viewDidAppear:(BOOL)animated
 //{
-//    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES ;
+//    
 //}
 
 - (void)didReceiveMemoryWarning {

@@ -50,7 +50,7 @@
                             <rect key="frame" x="10" y="0.0" width="310" height="40"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="abi-BC-mbU">
                             <rect key="frame" x="0.0" y="41" width="320" height="1"/>

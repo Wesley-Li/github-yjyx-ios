@@ -39,6 +39,8 @@
     sureBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     UIBarButtonItem *rightBtnItem = [[UIBarButtonItem alloc] initWithCustomView:sureBtn];
     self.navigationItem.rightBarButtonItem = rightBtnItem;
+    
+    [_phoneTextfield addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -63,7 +65,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if(textField.text.length > 11){
+        textField.text = [textField.text substringToIndex:11];
+    }
+}
 #pragma mark - 确定
 -(void)goSure
 {

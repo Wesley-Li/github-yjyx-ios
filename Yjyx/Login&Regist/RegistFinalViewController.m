@@ -24,7 +24,46 @@
     relationText.placeholder = [NSString stringWithFormat:@"是%@的(称谓,譬如父亲,母亲...)",_childrenEntity.name];
     phoneText.placeholder = @"手机号码(作为登录账户)";
     codeText.placeholder = @"4位验证码";
+    
+    [parentNameText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+     [relationText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+     [phoneText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+     [parentPasswordText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     // Do any additional setup after loading the view from its nib.
+}
+// 限制输入的长度
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    
+    if ([textField isEqual:phoneText]) {
+
+        if (textField.text.length > 11) {
+            textField.text = [textField.text substringToIndex:11];
+        }
+        
+    }else if ([textField isEqual:parentNameText] || [textField isEqual:relationText]) {
+        NSString *toBeString = textField.text;
+        NSString *lang = [[UITextInputMode currentInputMode] primaryLanguage]; // 键盘输入模式
+        if ([lang isEqualToString:@"zh-Hans"]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写
+            UITextRange *selectedRange = [textField markedTextRange];
+            //获取高亮部分
+            UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+            // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+            if (!position) {
+                if (toBeString.length > 10) {
+                    textField.text = [toBeString substringToIndex:10];
+                }
+                
+            }
+            
+        }
+    }else if ([textField isEqual:parentPasswordText]){
+        if (textField.text.length > 20){
+            textField.text = [textField.text substringToIndex:20];
+            [self.view makeToast:@"密码的长度不能大于20位" duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,6 +79,14 @@
 {
     if (phoneText.text.length == 0 || phoneText.text.length < 11) {
         [self.view makeToast:@"请输入正确的账号" duration:1.0 position:SHOW_CENTER complete:nil];
+        return;
+    }
+    if (parentPasswordText.text.length < 6){
+        [self.view makeToast:@"密码长度不能小于6位" duration:1.0 position:SHOW_CENTER complete:nil];
+        return;
+    }
+    if ([parentPasswordText.text containsString:@" "]){
+        [self.view makeToast:@"密码不能包含空格" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
     NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",phoneText.text];

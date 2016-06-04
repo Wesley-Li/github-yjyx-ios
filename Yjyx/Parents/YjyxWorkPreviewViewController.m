@@ -63,6 +63,7 @@
 {
     [self.view makeToastActivity:SHOW_CENTER];
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:previewrid,@"rid", @"1",@"tasktype",@"preview",@"action",nil];
+    
     [[YjxService sharedInstance] getChildrenPreviewResult:dic withBlock:^(id result,NSError *error){
         [self.view hideToastActivity];
         if (result != nil) {
