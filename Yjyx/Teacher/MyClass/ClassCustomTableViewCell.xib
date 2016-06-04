@@ -21,7 +21,7 @@
                             <constraint firstAttribute="width" secondItem="vzk-Xa-s1b" secondAttribute="height" multiplier="1:1" id="IGP-g5-DqP"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omg-Xr-wTp">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omg-Xr-wTp">
                         <rect key="frame" x="150" y="66" width="50" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="CuL-7R-XaL"/>
@@ -30,8 +30,13 @@
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="CuL-7R-XaL"/>
+                            </mask>
+                        </variation>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vip" translatesAutoresizingMaskIntoConstraints="NO" id="BX2-ki-fcv">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="vip" translatesAutoresizingMaskIntoConstraints="NO" id="BX2-ki-fcv">
                         <rect key="frame" x="200" y="64" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="24" id="X2q-17-FDN"/>
@@ -45,7 +50,7 @@
                     <constraint firstItem="BX2-ki-fcv" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hVD-Qj-UaK"/>
                     <constraint firstItem="omg-Xr-wTp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ite-p7-Ay5"/>
                     <constraint firstItem="omg-Xr-wTp" firstAttribute="leading" secondItem="vzk-Xa-s1b" secondAttribute="trailing" constant="5" id="qQz-7U-c50"/>
-                    <constraint firstItem="BX2-ki-fcv" firstAttribute="leading" secondItem="omg-Xr-wTp" secondAttribute="trailing" id="rPe-hN-EUf"/>
+                    <constraint firstItem="BX2-ki-fcv" firstAttribute="leading" secondItem="omg-Xr-wTp" secondAttribute="trailing" constant="10" id="rPe-hN-EUf"/>
                     <constraint firstAttribute="bottom" secondItem="vzk-Xa-s1b" secondAttribute="bottom" constant="5" id="z7m-ZV-eAx"/>
                 </constraints>
             </tableViewCellContentView>
