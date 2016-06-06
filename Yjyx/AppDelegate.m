@@ -451,14 +451,6 @@
                 // 版本不同
                 if (![responseObject[@"version"] isEqualToString:APP_VERSION]) {
 
-                [alertVC addAction:[UIAlertAction actionWithTitle:@"不了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    
-                    
-                    [SYS_CACHE removeObjectForKey:@"date"];
-                    // 在此杀掉程序
-                    int i = 0;
-                    exit(i);
-
                     
                     if ([responseObject[@"force"] isEqual:@0]) {
                         
