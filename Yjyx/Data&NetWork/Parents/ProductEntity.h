@@ -17,6 +17,7 @@
 @property(nonatomic, strong) NSString *trialDays;
 @property(nonatomic, strong) NSArray *price_pacakge;
 @property(nonatomic, strong) NSString *content;
+@property(nonatomic, strong) NSNumber *status;
 
 +(ProductEntity *)wrapProductEntityWithDic:(NSDictionary *)dic;
 
