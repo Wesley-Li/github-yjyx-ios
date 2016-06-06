@@ -8,10 +8,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ForgetOneViewController">
             <connections>
                 <outlet property="accountText" destination="tc0-pS-rKW" id="w9P-oI-lcG"/>
-                <outlet property="parentBtn" destination="9J3-La-NsM" id="qZ7-3a-z6H"/>
+                <outlet property="parentBtn" destination="a4b-j4-aze" id="aGx-6D-GBb"/>
                 <outlet property="roleView" destination="yGL-J6-Shn" id="Cud-bF-b7y"/>
-                <outlet property="studentBtn" destination="a4b-j4-aze" id="e1S-PU-bpU"/>
-                <outlet property="teacherBtn" destination="WaA-qw-Iyz" id="NBY-L3-tob"/>
+                <outlet property="studentBtn" destination="WaA-qw-Iyz" id="zJg-nm-7fv"/>
+                <outlet property="teacherBtn" destination="9J3-La-NsM" id="MBu-l4-5Nf"/>
                 <outlet property="underLineV" destination="Jhy-fJ-HGS" id="yVy-6g-FjG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -81,11 +81,14 @@
                                 <color key="titleColor" red="0.18431372549019609" green="0.5725490196078431" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
-                                <action selector="parentBtnClick:" destination="-1" eventType="touchUpInside" id="OtG-Gw-MQq"/>
+                                <action selector="teacherBtnClick:" destination="-1" eventType="touchUpInside" id="Bji-oN-DVj"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WaA-qw-Iyz">
                             <rect key="frame" x="213" y="0.0" width="107" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="107" id="UzA-UC-LOS"/>
+                            </constraints>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="学生">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -93,8 +96,13 @@
                             <state key="selected">
                                 <color key="titleColor" red="0.1843137255" green="0.57254901960000004" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="UzA-UC-LOS"/>
+                                </mask>
+                            </variation>
                             <connections>
-                                <action selector="teacherBtnClick:" destination="-1" eventType="touchUpInside" id="Jod-9M-vls"/>
+                                <action selector="studentBtnClick:" destination="-1" eventType="touchUpInside" id="9eQ-NM-NDe"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jhy-fJ-HGS">
@@ -114,7 +122,7 @@
                                 <color key="titleColor" red="0.1843137255" green="0.57254901960000004" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
-                                <action selector="stuBtnClick:" destination="-1" eventType="touchUpInside" id="p7p-ca-Koo"/>
+                                <action selector="parentBtnClick:" destination="-1" eventType="touchUpInside" id="ecy-CQ-Gqj"/>
                             </connections>
                         </button>
                     </subviews>
@@ -184,7 +192,7 @@
                 <constraint firstItem="GYC-q6-b7x" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wU2-5t-2Y7"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="322" y="162"/>
+            <point key="canvasLocation" x="620" y="190"/>
         </view>
     </objects>
     <resources>

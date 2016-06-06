@@ -12,11 +12,11 @@
 @interface ForgetOneViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *roleView;
-@property (weak, nonatomic) IBOutlet UIButton *parentBtn;
+@property (weak, nonatomic) IBOutlet UIButton *teacherBtn;
 @property (weak, nonatomic) IBOutlet UIView *underLineV;
 @property (strong, nonatomic) UIButton *preSelectBtn;
+@property (weak, nonatomic) IBOutlet UIButton *parentBtn;
 @property (weak, nonatomic) IBOutlet UIButton *studentBtn;
-@property (weak, nonatomic) IBOutlet UIButton *teacherBtn;
 @end
 
 @implementation ForgetOneViewController
@@ -40,6 +40,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)teacherBtnClick:(UIButton *)sender {
+    self.preSelectBtn.selected = NO;
+    sender.selected = YES;
+    
+    self.preSelectBtn = sender;
+    [self moveUnderLine:sender];
+}
 - (IBAction)parentBtnClick:(UIButton *)sender {
     self.preSelectBtn.selected = NO;
     sender.selected = YES;
@@ -47,14 +54,7 @@
     self.preSelectBtn = sender;
     [self moveUnderLine:sender];
 }
-- (IBAction)stuBtnClick:(UIButton *)sender {
-    self.preSelectBtn.selected = NO;
-    sender.selected = YES;
-    
-    self.preSelectBtn = sender;
-    [self moveUnderLine:sender];
-}
-- (IBAction)teacherBtnClick:(UIButton *)sender {
+- (IBAction)studentBtnClick:(UIButton *)sender {
     self.preSelectBtn.selected = NO;
     sender.selected = YES;
     
