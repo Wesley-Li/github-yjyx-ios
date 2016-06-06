@@ -14,15 +14,15 @@
 
 
 //正式环境
-//#define BaseURL @"http://www.zgyjyx.com"
-//#define QiniuYunURL @"http://cdn-web-img.zgyjyx.com/"
+#define BaseURL @"http://www.zgyjyx.com"
+#define QiniuYunURL @"http://cdn-web-img.zgyjyx.com/"
 //#define QiniuYunURL @"http://cdn-web-video.zgyjyx.com/"
 
 /**
  * QA环境地址
  * **/
-#define BaseURL @"http://120.26.111.106"
-#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
+//#define BaseURL @"http://120.26.111.106"
+//#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
 
 @interface YjxService : NSObject
 

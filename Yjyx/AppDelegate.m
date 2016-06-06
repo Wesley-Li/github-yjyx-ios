@@ -218,12 +218,7 @@
 // 进入激活状态
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     
-    // 判断日期获取学生列表
-    if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"teacher"]) {
-        [self judgeGetStuListDate];
-    }
-    
-    // 判断版本更新,如果是老师身份就拉取学生列表
+    // 判断版本更新
     [self judgeAndUpdate];
     
     
@@ -334,7 +329,7 @@
         self.window.rootViewController = _cusTBViewController;
         
         // 判断日期获取学生列表
-        [self judgeGetStuListDate];
+        [self getStuList];
         
         // 判断版本更新并获取学生列表
         [self judgeAndUpdate];
@@ -359,9 +354,7 @@
     NSDate *oldDate = [SYS_CACHE objectForKey:@"getDate"];
     if (oldDate == nil) {
         
-        
         [self getStuList];
-        [SYS_CACHE setObject:currentDate forKey:@"getDate"];
         
     }else {
     
@@ -381,23 +374,28 @@
 }
 
 
+
+
+
 // 判断日期并更新
 - (void)judgeAndUpdate {
     
-
-    NSString *force = [SYS_CACHE objectForKey:@"force"];
+    NSDate *currentDate = [NSDate date];
     
-    if ([force isEqual:[NSNull null]]) {
-        
-        NSDate *currentDate = [NSDate date];
-        NSDate *pastDate = [SYS_CACHE objectForKey:@"date"];
+    NSString *force = [SYS_CACHE objectForKey:@"force"];
+    NSDate *pastDate = [SYS_CACHE objectForKey:@"date"];
+    
+    
+    
+    if (force == nil) {
         
         if (pastDate == nil) {
-            [SYS_CACHE setObject:currentDate forKey:@"date"];
+            
             [self judgeAppVersionAndUploadWithRole:((AppDelegate *)SYS_DELEGATE).role andCurrentVersion:APP_VERSION];
             
+            
         }else {
-        
+            
             NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:pastDate];
             
             if (timeInterval > 60*60*24) {
@@ -407,44 +405,18 @@
                 
                 return;
             }
-
+            
         }
+
         
     }else {
         
-        if ([force isEqualToString:@"YES"]) {
-            
-            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"版本更新提示" message:[NSString stringWithFormat:@"您的版本需要升级,请您升级,否则可能会导致程序某些功能无法正常使用!"] preferredStyle:UIAlertControllerStyleAlert];
-            
-            [alertVC addAction:[UIAlertAction actionWithTitle:@"不了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                
-                // 在此杀掉程序
-                int i = 0;
-                exit(i);
-                
-                
-            }]];
-            
-            [alertVC addAction:[UIAlertAction actionWithTitle:@"升级" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                
-                // 前往更新
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[SYS_CACHE objectForKey:@"app_update_url"]]];
-                
-                [SYS_CACHE removeObjectForKey:@"force"];
-                [SYS_CACHE removeObjectForKey:@"app_update_url"];
-                
-                NSDate *currentDate = [NSDate date];
-                [SYS_CACHE setObject:currentDate forKey:@"date"];
-                
-            }]];
-            
-            [self.window.rootViewController presentViewController:alertVC animated:YES completion:nil];
-            
-            
-        }
+        
+        [self judgeAppVersionAndUploadWithRole:((AppDelegate *)SYS_DELEGATE).role andCurrentVersion:APP_VERSION];
     
     
     }
+        
     
     
 
@@ -457,7 +429,7 @@
 
 - (void)judgeAppVersionAndUploadWithRole:(NSString *)role andCurrentVersion:(NSString *)currentVerdion{
     
-
+    NSLog(@"%@", currentVerdion);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"checkupgrade", @"action", @1, @"ostype", currentVerdion, @"currver", nil];
@@ -482,12 +454,14 @@
                         
                         UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"版本更新提示" message:[NSString stringWithFormat:@"发现新版本:%@,是否升级?", responseObject[@"version"]] preferredStyle:UIAlertControllerStyleAlert];
                         [alertVC addAction:[UIAlertAction actionWithTitle:@"不了" style:UIAlertActionStyleCancel handler:nil]];
+                        
+                        [SYS_CACHE setObject:[NSDate date] forKey:@"date"];
+                        
                         [alertVC addAction:[UIAlertAction actionWithTitle:@"升级" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                             
                             // 前往更新
                             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:responseObject[@"url"]]];
-                            
-                            [SYS_CACHE removeObjectForKey:@"date"];
+                        
                             
                         }]];
                         
@@ -499,8 +473,8 @@
                         
                         [alertVC addAction:[UIAlertAction actionWithTitle:@"不了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                             
-                            [SYS_CACHE setObject:@"YES" forKey:@"force"];
-                            [SYS_CACHE setObject:responseObject[@"url"] forKey:@"app_update_url"];
+                            [SYS_CACHE removeObjectForKey:@"date"];
+                            [SYS_CACHE setObject:@"yes" forKey:@"force"];
                             
                             // 在此杀掉程序
                             int i = 0;
@@ -514,9 +488,8 @@
                             // 前往更新
                             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:responseObject[@"url"]]];
                             
-                            [SYS_CACHE removeObjectForKey:@"force"];
-                            
                             [SYS_CACHE removeObjectForKey:@"date"];
+                            [SYS_CACHE removeObjectForKey:@"force"];
                             
                         }]];
                         
@@ -610,7 +583,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[BaseURL stringByAppendingString:TEACHER_GETALLSTULIST_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject);
         // 创建数据库
         [[StuDataBase shareStuDataBase] deleteStuTable];
         [[StuDataBase shareStuDataBase] creatStuDataBase];
@@ -638,6 +611,7 @@
             }
             
             [SYS_CACHE removeObjectForKey:@"getDate"];
+            
             
         }else {
         

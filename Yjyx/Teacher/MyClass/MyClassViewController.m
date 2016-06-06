@@ -22,17 +22,21 @@
 
 @implementation MyClassViewController
 
-//- (NSMutableArray *)dataSource {
-//
-//    if (!_dataSource) {
-//        self.dataSource = [NSMutableArray array];
-//    }
-//    return _dataSource;
-//}
+- (NSMutableArray *)dataSource {
+
+    if (!_dataSource) {
+        self.dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
+    
+    NSLog(@"%@", NSHomeDirectory());
+    
+    NSLog(@"%@", [[StuDataBase shareStuDataBase] selectAllClass]);
 
-    self.dataSource = [[[StuDataBase shareStuDataBase]selectAllClass] mutableCopy];
+    self.dataSource = [[[StuDataBase shareStuDataBase] selectAllClass] mutableCopy];
     
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;

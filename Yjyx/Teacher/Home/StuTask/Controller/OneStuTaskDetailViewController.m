@@ -250,6 +250,21 @@
 }
 
 
+// 强制加载单个cell
+- (void)viewDidAppear:(BOOL)animated {
+
+    if (_rows != 0) {
+        
+        NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:0 inSection:0];
+        NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:3 inSection:0];
+        NSArray *indexPathArray = [NSArray arrayWithObjects:indexPath1,indexPath2, nil];
+        [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+        
+    }
+    
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
