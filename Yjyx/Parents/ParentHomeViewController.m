@@ -43,7 +43,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.view.backgroundColor = RGBACOLOR(23, 155, 121, 1);
     self.navigationController.navigationBarHidden = YES ;
 }
 
