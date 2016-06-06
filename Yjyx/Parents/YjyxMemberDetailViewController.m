@@ -103,6 +103,7 @@
 
 -(void)reloadView:(NSDictionary *)dic
 {
+
     for (UIView *view in _detailView.subviews) {
         if (view.tag>=1000) {
             [view removeFromSuperview];

@@ -371,6 +371,13 @@
 		3BFE3B841CD99E6100502769 /* StuDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B831CD99E6100502769 /* StuDataBase.m */; };
 		3BFE3B871CDA0D4A00502769 /* StuClassEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B861CDA0D4A00502769 /* StuClassEntity.m */; };
 		3BFE3B8A1CDA0D6F00502769 /* StuGroupEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B891CDA0D6F00502769 /* StuGroupEntity.m */; };
+		3CC4738E1D05130A009FAC16 /* ChooseMaterialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC4738C1D05130A009FAC16 /* ChooseMaterialCell.m */; };
+		3CC4738F1D05130A009FAC16 /* ChooseMaterialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CC4738D1D05130A009FAC16 /* ChooseMaterialCell.xib */; };
+		3CC473921D054382009FAC16 /* PickerSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC473911D054382009FAC16 /* PickerSelectController.m */; };
+		3CC473951D05551B009FAC16 /* PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC473941D05551B009FAC16 /* PickerView.m */; };
+		3CC473971D055529009FAC16 /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CC473961D055529009FAC16 /* PickerView.xib */; };
+		3CC4739A1D0575E4009FAC16 /* ChooseBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC473991D0575E4009FAC16 /* ChooseBookCell.m */; };
+		3CC4739C1D0575F9009FAC16 /* ChooseBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CC4739B1D0575F9009FAC16 /* ChooseBookCell.xib */; };
 		3F4CA6281CE17FC000F4B791 /* FinshedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4CA6271CE17FC000F4B791 /* FinshedModel.m */; };
 		3FF740601CE308DD00D3C0F7 /* list_btn_shutdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */; };
 		3FF740621CE3090500D3C0F7 /* list_btn_shutdown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF740611CE3090500D3C0F7 /* list_btn_shutdown@3x.png */; };
@@ -948,6 +955,17 @@
 		3BFE3B861CDA0D4A00502769 /* StuClassEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuClassEntity.m; sourceTree = "<group>"; };
 		3BFE3B881CDA0D6F00502769 /* StuGroupEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuGroupEntity.h; sourceTree = "<group>"; };
 		3BFE3B891CDA0D6F00502769 /* StuGroupEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuGroupEntity.m; sourceTree = "<group>"; };
+		3CC4738B1D05130A009FAC16 /* ChooseMaterialCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseMaterialCell.h; sourceTree = "<group>"; };
+		3CC4738C1D05130A009FAC16 /* ChooseMaterialCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseMaterialCell.m; sourceTree = "<group>"; };
+		3CC4738D1D05130A009FAC16 /* ChooseMaterialCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseMaterialCell.xib; sourceTree = "<group>"; };
+		3CC473901D054382009FAC16 /* PickerSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerSelectController.h; sourceTree = "<group>"; };
+		3CC473911D054382009FAC16 /* PickerSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerSelectController.m; sourceTree = "<group>"; };
+		3CC473931D05551B009FAC16 /* PickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerView.h; sourceTree = "<group>"; };
+		3CC473941D05551B009FAC16 /* PickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerView.m; sourceTree = "<group>"; };
+		3CC473961D055529009FAC16 /* PickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
+		3CC473981D0575E4009FAC16 /* ChooseBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseBookCell.h; sourceTree = "<group>"; };
+		3CC473991D0575E4009FAC16 /* ChooseBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseBookCell.m; sourceTree = "<group>"; };
+		3CC4739B1D0575F9009FAC16 /* ChooseBookCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseBookCell.xib; sourceTree = "<group>"; };
 		3F4CA6261CE17FC000F4B791 /* FinshedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinshedModel.h; sourceTree = "<group>"; };
 		3F4CA6271CE17FC000F4B791 /* FinshedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinshedModel.m; sourceTree = "<group>"; };
 		3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_btn_shutdown.png; sourceTree = "<group>"; };
@@ -1859,27 +1877,9 @@
 		3B48646A1CCF117300D2DE3C /* PublishHomeWork */ = {
 			isa = PBXGroup;
 			children = (
-				3B48646B1CCF117300D2DE3C /* PublishHomeworkViewController.h */,
-				3B48646C1CCF117300D2DE3C /* PublishHomeworkViewController.m */,
-				3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */,
-				3BB773A01CD8781400A24485 /* SmartViewController.h */,
-				3BB773A11CD8781400A24485 /* SmartViewController.m */,
-				3BB773A21CD8781400A24485 /* SmartViewController.xib */,
-				3BB773A51CD8784000A24485 /* BookViewController.h */,
-				3BB773A61CD8784000A24485 /* BookViewController.m */,
-				3BB773A71CD8784000A24485 /* BookViewController.xib */,
-				3BB773AA1CD8786900A24485 /* TestViewController.h */,
-				3BB773AB1CD8786900A24485 /* TestViewController.m */,
-				3BB773AC1CD8786900A24485 /* TestViewController.xib */,
-				3BB773AF1CD8788200A24485 /* MidTestViewController.h */,
-				3BB773B01CD8788200A24485 /* MidTestViewController.m */,
-				3BB773B11CD8788200A24485 /* MidTestViewController.xib */,
-				3BB773B41CD8789800A24485 /* CameraViewController.h */,
-				3BB773B51CD8789800A24485 /* CameraViewController.m */,
-				3BB773B61CD8789800A24485 /* CameraViewController.xib */,
-				3BB773B91CD878B900A24485 /* PrivateViewController.h */,
-				3BB773BA1CD878B900A24485 /* PrivateViewController.m */,
-				3BB773BB1CD878B900A24485 /* PrivateViewController.xib */,
+				3CC4738A1D0511F6009FAC16 /* Controller */,
+				3CC473891D0511EA009FAC16 /* View */,
+				3CC473881D0511DB009FAC16 /* Model */,
 			);
 			path = PublishHomeWork;
 			sourceTree = "<group>";
@@ -2101,6 +2101,59 @@
 				3BFE3B891CDA0D6F00502769 /* StuGroupEntity.m */,
 			);
 			path = Teacher;
+			sourceTree = "<group>";
+		};
+		3CC473881D0511DB009FAC16 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		3CC473891D0511EA009FAC16 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3CC4738B1D05130A009FAC16 /* ChooseMaterialCell.h */,
+				3CC4738C1D05130A009FAC16 /* ChooseMaterialCell.m */,
+				3CC4738D1D05130A009FAC16 /* ChooseMaterialCell.xib */,
+				3CC473981D0575E4009FAC16 /* ChooseBookCell.h */,
+				3CC473991D0575E4009FAC16 /* ChooseBookCell.m */,
+				3CC4739B1D0575F9009FAC16 /* ChooseBookCell.xib */,
+				3CC473931D05551B009FAC16 /* PickerView.h */,
+				3CC473941D05551B009FAC16 /* PickerView.m */,
+				3CC473961D055529009FAC16 /* PickerView.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		3CC4738A1D0511F6009FAC16 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3B48646B1CCF117300D2DE3C /* PublishHomeworkViewController.h */,
+				3B48646C1CCF117300D2DE3C /* PublishHomeworkViewController.m */,
+				3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */,
+				3BB773A01CD8781400A24485 /* SmartViewController.h */,
+				3BB773A11CD8781400A24485 /* SmartViewController.m */,
+				3BB773A21CD8781400A24485 /* SmartViewController.xib */,
+				3BB773A51CD8784000A24485 /* BookViewController.h */,
+				3BB773A61CD8784000A24485 /* BookViewController.m */,
+				3BB773A71CD8784000A24485 /* BookViewController.xib */,
+				3CC473901D054382009FAC16 /* PickerSelectController.h */,
+				3CC473911D054382009FAC16 /* PickerSelectController.m */,
+				3BB773AA1CD8786900A24485 /* TestViewController.h */,
+				3BB773AB1CD8786900A24485 /* TestViewController.m */,
+				3BB773AC1CD8786900A24485 /* TestViewController.xib */,
+				3BB773AF1CD8788200A24485 /* MidTestViewController.h */,
+				3BB773B01CD8788200A24485 /* MidTestViewController.m */,
+				3BB773B11CD8788200A24485 /* MidTestViewController.xib */,
+				3BB773B41CD8789800A24485 /* CameraViewController.h */,
+				3BB773B51CD8789800A24485 /* CameraViewController.m */,
+				3BB773B61CD8789800A24485 /* CameraViewController.xib */,
+				3BB773B91CD878B900A24485 /* PrivateViewController.h */,
+				3BB773BA1CD878B900A24485 /* PrivateViewController.m */,
+				3BB773BB1CD878B900A24485 /* PrivateViewController.xib */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		5B7C88DD048F57B9225E4451 /* Frameworks */ = {
@@ -2469,13 +2522,16 @@
 				3BCF19211CDC66E600E2EA1A /* list_icon_note_nor2@3x.png in Resources */,
 				3A3E6DE71CD8F4B8002133D8 /* Parent_read@3x.png in Resources */,
 				3A5477961CE41ACF001233C1 /* homework_close@3x.png in Resources */,
+				3CC4739C1D0575F9009FAC16 /* ChooseBookCell.xib in Resources */,
 				3A4302051C61FDFB00B8D259 /* LoginViewController.xib in Resources */,
+				3CC4738F1D05130A009FAC16 /* ChooseMaterialCell.xib in Resources */,
 				3A8CAE971C70A12E00BDEB6B /* ParentModifyPhoneViewController.xib in Resources */,
 				3A8827861C6EE5730008367F /* tab_communitys@3x.png in Resources */,
 				CB40048A1C609BCD00556AA7 /* Assets.xcassets in Resources */,
 				3AE893FD1C6C26A400E8BA97 /* login_bg@3x.png in Resources */,
 				3AFE02B61CA28C2B0097CC83 /* tab_memberCenter@3x.png in Resources */,
 				3A38278B1CDF185F00EAB979 /* YjyxFeedBackViewController.xib in Resources */,
+				3CC473971D055529009FAC16 /* PickerView.xib in Resources */,
 				3A03CB691C8EB876007B5136 /* Parent_weike@3x.png in Resources */,
 				3B48644D1CCF10C200D2DE3C /* new.png in Resources */,
 				3A5A00F51C79EA2A004584E6 /* MJRefresh.bundle in Resources */,
@@ -2711,6 +2767,7 @@
 				3B35DBA21CE070DB000B7F83 /* VideoCell.m in Sources */,
 				3A7864331C868062001BB65A /* ChildrenResultViewController.m in Sources */,
 				3AEF272C1C61F08A0028BE09 /* SBJsonBase.m in Sources */,
+				3CC473951D05551B009FAC16 /* PickerView.m in Sources */,
 				3B84D5841CEC6E9D003F659B /* LxGridViewFlowLayout.m in Sources */,
 				3B831A291CE4B19D00724E6B /* OneStuTaskDetailViewController.m in Sources */,
 				801F44A81CDF164800B7E7E1 /* DataSigner.m in Sources */,
@@ -2795,6 +2852,7 @@
 				3A8CAEB61C70B36200BDEB6B /* MKAnnotationView+WebCache.m in Sources */,
 				3A91F4981C760CF4001568AA /* PNPieChart.m in Sources */,
 				3A91F4991C760CF4001568AA /* PNPieChartDataItem.m in Sources */,
+				3CC4739A1D0575E4009FAC16 /* ChooseBookCell.m in Sources */,
 				3AEF272A1C61F08A0028BE09 /* ViewRender.m in Sources */,
 				3A8CAEB71C70B36200BDEB6B /* SDImageCache.m in Sources */,
 				3F4CA6281CE17FC000F4B791 /* FinshedModel.m in Sources */,
@@ -2808,6 +2866,7 @@
 				3AEF272D1C61F08A0028BE09 /* SBJsonParser.m in Sources */,
 				3B35DB931CE06FE7000B7F83 /* AnswerSituationCell.m in Sources */,
 				3B4864721CCF117300D2DE3C /* MyClassViewController.m in Sources */,
+				3CC4738E1D05130A009FAC16 /* ChooseMaterialCell.m in Sources */,
 				801F44AF1CDF164800B7E7E1 /* APAuthV2Info.m in Sources */,
 				3A2E87091C8C079F00C3CD6C /* ChildrenResultTableViewController.m in Sources */,
 				3AA1655C1C91AB40006B8756 /* RCLabel.m in Sources */,
@@ -2817,6 +2876,7 @@
 				3A5A00F81C79EA2A004584E6 /* MJRefreshFooterView.m in Sources */,
 				3BFE3B791CD9816D00502769 /* YjyxOverallData.m in Sources */,
 				80F718C21CF28961007C0B75 /* SubmitCell.m in Sources */,
+				3CC473921D054382009FAC16 /* PickerSelectController.m in Sources */,
 				3AEF271F1C61F08A0028BE09 /* GTMBase64.m in Sources */,
 				801F44A91CDF164800B7E7E1 /* DataVerifier.m in Sources */,
 				3AEF27211C61F08A0028BE09 /* NSObject+category.m in Sources */,
@@ -2969,7 +3029,7 @@
 					"\"$(PROJECT_DIR)/Yjyx/Alipay/AliSDK/openssl\"",
 				);
 				INFOPLIST_FILE = Yjyx/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3021,7 +3081,7 @@
 					"\"$(PROJECT_DIR)/Yjyx/Alipay/AliSDK/openssl\"",
 				);
 				INFOPLIST_FILE = Yjyx/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
