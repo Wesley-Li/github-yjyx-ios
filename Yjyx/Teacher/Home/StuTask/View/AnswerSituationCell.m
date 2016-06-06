@@ -66,7 +66,7 @@
     CGSize size = CGSizeMake(10, 30);
     CGFloat padding = 10;
     
-    NSInteger num = 6;
+    NSInteger num = 5;
     
     CGFloat tWidth = (_correctView.width - 40 - padding *(num + 1)) * 1.0 / num * 1.0;
     CGFloat tHeigh = tWidth + 20;
@@ -141,7 +141,7 @@
     CGSize size2 = CGSizeMake(10, 30);
     CGFloat padding2 = 10;
     
-    NSInteger num2 = 6;
+    NSInteger num2 = 5;
     
     CGFloat tWidth2 = (_wrongView.width - 40 - padding2 *(num2 + 1)) * 1.0 / num2 * 1.0;
     CGFloat tHeigh2 = tWidth + 20;

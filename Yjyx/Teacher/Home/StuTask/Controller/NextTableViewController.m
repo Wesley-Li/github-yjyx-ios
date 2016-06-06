@@ -423,6 +423,7 @@
     }else if (indexPath.row == 1) {
     
         self.AnswerSituationCell = [tableView dequeueReusableCellWithIdentifier:KAnswerSituationCell forIndexPath:indexPath];
+        self.AnswerSituationCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         _AnswerSituationCell.r_arr = [_dic[@"summary"] objectForKey:@"CNL"];
         _AnswerSituationCell.w_arr = [_dic[@"summary"] objectForKey:@"WNL"];
