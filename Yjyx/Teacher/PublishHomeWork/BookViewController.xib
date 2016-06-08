@@ -17,21 +17,21 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  请选择当前使用的教材版本及课本" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OP5-7h-BVg">
-                    <rect key="frame" x="0.0" y="64" width="320" height="50"/>
+                    <rect key="frame" x="0.0" y="64" width="320" height="34"/>
                     <color key="backgroundColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="gin-gF-05A"/>
+                        <constraint firstAttribute="height" constant="34" id="gin-gF-05A"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.62352941176470589" green="0.62352941176470589" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6cV-IU-kK6">
-                    <rect key="frame" x="0.0" y="114" width="320" height="160"/>
+                    <rect key="frame" x="0.0" y="98" width="320" height="130"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="101" id="BKR-R0-Cnw"/>
-                        <constraint firstAttribute="height" constant="160" id="ZOU-iq-QM5"/>
+                        <constraint firstAttribute="height" constant="130" id="ZOU-iq-QM5"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -53,6 +53,9 @@
                     <state key="normal" title="确定" backgroundImage="list_btn_confirm_focus">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="goSure:" destination="-1" eventType="touchUpInside" id="hRz-DY-wo8"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

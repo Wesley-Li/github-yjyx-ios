@@ -10,7 +10,8 @@
 
 @interface ChooseMaterialCell : UITableViewCell
 
-
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *detail_label;
 
 @property (copy, nonatomic) NSString *type;
 @property (copy, nonatomic) NSString *selMaterial;

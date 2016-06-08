@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tx5-pX-V2c">
-                    <rect key="frame" x="0.0" y="379" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="423" width="375" height="44"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0TE-tT-Mba">
                             <rect key="frame" x="0.0" y="0.0" width="60" height="44"/>
@@ -51,7 +51,7 @@
                     </constraints>
                 </view>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wWo-QR-UYP">
-                    <rect key="frame" x="0.0" y="423" width="375" height="200"/>
+                    <rect key="frame" x="0.0" y="467" width="375" height="200"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="200" id="bnY-LU-K4S"/>
@@ -61,7 +61,7 @@
             <color key="backgroundColor" red="0.17254901960784313" green="0.17254901960784313" blue="0.17254901960784313" alpha="0.30950969827586206" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="wWo-QR-UYP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2lc-xK-ftM"/>
-                <constraint firstAttribute="bottom" secondItem="wWo-QR-UYP" secondAttribute="bottom" constant="44" id="4o4-JU-MEA"/>
+                <constraint firstAttribute="bottom" secondItem="wWo-QR-UYP" secondAttribute="bottom" id="4o4-JU-MEA"/>
                 <constraint firstAttribute="trailing" secondItem="wWo-QR-UYP" secondAttribute="trailing" id="7j3-Mm-iZh"/>
                 <constraint firstItem="tx5-pX-V2c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PH5-be-qCd"/>
                 <constraint firstItem="wWo-QR-UYP" firstAttribute="top" secondItem="tx5-pX-V2c" secondAttribute="bottom" id="jF7-Oy-Y9a"/>
@@ -69,8 +69,10 @@
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <connections>
+                <outlet property="heightCon" destination="bnY-LU-K4S" id="19g-uH-VaT"/>
                 <outlet property="picker_view" destination="wWo-QR-UYP" id="n7P-Al-MAg"/>
             </connections>
+            <point key="canvasLocation" x="132.5" y="299.5"/>
         </view>
     </objects>
 </document>
