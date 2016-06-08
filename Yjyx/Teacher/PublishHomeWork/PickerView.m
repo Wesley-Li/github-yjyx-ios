@@ -12,13 +12,14 @@
 
 @property (weak, nonatomic) IBOutlet UIPickerView *picker_view;
 @property (strong, nonatomic) NSString *selectedWord;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightCon;
 @end
 @implementation PickerView
 - (IBAction)cancelBtnClick:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PickViewCancel" object:nil userInfo:nil];
 }
 - (IBAction)doBtnClick:(id)sender {
-    if (self.self.selectedWord == nil) {
+    if (self.selectedWord == nil) {
 //        NSInteger index = [self.picker_view selectedRowInComponent:0];
 //        self.selectedWord = [self pickerView:self.picker_view titleForRow:index forComponent:0];
         self.selectedWord = self.materialArr.firstObject;
@@ -28,13 +29,14 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-//    self.picker_view.dataSource = self;
-//    self.picker_view.delegate = self;
+    self.picker_view.dataSource = self;
+    self.picker_view.delegate = self;
 }
 - (void)setMaterialArr:(NSMutableArray *)materialArr
 {
-    self.picker_view.dataSource = self;
-    self.picker_view.delegate = self;
+//    self.picker_view.dataSource = self;
+//    self.picker_view.delegate = self;
+
     _materialArr = materialArr;
     [self.picker_view reloadComponent:0];
 }
@@ -61,19 +63,27 @@
 #pragma mark - PickerView代理方法
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [self.materialArr objectAtIndex:row];
+    
+    if ([self.materialArr count] == 0) {
+        self.heightCon.constant = 0;
+        return nil;
+    }
+    self.heightCon.constant = 200;
+    return self.materialArr[row];
 }
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
 {
-    if (self.materialArr.count == 0) {
-        return 0;
-    }else{
-    return 50;
-    }
+   
+    return 35;
+   
 }
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     self.selectedWord = _materialArr[row];
     NSLog(@"---------");
+}
+- (void)dealloc
+{
+    NSLog(@"delloc");
 }
 @end

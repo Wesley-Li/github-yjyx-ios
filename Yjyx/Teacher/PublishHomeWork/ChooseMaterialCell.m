@@ -9,8 +9,7 @@
 #import "ChooseMaterialCell.h"
 
 @interface ChooseMaterialCell()
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *detail_label;
+
 
 @end
 @implementation ChooseMaterialCell
