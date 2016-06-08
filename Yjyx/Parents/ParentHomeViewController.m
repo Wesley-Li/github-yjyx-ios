@@ -22,23 +22,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics: UIBarMetricsDefault];
+//    self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
+//    self.navigationController.navigationBar.translucent = YES;
     [_iconImage setImageWithURL:[NSURL URLWithString:[YjyxOverallData sharedInstance].parentInfo.avatar] placeholderImage:[UIImage imageNamed:@"Parent_default.png"]];
     [_iconImage setCornerRadius:_iconImage.height /2];
+    _iconImage.layer.borderColor = [UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
+    _iconImage.layer.borderWidth = 4.0f;
     _iconImage.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeIcon)];
     [_iconImage addGestureRecognizer:tap];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushSwitch) name:@"ChildActivityNotification" object:nil];
+    [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
     // Do any additional setup after loading the view from its nib.
+    
 }
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBarHidden = YES ;
 }
 
-
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    self.navigationController.navigationBarHidden = YES ;
+//    
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -146,7 +158,7 @@
             return;
         }
         [_picker setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [_picker setAllowsEditing:NO];
+        [_picker setAllowsEditing:YES];
         [self.navigationController presentViewController:_picker animated:YES completion:nil];
 
     } else if(buttonIndex == 1){
@@ -157,7 +169,7 @@
             return;
         }
         [_picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-        [_picker setAllowsEditing:NO];
+        [_picker setAllowsEditing:YES];
         [self.navigationController presentViewController:_picker animated:YES completion:nil];
 
     }
@@ -167,7 +179,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
     [self.view makeToastActivity:SHOW_CENTER];
-    UIImage *image = [info[UIImagePickerControllerOriginalImage] fixOrientation];
+    UIImage *image = info[@"UIImagePickerControllerEditedImage"];;
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
     [[YjxService sharedInstance] getAboutqinniu:dic withBlock:^(id result, NSError *error){
         if (result != nil) {
@@ -180,7 +192,7 @@
             }
         }else{
             [self.view hideToastActivity];
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
 
     }];
@@ -219,7 +231,7 @@
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
 

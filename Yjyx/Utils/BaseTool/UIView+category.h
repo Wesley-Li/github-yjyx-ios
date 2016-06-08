@@ -63,13 +63,31 @@ typedef enum SHOW_POSITION {
  * @returned    视图宽
  */
 - (CGFloat)width;
-
+- (void)setWidth:(CGFloat)width;
 /**
  * 视图高
  * @returned    视图高
  */
 - (CGFloat)height;
+- (void)setHeight:(CGFloat)height;
 
+/**
+ * 设置中心点
+ */
+- (CGFloat)centerX;
+- (void)setCenterX:(CGFloat)centerX;
+/**
+ * 设置y值
+ */
+- (CGFloat)y;
+
+- (void)setY:(CGFloat)y;
+/**
+ * 设置x值
+ */
+- (CGFloat)x;
+
+- (void)setX:(CGFloat)x;
 /**
  * 当前界面隐藏键盘
  */

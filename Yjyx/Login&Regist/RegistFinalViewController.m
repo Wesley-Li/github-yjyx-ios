@@ -24,19 +24,69 @@
     relationText.placeholder = [NSString stringWithFormat:@"是%@的(称谓,譬如父亲,母亲...)",_childrenEntity.name];
     phoneText.placeholder = @"手机号码(作为登录账户)";
     codeText.placeholder = @"4位验证码";
+    
+    [parentNameText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+     [relationText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+     [phoneText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+     [parentPasswordText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     // Do any additional setup after loading the view from its nib.
+}
+// 限制输入的长度
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    
+    if ([textField isEqual:phoneText]) {
+
+        if (textField.text.length > 11) {
+            textField.text = [textField.text substringToIndex:11];
+        }
+        
+    }else if ([textField isEqual:parentNameText] || [textField isEqual:relationText]) {
+        NSString *toBeString = textField.text;
+        NSString *lang = [[UITextInputMode currentInputMode] primaryLanguage]; // 键盘输入模式
+        if ([lang isEqualToString:@"zh-Hans"]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写
+            UITextRange *selectedRange = [textField markedTextRange];
+            //获取高亮部分
+            UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+            // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+            if (!position) {
+                if (toBeString.length > 10) {
+                    textField.text = [toBeString substringToIndex:10];
+                }
+                
+            }
+            
+        }
+    }else if ([textField isEqual:parentPasswordText]){
+        if (textField.text.length > 20){
+            textField.text = [textField.text substringToIndex:20];
+            [self.view makeToast:@"密码的长度不能大于20位" duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-#pragma mark - 获取验证码
--(IBAction)getRegisterCode:(id)sender
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    if (phoneText.text.length == 0) {
-        [self.view makeToast:@"请输入正确的账号" duration:1.0 position:SHOW_BOTTOM complete:nil];
+    [self.view endEditing:YES];
+}
+#pragma mark - 获取验证码
+-(IBAction)getRegisterCode:(UIButton *)sender
+{
+    if (phoneText.text.length == 0 || phoneText.text.length < 11) {
+        [self.view makeToast:@"请输入正确的账号" duration:1.0 position:SHOW_CENTER complete:nil];
+        return;
+    }
+    if (parentPasswordText.text.length < 6){
+        [self.view makeToast:@"密码长度不能小于6位" duration:1.0 position:SHOW_CENTER complete:nil];
+        return;
+    }
+    if ([parentPasswordText.text containsString:@" "]){
+        [self.view makeToast:@"密码不能包含空格" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
     NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",phoneText.text];
@@ -45,14 +95,17 @@
         [self.view hideToastActivity];
         if (result) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                timeLb.backgroundColor = RGBACOLOR(229.0, 230.0, 231.0, 1);
+                
                 _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
+                [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
                 //发送注册码按钮失效，防止频繁请求
                 [verifyBtn setEnabled:false];
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:@"电话号码不存在" duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
 }
@@ -70,8 +123,11 @@
 {
     _second = 60;
     codeText.text = @"";
-    timeLb.text = @"获取验证码";
     [verifyBtn setEnabled:YES];
+
+    timeLb.text = @"获取验证码";
+    timeLb.backgroundColor = RGBACOLOR(19.0, 141.0, 101.0, 1);
+   
     [_timer invalidate];
     _timer = nil;
 }
@@ -82,6 +138,10 @@
     
     if (parentNameText.text.length == 0||parentPasswordText.text.length == 0||relationText.text.length == 0||phoneText.text.length == 0||codeText.text.length == 0) {
         [self.view makeToast:@"请输入完整信息" duration:1.0 position:SHOW_CENTER complete:nil];
+    }else if([parentPasswordText.text containsString:@" "] || [parentNameText.text containsString:@" "]){
+        [self.view makeToast:@"用户名或密码不能含有空格" duration:1.0 position:SHOW_CENTER complete:nil];
+    }else if(parentPasswordText.text.length < 6 || parentPasswordText.text.length > 20){
+        [self.view makeToast:@"密码长度不能小于6位或大于20位" duration:1.0 position:SHOW_CENTER complete:nil];
     }else{
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",codeText.text,@"code",@"MREGISTER",@"stype",nil];
         [[YjxService sharedInstance] checkOutVerfirycode:dic withBlock:^(id result, NSError *error){//验证验证码
@@ -93,7 +153,11 @@
                     [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
                 }
             }else{
-                [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+                if (error.code == -1009) {
+                    [self.view makeToast:@"您的网络可能不太好,请重试!" duration:3.0 position:SHOW_CENTER complete:nil];
+                    return;
+                }
+                [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:3.0 position:SHOW_CENTER complete:nil];
             }
         }];
 
@@ -124,7 +188,7 @@
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
 

@@ -49,17 +49,26 @@
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"list",@"action",@"0",@"firstid",@"0",@"lastid",@"ASC",@"direction", nil];
     [[YjxService sharedInstance] getProductList:dic withBlock:^(id result, NSError *error){
         if (result != nil) {
+            
+            NSLog(@"%@", result);
+            
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 for (int i = 0; i<[[result objectForKey:@"products"] count]; i++) {
                     ProductEntity *entity = [ProductEntity wrapProductEntityWithDic:[[result objectForKey:@"products"] objectAtIndex:i]];
-                    [productAry addObject:entity];
+                    
+                    if ([entity.status isEqual:@1]) {
+                        // status 为1的代表正常的,为2代表下架的
+                        [productAry addObject:entity];
+                    }
+                    
+                    
                 }
                 [self initView];
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
 }

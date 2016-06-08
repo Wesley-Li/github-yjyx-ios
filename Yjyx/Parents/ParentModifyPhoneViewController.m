@@ -39,6 +39,8 @@
     sureBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     UIBarButtonItem *rightBtnItem = [[UIBarButtonItem alloc] initWithCustomView:sureBtn];
     self.navigationItem.rightBarButtonItem = rightBtnItem;
+    
+    [_phoneTextfield addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -63,7 +65,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if(textField.text.length > 11){
+        textField.text = [textField.text substringToIndex:11];
+    }
+}
 #pragma mark - 确定
 -(void)goSure
 {
@@ -82,7 +89,7 @@
                     [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
                 }
             }else{
-                [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+                [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }];
         
@@ -111,7 +118,7 @@
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
 
@@ -125,12 +132,13 @@
         return;
     }
     NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",_phoneTextfield.text];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneTextfield.text,@"target",sign,@"sign",@"MPASSWDCHG",@"stype",nil];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneTextfield.text,@"target",[sign md5],@"sign",@"MPASSWDCHG",@"stype",nil];
     [[YjxService sharedInstance] getSMSsendcode:dic withBlock:^(id result, NSError *error){//验证验证码
         [self.view hideToastActivity];
         if (result) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
+                timeLb.backgroundColor = [UIColor grayColor];
                 //发送注册码按钮失效，防止频繁请求
                 timeLb.text = [NSString stringWithFormat:@"%ds",_second--];
                 [verifyBtn setEnabled:false];
@@ -139,7 +147,7 @@
                
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
 }
@@ -156,6 +164,7 @@
 #pragma mark - 重置定时器
 -(void)resetTimer
 {
+    timeLb.backgroundColor = RGBACOLOR(24, 142, 127, 1);
     _second = 60;
     timeLb.text = @"获取验证码";
     [_timer invalidate];

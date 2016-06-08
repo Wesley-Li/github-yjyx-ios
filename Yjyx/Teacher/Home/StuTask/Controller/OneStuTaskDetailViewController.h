@@ -18,6 +18,6 @@
 
 
 @property (nonatomic, copy) NSString *answer;// 答案
-@property (nonatomic, copy) NSArray *answerArr;// 答案数组
+//@property (nonatomic, copy) NSArray *answerArr;// 答案数组
 
 @end

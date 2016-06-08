@@ -167,7 +167,7 @@
 -(void)toCell{
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
     [wmPlayer removeFromSuperview];
-    NSLog(@"row = %ld",currentIndexPath.row);
+    NSLog(@"row = %ld",(long)currentIndexPath.row);
     [UIView animateWithDuration:0.5f animations:^{
         wmPlayer.transform = CGAffineTransformIdentity;
         wmPlayer.frame = currentCell.backgroundIV.bounds;
@@ -261,14 +261,20 @@
     }];
     
 }
-/*
-// 强制重载
+
+// 强制重载单个cell
 - (void)viewDidAppear:(BOOL)animated {
 
-    [self.tableView reloadData];
+    if (rows != 0) {
+        NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:0 inSection:0];
+        NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:3 inSection:0];
+        NSArray *indexPathArray = [NSArray arrayWithObjects:indexPath1,indexPath2, nil];
+        [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+    }
+    
 }
- 
- */
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -315,7 +321,7 @@
                                                object:nil
      ];
     
-//    self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.tableFooterView = [[UIView alloc] init];
 
 }
 
@@ -352,13 +358,7 @@
 
                 
             }
-//            else if([responseObject[@"question"][@"videourl"] isEqualToString: @"" ]&& [responseObject[@"question"][@"explanation"] isEqualToString: @""]){
-//                rows = 3;
-//            
-//            }else if([responseObject[@"question"][@"videourl"] isEqualToString: @"" ]|| [responseObject[@"question"][@"explanation"] isEqualToString: @""]){
-//                rows = 4;
-//                
-//            }
+
             else {
             
                 rows = 5;
@@ -375,14 +375,17 @@
         [SVProgressHUD dismissWithDelay:0.8];
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
-        
+         [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:3.0 position:SHOW_CENTER complete:nil];
+        [SVProgressHUD dismiss];
         NSLog(@"%@", error);
         
     }];
 
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [SVProgressHUD dismiss];
+}
 - (void)goBack {
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -397,12 +400,12 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
+    
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
+
     return rows;
 }
 
@@ -420,7 +423,16 @@
     }else if (indexPath.row == 1) {
     
         self.AnswerSituationCell = [tableView dequeueReusableCellWithIdentifier:KAnswerSituationCell forIndexPath:indexPath];
+        self.AnswerSituationCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        _AnswerSituationCell.r_arr = [_dic[@"summary"] objectForKey:@"CNL"];
+        _AnswerSituationCell.w_arr = [_dic[@"summary"] objectForKey:@"WNL"];
+        _AnswerSituationCell.qtype = self.qtype;
+        _AnswerSituationCell.taskid = self.taskid;
+        _AnswerSituationCell.navi = self;
+        _AnswerSituationCell.qid = self.qid;
+        
+        [_AnswerSituationCell setValueWithCorrectArray:[_dic[@"summary"] objectForKey:@"CNL"] andWrongArray:[_dic[@"summary"] objectForKey:@"WNL"]];
         return _AnswerSituationCell;
     }else if (indexPath.row == 2) {
     
@@ -439,6 +451,9 @@
     }else if (indexPath.row == 3) {
     
         self.solutionCell = [tableView dequeueReusableCellWithIdentifier:KSolutionCell forIndexPath:indexPath];
+        if([_explanation isEqualToString:@""]  ){
+            _solutionCell.solutionLabel.hidden = YES;
+        }
         self.solutionCell.selectionStyle = UITableViewCellSelectionStyleNone;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_solutionCell setSolutionValueWithDiction:_dic];
@@ -456,6 +471,9 @@
         [_videoCell.playBtn addTarget:self action:@selector(startPlayVideo:) forControlEvents:UIControlEventTouchUpInside];
         
         _videoCell.playBtn.tag = indexPath.row;
+        if([_videourl isEqualToString:@""]  ){
+            _videoCell.videoLabel.hidden = YES;
+        }
         // 按钮的显示
         if (isPlay == YES) {
             _videoCell.playBtn.hidden = YES;
@@ -615,7 +633,7 @@
 -(void)dealloc{
     [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSLog(@"player deallco");
+//    NSLog(@"player deallco");
 }
 
 
@@ -629,10 +647,10 @@
         return _taskCell.height;
     }else if (indexPath.row == 1) {
 
-        return 0;
+
         return _AnswerSituationCell.height;
     }else if (indexPath.row == 2) {
-//        return 0   ;
+
         return _correctCell.height;
     }else if (indexPath.row == 3) {
         if ([_explanation isEqualToString:@""]) {

@@ -29,6 +29,9 @@
     NSIndexPath *currentIndexPath;
     BOOL isSmallScreen;
     BOOL isPlay;
+    NSInteger _rows;
+    NSString *_explanation;
+    NSString *_videourl;
     
 }
 
@@ -151,7 +154,7 @@
 -(void)toCell{
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
     [wmPlayer removeFromSuperview];
-    NSLog(@"row = %ld",currentIndexPath.row);
+    NSLog(@"row = %ld",(long)currentIndexPath.row);
     [UIView animateWithDuration:0.5f animations:^{
         wmPlayer.transform = CGAffineTransformIdentity;
         wmPlayer.frame = currentCell.backgroundIV.bounds;
@@ -247,6 +250,21 @@
 }
 
 
+// 强制加载单个cell
+- (void)viewDidAppear:(BOOL)animated {
+
+    if (_rows != 0) {
+        
+        NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:0 inSection:0];
+        NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:3 inSection:0];
+        NSArray *indexPathArray = [NSArray arrayWithObjects:indexPath1,indexPath2, nil];
+        [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+        
+    }
+    
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -285,7 +303,7 @@
      ];
     
 
-    
+    self.view.backgroundColor = RGBACOLOR(239, 239, 244,1);
 
 }
 
@@ -300,7 +318,8 @@
     [manager GET:[BaseURL stringByAppendingString:TEACHER_DETAIL_ONESTU_ONETASK_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         NSLog(@"%@", responseObject);
-        
+        _explanation = responseObject[@"question"][@"explanation"];
+        _videourl = responseObject[@"question"][@"videourl"];
         if ([responseObject[@"retcode"] isEqual: @0]) {
             
             self.dic = [NSDictionary dictionaryWithDictionary:responseObject];
@@ -309,11 +328,28 @@
             
             [self.tableView makeToast:[NSString stringWithFormat:@"%@", responseObject[@"msg"]] duration:1.0 position:SHOW_CENTER complete:nil];
         }
-        
+//        if ([responseObject[@"question"][@"videourl"] isEqualToString: @""]&&[responseObject[@"question"][@"explanation"] isEqualToString:@""]) {
+//            _rows = 0;
+//            UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+//            imageV.image = [UIImage imageNamed:@"wrong"];
+//            self.tableView.tableFooterView = (UIView *)imageV;
+//        }else{
+//            _rows = 5;
+//        }
+        _rows = 5;
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
+       
         
+        _rows = 0;
+        [self.tableView reloadData];
+        UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        
+        imageV.image = [UIImage imageNamed:@"wrong"];
+        
+        self.tableView.tableFooterView = (UIView *)imageV;
+        self.tableView.scrollEnabled = NO;
         NSLog(@"%@", error);
         
     }];
@@ -341,7 +377,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 5;
+    return _rows;
 }
 
 
@@ -350,6 +386,7 @@
     if (indexPath.row == 0) {
         self.taskCell = [tableView dequeueReusableCellWithIdentifier:kidentifier1 forIndexPath:indexPath];
         _taskCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_taskCell setValueWithDictionary:self.dic];
         return _taskCell;
     }else if (indexPath.row == 1) {
@@ -383,17 +420,22 @@
     }else if (indexPath.row == 3) {
         
         self.solutionCell = [tableView dequeueReusableCellWithIdentifier:Kidentifier4 forIndexPath:indexPath];
+        if([_explanation isEqualToString:@""]  ){
+            _solutionCell.solutionLabel.hidden = YES;
+        }
         _solutionCell.selectionStyle = UITableViewCellSelectionStyleNone;
         [_solutionCell setSolutionValueWithDiction:self.dic];
         return _solutionCell;
     }else {
-    
+        
         self.videoCell = [tableView dequeueReusableCellWithIdentifier:Kidentifier5 forIndexPath:indexPath];
         
         [_videoCell.playBtn addTarget:self action:@selector(startPlayVideo:) forControlEvents:UIControlEventTouchUpInside];
         
         _videoCell.playBtn.tag = indexPath.row;
-        
+        if([_videourl isEqualToString:@""]  ){
+            _videoCell.videoLabel.hidden = YES;
+        }
         // 按钮的显示
         if (isPlay == YES) {
             _videoCell.playBtn.hidden = YES;
@@ -441,7 +483,7 @@
  */
 -(void)startPlayVideo:(UIButton *)sender{
     currentIndexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
-    NSLog(@"currentIndexPath.row = %ld",currentIndexPath.row);
+    NSLog(@"currentIndexPath.row = %ld",(long)currentIndexPath.row);
     
     if ([UIDevice currentDevice].systemVersion.floatValue>=8||[UIDevice currentDevice].systemVersion.floatValue<7) {
         self.videoCell = (VideoCell *)sender.superview.superview;
@@ -563,9 +605,15 @@
     }else if (indexPath.row == 2) {
         return _corectCell.height;
     }else if (indexPath.row == 3) {
+        if ([_explanation isEqualToString:@""]) {
+            return 0;
+        }
         return _solutionCell.height;
     }else {
-        return (SCREEN_WIDTH)*184/320;
+        if ([_videourl isEqualToString:@""]) {
+            return 0;
+        }
+        return (SCREEN_WIDTH)*184/320 + 20;
     }
 }
 

@@ -212,7 +212,7 @@
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
 }
@@ -256,6 +256,7 @@
     NSString *content = [lessionDic objectForKey:@"knowledgedesc"];
     content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 30, SCREEN_WIDTH - 20, 999)];
+    templabel.userInteractionEnabled = NO;
     templabel.font = [UIFont systemFontOfSize:14];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
     templabel.componentsAndPlainText = componentsDS;
@@ -374,6 +375,7 @@
             NSString *content = [[_choices objectAtIndex:indexPath.row] objectForKey:@"content"];
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
+            templabel.userInteractionEnabled = NO;
             templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
             templabel.componentsAndPlainText = componentsDS;
@@ -383,6 +385,7 @@
             NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
+            templabel.userInteractionEnabled = NO;
             templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
             templabel.componentsAndPlainText = componentsDS;
@@ -393,6 +396,7 @@
         NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
         content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
         RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
+        templabel.userInteractionEnabled = NO;
         templabel.font = [UIFont systemFontOfSize:14];
         RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
         templabel.componentsAndPlainText = componentsDS;
@@ -423,6 +427,7 @@
             NSString *content = [[_choices objectAtIndex:indexPath.row] objectForKey:@"content"];
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
+            templabel.userInteractionEnabled = NO;
             templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
             templabel.componentsAndPlainText = componentsDS;
@@ -436,6 +441,7 @@
             NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
+            templabel.userInteractionEnabled = NO;
             templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
             templabel.componentsAndPlainText = componentsDS;
@@ -450,6 +456,7 @@
         NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
         content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
         RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
+        templabel.userInteractionEnabled = NO;
         templabel.font = [UIFont systemFontOfSize:14];
         RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
         templabel.componentsAndPlainText = componentsDS;

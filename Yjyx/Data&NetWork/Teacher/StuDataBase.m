@@ -64,7 +64,7 @@ static StuDataBase *singleton = nil;
     
     [self.db open];
     // 学生列表
-    BOOL isSuccess = [self.db executeUpdate:@"create table StuList(user_id text primary key, realname text, avatar_url text)"];
+    BOOL isSuccess = [self.db executeUpdate:@"create table StuList(user_id text primary key, realname text, avatar_url text, isyjmember text)"];
     NSLog(@"%@", isSuccess ? @"建表成功" : @"建表失败");
     // 班级列表
     [self.db executeUpdate:@"create table SC(cid text primary key, memberlist text, gradeid text, name text, invitecode text)"];
@@ -102,7 +102,7 @@ static StuDataBase *singleton = nil;
 // 插入学生数据
 - (void)insertStudent:(StudentEntity *)student {
     [self.db open];
-    BOOL isSuccess = [self.db executeUpdate:@"insert into StuList(user_id, realname, avatar_url) values(?,?,?)", student.user_id, student.realname, student.avatar_url];
+    BOOL isSuccess = [self.db executeUpdate:@"insert into StuList(user_id, realname, avatar_url, isyjmember) values(?,?,?,?)", student.user_id, student.realname, student.avatar_url, student.isyjmember];
     NSLog(@"%@", isSuccess ? @"插入学生数据成功" : @"插入学生数据失败");
     [self.db close];
 }
@@ -140,6 +140,7 @@ static StuDataBase *singleton = nil;
         NSString *sid = [set stringForColumn:@"user_id"];
         NSString *realname = [set stringForColumn:@"realname"];
         NSString *avatar_url = [set stringForColumn:@"avatar_url"];
+        NSString *isyjmember = [set stringForColumn:@"isyjmember"];
         
         // 封装到模型对象
         StudentEntity *model = [[StudentEntity alloc] init];
@@ -148,6 +149,7 @@ static StuDataBase *singleton = nil;
         model.user_id = [numberFormatter numberFromString:sid];
         model.realname = realname;
         model.avatar_url = avatar_url;
+        model.isyjmember = [numberFormatter numberFromString:isyjmember];
         
         [group addObject:model];
 
@@ -237,13 +239,14 @@ static StuDataBase *singleton = nil;
         NSString *sid = [set stringForColumn:@"user_id"];
         NSString *realname = [set stringForColumn:@"realname"];
         NSString *avatar_url = [set stringForColumn:@"avatar_url"];
-        
+        NSString *isyjmember = [set stringForColumn:@"isyjmember"];
         
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
         model.user_id = [numberFormatter numberFromString:sid];
         model.realname = realname;
         model.avatar_url = avatar_url;
+        model.isyjmember = [numberFormatter numberFromString:isyjmember];
         
     }
     [self.db close];

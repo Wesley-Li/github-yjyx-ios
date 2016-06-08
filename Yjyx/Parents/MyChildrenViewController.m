@@ -50,6 +50,7 @@
         currentChildren = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:0];
     }
     // Do any additional setup after loading the view from its nib.
+    
 }
 
 //设置小孩
@@ -113,7 +114,7 @@
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
         [self.childrenTab headerEndRefreshing];
     }];
@@ -152,7 +153,7 @@
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
         [self.childrenTab footerEndRefreshing];
     }];
@@ -164,6 +165,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+//    self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
 
@@ -172,7 +174,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = NO;
+  
     [super viewWillDisappear:YES];
 }
 

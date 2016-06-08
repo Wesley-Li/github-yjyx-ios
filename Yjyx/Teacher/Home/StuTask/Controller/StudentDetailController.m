@@ -146,7 +146,7 @@
         [self.tableView reloadData];
         
     }failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+        [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
     }];
     
 }
@@ -403,7 +403,7 @@
     TaskConditonModel *model = _choiceArray[sender.tag - 200];
     oneTaskVC.qid = model.t_id;
     oneTaskVC.title = [NSString stringWithFormat:@"%@", self.finshedModel.Name];
-    oneTaskVC.answerArr = model.answerArr;
+//    oneTaskVC.answerArr = model.answerArr;
     [self.navigationController pushViewController:oneTaskVC animated:YES];
     
 }
@@ -481,7 +481,7 @@
     TaskConditonModel *model = _blankfillArray[sender.tag - 200];
     oneTaskVC.qid = model.t_id;
     oneTaskVC.title = [NSString stringWithFormat:@"%@", self.finshedModel.Name];
-    oneTaskVC.answerArr = model.answerArr;
+//    oneTaskVC.answerArr = model.answerArr;
     [self.navigationController pushViewController:oneTaskVC animated:YES];
 
 }

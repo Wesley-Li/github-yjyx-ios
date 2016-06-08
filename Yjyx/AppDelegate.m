@@ -51,13 +51,13 @@
     ((AppDelegate*)SYS_DELEGATE).stuListArr = [NSMutableArray array];
     
     // 创建定时器,并行,24小时执行一次
-    dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
-    ((AppDelegate*)SYS_DELEGATE).timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-    dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, 24*60*60 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
-    dispatch_source_set_event_handler(_timer, ^{
-        NSLog(@"我被调用了");
-        [(AppDelegate *)SYS_DELEGATE getStuList];
-    });
+//    dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
+//    ((AppDelegate*)SYS_DELEGATE).timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+//    dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, 24*60*60 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+//    dispatch_source_set_event_handler(_timer, ^{
+//        NSLog(@"我被调用了");
+//        [(AppDelegate *)SYS_DELEGATE getStuList];
+//    });
 
     [self initUmeng:launchOptions];
     // Override point for customization after application launch.
@@ -85,15 +85,15 @@
     
     // 自动登录,从本地取值
     NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
-    if ([[dic objectForKey:@"username"] length] > 0) {
-        autologin = [[AutoLoginViewController alloc] init];
-        _navigation = [[NavRootViewController alloc] initWithRootViewController:autologin];
-        _navigation.navigationBar.hidden = YES;
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        self.window.backgroundColor = [UIColor whiteColor];
-        self.window.rootViewController = _navigation;
-        [self.window makeKeyAndVisible];
-    }else{
+//    if ([[dic objectForKey:@"username"] length] > 0) {
+//        autologin = [[AutoLoginViewController alloc] init];
+//        _navigation = [[NavRootViewController alloc] initWithRootViewController:autologin];
+//        _navigation.navigationBar.hidden = YES;
+//        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//        self.window.backgroundColor = [UIColor whiteColor];
+//        self.window.rootViewController = _navigation;
+//        [self.window makeKeyAndVisible];
+//    }else{
         _deviceToken = @"1231231312da1231sqwc1213";
         LoginViewController *loginView = [[LoginViewController alloc] init];
         _navigation = [[NavRootViewController alloc] initWithRootViewController:loginView];
@@ -102,7 +102,7 @@
         self.window.backgroundColor = [UIColor whiteColor];
         self.window.rootViewController = _navigation;
         [self.window makeKeyAndVisible];
-    }
+//    }
 
     return YES;
 }
@@ -215,8 +215,14 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
+// 进入激活状态
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    // 判断版本更新
+    [self judgeAndUpdate];
+    
+    
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -273,6 +279,9 @@
         
         [_tabBar setSelectedIndex:0];
         [self.window setRootViewController:_tabBar];
+        
+        // 判断版本更新
+        [self judgeAndUpdate];
 
         
     }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"teacher"]) {
@@ -318,15 +327,203 @@
         [_cusTBViewController.tabBar setShadowImage:img];
         _cusTBViewController.selectedIndex = 0;
         self.window.rootViewController = _cusTBViewController;
+        
+        // 判断日期获取学生列表
+        [self getStuList];
+        
+        // 判断版本更新并获取学生列表
+        [self judgeAndUpdate];
+        
+        
     
     }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"student"]) {
         
         // 学生登录
     
     }
+    
+    
 
     
 }
+
+// 判断日期获取学生列表
+- (void)judgeGetStuListDate {
+
+    NSDate *currentDate = [NSDate date];
+    NSDate *oldDate = [SYS_CACHE objectForKey:@"getDate"];
+    if (oldDate == nil) {
+        
+        [self getStuList];
+        
+    }else {
+    
+        NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:oldDate];
+        
+        if (timeInterval > 60*60*24) {
+            [self getStuList];
+            
+        }else {
+            
+            return;
+        }
+
+        
+    }
+
+}
+
+
+
+
+
+// 判断日期并更新
+- (void)judgeAndUpdate {
+    
+    NSDate *currentDate = [NSDate date];
+    
+    NSString *force = [SYS_CACHE objectForKey:@"force"];
+    NSDate *pastDate = [SYS_CACHE objectForKey:@"date"];
+    
+    
+    
+    if (force == nil) {
+        
+        if (pastDate == nil) {
+            
+            [self judgeAppVersionAndUploadWithRole:((AppDelegate *)SYS_DELEGATE).role andCurrentVersion:APP_VERSION];
+            
+            
+        }else {
+            
+            NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:pastDate];
+            
+            if (timeInterval > 60*60*24) {
+                
+                [self judgeAppVersionAndUploadWithRole:((AppDelegate *)SYS_DELEGATE).role andCurrentVersion:APP_VERSION];
+            }else {
+                
+                return;
+            }
+            
+        }
+
+        
+    }else {
+        
+        
+        [self judgeAppVersionAndUploadWithRole:((AppDelegate *)SYS_DELEGATE).role andCurrentVersion:APP_VERSION];
+    
+    
+    }
+        
+    
+    
+
+}
+
+
+
+
+#pragma mark - 版本更新
+
+- (void)judgeAppVersionAndUploadWithRole:(NSString *)role andCurrentVersion:(NSString *)currentVerdion{
+    
+    NSLog(@"%@", currentVerdion);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"checkupgrade", @"action", @1, @"ostype", currentVerdion, @"currver", nil];
+    
+    [manager GET:[BaseURL stringByAppendingString:[NSString stringWithFormat:@"/api/%@/version/", role]] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        NSLog(@"%@", responseObject);
+        
+        if ([responseObject[@"retcode"] isEqual:@0]) {
+            
+            
+            if ([responseObject[@"version"] isEqualToString:@""] && [responseObject[@"version"] isEqual:[NSNull null]]) {
+                
+
+                // 如果是空不做处理
+                return;
+                
+            }else {
+                // 版本不同
+                if (![responseObject[@"version"] isEqualToString:APP_VERSION]) {
+
+                    
+                    if ([responseObject[@"force"] isEqual:@0]) {
+                        
+                        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"版本更新提示" message:[NSString stringWithFormat:@"发现新版本:%@,是否升级?", responseObject[@"version"]] preferredStyle:UIAlertControllerStyleAlert];
+                        [alertVC addAction:[UIAlertAction actionWithTitle:@"不了" style:UIAlertActionStyleCancel handler:nil]];
+                        
+                        [SYS_CACHE setObject:[NSDate date] forKey:@"date"];
+                        
+                        [alertVC addAction:[UIAlertAction actionWithTitle:@"升级" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                            
+                            // 前往更新
+                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:responseObject[@"url"]]];
+                        
+                            
+                        }]];
+                        
+                        [self.window.rootViewController presentViewController:alertVC animated:YES completion:nil];
+                        
+                    }else {
+                    
+                        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"版本更新提示" message:[NSString stringWithFormat:@"发现新版本:%@,该版本有重要升级,请您升级,否则可能会导致程序某些功能无法正常使用!", responseObject[@"version"]] preferredStyle:UIAlertControllerStyleAlert];
+                        
+                        [alertVC addAction:[UIAlertAction actionWithTitle:@"不了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                            
+                            [SYS_CACHE removeObjectForKey:@"date"];
+                            [SYS_CACHE setObject:@"yes" forKey:@"force"];
+                            
+                            // 在此杀掉程序
+                            int i = 0;
+                            exit(i);
+                            
+                            
+                        }]];
+                        
+                        [alertVC addAction:[UIAlertAction actionWithTitle:@"升级" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                            
+                            // 前往更新
+                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:responseObject[@"url"]]];
+                            
+                            [SYS_CACHE removeObjectForKey:@"date"];
+                            [SYS_CACHE removeObjectForKey:@"force"];
+                            
+                        }]];
+                        
+                        [self.window.rootViewController presentViewController:alertVC animated:YES completion:nil];
+                        
+
+                    
+                    }
+                    
+                }
+                
+            
+            }
+
+        
+        }else {
+        
+            NSLog(@"%@", responseObject[@"msg"]);
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+    
+    
+}
+
+
+
 
 //友盟相关内容统计
 -(void)initUmeng:(NSDictionary *)launchOptions
@@ -387,6 +584,8 @@
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"getstudents", @"action", nil];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[BaseURL stringByAppendingString:TEACHER_GETALLSTULIST_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+//        NSLog(@"%@", responseObject);
         // 创建数据库
         [[StuDataBase shareStuDataBase] deleteStuTable];
         [[StuDataBase shareStuDataBase] creatStuDataBase];
@@ -412,7 +611,15 @@
                 [model initStuGroupWithDic:dic];
                 [[StuDataBase shareStuDataBase] insertStuGroup:model];
             }
+            
+            [SYS_CACHE removeObjectForKey:@"getDate"];
+            
+            
+        }else {
+        
+            NSLog(@"%@", responseObject[@"msg"]);
         }
+        
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
     }];

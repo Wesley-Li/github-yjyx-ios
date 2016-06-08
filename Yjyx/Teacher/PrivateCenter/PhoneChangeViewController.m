@@ -23,16 +23,28 @@
 
 @implementation PhoneChangeViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     _second = 60;
     
     [self configureNavBar];
-    
+       [_phoneTF addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
 }
-
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if(textField.text.length > 11){
+        textField.text = [textField.text substringToIndex:11];
+    }
+}
 #pragma mark - 配置导航栏
 - (void)configureNavBar {
     
@@ -79,7 +91,7 @@
                     [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
                 }
             }else{
-                [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+                [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }];
         
@@ -124,7 +136,7 @@
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
-        [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+        [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         
     }];
 
@@ -145,6 +157,7 @@
         if (result) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
+                _timeLabel.backgroundColor = [UIColor grayColor];
                 //发送注册码按钮失效，防止频繁请求
                 self.timeLabel.text = [NSString stringWithFormat:@"%lds",(long)_second--];
                 [self.getCodeBtn setEnabled:false];
@@ -153,7 +166,7 @@
                 
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
 
@@ -172,6 +185,7 @@
 #pragma mark - 重置时间器
 -(void)resetTimer
 {
+    _timeLabel.backgroundColor = RGBACOLOR(11.0, 102.0, 254.0, 1);
     _second = 60;
     _timeLabel.text = @"获取验证码";
     [_timer invalidate];

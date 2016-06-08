@@ -22,30 +22,41 @@
 
 @implementation MyClassViewController
 
-//- (NSMutableArray *)dataSource {
-//
-//    if (!_dataSource) {
-//        self.dataSource = [NSMutableArray array];
-//    }
-//    return _dataSource;
-//}
+- (NSMutableArray *)dataSource {
+
+    if (!_dataSource) {
+        self.dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
+    
+    NSLog(@"%@", NSHomeDirectory());
+    
+    NSLog(@"%@", [[StuDataBase shareStuDataBase] selectAllClass]);
 
-    self.dataSource = [[[StuDataBase shareStuDataBase]selectAllClass] mutableCopy];
+    self.dataSource = [[[StuDataBase shareStuDataBase] selectAllClass] mutableCopy];
+    
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = NO;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = NO;
     
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    NSLog(@"%@", NSHomeDirectory());
+    
     // Do any additional setup after loading the view from its nib.
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:3/255.0 green:136/255.0 blue:227/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
 
+    self.navigationItem.title = @"我的班级";
 
-    self.title = @"我的班级";
     [self refreshAll];
 //    [self.classListTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"1"];
     

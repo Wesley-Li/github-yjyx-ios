@@ -39,6 +39,7 @@
     titleLb.text = [NSString stringWithFormat:@"%@会员特权",self.productEntity.subject_name];
     NSString *content = [self.productEntity.content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     contentLb = [[RCLabel alloc] initWithFrame:CGRectMake(35, 46, SCREEN_WIDTH - 50, 999)];
+    contentLb.userInteractionEnabled = NO;
     contentLb.font = [UIFont systemFontOfSize:12];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
     contentLb.componentsAndPlainText = componentsDS;
@@ -94,7 +95,7 @@
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
 }
@@ -102,6 +103,7 @@
 
 -(void)reloadView:(NSDictionary *)dic
 {
+
     for (UIView *view in _detailView.subviews) {
         if (view.tag>=1000) {
             [view removeFromSuperview];
@@ -343,7 +345,7 @@
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
 

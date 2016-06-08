@@ -8,7 +8,7 @@
 
 #import "ForgetThreeViewController.h"
 
-@interface ForgetThreeViewController ()
+@interface ForgetThreeViewController ()<UITextFieldDelegate>
 
 @end
 
@@ -19,8 +19,31 @@
     _second = 60;
      _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
     titleLb.text = [NSString stringWithFormat:@"请为您的账号%@设置密码，以保证下次正常登录",_phoneStr];
+    [codeText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [newPassWord addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [confrimPassWord addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 }
-
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if ([textField isEqual:codeText]) {
+        if (textField.text.length > 4) {
+            textField.text = [textField.text substringToIndex:4];
+        }
+    }else if([textField isEqual:newPassWord] || [textField isEqual:confrimPassWord]){
+        if (textField.text.length > 20){
+            textField.text = [textField.text substringToIndex:20];
+            [self.view makeToast:@"密码的长度不能大于20位" duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+    }
+}
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+//{
+//    if(range.location > 20){
+//        [self.view makeToast:@"密码的长度不能大于20位" duration:1.0 position:SHOW_CENTER complete:nil];
+//        return NO;
+//    }
+//    return YES;
+//}
 -(void)checkCodeTimeout
 {
     codeLb.text = [NSString stringWithFormat:@"重新获取验证码(%ds)",_second--];
@@ -49,7 +72,14 @@
         [self.view makeToast:@"两次密码必须一致" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
-    
+    if ([newPassWord.text containsString:@" "]) {
+        [self.view makeToast:@"密码不能含有空格" duration:1.0 position:SHOW_CENTER complete:nil];
+        return;
+    }
+    if (newPassWord.text.length < 6){
+        [self.view makeToast:@"密码长度不能小于6位" duration:1.0 position:SHOW_CENTER complete:nil];
+        return;
+    }
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_userName,@"username",codeText.text,@"smscode",confrimPassWord.text,@"password",nil];
     [[YjxService sharedInstance] restPassWord:dic withBlock:^(id result, NSError *error){//重置密码
         [self.view hideToastActivity];
@@ -60,7 +90,11 @@
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            if (error.code == -1009) {
+                [self.view makeToast:@"您的网络可能不太好,请重试!" duration:3.0 position:SHOW_CENTER complete:nil];
+                return;
+            }
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:3.0 position:SHOW_CENTER complete:nil];
         }
     }];
 }

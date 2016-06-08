@@ -98,7 +98,7 @@
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
 }
@@ -196,6 +196,7 @@
             }
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
+            templabel.userInteractionEnabled = NO;
             templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
             templabel.componentsAndPlainText = componentsDS;
@@ -210,6 +211,7 @@
                 return 0;
             }
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
+            templabel.userInteractionEnabled = NO;
             templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
             templabel.componentsAndPlainText = componentsDS;
@@ -250,6 +252,7 @@
             return 0;
         }
         RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
+        templabel.userInteractionEnabled = NO;
         templabel.font = [UIFont systemFontOfSize:14];
         RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
         templabel.componentsAndPlainText = componentsDS;
@@ -307,6 +310,7 @@
                 return cell;
             }
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
+            templabel.userInteractionEnabled = NO;
             templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
             templabel.componentsAndPlainText = componentsDS;
@@ -386,6 +390,7 @@
                 return cell;
             }
             RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
+            templabel.userInteractionEnabled = NO;
             templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
             templabel.componentsAndPlainText = componentsDS;
@@ -513,6 +518,7 @@
             return cell;
         }
         RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
+        templabel.userInteractionEnabled = NO;
         templabel.font = [UIFont systemFontOfSize:14];
         RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
         templabel.componentsAndPlainText = componentsDS;
@@ -718,7 +724,7 @@
                     [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
                 }
             }else{
-                [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+                [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }];
 

@@ -153,11 +153,15 @@
         [SVProgressHUD dismissWithDelay:1.0];
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+        [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
+        [SVProgressHUD dismiss];
     }];
     
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [SVProgressHUD dismiss];
+}
 - (void)goBack {
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -681,7 +685,10 @@
         if (cell.bg_view.width - size.width <= 0) {
             // 换行
             size.width = 10;
-            size.height += tHeigh + 10;
+            if (arr.count - i > 1) {
+                size.height += tHeigh + 10;
+            }
+
         }
         
         //        taskView.backgroundColor = [UIColor redColor];
@@ -763,7 +770,10 @@
         if (SCREEN_WIDTH - 20 - size.width <= 0) {
             // 换行
             size.width = 10;
-            size.height += tHeigh + 10;
+            if (arr.count - i > 1) {
+                size.height += tHeigh + 10;
+            }
+
         }
         
         FinshedModel *model = _finishedArr[i];
@@ -774,11 +784,12 @@
         imageBtn.frame = CGRectMake(0, 0, tWidth, tWidth);
         
         if ([model.ImageAvatar isEqual:[NSNull null]]) {
-            [imageBtn setImage:[UIImage imageNamed:@"stu_pic"] forState:UIControlStateNormal];
+//            [imageBtn setImage:[UIImage imageNamed:@"stu_pic"] forState:UIControlStateNormal];
+            [imageBtn setBackgroundImage:[UIImage imageNamed:@"stu_pic"] forState:UIControlStateNormal];
         }else {
             
-            [imageBtn setImageWithURL:[NSURL URLWithString:model.ImageAvatar] placeholderImage:[UIImage imageNamed:@"stu_pic"]];
-        
+//            [imageBtn setImageWithURL:[NSURL URLWithString:model.ImageAvatar] placeholderImage:[UIImage imageNamed:@"stu_pic"]];
+            [imageBtn setBackgroundImageWithURL:[NSURL URLWithString:model.ImageAvatar] placeholderImage:[UIImage imageNamed:@"stu_pic"]];
         }
         
         
@@ -828,7 +839,10 @@
         if (SCREEN_WIDTH - 20 - size.width <= 0) {
             // 换行
             size.width = 10;
-            size.height += tHeigh;
+            if (arr.count - i > 1) {
+                size.height += tHeigh + 10;
+            }
+
         }
         
         //        taskView.backgroundColor = [UIColor redColor];
@@ -861,7 +875,7 @@
         
 //        [cell.bg_view addSubview:taskView];
     }
-    self.unsubmitCellHeight = size.height + 80 + 30 - 40;
+    self.unsubmitCellHeight = size.height + 80 + 30;
     cell.showMoreBtn.hidden = YES;
     
 

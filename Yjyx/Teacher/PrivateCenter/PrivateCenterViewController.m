@@ -33,6 +33,11 @@
 - (void)viewWillAppear:(BOOL)animated {
 
     [super viewWillAppear:YES];
+    
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = NO;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = NO;
+    
     [_tableView reloadData];
 }
 
@@ -161,9 +166,9 @@
     else{
         UIButton *loginOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         [loginOutBtn addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
-        loginOutBtn.backgroundColor = [UIColor redColor];
+        loginOutBtn.backgroundColor = [UIColor whiteColor];
         [loginOutBtn setTitle:@"退出登录" forState:UIControlStateNormal];
-        [loginOutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [loginOutBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         cell.backgroundColor = [UIColor clearColor];
         [cell.contentView addSubview:loginOutBtn];
     }
@@ -240,7 +245,11 @@
     NSLog(@"退出登录");
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:[YjyxOverallData sharedInstance].parentInfo.pid,@"pid", nil];
     [self.view makeToastActivity:SHOW_CENTER];
-    
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    AppDelegate *mydelegate = (AppDelegate*)SYS_DELEGATE;
+    nav.navigationBarHidden = YES;
+    [mydelegate.window setRootViewController:nav];
     [[YjxService sharedInstance] teacherLogout:dic withBlock:^(id result, NSError *error) {
         [self.view hideToastActivity];
         
@@ -258,17 +267,17 @@
                 
                 [SYS_CACHE removeObjectForKey:@"AutoLogoin"];
                 // 定时器挂起
-                dispatch_suspend(((AppDelegate*)SYS_DELEGATE).timer);
+//                dispatch_suspend(((AppDelegate*)SYS_DELEGATE).timer);
                 
-                LoginViewController *loginVC = [[LoginViewController alloc] init];
-                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
-                AppDelegate *mydelegate = (AppDelegate*)SYS_DELEGATE;
-                nav.navigationBarHidden = YES;
-                [mydelegate.window setRootViewController:nav];
+//                LoginViewController *loginVC = [[LoginViewController alloc] init];
+//                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+//                AppDelegate *mydelegate = (AppDelegate*)SYS_DELEGATE;
+//                nav.navigationBarHidden = YES;
+//                [mydelegate.window setRootViewController:nav];
             }
         }else {
-        
-            [self.view makeToast:[error description] duration:2.0 position:SHOW_CENTER complete:nil];
+            NSLog(@"%@", error.userInfo[NSLocalizedDescriptionKey]);
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2.0 position:SHOW_CENTER complete:nil];
         }
         
         

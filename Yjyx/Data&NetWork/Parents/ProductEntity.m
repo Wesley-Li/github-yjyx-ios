@@ -21,6 +21,7 @@
     entity.subject_name = [dic objectForKey:@"subject_name"];
     entity.trialDays = [dic objectForKey:@"trialDays"];
     entity.content = [dic objectForKey:@"description"];
+    entity.status = dic[@"status"];
     return entity;
 }
 

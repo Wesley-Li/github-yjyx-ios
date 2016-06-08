@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) UIButton *customButton;
 @property (nonatomic, strong) UITabBar *customTabBar;
+@property (nonatomic, strong) UIImageView *tab_bgImage;
 
 @end

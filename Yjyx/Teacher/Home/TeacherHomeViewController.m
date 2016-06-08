@@ -24,6 +24,10 @@
 
      _nameLabel.text = [YjyxOverallData sharedInstance].teacherInfo.name;
     self.navigationController.navigationBarHidden = YES;
+    
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = NO;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = NO;
 }
 
 
@@ -200,7 +204,7 @@
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
-            [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
 
         

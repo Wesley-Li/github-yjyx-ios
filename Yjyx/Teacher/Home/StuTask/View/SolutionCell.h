@@ -11,6 +11,7 @@
 @interface SolutionCell : UITableViewCell
 
 @property (nonatomic, assign) CGFloat height;
+@property (weak, nonatomic) IBOutlet UILabel *solutionLabel;
 
 - (void)setSolutionValueWithDiction:(NSDictionary *)dic;
 

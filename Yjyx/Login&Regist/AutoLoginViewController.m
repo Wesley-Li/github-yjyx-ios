@@ -52,7 +52,7 @@
                 UINavigationController* navigation = [[NavRootViewController alloc] initWithRootViewController:loginView];
                 navigation.navigationBar.hidden = YES;
                 [(AppDelegate *)SYS_DELEGATE window].rootViewController =navigation;
-                [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+                [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }];
 
@@ -67,7 +67,7 @@
                     [(AppDelegate *)SYS_DELEGATE fillViews];
                     
                     // 开启GCD
-                    dispatch_resume(((AppDelegate*)SYS_DELEGATE).timer);
+//                    dispatch_resume(((AppDelegate*)SYS_DELEGATE).timer);
                     
                     [YjyxOverallData sharedInstance].teacherInfo = [TeacherEntity wrapTeacherWithDic:result];
                     
