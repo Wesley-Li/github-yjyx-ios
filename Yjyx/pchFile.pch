@@ -57,7 +57,7 @@
 #define APP_WINDOW (UIWindow*)[[UIApplication sharedApplication].windows objectAtIndex:0]
 //定义颜色
 #define RGBACOLOR(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
-
+#define COMMONCOLOR RGBACOLOR(239, 239, 244,1);
 // 老师端统一色
 #define TEACHERCOLOR RGBACOLOR(3, 136, 227, 1)
 //随机颜色

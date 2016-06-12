@@ -371,6 +371,17 @@
 		3BFE3B841CD99E6100502769 /* StuDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B831CD99E6100502769 /* StuDataBase.m */; };
 		3BFE3B871CDA0D4A00502769 /* StuClassEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B861CDA0D4A00502769 /* StuClassEntity.m */; };
 		3BFE3B8A1CDA0D6F00502769 /* StuGroupEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B891CDA0D6F00502769 /* StuGroupEntity.m */; };
+		3CA896321D0671D60092D292 /* GradeContentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA896311D0671D60092D292 /* GradeContentItem.m */; };
+		3CA896351D0674460092D292 /* ChapterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA896341D0674460092D292 /* ChapterViewController.m */; };
+		3CA896381D06B3890092D292 /* TreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA896371D06B3890092D292 /* TreeNode.m */; };
+		3CA8963B1D06B8A80092D292 /* TreeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA8963A1D06B8A80092D292 /* TreeTableView.m */; };
+		3CA8963F1D06DF540092D292 /* ParentChapterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA8963D1D06DF540092D292 /* ParentChapterCell.m */; };
+		3CA896401D06DF540092D292 /* ParentChapterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA8963E1D06DF540092D292 /* ParentChapterCell.xib */; };
+		3CC4738E1D05130A009FAC16 /* ChooseMaterialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC4738C1D05130A009FAC16 /* ChooseMaterialCell.m */; };
+		3CC4738F1D05130A009FAC16 /* ChooseMaterialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CC4738D1D05130A009FAC16 /* ChooseMaterialCell.xib */; };
+		3CC473951D05551B009FAC16 /* PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC473941D05551B009FAC16 /* PickerView.m */; };
+		3CC473971D055529009FAC16 /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CC473961D055529009FAC16 /* PickerView.xib */; };
+		3CD1D6C61D08054D0027E797 /* GradeVerVolItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1D6C51D08054D0027E797 /* GradeVerVolItem.m */; };
 		3F4CA6281CE17FC000F4B791 /* FinshedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4CA6271CE17FC000F4B791 /* FinshedModel.m */; };
 		3FF740601CE308DD00D3C0F7 /* list_btn_shutdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */; };
 		3FF740621CE3090500D3C0F7 /* list_btn_shutdown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF740611CE3090500D3C0F7 /* list_btn_shutdown@3x.png */; };
@@ -948,6 +959,25 @@
 		3BFE3B861CDA0D4A00502769 /* StuClassEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuClassEntity.m; sourceTree = "<group>"; };
 		3BFE3B881CDA0D6F00502769 /* StuGroupEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuGroupEntity.h; sourceTree = "<group>"; };
 		3BFE3B891CDA0D6F00502769 /* StuGroupEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuGroupEntity.m; sourceTree = "<group>"; };
+		3CA896301D0671D60092D292 /* GradeContentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeContentItem.h; sourceTree = "<group>"; };
+		3CA896311D0671D60092D292 /* GradeContentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradeContentItem.m; sourceTree = "<group>"; };
+		3CA896331D0674460092D292 /* ChapterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterViewController.h; sourceTree = "<group>"; };
+		3CA896341D0674460092D292 /* ChapterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChapterViewController.m; sourceTree = "<group>"; };
+		3CA896361D06B3890092D292 /* TreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeNode.h; sourceTree = "<group>"; };
+		3CA896371D06B3890092D292 /* TreeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeNode.m; sourceTree = "<group>"; };
+		3CA896391D06B8A80092D292 /* TreeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeTableView.h; sourceTree = "<group>"; };
+		3CA8963A1D06B8A80092D292 /* TreeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TreeTableView.m; sourceTree = "<group>"; };
+		3CA8963C1D06DF540092D292 /* ParentChapterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentChapterCell.h; sourceTree = "<group>"; };
+		3CA8963D1D06DF540092D292 /* ParentChapterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentChapterCell.m; sourceTree = "<group>"; };
+		3CA8963E1D06DF540092D292 /* ParentChapterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParentChapterCell.xib; sourceTree = "<group>"; };
+		3CC4738B1D05130A009FAC16 /* ChooseMaterialCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseMaterialCell.h; sourceTree = "<group>"; };
+		3CC4738C1D05130A009FAC16 /* ChooseMaterialCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseMaterialCell.m; sourceTree = "<group>"; };
+		3CC4738D1D05130A009FAC16 /* ChooseMaterialCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseMaterialCell.xib; sourceTree = "<group>"; };
+		3CC473931D05551B009FAC16 /* PickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerView.h; sourceTree = "<group>"; };
+		3CC473941D05551B009FAC16 /* PickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerView.m; sourceTree = "<group>"; };
+		3CC473961D055529009FAC16 /* PickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
+		3CD1D6C41D08054D0027E797 /* GradeVerVolItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeVerVolItem.h; sourceTree = "<group>"; };
+		3CD1D6C51D08054D0027E797 /* GradeVerVolItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradeVerVolItem.m; sourceTree = "<group>"; };
 		3F4CA6261CE17FC000F4B791 /* FinshedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinshedModel.h; sourceTree = "<group>"; };
 		3F4CA6271CE17FC000F4B791 /* FinshedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinshedModel.m; sourceTree = "<group>"; };
 		3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_btn_shutdown.png; sourceTree = "<group>"; };
@@ -1859,27 +1889,9 @@
 		3B48646A1CCF117300D2DE3C /* PublishHomeWork */ = {
 			isa = PBXGroup;
 			children = (
-				3B48646B1CCF117300D2DE3C /* PublishHomeworkViewController.h */,
-				3B48646C1CCF117300D2DE3C /* PublishHomeworkViewController.m */,
-				3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */,
-				3BB773A01CD8781400A24485 /* SmartViewController.h */,
-				3BB773A11CD8781400A24485 /* SmartViewController.m */,
-				3BB773A21CD8781400A24485 /* SmartViewController.xib */,
-				3BB773A51CD8784000A24485 /* BookViewController.h */,
-				3BB773A61CD8784000A24485 /* BookViewController.m */,
-				3BB773A71CD8784000A24485 /* BookViewController.xib */,
-				3BB773AA1CD8786900A24485 /* TestViewController.h */,
-				3BB773AB1CD8786900A24485 /* TestViewController.m */,
-				3BB773AC1CD8786900A24485 /* TestViewController.xib */,
-				3BB773AF1CD8788200A24485 /* MidTestViewController.h */,
-				3BB773B01CD8788200A24485 /* MidTestViewController.m */,
-				3BB773B11CD8788200A24485 /* MidTestViewController.xib */,
-				3BB773B41CD8789800A24485 /* CameraViewController.h */,
-				3BB773B51CD8789800A24485 /* CameraViewController.m */,
-				3BB773B61CD8789800A24485 /* CameraViewController.xib */,
-				3BB773B91CD878B900A24485 /* PrivateViewController.h */,
-				3BB773BA1CD878B900A24485 /* PrivateViewController.m */,
-				3BB773BB1CD878B900A24485 /* PrivateViewController.xib */,
+				3CC4738A1D0511F6009FAC16 /* Controller */,
+				3CC473891D0511EA009FAC16 /* View */,
+				3CC473881D0511DB009FAC16 /* Model */,
 			);
 			path = PublishHomeWork;
 			sourceTree = "<group>";
@@ -2101,6 +2113,67 @@
 				3BFE3B891CDA0D6F00502769 /* StuGroupEntity.m */,
 			);
 			path = Teacher;
+			sourceTree = "<group>";
+		};
+		3CC473881D0511DB009FAC16 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3CA896301D0671D60092D292 /* GradeContentItem.h */,
+				3CA896311D0671D60092D292 /* GradeContentItem.m */,
+				3CA896361D06B3890092D292 /* TreeNode.h */,
+				3CA896371D06B3890092D292 /* TreeNode.m */,
+				3CD1D6C41D08054D0027E797 /* GradeVerVolItem.h */,
+				3CD1D6C51D08054D0027E797 /* GradeVerVolItem.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		3CC473891D0511EA009FAC16 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3CC4738B1D05130A009FAC16 /* ChooseMaterialCell.h */,
+				3CC4738C1D05130A009FAC16 /* ChooseMaterialCell.m */,
+				3CC4738D1D05130A009FAC16 /* ChooseMaterialCell.xib */,
+				3CC473931D05551B009FAC16 /* PickerView.h */,
+				3CC473941D05551B009FAC16 /* PickerView.m */,
+				3CC473961D055529009FAC16 /* PickerView.xib */,
+				3CA8963C1D06DF540092D292 /* ParentChapterCell.h */,
+				3CA8963D1D06DF540092D292 /* ParentChapterCell.m */,
+				3CA8963E1D06DF540092D292 /* ParentChapterCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		3CC4738A1D0511F6009FAC16 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3B48646B1CCF117300D2DE3C /* PublishHomeworkViewController.h */,
+				3B48646C1CCF117300D2DE3C /* PublishHomeworkViewController.m */,
+				3B48646D1CCF117300D2DE3C /* PublishHomeworkViewController.xib */,
+				3BB773A01CD8781400A24485 /* SmartViewController.h */,
+				3BB773A11CD8781400A24485 /* SmartViewController.m */,
+				3BB773A21CD8781400A24485 /* SmartViewController.xib */,
+				3BB773A51CD8784000A24485 /* BookViewController.h */,
+				3BB773A61CD8784000A24485 /* BookViewController.m */,
+				3BB773A71CD8784000A24485 /* BookViewController.xib */,
+				3CA896331D0674460092D292 /* ChapterViewController.h */,
+				3CA896341D0674460092D292 /* ChapterViewController.m */,
+				3CA896391D06B8A80092D292 /* TreeTableView.h */,
+				3CA8963A1D06B8A80092D292 /* TreeTableView.m */,
+				3BB773AA1CD8786900A24485 /* TestViewController.h */,
+				3BB773AB1CD8786900A24485 /* TestViewController.m */,
+				3BB773AC1CD8786900A24485 /* TestViewController.xib */,
+				3BB773AF1CD8788200A24485 /* MidTestViewController.h */,
+				3BB773B01CD8788200A24485 /* MidTestViewController.m */,
+				3BB773B11CD8788200A24485 /* MidTestViewController.xib */,
+				3BB773B41CD8789800A24485 /* CameraViewController.h */,
+				3BB773B51CD8789800A24485 /* CameraViewController.m */,
+				3BB773B61CD8789800A24485 /* CameraViewController.xib */,
+				3BB773B91CD878B900A24485 /* PrivateViewController.h */,
+				3BB773BA1CD878B900A24485 /* PrivateViewController.m */,
+				3BB773BB1CD878B900A24485 /* PrivateViewController.xib */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		5B7C88DD048F57B9225E4451 /* Frameworks */ = {
@@ -2470,12 +2543,14 @@
 				3A3E6DE71CD8F4B8002133D8 /* Parent_read@3x.png in Resources */,
 				3A5477961CE41ACF001233C1 /* homework_close@3x.png in Resources */,
 				3A4302051C61FDFB00B8D259 /* LoginViewController.xib in Resources */,
+				3CC4738F1D05130A009FAC16 /* ChooseMaterialCell.xib in Resources */,
 				3A8CAE971C70A12E00BDEB6B /* ParentModifyPhoneViewController.xib in Resources */,
 				3A8827861C6EE5730008367F /* tab_communitys@3x.png in Resources */,
 				CB40048A1C609BCD00556AA7 /* Assets.xcassets in Resources */,
 				3AE893FD1C6C26A400E8BA97 /* login_bg@3x.png in Resources */,
 				3AFE02B61CA28C2B0097CC83 /* tab_memberCenter@3x.png in Resources */,
 				3A38278B1CDF185F00EAB979 /* YjyxFeedBackViewController.xib in Resources */,
+				3CC473971D055529009FAC16 /* PickerView.xib in Resources */,
 				3A03CB691C8EB876007B5136 /* Parent_weike@3x.png in Resources */,
 				3B48644D1CCF10C200D2DE3C /* new.png in Resources */,
 				3A5A00F51C79EA2A004584E6 /* MJRefresh.bundle in Resources */,
@@ -2502,6 +2577,7 @@
 				3B35DB871CE02559000B7F83 /* tab_bg@3x.png in Resources */,
 				3A91F46B1C7606FB001568AA /* ChildrenStatisticViewController.xib in Resources */,
 				3A8827851C6EE5730008367F /* tab_community@3x.png in Resources */,
+				3CA896401D06DF540092D292 /* ParentChapterCell.xib in Resources */,
 				80F718C31CF28961007C0B75 /* SubmitCell.xib in Resources */,
 				3AE894101C6C47C400E8BA97 /* login_right_line@3x.png in Resources */,
 				3AFE02C61CA29D540097CC83 /* member_yingyu@3x.png in Resources */,
@@ -2665,11 +2741,13 @@
 				3A04A5CB1C93E6290040D913 /* MASCompositeConstraint.m in Sources */,
 				3B4864701CCF117300D2DE3C /* MessageViewController.m in Sources */,
 				3AEF27221C61F08A0028BE09 /* PasswordStipulateCheckin.m in Sources */,
+				3CA8963F1D06DF540092D292 /* ParentChapterCell.m in Sources */,
 				CB4004821C609BCD00556AA7 /* AppDelegate.m in Sources */,
 				3BE01BD41CDD7DBE00781B86 /* BlankFillModel.m in Sources */,
 				3A91F49A1C760CF4001568AA /* PNRadarChart.m in Sources */,
 				3AF339461C770FDC00586A37 /* AutoLoginViewController.m in Sources */,
 				3BB773B71CD8789800A24485 /* CameraViewController.m in Sources */,
+				3CA8963B1D06B8A80092D292 /* TreeTableView.m in Sources */,
 				3AC1D1E11CCDE70E006291D0 /* RegistFinalViewController.m in Sources */,
 				8013D34A1CF47CB700F82301 /* TaskConditonModel.m in Sources */,
 				3B4864741CCF117300D2DE3C /* PrivateCenterViewController.m in Sources */,
@@ -2697,7 +2775,9 @@
 				3BB773BC1CD878B900A24485 /* PrivateViewController.m in Sources */,
 				3A4057071CCF6FAF00258784 /* ForgetOneViewController.m in Sources */,
 				3A88278E1C6EE9BD0008367F /* RegistViewController.m in Sources */,
+				3CA896351D0674460092D292 /* ChapterViewController.m in Sources */,
 				3A8CAE961C70A12E00BDEB6B /* ParentModifyPhoneViewController.m in Sources */,
+				3CD1D6C61D08054D0027E797 /* GradeVerVolItem.m in Sources */,
 				3A04A5CD1C93E6290040D913 /* MASConstraintMaker.m in Sources */,
 				3AB212B41CA2E11900DCC618 /* KWFormViewQuickBuilder.m in Sources */,
 				3A04A5DF1C9406850040D913 /* YjyxWorkPreviewViewController.m in Sources */,
@@ -2711,6 +2791,7 @@
 				3B35DBA21CE070DB000B7F83 /* VideoCell.m in Sources */,
 				3A7864331C868062001BB65A /* ChildrenResultViewController.m in Sources */,
 				3AEF272C1C61F08A0028BE09 /* SBJsonBase.m in Sources */,
+				3CC473951D05551B009FAC16 /* PickerView.m in Sources */,
 				3B84D5841CEC6E9D003F659B /* LxGridViewFlowLayout.m in Sources */,
 				3B831A291CE4B19D00724E6B /* OneStuTaskDetailViewController.m in Sources */,
 				801F44A81CDF164800B7E7E1 /* DataSigner.m in Sources */,
@@ -2736,6 +2817,7 @@
 				3AEF27241C61F08A0028BE09 /* UICountingLabel.m in Sources */,
 				3AFE02B91CA291BD0097CC83 /* BaseViewController.m in Sources */,
 				3BFE3B841CD99E6100502769 /* StuDataBase.m in Sources */,
+				3CA896321D0671D60092D292 /* GradeContentItem.m in Sources */,
 				3AAE42281CE8A1B1007B2C64 /* OrderNewEntity.m in Sources */,
 				3A66A8031C931BBA005E2D43 /* ChildrenExplantionViewController.m in Sources */,
 				3A91F4921C760CF4001568AA /* PNCircleChart.m in Sources */,
@@ -2777,6 +2859,7 @@
 				8013D3411CF45A3E00F82301 /* SubTimeCell.m in Sources */,
 				3A188F9F1CE5D60B00F055DD /* YjyxOrderViewController.m in Sources */,
 				CB40047F1C609BCD00556AA7 /* main.m in Sources */,
+				3CA896381D06B3890092D292 /* TreeNode.m in Sources */,
 				3A8CAEC11C70B3C200BDEB6B /* ParentChildrensViewController.m in Sources */,
 				3A91F49E1C760CF4001568AA /* PNScatterChartDataItem.m in Sources */,
 				3B91A6F71CE6010D0082A92C /* YourAnswerCell.m in Sources */,
@@ -2808,6 +2891,7 @@
 				3AEF272D1C61F08A0028BE09 /* SBJsonParser.m in Sources */,
 				3B35DB931CE06FE7000B7F83 /* AnswerSituationCell.m in Sources */,
 				3B4864721CCF117300D2DE3C /* MyClassViewController.m in Sources */,
+				3CC4738E1D05130A009FAC16 /* ChooseMaterialCell.m in Sources */,
 				801F44AF1CDF164800B7E7E1 /* APAuthV2Info.m in Sources */,
 				3A2E87091C8C079F00C3CD6C /* ChildrenResultTableViewController.m in Sources */,
 				3AA1655C1C91AB40006B8756 /* RCLabel.m in Sources */,
@@ -2942,8 +3026,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -2969,7 +3053,7 @@
 					"\"$(PROJECT_DIR)/Yjyx/Alipay/AliSDK/openssl\"",
 				);
 				INFOPLIST_FILE = Yjyx/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2981,7 +3065,7 @@
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "92e9b2c4-8833-4ab2-bf04-b311a25d4413";
+				PROVISIONING_PROFILE = "8738e8ea-9b10-4c1a-9734-06599c5639a1";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -2994,8 +3078,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -3021,7 +3105,7 @@
 					"\"$(PROJECT_DIR)/Yjyx/Alipay/AliSDK/openssl\"",
 				);
 				INFOPLIST_FILE = Yjyx/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3032,7 +3116,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "92e9b2c4-8833-4ab2-bf04-b311a25d4413";
+				PROVISIONING_PROFILE = "8738e8ea-9b10-4c1a-9734-06599c5639a1";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

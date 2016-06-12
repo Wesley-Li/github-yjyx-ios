@@ -85,15 +85,15 @@
     
     // 自动登录,从本地取值
     NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
-    if ([[dic objectForKey:@"username"] length] > 0) {
-        autologin = [[AutoLoginViewController alloc] init];
-        _navigation = [[NavRootViewController alloc] initWithRootViewController:autologin];
-        _navigation.navigationBar.hidden = YES;
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        self.window.backgroundColor = [UIColor whiteColor];
-        self.window.rootViewController = _navigation;
-        [self.window makeKeyAndVisible];
-    }else{
+//    if ([[dic objectForKey:@"username"] length] > 0) {
+//        autologin = [[AutoLoginViewController alloc] init];
+//        _navigation = [[NavRootViewController alloc] initWithRootViewController:autologin];
+//        _navigation.navigationBar.hidden = YES;
+//        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//        self.window.backgroundColor = [UIColor whiteColor];
+//        self.window.rootViewController = _navigation;
+//        [self.window makeKeyAndVisible];
+//    }else{
         _deviceToken = @"1231231312da1231sqwc1213";
         LoginViewController *loginView = [[LoginViewController alloc] init];
         _navigation = [[NavRootViewController alloc] initWithRootViewController:loginView];
@@ -102,7 +102,7 @@
         self.window.backgroundColor = [UIColor whiteColor];
         self.window.rootViewController = _navigation;
         [self.window makeKeyAndVisible];
-    }
+//    }
 
     return YES;
 }
@@ -443,12 +443,14 @@
             
             if ([responseObject[@"version"] isEqualToString:@""] && [responseObject[@"version"] isEqual:[NSNull null]]) {
                 
+
                 // 如果是空不做处理
                 return;
                 
             }else {
                 // 版本不同
                 if (![responseObject[@"version"] isEqualToString:APP_VERSION]) {
+
                     
                     if ([responseObject[@"force"] isEqual:@0]) {
                         

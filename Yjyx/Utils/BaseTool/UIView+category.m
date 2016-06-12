@@ -105,6 +105,17 @@ static const CGFloat CSToastActivityHeight      = 100.0;
     rect.origin.y = y;
     self.frame = rect;
 }
+
+- (CGFloat)x
+{
+    return self.frame.origin.x;
+}
+- (void)setX:(CGFloat)x
+{
+    CGRect rect = self.frame;
+    rect.origin.x = x;
+    self.frame = rect;
+}
 #pragma mark 隐藏键盘
 - (void)hideKeyboard
 {

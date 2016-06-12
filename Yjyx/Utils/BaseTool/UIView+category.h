@@ -83,6 +83,12 @@ typedef enum SHOW_POSITION {
 
 - (void)setY:(CGFloat)y;
 /**
+ * 设置x值
+ */
+- (CGFloat)x;
+
+- (void)setX:(CGFloat)x;
+/**
  * 当前界面隐藏键盘
  */
 - (void)hideKeyboard;
