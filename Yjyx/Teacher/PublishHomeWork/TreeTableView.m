@@ -78,12 +78,13 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
 //        [name appendString:@"     "];
 //    }
 //    [name appendString:node.name];
-    cell.node = node;
+    
     if (node.expand == NO) {
         cell.imageV.image = [UIImage imageNamed:@"list_icon_1展开"];
     }else{
     cell.imageV.image = [UIImage imageNamed:@"list_icon_1"];
     }
+    cell.node = node;
     if (node.depth == 1) {
         cell.imageV.image = [UIImage imageNamed:@"list_icon_3"];
     }
@@ -116,8 +117,8 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
     NSLog(@"%d", parentNode.nodeId);
      GradeContentItem *item = self.chapterArray[parentNode.nodeId + 1];
     GradeVerVolItem *item1 = self.gradeNumItem;
-    if (_treeTableCellDelegate && [_treeTableCellDelegate respondsToSelector:@selector(cellClick:)]) {
-        [_treeTableCellDelegate cellClick:parentNode];
+    if (_treeTableCellDelegate && [_treeTableCellDelegate respondsToSelector:@selector(cellClick:andVerVolItem:andTreeNode:)]) {
+        [_treeTableCellDelegate cellClick:item andVerVolItem:item1 andTreeNode:parentNode];
     }
     
     NSUInteger startPosition = indexPath.row+1;

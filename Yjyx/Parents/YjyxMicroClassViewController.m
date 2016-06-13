@@ -24,7 +24,17 @@
 @end
 
 @implementation YjyxMicroClassViewController
-
+-(BOOL)prefersStatusBarHidden{
+    if (wmPlayer) {
+        if (wmPlayer.isFullscreen) {
+            return YES;
+        }else{
+            return NO;
+        }
+    }else{
+        return NO;
+    }
+}
 - (instancetype)init
 {
     self = [super init];
@@ -45,15 +55,11 @@
      ];
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
-    
+
     self.navigationController.navigationBarHidden = NO;
 }
 
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:YES];
 
-}
 
 -(void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation{
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
@@ -64,17 +70,17 @@
     }else if(interfaceOrientation==UIInterfaceOrientationLandscapeRight){
         wmPlayer.transform = CGAffineTransformMakeRotation(M_PI_2);
     }
-    wmPlayer.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    wmPlayer.playerLayer.frame =  CGRectMake(0,0, self.view.frame.size.height,self.view.frame.size.width);
+    wmPlayer.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    wmPlayer.playerLayer.frame =  CGRectMake(0,0, SCREEN_HEIGHT,SCREEN_WIDTH);
     
     [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(40);
-        make.top.mas_equalTo(self.view.frame.size.width-40);
-        make.width.mas_equalTo(self.view.frame.size.height);
+        make.top.mas_equalTo(SCREEN_WIDTH-40);
+        make.width.mas_equalTo(SCREEN_HEIGHT);
     }];
     
     [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(wmPlayer).with.offset((-self.view.frame.size.height/2));
+        make.right.equalTo(wmPlayer).with.offset((-SCREEN_HEIGHT/2));
         make.height.mas_equalTo(30);
         make.width.mas_equalTo(30);
         make.top.equalTo(wmPlayer).with.offset(5);
@@ -84,10 +90,15 @@
     wmPlayer.isFullscreen = YES;
     wmPlayer.fullScreenBtn.selected = YES;
     [wmPlayer bringSubviewToFront:wmPlayer.bottomView];
+    [self setNeedsStatusBarAppearanceUpdate];
     
 }
 -(void)toNormal{
     [wmPlayer removeFromSuperview];
+//    _namelb.frame = CGRectMake(0, 0, SCREEN_WIDTH, 40);
+//    _knowledgeView.frame = CGRectMake(0, _namelb.frame.origin.y + 50, SCREEN_WIDTH, 60);
+    
+
     [UIView animateWithDuration:0.5f animations:^{
         wmPlayer.transform = CGAffineTransformIdentity;
         wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
@@ -105,11 +116,17 @@
             make.width.mas_equalTo(30);
             make.top.equalTo(wmPlayer).with.offset(5);
         }];
-        
+         
     }completion:^(BOOL finished) {
+//        _contentScroll.frame = CGRectMake(0, 64 + playerFrame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - playerFrame.size.height -64);
+//        _namelb.frame = CGRectMake(0, 0, SCREEN_WIDTH, 40);
+//        _knowledgeView.frame = CGRectMake(0, _namelb.frame.origin.y + 50, SCREEN_WIDTH, 60);
+        NSLog(@"%@", NSStringFromCGRect(_namelb.frame));
+        NSLog(@"%@", NSStringFromCGRect(_contentScroll.frame));
         wmPlayer.isFullscreen = NO;
         wmPlayer.fullScreenBtn.selected = NO;
-        [[UIApplication sharedApplication] setStatusBarHidden:NO animated:NO];
+//        [[UIApplication sharedApplication] setStatusBarHidden:NO animated:NO];
+        [self setNeedsStatusBarAppearanceUpdate];
         
     }];
 }
@@ -164,6 +181,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
     self.navigationController.navigationBarHidden = NO;
     [self loadBackBtn];
@@ -218,6 +236,13 @@
 }
 
 
+//- (void)viewDidLayoutSubviews
+//{
+//    [super viewDidLayoutSubviews];
+//    _namelb.frame = CGRectMake(0, 0, SCREEN_WIDTH, 40);
+//    _knowledgeView.frame = CGRectMake(0, _namelb.frame.origin.y + 50, SCREEN_WIDTH, 60);
+//}
+
 -(void)initView:(NSDictionary *)lessionDic questionDic:(NSDictionary *)questionDic
 {
     NSString *videoStr = [[[[lessionDic objectForKey:@"videoobjlist"] JSONValue] firstObject] objectForKey:@"url"];
@@ -242,6 +267,8 @@
     _contentScroll = contentScroll;
     UILabel * namelb = [UILabel labelWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:[lessionDic objectForKey:@"name"]];
     _namelb = namelb;
+    contentScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    namelb.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     namelb.backgroundColor = [UIColor whiteColor];
     
     [contentScroll addSubview:namelb];

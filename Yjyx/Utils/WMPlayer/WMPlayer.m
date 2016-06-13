@@ -203,7 +203,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         _backBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 44, 44)];
         [_backBtn setImage:[UIImage imageNamed:@"Parent_VideoBack"] forState:UIControlStateNormal];
         [_backBtn addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_backBtn];
+//        [self addSubview:_backBtn];
         
         // 单击的 Recognizer
         UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap)];
@@ -415,7 +415,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     if (self.currentTime == self.duration&&self.player.rate==.0f) {
         self.playOrPauseBtn.selected = YES;
         //播放完成后的通知
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"finishedPlay" object:self.durationTimer];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"finishedPlay" object:nil];
         [self.durationTimer invalidate];
         self.durationTimer = nil;
     }
