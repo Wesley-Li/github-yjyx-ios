@@ -33,7 +33,7 @@
     teacherEntity.school_name = [dic[@"school"] objectForKey:@"name"];
     teacherEntity.school_typeid = [numberF stringFromNumber:[dic[@"school"] objectForKey:@"typeid"]];
     teacherEntity.school_typename = [dic[@"school"] objectForKey:@"typename"];
-    teacherEntity.school_classes = [[dic[@"school"] objectForKey:@"classes"] componentsSeparatedByString:@","];
+    teacherEntity.school_classes = [dic[@"school"] objectForKey:@"classes"];
     
     
     // 消息提示音

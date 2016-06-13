@@ -11,11 +11,14 @@
 #import "StuDataBase.h"
 #import "StuClassEntity.h"
 #import "MJRefresh.h"
+#import "YjyxOverallData.h"
 
 
 @interface MyClassViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *gradeArr;
+@property (nonatomic, strong) NSMutableArray *titleArr;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
@@ -30,13 +33,24 @@
     return _dataSource;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    NSLog(@"%@", NSHomeDirectory());
-    
-    NSLog(@"%@", [[StuDataBase shareStuDataBase] selectAllClass]);
+- (NSMutableArray *)gradeArr {
 
-    self.dataSource = [[[StuDataBase shareStuDataBase] selectAllClass] mutableCopy];
+    if (!_gradeArr) {
+        self.gradeArr = [NSMutableArray array];
+    }
+    return _gradeArr;
+}
+
+- (NSMutableArray *)titleArr {
+
+    if (!_titleArr) {
+        self.titleArr = [NSMutableArray array];
+    }
+    return _titleArr;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+
     
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
@@ -47,6 +61,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.dataSource = [[[StuDataBase shareStuDataBase] selectAllClass] mutableCopy];
+    self.gradeArr = [[[YjyxOverallData sharedInstance].teacherInfo.school_classes JSONValue] mutableCopy];
+    
     
 //    NSLog(@"%@", NSHomeDirectory());
     
@@ -72,6 +89,7 @@
 - (void)headerRefresh
 {
     self.dataSource = [[[StuDataBase shareStuDataBase]selectAllClass] mutableCopy];
+    self.gradeArr = [[[YjyxOverallData sharedInstance].teacherInfo.school_classes JSONValue] mutableCopy];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.tableView headerEndRefreshing];
@@ -101,7 +119,15 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     StuClassEntity *model = self.dataSource[indexPath.row];
     
-    cell.textLabel.text = model.name;
+    for (NSArray *arr in _gradeArr) {
+        if ([model.gradeid isEqual:arr[2]]) {
+            cell.textLabel.text = [NSString stringWithFormat:@"%@%@", arr[3], arr[1]];
+            [self.titleArr addObject:cell.textLabel.text];
+        }
+    }
+    
+    
+//    cell.textLabel.text = model.name;
     NSNumberFormatter *numberF = [[NSNumberFormatter alloc] init];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"邀请码:%@", [numberF stringFromNumber: model.invitecode]];
     cell.detailTextLabel.textColor = [UIColor lightGrayColor];
@@ -115,6 +141,7 @@
     ClassDetailViewController *detailVC = [[ClassDetailViewController alloc] initWithNibName:@"ClassDetailViewController" bundle:nil];
     detailVC.model = self.dataSource[indexPath.row];
     detailVC.currentIndex = indexPath.row;
+    detailVC.navigationItem.title = self.titleArr[indexPath.row];
     [self.navigationController pushViewController:detailVC animated:YES];
     
 }

@@ -585,7 +585,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[BaseURL stringByAppendingString:TEACHER_GETALLSTULIST_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-//        NSLog(@"%@", responseObject);
+        NSLog(@"%@", responseObject);
         // 创建数据库
         [[StuDataBase shareStuDataBase] deleteStuTable];
         [[StuDataBase shareStuDataBase] creatStuDataBase];

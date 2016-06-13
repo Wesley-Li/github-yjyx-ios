@@ -28,7 +28,7 @@
 @property (nonatomic, copy) NSString *school_id;
 @property (nonatomic, copy) NSString *school_typeid;// 判断是否是重点中学
 @property (nonatomic, copy) NSString *school_typename;// 重点
-@property (nonatomic, strong) NSArray *school_classes;// 班级
+@property (nonatomic, copy) NSString *school_classes;// 班级
 
 
 @property (nonatomic, copy) NSString *receive_notify;// 是否接收通知

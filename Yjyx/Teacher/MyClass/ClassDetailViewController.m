@@ -43,8 +43,6 @@
     self.navigationItem.rightBarButtonItem = rightBtnItem;
 
     
-    self.title = self.model.name;
-    
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
 
     self.invitecodeLabel.text = [NSString stringWithFormat:@"班级邀请码:%@" ,[numberFormatter stringFromNumber:self.model.invitecode]];
