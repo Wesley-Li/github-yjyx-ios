@@ -340,12 +340,15 @@
             explainText.backgroundColor = RGBACOLOR(22, 156, 111, 1);
             [cell.contentView addSubview:explainText];
             
+            NSLog(@"%@", [_choices objectForKey:key]);
             
-            if ([[[_choices objectForKey:key] objectForKey:@"videourl"] length] == 0&&[[[_choices objectForKey:key] objectForKey:@"explanation"] length] == 0) {
-                explainText.hidden = YES;
-            }else{
+            if ([[[_choices objectForKey:key] objectForKey:@"showview"] isEqual:@1]) {
                 explainText.hidden = NO;
+            }else {
+            
+                explainText.hidden = YES;
             }
+            
 
             NSString *myanswer1 = [[NSString alloc] initWithFormat:@""];
             NSArray *resultary = [[_resultchoices objectAtIndex:indexPath.row] objectAtIndex:1];
@@ -470,14 +473,12 @@
 //            [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
             [cell.contentView addSubview:explainText];
             
-            if ([[[_blankfills objectForKey:key] objectForKey:@"videourl"] length] == 0&&[[[_blankfills objectForKey:key] objectForKey:@"explanation"] length] == 0) {
-                explainText.hidden = YES;
-            }else{
+            if ([[[_blankfills objectForKey:key] objectForKey:@"showview"] isEqual:@1]) {
                 explainText.hidden = NO;
+            }else {
+            
+                explainText.hidden = YES;
             }
-            
-            
-            
             
             
             //收起展开按钮显示
@@ -597,10 +598,11 @@
 //        [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
         [cell.contentView addSubview:explainText];
         
-        if ([[[_blankfills objectForKey:key] objectForKey:@"videourl"] length] == 0&&[[[_blankfills objectForKey:key] objectForKey:@"explanation"] length] == 0) {
-            explainText.hidden = YES;
-        }else{
+        if ([[[_blankfills objectForKey:key] objectForKey:@"showview"] isEqual:@1]) {
             explainText.hidden = NO;
+        }else {
+            
+            explainText.hidden = YES;
         }
 
     

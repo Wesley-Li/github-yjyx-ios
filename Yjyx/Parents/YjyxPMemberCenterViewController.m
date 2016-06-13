@@ -63,6 +63,8 @@
                     
                     
                 }
+                
+                
                 [self initView];
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];

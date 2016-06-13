@@ -1,22 +1,29 @@
 //
-//  CameraViewController.m
+//  KnowledgeViewController.m
 //  Yjyx
 //
-//  Created by  yjyx-ios1 on 16/5/3.
+//  Created by liushaochang on 16/6/12.
 //  Copyright © 2016年 Alibaba. All rights reserved.
 //
 
-#import "CameraViewController.h"
+#import "KnowledgeViewController.h"
 
-@interface CameraViewController ()
+@interface KnowledgeViewController ()
 
 @end
 
-@implementation CameraViewController
+@implementation KnowledgeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -16,6 +16,9 @@
 @property (nonatomic, strong) NSNumber *C_count;// 作对的学生数
 @property (nonatomic, strong) NSNumber *W_count;// 做错的学生数
 
+@property (nonatomic, assign) NSInteger totalNumber;// 总题数
+@property (nonatomic, assign) NSInteger currentNumber;// 当前题号
+
 
 
 @end

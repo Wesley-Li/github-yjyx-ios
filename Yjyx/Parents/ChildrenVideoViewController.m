@@ -182,9 +182,16 @@
 
 }
 
+- (BOOL)prefersStatusBarHidden {
+
+    return YES;
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+
+
     //旋转屏幕通知
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onDeviceOrientationChange)

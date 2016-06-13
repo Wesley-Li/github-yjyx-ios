@@ -295,10 +295,10 @@
     [self readDataFromNetWork];
     
     if ([_qtype isEqualToNumber:@1]) {
-        self.title = [NSString stringWithFormat:@"选择题(%d/%d)", [_C_count intValue], [_C_count intValue] + [_W_count intValue]];
+        self.title = [NSString stringWithFormat:@"选择题(%ld/%ld)", (long)_currentNumber, (long)_totalNumber];
     }else {
     
-        self.title = [NSString stringWithFormat:@"填空题(%d/%d)", [_C_count intValue], [_C_count intValue] + [_W_count intValue]];
+        self.title = [NSString stringWithFormat:@"填空题(%ld/%ld)", (long)_currentNumber, (long)_totalNumber];
     }
     
     // 注册cell

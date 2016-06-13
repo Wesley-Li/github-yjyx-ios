@@ -132,6 +132,7 @@
     }
 
     [SVProgressHUD showWithStatus:@"正在拼命上传"];
+    
     [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArray) {
         
             
@@ -156,10 +157,12 @@
                     
                     //                [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
                     [SVProgressHUD showErrorWithStatus:responseObject[@"reason"]];
+                    [SVProgressHUD dismissWithDelay:1.5];
+                    [self performSelector:@selector(goBack) withObject:nil afterDelay:2.0];
                 }
                 
             } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-                [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
+//                [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
             }];
             
 
@@ -167,6 +170,8 @@
         } failure:^{
             
             [SVProgressHUD showErrorWithStatus:@"上传失败"];
+            [SVProgressHUD dismissWithDelay:1.5];
+            [self performSelector:@selector(goBack) withObject:nil afterDelay:2.0];
             
         }];
         

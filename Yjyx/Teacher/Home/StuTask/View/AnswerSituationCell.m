@@ -14,6 +14,7 @@
 #import "StudentEntity.h"
 #import "TaskConditonModel.h"
 #import "NextTableViewController.h"
+#import "YourAnswerCell.h"
 
 
 
@@ -212,6 +213,7 @@
     oneTaskVC.taskid = self.taskid;
     oneTaskVC.qtype = self.qtype;
     oneTaskVC.suid = _r_arr[sender.tag - 200];
+    oneTaskVC.right = @"YES";
 
     oneTaskVC.qid = self.qid;
     

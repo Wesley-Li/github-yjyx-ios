@@ -11,8 +11,8 @@
 #import "SmartViewController.h"
 #import "BookViewController.h"
 #import "TestViewController.h"
-#import "MidTestViewController.h"
-#import "CameraViewController.h"
+#import "KnowledgeViewController.h"
+#import "WrongViewController.h"
 #import "PrivateViewController.h"
 
 @interface PublishHomeworkViewController ()
@@ -69,21 +69,24 @@
 
 }
 
-// 点击中考复习
-- (IBAction)handleMidTestBtn:(UIButton *)sender {
+// 知识点出题
+- (IBAction)knowledgeBtn:(UIButton *)sender {
     
-    MidTestViewController *midTestVC = [[MidTestViewController alloc] initWithNibName:@"MidTestViewController" bundle:nil];
-    midTestVC.title = @"中考复习";
-    [self.navigationController pushViewController:midTestVC animated:YES];
+    KnowledgeViewController *knowledgeVC = [[KnowledgeViewController alloc] initWithNibName:@"KnowledgeViewController" bundle:nil];
+    knowledgeVC.title = @"知识点出题";
+    [self.navigationController pushViewController:knowledgeVC animated:YES];
+    
 }
 
-// 点击拍照出题
-- (IBAction)handleCameraBtn:(UIButton *)sender {
+// 错题库
+- (IBAction)wrongBtn:(UIButton *)sender {
     
-    CameraViewController *cameraVC = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
-    cameraVC.title = @"拍照出题";
-    [self.navigationController pushViewController:cameraVC animated:YES];
+    WrongViewController *wrongVC = [[WrongViewController alloc] initWithNibName:@"WrongViewController" bundle:nil];
+    wrongVC.title = @"错题库";
+    [self.navigationController pushViewController:wrongVC animated:YES];
+    
 }
+
 
 // 点击私有题库
 - (IBAction)handlePrivateBtn:(UIButton *)sender {

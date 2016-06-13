@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _second = 60;
-     _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
     titleLb.text = [NSString stringWithFormat:@"请为您的账号%@设置密码，以保证下次正常登录",_phoneStr];
     [codeText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [newPassWord addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
@@ -44,9 +44,51 @@
 //    }
 //    return YES;
 //}
+
+- (void)timerRestart {
+
+    
+    // 获取验证码
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_userName,@"username",nil];
+    [SVProgressHUD showWithStatus:@"正在发送验证..."];
+    [[YjxService sharedInstance] getRestpasswordSms:dic withBlock:^(id result, NSError *error){//验证验证码
+        [self.view hideToastActivity];
+        if (result) {
+            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                
+                [_timer invalidate];
+                _timer = nil;
+                
+                _second = 60;
+                _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
+
+                [SVProgressHUD dismiss];
+                
+            }else{
+                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                [SVProgressHUD dismiss];
+                
+            }
+        }else{
+            if (error.code == -1009) {
+                [self.view makeToast:@"您的网络可能不太好,请重试!" duration:3.0 position:SHOW_CENTER complete:nil];
+                [SVProgressHUD dismiss];
+                return;
+            }
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:3.0 position:SHOW_CENTER complete:nil];
+            [SVProgressHUD dismiss];
+        }
+    }];
+
+
+}
+
 -(void)checkCodeTimeout
 {
     codeLb.text = [NSString stringWithFormat:@"重新获取验证码(%ds)",_second--];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(timerRestart)];
+    [codeLb addGestureRecognizer:tap];
+
     if (_second < 0) {
         [self resetTimer];
     }
@@ -56,6 +98,8 @@
 {
     _second = 60;
     codeLb.text = @"重新获取验证码(60s)";
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(timerRestart)];
+    [codeLb addGestureRecognizer:tap];
     [_timer invalidate];
     _timer = nil;
 

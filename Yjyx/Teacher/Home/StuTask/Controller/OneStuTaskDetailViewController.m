@@ -396,8 +396,16 @@
         
         if ([self.qtype isEqual:@1]) {
             
+            if ([self.right isEqualToString:@"YES"]) {
+                _yourAnswerCell.yourAnswerLable.textColor = [UIColor greenColor];
+            }
+            
             [_yourAnswerCell setChoiceValueWithDictionary:_dic];
         }else if ([self.qtype isEqual:@2]) {
+            
+            if ([self.right isEqualToString:@"YES"]) {
+                _yourAnswerCell.yourAnswerLable.textColor = [UIColor greenColor];
+            }
         
             [_yourAnswerCell setBlankfillValueWithDictionary:_dic];
         }
