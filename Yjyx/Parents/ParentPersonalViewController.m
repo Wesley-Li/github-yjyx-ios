@@ -37,6 +37,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    
+    
     notify_with_sound = [YjyxOverallData sharedInstance].parentInfo.notify_with_sound;
     receive_notify = [YjyxOverallData sharedInstance].parentInfo.receive_notify;
     

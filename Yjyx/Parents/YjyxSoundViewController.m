@@ -14,6 +14,11 @@
 
 @implementation YjyxSoundViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setTitle:@"设置提示音"];

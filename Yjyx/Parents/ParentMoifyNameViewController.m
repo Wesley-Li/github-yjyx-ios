@@ -14,6 +14,11 @@
 
 @implementation ParentMoifyNameViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
