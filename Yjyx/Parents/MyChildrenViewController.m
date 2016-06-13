@@ -249,7 +249,7 @@
         ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
         result.childrenCid = children.cid;
         result.taskResultId = children.activityID;
-        result.title = children.title;
+        result.navigationItem.title = children.title;
         [self.navigationController pushViewController:result animated:YES];
     }
     
@@ -257,7 +257,7 @@
     if ([children.tasktype integerValue] == 1&&[children.finished integerValue] == 0) {//作业预览
         YjyxWorkPreviewViewController *result = [[YjyxWorkPreviewViewController alloc] init];
         result.previewRid = children.rid;
-        result.title = children.title;
+        result.navigationItem.title = children.title;
         [self.navigationController pushViewController:result animated:YES];
         
     }
@@ -265,7 +265,7 @@
     if ([children.tasktype integerValue] == 2&&[children.finished integerValue] == 0) {//微课预览
         YjyxMicroClassViewController *result = [[YjyxMicroClassViewController alloc] init];
         result.previewRid = children.rid;
-        result.title = children.title;
+        result.navigationItem.title = children.title;
         [self.navigationController pushViewController:result animated:YES];
 
     }
