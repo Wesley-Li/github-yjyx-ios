@@ -56,6 +56,11 @@ static NSString *ID = @"ChooseMater";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
 #pragma mark - 私有方法
 - (void)pickerCancel
 {

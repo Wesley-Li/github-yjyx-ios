@@ -75,6 +75,7 @@
 -(void)videoDidFinished:(NSNotification *)notice{
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
     currentCell.playBtn.hidden = NO;
+    isPlay = NO;
     [self releaseWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
 }
@@ -264,7 +265,10 @@
     
 }
 
-
+//- (void)viewWillDisappear:(BOOL)animated
+//{
+//    [wmPlayer removeFromSuperview];
+//}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -302,12 +306,17 @@
                                                object:nil
      ];
     
-
+    
     self.view.backgroundColor = RGBACOLOR(239, 239, 244,1);
 
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self releaseWMPlayer];
+    [wmPlayer removeFromSuperview];
+}
 #pragma mark - 网络请求
+
 - (void)readDataFromNetWork {
 
     
@@ -429,7 +438,7 @@
     }else {
         
         self.videoCell = [tableView dequeueReusableCellWithIdentifier:Kidentifier5 forIndexPath:indexPath];
-        
+         _videoCell.selectionStyle = UITableViewCellSelectionStyleNone;
         [_videoCell.playBtn addTarget:self action:@selector(startPlayVideo:) forControlEvents:UIControlEventTouchUpInside];
         
         _videoCell.playBtn.tag = indexPath.row;

@@ -24,7 +24,11 @@
 //        self.selectedWord = [self pickerView:self.picker_view titleForRow:index forComponent:0];
         self.selectedWord = self.materialArr.firstObject;
     }
+    if(self.selectedWord == nil){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"PickViewCancel" object:nil userInfo:nil];
+    }else{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PickViewDone" object:nil userInfo:@{@"selectedWord" : self.selectedWord}];
+    }
 }
 - (void)awakeFromNib
 {
@@ -64,11 +68,6 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     
-    if ([self.materialArr count] == 0) {
-        self.heightCon.constant = 0;
-        return nil;
-    }
-    self.heightCon.constant = 200;
     return self.materialArr[row];
 }
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component

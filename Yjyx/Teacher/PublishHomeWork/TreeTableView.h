@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 @class TreeNode;
 @class GradeVerVolItem;
+@class GradeContentItem;
 @protocol TreeTableCellDelegate <NSObject>
 
--(void)cellClick : (TreeNode *)node;
+-(void)cellClick : (GradeContentItem *)node andVerVolItem:(GradeVerVolItem *)item andTreeNode:(TreeNode *)node;
 
 @end
 
