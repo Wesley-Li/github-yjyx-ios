@@ -86,13 +86,14 @@
 
 
 -(void)videoDidFinished:(NSNotification *)notice{
-    VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
+    VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+    isPlay = NO;
     currentCell.playBtn.hidden = NO;
     [self releaseWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
 }
 -(void)closeTheVideo:(NSNotification *)obj{
-    VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
+    VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
     currentCell.playBtn.hidden = NO;
     isPlay = NO;
     [self releaseWMPlayer];
@@ -384,6 +385,8 @@
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [self releaseWMPlayer];
+    [wmPlayer removeFromSuperview];
     [SVProgressHUD dismiss];
 }
 - (void)goBack {
@@ -466,7 +469,7 @@
 //        [_videoCell setVideoValueWithDic:_dic];
         
 //        NSString *urlString = [_dic[@"question"] objectForKey:@"videourl"];
-        
+         _videoCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         [_videoCell.playBtn addTarget:self action:@selector(startPlayVideo:) forControlEvents:UIControlEventTouchUpInside];
         

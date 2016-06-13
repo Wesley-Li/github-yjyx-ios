@@ -11,15 +11,26 @@
 #import "TreeNode.h"
 #import "TreeTableView.h"
 #import "GradeVerVolItem.h"
+#import "ChapterChoiceController.h"
+#import "ChaperContentItem.h"
+#import <AFNetworking.h>
+
+#import <SVProgressHUD/SVProgressHUD.h>
 @interface ChapterViewController ()<TreeTableCellDelegate>
 
 @property (weak, nonatomic) UILabel *title_label;
+@property (strong, nonatomic) NSMutableArray *chaperItemArr;
+@property (strong, nonatomic) AFHTTPSessionManager *mgr;
 @end
 
 @implementation ChapterViewController
-- (void)dealloc
+
+- (NSMutableArray *)chaperItemArr
 {
-    NSLog(@"-------");
+    if (_chaperItemArr == nil) {
+        _chaperItemArr = [NSMutableArray array];
+    }
+    return _chaperItemArr;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,6 +52,7 @@
     tableview.gradeNumItem = self.GradeNumItem;
     tableview.bounces = NO;
     [self.view addSubview:tableview];
+    // 标题label
     [self addTitleLabel];
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -49,7 +61,9 @@
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
-    
+    // 取消网络请求
+    [self.mgr.operationQueue cancelAllOperations];
+    [SVProgressHUD dismiss];
 }
 - (void)addTitleLabel
 {
@@ -59,7 +73,6 @@
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, titleView.width, titleView.height)];
     self.title_label = titleLabel;
     titleLabel.textAlignment = NSTextAlignmentCenter;
-//    titleLabel.text = self.title1;
     [titleView addSubview:titleLabel];
     UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(titleView.width - 30, 5, titleView.height - 10 , titleView.height - 10 )];
     imageV.image = [UIImage imageNamed:@"list_icon_2-1"];
@@ -75,8 +88,52 @@
 }
 
 #pragma mark - TreeTableCellDelegate
--(void)cellClick:(TreeNode *)node{
-    NSLog(@"%@",node.name);
+// cell的点击方法
+-(void)cellClick:(GradeContentItem *)item1 andVerVolItem:(GradeVerVolItem *)item andTreeNode:(TreeNode *)node{
+    if(node.depth == 1){
+       AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+        self.mgr = mgr;
+        NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
+        
+        NSLog(@"%ld,%ld,%ld,%@", item.verid, item.volid, item.gradeid, item1.g_id);
+        pamar[@"action"] = @"m_search";
+        pamar[@"question_type"] = @"choice";
+        pamar[@"lastid"]  = @0;
+        
+        pamar[@"sgt_dict"] = @{
+                            
+                               @"textbookunitid" : [NSString stringWithFormat:@"%@|%@",item1.parent ,item1.g_id],
+                               @"textbookverid" : @(item.verid),
+                               @"gradeid" : @(item.gradeid),
+                               @"textbookvolid" : @(item.volid)
+                               };
+        [self.chaperItemArr removeAllObjects];
+        [SVProgressHUD showWithStatus:@"正在请求数据..."];
+        [mgr GET:[BaseURL stringByAppendingString:@"/api/teacher/mobile/question/"] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+
+            if ([responseObject[@"retcode"] isEqual: @(0)]) {
+                for (NSArray *tempArr in responseObject[@"retlist"]) {
+                    if([ChaperContentItem chaperContentItemWithArray:tempArr] == nil){
+                        continue;
+                    }
+                   [self.chaperItemArr addObject:[ChaperContentItem chaperContentItemWithArray:tempArr]];
+                }
+                ChapterChoiceController *choiceVc = [[ChapterChoiceController alloc] init];
+                choiceVc.chapterItemArray = self.chaperItemArr;
+                [self.navigationController pushViewController:choiceVc animated:YES];
+                [SVProgressHUD dismiss];
+            }else{
+                [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                
+                [SVProgressHUD dismiss];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@", error.localizedDescription);
+            [SVProgressHUD dismiss];
+        }];
+    }
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

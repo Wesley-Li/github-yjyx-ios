@@ -365,6 +365,11 @@
 		3BFE3B841CD99E6100502769 /* StuDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B831CD99E6100502769 /* StuDataBase.m */; };
 		3BFE3B871CDA0D4A00502769 /* StuClassEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B861CDA0D4A00502769 /* StuClassEntity.m */; };
 		3BFE3B8A1CDA0D6F00502769 /* StuGroupEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B891CDA0D6F00502769 /* StuGroupEntity.m */; };
+		3C1566971D0D54D0006670D6 /* ChaperContentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1566961D0D54D0006670D6 /* ChaperContentItem.m */; };
+		3C15669A1D0D5B49006670D6 /* ChapterChoiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1566991D0D5B49006670D6 /* ChapterChoiceController.m */; };
+		3C15669E1D0D615D006670D6 /* subjectContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C15669C1D0D615D006670D6 /* subjectContentCell.m */; };
+		3C15669F1D0D615D006670D6 /* subjectContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C15669D1D0D615D006670D6 /* subjectContentCell.xib */; };
+		3C1566A11D0D7042006670D6 /* ChapterChoiceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1566A01D0D7042006670D6 /* ChapterChoiceController.xib */; };
 		3CA896321D0671D60092D292 /* GradeContentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA896311D0671D60092D292 /* GradeContentItem.m */; };
 		3CA896351D0674460092D292 /* ChapterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA896341D0674460092D292 /* ChapterViewController.m */; };
 		3CA896381D06B3890092D292 /* TreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA896371D06B3890092D292 /* TreeNode.m */; };
@@ -376,6 +381,9 @@
 		3CC473951D05551B009FAC16 /* PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC473941D05551B009FAC16 /* PickerView.m */; };
 		3CC473971D055529009FAC16 /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CC473961D055529009FAC16 /* PickerView.xib */; };
 		3CD1D6C61D08054D0027E797 /* GradeVerVolItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1D6C51D08054D0027E797 /* GradeVerVolItem.m */; };
+		3CF01B4B1D0E49C5001C4251 /* siftContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF01B4A1D0E49C5001C4251 /* siftContentView.m */; };
+		3CF01B4D1D0E49E5001C4251 /* siftContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF01B4C1D0E49E5001C4251 /* siftContentView.xib */; };
+		3CF01B501D0E543E001C4251 /* siftButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF01B4F1D0E543E001C4251 /* siftButton.m */; };
 		3F4CA6281CE17FC000F4B791 /* FinshedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4CA6271CE17FC000F4B791 /* FinshedModel.m */; };
 		3FF740601CE308DD00D3C0F7 /* list_btn_shutdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */; };
 		3FF740621CE3090500D3C0F7 /* list_btn_shutdown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF740611CE3090500D3C0F7 /* list_btn_shutdown@3x.png */; };
@@ -953,6 +961,14 @@
 		3BFE3B861CDA0D4A00502769 /* StuClassEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuClassEntity.m; sourceTree = "<group>"; };
 		3BFE3B881CDA0D6F00502769 /* StuGroupEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuGroupEntity.h; sourceTree = "<group>"; };
 		3BFE3B891CDA0D6F00502769 /* StuGroupEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuGroupEntity.m; sourceTree = "<group>"; };
+		3C1566951D0D54D0006670D6 /* ChaperContentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaperContentItem.h; sourceTree = "<group>"; };
+		3C1566961D0D54D0006670D6 /* ChaperContentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaperContentItem.m; sourceTree = "<group>"; };
+		3C1566981D0D5B49006670D6 /* ChapterChoiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterChoiceController.h; sourceTree = "<group>"; };
+		3C1566991D0D5B49006670D6 /* ChapterChoiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChapterChoiceController.m; sourceTree = "<group>"; };
+		3C15669B1D0D615D006670D6 /* subjectContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = subjectContentCell.h; sourceTree = "<group>"; };
+		3C15669C1D0D615D006670D6 /* subjectContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = subjectContentCell.m; sourceTree = "<group>"; };
+		3C15669D1D0D615D006670D6 /* subjectContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = subjectContentCell.xib; sourceTree = "<group>"; };
+		3C1566A01D0D7042006670D6 /* ChapterChoiceController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChapterChoiceController.xib; sourceTree = "<group>"; };
 		3CA896301D0671D60092D292 /* GradeContentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeContentItem.h; sourceTree = "<group>"; };
 		3CA896311D0671D60092D292 /* GradeContentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradeContentItem.m; sourceTree = "<group>"; };
 		3CA896331D0674460092D292 /* ChapterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterViewController.h; sourceTree = "<group>"; };
@@ -972,6 +988,11 @@
 		3CC473961D055529009FAC16 /* PickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
 		3CD1D6C41D08054D0027E797 /* GradeVerVolItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeVerVolItem.h; sourceTree = "<group>"; };
 		3CD1D6C51D08054D0027E797 /* GradeVerVolItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradeVerVolItem.m; sourceTree = "<group>"; };
+		3CF01B491D0E49C5001C4251 /* siftContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = siftContentView.h; sourceTree = "<group>"; };
+		3CF01B4A1D0E49C5001C4251 /* siftContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = siftContentView.m; sourceTree = "<group>"; };
+		3CF01B4C1D0E49E5001C4251 /* siftContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = siftContentView.xib; sourceTree = "<group>"; };
+		3CF01B4E1D0E543E001C4251 /* siftButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = siftButton.h; sourceTree = "<group>"; };
+		3CF01B4F1D0E543E001C4251 /* siftButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = siftButton.m; sourceTree = "<group>"; };
 		3F4CA6261CE17FC000F4B791 /* FinshedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinshedModel.h; sourceTree = "<group>"; };
 		3F4CA6271CE17FC000F4B791 /* FinshedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinshedModel.m; sourceTree = "<group>"; };
 		3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_btn_shutdown.png; sourceTree = "<group>"; };
@@ -2130,6 +2151,8 @@
 				3CA896371D06B3890092D292 /* TreeNode.m */,
 				3CD1D6C41D08054D0027E797 /* GradeVerVolItem.h */,
 				3CD1D6C51D08054D0027E797 /* GradeVerVolItem.m */,
+				3C1566951D0D54D0006670D6 /* ChaperContentItem.h */,
+				3C1566961D0D54D0006670D6 /* ChaperContentItem.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2146,6 +2169,14 @@
 				3CA8963C1D06DF540092D292 /* ParentChapterCell.h */,
 				3CA8963D1D06DF540092D292 /* ParentChapterCell.m */,
 				3CA8963E1D06DF540092D292 /* ParentChapterCell.xib */,
+				3C15669B1D0D615D006670D6 /* subjectContentCell.h */,
+				3C15669C1D0D615D006670D6 /* subjectContentCell.m */,
+				3C15669D1D0D615D006670D6 /* subjectContentCell.xib */,
+				3CF01B491D0E49C5001C4251 /* siftContentView.h */,
+				3CF01B4A1D0E49C5001C4251 /* siftContentView.m */,
+				3CF01B4C1D0E49E5001C4251 /* siftContentView.xib */,
+				3CF01B4E1D0E543E001C4251 /* siftButton.h */,
+				3CF01B4F1D0E543E001C4251 /* siftButton.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2164,12 +2195,18 @@
 				3BB773A71CD8784000A24485 /* BookViewController.xib */,
 				3CA896331D0674460092D292 /* ChapterViewController.h */,
 				3CA896341D0674460092D292 /* ChapterViewController.m */,
+
 				80590BEF1D0CF9AA00867D9B /* KnowledgeViewController.h */,
 				80590BF01D0CF9AA00867D9B /* KnowledgeViewController.m */,
 				80590BF11D0CF9AA00867D9B /* KnowledgeViewController.xib */,
 				80590BF41D0CF9D900867D9B /* WrongViewController.h */,
 				80590BF51D0CF9D900867D9B /* WrongViewController.m */,
 				80590BF61D0CF9D900867D9B /* WrongViewController.xib */,
+
+				3C1566981D0D5B49006670D6 /* ChapterChoiceController.h */,
+				3C1566991D0D5B49006670D6 /* ChapterChoiceController.m */,
+				3C1566A01D0D7042006670D6 /* ChapterChoiceController.xib */,
+
 				3CA896391D06B8A80092D292 /* TreeTableView.h */,
 				3CA8963A1D06B8A80092D292 /* TreeTableView.m */,
 				3BB773AA1CD8786900A24485 /* TestViewController.h */,
@@ -2507,6 +2544,7 @@
 				3AE894031C6C28C300E8BA97 /* login_password_icon@3x.png in Resources */,
 				3BB773941CD86B3A00A24485 /* home_img_book.png in Resources */,
 				3A8CAEC21C70B3C200BDEB6B /* ParentChildrensViewController.xib in Resources */,
+				3C1566A11D0D7042006670D6 /* ChapterChoiceController.xib in Resources */,
 				3A2E1EC71CE9E3B5002F775E /* Parent_VideoBack@3x.png in Resources */,
 				3AF11DDF1CB2691A00F98A03 /* subject_logo@3x.png in Resources */,
 				3BCF19161CDC66E600E2EA1A /* list_btn_More.png in Resources */,
@@ -2622,6 +2660,7 @@
 				3AA165691C91BCD6006B8756 /* homework_4@3x.png in Resources */,
 				3BB773C71CD883EA00A24485 /* PhoneChangeViewController.xib in Resources */,
 				3A616F5A1CBB9C6B007255BB /* member_arrow@3x.png in Resources */,
+				3C15669F1D0D615D006670D6 /* subjectContentCell.xib in Resources */,
 				3BCF19501CDCC2B500E2EA1A /* TaskConditionTableViewCell.xib in Resources */,
 				80590BF81D0CF9D900867D9B /* WrongViewController.xib in Resources */,
 				3B4864491CCF10C200D2DE3C /* message_click@3x.png in Resources */,
@@ -2651,6 +2690,7 @@
 				3B35DB851CE016BE000B7F83 /* corect_pic.png in Resources */,
 				3B4864731CCF117300D2DE3C /* MyClassViewController.xib in Resources */,
 				3B48644A1CCF10C200D2DE3C /* myclass@3x.png in Resources */,
+				3CF01B4D1D0E49E5001C4251 /* siftContentView.xib in Resources */,
 				3B4864501CCF10C200D2DE3C /* privatecenter_click@3x.png in Resources */,
 				3AF11DDA1CB211D600F98A03 /* YjyxMemberDetailViewController.xib in Resources */,
 				3B4864521CCF10C200D2DE3C /* publishhw_click@3x.png in Resources */,
@@ -2738,6 +2778,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A905D141C7F3587005AB12F /* YjyxSoundViewController.m in Sources */,
+				3CF01B501D0E543E001C4251 /* siftButton.m in Sources */,
 				3BC7DBDF1CDB27ED00E5E12F /* ClassCustomTableViewCell.m in Sources */,
 				3BCF194A1CDCC2B500E2EA1A /* StuTaskTableViewController.m in Sources */,
 				801F44AA1CDF164800B7E7E1 /* MD5DataSigner.m in Sources */,
@@ -2785,6 +2826,7 @@
 				3A8CAE961C70A12E00BDEB6B /* ParentModifyPhoneViewController.m in Sources */,
 				3CD1D6C61D08054D0027E797 /* GradeVerVolItem.m in Sources */,
 				3A04A5CD1C93E6290040D913 /* MASConstraintMaker.m in Sources */,
+				3C1566971D0D54D0006670D6 /* ChaperContentItem.m in Sources */,
 				3AB212B41CA2E11900DCC618 /* KWFormViewQuickBuilder.m in Sources */,
 				3A04A5DF1C9406850040D913 /* YjyxWorkPreviewViewController.m in Sources */,
 				3AEF272B1C61F08A0028BE09 /* JSONKit.m in Sources */,
@@ -2813,6 +2855,7 @@
 				3A8CAEB91C70B36200BDEB6B /* SDWebImageDownloader.m in Sources */,
 				80590BF21D0CF9AA00867D9B /* KnowledgeViewController.m in Sources */,
 				3BFE3B7C1CD9816D00502769 /* ParentEntity.m in Sources */,
+				3C15669E1D0D615D006670D6 /* subjectContentCell.m in Sources */,
 				3BFE3B7A1CD9816D00502769 /* ChildrenActivity.m in Sources */,
 				3BD9C7F21CEEACC9008232D7 /* UploadImageTool.m in Sources */,
 				3A44A1E91CC0C63100B93F6A /* ZLScrolling.m in Sources */,
@@ -2833,6 +2876,7 @@
 				3B84D5851CEC6E9D003F659B /* TZTestCell.m in Sources */,
 				3A8CAEBC1C70B36200BDEB6B /* UIButton+WebCache.m in Sources */,
 				3A91F46A1C7606FB001568AA /* ChildrenStatisticViewController.m in Sources */,
+				3C15669A1D0D5B49006670D6 /* ChapterChoiceController.m in Sources */,
 				3A38278A1CDF185F00EAB979 /* YjyxFeedBackViewController.m in Sources */,
 				3A91F48F1C760CF4001568AA /* PNBar.m in Sources */,
 				8013D3391CF4521100F82301 /* CardCell.m in Sources */,
@@ -2906,6 +2950,7 @@
 				3A40570C1CCF732800258784 /* ForgetTwoViewController.m in Sources */,
 				8013D32F1CF4495300F82301 /* SpendTimeCell.m in Sources */,
 				3A5A00F61C79EA2A004584E6 /* MJRefreshBaseView.m in Sources */,
+				3CF01B4B1D0E49C5001C4251 /* siftContentView.m in Sources */,
 				3A5A00F81C79EA2A004584E6 /* MJRefreshFooterView.m in Sources */,
 				3BFE3B791CD9816D00502769 /* YjyxOverallData.m in Sources */,
 				80F718C21CF28961007C0B75 /* SubmitCell.m in Sources */,
