@@ -102,7 +102,15 @@
                 //发送注册码按钮失效，防止频繁请求
                 [verifyBtn setEnabled:false];
             }else{
-                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                
+                if ([result[@"msg"] isEqualToString:@"ratelimitted"]) {
+                    [self.view makeToast:@"操作过快" duration:1.0 position:SHOW_CENTER complete:nil];
+                }else {
+                
+                    [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                
+                }
+                
             }
         }else{
             [self.view makeToast:@"电话号码不存在" duration:1.0 position:SHOW_CENTER complete:nil];

@@ -113,8 +113,11 @@
         return 2;
     }else if ([_resultblankfills count]==0&&[_resultchoices count]==0){
         return 0;
+    }else {
+    
+        return 1;
     }
-    return 1;
+    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -152,7 +155,7 @@
             return 0;
         }
     }
-    return 25;
+//    return 25;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
