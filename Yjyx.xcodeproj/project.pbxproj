@@ -2195,18 +2195,15 @@
 				3BB773A71CD8784000A24485 /* BookViewController.xib */,
 				3CA896331D0674460092D292 /* ChapterViewController.h */,
 				3CA896341D0674460092D292 /* ChapterViewController.m */,
-
 				80590BEF1D0CF9AA00867D9B /* KnowledgeViewController.h */,
 				80590BF01D0CF9AA00867D9B /* KnowledgeViewController.m */,
 				80590BF11D0CF9AA00867D9B /* KnowledgeViewController.xib */,
 				80590BF41D0CF9D900867D9B /* WrongViewController.h */,
 				80590BF51D0CF9D900867D9B /* WrongViewController.m */,
 				80590BF61D0CF9D900867D9B /* WrongViewController.xib */,
-
 				3C1566981D0D5B49006670D6 /* ChapterChoiceController.h */,
 				3C1566991D0D5B49006670D6 /* ChapterChoiceController.m */,
 				3C1566A01D0D7042006670D6 /* ChapterChoiceController.xib */,
-
 				3CA896391D06B8A80092D292 /* TreeTableView.h */,
 				3CA8963A1D06B8A80092D292 /* TreeTableView.m */,
 				3BB773AA1CD8786900A24485 /* TestViewController.h */,
@@ -3079,8 +3076,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -3118,7 +3115,7 @@
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "92e9b2c4-8833-4ab2-bf04-b311a25d4413";
+				PROVISIONING_PROFILE = "8738e8ea-9b10-4c1a-9734-06599c5639a1";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -3131,8 +3128,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -3169,7 +3166,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "92e9b2c4-8833-4ab2-bf04-b311a25d4413";
+				PROVISIONING_PROFILE = "8738e8ea-9b10-4c1a-9734-06599c5639a1";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

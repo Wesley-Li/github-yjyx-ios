@@ -41,13 +41,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"登录";
-    
+    if(self.roleType == 1){
+        ((AppDelegate*)SYS_DELEGATE).role = @"teacher";
+        [_parentsBtn setSelected:NO];
+        [_teacherBtn setSelected:YES];
+        [_stuBtn setSelected:NO];
+    }else if (self.roleType == 2){
+        ((AppDelegate*)SYS_DELEGATE).role = @"student";
+        [_parentsBtn setSelected:NO];
+        [_teacherBtn setSelected:NO];
+        [_stuBtn setSelected:YES];
+    }else{
     // 身份选择默认是家长
     ((AppDelegate*)SYS_DELEGATE).role = @"parents";
     [_parentsBtn setSelected:YES];
     [_teacherBtn setSelected:NO];
     [_stuBtn setSelected:NO];
-    
+    }
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clicked:)];
     [self.view addGestureRecognizer:tap];

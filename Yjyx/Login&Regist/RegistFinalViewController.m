@@ -34,8 +34,10 @@
 // 限制输入的长度
 - (void)textFieldDidChange:(UITextField *)textField
 {
-    
-    if ([textField isEqual:phoneText]) {
+    if([textField.text containsString:@" "]){
+        [self.view makeToast:@"密码不能含有空格,请重新输入" duration:1.0 position:SHOW_CENTER complete:nil];
+        textField.text = nil;
+    }else if ([textField isEqual:phoneText]) {
 
         if (textField.text.length > 11) {
             textField.text = [textField.text substringToIndex:11];

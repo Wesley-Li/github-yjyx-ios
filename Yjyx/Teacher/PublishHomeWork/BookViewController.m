@@ -157,6 +157,7 @@ static NSString *ID = @"ChooseMater";
 {
     if (_selectMatieral == nil) {
         PickerView *selectMatieral = [PickerView pickerView];
+        selectMatieral.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
         [self.view addSubview:selectMatieral];
         _selectMatieral = selectMatieral;
         
