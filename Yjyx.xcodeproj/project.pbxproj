@@ -2195,18 +2195,15 @@
 				3BB773A71CD8784000A24485 /* BookViewController.xib */,
 				3CA896331D0674460092D292 /* ChapterViewController.h */,
 				3CA896341D0674460092D292 /* ChapterViewController.m */,
-
 				80590BEF1D0CF9AA00867D9B /* KnowledgeViewController.h */,
 				80590BF01D0CF9AA00867D9B /* KnowledgeViewController.m */,
 				80590BF11D0CF9AA00867D9B /* KnowledgeViewController.xib */,
 				80590BF41D0CF9D900867D9B /* WrongViewController.h */,
 				80590BF51D0CF9D900867D9B /* WrongViewController.m */,
 				80590BF61D0CF9D900867D9B /* WrongViewController.xib */,
-
 				3C1566981D0D5B49006670D6 /* ChapterChoiceController.h */,
 				3C1566991D0D5B49006670D6 /* ChapterChoiceController.m */,
 				3C1566A01D0D7042006670D6 /* ChapterChoiceController.xib */,
-
 				3CA896391D06B8A80092D292 /* TreeTableView.h */,
 				3CA8963A1D06B8A80092D292 /* TreeTableView.m */,
 				3BB773AA1CD8786900A24485 /* TestViewController.h */,

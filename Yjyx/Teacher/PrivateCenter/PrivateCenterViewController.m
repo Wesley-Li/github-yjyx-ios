@@ -246,6 +246,7 @@
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:[YjyxOverallData sharedInstance].parentInfo.pid,@"pid", nil];
     [self.view makeToastActivity:SHOW_CENTER];
     LoginViewController *loginVC = [[LoginViewController alloc] init];
+    loginVC.roleType = 1;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
     AppDelegate *mydelegate = (AppDelegate*)SYS_DELEGATE;
     nav.navigationBarHidden = YES;

@@ -22,10 +22,15 @@
     [codeText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [newPassWord addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [confrimPassWord addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+   
 }
 - (void)textFieldDidChange:(UITextField *)textField
 {
-    if ([textField isEqual:codeText]) {
+    NSLog(@"%@", textField.text);
+    if ([textField.text containsString:@" "]){
+        [self.view makeToast:@"密码不能含有空格,请重新输入" duration:1.0 position:SHOW_CENTER complete:nil];
+        textField.text = nil;
+    }else if ([textField isEqual:codeText]) {
         if (textField.text.length > 4) {
             textField.text = [textField.text substringToIndex:4];
         }
@@ -36,14 +41,7 @@
         }
     }
 }
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-//{
-//    if(range.location > 20){
-//        [self.view makeToast:@"密码的长度不能大于20位" duration:1.0 position:SHOW_CENTER complete:nil];
-//        return NO;
-//    }
-//    return YES;
-//}
+
 
 - (void)timerRestart {
 

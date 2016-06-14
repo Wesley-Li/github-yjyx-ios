@@ -19,5 +19,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *parentsBtn;
 @property (weak, nonatomic) IBOutlet UIButton *stuBtn;
 
-
+@property (assign, nonatomic) NSInteger roleType;
 @end
