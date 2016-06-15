@@ -9,7 +9,7 @@
 #import "ChildrenVideoViewController.h"
 #import "WMPlayer.h"
 
-@interface ChildrenVideoViewController ()
+@interface ChildrenVideoViewController ()<UIWebViewDelegate>
 {
     WMPlayer *wmPlayer;
     CGRect playerFrame;
@@ -66,11 +66,13 @@
 }
 -(void)toNormal{
     [wmPlayer removeFromSuperview];
+    [backBtn removeFromSuperview];
     [UIView animateWithDuration:0.5f animations:^{
         wmPlayer.transform = CGAffineTransformIdentity;
         wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
         wmPlayer.playerLayer.frame =  wmPlayer.bounds;
         [self.view addSubview:wmPlayer];
+       
         [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(wmPlayer).with.offset(0);
             make.right.equalTo(wmPlayer).with.offset(0);
@@ -85,6 +87,8 @@
         }];
         
     }completion:^(BOOL finished) {
+        
+        [self.view insertSubview:backBtn aboveSubview:wmPlayer];
         wmPlayer.isFullscreen = NO;
         wmPlayer.fullScreenBtn.selected = NO;
         [[UIApplication sharedApplication] setStatusBarHidden:NO animated:NO];
@@ -162,7 +166,7 @@
        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playVideo)];
        [videoImage addGestureRecognizer:tap];
        [self.view addSubview:videoImage];
-        UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, playerFrame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - playerFrame.size.height - 64)];
+        UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, playerFrame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - playerFrame.size.height)];
        [web loadHTMLString:_explantionStr baseURL:nil];
        [self.view addSubview:web];
        
@@ -171,16 +175,32 @@
        backBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 44, 44)];
        [backBtn setImage:[UIImage imageNamed:@"Parent_VideoBack"] forState:UIControlStateNormal];
        [backBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-       [self.view addSubview:backBtn];
+//       [self.view addSubview:backBtn];
+       [self.view insertSubview:backBtn aboveSubview:videoImage];
       
    }else{
-       UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
-       [web loadHTMLString:_explantionStr baseURL:nil];
+       UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-44)];
+       NSLog(@"%f,%f", SCREEN_WIDTH, SCREEN_HEIGHT);
+
+       web.delegate = self;
+
+       
+       NSRange range = [_explantionStr rangeOfString:@">" options:NSCaseInsensitiveSearch];
+
+       
+       NSString *str1 =  [_explantionStr substringFromIndex:range.location];
+       NSString *str2 = [NSString stringWithFormat:@"<p%@%@",@" style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"", str1];
+       
+       NSLog(@"%@", str2);
+       [web loadHTMLString:str2 baseURL:nil];
+
+       
        [self.view addSubview:web];
    }
   //    [self toFullScreenWithInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
 
 }
+
 
 - (BOOL)prefersStatusBarHidden {
 
@@ -223,7 +243,7 @@
 
 -(void)playVideo
 {
-    backBtn.hidden = YES;
+//    backBtn.hidden = YES;
     [wmPlayer.player play];
     [videoImage removeFromSuperview];
     videoImage = nil;

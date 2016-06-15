@@ -53,7 +53,7 @@
     UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:goBackBtn];
     self.navigationItem.leftBarButtonItem = leftBtnItem;
     self.title = @"我要吐槽";
-    
+//    self.hidesBottomBarWhenPushed = YES;
     
     imageUrlAry = [[NSMutableArray alloc] init];
     

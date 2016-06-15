@@ -28,6 +28,16 @@
 
 @implementation BookViewController
 static NSString *ID = @"ChooseMater";
+static BookViewController *_instance;
++ (instancetype)allocWithZone:(struct _NSZone *)zone
+{
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance = [super allocWithZone:zone];
+    });
+    return _instance;
+}
 #pragma mark - view的生命周期方法
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,7 +46,7 @@ static NSString *ID = @"ChooseMater";
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ChooseMaterialCell class]) bundle:nil] forCellReuseIdentifier:ID];
     self.types = [[NSArray alloc] initWithObjects:@"选择教材版本", @"选择课本", nil];
-    self.tableView.rowHeight = 80;
+    self.tableView.rowHeight = 65;
     self.tableView.scrollEnabled = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pickerCancel) name:@"PickViewCancel" object:nil];
@@ -72,11 +82,14 @@ static NSString *ID = @"ChooseMater";
     [_selectMatieral removeFromSuperview];
 
     self.selWord = noti.userInfo[@"selectedWord"];
+    
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    NSLog(@"%zd", indexPath.row);
+    
+    
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     
 }
+// 确定按钮的点击
 - (IBAction)goSure:(id)sender {
     
     
@@ -107,35 +120,21 @@ static NSString *ID = @"ChooseMater";
         verid = 2;
     }
     [self.chapterArr removeAllObjects];
-   GradeVerVolItem *item = [GradeVerVolItem gradeVerVolItemWithGrade:gradeid andVolid:volid anfVerid:verid];
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
-    pamar[@"action"] = @"getbookunit";
-    pamar[@"gradeid"] = @(gradeid);
-    pamar[@"verid"] = @(verid);
-    pamar[@"volid"] = @(volid);
-    [mgr GET:[BaseURL stringByAppendingString:@"/api/teacher/vgsv/"] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        if ([responseObject[@"retcode"] isEqual:@0]) {
-            for (NSDictionary *dict in responseObject[@"content"]) {
-                GradeContentItem *item = [GradeContentItem gradeContentItem:dict];
-                [self.chapterArr addObject:item];
-            }
-            ChapterViewController *chapterVc = [[ChapterViewController alloc] init];
-            chapterVc.chaperArr = self.chapterArr;
-            chapterVc.GradeNumItem = item;
-            NSString *title = [NSString stringWithFormat:@"%@-%@",cell1.detail_label.text, cell2.detail_label.text];
-            chapterVc.title1 = title;
-            [self.navigationController pushViewController:chapterVc animated:YES];
-        }else{
-            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
-            [SVProgressHUD dismiss];
-        }
-        [SVProgressHUD dismiss];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"$$$$$$$$$$$");
-        [SVProgressHUD dismiss];
-    }];
+    NSString *title = [NSString stringWithFormat:@"%@-%@",cell1.detail_label.text, cell2.detail_label.text];
+    [[NSUserDefaults standardUserDefaults] setObject:title forKey:@"TeacherPostTitle"];
+    GradeVerVolItem *item = [GradeVerVolItem gradeVerVolItemWithGrade:gradeid andVolid:volid andVerid:verid];
+    ChapterViewController *chapterVc = [[ChapterViewController alloc] init];
+    chapterVc.GradeNumItem = item;
+    chapterVc.title1 = title;
+    chapterVc.gradeid = gradeid;
+    chapterVc.volid = volid;
+    chapterVc.verid = verid;
+  
+    [self.navigationController pushViewController:chapterVc animated:YES];
+ 
+   
+    
+    
     
 }
 #pragma mark - 懒加载
@@ -180,9 +179,13 @@ static NSString *ID = @"ChooseMater";
 {
     ChooseMaterialCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     cell.type = _types[indexPath.row];
-   
-    cell.selMaterial = self.selWord;
-   
+ 
+    cell.selMaterial = self.verVolArr[indexPath.row];
+    if (self.selWord != nil) {
+        cell.selMaterial = self.selWord;
+    }
+    
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;

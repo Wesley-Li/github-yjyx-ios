@@ -55,6 +55,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
 #pragma mark - Required
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
     return _tempData.count;
 }
 
@@ -62,9 +63,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
     static NSString *NODE_CELL_ID = @"node_cell_id";
     
     ParentChapterCell *cell = [tableView dequeueReusableCellWithIdentifier:NODE_CELL_ID];
-//    if (!cell) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NODE_CELL_ID];
-//    }
+
     
     TreeNode *node = [_tempData objectAtIndex:indexPath.row];
     

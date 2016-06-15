@@ -129,6 +129,7 @@
         [self.view makeToast:@"请输入邀请码" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
+    [self.view endEditing:YES];
     [self.view makeToastActivity:SHOW_CENTER];
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:codeTextField.text,@"code",@"checkcode",@"action",[YjyxOverallData sharedInstance].parentInfo.pid,@"pid",nil];
     [[YjxService sharedInstance] parentsAboutChildrenSetting:dic withBlock:^(id result, NSError *error){
@@ -149,6 +150,7 @@
             }
             
         }else{
+            NSLog(@"%@", error.userInfo[NSLocalizedDescriptionKey]);
             [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];

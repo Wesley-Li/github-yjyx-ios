@@ -1547,13 +1547,13 @@ CGFloat MyGetWidthCallback( void* refCon ){
                 [lock unlock];
 
                 
-          
+//          `
                 
                 if (!isSizeTooSmall) {
                     
                     NSMutableString *tempString = [NSMutableString stringWithString:plainData];
-                    [tempString insertString:@"`" atIndex:position];
-                        
+                    [tempString insertString:@"  " atIndex:position];
+                    
                                         
                     plainData = [NSString stringWithString:tempString];
                     

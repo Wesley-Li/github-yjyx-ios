@@ -67,10 +67,11 @@
     [self refreshAll];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:@"TaskListTableViewCell" bundle:nil]forCellReuseIdentifier:kk];
     
+    NSLog(@"%@", NSStringFromCGRect(self.tableView.frame));
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -104,7 +105,7 @@
     
     if ([self.hasmore isEqual:@0]) {
         self.tableView.footerRefreshingText = @"没有更多了!!!";
-        [self.tableView setFooterHidden:YES];
+//        [self.tableView setFooterHidden:YES];
     }
     
     [self readDataFromNetWork];
@@ -180,12 +181,12 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
+
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
+
     return self.dataSource.count;
 }
 

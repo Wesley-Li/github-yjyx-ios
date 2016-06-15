@@ -67,6 +67,7 @@
 {
     self.navigationController.navigationBarHidden = YES;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RCLabelReload" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshjurisdiction" object:nil];
     [super viewWillDisappear:YES];
 }
 
@@ -327,10 +328,22 @@
             UIImageView *imageLine = [[UIImageView alloc] initWithFrame:CGRectMake(8, optimalSize.height + 8, SCREEN_WIDTH - 16, 1)];
             imageLine.backgroundColor = RGBACOLOR(220, 220, 220, 1);
             [cell.contentView addSubview:imageLine];
-          
-            NSString *tureAnswer = [letterAry objectAtIndex:[[[_choices objectForKey:key] objectForKey:@"answer"] integerValue]];
-            
-            UILabel *answerLb = [UILabel labelWithFrame:CGRectMake(10, optimalSize.height + 12, 110, 38) textColor:RGBACOLOR(100, 174, 99, 1) font:[UIFont systemFontOfSize:14] context:[NSString stringWithFormat:@"正确答案:%@",tureAnswer]];
+            NSString *tureAnswer = nil;
+            if ([[[_choices objectForKey:key] objectForKey:@"answer"] containsString:@"|"]) {
+                NSArray *tempArr =  [[[_choices objectForKey:key] objectForKey:@"answer"] componentsSeparatedByString:@"|"];
+                for (NSString *str in tempArr) {
+                    NSString *tempStr = [letterAry objectAtIndex:[str integerValue]];
+                    if (tureAnswer == nil) {
+                        tureAnswer = [NSString stringWithFormat:@"%@", tempStr];
+                    }else{
+                    tureAnswer = [NSString stringWithFormat:@"%@%@", tureAnswer,tempStr];
+                    }
+                }
+                
+            }else{
+            tureAnswer = [letterAry objectAtIndex:[[[_choices objectForKey:key] objectForKey:@"answer"] integerValue]];
+            }
+            UILabel *answerLb = [UILabel labelWithFrame:CGRectMake(10, optimalSize.height + 12, 150, 38) textColor:RGBACOLOR(100, 174, 99, 1) font:[UIFont systemFontOfSize:14] context:[NSString stringWithFormat:@"正确答案:%@",tureAnswer]];
             [cell.contentView addSubview:answerLb];
             
             UIButton *explainText = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 40, optimalSize.height+19, 60, 20)];
@@ -686,7 +699,7 @@
         NSInteger index = btn.tag;
         NSString *key = [NSString stringWithFormat:@"%@",[[_resultchoices objectAtIndex:index] firstObject]];
         videoUrl = [[_choices objectForKey:key] objectForKey:@"videourl"];
-        explantionStr = [[_choices objectForKey:key] objectForKey:@"explanation"];
+        explantionStr =[[_choices objectForKey:key] objectForKey:@"explanation"];
     }else{//填空题
         NSInteger index = btn.tag%100;
         NSString *key = [NSString stringWithFormat:@"%@",[[_resultblankfills objectAtIndex:index] firstObject]];
@@ -702,7 +715,7 @@
     }else{
         ChildrenVideoViewController *vc = [[ChildrenVideoViewController alloc] init];
         vc.URLString = videoUrl;
-        vc.explantionStr = [explantionStr stringByReplacingOccurrencesOfString:@"" withString:@""];
+        vc.explantionStr = explantionStr;
         vc.title = @"详解";
         [self.navigationController pushViewController:vc animated:YES];
 

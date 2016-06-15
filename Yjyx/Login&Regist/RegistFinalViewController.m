@@ -24,7 +24,7 @@
     relationText.placeholder = [NSString stringWithFormat:@"是%@的(称谓,譬如父亲,母亲...)",_childrenEntity.name];
     phoneText.placeholder = @"手机号码(作为登录账户)";
     codeText.placeholder = @"4位验证码";
-    
+    phoneText.delegate  = self;
     [parentNameText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
      [relationText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
      [phoneText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
@@ -67,6 +67,28 @@
     }
     
 }
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if([textField isEqual:phoneText]){
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
+    pamar[@"action"] = @"checkuserexist";
+    pamar[@"username"] = textField.text;
+        [mgr GET:[BaseURL stringByAppendingString:USERNAME_ISEXIST_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+            if([responseObject[@"retcode"] isEqual: @0]){
+                if ([responseObject[@"exist"] isEqual: @1]) {
+                    [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
+                }
+            }else{
+                [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
+        }];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

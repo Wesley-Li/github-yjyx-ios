@@ -10,4 +10,5 @@
 
 @interface BookViewController : UIViewController
 
+@property (strong, nonatomic) NSArray *verVolArr;
 @end

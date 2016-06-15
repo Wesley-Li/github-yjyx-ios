@@ -44,13 +44,7 @@
     _materialArr = materialArr;
     [self.picker_view reloadComponent:0];
 }
-//- (void)setBookArr:(NSMutableArray *)bookArr
-//{
-//    self.picker_view.dataSource = self;
-//    self.picker_view.delegate = self;
-//    _bookArr = bookArr;
-//    [self.picker_view reloadComponent:0];
-//}
+
 + (instancetype)pickerView
 {
     
@@ -79,7 +73,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     self.selectedWord = _materialArr[row];
-    NSLog(@"---------");
+  
 }
 - (void)dealloc
 {

@@ -21,4 +21,6 @@
 @property (nonatomic , assign) BOOL expand;//该节点是否处于展开状态
 
 + (instancetype)treeNodeWithDictionary:(GradeContentItem *)item;
+
+- (void)setStaticPamar;
 @end

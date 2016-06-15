@@ -33,8 +33,14 @@ static NSInteger j = 0;
     }
     return node;
 }
+- (void)setStaticPamar
+{
+    i = 0;
+    j = 0;
+}
 -(void)dealloc
 {
+    NSLog(@"delloc---------");
     i = 0;
     j = 0;
 }

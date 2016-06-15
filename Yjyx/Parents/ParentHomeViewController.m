@@ -37,6 +37,10 @@
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
     // Do any additional setup after loading the view from its nib.
     
+//    UIImageView *imageV = [[UIImageView alloc] init];
+//    imageV.frame = CGRectMake(50, 50, 30, 30);
+//    imageV.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://cdn-web-img.zgyjyx.com/mgr/cb7ae464b0f82abf2e6dcad28fedbee6"]] scale:1];
+//    [self.view addSubview:imageV];
 }
 
 

@@ -10,7 +10,7 @@
 
 @implementation GradeVerVolItem
 
-+ (instancetype)gradeVerVolItemWithGrade:(NSInteger)gradeid andVolid:(NSInteger)volid anfVerid:(NSInteger)verid
++ (instancetype)gradeVerVolItemWithGrade:(NSInteger)gradeid andVolid:(NSInteger)volid andVerid:(NSInteger)verid
 {
     GradeVerVolItem *item = [[self alloc] init];
     item.gradeid = gradeid;

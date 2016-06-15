@@ -16,4 +16,8 @@
 // 书本编号模型
 @property (strong, nonatomic) GradeVerVolItem *GradeNumItem;
 
+@property (assign, nonatomic) NSInteger gradeid;
+@property (assign, nonatomic) NSInteger volid;
+@property (assign, nonatomic) NSInteger verid;
+
 @end

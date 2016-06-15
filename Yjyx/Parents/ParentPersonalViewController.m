@@ -222,6 +222,7 @@
         
         if (indexPath.row == 3) {
             YjyxFeedBackViewController *vc = [[YjyxFeedBackViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }

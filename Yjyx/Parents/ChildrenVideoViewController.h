@@ -10,5 +10,5 @@
 
 @interface ChildrenVideoViewController : BaseViewController<UIWebViewDelegate>
 @property (nonatomic, retain)NSString * URLString;
-@property (strong , nonatomic) NSString *explantionStr;
+@property (copy , nonatomic) NSString *explantionStr;
 @end

@@ -105,6 +105,8 @@
 
 
 // *************************老师部分******************
+// 注册
+#define USERNAME_ISEXIST_CONNECT_GET @"/api/general/user/"
 // 登录
 #define TEACHER_LOGIN_CONECT_POST @"/api/teacher/mobile/login/"
 
@@ -150,8 +152,8 @@
 
 // 某次任务中某个学生的概况
 #define TEACHER_DETAIL_ACTION_CONNECT_GET @"/api/teacher/mobile/task/"
-
-
+// 发布作业时显示章节目录
+#define TEACHER_POST_CHAPTER_CONNECT_GET @"/api/teacher/vgsv/"
 
 
 // 学生部分

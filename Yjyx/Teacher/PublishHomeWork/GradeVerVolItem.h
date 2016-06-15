@@ -16,5 +16,5 @@
 // 版本号
 @property (assign, nonatomic) NSInteger verid;
 
-+ (instancetype)gradeVerVolItemWithGrade:(NSInteger)gradeid andVolid:(NSInteger)volid anfVerid:(NSInteger)verid;
++ (instancetype)gradeVerVolItemWithGrade:(NSInteger)gradeid andVolid:(NSInteger)volid andVerid:(NSInteger)verid;
 @end
