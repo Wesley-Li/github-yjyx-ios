@@ -17,15 +17,20 @@
 
 @property (weak, nonatomic) RCLabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
-@property (weak, nonatomic) IBOutlet UILabel *bgLabel;
+
 @end
 
 @implementation subjectContentCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.bgLabel.layer.cornerRadius = 12.5;
-    self.bgLabel.layer.masksToBounds = YES;
+    
+    self.collectBtn.hidden = YES;
+    
+    self.subjectNumLabel.layer.cornerRadius = 5;
+    self.subjectNumLabel.layer.masksToBounds = YES;
+    self.subjectNumLabel.backgroundColor = RGBACOLOR(3, 138, 228, 1);
+    
     self.bgView.layer.borderWidth = 1;
     self.bgView.layer.borderColor = RGBACOLOR(140.0, 140.0, 140.0, 1).CGColor;
     NSString *content = _item.content_text;
@@ -37,6 +42,8 @@
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
     templabel.componentsAndPlainText = componentsDS;
 //    CGSize optimalSize = [templabel optimumSize];
+    
+    
     
     [self.bgView addSubview:templabel];
 
@@ -64,6 +71,8 @@
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
     self.contentLabel.componentsAndPlainText = componentsDS;
 }
+
+
 
 - (void)layoutSubviews
 {

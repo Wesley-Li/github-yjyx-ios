@@ -13,15 +13,20 @@
 #import "GradeVerVolItem.h"
 #import "ChapterChoiceController.h"
 #import "ChaperContentItem.h"
+
 #import <AFNetworking.h>
 #import "BookViewController.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+
+
+
 @interface ChapterViewController ()<TreeTableCellDelegate>
 
 @property (weak, nonatomic) UILabel *title_label;
 @property (strong, nonatomic) NSMutableArray *chaperItemArr;
-@property (strong, nonatomic) AFHTTPSessionManager *mgr;
+
 @property (strong, nonatomic) NSMutableArray *data;
+
 @end
 
 @implementation ChapterViewController
@@ -57,8 +62,7 @@
     [backBtn1 setImage:[UIImage imageNamed:@"comm_back"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn1];
     self.navigationItem.leftBarButtonItem = leftBtnItem;
-    // 加载数据
-    [self loadData];
+    
     self.navigationItem.title = @"选择出题";
     // 标题label
     [self addTitleLabel];
@@ -73,12 +77,7 @@
    
 
 }
-- (void)viewWillDisappear:(BOOL)animated
-{
-    // 取消网络请求
-    [self.mgr.operationQueue cancelAllOperations];
-    [SVProgressHUD dismiss];
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -87,50 +86,6 @@
 #pragma mark - 私有方法
 - (void)goBack{
     [self.navigationController popToViewController:self.navigationController.childViewControllers[0] animated:YES];
-}
-- (void)loadData{
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
-   
-    pamar[@"action"] = @"getbookunit";
-    pamar[@"gradeid"] = @(_gradeid);
-    pamar[@"verid"] = @(_verid);
-    pamar[@"volid"] = @(_volid);
-    [self.chaperArr removeAllObjects];
-    
-    [mgr GET:[BaseURL stringByAppendingString:TEACHER_POST_CHAPTER_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        if ([responseObject[@"retcode"] isEqual:@0]) {
-            for (NSDictionary *dict in responseObject[@"content"]) {
-                GradeContentItem *item = [GradeContentItem gradeContentItem:dict];
-                [self.chaperArr addObject:item];
-            }
-            
-            
-            [self.data removeAllObjects];
-            for (GradeContentItem *item in _chaperArr) {
-                TreeNode *node = [TreeNode treeNodeWithDictionary:item];
-                if (node == nil) {
-                    continue;
-                }
-                [self.data addObject:node];
-            }
-            self.automaticallyAdjustsScrollViewInsets = NO;
-            TreeTableView *tableview = [[TreeTableView alloc] initWithFrame:CGRectMake(0, 64+49, SCREEN_WIDTH , SCREEN_HEIGHT - 64 - 49) withData:_data];
-            tableview.treeTableCellDelegate = self;
-            tableview.chapterArray = self.chaperArr;
-            tableview.gradeNumItem = self.GradeNumItem;
-            tableview.bounces = NO;
-            [self.view addSubview:tableview];
-        }else{
-
-            [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
-        }
-        [SVProgressHUD dismiss];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"$$$$$$$$$$$");
-        [SVProgressHUD dismiss];
-    }];
 }
 
 
@@ -164,55 +119,22 @@
     TreeNode *node = [TreeNode treeNodeWithDictionary:nil];
     [node setStaticPamar];
 }
-- (void)dealloc
-{
-    NSLog(@"dealloc");
-}
+
 #pragma mark - TreeTableCellDelegate
 // cell的点击方法
 -(void)cellClick:(GradeContentItem *)item1 andVerVolItem:(GradeVerVolItem *)item andTreeNode:(TreeNode *)node{
     if(node.depth == 1){
-       AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-        self.mgr = mgr;
-        NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
+       
+        ChapterChoiceController *chapterVC = [[ChapterChoiceController alloc] init];
         
-        NSLog(@"%ld,%ld,%ld,%@", item.verid, item.volid, item.gradeid, item1.g_id);
-        pamar[@"action"] = @"m_search";
-        pamar[@"question_type"] = @"choice";
-        pamar[@"lastid"]  = @0;
+        chapterVC.g_id = item1.g_id;
+        chapterVC.gradeid = item.gradeid;
+        chapterVC.verid = item.verid;
+        chapterVC.volid = item.volid;
         
-        pamar[@"sgt_dict"] = @{
-                            
-                               @"textbookunitid" : [NSString stringWithFormat:@"%@|%@",item1.parent ,item1.g_id],
-                               @"textbookverid" : @(item.verid),
-                               @"gradeid" : @(item.gradeid),
-                               @"textbookvolid" : @(item.volid)
-                               };
-        [self.chaperItemArr removeAllObjects];
-        [SVProgressHUD showWithStatus:@"正在请求数据..."];
-        [mgr GET:[BaseURL stringByAppendingString:@"/api/teacher/mobile/question/"] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-
-            if ([responseObject[@"retcode"] isEqual: @(0)]) {
-                for (NSArray *tempArr in responseObject[@"retlist"]) {
-                    if([ChaperContentItem chaperContentItemWithArray:tempArr] == nil){
-                        continue;
-                    }
-                   [self.chaperItemArr addObject:[ChaperContentItem chaperContentItemWithArray:tempArr]];
-                }
-                ChapterChoiceController *choiceVc = [[ChapterChoiceController alloc] init];
-                choiceVc.chapterItemArray = self.chaperItemArr;
-                [self.navigationController pushViewController:choiceVc animated:YES];
-                [SVProgressHUD dismiss];
-            }else{
-                [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
-                
-                [SVProgressHUD dismiss];
-            }
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"%@", error.localizedDescription);
-            [SVProgressHUD dismiss];
-        }];
+        [self.navigationController pushViewController:chapterVC animated:YES];
+        
+    
     }
     
 }

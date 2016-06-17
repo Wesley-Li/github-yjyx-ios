@@ -26,5 +26,10 @@
 // RClabel的frame
 @property (assign, nonatomic) CGRect RCLabelFrame;
 
+@property (nonatomic, assign) BOOL add;// 添加标识
+
+
 + (instancetype)chaperContentItemWithArray:(NSArray *)array;
+
+
 @end

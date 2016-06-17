@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuestionPreviewController">
+            <connections>
+                <outlet property="configurePublishBtn" destination="Ghi-1d-1QU" id="Oap-aI-T0E"/>
+                <outlet property="tableView" destination="LYK-LE-76t" id="9Yb-OA-7rc"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LYK-LE-76t">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="P6l-GS-uXr"/>
+                        <outlet property="delegate" destination="-1" id="yfL-SH-FOi"/>
+                    </connections>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ghi-1d-1QU">
+                    <rect key="frame" x="0.0" y="519" width="320" height="49"/>
+                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="3ug-aW-RKe"/>
+                    </constraints>
+                    <state key="normal" title="发布作业">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="configureBtnClick:" destination="-1" eventType="touchUpInside" id="8qQ-bB-7cZ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Ghi-1d-1QU" secondAttribute="trailing" id="B6u-5l-ikW"/>
+                <constraint firstItem="LYK-LE-76t" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="J3l-nr-2kf"/>
+                <constraint firstAttribute="bottom" secondItem="Ghi-1d-1QU" secondAttribute="bottom" id="VUZ-bV-uGo"/>
+                <constraint firstItem="Ghi-1d-1QU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ywt-ZH-PaT"/>
+                <constraint firstAttribute="trailing" secondItem="LYK-LE-76t" secondAttribute="trailing" id="ZJ3-oP-r0v"/>
+                <constraint firstItem="Ghi-1d-1QU" firstAttribute="top" secondItem="LYK-LE-76t" secondAttribute="bottom" id="Zft-sv-bMc"/>
+                <constraint firstItem="LYK-LE-76t" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zdI-lL-N2D"/>
+            </constraints>
+            <point key="canvasLocation" x="462" y="367"/>
+        </view>
+    </objects>
+</document>

@@ -11,13 +11,43 @@
 #import "ChaperContentItem.h"
 #import "siftContentView.h"
 #import "MJRefresh.h"
+#import "QuestionPreviewController.h"
+#import "QuestionDataBase.h"
+
+#define ID @"subjectContentCell"
 @interface ChapterChoiceController ()<UITableViewDelegate, UITableViewDataSource>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) siftContentView *siftV;
+@property (weak, nonatomic) IBOutlet UIButton *bottom_button;
+
+@property (strong, nonatomic) siftContentView *siftV;// 筛选菜单
+@property (nonatomic, strong) NSMutableArray *dataSoruce;// 数据源
+@property (nonatomic, strong) NSMutableArray *addArray;// 已选题目
+
+@property (nonatomic, strong) NSNumber *last_id;
+
+
 @end
 
 @implementation ChapterChoiceController
-static  NSString *ID = @"CELL";
+
+- (NSMutableArray *)dataSoruce {
+
+    if (!_dataSoruce) {
+        self.dataSoruce = [NSMutableArray array];
+    }
+    return _dataSoruce;
+}
+
+- (NSMutableArray *)addArray {
+
+    if (!_addArray) {
+        self.addArray = [NSMutableArray array];
+    }
+    return _addArray;
+}
+
+
 // 懒加载筛选view
 - (siftContentView *)siftV
 {
@@ -32,37 +62,68 @@ static  NSString *ID = @"CELL";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadBackBtn];
+    
+    self.last_id = @0;
+    [self readDataFromNetWork];
+    
+    self.bottom_button.backgroundColor = RGBACOLOR(3, 138, 228, 1);
+    
+    [self.bottom_button setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", [[[QuestionDataBase shareDataBase] selectAllQuestion] count]] forState:UIControlStateNormal];
+
+    
     // 导航栏右按钮的使用
     UIButton *siftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     siftBtn.frame = CGRectMake(0, 0, 50, 50);
     [siftBtn setTitle:@"筛选" forState:UIControlStateNormal];
     [siftBtn addTarget:self action:@selector(sift:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:siftBtn];
+    
     // tableview的属性设置
     self.tableView.backgroundColor = COMMONCOLOR;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    // 加载cell
+    
+    // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([subjectContentCell class]) bundle:nil] forCellReuseIdentifier:ID];
+    
     // 加载刷新按钮
     [self loadRefresh];
+    
+    // 注册通知
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(notice:) name:@"bottomBtnNameChange" object:nil];
+    
+    
+    
+    
 }
+
+
 // 加载刷新按钮
 - (void)loadRefresh
 {
     [self.tableView addHeaderWithTarget:self action:@selector(loadNewData)];
     [self.tableView  addFooterWithTarget:self action:@selector(loadMoreData)];
 }
+
+
 // 头部刷新 加载新数据
 - (void)loadNewData
 {
-    [self.tableView headerEndRefreshing];
+    self.last_id = @0;
+    [self readDataFromNetWork];
 }
+
+
 // 尾部刷新 加载更多数据
 - (void)loadMoreData
 {
-    [self.tableView footerEndRefreshing];
+    ChaperContentItem *model = self.dataSoruce.lastObject;
+    self.last_id = [NSNumber numberWithInteger:model.t_id];
+    [self readDataFromNetWork];
 }
+
+
 // 筛选按钮的点击
 - (void)sift:(UIButton *)btn
 {
@@ -71,31 +132,183 @@ static  NSString *ID = @"CELL";
 
     if(btn.selected){
     self.siftV.transform = CGAffineTransformMakeTranslation(0, SCREEN_HEIGHT - 64);
-}else{
+        
+    }else{
+        
     self.siftV.transform = CGAffineTransformMakeTranslation(0, -(SCREEN_HEIGHT - 64));
-}
+        
+    }
 
     
 }
+
+
+// 网络请求
+- (void)readDataFromNetWork {
+
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
+    
+    pamar[@"action"] = @"m_search";
+    pamar[@"question_type"] = @"choice";
+    pamar[@"lastid"]  = _last_id;
+    
+    pamar[@"sgt_dict"] = @{
+                           
+                           @"textbookunitid" : _g_id,
+                           @"textbookverid" : @(_verid),
+                           @"gradeid" : @(_gradeid),
+                           @"textbookvolid" : @(_volid)
+                           };
+    
+    NSString *aString = [pamar[@"sgt_dict"] JSONString];
+    
+    NSString *urlString = [BaseURL stringByAppendingString:[NSString stringWithFormat:@"%@?action=%@&question_type=%@&lastid=%@&sgt_dict=%@", SEARCH_QUESTION_GET, pamar[@"action"], pamar[@"question_type"], pamar[@"lastid"], aString]];
+    
+    NSString *urlEcoding = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    [SVProgressHUD showWithStatus:@"正在请求数据..."];
+    [manager GET:urlEcoding parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        
+        // 临时数组
+        NSMutableArray *currentArr = [NSMutableArray array];
+        
+        if ([responseObject[@"retcode"] isEqual: @0]) {
+            
+            for (NSArray *tempArr in responseObject[@"retlist"]) {
+              
+                ChaperContentItem *model = [ChaperContentItem chaperContentItemWithArray:tempArr];
+
+                [currentArr addObject:model];
+            
+            }
+            
+//            NSLog(@"%@", currentArr);
+
+            if ([self.last_id isEqual:@0]) {
+                
+                [self.dataSoruce removeAllObjects];
+                [self.dataSoruce addObjectsFromArray:currentArr];
+                [self.tableView headerEndRefreshing];
+            }else {
+            
+                [self.dataSoruce addObjectsFromArray:currentArr];
+                [self.tableView footerEndRefreshing];
+            }
+            
+            [self.tableView reloadData];
+            
+            [SVProgressHUD showSuccessWithStatus:@"数据加载成功"];
+            [SVProgressHUD dismissWithDelay:0.8];
+        }else{
+            [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+            
+            [SVProgressHUD dismiss];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error.localizedDescription);
+        [SVProgressHUD dismiss];
+    }];
+
+    
+}
+
 
 #pragma mark - UITableView的数据源
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.chapterItemArray.count;
+    return self.dataSoruce.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    subjectContentCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    subjectContentCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.item = self.chapterItemArray[indexPath.row];
+    cell.item = self.dataSoruce[indexPath.row];
     
-    cell.subjectNumLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row+1];
+    if (cell.item != nil) {
+        
+        NSMutableArray *arr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", cell.item.t_id] andQuestionType:cell.item.subject_type];
+        
+        if (arr.count != 0) {
+            cell.addBtn.selected = YES;
+        }else {
+            
+            cell.addBtn.selected = NO;
+        }
+
+    }
+    
+
+    cell.addBtn.tag = indexPath.row + 200;
+    [cell.addBtn addTarget:self action:@selector(addBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    cell.subjectNumLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row + 1];
     return cell;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ChaperContentItem *item = self.chapterItemArray[indexPath.row];
+    ChaperContentItem *item = self.dataSoruce[indexPath.row];
     return item.cellHeight;
 }
+
+// 点击加号,选题
+- (void)addBtnClick:(UIButton *)sender {
+
+    NSInteger row = sender.tag - 200;
+    ChaperContentItem *model = self.dataSoruce[row];
+    
+    if (!sender.selected) {
+        
+        sender.selected = YES;
+        [[QuestionDataBase shareDataBase] insertQuestion:model];
+        NSMutableArray *arr = [[QuestionDataBase shareDataBase] selectAllQuestion];
+        NSNotification *notice = [NSNotification notificationWithName:@"bottomBtnNameChange" object:nil userInfo:@{@"key":arr}];
+        [[NSNotificationCenter defaultCenter] postNotification:notice];
+        
+    }else {
+    
+        sender.selected = NO;
+        [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", model.t_id] andQuestionType:model.subject_type];
+        NSMutableArray *arr = [[QuestionDataBase shareDataBase] selectAllQuestion];
+        NSNotification *notice = [NSNotification notificationWithName:@"bottomBtnNameChange" object:nil userInfo:@{@"key":arr}];
+        [[NSNotificationCenter defaultCenter] postNotification:notice];
+        
+    }
+    
+}
+
+// 通知回调
+- (void)notice:(NSNotification *)sender {
+
+    NSLog(@"%@",sender.userInfo[@"key"]);
+    [self.bottom_button setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", [sender.userInfo[@"key"] count]] forState:UIControlStateNormal];
+    
+
+
+}
+
+// 点击底部预览
+- (IBAction)bottomBtnClick:(UIButton *)sender {
+    
+    QuestionPreviewController *previewVC = [[QuestionPreviewController alloc] init];
+    NSMutableArray *arr = [[QuestionDataBase shareDataBase] selectAllQuestion];
+
+    if (arr.count == 0) {
+        
+        [self.view makeToast:@"您还没有选择题目,请选择" duration:1.0 position:SHOW_BOTTOM complete:nil];
+    }else {
+        
+        previewVC.selectArr = [arr mutableCopy];
+        previewVC.navigationItem.title = @"预览作业";
+        [self.navigationController pushViewController:previewVC animated:YES];
+
+    }
+    
+    
+}
+
 @end

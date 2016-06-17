@@ -26,6 +26,8 @@
     }
     item.subject_type = arr[6];
     
+    item.add = NO;
+    
     return item;
 }
 - (CGFloat)cellHeight
