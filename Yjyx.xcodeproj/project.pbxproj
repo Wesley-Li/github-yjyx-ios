@@ -381,6 +381,10 @@
 		3CC473951D05551B009FAC16 /* PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC473941D05551B009FAC16 /* PickerView.m */; };
 		3CC473971D055529009FAC16 /* PickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CC473961D055529009FAC16 /* PickerView.xib */; };
 		3CD1D6C61D08054D0027E797 /* GradeVerVolItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1D6C51D08054D0027E797 /* GradeVerVolItem.m */; };
+		3CE098991D122F660054C42B /* ReleaseHomeWorkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE098971D122F660054C42B /* ReleaseHomeWorkController.m */; };
+		3CE0989A1D122F660054C42B /* ReleaseHomeWorkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE098981D122F660054C42B /* ReleaseHomeWorkController.xib */; };
+		3CE0989E1D123EF10054C42B /* PostStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0989C1D123EF10054C42B /* PostStudentCell.m */; };
+		3CE0989F1D123EF10054C42B /* PostStudentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE0989D1D123EF10054C42B /* PostStudentCell.xib */; };
 		3CF01B4B1D0E49C5001C4251 /* siftContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF01B4A1D0E49C5001C4251 /* siftContentView.m */; };
 		3CF01B4D1D0E49E5001C4251 /* siftContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF01B4C1D0E49E5001C4251 /* siftContentView.xib */; };
 		3CF01B501D0E543E001C4251 /* siftButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF01B4F1D0E543E001C4251 /* siftButton.m */; };
@@ -993,6 +997,12 @@
 		3CC473961D055529009FAC16 /* PickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerView.xib; sourceTree = "<group>"; };
 		3CD1D6C41D08054D0027E797 /* GradeVerVolItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeVerVolItem.h; sourceTree = "<group>"; };
 		3CD1D6C51D08054D0027E797 /* GradeVerVolItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradeVerVolItem.m; sourceTree = "<group>"; };
+		3CE098961D122F660054C42B /* ReleaseHomeWorkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseHomeWorkController.h; sourceTree = "<group>"; };
+		3CE098971D122F660054C42B /* ReleaseHomeWorkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseHomeWorkController.m; sourceTree = "<group>"; };
+		3CE098981D122F660054C42B /* ReleaseHomeWorkController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseHomeWorkController.xib; sourceTree = "<group>"; };
+		3CE0989B1D123EF10054C42B /* PostStudentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostStudentCell.h; sourceTree = "<group>"; };
+		3CE0989C1D123EF10054C42B /* PostStudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostStudentCell.m; sourceTree = "<group>"; };
+		3CE0989D1D123EF10054C42B /* PostStudentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostStudentCell.xib; sourceTree = "<group>"; };
 		3CF01B491D0E49C5001C4251 /* siftContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = siftContentView.h; sourceTree = "<group>"; };
 		3CF01B4A1D0E49C5001C4251 /* siftContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = siftContentView.m; sourceTree = "<group>"; };
 		3CF01B4C1D0E49E5001C4251 /* siftContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = siftContentView.xib; sourceTree = "<group>"; };
@@ -2195,6 +2205,9 @@
 				3CF01B4C1D0E49E5001C4251 /* siftContentView.xib */,
 				3CF01B4E1D0E543E001C4251 /* siftButton.h */,
 				3CF01B4F1D0E543E001C4251 /* siftButton.m */,
+				3CE0989B1D123EF10054C42B /* PostStudentCell.h */,
+				3CE0989C1D123EF10054C42B /* PostStudentCell.m */,
+				3CE0989D1D123EF10054C42B /* PostStudentCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2213,6 +2226,9 @@
 				3BB773A71CD8784000A24485 /* BookViewController.xib */,
 				3CA896331D0674460092D292 /* ChapterViewController.h */,
 				3CA896341D0674460092D292 /* ChapterViewController.m */,
+				3CE098961D122F660054C42B /* ReleaseHomeWorkController.h */,
+				3CE098971D122F660054C42B /* ReleaseHomeWorkController.m */,
+				3CE098981D122F660054C42B /* ReleaseHomeWorkController.xib */,
 				80590BEF1D0CF9AA00867D9B /* KnowledgeViewController.h */,
 				80590BF01D0CF9AA00867D9B /* KnowledgeViewController.m */,
 				80590BF11D0CF9AA00867D9B /* KnowledgeViewController.xib */,
@@ -2580,6 +2596,7 @@
 				3B4864461CCF10C200D2DE3C /* hw_stats.png in Resources */,
 				3B91A6F11CE5B8BB0082A92C /* start_btn.png in Resources */,
 				3AF27E381C73239400698673 /* AddChildrenViewController.xib in Resources */,
+				3CE0989F1D123EF10054C42B /* PostStudentCell.xib in Resources */,
 				3BB7739D1CD86B3A00A24485 /* home_img_smart@3x.png in Resources */,
 				3BB7739B1CD86B3A00A24485 /* home_img_private@3x.png in Resources */,
 				3BCF191D1CDC66E600E2EA1A /* list_btn_wrong@3x.png in Resources */,
@@ -2648,6 +2665,7 @@
 				3AF11DE01CB2691A00F98A03 /* subject_shiyong@3x.png in Resources */,
 				80590BEE1D0CF5D500867D9B /* home_img_knowledge.png in Resources */,
 				3AFE02C41CA29D540097CC83 /* member_subjectbg1@3x.png in Resources */,
+				3CE0989A1D122F660054C42B /* ReleaseHomeWorkController.xib in Resources */,
 				3BCF19191CDC66E600E2EA1A /* list_btn_nor@3x.png in Resources */,
 				3BB773A91CD8784000A24485 /* BookViewController.xib in Resources */,
 				3BCF19251CDC66E600E2EA1A /* stu_pic.png in Resources */,
@@ -2841,6 +2859,7 @@
 				3A91F4951C760CF4001568AA /* PNLineChart.m in Sources */,
 				8094E4C21D129DB800EF221A /* QuestionPreviewCell.m in Sources */,
 				3BB773BC1CD878B900A24485 /* PrivateViewController.m in Sources */,
+				3CE098991D122F660054C42B /* ReleaseHomeWorkController.m in Sources */,
 				3A4057071CCF6FAF00258784 /* ForgetOneViewController.m in Sources */,
 				3A88278E1C6EE9BD0008367F /* RegistViewController.m in Sources */,
 				3CA896351D0674460092D292 /* ChapterViewController.m in Sources */,
@@ -2964,6 +2983,7 @@
 				3AF11DD91CB211D600F98A03 /* YjyxMemberDetailViewController.m in Sources */,
 				3A8827761C6EE1470008367F /* ParentCommunityViewController.m in Sources */,
 				3AEF272D1C61F08A0028BE09 /* SBJsonParser.m in Sources */,
+				3CE0989E1D123EF10054C42B /* PostStudentCell.m in Sources */,
 				3B35DB931CE06FE7000B7F83 /* AnswerSituationCell.m in Sources */,
 				3B4864721CCF117300D2DE3C /* MyClassViewController.m in Sources */,
 				3CC4738E1D05130A009FAC16 /* ChooseMaterialCell.m in Sources */,

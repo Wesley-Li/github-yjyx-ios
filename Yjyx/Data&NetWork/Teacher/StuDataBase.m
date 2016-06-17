@@ -227,7 +227,7 @@ static StuDataBase *singleton = nil;
 
 }
 
-- (StudentEntity *)selectStuById:(NSString *)Sid {
+- (StudentEntity *)selectStuById:(NSNumber *)Sid {
     [self.db open];
     // 封装到模型对象
     StudentEntity *model = [[StudentEntity alloc] init];

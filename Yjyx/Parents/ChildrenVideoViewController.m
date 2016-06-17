@@ -187,13 +187,16 @@
        
        NSRange range = [_explantionStr rangeOfString:@">" options:NSCaseInsensitiveSearch];
 
-       
+       NSLog(@"%@", NSStringFromRange(range));
+       if(range.length != 1){
+             [web loadHTMLString:_explantionStr baseURL:nil];
+       }else{
        NSString *str1 =  [_explantionStr substringFromIndex:range.location];
        NSString *str2 = [NSString stringWithFormat:@"<p%@%@",@" style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"", str1];
        
        NSLog(@"%@", str2);
        [web loadHTMLString:str2 baseURL:nil];
-
+       }
        
        [self.view addSubview:web];
    }

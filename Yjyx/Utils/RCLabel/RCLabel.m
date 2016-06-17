@@ -1553,18 +1553,22 @@ CGFloat MyGetWidthCallback( void* refCon ){
                     
                     NSMutableString *tempString = [NSMutableString stringWithString:plainData];
                     [tempString insertString:@"  " atIndex:position];
-                    
+                    NSLog(@"%@", tempString);
                                         
                     plainData = [NSString stringWithString:tempString];
-                    
-                    component.text = [plainData substringWithRange:NSMakeRange(component.position, 1)];
+//                    if(![plainData containsString:@"   "]){
+//                    component.text = [plainData substringWithRange:NSMakeRange(component.position, 3)];
+//                    }else{
+                        component.text = [plainData substringWithRange:NSMakeRange(component.position, 1)];
+//                    }
+                    NSLog(@"%@", component.text);
                     component.isClosure = YES;
                     
                     [components addObject:component];
                 }
                 
                 
-                
+                NSLog(@"%@", component);
                 
                     
             }

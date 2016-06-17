@@ -40,6 +40,7 @@
     templabel.userInteractionEnabled = NO;
     templabel.font = [UIFont systemFontOfSize:14];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
+    NSLog(@"%@", componentsDS);
     templabel.componentsAndPlainText = componentsDS;
 //    CGSize optimalSize = [templabel optimumSize];
     
