@@ -59,6 +59,17 @@
     }
     return _siftV;
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+
+    // 注册通知
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(notice:) name:@"bottomBtnNameChange" object:nil];
+    [self.bottom_button setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", [[[QuestionDataBase shareDataBase] selectAllQuestion] count]] forState:UIControlStateNormal];
+    [self.tableView reloadData];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadBackBtn];
@@ -67,9 +78,6 @@
     [self readDataFromNetWork];
     
     self.bottom_button.backgroundColor = RGBACOLOR(3, 138, 228, 1);
-    
-    [self.bottom_button setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", [[[QuestionDataBase shareDataBase] selectAllQuestion] count]] forState:UIControlStateNormal];
-
     
     // 导航栏右按钮的使用
     UIButton *siftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -89,9 +97,7 @@
     // 加载刷新按钮
     [self loadRefresh];
     
-    // 注册通知
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(notice:) name:@"bottomBtnNameChange" object:nil];
+    
     
     
     

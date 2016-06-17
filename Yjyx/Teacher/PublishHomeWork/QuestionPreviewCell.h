@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *questionNumberLabel;
 @property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 @property (nonatomic, assign) CGFloat height;
+@property (nonatomic, strong) ChaperContentItem *model;
 
 
 - (void)setValueWithModel:(ChaperContentItem *)model;
