@@ -154,7 +154,8 @@
 #define TEACHER_DETAIL_ACTION_CONNECT_GET @"/api/teacher/mobile/task/"
 // 发布作业时显示章节目录
 #define TEACHER_POST_CHAPTER_CONNECT_GET @"/api/teacher/vgsv/"
-
+// 发布作业
+#define TEACHER_RELEASE_CONNECT_POST @"/api/teacher/mobile/task/"
 
 // 学生部分
 

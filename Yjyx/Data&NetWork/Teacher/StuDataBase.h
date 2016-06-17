@@ -29,7 +29,7 @@
 // 查询所有群组
 - (NSMutableArray *)selectAllGroup;
 // 根据id查询学生
-- (StudentEntity *)selectStuById:(NSString *)Sid;
+- (StudentEntity *)selectStuById:(NSNumber *)Sid;
 
 
 // 创建数据库

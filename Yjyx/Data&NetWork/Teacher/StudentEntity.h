@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) NSNumber *isyjmember;// 学生真实姓名
 
+@property (assign, nonatomic) BOOL isSelect;
 - (void)initStudentWithDic:(NSDictionary *)dic;
 
 @end
