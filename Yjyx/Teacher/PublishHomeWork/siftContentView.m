@@ -24,22 +24,26 @@
 @property (weak, nonatomic) siftButton *preStatusBtn;
 @end
 @implementation siftContentView
+
  - (void)awakeFromNib
 {
     self.preTypeBtn = self.choiceBtn;
     self.preLevelBtn = self.allLevelBtn;
     self.preStatusBtn = self.allStatusBtn;
 }
+
 + (instancetype)siftContentViewFromXib
 {
     return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] firstObject];
 }
+
 - (IBAction)typeBtnClicked:(siftButton *)sender {
     self.preTypeBtn.selected = NO;
     sender.selected = YES;
     self.preTypeBtn = sender;
     
 }
+
 - (IBAction)levelBtnClicked:(siftButton *)sender {
     self.preLevelBtn.selected = NO;
     sender.selected = YES;
@@ -51,4 +55,5 @@
     sender.selected = YES;
     self.preStatusBtn = sender;
 }
+
 @end

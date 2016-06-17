@@ -25,6 +25,16 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    NSString *content = _model.content_text;
+    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH - 20, 999)];
+    self.contentLabel = templabel;
+    templabel.userInteractionEnabled = NO;
+    templabel.font = [UIFont systemFontOfSize:14];
+    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
+    templabel.componentsAndPlainText = componentsDS;
+    
+    [self.bg_view addSubview:templabel];
     
 }
 
@@ -34,7 +44,7 @@
     self.questionNumberLabel.layer.masksToBounds = YES;
     self.questionNumberLabel.backgroundColor = RGBACOLOR(3, 138, 228, 1);
     self.lineView.backgroundColor = RGBACOLOR(140.0, 140.0, 140.0, 1);
-    
+    self.levelLabel.textColor = RGBACOLOR(204, 204, 153, 1);
     
     self.subject_typeLabel.text = model.subject_type;
     
@@ -66,15 +76,8 @@
     
     NSString *content = model.content_text;
     content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH - 20, 999)];
-    templabel.userInteractionEnabled = NO;
-    templabel.font = [UIFont systemFontOfSize:14];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    templabel.componentsAndPlainText = componentsDS;
-    
-    
-    [self.bg_view addSubview:templabel];
-    
+    self.contentLabel.componentsAndPlainText = componentsDS;
     
 }
 

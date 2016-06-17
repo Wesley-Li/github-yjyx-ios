@@ -16,11 +16,28 @@
 #import "PrivateViewController.h"
 #import "GradeVerVolItem.h"
 #import "ChapterViewController.h"
+#import "QuestionPreviewController.h"
+#import "QuestionDataBase.h"
+
 @interface PublishHomeworkViewController ()
+
+@property (weak, nonatomic) IBOutlet UILabel *question_countLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *previewBtn;
+
+@property (nonatomic, strong) NSMutableArray *selectArr;
 
 @end
 
 @implementation PublishHomeworkViewController
+
+- (NSMutableArray *)selectArr {
+
+    if (!_selectArr) {
+        self.selectArr = [NSMutableArray array];
+    }
+    return _selectArr;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,6 +55,24 @@
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = NO;
+    
+    self.selectArr = [[[QuestionDataBase shareDataBase] selectAllQuestion] mutableCopy];
+    if (_selectArr.count == 0) {
+        
+        self.question_countLabel.hidden = YES;
+        self.previewBtn.hidden = YES;
+        
+    }else {
+    
+        self.question_countLabel.hidden = NO;
+        self.previewBtn.hidden = NO;
+        self.question_countLabel.layer.cornerRadius = 10;
+        self.question_countLabel.layer.masksToBounds = YES;
+        self.question_countLabel.text = [NSString stringWithFormat:@"%ld", _selectArr.count];
+        
+    }
+    
+    
 }
 - (void) navPop {
 
@@ -125,6 +160,16 @@
     privateVC.title = @"私有题库";
     [self.navigationController pushViewController:privateVC animated:YES];
 }
+
+// 预览选题
+- (IBAction)previewBtnClick:(UIButton *)sender {
+    
+    QuestionPreviewController *previewVC = [[QuestionPreviewController alloc] init];
+    previewVC.selectArr = _selectArr;
+    [self.navigationController pushViewController:previewVC animated:YES];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

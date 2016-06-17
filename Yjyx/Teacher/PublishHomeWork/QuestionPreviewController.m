@@ -9,8 +9,9 @@
 #import "QuestionPreviewController.h"
 #import "ChaperContentItem.h"
 #import "QuestionPreviewCell.h"
+#import "QuestionDataBase.h"
 
-#define kIndentifier @"previewCell"
+#define kIndentifier @"fhdsjfhdskjhf"
 @interface QuestionPreviewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIButton *configurePublishBtn;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -29,6 +30,13 @@
         self.selectArr = [NSMutableArray array];
     }
     return _selectArr;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
 }
 
 - (void)viewDidLoad {
@@ -64,8 +72,12 @@
     QuestionPreviewCell *cell = [tableView dequeueReusableCellWithIdentifier:kIndentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     ChaperContentItem *item = self.selectArr[indexPath.row];
-    cell.questionNumberLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row + 1];
     [cell setValueWithModel:item];
+    
+    cell.questionNumberLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row + 1];
+    cell.deleteBtn.tag = indexPath.row + 200;
+    [cell.deleteBtn addTarget:self action:@selector(deleteBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
     
     return cell;
 }
@@ -73,14 +85,31 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ChaperContentItem *item = self.selectArr[indexPath.row];
-    return item.cellHeight;
+    return item.cellHeight - 40;
 }
 
+#pragma mark - delete
+- (void)deleteBtnClick:(UIButton *)sender {
+
+    ChaperContentItem *model = self.selectArr[sender.tag - 200];
+    [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", model.t_id] andQuestionType:model.subject_type];
+    [self.selectArr removeObject:model];
+    
+    NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:0];
+    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    if ([[[QuestionDataBase shareDataBase] selectAllQuestion] count] ==0) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+//    [self.tableView reloadData];
+    
+}
 
 #pragma mark - push
 - (IBAction)configureBtnClick:(UIButton *)sender {
     
-    NSLog(@"发布作业");
+    
     
 }
 
