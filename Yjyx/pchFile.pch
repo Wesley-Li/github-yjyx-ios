@@ -151,6 +151,9 @@
 // 某次任务中某个学生的概况
 #define TEACHER_DETAIL_ACTION_CONNECT_GET @"/api/teacher/mobile/task/"
 
+// 搜题
+#define SEARCH_QUESTION_GET @"/api/teacher/mobile/question/"
+
 
 
 

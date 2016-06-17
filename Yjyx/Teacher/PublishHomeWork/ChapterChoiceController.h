@@ -10,5 +10,17 @@
 
 @interface ChapterChoiceController : UIViewController
 
-@property (strong, nonatomic) NSMutableArray *chapterItemArray;
+/*
+ * 章节目录
+ */
+@property (copy, nonatomic) NSString *g_id;
+// 年级号
+@property (assign, nonatomic) NSInteger gradeid;
+// 上下册
+@property (assign, nonatomic) NSInteger volid;
+// 版本号
+@property (assign, nonatomic) NSInteger verid;
+
+
+
 @end
