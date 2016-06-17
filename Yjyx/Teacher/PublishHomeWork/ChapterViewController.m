@@ -14,9 +14,8 @@
 #import "ChapterChoiceController.h"
 #import "ChaperContentItem.h"
 
-#import <AFNetworking.h>
 #import "BookViewController.h"
-#import <SVProgressHUD/SVProgressHUD.h>
+
 
 
 
@@ -62,7 +61,7 @@
     [backBtn1 setImage:[UIImage imageNamed:@"comm_back"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn1];
     self.navigationItem.leftBarButtonItem = leftBtnItem;
-    
+    [self loadData];
     self.navigationItem.title = @"选择出题";
     // 标题label
     [self addTitleLabel];
@@ -78,6 +77,50 @@
 
 }
 
+- (void)loadData{
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
+    
+    pamar[@"action"] = @"getbookunit";
+    pamar[@"gradeid"] = @(_gradeid);
+    pamar[@"verid"] = @(_verid);
+    pamar[@"volid"] = @(_volid);
+    [self.chaperArr removeAllObjects];
+    
+    [mgr GET:[BaseURL stringByAppendingString:TEACHER_POST_CHAPTER_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        if ([responseObject[@"retcode"] isEqual:@0]) {
+            for (NSDictionary *dict in responseObject[@"content"]) {
+                GradeContentItem *item = [GradeContentItem gradeContentItem:dict];
+                [self.chaperArr addObject:item];
+            }
+            
+            
+            [self.data removeAllObjects];
+            for (GradeContentItem *item in _chaperArr) {
+                TreeNode *node = [TreeNode treeNodeWithDictionary:item];
+                if (node == nil) {
+                    continue;
+                }
+                [self.data addObject:node];
+            }
+            self.automaticallyAdjustsScrollViewInsets = NO;
+            TreeTableView *tableview = [[TreeTableView alloc] initWithFrame:CGRectMake(0, 64+49, SCREEN_WIDTH , SCREEN_HEIGHT - 64 - 49) withData:_data];
+            tableview.treeTableCellDelegate = self;
+            tableview.chapterArray = self.chaperArr;
+            tableview.gradeNumItem = self.GradeNumItem;
+            tableview.bounces = NO;
+            [self.view addSubview:tableview];
+        }else{
+            
+            [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+        [SVProgressHUD dismiss];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"$$$$$$$$$$$");
+        [SVProgressHUD dismiss];
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
