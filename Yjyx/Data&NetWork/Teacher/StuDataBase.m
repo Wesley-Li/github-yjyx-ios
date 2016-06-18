@@ -27,6 +27,8 @@ static StuDataBase *singleton = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         singleton = [[StuDataBase alloc] init];
+        // 单例创建即附带数据库
+        [singleton creatStuDataBase];
         
     });
     
@@ -64,12 +66,12 @@ static StuDataBase *singleton = nil;
     
     [self.db open];
     // 学生列表
-    BOOL isSuccess = [self.db executeUpdate:@"create table StuList(user_id text primary key, realname text, avatar_url text, isyjmember text)"];
+    BOOL isSuccess = [self.db executeUpdate:@"create table if not exists StuList(id integer PRIMARY KEY AUTOINCREMENT,user_id text, realname text, avatar_url text, isyjmember text)"];
     NSLog(@"%@", isSuccess ? @"建表成功" : @"建表失败");
     // 班级列表
-    [self.db executeUpdate:@"create table SC(cid text primary key, memberlist text, gradeid text, name text, invitecode text)"];
+    [self.db executeUpdate:@"create table if not exists SC(id integer PRIMARY KEY AUTOINCREMENT, cid text, memberlist text, gradeid text, name text, invitecode text)"];
     // 群组列表
-    [self.db executeUpdate:@"create table SG(gid text primary key, memberlist text, name text)"];
+    [self.db executeUpdate:@"create table if not exists SG(id integer PRIMARY KEY AUTOINCREMENT, gid text , memberlist text, name text)"];
     
     [self.db close];
     
@@ -97,6 +99,10 @@ static StuDataBase *singleton = nil;
     [self.db executeUpdate:@"drop table if exists SC"];
     [self.db executeUpdate:@"drop table if exists SG"];
     [self.db close];
+    
+    // 重新建表
+    [self creatStuListTable];
+    
 }
 
 // 插入学生数据

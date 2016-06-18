@@ -10,4 +10,6 @@
 
 @interface ReleaseHomeWorkController : UIViewController
 
+@property (nonatomic, strong) NSMutableArray *selectArr;
+
 @end

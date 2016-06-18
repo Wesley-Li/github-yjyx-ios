@@ -10,6 +10,9 @@
 #import "StuDataBase.h"
 #import "PostStudentCell.h"
 #import "StuClassEntity.h"
+#import "ChaperContentItem.h"
+#import "QuestionDataBase.h"
+#import "StuTaskTableViewController.h"
 
 #import "StudentEntity.h"
 @interface ReleaseHomeWorkController ()<UITableViewDelegate, UITableViewDataSource>
@@ -17,6 +20,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *timeTextField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+// 题目列表
+@property (nonatomic, strong) NSMutableArray *questionList;
+
 // 获取班级信息
 @property (strong, nonatomic) NSMutableArray *classArr;
 // 保存所有学生信息
@@ -26,6 +33,7 @@
 @end
 
 @implementation ReleaseHomeWorkController
+
 static NSString *ID = @"CELL";
 #pragma mark - 懒加载
 - (NSMutableArray *)classArr
@@ -35,6 +43,7 @@ static NSString *ID = @"CELL";
     }
     return _classArr;
 }
+
 - (NSMutableArray *)stuArr
 {
     if (_stuArr == nil) {
@@ -42,6 +51,7 @@ static NSString *ID = @"CELL";
     }
     return _stuArr;
 }
+
 - (NSMutableArray *)classStuArr
 {
     if (_classStuArr == nil) {
@@ -49,6 +59,7 @@ static NSString *ID = @"CELL";
     }
     return _classStuArr;
 }
+
 #pragma mark - view的生命属性
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -73,18 +84,22 @@ static NSString *ID = @"CELL";
     self.tableView.sectionFooterHeight = 0;
     self.tableView.contentInset = UIEdgeInsetsMake(-34, 0, 0, 0);
 }
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
 }
+
 - (void)cellClicked:(NSNotification *)noti{
     UIButton *sender = noti.userInfo[@"BtnIsSelect"];
     NSIndexPath *indexpath = noti.userInfo[@"ClickIsSection"];
@@ -94,11 +109,13 @@ static NSString *ID = @"CELL";
     }
     [self.tableView reloadData];
 }
+
 #pragma mark - UITableView的代理方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return self.classStuArr.count;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     StuClassEntity *stuClassModel = self.classArr[section];
@@ -108,6 +125,7 @@ static NSString *ID = @"CELL";
     return 1;
     }
 }
+
 - (PostStudentCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -125,6 +143,7 @@ static NSString *ID = @"CELL";
     cell.backgroundColor = COMMONCOLOR;
     return cell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     StuClassEntity *stuClassModel = self.classArr[indexPath.section];
@@ -143,6 +162,7 @@ static NSString *ID = @"CELL";
         }
     }
 }
+
 - (IBAction)goSure:(UIButton *)sender {
     NSMutableArray *tempArr = [NSMutableArray array];
     for (StudentEntity *stuModel in self.stuArr) {
@@ -153,9 +173,42 @@ static NSString *ID = @"CELL";
     }
     [SVProgressHUD showWithStatus:@"正在发布..."];
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    
+    // 入参
     NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
     pamar[@"action"] = @"asign_exam_task";
-    pamar[@"questionlist"] = @"";
+    
+    // 题目列表
+    
+    NSMutableArray *choiceArr = [NSMutableArray array];
+    for (ChaperContentItem *model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"choice"]) {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: model.t_id], @"id", [NSNumber numberWithInteger: model.level], @"level", nil];
+        [choiceArr addObject:dic];
+    }
+    
+    
+    NSMutableArray *blankfillArr = [NSMutableArray array];
+    for (ChaperContentItem *model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"blankfill"]) {
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: model.t_id], @"id", [NSNumber numberWithInteger: model.level], @"level", nil];
+        [choiceArr addObject:dic];
+    }
+    
+    // 没有对应的类型就不传
+    if (choiceArr.count == 0 && blankfillArr.count != 0) {
+        NSMutableArray *arr = [NSMutableArray arrayWithObjects:@"blankfill", blankfillArr, nil];
+        self.questionList = [NSMutableArray arrayWithObjects:arr, nil];
+        
+    }else if (choiceArr.count != 0 && blankfillArr.count == 0) {
+        NSMutableArray *arr = [NSMutableArray arrayWithObjects:@"choice", choiceArr, nil];
+        self.questionList = [NSMutableArray arrayWithObjects:arr, nil];
+    }else {
+        NSMutableArray *arr1 = [NSMutableArray arrayWithObjects:@"choice", choiceArr, nil];
+        NSMutableArray *arr2 = [NSMutableArray arrayWithObjects:@"blankfill", blankfillArr, nil];
+        self.questionList = [NSMutableArray arrayWithObjects: arr1, arr2, nil];
+    
+    }
+    
+    // 学生列表
     NSMutableArray *pamarArr = [NSMutableArray array];
     for (StudentEntity *stuModel in tempArr) {
         NSMutableArray *arr = [NSMutableArray array];
@@ -163,14 +216,24 @@ static NSString *ID = @"CELL";
         [arr addObject:stuModel.realname];
         [pamarArr addObject:arr];
     }
-    NSLog(@"%@", pamarArr);
-    pamar[@"recipients"] = pamarArr;
+
+    pamar[@"recipients"] = [pamarArr JSONString];
     pamar[@"name"] = self.homeWorkNameTextField.text;
     pamar[@"desc"] = self.descriptionTextField.text;
     pamar[@"suggestspendtime"] = self.timeTextField.text;
+    pamar[@"questionlist"] = [self.questionList JSONString];
+
+    
     [mgr POST:[BaseURL stringByAppendingString:TEACHER_RELEASE_CONNECT_POST] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         if([responseObject[@"retcode"] isEqual:@0]){
             [SVProgressHUD showWithStatus:@"发布成功"];
+            
+            [[QuestionDataBase shareDataBase] deleteQuestionTable];
+            
+            // 跳转到学生作业列表
+            StuTaskTableViewController *stuTaskVC = [[StuTaskTableViewController alloc] init];
+            [self.navigationController pushViewController:stuTaskVC animated:YES];
+            
         }else{
             [SVProgressHUD showWithStatus:@"发布失败"];
         }
@@ -185,4 +248,8 @@ static NSString *ID = @"CELL";
         });
     }];
 }
+
+
+
+
 @end

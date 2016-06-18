@@ -56,13 +56,14 @@
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = NO;
     
+    self.dataSource = [[[StuDataBase shareStuDataBase] selectAllClass] mutableCopy];
+    self.gradeArr = [[[YjyxOverallData sharedInstance].teacherInfo.school_classes JSONValue] mutableCopy];
+    
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataSource = [[[StuDataBase shareStuDataBase] selectAllClass] mutableCopy];
-    self.gradeArr = [[[YjyxOverallData sharedInstance].teacherInfo.school_classes JSONValue] mutableCopy];
     
     
 //    NSLog(@"%@", NSHomeDirectory());
@@ -119,15 +120,22 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     StuClassEntity *model = self.dataSource[indexPath.row];
     
-    for (NSArray *arr in _gradeArr) {
-        if ([model.gradeid isEqual:arr[2]]) {
-            cell.textLabel.text = [NSString stringWithFormat:@"%@%@", arr[3], arr[1]];
-            [self.titleArr addObject:cell.textLabel.text];
+    if ([model.name containsString:@"年级"]) {
+        
+        cell.textLabel.text = model.name;
+    }else {
+        
+        for (NSArray *arr in _gradeArr) {
+            if ([model.gradeid isEqual:arr[2]]) {
+                cell.textLabel.text = [NSString stringWithFormat:@"%@%@", arr[3], arr[1]];
+            }
         }
-    }
     
+    }
+
     
 //    cell.textLabel.text = model.name;
+    [self.titleArr addObject:cell.textLabel.text];
     NSNumberFormatter *numberF = [[NSNumberFormatter alloc] init];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"邀请码:%@", [numberF stringFromNumber: model.invitecode]];
     cell.detailTextLabel.textColor = [UIColor lightGrayColor];

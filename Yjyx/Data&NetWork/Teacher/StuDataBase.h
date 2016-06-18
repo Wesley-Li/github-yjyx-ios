@@ -32,9 +32,6 @@
 - (StudentEntity *)selectStuById:(NSNumber *)Sid;
 
 
-// 创建数据库
-- (void)creatStuDataBase;
-
 // 删除所有数据
 - (void)deleteAllStudent;
 

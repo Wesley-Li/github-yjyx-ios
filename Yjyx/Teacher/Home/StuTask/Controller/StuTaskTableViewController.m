@@ -11,6 +11,7 @@
 #import "TaskModel.h"
 #import "TaskDetailTableViewController.h"
 #import "MJRefresh.h"
+#import "TeacherHomeViewController.h"
 
 
 
@@ -174,7 +175,10 @@
 
 - (void)goBack {
 
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+
 }
 
 

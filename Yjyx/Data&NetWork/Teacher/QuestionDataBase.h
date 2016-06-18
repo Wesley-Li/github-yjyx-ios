@@ -27,9 +27,11 @@
 // 查询所有题目
 - (NSMutableArray *)selectAllQuestion;
 
-// 根据id查询
+// 根据id和类型查询
 - (NSMutableArray *)selectQuestionByid:(NSString *)qid andQuestionType:(NSString *)subject_type;
 
+// 根据类型查询
+- (NSMutableArray *)selectQuestionByQuestionType:(NSString *)subject_type;
 
 
 @end

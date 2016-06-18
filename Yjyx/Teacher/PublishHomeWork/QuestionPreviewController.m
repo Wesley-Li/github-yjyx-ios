@@ -10,6 +10,7 @@
 #import "ChaperContentItem.h"
 #import "QuestionPreviewCell.h"
 #import "QuestionDataBase.h"
+#import "ReleaseHomeWorkController.h"
 
 #define kIndentifier @"fhdsjfhdskjhf"
 @interface QuestionPreviewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -109,7 +110,9 @@
 #pragma mark - push
 - (IBAction)configureBtnClick:(UIButton *)sender {
     
+    ReleaseHomeWorkController *releaseVC = [[ReleaseHomeWorkController alloc] init];
     
+    [self.navigationController pushViewController:releaseVC animated:YES];
     
 }
 

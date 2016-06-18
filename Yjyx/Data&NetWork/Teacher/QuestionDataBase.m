@@ -90,6 +90,8 @@ static QuestionDataBase *singleton = nil;
     BOOL isSuccess = [self.question_db executeUpdate:@"drop table if exists Question"];
     NSLog(@"%@", isSuccess ? @"删除成功" : @"删除失败");
 
+    // 重新建表
+    [self creatQuestionTable];
 
 }
 
@@ -192,6 +194,42 @@ static QuestionDataBase *singleton = nil;
 
 }
 
+// 根据类型查找
+- (NSMutableArray *)selectQuestionByQuestionType:(NSString *)subject_type {
+
+    NSMutableArray *group = [NSMutableArray array];
+    
+    FMResultSet *set = [self.question_db executeQuery:@"select * from Question where subject_type = ?", subject_type];
+    
+    while ([set next]) {
+        NSString *t_id = [set stringForColumn:@"t_id"];
+        NSString *content_text = [set stringForColumn:@"content_text"];
+        NSString *person_type = [set stringForColumn:@"person_type"];
+        NSString *p_id = [set stringForColumn:@"p_id"];
+        NSString *level = [set stringForColumn:@"level"];
+        NSString *subject_type = [set stringForColumn:@"subject_type"];
+        NSString *cellHeight = [set stringForColumn:@"cellHeight"];
+        NSString *RCLabelFrame = [set stringForColumn:@"RCLabelFrame"];
+        
+        // 封装到模型
+        ChaperContentItem *model = [[ChaperContentItem alloc] init];
+        model.t_id = [t_id integerValue];
+        model.content_text = content_text;
+        model.person_type = [person_type integerValue];
+        model.p_id = [p_id integerValue];
+        model.level = [level integerValue];
+        model.subject_type = subject_type;
+        model.cellHeight = [cellHeight floatValue];
+        model.RCLabelFrame = CGRectFromString(RCLabelFrame);
+        
+        [group addObject:model];
+        
+    }
+    
+    return group;
+
+    
+}
 
 
 @end

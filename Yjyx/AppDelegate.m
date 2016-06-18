@@ -329,7 +329,7 @@
         self.window.rootViewController = _cusTBViewController;
         
         // 判断日期获取学生列表
-        [self getStuList];
+        [self judgeGetStuListDate];
         
         // 判断版本更新并获取学生列表
         [self judgeAndUpdate];
@@ -586,9 +586,8 @@
     [manager GET:[BaseURL stringByAppendingString:TEACHER_GETALLSTULIST_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         NSLog(@"%@", responseObject);
-        // 创建数据库
+        // 创建数据表
         [[StuDataBase shareStuDataBase] deleteStuTable];
-        [[StuDataBase shareStuDataBase] creatStuDataBase];
         
         if ([responseObject[@"retcode"] integerValue] == 0) {
             
@@ -612,8 +611,7 @@
                 [[StuDataBase shareStuDataBase] insertStuGroup:model];
             }
             
-            [SYS_CACHE removeObjectForKey:@"getDate"];
-            
+            [SYS_CACHE setObject:[NSDate date] forKey:@"getDate"];
             
         }else {
         
