@@ -64,28 +64,32 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
     
     ParentChapterCell *cell = [tableView dequeueReusableCellWithIdentifier:NODE_CELL_ID];
 
-    
     TreeNode *node = [_tempData objectAtIndex:indexPath.row];
-    
-    // cell有缩进的方法
-    cell.indentationLevel = node.depth; // 缩进级别
-    cell.indentationWidth = 30.f; // 每个缩进级别的距离
 
-    
-//    NSMutableString *name = [NSMutableString string];
-//    for (int i=0; i<node.depth; i++) {
-//        [name appendString:@"     "];
-//    }
-//    [name appendString:node.name];
-    
-    if (node.expand == NO) {
-        cell.imageV.image = [UIImage imageNamed:@"list_icon_1展开"];
-    }else{
-    cell.imageV.image = [UIImage imageNamed:@"list_icon_1"];
-    }
     cell.node = node;
-    if (node.depth == 1) {
-        cell.imageV.image = [UIImage imageNamed:@"list_icon_3"];
+
+    if (node.depth == 0) {
+        if (node.expand == NO) {
+            cell.imageV.image = [UIImage imageNamed:@"list_icon_1展开"];
+        }else{
+            cell.imageV.image = [UIImage imageNamed:@"list_icon_1"];
+        }
+    }else{
+
+        for (int j = 0; j < _data.count; j++){
+            TreeNode *sNode = [_data objectAtIndex:j];
+     
+            if(node.nodeId == sNode.parentId){
+                if (!node.expand) {
+                    cell.imageV.image = [UIImage imageNamed:@"list_icon_2展开"];
+                }else{
+                    cell.imageV.image = [UIImage imageNamed:@"list_icon_2"];
+                }
+                break;
+            }else{
+                cell.imageV.image = [UIImage imageNamed:@"list_icon_3"];
+            }
+        }
     }
     cell.chapterLabel.text = node.name;
     
@@ -114,11 +118,9 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
     //先修改数据源
     TreeNode *parentNode = [_tempData objectAtIndex:indexPath.row];
     NSLog(@"%d", parentNode.nodeId);
-     GradeContentItem *item = self.chapterArray[parentNode.nodeId + 1];
+    GradeContentItem *item = self.chapterArray[parentNode.nodeId + 1];
     GradeVerVolItem *item1 = self.gradeNumItem;
-    if (_treeTableCellDelegate && [_treeTableCellDelegate respondsToSelector:@selector(cellClick:andVerVolItem:andTreeNode:)]) {
-        [_treeTableCellDelegate cellClick:item andVerVolItem:item1 andTreeNode:parentNode];
-    }
+  
     
     NSUInteger startPosition = indexPath.row+1;
     NSUInteger endPosition = startPosition;
@@ -156,6 +158,9 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
         [self insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
     }else{
         if(indexPathArray.count <= 0){
+            if (_treeTableCellDelegate && [_treeTableCellDelegate respondsToSelector:@selector(cellClick:andVerVolItem:andTreeNode:)]) {
+                [_treeTableCellDelegate cellClick:item andVerVolItem:item1 andTreeNode:parentNode];
+            }
             return;
         }
         parentNode.expand = !parentNode.expand;
@@ -163,6 +168,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
     }
     NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
     [self reloadRowsAtIndexPaths:@[indexPath1] withRowAnimation:UITableViewRowAnimationNone];
+
 //    [self reloadData];
 }
 

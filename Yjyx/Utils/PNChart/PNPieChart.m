@@ -209,7 +209,11 @@
 }
 
 - (CGFloat)endPercentageForItemAtIndex:(NSUInteger)index{
+    if (_endPercentages.count == 0) {
+        return 0;
+    }else{
     return [_endPercentages[index] floatValue];
+    }
 }
 
 - (CGFloat)ratioForItemAtIndex:(NSUInteger)index{

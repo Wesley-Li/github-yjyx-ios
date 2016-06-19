@@ -89,6 +89,7 @@
     
     [mgr GET:[BaseURL stringByAppendingString:TEACHER_POST_CHAPTER_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         if ([responseObject[@"retcode"] isEqual:@0]) {
+            [responseObject writeToFile:@"/Users/wangdapeng/Desktop/文件/5.plist" atomically:YES];
             for (NSDictionary *dict in responseObject[@"content"]) {
                 GradeContentItem *item = [GradeContentItem gradeContentItem:dict];
                 [self.chaperArr addObject:item];
@@ -117,7 +118,6 @@
         [SVProgressHUD dismiss];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"$$$$$$$$$$$");
         [SVProgressHUD dismiss];
     }];
 }
@@ -166,7 +166,7 @@
 #pragma mark - TreeTableCellDelegate
 // cell的点击方法
 -(void)cellClick:(GradeContentItem *)item1 andVerVolItem:(GradeVerVolItem *)item andTreeNode:(TreeNode *)node{
-    if(node.depth == 1){
+
        
         ChapterChoiceController *chapterVC = [[ChapterChoiceController alloc] init];
         
@@ -178,7 +178,7 @@
         [self.navigationController pushViewController:chapterVC animated:YES];
         
     
-    }
+
     
 }
 

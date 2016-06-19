@@ -54,6 +54,7 @@ static NSString *ID = @"CELL";
     [super viewDidLoad];
     
     self.classArr = [[StuDataBase shareStuDataBase] selectAllClass];
+    NSLog(@"%@", self.classArr);
     for (StuClassEntity *stuClassModel in self.classArr) {
         NSMutableArray *tempArr = [NSMutableArray array];
         for (NSNumber *num in stuClassModel.memberlist) {
@@ -72,6 +73,9 @@ static NSString *ID = @"CELL";
     self.tableView.sectionHeaderHeight = 10;
     self.tableView.sectionFooterHeight = 0;
     self.tableView.contentInset = UIEdgeInsetsMake(-34, 0, 0, 0);
+    
+     [_homeWorkNameTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+     [_descriptionTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -81,6 +85,7 @@ static NSString *ID = @"CELL";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+//  私有方法
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
@@ -88,11 +93,41 @@ static NSString *ID = @"CELL";
 - (void)cellClicked:(NSNotification *)noti{
     UIButton *sender = noti.userInfo[@"BtnIsSelect"];
     NSIndexPath *indexpath = noti.userInfo[@"ClickIsSection"];
-    for (StudentEntity *stuModel in self.classStuArr[indexpath.section]) {
-       
-        stuModel.isSelect = sender.isSelected;
+    NSLog(@"%zd, %zd", indexpath.section, indexpath.row);
+    NSMutableArray *tempArr = self.classStuArr[indexpath.section];
+    for (NSInteger i = 0; i < tempArr.count; i++) {
+            StudentEntity *stuModel = tempArr[i];
+            stuModel.isSelect = sender.isSelected;
     }
+        
+  
     [self.tableView reloadData];
+}
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    
+    NSString *toBeString = textField.text;
+    NSString *lang = [[UITextInputMode currentInputMode] primaryLanguage]; // 键盘输入模式
+    if ([lang isEqualToString:@"zh-Hans"]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写
+        UITextRange *selectedRange = [textField markedTextRange];
+        //获取高亮部分
+        UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if (!position) {
+            if([textField isEqual:_homeWorkNameTextField]){
+            if (toBeString.length > 100) {
+                [self.view makeToast:@"作业名称最多只能输入100个字" duration:1.0 position:SHOW_TOP complete:nil];
+                textField.text = [toBeString substringToIndex:100];
+            }
+        }else if([textField isEqual:_descriptionTextField]){
+            if (toBeString.length > 300) {
+                [self.view makeToast:@"作业描述最多只能输入300个字" duration:1.0 position:SHOW_TOP complete:nil];
+                    textField.text = [toBeString substringToIndex:300];
+                }
+        }
+    }
+        
+  }
 }
 #pragma mark - UITableView的代理方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -117,10 +152,11 @@ static NSString *ID = @"CELL";
     if (indexPath.row == 0) {
         cell.stuClassModel = stuClassModel;
     }else{
-
-        StudentEntity *stuModel = self.stuArr[indexPath.row - 1];
+        NSMutableArray *arr =  self.classStuArr[indexPath.section];
+        StudentEntity *stuModel =  arr[indexPath.row - 1];
         NSLog(@"%@,%zd",stuModel, stuModel.isSelect);
         cell.studentModel = stuModel;
+       
     }
     cell.backgroundColor = COMMONCOLOR;
     return cell;

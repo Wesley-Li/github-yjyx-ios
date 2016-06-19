@@ -23,14 +23,18 @@
 - (void)setNode:(TreeNode *)node
 {
     _node = node;
-    if (node.depth == 1) {
-        self.widthConstant.constant = 10;
-        self.heightConstant.constant = 10;
-        self.imageVleadConstant.constant = 35;
-    }else{
+    if (node.depth == 0) {
         self.widthConstant.constant = 25;
         self.heightConstant.constant = 25;
         self.imageVleadConstant.constant = 12;
+    }else if(node.depth == 1){
+        self.widthConstant.constant = 16;
+        self.heightConstant.constant = 16;
+        self.imageVleadConstant.constant = 27;
+    }else if(node.depth == 2){
+        self.widthConstant.constant = 10;
+        self.heightConstant.constant = 10;
+        self.imageVleadConstant.constant = 42;
     }
 }
 

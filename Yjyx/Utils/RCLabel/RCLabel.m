@@ -523,7 +523,7 @@ CGFloat MyGetWidthCallback( void* refCon ){
             }
             linkComponentString = [self.componentsAndPlainText.plainTextData substringWithRange:NSMakeRange(linkComponent.position, rangeLength)];
         }
-        NSLog(@"%@",linkComponentString);
+//        NSLog(@"%@",linkComponentString);
        
         
         
@@ -620,7 +620,10 @@ CGFloat MyGetWidthCallback( void* refCon ){
 	CFRange range;
 	CGSize constraint = CGSizeMake(self.frame.size.width, 1000000);
     CGSize sizeBeforeRender = _optimumSize;
-    CGSize sizeAfterRender = CTFramesetterSuggestFrameSizeWithConstraints(_framesetter, CFRangeMake(0, [self.componentsAndPlainText.plainTextData length]), nil, constraint, &range); 
+//    NSLog(@"%@", self.componentsAndPlainText.plainTextData);
+//    NSLog(@"%lu", (unsigned long)[self.componentsAndPlainText.plainTextData length]);
+    CGSize sizeAfterRender = CTFramesetterSuggestFrameSizeWithConstraints(_framesetter, CFRangeMake(0, [self.componentsAndPlainText.plainTextData length]), nil, constraint, &range);
+ 
 	self.optimumSize = sizeAfterRender;
     
     if (context) {
@@ -1550,25 +1553,22 @@ CGFloat MyGetWidthCallback( void* refCon ){
 //          `
                 
                 if (!isSizeTooSmall) {
-                    
+                   
                     NSMutableString *tempString = [NSMutableString stringWithString:plainData];
-                    [tempString insertString:@"  " atIndex:position];
-                    NSLog(@"%@", tempString);
-                                        
+                    [tempString insertString:@"`" atIndex:position];
+                    
                     plainData = [NSString stringWithString:tempString];
-//                    if(![plainData containsString:@"   "]){
-//                    component.text = [plainData substringWithRange:NSMakeRange(component.position, 3)];
-//                    }else{
-                        component.text = [plainData substringWithRange:NSMakeRange(component.position, 1)];
-//                    }
-                    NSLog(@"%@", component.text);
+                   
+                    component.text = [plainData substringWithRange:NSMakeRange(component.position, 1)];
+
+                  
                     component.isClosure = YES;
                     
                     [components addObject:component];
                 }
                 
-                
-                NSLog(@"%@", component);
+                 [plainData stringByReplacingOccurrencesOfString:@"`" withString:@" "];
+              
                 
                     
             }
@@ -1581,6 +1581,8 @@ CGFloat MyGetWidthCallback( void* refCon ){
                 [linkComponents addObject:component];
             }
             if ([component.tagLabel isEqualToString:@"img"]) {
+                [plainData stringByReplacingOccurrencesOfString:@"`" withString:@" "];
+               
                 [imgComponents addObject:component];
             }
 		}
@@ -1603,6 +1605,9 @@ CGFloat MyGetWidthCallback( void* refCon ){
     componentsDS.components = components;
     componentsDS.linkComponents = linkComponents;
     componentsDS.imgComponents = imgComponents;
+    if ([plainData containsString:@"`"]) {
+        [plainData stringByReplacingOccurrencesOfString:@"`" withString:@""];
+    }
     componentsDS.plainTextData = plainData;
     
     return [componentsDS autorelease];

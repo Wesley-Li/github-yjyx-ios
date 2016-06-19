@@ -11,6 +11,7 @@
 @implementation TreeNode
 static NSInteger i = 0;
 static NSInteger j = 0;
+static NSInteger k = 0;
 + (instancetype)treeNodeWithDictionary:(GradeContentItem *)item
 {
     if (item.g_id.length == 4) {
@@ -28,8 +29,12 @@ static NSInteger j = 0;
         node.parentId = j;
         node.depth = 1;
         node.expand = NO;
+        k = i - 1;
     }else if(item.g_id.length == 10){
-        
+        node.depth = 2;
+        node.expand = NO;
+        node.parentId = k;
+        node.name = item.text;
     }
     return node;
 }
@@ -37,11 +42,13 @@ static NSInteger j = 0;
 {
     i = 0;
     j = 0;
+    k = 0;
 }
 -(void)dealloc
 {
     NSLog(@"delloc---------");
     i = 0;
     j = 0;
+    k = 0;
 }
 @end

@@ -17,7 +17,7 @@
 @property (nonatomic, copy) NSString *name;// 班级名称
 
 @property (assign, nonatomic, readwrite) BOOL isExpanded;
-
+@property (assign, nonatomic, readwrite) BOOL isSelect;
 - (void)initStuClassWithDic:(NSDictionary *)dic;
 
 @end
