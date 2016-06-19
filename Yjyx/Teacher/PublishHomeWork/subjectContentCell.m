@@ -40,7 +40,7 @@
     templabel.userInteractionEnabled = NO;
     templabel.font = [UIFont systemFontOfSize:14];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    NSLog(@"%@", componentsDS);
+    
     templabel.componentsAndPlainText = componentsDS;
 //    CGSize optimalSize = [templabel optimumSize];
     
@@ -70,7 +70,15 @@
     NSString *content = _item.content_text;
     content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
+    NSLog(@"%@", componentsDS.plainTextData);
+
+    [componentsDS.plainTextData stringByReplacingOccurrencesOfString:@"A" withString:@""];
+    
+    
+    NSLog(@"%@", componentsDS.plainTextData);
+    NSLog(@"$$$$$$$$$%@", componentsDS);
     self.contentLabel.componentsAndPlainText = componentsDS;
+    [self.contentLabel.componentsAndPlainText.plainTextData stringByReplacingOccurrencesOfString:@"`" withString:@""];
 }
 
 

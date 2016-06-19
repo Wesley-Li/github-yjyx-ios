@@ -203,6 +203,7 @@
             templabel.userInteractionEnabled = NO;
             templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
+           
             templabel.componentsAndPlainText = componentsDS;
             CGSize optimalSize = [templabel optimumSize];
             return optimalSize.height +55;
@@ -317,6 +318,7 @@
             templabel.userInteractionEnabled = NO;
             templabel.font = [UIFont systemFontOfSize:14];
             RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
+         
             templabel.componentsAndPlainText = componentsDS;
             CGSize optimalSize = [templabel optimumSize];
             bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 50);
@@ -324,10 +326,11 @@
             
             [bg addSubview:templabel];
             
-            
+            // 分割线
             UIImageView *imageLine = [[UIImageView alloc] initWithFrame:CGRectMake(8, optimalSize.height + 8, SCREEN_WIDTH - 16, 1)];
             imageLine.backgroundColor = RGBACOLOR(220, 220, 220, 1);
             [cell.contentView addSubview:imageLine];
+            // 如果是多项选择
             NSString *tureAnswer = nil;
             if ([[[_choices objectForKey:key] objectForKey:@"answer"] containsString:@"|"]) {
                 NSArray *tempArr =  [[[_choices objectForKey:key] objectForKey:@"answer"] componentsSeparatedByString:@"|"];
@@ -350,14 +353,15 @@
             explainText.tag = indexPath.row;
             [explainText addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
 //            [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
+            // 解题方法按钮
             [explainText setTitle:@"解题方法" forState:UIControlStateNormal];
             [explainText setCornerRadius:5];
             explainText.titleLabel.font = [UIFont systemFontOfSize:12];
             explainText.backgroundColor = RGBACOLOR(22, 156, 111, 1);
             [cell.contentView addSubview:explainText];
             
-            NSLog(@"%@", [_choices objectForKey:key]);
-            
+//            NSLog(@"%@", [_choices objectForKey:key]);
+            //  是否是会员
             if ([[[_choices objectForKey:key] objectForKey:@"showview"] isEqual:@1]) {
                 explainText.hidden = NO;
             }else {
@@ -368,26 +372,42 @@
 
             NSString *myanswer1 = [[NSString alloc] initWithFormat:@""];
             NSArray *resultary = [[_resultchoices objectAtIndex:indexPath.row] objectAtIndex:1];
+            NSLog(@"%@", _resultchoices);
+            NSLog(@"%@", resultary);
             for (int i = 0; i< [resultary count]; i++) {
-                myanswer1 = [myanswer1 stringByAppendingString:[NSString stringWithFormat:@"%@ ",[letterAry objectAtIndex:[[resultary objectAtIndex:i] integerValue]]]];
+                myanswer1 = [myanswer1 stringByAppendingString:[NSString stringWithFormat:@" %@",[letterAry objectAtIndex:[[resultary objectAtIndex:i] integerValue]]]];
             }
             
             NSString *myanswer = [[NSString alloc] initWithFormat:@""];
             NSInteger answerCount = [[[_choices objectForKey:key] objectForKey:@"choicecount"] integerValue];
+            NSLog(@"%ld", answerCount);
             for (int i =0 ; i< answerCount; i++) {
-                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%@ ",[letterAry objectAtIndex:i]]];
+                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@" %@",[letterAry objectAtIndex:i]]];
             }
+            NSLog(@"%@", myanswer);
             NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:myanswer];
             
             BOOL isture = [[[_resultchoices objectAtIndex:indexPath.row] objectAtIndex:2] boolValue];
-
-            NSRange range = [myanswer rangeOfString:myanswer1];
-            if (isture) {
-                [attributeString addAttribute:NSForegroundColorAttributeName value:RGBACOLOR(100, 174, 99, 1) range:range];
-            }else{
-                [attributeString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:range];
+            
+            for (int i = 0; i < resultary.count; i++) {
+                NSRange range =  NSMakeRange([resultary[i] integerValue] * 2 + 1, 1);
+//                BOOL isture = [[[_resultchoices objectAtIndex:indexPath.row] objectAtIndex:1][i] boolValue];
+                if (isture) {
+                    [attributeString addAttribute:NSForegroundColorAttributeName value:RGBACOLOR(100, 174, 99, 1) range:range];
+                }else{
+                    [attributeString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:range];
+                }
+                [attributeString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:range];
             }
-            [attributeString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:range];
+//            NSLog(@"%@", [_resultchoices objectAtIndex:indexPath.row]);
+//            NSRange range = [myanswer rangeOfString:myanswer1];
+//            NSLog(@"%@", NSStringFromRange(range));
+//            if (isture) {
+//                [attributeString addAttribute:NSForegroundColorAttributeName value:RGBACOLOR(100, 174, 99, 1) range:range];
+//            }else{
+//                [attributeString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:range];
+//            }
+//            [attributeString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:range];
             
             UILabel *childrenAnswer = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 + 40, optimalSize.height +12, SCREEN_WIDTH/2 - 50, 38)];
             childrenAnswer.attributedText = attributeString;
