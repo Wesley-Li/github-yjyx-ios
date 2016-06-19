@@ -70,15 +70,13 @@
     NSString *content = _item.content_text;
     content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    NSLog(@"%@", componentsDS.plainTextData);
+    
 
     [componentsDS.plainTextData stringByReplacingOccurrencesOfString:@"A" withString:@""];
     
-    
-    NSLog(@"%@", componentsDS.plainTextData);
-    NSLog(@"$$$$$$$$$%@", componentsDS);
     self.contentLabel.componentsAndPlainText = componentsDS;
     [self.contentLabel.componentsAndPlainText.plainTextData stringByReplacingOccurrencesOfString:@"`" withString:@""];
+    
 }
 
 

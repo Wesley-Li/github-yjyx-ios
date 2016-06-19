@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ALh-0Z-7Vw">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="266"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="194"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fWU-db-pr8">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
@@ -65,17 +65,17 @@
                                 <constraint firstItem="KH3-Na-1T7" firstAttribute="centerY" secondItem="O6e-ej-2hN" secondAttribute="centerY" id="wB2-M4-L7Q"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5rz-nr-6Cb">
-                            <rect key="frame" x="0.0" y="144" width="375" height="71"/>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5rz-nr-6Cb">
+                            <rect key="frame" x="0.0" y="143" width="375" height="0.0"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="状态" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="va0-Fa-fKT">
-                                    <rect key="frame" x="5" y="25" width="42" height="21"/>
+                                    <rect key="frame" x="5" y="-10" width="42" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7q-Lc-msF" customClass="siftButton">
-                                    <rect key="frame" x="62" y="23" width="65" height="25"/>
+                                    <rect key="frame" x="62" y="-12" width="65" height="25"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="rcw-cQ-Max"/>
@@ -89,7 +89,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WB2-Li-yHF" customClass="siftButton">
-                                    <rect key="frame" x="142" y="23" width="64" height="25"/>
+                                    <rect key="frame" x="142" y="-12" width="64" height="25"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="G4A-Xy-Flj"/>
@@ -103,7 +103,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFa-Sr-P4R" customClass="siftButton">
-                                    <rect key="frame" x="221" y="23" width="65" height="25"/>
+                                    <rect key="frame" x="221" y="-12" width="65" height="25"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="o1R-ff-g1t"/>
@@ -122,17 +122,20 @@
                                 <constraint firstItem="bFa-Sr-P4R" firstAttribute="centerY" secondItem="va0-Fa-fKT" secondAttribute="centerY" id="1WT-cI-BAh"/>
                                 <constraint firstItem="va0-Fa-fKT" firstAttribute="centerY" secondItem="5rz-nr-6Cb" secondAttribute="centerY" id="BQ7-Uw-RvO"/>
                                 <constraint firstItem="WB2-Li-yHF" firstAttribute="centerY" secondItem="va0-Fa-fKT" secondAttribute="centerY" id="R0K-FM-JN8"/>
-                                <constraint firstAttribute="height" constant="71" id="Xrn-7L-9md"/>
+                                <constraint firstAttribute="height" id="Xrn-7L-9md"/>
                                 <constraint firstItem="e7q-Lc-msF" firstAttribute="centerY" secondItem="5rz-nr-6Cb" secondAttribute="centerY" id="jOz-LU-9jP"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dnK-eI-YXx">
-                            <rect key="frame" x="0.0" y="216" width="375" height="50"/>
+                            <rect key="frame" x="0.0" y="144" width="375" height="50"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDr-E5-ARX">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <state key="normal" title="确定"/>
+                                    <connections>
+                                        <action selector="configureBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="8Vl-MV-NlY"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -295,7 +298,7 @@
                         <constraint firstItem="va0-Fa-fKT" firstAttribute="trailing" secondItem="O6e-ej-2hN" secondAttribute="trailing" id="tYQ-1b-DoF"/>
                         <constraint firstItem="WB2-Li-yHF" firstAttribute="trailing" secondItem="fsy-71-9l8" secondAttribute="trailing" id="wUU-PR-mRD"/>
                         <constraint firstItem="5rz-nr-6Cb" firstAttribute="leading" secondItem="ALh-0Z-7Vw" secondAttribute="leading" id="xoC-hd-EqG"/>
-                        <constraint firstItem="5rz-nr-6Cb" firstAttribute="top" secondItem="D1x-Sn-bhu" secondAttribute="bottom" constant="1" id="y2M-mY-DOA"/>
+                        <constraint firstItem="5rz-nr-6Cb" firstAttribute="top" secondItem="D1x-Sn-bhu" secondAttribute="bottom" id="y2M-mY-DOA"/>
                     </constraints>
                 </view>
             </subviews>

@@ -8,7 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol siftContentViewDelegate <NSObject>
+
+- (void)configurePamra;// 配置参数
+
+@end
+
 @interface siftContentView : UIView
 
+@property (nonatomic, copy) NSString *questionType;// 题目类型
+@property (nonatomic, copy) NSString *level;// 难度
+
+@property (nonatomic, weak) id<siftContentViewDelegate> delegate;
+
+
 + (instancetype)siftContentViewFromXib;
+
 @end

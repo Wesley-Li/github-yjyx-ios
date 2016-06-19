@@ -15,16 +15,18 @@
 #import "QuestionDataBase.h"
 
 #define ID @"subjectContentCell"
-@interface ChapterChoiceController ()<UITableViewDelegate, UITableViewDataSource>
+@interface ChapterChoiceController ()<UITableViewDelegate, UITableViewDataSource, siftContentViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *bottom_button;
-
+@property (nonatomic, strong) UIButton *siftBtn;// 筛选按钮
 @property (strong, nonatomic) siftContentView *siftV;// 筛选菜单
 @property (nonatomic, strong) NSMutableArray *dataSoruce;// 数据源
 @property (nonatomic, strong) NSMutableArray *addArray;// 已选题目
 
 @property (nonatomic, strong) NSNumber *last_id;
+
+@property (nonatomic, copy) NSString *urlString;
 
 
 @end
@@ -53,6 +55,7 @@
 {
     if (_siftV == nil) {
         siftContentView *siftV = [siftContentView siftContentViewFromXib];
+        siftV.delegate = self;
         siftV.frame = CGRectMake(0,  -(SCREEN_HEIGHT - 64) + 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
         [self.view  insertSubview:siftV aboveSubview:self.tableView];
         _siftV = siftV;
@@ -79,12 +82,13 @@
     
     self.bottom_button.backgroundColor = RGBACOLOR(3, 138, 228, 1);
     
+    
     // 导航栏右按钮的使用
-    UIButton *siftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    siftBtn.frame = CGRectMake(0, 0, 50, 50);
-    [siftBtn setTitle:@"筛选" forState:UIControlStateNormal];
-    [siftBtn addTarget:self action:@selector(sift:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:siftBtn];
+    self.siftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _siftBtn.frame = CGRectMake(0, 0, 50, 50);
+    [_siftBtn setTitle:@"筛选" forState:UIControlStateNormal];
+    [_siftBtn addTarget:self action:@selector(sift:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_siftBtn];
     
     // tableview的属性设置
     self.tableView.backgroundColor = COMMONCOLOR;
@@ -97,10 +101,7 @@
     // 加载刷新按钮
     [self loadRefresh];
     
-    
-    
-    
-    
+ 
     
 }
 
@@ -157,9 +158,21 @@
     NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
     
     pamar[@"action"] = @"m_search";
-    pamar[@"question_type"] = @"choice";
+    
+    // 题目类型
+    if (self.questionType == nil) {
+        pamar[@"question_type"] = @"choice";
+    }else {
+    
+        pamar[@"question_type"] = self.questionType;
+    }
+    
     pamar[@"lastid"]  = _last_id;
     
+
+    
+    
+    // 章节信息
     pamar[@"sgt_dict"] = @{
                            
                            @"textbookunitid" : _g_id,
@@ -170,9 +183,19 @@
     
     NSString *aString = [pamar[@"sgt_dict"] JSONString];
     
-    NSString *urlString = [BaseURL stringByAppendingString:[NSString stringWithFormat:@"%@?action=%@&question_type=%@&lastid=%@&sgt_dict=%@", SEARCH_QUESTION_GET, pamar[@"action"], pamar[@"question_type"], pamar[@"lastid"], aString]];
     
-    NSString *urlEcoding = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    self.urlString = [BaseURL stringByAppendingString:[NSString stringWithFormat:@"%@?action=%@&question_type=%@&lastid=%@&sgt_dict=%@", SEARCH_QUESTION_GET, pamar[@"action"], pamar[@"question_type"], pamar[@"lastid"], aString]];
+    
+    // 标签信息
+    if (self.level != nil) {
+        pamar[@"tags"] = @{@"level":_level};
+        NSString *tagString = [pamar[@"tags"] JSONString];
+        self.urlString = [self.urlString stringByAppendingString:[NSString stringWithFormat:@"&tags=%@", tagString]];
+    }
+    
+    NSLog(@"%@", self.urlString);
+    
+    NSString *urlEcoding = [self.urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     [SVProgressHUD showWithStatus:@"正在请求数据..."];
     [manager GET:urlEcoding parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
@@ -205,8 +228,19 @@
             
             [self.tableView reloadData];
             
-            [SVProgressHUD showSuccessWithStatus:@"数据加载成功"];
-            [SVProgressHUD dismissWithDelay:0.8];
+            if (self.dataSoruce.count == 0) {
+                
+                [SVProgressHUD showErrorWithStatus:@"暂时还没有响应题目,我们会尽快添加,敬请期待"];
+                [SVProgressHUD dismissWithDelay:2.0];
+                
+            }else {
+                
+                [SVProgressHUD showSuccessWithStatus:@"数据加载成功"];
+                [SVProgressHUD dismissWithDelay:0.8];
+
+            
+            }
+            
         }else{
             [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             
@@ -313,6 +347,18 @@
         [self.navigationController pushViewController:previewVC animated:YES];
 
     }
+    
+    
+}
+
+
+#pragma mark - siftContentViewDelegate
+- (void)configurePamra {
+
+    self.questionType = self.siftV.questionType;
+    self.level = self.siftV.level;
+    self.siftBtn.selected = !_siftBtn.selected;
+    [self loadNewData];
     
     
 }

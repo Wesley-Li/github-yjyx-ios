@@ -21,6 +21,7 @@
 // 版本号
 @property (assign, nonatomic) NSInteger verid;
 
-
+@property (nonatomic, copy) NSString *questionType;// 题目类型
+@property (nonatomic, copy) NSString *level;// 难度
 
 @end

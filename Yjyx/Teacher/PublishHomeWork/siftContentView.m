@@ -41,13 +41,58 @@
     self.preTypeBtn.selected = NO;
     sender.selected = YES;
     self.preTypeBtn = sender;
+    if (sender == self.choiceBtn) {
+        self.questionType = @"choice";
+    }else {
+    
+        self.questionType = @"blankfill";
+    }
     
 }
 
 - (IBAction)levelBtnClicked:(siftButton *)sender {
-    self.preLevelBtn.selected = NO;
-    sender.selected = YES;
+//    self.preLevelBtn.selected = NO;
+    sender.selected = !sender.selected;
     self.preLevelBtn= sender;
+    if (self.easyBtn.selected && self.middleBtn.selected && self.hardBtn.selected) {
+        self.allLevelBtn.selected = YES;
+        self.easyBtn.selected = NO;
+        self.middleBtn.selected = NO;
+        self.hardBtn.selected = NO;
+        
+        self.level = @"1|2|3";
+        
+    }else if (self.allLevelBtn.selected) {
+        
+        self.easyBtn.selected = NO;
+        self.middleBtn.selected = NO;
+        self.hardBtn.selected = NO;
+        
+        self.level = @"1|2|3";
+    }else if (self.easyBtn.selected && !self.middleBtn.selected && !self.hardBtn.selected) {
+    
+        self.level = @"1";
+    }else if (self.middleBtn.selected && !self.easyBtn.selected && !self.hardBtn.selected) {
+        
+        self.level = @"2";
+    }else if (self.hardBtn.selected && !self.easyBtn.selected && !self.middleBtn.selected) {
+        
+        self.level = @"3";
+    }else if (self.easyBtn.selected && self.middleBtn.selected && !self.hardBtn.selected) {
+        
+        self.level = @"1|2";
+    }else if (self.easyBtn.selected && self.hardBtn.selected && !self.middleBtn.selected) {
+    
+        self.level = @"1|3";
+    }else {
+    
+        self.level = @"2|3";
+    }
+
+
+
+    
+    
 }
 
 - (IBAction)statusBtnClicked:(siftButton *)sender {
@@ -55,5 +100,16 @@
     sender.selected = YES;
     self.preStatusBtn = sender;
 }
+
+// 确定
+- (IBAction)configureBtnClick:(UIButton *)sender {
+    
+    [self.delegate configurePamra];
+    self.transform = CGAffineTransformMakeTranslation(0, -(SCREEN_HEIGHT - 64));
+    
+    
+}
+
+
 
 @end
