@@ -17,8 +17,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66f-M0-6ms">
                         <rect key="frame" x="10" y="0.0" width="444" height="167"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R3Q-t7-7l0">
-                                <rect key="frame" x="170" y="137" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R3Q-t7-7l0">
+                                <rect key="frame" x="199" y="132" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Kjd-It-4wR"/>
                                     <constraint firstAttribute="width" constant="46" id="wnr-Wg-bhK"/>
@@ -36,13 +36,21 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QXL-9L-MsD">
+                                <rect key="frame" x="0.0" y="25" width="444" height="107"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="JT8-hy-ova" firstAttribute="top" secondItem="66f-M0-6ms" secondAttribute="top" constant="5" id="5dA-hF-siY"/>
+                            <constraint firstItem="QXL-9L-MsD" firstAttribute="top" secondItem="JT8-hy-ova" secondAttribute="bottom" id="EdB-tj-6ft"/>
                             <constraint firstItem="JT8-hy-ova" firstAttribute="leading" secondItem="66f-M0-6ms" secondAttribute="leading" constant="20" id="QGP-OA-jrn"/>
                             <constraint firstAttribute="bottom" secondItem="R3Q-t7-7l0" secondAttribute="bottom" constant="5" id="RYX-Jt-NpT"/>
+                            <constraint firstAttribute="trailing" secondItem="QXL-9L-MsD" secondAttribute="trailing" id="Rlc-YD-tLq"/>
                             <constraint firstItem="R3Q-t7-7l0" firstAttribute="centerX" secondItem="66f-M0-6ms" secondAttribute="centerX" id="hIq-ln-VER"/>
+                            <constraint firstItem="QXL-9L-MsD" firstAttribute="leading" secondItem="66f-M0-6ms" secondAttribute="leading" id="kvi-Z2-LWZ"/>
+                            <constraint firstItem="R3Q-t7-7l0" firstAttribute="top" secondItem="QXL-9L-MsD" secondAttribute="bottom" id="sPu-fH-SLp"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -56,6 +64,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="BGVIEW" destination="QXL-9L-MsD" id="ezi-m8-BTY"/>
                 <outlet property="bg_view" destination="66f-M0-6ms" id="dhK-Ub-r94"/>
                 <outlet property="showMoreBtn" destination="R3Q-t7-7l0" id="eLM-Iw-szr"/>
                 <outlet property="submitLabel" destination="JT8-hy-ova" id="7Sp-hk-smS"/>

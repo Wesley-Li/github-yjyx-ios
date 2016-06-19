@@ -16,13 +16,19 @@
 #import "NextTableViewController.h"
 #import "YourAnswerCell.h"
 
+@interface AnswerSituationCell ()
 
+@property (weak, nonatomic) IBOutlet UIView *bg_view;
+
+
+@end
 
 @implementation AnswerSituationCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+    
 }
 
 - (NSArray *)r_arr {
@@ -42,9 +48,14 @@
 }
 
 - (void)setValueWithCorrectArray:(NSArray *)correctArray andWrongArray:(NSArray *)wrongArray {
+    
+    // 移除该视图上的所有子视图,不然走一次就会加一层
+    for (UIView *view in [self.bg_view subviews]) {
+        [view removeFromSuperview];
+    }
 
     NSInteger totalCount = correctArray.count + wrongArray.count;
-    UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.summaryLabel.origin.y + 30, SCREEN_WIDTH - 20, 20)];
+    UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.summaryLabel.height, SCREEN_WIDTH - 20, 20)];
     if (correctArray.count == 0 || totalCount == 0) {
         contentLabel.text = [NSString stringWithFormat:@"答题人数%ld人, 正确率为0%%;", (long)totalCount];
     }else {
@@ -53,7 +64,7 @@
     }
     
     contentLabel.font = [UIFont systemFontOfSize:12];
-    [self.contentView addSubview:contentLabel];
+    [self.bg_view addSubview:contentLabel];
     
     
     // 答题正确人数
@@ -126,7 +137,7 @@
 //    correctView.frame = CGRectMake(0, contentLabel.origin.y + contentLabel.height, SCREEN_WIDTH - 40, size.height + tHeigh + 20);
     
     // 将正确的人数添加到父视图
-    [self.contentView addSubview:_correctView];
+    [self.bg_view addSubview:_correctView];
     
     
     
@@ -199,7 +210,7 @@
     wFrame.size.height = size2.height + tHeigh2 + 20;
     _wrongView.frame = wFrame;
     } 
-    [self.contentView addSubview:_wrongView];
+    [self.bg_view addSubview:_wrongView];
     
     self.height = _wrongView.origin.y + _wrongView.height + 20;
 

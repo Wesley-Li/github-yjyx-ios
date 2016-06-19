@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *bg_view;
 
 
 @end

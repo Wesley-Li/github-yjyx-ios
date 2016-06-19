@@ -13,6 +13,8 @@
 @property (nonatomic, assign) CGSize optimalSize;
 @property (nonatomic, assign) CGFloat height;
 
+@property (nonatomic, strong) NSDictionary *dic;
+
 /**
  *根据字典赋值
  */

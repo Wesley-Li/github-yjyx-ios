@@ -13,9 +13,9 @@
 
 
 @property (weak, nonatomic) IBOutlet UILabel *dificultyLabel;
+@property (nonatomic, strong) RCLabel *contentLabel;
 
-//@property (weak, nonatomic) IBOutlet RCLabel *contentLabel;
-
+@property (weak, nonatomic) IBOutlet UIView *bg_view;
 
 
 
@@ -26,7 +26,20 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+
+    
+    NSString *content = [NSString stringWithFormat:@"%@", [_dic[@"question"] objectForKey:@"content"]];
+    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH - 20, 999)];
+    self.contentLabel = templabel;
+    templabel.userInteractionEnabled = NO;
+    templabel.font = [UIFont systemFontOfSize:14];
+    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
+    templabel.componentsAndPlainText = componentsDS;
+    
+    [self.bg_view addSubview:templabel];
+    
+    
 }
 
 - (void)setValueWithDictionary:(NSDictionary *)dic {
@@ -38,14 +51,13 @@
     
     NSString *htmlString = [NSString stringWithFormat:@"%@", [dic[@"question"] objectForKey:@"content"]];
     NSString *content = [htmlString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *contentLabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 5, SCREEN_WIDTH - 20, 500)];
-    contentLabel.userInteractionEnabled = NO;
-    contentLabel.font = [UIFont systemFontOfSize:12];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    contentLabel.componentsAndPlainText = componentsDS;
-    CGSize optimalSize = [contentLabel optimumSize];
+    self.contentLabel.componentsAndPlainText = componentsDS;
+    
+    CGSize optimalSize = [_contentLabel optimumSize];
     self.height = optimalSize.height + 15 + 30;
-    [self.contentView addSubview:contentLabel];
+
+
 
     NSInteger level;
     if ([dic[@"question"][@"level"] isEqual:[NSNull null]]) {

@@ -24,13 +24,22 @@
                         <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kbh-8v-cNJ">
+                        <rect key="frame" x="0.0" y="25" width="387" height="156"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="kbh-8v-cNJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="7zX-bw-smy"/>
                     <constraint firstItem="mCd-v8-pfp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="9ia-t6-5qj"/>
                     <constraint firstItem="mCd-v8-pfp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Cl1-Xe-0Pe"/>
+                    <constraint firstItem="kbh-8v-cNJ" firstAttribute="top" secondItem="mCd-v8-pfp" secondAttribute="bottom" id="NpV-Im-o6s"/>
+                    <constraint firstAttribute="trailing" secondItem="kbh-8v-cNJ" secondAttribute="trailing" id="XoE-hR-Gww"/>
+                    <constraint firstAttribute="bottom" secondItem="kbh-8v-cNJ" secondAttribute="bottom" id="bFI-ab-2de"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bg_view" destination="kbh-8v-cNJ" id="jkU-uc-02w"/>
                 <outlet property="solutionLabel" destination="mCd-v8-pfp" id="7Iu-CN-yBp"/>
                 <outlet property="title_label" destination="mCd-v8-pfp" id="U9a-4e-BX4"/>
             </connections>

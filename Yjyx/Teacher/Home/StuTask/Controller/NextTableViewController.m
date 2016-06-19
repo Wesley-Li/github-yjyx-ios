@@ -265,13 +265,15 @@
 
 // 强制重载单个cell
 - (void)viewDidAppear:(BOOL)animated {
+    
+    [self.tableView reloadData];
 
-    if (rows != 0) {
-        NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:0 inSection:0];
-        NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:3 inSection:0];
-        NSArray *indexPathArray = [NSArray arrayWithObjects:indexPath1,indexPath2, nil];
-        [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
-    }
+//    if (rows != 0) {
+//        NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:0 inSection:0];
+//        NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:3 inSection:0];
+//        NSArray *indexPathArray = [NSArray arrayWithObjects:indexPath1,indexPath2, nil];
+//        [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+//    }
     
 }
 
@@ -420,11 +422,14 @@
         self.taskCell = [tableView dequeueReusableCellWithIdentifier:KTaskCell forIndexPath:indexPath];
         self.taskCell.selectionStyle = UITableViewCellSelectionStyleNone;
 //        NSLog(@"%@", _dic);
+        _taskCell.dic = [NSDictionary dictionaryWithDictionary:_dic];
         [_taskCell setValueWithDictionary:_dic];
         
         return _taskCell;
     }else if (indexPath.row == 1) {
     
+        NSLog(@"%@", _dic);
+        
         self.AnswerSituationCell = [tableView dequeueReusableCellWithIdentifier:KAnswerSituationCell forIndexPath:indexPath];
         self.AnswerSituationCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -434,6 +439,7 @@
         _AnswerSituationCell.taskid = self.taskid;
         _AnswerSituationCell.navi = self;
         _AnswerSituationCell.qid = self.qid;
+        
         
         [_AnswerSituationCell setValueWithCorrectArray:[_dic[@"summary"] objectForKey:@"CNL"] andWrongArray:[_dic[@"summary"] objectForKey:@"WNL"]];
         return _AnswerSituationCell;
@@ -646,6 +652,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     if (indexPath.row == 0) {
+        
         
         return _taskCell.height;
     }else if (indexPath.row == 1) {

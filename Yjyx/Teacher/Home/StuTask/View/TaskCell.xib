@@ -14,33 +14,46 @@
                 <rect key="frame" x="0.0" y="0.0" width="493" height="159"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrt-Ze-wYQ">
-                        <rect key="frame" x="0.0" y="158" width="493" height="1"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OiW-Vu-oy2" userLabel="bg_view">
+                        <rect key="frame" x="0.0" y="0.0" width="493" height="159"/>
+                        <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrt-Ze-wYQ" userLabel="lineView">
+                                <rect key="frame" x="0.0" y="158" width="493" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="OQv-ND-tmR"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="难度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmq-3K-3I2">
+                                <rect key="frame" x="10" y="133" width="473" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="mED-Lw-4IL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="OQv-ND-tmR"/>
+                            <constraint firstAttribute="trailing" secondItem="xrt-Ze-wYQ" secondAttribute="trailing" id="4Va-E8-yfB"/>
+                            <constraint firstItem="xrt-Ze-wYQ" firstAttribute="leading" secondItem="OiW-Vu-oy2" secondAttribute="leading" id="I5q-HQ-BaF"/>
+                            <constraint firstAttribute="bottom" secondItem="xrt-Ze-wYQ" secondAttribute="bottom" id="j4H-da-ahK"/>
+                            <constraint firstAttribute="trailing" secondItem="wmq-3K-3I2" secondAttribute="trailing" constant="10" id="nVH-xO-s0a"/>
+                            <constraint firstItem="wmq-3K-3I2" firstAttribute="leading" secondItem="OiW-Vu-oy2" secondAttribute="leading" constant="10" id="uuv-de-LTm"/>
+                            <constraint firstItem="xrt-Ze-wYQ" firstAttribute="top" secondItem="wmq-3K-3I2" secondAttribute="bottom" constant="5" id="zDV-WC-dGW"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="难度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmq-3K-3I2">
-                        <rect key="frame" x="8" y="131" width="473" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="mED-Lw-4IL"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="xrt-Ze-wYQ" secondAttribute="trailing" id="3ZA-Io-CDE"/>
-                    <constraint firstItem="xrt-Ze-wYQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Hz4-d9-vUd"/>
-                    <constraint firstAttribute="trailing" secondItem="wmq-3K-3I2" secondAttribute="trailing" constant="10" id="VMv-gR-8QF"/>
-                    <constraint firstItem="wmq-3K-3I2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="jS3-Kp-7Fb"/>
-                    <constraint firstAttribute="bottom" secondItem="wmq-3K-3I2" secondAttribute="bottom" constant="5" id="vHU-iu-1A8"/>
-                    <constraint firstAttribute="bottom" secondItem="xrt-Ze-wYQ" secondAttribute="bottom" id="xyP-wO-8A6"/>
+                    <constraint firstAttribute="bottom" secondItem="OiW-Vu-oy2" secondAttribute="bottom" id="8sw-05-iEl"/>
+                    <constraint firstItem="OiW-Vu-oy2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Buh-Qy-dTc"/>
+                    <constraint firstItem="OiW-Vu-oy2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="bzW-vM-vbv"/>
+                    <constraint firstAttribute="trailing" secondItem="OiW-Vu-oy2" secondAttribute="trailing" id="yYe-SF-cYU"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bg_view" destination="OiW-Vu-oy2" id="Sfm-Qd-29Z"/>
                 <outlet property="dificultyLabel" destination="wmq-3K-3I2" id="T7e-II-nJ7"/>
             </connections>
             <point key="canvasLocation" x="275.5" y="415"/>

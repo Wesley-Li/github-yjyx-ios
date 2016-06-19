@@ -573,13 +573,18 @@
 #pragma mark - 选择题cell赋值方法
 - (void)cell:(TaskConditionTableViewCell *)cell addSubViewsWithChoiceArr:(NSMutableArray *)arr {
     
-    CGSize size = CGSizeMake(10, 30);// 初始位置
+    
+    // 清空上次添加的所有子视图
+    for (UIView *view in [cell.BGVIEW subviews]) {
+        [view removeFromSuperview];
+    }
+    
+    CGSize size = CGSizeMake(10, 0);// 初始位置
     CGFloat padding = 10;// 间距
     NSInteger num = 6;
     
-    CGFloat tWidth = (cell.bg_view.width - padding *(num + 1)) / num;
-    NSLog(@"%.f", cell.bg_view.width);
-    NSLog(@"#######%.f", tWidth);
+    CGFloat tWidth = (cell.BGVIEW.width - padding *(num + 1)) / num;
+    
     CGFloat tHeigh = tWidth + 20;
     
     //    NSLog(@"%@", self.choiceArr);
@@ -592,7 +597,7 @@
         
         size.width += tWidth + padding;
         
-        if (cell.bg_view.width - size.width <= 0) {
+        if (cell.BGVIEW.width - size.width <= 0) {
             // 换行
             size.width = 10;
             
@@ -610,8 +615,6 @@
         imageView.image = [UIImage imageNamed:@"corect_pic"];
         UIButton *choiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         choiceBtn.frame = CGRectMake(0, 20, tWidth, tWidth);
-        
-        NSLog(@"^^^^^%@", model.C_count);
         
         
         NSString *titleString;
@@ -638,9 +641,9 @@
         [taskView addSubview:imageView];
         [taskView addSubview:choiceBtn];
         
-        [cell.bg_view addSubview:taskView];
+        [cell.BGVIEW addSubview:taskView];
     }
-    self.choiceTaskCellHeight = size.height + 80 + 30;
+    self.choiceTaskCellHeight = size.height + tHeigh + 70;
     
 }
 
@@ -664,12 +667,17 @@
 #pragma mark - 填空题cell赋值方法
 - (void)cell:(TaskConditionTableViewCell *)cell addSubViewsWithBlankfillArr:(NSMutableArray *)arr{
     
-    CGSize size = CGSizeMake(10, 30);
+    // 清空上次添加的所有子视图
+    for (UIView *view in [cell.BGVIEW subviews]) {
+        [view removeFromSuperview];
+    }
+    
+    CGSize size = CGSizeMake(10, 0);
     CGFloat padding = 10;
     
     NSInteger num = 6;
     
-    CGFloat tWidth = (cell.bg_view.width - padding *(num + 1)) / num;
+    CGFloat tWidth = (cell.BGVIEW.width - padding *(num + 1)) / num;
     
     
     
@@ -684,7 +692,7 @@
         
         size.width += tWidth + padding;
         
-        if (cell.bg_view.width - size.width <= 0) {
+        if (cell.BGVIEW.width - size.width <= 0) {
             // 换行
             size.width = 10;
             if (arr.count - i > 1) {
@@ -723,9 +731,9 @@
         [taskView addSubview:imageView];
         [taskView addSubview:blankfillBtn];
         
-        [cell.bg_view addSubview:taskView];
+        [cell.BGVIEW addSubview:taskView];
     }
-    self.blankfillTaskCellHeight = size.height + 80 + 30;
+    self.blankfillTaskCellHeight = size.height + tHeigh + 70;
     
     
     
@@ -751,10 +759,14 @@
 #pragma mark - 已上交作业cell赋值方法
 - (void)cell:(SubmitCell *)cell addSubViewsWithFinishedArr:(NSMutableArray *)arr {
     
+    // 清空上次添加的所有子视图
+    for (UIView *view in [cell.BGVIEW subviews]) {
+        [view removeFromSuperview];
+    }
     
     cell.submitLabel.text = [NSString stringWithFormat:@"已交作业的同学数(%ld/%ld)", (unsigned long)_finishedArr.count, (unsigned long)_unfinishedArr.count + (unsigned long)_finishedArr.count];
     
-    CGSize size = CGSizeMake(10, 30);
+    CGSize size = CGSizeMake(10, 0);
     CGFloat padding = 10;
     
     NSInteger num = 6;
@@ -806,22 +818,30 @@
         [taskView addSubview:label];
         [taskView addSubview:imageBtn];
         
-        [cell.bg_view addSubview:taskView];
+        [cell.BGVIEW addSubview:taskView];
     }
+    
+    // 判断显示更多按钮是否需要显示
+    
     
     cell.showMoreBtn.hidden = YES;
     
     
-    self.submitCellHeight = size.height + 80 + 30;
+    self.submitCellHeight = size.height + tHeigh + 30 + 30;
     
 }
 
 #pragma mark - 未上交作业cell赋值方法
 - (void)cell:(UnSubmitCell *)cell addSubViewsWithUnfinishedArr:(NSMutableArray *)arr {
     
+    // 清空上次添加的所有子视图
+    for (UIView *view in [cell.BGVIEW subviews]) {
+        [view removeFromSuperview];
+    }
+    
     cell.submitLabel.text = [NSString stringWithFormat:@"未交作业的同学数(%ld/%ld)", (unsigned long)_unfinishedArr.count, (unsigned long)_unfinishedArr.count + (unsigned long)_finishedArr.count];
     
-    CGSize size = CGSizeMake(10, 30);
+    CGSize size = CGSizeMake(10, 0);
     CGFloat padding = 10;
     
     NSInteger num = 6;
@@ -835,7 +855,7 @@
     for (int i = 0; i < arr.count; i++) {
         
         UIView *taskView = [[UIView alloc] init];
-        [cell.bg_view addSubview:taskView];
+        [cell.BGVIEW addSubview:taskView];
         taskView.frame = CGRectMake(size.width, size.height, tWidth , tHeigh);
         
         NSLog(@"%f", size.width );
@@ -879,7 +899,7 @@
         
 //        [cell.bg_view addSubview:taskView];
     }
-    self.unsubmitCellHeight = size.height + 80 + 30;
+    self.unsubmitCellHeight = size.height + tHeigh + 30 + 30;
     cell.showMoreBtn.hidden = YES;
     
 

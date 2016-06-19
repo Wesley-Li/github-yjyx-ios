@@ -325,10 +325,13 @@
 // 选择题答题情况
 - (void)cell:(ChoiceCell *)cell addSubviewsWithChoiceArray:(NSMutableArray *)array {
 
+    for (UIView *view in [cell.bg_view subviews]) {
+        [view removeFromSuperview];
+    }
     
     cell.titleLabel.text = [NSString stringWithFormat:@"选择题答题情况(%ld)", (unsigned long)array.count];
     
-    CGSize size = CGSizeMake(10, 30);
+    CGSize size = CGSizeMake(10, 0);
     CGFloat padding = 10;
     
     NSInteger num = 7;
@@ -385,9 +388,9 @@
         [taskView addSubview:label];
         [taskView addSubview:imageBtn];
         
-        [cell.contentView addSubview:taskView];
+        [cell.bg_view addSubview:taskView];
     }
-    self.choiceCellHeight = size.height + 80 + 30;
+    self.choiceCellHeight = size.height + tHeigh + 30;
     
 
 
@@ -403,7 +406,9 @@
     TaskConditonModel *model = _choiceArray[sender.tag - 200];
     oneTaskVC.qid = model.t_id;
     oneTaskVC.title = [NSString stringWithFormat:@"%@", self.finshedModel.Name];
-//    oneTaskVC.answerArr = model.answerArr;
+    if ([model.rightOrWrong isEqual:@1]) {
+        oneTaskVC.right = @"YES";
+    }
     [self.navigationController pushViewController:oneTaskVC animated:YES];
     
 }
@@ -411,10 +416,13 @@
 // 填空题答题情况
 - (void)cell:(BlankfillCell *)cell addSubviewsWithBlankfillArray:(NSMutableArray *)array {
 
+    for (UIView *view in [cell.bg_view subviews]) {
+        [view removeFromSuperview];
+    }
 
     cell.titleLabel.text = [NSString stringWithFormat:@"填空题答题情况(%ld)", (unsigned long)array.count];
     
-    CGSize size = CGSizeMake(10, 30);
+    CGSize size = CGSizeMake(10, 0);
     CGFloat padding = 10;
     NSInteger num = 7;
     
@@ -464,9 +472,9 @@
         [taskView addSubview:label];
         [taskView addSubview:imageBtn];
         
-        [cell.contentView addSubview:taskView];
+        [cell.bg_view addSubview:taskView];
     }
-    self.blankfillCellHeight = size.height + 80 + 30;
+    self.blankfillCellHeight = size.height + tHeigh + 30;
     
 
     
@@ -481,7 +489,9 @@
     TaskConditonModel *model = _blankfillArray[sender.tag - 200];
     oneTaskVC.qid = model.t_id;
     oneTaskVC.title = [NSString stringWithFormat:@"%@", self.finshedModel.Name];
-//    oneTaskVC.answerArr = model.answerArr;
+    if ([model.rightOrWrong isEqual:@1]) {
+        oneTaskVC.right = @"YES";
+    }
     [self.navigationController pushViewController:oneTaskVC animated:YES];
 
 }

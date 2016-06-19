@@ -20,17 +20,26 @@
                             <constraint firstAttribute="height" constant="20" id="fJW-d2-Oda"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YL7-Yj-lku">
+                        <rect key="frame" x="0.0" y="25" width="478" height="181"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="bO6-od-Bdv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="5ht-Dp-ffT"/>
                     <constraint firstItem="bO6-od-Bdv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="FPL-UB-cba"/>
+                    <constraint firstItem="YL7-Yj-lku" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="IWK-YZ-25g"/>
+                    <constraint firstItem="YL7-Yj-lku" firstAttribute="top" secondItem="bO6-od-Bdv" secondAttribute="bottom" id="WM7-Du-Xvc"/>
+                    <constraint firstAttribute="trailing" secondItem="YL7-Yj-lku" secondAttribute="trailing" id="nfr-th-WAd"/>
                     <constraint firstAttribute="trailing" secondItem="bO6-od-Bdv" secondAttribute="trailing" constant="10" id="rAt-dV-b8l"/>
+                    <constraint firstAttribute="bottom" secondItem="YL7-Yj-lku" secondAttribute="bottom" id="wba-rs-qxW"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bg_view" destination="YL7-Yj-lku" id="PKO-uL-hOs"/>
                 <outlet property="titleLabel" destination="bO6-od-Bdv" id="7Rn-eZ-3tq"/>
             </connections>
             <point key="canvasLocation" x="370" y="433.5"/>

@@ -14,7 +14,10 @@
 @interface CorectCell ()
 
 
-//@property (nonatomic, assign) NSInteger ANSWER;
+
+@property (weak, nonatomic) IBOutlet UIView *bg_view;
+
+
 
 @end
 
@@ -35,6 +38,13 @@
     if (dic == nil) {
         return;
     }
+    
+    // 清空上次添加的所有子视图
+    for (UIView *view in [self.bg_view subviews]) {
+        [view removeFromSuperview];
+    }
+    
+    
     NSString *answerString = [NSString stringWithFormat:@"%@", [dic[@"question"] objectForKey:@"answer"]];
     NSArray *answerArr = [answerString componentsSeparatedByString:@"|"];
     NSMutableArray *arr = [NSMutableArray array];
@@ -100,12 +110,12 @@
 //    NSLog(@"%@", arr);
     NSString *ansString = [arr componentsJoinedByString:@","];
 
-    UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 25, SCREEN_WIDTH - 20, 40)];
+    UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH - 20, 40)];
     answerLabel.text = ansString;
     answerLabel.font = [UIFont systemFontOfSize:13];
     
     
-    [self.contentView addSubview:answerLabel];
+    [self.bg_view addSubview:answerLabel];
     self.height = answerLabel.frame.size.height + 20 + 10;
     
     
@@ -125,6 +135,12 @@
         return;
     }
     
+    // 清空上次添加的所有子视图
+    for (UIView *view in [self.bg_view subviews]) {
+        [view removeFromSuperview];
+    }
+    
+    
     NSString *htmlString = [NSString stringWithFormat:@"%@", [dic[@"question"] objectForKey:@"answer"]];
     
     
@@ -136,7 +152,7 @@
     contentLabel.componentsAndPlainText = componentsDS;
     CGSize optimalSize = [contentLabel optimumSize];
     self.height = optimalSize.height + 15 + 30;
-    [self.contentView addSubview:contentLabel];
+    [self.bg_view addSubview:contentLabel];
 
     
     

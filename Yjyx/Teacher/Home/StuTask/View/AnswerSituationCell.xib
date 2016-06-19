@@ -31,15 +31,26 @@
                             <constraint firstAttribute="height" constant="1" id="qhT-Eq-Kga"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cop-NT-lpA">
+                        <rect key="frame" x="0.0" y="25" width="446" height="213"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="gmg-iC-GSU" secondAttribute="trailing" id="5bi-Q8-qiA"/>
                     <constraint firstAttribute="bottom" secondItem="gmg-iC-GSU" secondAttribute="bottom" id="7VY-AO-sQJ"/>
+                    <constraint firstItem="gmg-iC-GSU" firstAttribute="top" secondItem="cop-NT-lpA" secondAttribute="bottom" id="Bzf-cA-cTo"/>
+                    <constraint firstAttribute="trailing" secondItem="cop-NT-lpA" secondAttribute="trailing" id="Lgv-K6-0ZQ"/>
+                    <constraint firstItem="cop-NT-lpA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="M3S-Gk-L3A"/>
                     <constraint firstItem="yv8-eP-5bh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="PTN-x0-eWA"/>
+                    <constraint firstItem="cop-NT-lpA" firstAttribute="top" secondItem="yv8-eP-5bh" secondAttribute="bottom" id="Xd8-X4-V3Y"/>
                     <constraint firstItem="yv8-eP-5bh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ePh-RX-Yic"/>
                     <constraint firstItem="gmg-iC-GSU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="sX1-qG-50S"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="bg_view" destination="cop-NT-lpA" id="k9h-CV-dhz"/>
+            </connections>
             <point key="canvasLocation" x="311" y="387"/>
         </tableViewCell>
     </objects>

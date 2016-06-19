@@ -20,17 +20,26 @@
                             <constraint firstAttribute="height" constant="20" id="zdi-fg-6qF"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kmb-JB-h0D">
+                        <rect key="frame" x="0.0" y="25" width="461" height="153"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Kmb-JB-h0D" secondAttribute="trailing" id="4Nn-WH-807"/>
                     <constraint firstAttribute="trailing" secondItem="TrS-Mo-JKH" secondAttribute="trailing" constant="10" id="Asb-hF-Odc"/>
+                    <constraint firstItem="Kmb-JB-h0D" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="FrI-zR-iVa"/>
+                    <constraint firstAttribute="bottom" secondItem="Kmb-JB-h0D" secondAttribute="bottom" id="IVd-RB-JfA"/>
+                    <constraint firstItem="Kmb-JB-h0D" firstAttribute="top" secondItem="TrS-Mo-JKH" secondAttribute="bottom" id="LhP-wy-vZc"/>
                     <constraint firstItem="TrS-Mo-JKH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="boK-BF-fNg"/>
                     <constraint firstItem="TrS-Mo-JKH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="rJc-Ry-Nl8"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bg_view" destination="Kmb-JB-h0D" id="ydH-aY-Fl9"/>
                 <outlet property="titleLabel" destination="TrS-Mo-JKH" id="7TR-fo-1eD"/>
             </connections>
             <point key="canvasLocation" x="378.5" y="419.5"/>

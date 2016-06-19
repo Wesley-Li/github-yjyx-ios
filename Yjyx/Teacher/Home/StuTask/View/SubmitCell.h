@@ -15,6 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *showMoreBtn;
 
+@property (weak, nonatomic) IBOutlet UIView *BGVIEW;
 
 
 

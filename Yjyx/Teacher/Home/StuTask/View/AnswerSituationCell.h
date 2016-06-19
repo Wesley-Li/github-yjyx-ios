@@ -22,6 +22,9 @@
 @property (nonatomic, strong) NSArray *r_arr;
 @property (nonatomic, strong) NSArray *w_arr;
 
+@property (nonatomic, strong) NSArray *correctArray;
+@property (nonatomic, strong) NSArray *wrongArray;
+
 @property (nonatomic, strong) NSNumber *qtype;
 @property (nonatomic, strong) NSNumber *taskid;
 @property (nonatomic, strong) NSNumber *qid;
