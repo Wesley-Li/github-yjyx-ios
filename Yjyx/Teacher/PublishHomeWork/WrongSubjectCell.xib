@@ -15,10 +15,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9K-d3-ajp">
-                        <rect key="frame" x="5" y="5" width="399" height="220"/>
+                        <rect key="frame" x="5" y="15" width="399" height="210"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ji-Bw-GwN">
-                                <rect key="frame" x="0.0" y="171" width="399" height="49"/>
+                                <rect key="frame" x="0.0" y="161" width="399" height="49"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共做错" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCY-Mr-ghE">
                                         <rect key="frame" x="8" y="14" width="55" height="21"/>
@@ -26,13 +26,13 @@
                                             <constraint firstAttribute="width" constant="55" id="Yzv-EQ-AWY"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17次" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bvb-xf-SGd">
                                         <rect key="frame" x="59" y="14" width="34" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zc4-1O-eDu">
@@ -41,8 +41,12 @@
                                             <constraint firstAttribute="width" constant="40" id="VQY-gg-UzZ"/>
                                             <constraint firstAttribute="height" constant="40" id="Vdh-rf-60s"/>
                                         </constraints>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal" backgroundImage="list_icon_add_nor"/>
                                         <state key="selected" backgroundImage="list_icon_add_sel"/>
+                                        <connections>
+                                            <action selector="addBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="E5l-Wm-n87"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qxg-Du-ZfD">
                                         <rect key="frame" x="289" y="5" width="40" height="40"/>
@@ -50,8 +54,12 @@
                                             <constraint firstAttribute="width" constant="40" id="WrU-ps-12G"/>
                                             <constraint firstAttribute="height" constant="40" id="wLh-mn-td8"/>
                                         </constraints>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal" backgroundImage="list_icon_collect_nor"/>
                                         <state key="selected" backgroundImage="list_icon_collect_sel"/>
+                                        <connections>
+                                            <action selector="collectBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="SkV-ag-8zH"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正确答案:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EwG-1B-PAq">
                                         <rect key="frame" x="130" y="14" width="73" height="21"/>
@@ -59,17 +67,17 @@
                                             <constraint firstAttribute="width" constant="73" id="NyG-oK-Fvo"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.07444966032" green="0.55273154769999999" blue="0.39778147209999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1P-D4-8CJ">
                                         <rect key="frame" x="203" y="14" width="12" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.07444966032" green="0.55273154769999999" blue="0.39778147209999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.1843137255" green="0.57254901960000004" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Bvb-xf-SGd" firstAttribute="centerY" secondItem="5ji-Bw-GwN" secondAttribute="centerY" id="4Yt-le-N3R"/>
                                     <constraint firstItem="Zc4-1O-eDu" firstAttribute="centerY" secondItem="5ji-Bw-GwN" secondAttribute="centerY" id="52X-hq-XbZ"/>
@@ -87,7 +95,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kk7-1o-nFy">
-                                <rect key="frame" x="8" y="165" width="383" height="1"/>
+                                <rect key="frame" x="8" y="155" width="383" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="IV0-6k-sze"/>
@@ -106,13 +114,20 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="E9K-d3-ajp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="JCs-mM-a2y"/>
+                    <constraint firstItem="E9K-d3-ajp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="JCs-mM-a2y"/>
                     <constraint firstItem="E9K-d3-ajp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="KlD-9Z-8sv"/>
                     <constraint firstAttribute="trailing" secondItem="E9K-d3-ajp" secondAttribute="trailing" constant="5" id="YR0-g2-2OY"/>
                     <constraint firstAttribute="bottom" secondItem="E9K-d3-ajp" secondAttribute="bottom" constant="5" id="ddz-3x-Zi5"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="379.5" y="262.5"/>
+            <connections>
+                <outlet property="addBtn" destination="Zc4-1O-eDu" id="GiS-5b-seO"/>
+                <outlet property="bgView" destination="E9K-d3-ajp" id="HpQ-qP-VGL"/>
+                <outlet property="collectBtn" destination="Qxg-Du-ZfD" id="X03-Pb-QD2"/>
+                <outlet property="rightAnswerLabel" destination="G1P-D4-8CJ" id="awP-AF-kXG"/>
+                <outlet property="wrongTimesLabel" destination="Bvb-xf-SGd" id="upY-Cy-dh7"/>
+            </connections>
+            <point key="canvasLocation" x="271.5" y="247.5"/>
         </tableViewCell>
     </objects>
     <resources>

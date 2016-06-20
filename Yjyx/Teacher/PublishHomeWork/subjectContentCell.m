@@ -71,21 +71,16 @@
     content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
     
-
-    [componentsDS.plainTextData stringByReplacingOccurrencesOfString:@"A" withString:@""];
-    
     self.contentLabel.componentsAndPlainText = componentsDS;
-    [self.contentLabel.componentsAndPlainText.plainTextData stringByReplacingOccurrencesOfString:@"`" withString:@""];
+   
     
 }
-
-
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     self.contentLabel.frame = _item.RCLabelFrame;
-//    self.bgView.frame = CGRectMake(5, 30, SCREEN_WIDTH - 10, self.contentLabel.height + 20);
+
 }
 
 @end
