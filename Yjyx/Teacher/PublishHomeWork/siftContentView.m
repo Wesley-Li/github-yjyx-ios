@@ -28,8 +28,14 @@
  - (void)awakeFromNib
 {
     self.preTypeBtn = self.choiceBtn;
-    self.preLevelBtn = self.allLevelBtn;
+//    self.preLevelBtn = self.allLevelBtn;
+    self.allLevelBtn.selected = YES;
     self.preStatusBtn = self.allStatusBtn;
+    
+    // 注册通知
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(notice:) name:@"levelChange" object:nil];
+    
 }
 
 + (instancetype)siftContentViewFromXib
@@ -50,10 +56,41 @@
     
 }
 
-- (IBAction)levelBtnClicked:(siftButton *)sender {
-//    self.preLevelBtn.selected = NO;
+
+
+- (IBAction)easyBtnClick:(siftButton *)sender {
+    
     sender.selected = !sender.selected;
-    self.preLevelBtn= sender;
+    self.allLevelBtn.selected = NO;
+    NSNotification *notice = [NSNotification notificationWithName:@"levelChange" object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notice];
+}
+
+- (IBAction)middleBtnClick:(siftButton *)sender {
+    sender.selected = !sender.selected;
+    self.allLevelBtn.selected = NO;
+    NSNotification *notice = [NSNotification notificationWithName:@"levelChange" object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notice];
+
+}
+
+- (IBAction)hardBtnClick:(siftButton *)sender {
+    sender.selected = !sender.selected;
+    self.allLevelBtn.selected = NO;
+    NSNotification *notice = [NSNotification notificationWithName:@"levelChange" object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notice];
+
+}
+
+- (IBAction)allLevelBtnClick:(siftButton *)sender {
+    sender.selected = !sender.selected;
+    NSNotification *notice = [NSNotification notificationWithName:@"levelChange" object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:notice];
+
+}
+
+- (void)notice:(NSNotification *)sender {
+
     if (self.easyBtn.selected && self.middleBtn.selected && self.hardBtn.selected) {
         self.allLevelBtn.selected = YES;
         self.easyBtn.selected = NO;
@@ -62,7 +99,7 @@
         
         self.level = @"1|2|3";
         
-    }else if (self.allLevelBtn.selected) {
+    }else if (self.allLevelBtn.selected ) {
         
         self.easyBtn.selected = NO;
         self.middleBtn.selected = NO;
@@ -70,30 +107,31 @@
         
         self.level = @"1|2|3";
     }else if (self.easyBtn.selected && !self.middleBtn.selected && !self.hardBtn.selected) {
-    
+        self.allLevelBtn.selected = NO;
         self.level = @"1";
     }else if (self.middleBtn.selected && !self.easyBtn.selected && !self.hardBtn.selected) {
-        
+        self.allLevelBtn.selected = NO;
         self.level = @"2";
     }else if (self.hardBtn.selected && !self.easyBtn.selected && !self.middleBtn.selected) {
-        
+        self.allLevelBtn.selected = NO;
         self.level = @"3";
     }else if (self.easyBtn.selected && self.middleBtn.selected && !self.hardBtn.selected) {
-        
+        self.allLevelBtn.selected = NO;
         self.level = @"1|2";
     }else if (self.easyBtn.selected && self.hardBtn.selected && !self.middleBtn.selected) {
-    
+        self.allLevelBtn.selected = NO;
         self.level = @"1|3";
     }else {
-    
+        self.allLevelBtn.selected = NO;
         self.level = @"2|3";
     }
 
-
-
-    
     
 }
+
+
+
+
 
 - (IBAction)statusBtnClicked:(siftButton *)sender {
     self.preStatusBtn.selected = NO;
