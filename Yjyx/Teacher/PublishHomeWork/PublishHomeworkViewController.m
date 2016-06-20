@@ -147,7 +147,7 @@
 - (IBAction)wrongBtn:(UIButton *)sender {
     
 //    WrongSubjectController *wrongVC = [[WrongSubjectController alloc] initWithNibName:@"WrongSubjectController" bundle:nil];
-//    wrongVC.title = @"错题库";
+//    wrongVC.title = @"错题榜";
 //    [self.navigationController pushViewController:wrongVC animated:YES];
     
 }

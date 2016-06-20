@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class YjyxWrongSubModel;
 @interface WrongSubjectCell : UITableViewCell
-
+// 错题模型
+@property (strong, nonatomic) YjyxWrongSubModel *wrongSubModel;
 @end

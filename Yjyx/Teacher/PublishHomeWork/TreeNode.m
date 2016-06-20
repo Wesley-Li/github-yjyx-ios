@@ -18,7 +18,11 @@ static NSInteger k = 0;
         return nil;
     }
     TreeNode *node = [[self alloc] init];
-    node.name = [item.text substringFromIndex:4];
+    if(node.name.length < 4){
+        node.name = item.text;
+    }else{
+        node.name = [item.text substringFromIndex:4];
+    }
     node.nodeId = i++;
     if (item.g_id.length == 6 ) {
         node.parentId = -1;

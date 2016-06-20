@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WrongSubjectController">
             <connections>
+                <outlet property="selectedBtn" destination="Mnm-um-QgH" id="K1K-BH-g0N"/>
+                <outlet property="tableView" destination="rZl-dt-ejh" id="kAT-73-u1q"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,6 +20,10 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rZl-dt-ejh">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="fdc-w1-6BS"/>
+                        <outlet property="delegate" destination="-1" id="cIO-1O-klC"/>
+                    </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mnm-um-QgH">
                     <rect key="frame" x="0.0" y="431" width="320" height="49"/>
@@ -28,6 +34,9 @@
                     <state key="normal" title="Button">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="selectedBtnClick:" destination="-1" eventType="touchUpInside" id="YvR-WI-hRk"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -41,6 +50,7 @@
                 <constraint firstAttribute="trailing" secondItem="rZl-dt-ejh" secondAttribute="trailing" id="vqu-2O-Gxg"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="406" y="280"/>
         </view>
     </objects>
 </document>
