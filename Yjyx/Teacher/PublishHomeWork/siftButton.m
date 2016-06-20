@@ -14,13 +14,14 @@
 {
     self.layer.cornerRadius = 5;
     self.layer.masksToBounds = YES;
-    
+    self.layer.borderColor = [UIColor grayColor].CGColor;
     self.layer.borderWidth = 1;
     [self setBackgroundImage:[UIImage imageNamed:@"list_btn_confirm_focus"] forState:UIControlStateSelected];
+//    [self setBackgroundImage:[UIImage imageNamed:@"list_btn_confirm_dis"] forState:UIControlStateNormal];
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [self setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
   
-    self.layer.borderColor = [UIColor grayColor].CGColor;
+    
   
     
 }
