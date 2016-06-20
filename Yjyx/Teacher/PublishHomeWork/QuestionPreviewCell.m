@@ -17,6 +17,8 @@
 @property (weak, nonatomic) RCLabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIView *bg_view;
 @property (weak, nonatomic) IBOutlet UIView *lineView;
+@property (weak, nonatomic) IBOutlet UIView *BGVIEW;
+
 
 @end
 
@@ -25,20 +27,14 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    NSString *content = _model.content_text;
-    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH - 20, 999)];
-    self.contentLabel = templabel;
-    templabel.userInteractionEnabled = NO;
-    templabel.font = [UIFont systemFontOfSize:14];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    templabel.componentsAndPlainText = componentsDS;
-    
-    [self.bg_view addSubview:templabel];
     
 }
 
 - (void)setValueWithModel:(ChaperContentItem *)model {
+    
+    for (UIView *view in [self.BGVIEW subviews]) {
+        [view removeFromSuperview];
+    }
 
     self.questionNumberLabel.layer.cornerRadius = 5;
     self.questionNumberLabel.layer.masksToBounds = YES;
@@ -70,14 +66,19 @@
             
     }
     
-    
     self.bg_view.layer.borderWidth = 1;
     self.bg_view.layer.borderColor = RGBACOLOR(140.0, 140.0, 140.0, 1).CGColor;
     
     NSString *content = model.content_text;
     content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
+    templabel.userInteractionEnabled = NO;
+    templabel.font = [UIFont systemFontOfSize:14];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    self.contentLabel.componentsAndPlainText = componentsDS;
+    templabel.componentsAndPlainText = componentsDS;
+    
+    [self.BGVIEW addSubview:templabel];
+
     
 }
 
