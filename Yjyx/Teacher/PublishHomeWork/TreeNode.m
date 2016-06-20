@@ -17,6 +17,9 @@ static NSInteger k = 0;
     if (item.g_id.length == 4) {
         return nil;
     }
+    
+    NSLog(@"%@", item.text);
+    
     TreeNode *node = [[self alloc] init];
     node.name = [item.text substringFromIndex:4];
     node.nodeId = i++;

@@ -28,6 +28,8 @@
 
 @property (nonatomic, copy) NSString *urlString;
 
+@property (nonatomic, strong) NSMutableDictionary *tagDic;// 标签字典
+
 
 @end
 
@@ -81,7 +83,7 @@
     [self readDataFromNetWork];
     
     self.bottom_button.backgroundColor = RGBACOLOR(3, 138, 228, 1);
-    
+    self.tagDic = [NSMutableDictionary dictionary];
     
     // 导航栏右按钮的使用
     self.siftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -169,27 +171,38 @@
     
     pamar[@"lastid"]  = _last_id;
     
+    self.urlString = [BaseURL stringByAppendingString:[NSString stringWithFormat:@"%@?action=%@&question_type=%@&lastid=%@", SEARCH_QUESTION_GET, pamar[@"action"], pamar[@"question_type"], pamar[@"lastid"]]];
 
-    
-    
-    // 章节信息
-    pamar[@"sgt_dict"] = @{
-                           
-                           @"textbookunitid" : _g_id,
-                           @"textbookverid" : @(_verid),
-                           @"gradeid" : @(_gradeid),
-                           @"textbookvolid" : @(_volid)
-                           };
-    
-    NSString *aString = [pamar[@"sgt_dict"] JSONString];
-    
-    
-    self.urlString = [BaseURL stringByAppendingString:[NSString stringWithFormat:@"%@?action=%@&question_type=%@&lastid=%@&sgt_dict=%@", SEARCH_QUESTION_GET, pamar[@"action"], pamar[@"question_type"], pamar[@"lastid"], aString]];
-    
-    // 标签信息
+    // 章节可选
+    if (self.g_id != nil && self.verid != nil && self.gradeid != nil && self.volid != nil) {
+      
+        // 章节信息
+        pamar[@"sgt_dict"] = @{
+                               
+                               @"textbookunitid" : _g_id,
+                               @"textbookverid" : @(_verid),
+                               @"gradeid" : @(_gradeid),
+                               @"textbookvolid" : @(_volid)
+                               };
+        
+        NSString *aString = [pamar[@"sgt_dict"] JSONString];
+        
+        self.urlString = [self.urlString stringByAppendingString:[NSString stringWithFormat:@"&sgt_dict=%@", aString]];
+        
+    }
+    // 标签信息,知识点可选
+    if (self.knowledgetreeidvalue != nil) {
+        
+        [self.tagDic setObject:self.knowledgetreeidvalue forKey:@"knowledgetreeidvalue"];
+        NSString *tagString = [self.tagDic JSONString];
+        self.urlString = [self.urlString stringByAppendingString:[NSString stringWithFormat:@"&tags=%@", tagString]];
+        
+    }
+
+    // 标签信息,难度可选
     if (self.level != nil) {
-        pamar[@"tags"] = @{@"level":_level};
-        NSString *tagString = [pamar[@"tags"] JSONString];
+        [self.tagDic setObject:self.level forKey:@"level"];
+        NSString *tagString = [self.tagDic JSONString];
         self.urlString = [self.urlString stringByAppendingString:[NSString stringWithFormat:@"&tags=%@", tagString]];
     }
     
