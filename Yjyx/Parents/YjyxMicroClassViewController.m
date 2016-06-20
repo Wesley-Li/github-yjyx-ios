@@ -18,6 +18,7 @@
     UIScrollView *_contentScroll;
     UIView *_knowledgeView;
     UILabel *_namelb;
+    NSDictionary *lessDic;
 
 }
 
@@ -226,6 +227,7 @@
             NSLog(@"%@",result);
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 [self initView:[result objectForKey:@"lessonobj"] questionDic:[result objectForKey:@"questions"]];
+                lessDic = [result objectForKey:@"lessonobj"];
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
@@ -245,7 +247,30 @@
 
 -(void)initView:(NSDictionary *)lessionDic questionDic:(NSDictionary *)questionDic
 {
+//    NSArray *tempArr = [[lessionDic objectForKey:@"videoobjlist"] JSONValue];
+//    for (int i = 0; i < tempArr.count; i++) {
+//        NSString *videoStr = [tempArr[i] objectForKey:@"url"];
+//        playerFrame = CGRectMake(0, 64 + ((SCREEN_WIDTH)*184/320+4) * i , SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
+//        WMPlayer *player = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:videoStr];
+////        wmPlayer = player;
+//        player.closeBtn.hidden = YES;
+//        player.layer.masksToBounds = YES;
+//        [self.view addSubview:player];
+//        [player.player pause];
+//        
+//        UIImageView *tempImageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64 + ((SCREEN_WIDTH)*184/320 + 4) * i , SCREEN_WIDTH, (SCREEN_WIDTH)*184/320 + 4)];
+//        tempImageV.tag = self.view.subviews.count;
+////        videoImage = tempImageV;
+//        tempImageV.image = [UIImage imageNamed:@"Common_video.png"];
+//        tempImageV.layer.masksToBounds = YES;
+//        tempImageV.userInteractionEnabled = YES;
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playVideo:)];
+//        
+//        [tempImageV addGestureRecognizer:tap];
+//        [self.view addSubview:tempImageV];
+//    }
     NSString *videoStr = [[[[lessionDic objectForKey:@"videoobjlist"] JSONValue] firstObject] objectForKey:@"url"];
+    NSLog(@"%@", videoStr);
     playerFrame = CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
     wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:videoStr];
     wmPlayer.closeBtn.hidden = YES;
@@ -262,7 +287,7 @@
     [self.view addSubview:videoImage];
     
     // scrollview
-    UIScrollView *contentScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + playerFrame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - playerFrame.size.height -64)];
+    UIScrollView *contentScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + playerFrame.size.height , SCREEN_WIDTH, SCREEN_HEIGHT - playerFrame.size.height -64)];
     [self.view addSubview:contentScroll];
     _contentScroll = contentScroll;
     UILabel * namelb = [UILabel labelWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:[lessionDic objectForKey:@"name"]];
@@ -502,7 +527,12 @@
 #pragma mark -event
 -(void)playVideo
 {
+//    NSString *videoUrl = [[[lessDic objectForKey:@"videoobjlist"] JSONValue][(sender.view.tag - 2)/ 2] objectForKey:@"url"];
+//    NSLog(@"%@, %ld", self.view.subviews, sender.view.tag);
+////    wmPlayer = self.view.subviews[sender.view.tag - 2];
+//    wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:videoUrl];
     [wmPlayer.player play];
+//    [self.view.subviews[sender.view.tag -1] removeFromSuperview];
     [videoImage removeFromSuperview];
     videoImage = nil;
 }

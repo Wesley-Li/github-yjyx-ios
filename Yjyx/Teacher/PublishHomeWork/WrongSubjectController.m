@@ -1,36 +1,42 @@
 //
-//  WrongViewController.m
+//  WrongSubjectController.m
 //  Yjyx
 //
-//  Created by liushaochang on 16/6/12.
+//  Created by yjyx-iOS2 on 16/6/20.
 //  Copyright © 2016年 Alibaba. All rights reserved.
 //
 
-#import "WrongViewController.h"
-#import "ReleaseHomeWorkController.h"
-@interface WrongViewController ()
+#import "WrongSubjectController.h"
+
+@interface WrongSubjectController ()
 
 @end
 
-@implementation WrongViewController
-
+@implementation WrongSubjectController
+#pragma mark - view的生命周期方法
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    // 重写导航栏的返回按钮
+    [self loadBackBtn];
+    // 加载错题数据
+    [self loadData];
 }
-
 - (void)viewWillAppear:(BOOL)animated
 {
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
+#pragma mark - 私有方法
+- (void)loadData
+{
+//    AFHTTPSessionManager
+}
 
 
 @end

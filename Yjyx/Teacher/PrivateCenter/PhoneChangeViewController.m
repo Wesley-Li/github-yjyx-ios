@@ -36,7 +36,7 @@
     _second = 60;
     
     [self configureNavBar];
-       [_phoneTF addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [_phoneTF addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
 }
 - (void)textFieldDidChange:(UITextField *)textField
@@ -44,6 +44,12 @@
     if(textField.text.length > 11){
         textField.text = [textField.text substringToIndex:11];
     }
+    textField.text = textField.text;
+    NSLog(@"%@", textField.text);
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.view endEditing:YES];
 }
 #pragma mark - 配置导航栏
 - (void)configureNavBar {
@@ -125,7 +131,7 @@
             
             [self.view makeToast:@"修改成功" duration:0.5 position:SHOW_CENTER complete:^{
                 // 刷新列表
-                [YjyxOverallData sharedInstance].parentInfo.phone = _phoneTF.text;
+                [YjyxOverallData sharedInstance].teacherInfo.phone = _phoneTF.text;
                 
                 [self.navigationController popViewControllerAnimated:YES];
             }];

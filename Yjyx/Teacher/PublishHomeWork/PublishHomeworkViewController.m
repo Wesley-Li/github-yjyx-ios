@@ -12,7 +12,7 @@
 #import "BookViewController.h"
 #import "TestViewController.h"
 #import "KnowledgeViewController.h"
-#import "WrongViewController.h"
+#import "WrongSubjectController.h"
 #import "PrivateViewController.h"
 #import "GradeVerVolItem.h"
 #import "ChapterViewController.h"
@@ -146,9 +146,9 @@
 // 错题库
 - (IBAction)wrongBtn:(UIButton *)sender {
     
-    WrongViewController *wrongVC = [[WrongViewController alloc] initWithNibName:@"WrongViewController" bundle:nil];
-    wrongVC.title = @"错题库";
-    [self.navigationController pushViewController:wrongVC animated:YES];
+//    WrongSubjectController *wrongVC = [[WrongSubjectController alloc] initWithNibName:@"WrongSubjectController" bundle:nil];
+//    wrongVC.title = @"错题库";
+//    [self.navigationController pushViewController:wrongVC animated:YES];
     
 }
 
