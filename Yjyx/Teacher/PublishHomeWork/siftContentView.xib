@@ -181,7 +181,7 @@
                                         </mask>
                                     </variation>
                                     <connections>
-                                        <action selector="levelBtnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="F6d-ps-3pw"/>
+                                        <action selector="middleBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="ANl-V6-9RW"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I28-0d-EM0" customClass="siftButton">
@@ -201,7 +201,7 @@
                                         </mask>
                                     </variation>
                                     <connections>
-                                        <action selector="levelBtnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="f8m-R9-8aZ"/>
+                                        <action selector="allLevelBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="XGj-8c-sxv"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPH-bn-MHh" customClass="siftButton">
@@ -221,7 +221,7 @@
                                         </mask>
                                     </variation>
                                     <connections>
-                                        <action selector="levelBtnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="k2x-tR-Y54"/>
+                                        <action selector="hardBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="PAQ-dP-ZLh"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsy-71-9l8" customClass="siftButton">
@@ -241,7 +241,7 @@
                                         </mask>
                                     </variation>
                                     <connections>
-                                        <action selector="levelBtnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="Xh4-Wq-uUc"/>
+                                        <action selector="easyBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="H49-Gu-oXW"/>
                                     </connections>
                                 </button>
                             </subviews>
