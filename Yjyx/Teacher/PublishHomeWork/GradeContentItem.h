@@ -10,11 +10,11 @@
 
 @interface GradeContentItem : NSObject
 /*
- * 章节目录
+ * 章节id
  */
 @property (copy, nonatomic) NSString *g_id;
 /*
- * 父章节
+ * 父章节id
  */
 @property (copy, nonatomic) NSString *parent;
 /*

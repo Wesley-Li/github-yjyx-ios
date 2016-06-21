@@ -28,13 +28,32 @@
         self.heightConstant.constant = 25;
         self.imageVleadConstant.constant = 12;
     }else if(node.depth == 1){
-        self.widthConstant.constant = 16;
-        self.heightConstant.constant = 16;
-        self.imageVleadConstant.constant = 27;
+        self.widthConstant.constant = 25;
+        self.heightConstant.constant = 25;
+        self.imageVleadConstant.constant = 12;
     }else if(node.depth == 2){
+        self.widthConstant.constant = 20;
+        self.heightConstant.constant = 20;
+        self.imageVleadConstant.constant = 20;
+    }else if (node.depth == 3) {
+    
+        self.widthConstant.constant = 15;
+        self.heightConstant.constant = 15;
+        self.imageVleadConstant.constant = 40;
+
+        
+    }else if (node.depth == 4) {
+    
         self.widthConstant.constant = 10;
         self.heightConstant.constant = 10;
-        self.imageVleadConstant.constant = 42;
+        self.imageVleadConstant.constant = 50;
+
+    }else if (node.depth == 5) {
+    
+        self.widthConstant.constant = 6;
+        self.heightConstant.constant = 6;
+        self.imageVleadConstant.constant = 55;
+
     }
 }
 

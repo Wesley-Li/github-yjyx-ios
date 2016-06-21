@@ -15,14 +15,16 @@
 
 @property (nonatomic , strong) NSMutableArray *data;//传递过来已经组织好的数据（全量数据）
 
-@property (nonatomic , strong) NSMutableArray *tempData;//用于存储数据源（部分数据）
+@property (nonatomic , strong) NSMutableArray *tempData;//用于存储数据源（部分数据）控制显示的行数
 
 
 @end
 
 @implementation TreeTableView
+
 static NSString *NODE_CELL_ID = @"node_cell_id";
 static NSString *NODE_CELL_ID2 = @"node_cell_id2";
+
 -(instancetype)initWithFrame:(CGRect)frame withData : (NSMutableArray *)data{
     self = [super initWithFrame:frame style:UITableViewStyleGrouped];
     if (self) {
@@ -56,6 +58,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
+    NSLog(@"%ld", _tempData.count);
     return _tempData.count;
 }
 
@@ -68,7 +71,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
 
     cell.node = node;
 
-    if (node.depth == 0) {
+    if (node.depth == 1) {
         if (node.expand == NO) {
             cell.imageV.image = [UIImage imageNamed:@"list_icon_1展开"];
         }else{
@@ -117,8 +120,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
     NSLog(@"%zd", indexPath.row);
     //先修改数据源
     TreeNode *parentNode = [_tempData objectAtIndex:indexPath.row];
-    NSLog(@"%d", parentNode.nodeId);
-    GradeContentItem *item = self.chapterArray[parentNode.nodeId + 1];
+    GradeContentItem *item = self.chapterArray[indexPath.row + 1];
     GradeVerVolItem *item1 = self.gradeNumItem;
   
     

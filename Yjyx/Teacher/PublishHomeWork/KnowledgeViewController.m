@@ -10,10 +10,13 @@
 #import "GradeContentItem.h"
 #import "TreeNode.h"
 #import "TreeTableView.h"
+#import "ChapterChoiceController.h"
 
 @interface KnowledgeViewController ()<TreeTableCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *chapterArr;
+@property (nonatomic, copy) NSNumber *root_id;
 
 @end
 
@@ -25,6 +28,14 @@
         self.dataSource = [NSMutableArray array];
     }
     return _dataSource;
+}
+
+- (NSMutableArray *)chapterArr {
+
+    if (!_chapterArr) {
+        self.chapterArr = [NSMutableArray array];
+    }
+    return _chapterArr;
 }
 
 - (void)viewDidLoad {
@@ -44,17 +55,22 @@
         
         if ([responseObject[@"retcode"] isEqual:@0]) {
             
+            self.root_id = responseObject[@"id"];
+            
             for (NSDictionary *dic in responseObject[@"content"]) {
                 GradeContentItem *item = [GradeContentItem gradeContentItem:dic];
+                [self.chapterArr addObject:item];
+                
                 TreeNode *node = [TreeNode treeNodeWithDictionary:item];
                 [self.dataSource addObject:node];
             }
             
+            
+            self.automaticallyAdjustsScrollViewInsets = NO;
             TreeTableView *tableview = [[TreeTableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH , SCREEN_HEIGHT - 64) withData:self.dataSource];
             tableview.treeTableCellDelegate = self;
-            tableview.chapterArray = self.dataSource;
+            tableview.chapterArray = self.chapterArr;
             
-            tableview.bounces = NO;
             [self.view addSubview:tableview];
 
             
@@ -88,7 +104,16 @@
 
 #pragma mark - TreeTableCellDelegate
 
-- (void)cellClick:(GradeContentItem *)node andVerVolItem:(GradeVerVolItem *)item andTreeNode:(TreeNode *)node {
+- (void)cellClick:(GradeContentItem *)item1 andVerVolItem:(GradeVerVolItem *)item andTreeNode:(TreeNode *)node {
+
+    ChapterChoiceController *chapterVC = [[ChapterChoiceController alloc] init];
+    
+    chapterVC.knowledgetreeidvalue = [NSString stringWithFormat:@"%@=%@", self.root_id, item1.g_id];
+    
+    
+    
+    [self.navigationController pushViewController:chapterVC animated:YES];
+    
 
     
     

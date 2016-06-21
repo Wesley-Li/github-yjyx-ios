@@ -193,8 +193,11 @@
     // 标签信息,知识点可选
     if (self.knowledgetreeidvalue != nil) {
         
-        [self.tagDic setObject:self.knowledgetreeidvalue forKey:@"knowledgetreeidvalue"];
+        self.tagDic = [@{@"knowledgetreeidvalue":_knowledgetreeidvalue} mutableCopy];
+//        [self.tagDic setObject:self.knowledgetreeidvalue forKey:@"knowledgetreeidvalue"];
+        
         NSString *tagString = [self.tagDic JSONString];
+       
         self.urlString = [self.urlString stringByAppendingString:[NSString stringWithFormat:@"&tags=%@", tagString]];
         
     }

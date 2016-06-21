@@ -10,11 +10,11 @@
 @class GradeContentItem;
 @interface TreeNode : NSObject
 
-@property (nonatomic , assign) int parentId;//父节点的id，如果为-1表示该节点为根节点
+@property (nonatomic , copy) NSString *parentId;//父节点的id，如果为-1表示该节点为根节点
 
-@property (nonatomic , assign) int nodeId;//本节点的id
+@property (nonatomic , copy) NSString *nodeId;//本节点的id
 
-@property (nonatomic , strong) NSString *name;//本节点的名称
+@property (nonatomic , copy) NSString *name;//本节点的名称
 
 @property (nonatomic , assign) int depth;//该节点的深度
 
@@ -22,5 +22,5 @@
 
 + (instancetype)treeNodeWithDictionary:(GradeContentItem *)item;
 
-- (void)setStaticPamar;
+
 @end
