@@ -9,6 +9,7 @@
 #import "WrongSubjectCell.h"
 #import "YjyxWrongSubModel.h"
 #import "RCLabel.h"
+#import "WrongDataBase.h"
 @interface WrongSubjectCell()
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
@@ -44,14 +45,28 @@
 - (void)setWrongSubModel:(YjyxWrongSubModel *)wrongSubModel
 {
     _wrongSubModel = wrongSubModel;
-    self.wrongTimesLabel.text = [NSString stringWithFormat:@"%ld", wrongSubModel.total_wrong_num];
+    self.wrongTimesLabel.text = wrongSubModel.total_wrong_num;
     self.rightAnswerLabel.text = wrongSubModel.answer;
-    
+    // RCLabel赋值
     NSString *content = wrongSubModel.content;
     content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    
     self.contentLabel.componentsAndPlainText = componentsDS;
+  
+    // 判断是否已经被选中
+    NSMutableArray *tempArr = [[WrongDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", wrongSubModel.questionid] andQuestionType:[NSString stringWithFormat:@"%ld", wrongSubModel.questiontype]];
+    if(tempArr.count){
+        wrongSubModel.isSelected = YES;
+    }else{
+        wrongSubModel.isSelected = NO;
+    }
+    // 判断添加按钮是否处于选中
+    if(wrongSubModel.isSelected){
+        self.addBtn.selected = YES;
+    }else{
+        self.addBtn.selected = NO;
+    }
+    
 }
 - (void)layoutSubviews
 {
@@ -63,7 +78,15 @@
 }
 - (IBAction)addBtnClick:(UIButton *)sender {
     sender.selected = !sender.selected;
+    self.wrongSubModel.isSelected = sender.selected;
+    if(sender.selected){
+        [[WrongDataBase shareDataBase] insertQuestion:_wrongSubModel];
     
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BUTTON_IS_SELEND" object:nil];
+    }else{
+        [[WrongDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", _wrongSubModel.questionid] andQuestionType: [NSString stringWithFormat:@"%ld", _wrongSubModel.questiontype]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"BUTTON_NO_SELEND" object:nil];
+    }
     
 }
 

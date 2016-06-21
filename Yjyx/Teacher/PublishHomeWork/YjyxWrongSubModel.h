@@ -18,11 +18,14 @@
 // 题目的难度
 @property (assign, nonatomic) NSInteger level;
 // 总错题数
-@property (assign, nonatomic) NSInteger total_wrong_num;
+@property (copy, nonatomic) NSString *total_wrong_num;
 // 题目的类型
 @property (assign, nonatomic) NSInteger questiontype;
 // 题目id
 @property (assign, nonatomic) NSInteger questionid;
+
+// 是否是选题
+@property (assign, nonatomic) BOOL isSelected;
 // cell的高度
 @property (assign, nonatomic) CGFloat cellHeight;
 // RCLabel的frame
