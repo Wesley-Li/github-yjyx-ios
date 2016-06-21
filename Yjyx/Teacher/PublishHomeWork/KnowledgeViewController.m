@@ -70,7 +70,7 @@
             TreeTableView *tableview = [[TreeTableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH , SCREEN_HEIGHT - 64) withData:self.dataSource];
             tableview.treeTableCellDelegate = self;
             tableview.chapterArray = self.chapterArr;
-            
+            tableview.bounces = NO;
             [self.view addSubview:tableview];
 
             
