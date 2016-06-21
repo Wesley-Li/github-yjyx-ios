@@ -51,6 +51,14 @@
     return _addArray;
 }
 
+- (NSMutableDictionary *)tagDic {
+
+    if (!_tagDic) {
+        self.tagDic = [NSMutableDictionary dictionary];
+    }
+    
+    return _tagDic;
+}
 
 // 懒加载筛选view
 - (siftContentView *)siftV
@@ -83,7 +91,7 @@
     [self readDataFromNetWork];
     
     self.bottom_button.backgroundColor = RGBACOLOR(3, 138, 228, 1);
-    self.tagDic = [NSMutableDictionary dictionary];
+
     
     // 导航栏右按钮的使用
     self.siftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -193,8 +201,8 @@
     // 标签信息,知识点可选
     if (self.knowledgetreeidvalue != nil) {
         
-        self.tagDic = [@{@"knowledgetreeidvalue":_knowledgetreeidvalue} mutableCopy];
-//        [self.tagDic setObject:self.knowledgetreeidvalue forKey:@"knowledgetreeidvalue"];
+//        self.tagDic = [@{@"knowledgetreeidvalue":_knowledgetreeidvalue} mutableCopy];
+        [self.tagDic setObject:self.knowledgetreeidvalue forKey:@"knowledgetreeidvalue"];
         
         NSString *tagString = [self.tagDic JSONString];
        
@@ -346,6 +354,10 @@
 
 
 }
+
+
+
+
 
 // 点击底部预览
 - (IBAction)bottomBtnClick:(UIButton *)sender {

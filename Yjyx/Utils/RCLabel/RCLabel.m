@@ -56,6 +56,12 @@
 static NSMutableDictionary *imgSizeDict = NULL;
 static NSRecursiveLock *lock;
 
+@interface RTLabelComponent ()
+
+@property (nonatomic, copy) NSMutableString *tempString;
+
+@end
+
 @implementation RTLabelComponent
 
 @synthesize text = _text;
@@ -977,6 +983,8 @@ CGFloat MyGetWidthCallback( void* refCon ){
 	for (NSString *key in attributes)
 	{
 		NSString *value = [attributes objectForKey:key];
+        
+        
 		value = [value stringByReplacingOccurrencesOfString:@"'" withString:@""];
 		
 		if ([key isEqualToString:@"color"])
@@ -1298,6 +1306,9 @@ CGFloat MyGetWidthCallback( void* refCon ){
 	
 	int last_position = 0;
 	scanner = [NSScanner scannerWithString:data];
+    
+    NSMutableString *tempString;
+    
 	while (![scanner isAtEnd])
     {
         //Begin element(such as <font size=30>) or end element(such as </font>) 
@@ -1554,12 +1565,15 @@ CGFloat MyGetWidthCallback( void* refCon ){
                 
                 if (!isSizeTooSmall) {
                    
-                    NSMutableString *tempString = [NSMutableString stringWithString:plainData];
-                    [tempString insertString:@"`" atIndex:position];
+                    tempString = [NSMutableString stringWithString:plainData];
+                    
+                
+                    [tempString insertString:@" " atIndex:position];
                     
                     plainData = [NSString stringWithString:tempString];
                    
-                    component.text = [plainData substringWithRange:NSMakeRange(component.position, 1)];
+                    component.text = [plainData substringWithRange:NSMakeRange(component.position , 1)];
+                    
 
                   
                     component.isClosure = YES;
@@ -1605,7 +1619,7 @@ CGFloat MyGetWidthCallback( void* refCon ){
     componentsDS.components = components;
     componentsDS.linkComponents = linkComponents;
     componentsDS.imgComponents = imgComponents;
-    if ([plainData containsString:@"`"]) {
+    if ([plainData containsString:@"`"]){
         [plainData stringByReplacingOccurrencesOfString:@"`" withString:@""];
     }
     componentsDS.plainTextData = plainData;
