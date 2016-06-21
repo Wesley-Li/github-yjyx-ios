@@ -106,6 +106,8 @@ typedef enum
 @property (nonatomic,retain)RTLabelComponent * currentLinkComponent;
 @property (nonatomic,retain)RTLabelComponent * currentImgComponent;
 
+
+
 + (RTLabelComponentsStructure*)extractTextStyle:(NSString*)data;
 + (NSString*)stripURL:(NSString*)url;
 - (void)setTextAlignment:(RTTextAlignment)textAlignment;
