@@ -61,10 +61,11 @@
 // 网络请求
 - (void)readDataFromNetWork {
 
-    [SVProgressHUD showWithStatus:@"正在拼命加载数据"];
+    [SVProgressHUD showWithStatus:@"正在拼命加载数据....."];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"getknowledgestruct", @"action", nil];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[BaseURL stringByAppendingString:TEACHER_POST_CHAPTER_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:[BaseURL stringByAppendingString:TEACHER_POST_CHAPTER_CONNECT_GET] parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
         if ([responseObject[@"retcode"] isEqual:@0]) {
             
@@ -85,19 +86,20 @@
             tableview.chapterArray = self.chapterArr;
             tableview.bounces = NO;
             [self.view addSubview:tableview];
-
+            
             
             [SVProgressHUD showSuccessWithStatus:@"数据加载成功"];
             [SVProgressHUD dismissWithDelay:0.8];
             
         }else {
-        
+            
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
             [SVProgressHUD dismissWithDelay:0.8];
             
         }
+
         
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSLog(@"%@", error);
         

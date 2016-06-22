@@ -30,15 +30,19 @@ static NSInteger line_num;// 下滑线个数
         NSArray *arr = [node.nodeId componentsSeparatedByString:subString];
         line_num = arr.count - 1;
         node.depth = 0;
+        node.show = NO;
         node.expand = NO;
+        
     }else {
         
         NSArray *arr = [node.nodeId componentsSeparatedByString:subString];
         node.depth = arr.count - 1 - line_num;
         if (node.depth == 1) {
-            node.expand = YES;
+            node.show = YES;
+            node.expand = NO;
         }else {
         
+            node.show = NO;
             node.expand = NO;
         }
 

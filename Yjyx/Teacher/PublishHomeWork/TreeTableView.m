@@ -44,7 +44,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
     NSMutableArray *tempArray = [NSMutableArray array];
     for (int i=0; i<data.count; i++) {
         TreeNode *node = [_data objectAtIndex:i];
-        if (node.expand) {
+        if (node.show) {
             [tempArray addObject:node];
         }
     }
@@ -72,7 +72,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
     cell.node = node;
 
     if (node.depth == 1) {
-        if (node.expand == NO) {
+        if (node.expand == YES) {
             cell.imageV.image = [UIImage imageNamed:@"list_icon_1展开"];
         }else{
             cell.imageV.image = [UIImage imageNamed:@"list_icon_1"];
@@ -83,7 +83,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
             TreeNode *sNode = [_data objectAtIndex:j];
      
             if(node.nodeId == sNode.parentId){
-                if (!node.expand) {
+                if (node.expand) {
                     cell.imageV.image = [UIImage imageNamed:@"list_icon_2展开"];
                 }else{
                     cell.imageV.image = [UIImage imageNamed:@"list_icon_2"];
@@ -120,6 +120,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
     NSLog(@"%zd", indexPath.row);
     //先修改数据源
     TreeNode *parentNode = [_tempData objectAtIndex:indexPath.row];
+    
     GradeContentItem *item = self.chapterArray[indexPath.row + 1];
     GradeVerVolItem *item1 = self.gradeNumItem;
   
@@ -132,10 +133,12 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
         TreeNode *node = [_data objectAtIndex:i];
         if (node.parentId == parentNode.nodeId) {
             
-            node.expand = !node.expand;
-            if (node.expand) {
-                
+            node.show = !node.show;
+            if (node.show) {
+                node.expand = NO;
                 [_tempData insertObject:node atIndex:endPosition];
+                
+                NSLog(@"%@", node.nodeId);
                 expand = YES;
                 endPosition++;
             }else{
@@ -188,17 +191,20 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
         TreeNode *node = [_tempData objectAtIndex:i];
         endPosition++;
         if (node.depth <= parentNode.depth) {
+    
             break;
         }
         if(endPosition == _tempData.count-1){
             endPosition++;
-            node.expand = NO;
+            node.show = NO;
             break;
         }
-        node.expand = NO;
+        node.show = NO;
     }
     if (endPosition>startPosition) {
-        [_tempData removeObjectsInRange:NSMakeRange(startPosition+1, endPosition-startPosition-1)];
+        
+        [_tempData removeObjectsInRange:NSMakeRange(startPosition+1, endPosition-startPosition -1)];
+        
     }
     return endPosition;
 }
