@@ -13,7 +13,9 @@
 #import "ReleaseVideoCell.h"
 #import "ReleaseExplanationCell.h"
 #import "WMPlayer.h"
-#import "WrongDataBase.h"
+//#import "WrongDataBase.h"
+#import "ChaperContentItem.h"
+#import "QuestionDataBase.h"
 #import "YjyxWrongSubModel.h"
 @interface OneSubjectController ()<UITableViewDelegate, UITableViewDataSource>
 {
@@ -381,12 +383,26 @@ static NSString *VideoID = @"VIDEOCELL";
     }];
 }
 - (IBAction)moveOrReleaseBtnClick:(UIButton *)sender {
+    NSString *str = @"1";
+    if ([self.qtype isEqualToString:@"blankfill"]) {
+        str = @"2";
+     }
     if([sender.titleLabel.text isEqualToString:@"移除本题"]){
-        [[WrongDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", _wrongSubjectModel.questionid]  andQuestionType:[NSString stringWithFormat:@"%ld", _wrongSubjectModel.questiontype]];
+        if (_wrongSubjectModel == nil) {
+            [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", _chaperContentModel.t_id] andQuestionType:_chaperContentModel.subject_type];
+        }else{
+        [[QuestionDataBase shareDataBase] deleteQuestionByid:_w_id andQuestionType:str];
+        }
     }else{
-        [[WrongDataBase shareDataBase] insertQuestion:self.wrongSubjectModel];
+        if (_wrongSubjectModel == nil) {
+            [[QuestionDataBase shareDataBase] insertQuestion:_chaperContentModel];
+        }else{
+        [[QuestionDataBase shareDataBase] insertWrong:_wrongSubjectModel];
+        }
     }
-    [self.navigationController popViewControllerAnimated:YES];
+  
+    [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
+    
 }
 
 #pragma mark - UITableView代理方法

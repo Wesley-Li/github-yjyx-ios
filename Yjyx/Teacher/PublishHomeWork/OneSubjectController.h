@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class YjyxWrongSubModel;
+@class YjyxWrongSubModel, ChaperContentItem;
 @interface OneSubjectController : UIViewController
 
 @property (copy, nonatomic) NSString *qtype;// 题目类型
@@ -15,4 +15,6 @@
 @property (assign, nonatomic) NSInteger is_select; // 是否被选中
 
 @property (strong, nonatomic) YjyxWrongSubModel *wrongSubjectModel;
+
+@property (strong, nonatomic) ChaperContentItem *chaperContentModel;
 @end

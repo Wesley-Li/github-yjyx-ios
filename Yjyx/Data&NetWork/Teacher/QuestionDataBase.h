@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class ChaperContentItem;
+@class ChaperContentItem, YjyxWrongSubModel;
 @interface QuestionDataBase : NSObject
 
 + (QuestionDataBase *)shareDataBase;
@@ -20,7 +20,8 @@
 
 // 添加题目
 - (void)insertQuestion:(ChaperContentItem *)model;
-
+// 添加错题
+- (void)insertWrong:(YjyxWrongSubModel *)model;
 // 删除题目
 - (void)deleteQuestionByid:(NSString *)qid andQuestionType:(NSString *)subject_type;
 

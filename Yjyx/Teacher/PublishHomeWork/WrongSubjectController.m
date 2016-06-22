@@ -10,9 +10,10 @@
 #import "WrongSubjectCell.h"
 #import "YjyxWrongSubModel.h"
 #import "OneSubjectController.h"
-#import "WrongDataBase.h"
+//#import "WrongDataBase.h"
 #import "QuestionDataBase.h"
 #import "MJRefresh.h"
+#import "QuestionPreviewController.h"
 @interface WrongSubjectController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *selectedBtn;
@@ -64,11 +65,11 @@ static NSString *ID = @"cell";
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
     
     // 底部button标题赋值
-    NSMutableArray *tempArr = [[WrongDataBase shareDataBase] selectAllQuestion];
+    NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectAllQuestion];
     NSMutableArray *currentArr = [[QuestionDataBase shareDataBase] selectAllQuestion];
     _questionArr = currentArr;
-    self.selectedBtn.titleLabel.text = [NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count + _questionArr.count] ;
-    [self.selectedBtn setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count + currentArr.count] forState:UIControlStateNormal];
+    self.selectedBtn.titleLabel.text = [NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count] ;
+    [self.selectedBtn setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count] forState:UIControlStateNormal];
     [self.tableView reloadData];
 }
 - (void)didReceiveMemoryWarning {
@@ -130,18 +131,21 @@ static NSString *ID = @"cell";
 }
 - (void)btnIsSelected
 {
-    NSMutableArray *tempArr = [[WrongDataBase shareDataBase] selectAllQuestion];
-    self.selectedBtn.titleLabel.text = [NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count + _questionArr.count] ;
-    [self.selectedBtn setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count + _questionArr.count] forState:UIControlStateNormal];
+    NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectAllQuestion];
+    self.selectedBtn.titleLabel.text = [NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count] ;
+    [self.selectedBtn setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count] forState:UIControlStateNormal];
 }
 - (void)btnNoSelected
 {
-    NSMutableArray *tempArr = [[WrongDataBase shareDataBase] selectAllQuestion];
-    self.selectedBtn.titleLabel.text = [NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count + _questionArr.count] ;
-    [self.selectedBtn setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count + _questionArr.count] forState:UIControlStateNormal];
+    NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectAllQuestion];
+    self.selectedBtn.titleLabel.text = [NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count ] ;
+    [self.selectedBtn setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count] forState:UIControlStateNormal];
     
 }
 - (IBAction)selectedBtnClick:(id)sender {
+    QuestionPreviewController *vc = [[QuestionPreviewController alloc] init];
+    vc.selectArr = [[QuestionDataBase shareDataBase] selectAllQuestion];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UITableView数据源方法

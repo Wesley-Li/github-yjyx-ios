@@ -375,7 +375,6 @@
 		3CA04CE31D17CE1E0054A05D /* WrongSubjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA04CE01D17CE1E0054A05D /* WrongSubjectCell.xib */; };
 		3CA04CE41D17CE1E0054A05D /* WrongSubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA04CE11D17CE1E0054A05D /* WrongSubjectCell.m */; };
 		3CA04CE71D17D03E0054A05D /* YjyxWrongSubModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA04CE61D17D03E0054A05D /* YjyxWrongSubModel.m */; };
-		3CA04CEA1D17DBEB0054A05D /* WrongDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA04CE91D17DBEB0054A05D /* WrongDataBase.m */; };
 		3CA04CEE1D17EF2A0054A05D /* OneSubjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA04CEC1D17EF2A0054A05D /* OneSubjectController.m */; };
 		3CA04CEF1D17EF2A0054A05D /* OneSubjectController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA04CED1D17EF2A0054A05D /* OneSubjectController.xib */; };
 		3CA04CF21D1807520054A05D /* OneSubjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA04CF11D1807520054A05D /* OneSubjectModel.m */; };
@@ -1001,8 +1000,6 @@
 		3CA04CE21D17CE1E0054A05D /* WrongSubjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WrongSubjectCell.h; sourceTree = "<group>"; };
 		3CA04CE51D17D03E0054A05D /* YjyxWrongSubModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxWrongSubModel.h; sourceTree = "<group>"; };
 		3CA04CE61D17D03E0054A05D /* YjyxWrongSubModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxWrongSubModel.m; sourceTree = "<group>"; };
-		3CA04CE81D17DBEB0054A05D /* WrongDataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WrongDataBase.h; sourceTree = "<group>"; };
-		3CA04CE91D17DBEB0054A05D /* WrongDataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WrongDataBase.m; sourceTree = "<group>"; };
 		3CA04CEB1D17EF2A0054A05D /* OneSubjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneSubjectController.h; sourceTree = "<group>"; };
 		3CA04CEC1D17EF2A0054A05D /* OneSubjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneSubjectController.m; sourceTree = "<group>"; };
 		3CA04CED1D17EF2A0054A05D /* OneSubjectController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OneSubjectController.xib; sourceTree = "<group>"; };
@@ -2194,8 +2191,6 @@
 				3BFE3B831CD99E6100502769 /* StuDataBase.m */,
 				8094E4BC1D123E9700EF221A /* QuestionDataBase.h */,
 				8094E4BD1D123E9700EF221A /* QuestionDataBase.m */,
-				3CA04CE81D17DBEB0054A05D /* WrongDataBase.h */,
-				3CA04CE91D17DBEB0054A05D /* WrongDataBase.m */,
 				3BFE3B761CD9816D00502769 /* TeacherEntity.h */,
 				3BFE3B771CD9816D00502769 /* TeacherEntity.m */,
 				3BFE3B7F1CD981AE00502769 /* StudentEntity.h */,
@@ -3074,7 +3069,6 @@
 				3BFE3B791CD9816D00502769 /* YjyxOverallData.m in Sources */,
 				80F718C21CF28961007C0B75 /* SubmitCell.m in Sources */,
 				3AEF271F1C61F08A0028BE09 /* GTMBase64.m in Sources */,
-				3CA04CEA1D17DBEB0054A05D /* WrongDataBase.m in Sources */,
 				801F44A91CDF164800B7E7E1 /* DataVerifier.m in Sources */,
 				3AEF27211C61F08A0028BE09 /* NSObject+category.m in Sources */,
 				3AEF27281C61F08A0028BE09 /* UIView+category.m in Sources */,
@@ -3227,7 +3221,7 @@
 					"\"$(PROJECT_DIR)/Yjyx/Alipay/AliSDK/openssl\"",
 				);
 				INFOPLIST_FILE = Yjyx/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3279,7 +3273,7 @@
 					"\"$(PROJECT_DIR)/Yjyx/Alipay/AliSDK/openssl\"",
 				);
 				INFOPLIST_FILE = Yjyx/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

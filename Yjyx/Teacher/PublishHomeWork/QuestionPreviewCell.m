@@ -9,7 +9,7 @@
 #import "QuestionPreviewCell.h"
 #import "ChaperContentItem.h"
 #import "RCLabel.h"
-
+#import "YjyxWrongSubModel.h"
 @interface QuestionPreviewCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *subject_typeLabel;
@@ -81,7 +81,55 @@
 
     
 }
-
+- (void)setWrongWithModel:(YjyxWrongSubModel *)model
+{
+    for (UIView *view in [self.BGVIEW subviews]) {
+        [view removeFromSuperview];
+    }
+    
+    self.questionNumberLabel.layer.cornerRadius = 5;
+    self.questionNumberLabel.layer.masksToBounds = YES;
+    self.questionNumberLabel.backgroundColor = RGBACOLOR(3, 138, 228, 1);
+    self.lineView.backgroundColor = RGBACOLOR(140.0, 140.0, 140.0, 1);
+    self.levelLabel.textColor = RGBACOLOR(204, 204, 153, 1);
+    
+//    self.subject_typeLabel.text = [NSString stringWithFormat:@"%ld", model.questiontype ];
+    
+    if (model.questiontype == 1) {
+        self.subject_typeLabel.text = @"选择题";
+    }else if (model.questiontype == 2) {
+        
+        self.subject_typeLabel.text = @"填空题";
+    }
+    
+    switch (model.level) {
+        case 1:
+            self.levelLabel.text = @"难度:简单";
+            break;
+        case 2:
+            self.levelLabel.text = @"难度:中等";
+            break;
+        case 3:
+            self.levelLabel.text = @"难度:较难";
+            break;
+        default:
+            break;
+            
+    }
+    
+    self.bg_view.layer.borderWidth = 1;
+    self.bg_view.layer.borderColor = RGBACOLOR(140.0, 140.0, 140.0, 1).CGColor;
+    
+    NSString *content = model.content;
+    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
+    templabel.userInteractionEnabled = NO;
+    templabel.font = [UIFont systemFontOfSize:14];
+    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
+    templabel.componentsAndPlainText = componentsDS;
+    
+    [self.BGVIEW addSubview:templabel];
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

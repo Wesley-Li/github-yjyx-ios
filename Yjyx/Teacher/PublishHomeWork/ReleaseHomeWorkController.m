@@ -13,7 +13,7 @@
 #import "ChaperContentItem.h"
 #import "QuestionDataBase.h"
 #import "StuTaskTableViewController.h"
-
+#import "YjyxWrongSubModel.h"
 #import "StudentEntity.h"
 @interface ReleaseHomeWorkController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextField *homeWorkNameTextField;
@@ -137,9 +137,9 @@ static NSString *ID = @"CELL";
                 textField.text = [toBeString substringToIndex:100];
             }
         }else if([textField isEqual:_descriptionTextField]){
-            if (toBeString.length > 300) {
-                [self.view makeToast:@"作业描述最多只能输入300个字" duration:1.0 position:SHOW_TOP complete:nil];
-                    textField.text = [toBeString substringToIndex:300];
+            if (toBeString.length > 500) {
+                [self.view makeToast:@"作业描述最多只能输入500个字" duration:1.0 position:SHOW_TOP complete:nil];
+                    textField.text = [toBeString substringToIndex:500];
                 }
         }
     }
@@ -209,6 +209,10 @@ static NSString *ID = @"CELL";
             NSLog(@"%@", stuModel.realname);
         }
     }
+    if ([self.homeWorkNameTextField.text isEqualToString:@""]) {
+        [self.view makeToast:@"请输入作业名称" duration:1.0 position:SHOW_CENTER complete:nil];
+        return;
+    }
     [SVProgressHUD showWithStatus:@"正在发布..."];
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     
@@ -219,16 +223,31 @@ static NSString *ID = @"CELL";
     // 题目列表
     
     NSMutableArray *choiceArr = [NSMutableArray array];
-    for (ChaperContentItem *model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"choice"]) {
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: model.t_id], @"id", [NSNumber numberWithInteger: model.level], @"level", nil];
-        [choiceArr addObject:dic];
+    for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"choice"]) {
+        if ([model isKindOfClass:[ChaperContentItem class]]) {
+            ChaperContentItem *tempModel = (ChaperContentItem *)model;
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", nil];
+            [choiceArr addObject:dic];
+        }else{
+            YjyxWrongSubModel *tempModel = (YjyxWrongSubModel *)model;
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.questionid], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", nil];
+            [choiceArr addObject:dic];
+        }
+       
     }
     
     
     NSMutableArray *blankfillArr = [NSMutableArray array];
-    for (ChaperContentItem *model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"blankfill"]) {
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: model.t_id], @"id", [NSNumber numberWithInteger: model.level], @"level", nil];
-        [choiceArr addObject:dic];
+    for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"blankfill"]) {
+        if ([model isKindOfClass:[ChaperContentItem class]]) {
+            ChaperContentItem *tempModel = (ChaperContentItem *)model;
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", nil];
+            [blankfillArr addObject:dic];
+        }else{
+            YjyxWrongSubModel *tempModel = (YjyxWrongSubModel *)model;
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.questionid], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", nil];
+            [blankfillArr addObject:dic];
+        }
     }
     
     // 没有对应的类型就不传
