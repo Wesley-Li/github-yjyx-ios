@@ -299,7 +299,7 @@ static QuestionDataBase *singleton = nil;
         [group addObject:model];
         
     }
-    FMResultSet *set1 = [self.question_db executeQuery:@"select * from Wrong where subject_type = ?", subject_type];
+    FMResultSet *set1 = [self.question_db executeQuery:@"select * from Wrong where questiontype = ?", subject_type];
     
     while ([set1 next]) {
         NSString *w_id = [set1 stringForColumn:@"w_id"];

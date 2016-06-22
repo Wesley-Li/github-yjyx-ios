@@ -277,11 +277,12 @@ static NSString *ID = @"CELL";
     pamar[@"recipients"] = [pamarArr JSONString];
     pamar[@"name"] = self.homeWorkNameTextField.text;
     pamar[@"desc"] = self.descriptionTextField.text;
-    pamar[@"suggestspendtime"] = self.timeTextField.text;
+    pamar[@"suggestspendtime"] = [self.timeTextField.text isEqualToString:@""] ? @"30" : self.timeTextField.text;
     pamar[@"questionlist"] = [self.questionList JSONString];
 
     
     [mgr POST:[BaseURL stringByAppendingString:TEACHER_RELEASE_CONNECT_POST] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        NSLog(@"%@", responseObject[@"msg"] );
         if([responseObject[@"retcode"] isEqual:@0]){
             [SVProgressHUD showWithStatus:@"发布成功"];
             

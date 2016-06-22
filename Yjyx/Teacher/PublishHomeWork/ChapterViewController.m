@@ -82,6 +82,10 @@
 {
     [SVProgressHUD dismiss];
 }
+- (void)dealloc
+{
+    NSLog(@"delooc------");
+}
 - (void)loadData{
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
@@ -94,8 +98,6 @@
     
     [mgr GET:[BaseURL stringByAppendingString:TEACHER_POST_CHAPTER_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         if ([responseObject[@"retcode"] isEqual:@0]) {
-            [responseObject writeToFile:@"/Users/wangdapeng/Desktop/文件/5.plist" atomically:YES];
-            
             for (NSDictionary *dict in responseObject[@"content"]) {
                 
                 GradeContentItem *item = [GradeContentItem gradeContentItem:dict];

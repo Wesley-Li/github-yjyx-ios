@@ -15,6 +15,7 @@
 #import "MJRefresh.h"
 #import "QuestionPreviewController.h"
 @interface WrongSubjectController ()<UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UILabel *promptLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *selectedBtn;
 // 错题数组
@@ -117,6 +118,11 @@ static NSString *ID = @"cell";
                 [self.wrongSubjectArr addObject:model];
             }
             _index = _wrongSubjectArr.count;
+            if(_index == 0){
+                self.promptLabel.hidden = NO;
+            }else{
+                self.promptLabel.hidden = YES;
+            }
             if(_wrongSubjectArr.count < 20){
                 _count = _wrongSubjectArr.count;
                 
