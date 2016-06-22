@@ -124,33 +124,42 @@
     [manager GET:[BaseURL stringByAppendingString:TEACHER_SCAN_THE_TASK_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         NSLog(@"%@", responseObject);
-        // 填空
-        for (NSDictionary *dic in [responseObject[@"questionstats"] objectForKey:@"blankfill"]) {
-            BlankFillModel *model = [[BlankFillModel alloc] init];
-            [model initBlankFillModelWithDic:dic];
-            [self.blankFillDataSource addObject:model];
+        
+        if ([responseObject[@"retcode"] isEqual:@0]) {
+            
+            // 填空
+            for (NSDictionary *dic in [responseObject[@"questionstats"] objectForKey:@"blankfill"]) {
+                BlankFillModel *model = [[BlankFillModel alloc] init];
+                [model initBlankFillModelWithDic:dic];
+                [self.blankFillDataSource addObject:model];
+            }
+            // 选择
+            for (NSDictionary *dic in [responseObject[@"questionstats"] objectForKey:@"choice"]) {
+                ChoiceModel *model = [[ChoiceModel alloc] init];
+                [model initChoiceModelWithDic:dic];
+                [self.choiceDataSource addObject:model];
+            }
+            //上交作业情况
+            for (NSDictionary *dic in responseObject[@"submit"]) {
+                FinshedModel *model = [[FinshedModel alloc] init];
+                [model initFinshedModelWithDic:dic];
+                [self.finishedArr addObject:model];
+            }
+            //未提交作业的情况
+            for(NSDictionary  * dic in responseObject[@"unsubmit"]){
+                FinshedModel *model = [[FinshedModel alloc] init];
+                [model initFinshedModelWithDic:dic];
+                [self.unfinishedArr addObject:model];
+            }
+            [self.tableView reloadData];
+            [SVProgressHUD showSuccessWithStatus:@"数据加载成功"];
+            [SVProgressHUD dismissWithDelay:1.0];
+
+        }else {
+        
+            [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
         }
-        // 选择
-        for (NSDictionary *dic in [responseObject[@"questionstats"] objectForKey:@"choice"]) {
-            ChoiceModel *model = [[ChoiceModel alloc] init];
-            [model initChoiceModelWithDic:dic];
-            [self.choiceDataSource addObject:model];
-        }
-        //上交作业情况
-        for (NSDictionary *dic in responseObject[@"submit"]) {
-            FinshedModel *model = [[FinshedModel alloc] init];
-            [model initFinshedModelWithDic:dic];
-            [self.finishedArr addObject:model];
-        }
-        //未提交作业的情况
-        for(NSDictionary  * dic in responseObject[@"unsubmit"]){
-            FinshedModel *model = [[FinshedModel alloc] init];
-            [model initFinshedModelWithDic:dic];
-            [self.unfinishedArr addObject:model];
-        }
-        [self.tableView reloadData];
-        [SVProgressHUD showSuccessWithStatus:@"数据加载成功"];
-        [SVProgressHUD dismissWithDelay:1.0];
+        
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
