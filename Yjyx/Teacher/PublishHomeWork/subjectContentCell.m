@@ -9,6 +9,7 @@
 #import "subjectContentCell.h"
 #import "ChaperContentItem.h"
 #import "RCLabel.h"
+#import "QuestionDataBase.h"
 @interface subjectContentCell()
 
 
@@ -72,7 +73,13 @@
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
     
     self.contentLabel.componentsAndPlainText = componentsDS;
-   
+    // 判断是否已经被选中
+    NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", item.t_id] andQuestionType:item.subject_type];
+    if(tempArr.count){
+        item.add = YES;
+    }else{
+        item.add = NO;
+    }
     
 }
 

@@ -10,7 +10,7 @@
 #import "WrongSubjectCell.h"
 #import "YjyxWrongSubModel.h"
 #import "OneSubjectController.h"
-//#import "WrongDataBase.h"
+
 #import "QuestionDataBase.h"
 #import "MJRefresh.h"
 #import "QuestionPreviewController.h"
@@ -80,6 +80,10 @@ static NSString *ID = @"cell";
 {
     [SVProgressHUD dismiss];
 }
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 #pragma mark - 私有方法
 - (void)loadRefresh
 {
@@ -142,7 +146,11 @@ static NSString *ID = @"cell";
     [self.selectedBtn setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count] forState:UIControlStateNormal];
     
 }
-- (IBAction)selectedBtnClick:(id)sender {
+- (IBAction)selectedBtnClick:(UIButton *)sender {
+    if ([[sender titleForState:UIControlStateNormal] isEqualToString:@"点击预览作业(已选0题)"]) {
+        [self.view makeToast:@"您还没有选择题目,请选择" duration:1.0 position:SHOW_BOTTOM complete:nil];
+        return;
+    }
     QuestionPreviewController *vc = [[QuestionPreviewController alloc] init];
     vc.selectArr = [[QuestionDataBase shareDataBase] selectAllQuestion];
     [self.navigationController pushViewController:vc animated:YES];

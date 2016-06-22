@@ -99,7 +99,7 @@ static NSString *ID = @"CELL";
     // Dispose of any resources that can be recreated.
 }
 
-//  私有方法
+#pragma mark - 私有方法
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {

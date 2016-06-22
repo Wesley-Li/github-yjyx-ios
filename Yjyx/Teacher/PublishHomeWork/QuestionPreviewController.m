@@ -12,6 +12,8 @@
 #import "QuestionDataBase.h"
 #import "ReleaseHomeWorkController.h"
 #import "YjyxWrongSubModel.h"
+#import "ChaperContentItem.h"
+#import "OneSubjectController.h"
 #define kIndentifier @"fhdsjfhdskjhf"
 @interface QuestionPreviewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIButton *configurePublishBtn;
@@ -42,12 +44,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"预览作业";
     NSLog(@"%@", self.selectArr);
-    
+    [self loadBackBtn];
     self.configurePublishBtn.backgroundColor = RGBACOLOR(3, 138, 228, 1);
     
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
+    self.tableView.scrollIndicatorInsets =  UIEdgeInsetsMake(0, 0, -49, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // 注册cell
@@ -98,6 +101,36 @@
     return item.cellHeight - 40;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    OneSubjectController *vc = [[OneSubjectController alloc] init];
+    vc.is_select = 1;
+    if ([self.selectArr[indexPath.row] isKindOfClass:[YjyxWrongSubModel class]]) {
+        YjyxWrongSubModel *model = self.selectArr[indexPath.row];
+        
+        NSString *str = @"choice";
+        if (model.questiontype == 2) {
+            str = @"blankfill";
+        }
+        vc.qtype = str;
+        vc.w_id = [NSString stringWithFormat:@"%ld", model.questionid];
+    
+        vc.wrongSubjectModel = model;
+        
+    }else{
+        ChaperContentItem *model = self.selectArr[indexPath.row];
+       
+        NSString *str = @"choice";
+        if ([model.subject_type isEqualToString:@"2"]) {
+            str = @"blankfill";
+        }
+        vc.qtype = str;
+        vc.w_id = [NSString stringWithFormat:@"%ld", model.t_id];
+     
+        vc.chaperContentModel = model;
+    }
+    [self.navigationController pushViewController:vc animated:YES];
+}
 #pragma mark - delete
 - (void)deleteBtnClick:(UIButton *)sender {
 

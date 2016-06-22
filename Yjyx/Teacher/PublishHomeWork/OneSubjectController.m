@@ -13,10 +13,10 @@
 #import "ReleaseVideoCell.h"
 #import "ReleaseExplanationCell.h"
 #import "WMPlayer.h"
-//#import "WrongDataBase.h"
 #import "ChaperContentItem.h"
 #import "QuestionDataBase.h"
 #import "YjyxWrongSubModel.h"
+#import "ChapterViewController.h"
 @interface OneSubjectController ()<UITableViewDelegate, UITableViewDataSource>
 {
     WMPlayer *wmPlayer;
@@ -361,7 +361,7 @@ static NSString *VideoID = @"VIDEOCELL";
     param[@"qid"] = self.w_id;
     NSLog(@"%@, %@", self.qtype, self.w_id);
     [mgr GET:[BaseURL stringByAppendingString:@"/api/teacher/mobile/question/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] isEqual:@0]) {
             OneSubjectModel *model = [OneSubjectModel oneSubjectModelWithDict:responseObject];
             self.model = model;
@@ -400,8 +400,11 @@ static NSString *VideoID = @"VIDEOCELL";
         [[QuestionDataBase shareDataBase] insertWrong:_wrongSubjectModel];
         }
     }
-  
-    [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
+    if([self.navigationController.childViewControllers[1] isKindOfClass:[ChapterViewController class]]){
+         [self.navigationController popToViewController:self.navigationController.childViewControllers[2] animated:YES];
+    }else{
+         [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
+    }
     
 }
 

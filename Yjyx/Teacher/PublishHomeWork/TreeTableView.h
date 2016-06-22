@@ -12,7 +12,7 @@
 @class GradeContentItem;
 @protocol TreeTableCellDelegate <NSObject>
 
--(void)cellClick : (GradeContentItem *)node andVerVolItem:(GradeVerVolItem *)item andTreeNode:(TreeNode *)node;
+-(void)cellClick : (TreeNode *)node andVerVolItem:(GradeVerVolItem *)item andTreeNode:(TreeNode *)node;
 
 @end
 
