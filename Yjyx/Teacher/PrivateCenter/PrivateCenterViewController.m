@@ -14,6 +14,7 @@
 #import "YjyxSoundViewController.h"
 #import "FeedBackViewController.h"
 #import "SoundChangeViewController.h"
+#import "QuestionDataBase.h"
 
 @interface PrivateCenterViewController ()
 
@@ -264,9 +265,13 @@
                 {
                     [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
                 }
-
                 
+
+                // 清楚本地标记
                 [SYS_CACHE removeObjectForKey:@"AutoLogoin"];
+                [SYS_CACHE removeObjectForKey:@"getDate"];
+                [[QuestionDataBase shareDataBase] deleteQuestionTable];
+                
                 // 定时器挂起
 //                dispatch_suspend(((AppDelegate*)SYS_DELEGATE).timer);
                 
