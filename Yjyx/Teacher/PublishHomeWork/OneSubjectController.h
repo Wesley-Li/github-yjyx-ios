@@ -10,9 +10,9 @@
 @class YjyxWrongSubModel;
 @interface OneSubjectController : UIViewController
 
-@property (copy, nonatomic) NSString *qtype;
-@property (copy, nonatomic) NSString *w_id;
-@property (assign, nonatomic) NSInteger is_select;
+@property (copy, nonatomic) NSString *qtype;// 题目类型
+@property (copy, nonatomic) NSString *w_id;// id
+@property (assign, nonatomic) NSInteger is_select; // 是否被选中
 
 @property (strong, nonatomic) YjyxWrongSubModel *wrongSubjectModel;
 @end

@@ -41,8 +41,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIButton *backBtn1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
+    [backBtn1 addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [backBtn1 setImage:[UIImage imageNamed:@"comm_back"] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn1];
+    self.navigationItem.leftBarButtonItem = leftBtnItem;
+    
     [self readDataFromNetWork];
     
+    
+    
+}
+
+- (void)goBack {
+
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 // 网络请求

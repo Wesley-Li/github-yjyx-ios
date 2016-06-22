@@ -13,6 +13,7 @@
 #import "MJRefresh.h"
 #import "QuestionPreviewController.h"
 #import "QuestionDataBase.h"
+#import "OneSubjectController.h"
 
 #define ID @"subjectContentCell"
 @interface ChapterChoiceController ()<UITableViewDelegate, UITableViewDataSource, siftContentViewDelegate>
@@ -355,7 +356,19 @@
 
 }
 
+// 点击题目进入详情
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    OneSubjectController *oneVC = [[OneSubjectController alloc] init];
+    
+    ChaperContentItem *model = self.dataSoruce[indexPath.row];
+    
+    oneVC.qtype = model.subject_type;
+    oneVC.w_id = [NSString stringWithFormat:@"%ld", model.t_id];
+    
+    [self.navigationController pushViewController:oneVC animated:YES];
+    
+}
 
 
 
