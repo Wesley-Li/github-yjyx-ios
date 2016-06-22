@@ -181,31 +181,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    
-
-    // 选择题或者填空题
-    if (_choiceDataSource.count == 0 || _blankFillDataSource.count == 0) {
-        
-        if (_finishedArr.count == 0 || _unfinishedArr.count == 0) {
-            // 全部上交或者全部未交
-            return 3;
-        }else {
-            // 既有上交又有未交
-            return 4;
-        }
-        
-    }else {
-        
-        if (_finishedArr.count == 0 || _unfinishedArr.count == 0) {
-            return 4;
-        }else {
-        
-            return 5;
-        }
-        
-    
-    }
-    
+    return 5;
 
 }
 
@@ -213,237 +189,104 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (_choiceDataSource.count != 0 && _blankFillDataSource.count == 0) {
-        
 
+    
+    
+    if (indexPath.row == 0) {
         
-        if (_unfinishedArr.count == 0 || _finishedArr.count == 0) {
-            
-            if (indexPath.row == 0) {
-                self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
-                [_tcell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                _tcell.descriptionLabel.text = @"选择题正确率";
-                [self cell:_tcell addSubViewsWithChoiceArr:self.choiceDataSource];
-                return _tcell;
-            }else if(indexPath.row == 1) {
-                StuConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                return cell;
-            }else {
-                
-                if (_unfinishedArr.count == 0) {
-                    SubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:submit forIndexPath:indexPath];
-                    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                    [self cell:cell addSubViewsWithFinishedArr:_finishedArr];
-                    return cell;
-
-                }else {
-                
-                    UnSubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:unSubmit forIndexPath:indexPath];
-                    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                    [self cell:cell addSubViewsWithUnfinishedArr:_unfinishedArr];
-                    return cell;
-                    
-                }
-                
-            }
+        // 选择题
+        
+        self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
+        [_tcell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        if (self.choiceDataSource.count == 0) {
+            self.tcell.contentView.hidden = YES;
         }else {
-            
-            if (indexPath.row == 0) {
-                self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
-                [_tcell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                
-                _tcell.descriptionLabel.text = @"选择题正确率";
-                [self cell:_tcell addSubViewsWithChoiceArr:self.choiceDataSource];
-                return _tcell;
-            }else if(indexPath.row == 1) {
-                StuConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                return cell;
-            }else if (indexPath.row == 2) {
-                
-                SubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:submit forIndexPath:indexPath];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                [self cell:cell addSubViewsWithFinishedArr:_finishedArr];
-                return cell;
-                
-            }else {
-                
-                
-                UnSubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:unSubmit forIndexPath:indexPath];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                [self cell:cell addSubViewsWithUnfinishedArr:_unfinishedArr];
-                return cell;
-                
-            }
-            
+            self.tcell.contentView.hidden = NO;
         }
+        
+        _tcell.descriptionLabel.text = @"选择题正确率";
+        [self cell:_tcell addSubViewsWithChoiceArr:self.choiceDataSource];
+        
+        
 
+        return _tcell;
         
+    }else if (indexPath.row == 1) {
         
-    }else if (_choiceDataSource.count == 0 && _blankFillDataSource.count != 0){
+        // 填空题
         
+        self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
+        [_tcell setSelectionStyle:UITableViewCellSelectionStyleNone];
         
-        if (_unfinishedArr.count == 0 || _finishedArr.count == 0) {
-            
-            if (indexPath.row == 0) {
-                self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
-                [_tcell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                
-                [self cell:_tcell addSubViewsWithBlankfillArr:self.blankFillDataSource];
-                _tcell.descriptionLabel.text = @"填空题正确率";
-                return _tcell;
-            }else if(indexPath.row == 1) {
-                StuConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                return cell;
-            }else {
-                
-                if (_unfinishedArr.count == 0) {
-                    SubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:submit forIndexPath:indexPath];
-                    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                    [self cell:cell addSubViewsWithFinishedArr:_finishedArr];
-                    return cell;
-                    
-                }else {
-                    
-                    UnSubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:unSubmit forIndexPath:indexPath];
-                    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                    [self cell:cell addSubViewsWithUnfinishedArr:_unfinishedArr];
-                    return cell;
-                    
-                }
-            }
+        if (self.blankFillDataSource.count == 0) {
+            self.tcell.contentView.hidden = YES;
         }else {
-            
-            if (indexPath.row == 0) {
-                self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
-                [_tcell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                
-                [self cell:_tcell addSubViewsWithBlankfillArr:self.blankFillDataSource];
-                _tcell.descriptionLabel.text = @"填空题正确率";
-                return _tcell;
-            }else if(indexPath.row == 1) {
-                StuConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                return cell;
-            }else if (indexPath.row == 2) {
-                
-                SubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:submit forIndexPath:indexPath];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                [self cell:cell addSubViewsWithFinishedArr:_finishedArr];
-                return cell;
-                
-            }else {
-                
-                UnSubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:unSubmit forIndexPath:indexPath];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                [self cell:cell addSubViewsWithUnfinishedArr:_unfinishedArr];
-                return cell;
-                
-            }
-            
+        
+            self.tcell.contentView.hidden = NO;
         }
+        
+        [self cell:_tcell addSubViewsWithBlankfillArr:self.blankFillDataSource];
+        _tcell.descriptionLabel.text = @"填空题正确率";
+        
 
+        return _tcell;
+        
+        
+    }else if (indexPath.row == 2) {
+        
+        // 作业上交情况
+        
+        StuConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        return cell;
+        
+    
+    }else if (indexPath.row == 3) {
+        
+        // 已上交学生
+        
+        SubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:submit forIndexPath:indexPath];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        if (self.finishedArr.count == 0) {
+            cell.contentView.hidden = YES;
+        }else {
+        
+            cell.contentView.hidden = NO;
+        }
+        
+        [self cell:cell addSubViewsWithFinishedArr:_finishedArr];
+
+        
+        return cell;
         
     
     }else {
         
-        if (_unfinishedArr.count == 0 || _finishedArr.count == 0) {
-            
-            if (indexPath.row == 0 || indexPath.row == 1) {
-                self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
-                [_tcell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                
-                if (indexPath.row == 0) {
-                    //            cell.choiceArr = self.choiceDataSource;
-                    _tcell.descriptionLabel.text = @"选择题正确率";
-                    
-                    [self cell:_tcell addSubViewsWithChoiceArr:self.choiceDataSource];
-                    //            [cell setValuesWithChoiceModelArr:self.choiceDataSource];
-                    return _tcell;
-                }else {
-                    //            cell.blankArr = self.blankFillDataSource;
-                    [self cell:_tcell addSubViewsWithBlankfillArr:self.blankFillDataSource];
-                    _tcell.descriptionLabel.text = @"填空题正确率";
-                    return _tcell;
-                    
-                }
-                
-            }else if(indexPath.row == 2) {
-                
-                StuConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                return cell;
-                
-            }else {
-                
-                if (_unfinishedArr.count == 0) {
-                    SubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:submit forIndexPath:indexPath];
-                    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                    [self cell:cell addSubViewsWithFinishedArr:_finishedArr];
-                    return cell;
-                    
-                }else {
-                    
-                    UnSubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:unSubmit forIndexPath:indexPath];
-                    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                    [self cell:cell addSubViewsWithUnfinishedArr:_unfinishedArr];
-                    return cell;
-                    
-                }
-
-            }
-            
-            
+        // 未上交学生
+        
+        UnSubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:unSubmit forIndexPath:indexPath];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        if (self.unfinishedArr.count == 0) {
+            cell.contentView.hidden = YES;
         }else {
-            
-            if (indexPath.row == 0 || indexPath.row == 1) {
-                self.tcell = [tableView dequeueReusableCellWithIdentifier:taskConditon  forIndexPath:indexPath];
-                [_tcell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                
-                if (indexPath.row == 0) {
-                    //            cell.choiceArr = self.choiceDataSource;
-                    _tcell.descriptionLabel.text = @"选择题正确率";
-                    
-                    [self cell:_tcell addSubViewsWithChoiceArr:self.choiceDataSource];
-                    //            [cell setValuesWithChoiceModelArr:self.choiceDataSource];
-                    return _tcell;
-                }else {
-                    //            cell.blankArr = self.blankFillDataSource;
-                    [self cell:_tcell addSubViewsWithBlankfillArr:self.blankFillDataSource];
-                    _tcell.descriptionLabel.text = @"填空题正确率";
-                    return _tcell;
-                    
-                }
-                
-            }else if (indexPath.row == 2) {
-                
-                StuConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:stuCondition forIndexPath:indexPath];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                return cell;
-                
-                
-            }else if (indexPath.row == 3) {
-                
-                SubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:submit forIndexPath:indexPath];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                [self cell:cell addSubViewsWithFinishedArr:_finishedArr];
-                return cell;
-                
-            }else {
-                
-                UnSubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:unSubmit forIndexPath:indexPath];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                [self cell:cell addSubViewsWithUnfinishedArr:_unfinishedArr];
-                return cell;
-            }
-            
-            
+            cell.contentView.hidden = NO;
         }
+        
+        [self cell:cell addSubViewsWithUnfinishedArr:_unfinishedArr];
+        
 
-    
+        return cell;
+
+        
     }
+    
+    
+    
+    
 
 
 }
@@ -452,118 +295,53 @@
 #pragma mark - 返回高度的方法
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (_blankFillDataSource.count == 0 && _choiceDataSource.count != 0) {
-        
-                        if (_unfinishedArr.count == 0 || _finishedArr.count == 0) {
-                            if (indexPath.row == 0) {
-                                return _choiceTaskCellHeight;
-                            }else if (indexPath.row == 1) {
-                            
-                                return headerHeight;
-                            
-                            }else {
-                            
-                                if (_finishedArr.count == 0) {
-                                    return _unsubmitCellHeight;
-                                }else {
-                                
-                                    return _submitCellHeight;
-                                }
-                            }
-                        }else {
-                        
-                            if (indexPath.row == 0) {
-                                return _choiceTaskCellHeight;
-                            }else if (indexPath.row == 1) {
-                            
-                                return headerHeight;
-                            }else if (indexPath.row == 2) {
-                            
-                                return _submitCellHeight;
-                            }else {
-                            
-                                return _unsubmitCellHeight;
-                            }
-                        }
-        
-    }else if (_blankFillDataSource.count != 0 && _choiceDataSource.count == 0) {
-        
-                    if (_unfinishedArr.count == 0 || _finishedArr.count == 0) {
-                        if (indexPath.row == 0) {
-                            return _blankfillTaskCellHeight;
-                        }else if (indexPath.row == 1) {
-                            
-                            return headerHeight;
-                            
-                        }else {
-                            
-                            if (_unfinishedArr.count == 0) {
-                                return _submitCellHeight;
-                            }else {
-                                
-                                return _unsubmitCellHeight;
-                            }
-                        }
-                    }else {
-                    
-                        if (indexPath.row == 0) {
-                            return _blankfillTaskCellHeight;
-                        }else if (indexPath.row == 1) {
-                            
-                            return headerHeight;
-                        }else if (indexPath.row == 2) {
-                            
-                            return _submitCellHeight;
-                        }else {
-                            
-                            return _unsubmitCellHeight;
-                        }
 
-                    }
-
-    }else {
+    if (indexPath.row == 0) {
         
-        
-        if (_unfinishedArr.count == 0 || _finishedArr.count == 0) {
-            if (indexPath.row == 0) {
-                return _choiceTaskCellHeight;
-            }else if (indexPath.row == 1) {
+        if (self.choiceDataSource.count == 0) {
             
-                return _blankfillTaskCellHeight;
-            }else if (indexPath.row == 2) {
-            
-                return headerHeight;
-            }else {
-            
-                if (_unfinishedArr.count == 0) {
-                    return _submitCellHeight;
-                }else {
-                
-                    return _unsubmitCellHeight;
-                }
-            }
+            return 0;
         }else {
         
-            if (indexPath.row == 0) {
-                return _choiceTaskCellHeight;
-                
-            }else if (indexPath.row == 1) {
+            return _choiceTaskCellHeight;
+        }
+        
+        
+    }else if (indexPath.row == 1) {
+        
+        if (self.blankFillDataSource.count == 0) {
+            return 0;
+        }else {
             
-                return _blankfillTaskCellHeight;
-            }else if (indexPath.row == 2) {
-            
-                return headerHeight;
-            }else if (indexPath.row == 3) {
-            
-                return _submitCellHeight;
-            }else {
-            
-                return _unsubmitCellHeight;
-            }
+            return _blankfillTaskCellHeight;
         }
     
+        
+    }else if (indexPath.row == 2) {
+    
+        return headerHeight;
+        
+    }else if (indexPath.row == 3) {
+    
+        if (self.finishedArr.count == 0) {
+            return 0;
+        }else {
+            
+            return _submitCellHeight;
+        }
+        
+    }else {
+        
+        if (self.unfinishedArr.count == 0) {
+            return 0;
+        }else {
+        
+            return _unsubmitCellHeight;
+        }
+    
+        
     }
-
+    
 }
 
 

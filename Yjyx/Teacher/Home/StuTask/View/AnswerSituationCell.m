@@ -212,7 +212,7 @@
     } 
     [self.bg_view addSubview:_wrongView];
     
-    self.height = _wrongView.origin.y + _wrongView.height + 20;
+    self.height = _wrongView.origin.y + _wrongView.height + 30;
 
 }
 
