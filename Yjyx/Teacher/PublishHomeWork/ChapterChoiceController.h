@@ -20,6 +20,9 @@
 @property (assign, nonatomic) NSInteger volid;
 // 版本号
 @property (assign, nonatomic) NSInteger verid;
+// 章节内容
+@property (strong, nonatomic) NSString *t_text;
+
 
 @property (nonatomic, copy) NSString *questionType;// 题目类型
 @property (nonatomic, copy) NSString *level;// 难度

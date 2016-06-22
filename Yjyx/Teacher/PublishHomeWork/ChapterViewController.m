@@ -55,6 +55,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = COMMONCOLOR;
+    
+    [SVProgressHUD showWithStatus:@"正在加载数据..."];
 //    [self loadBackBtn];
     UIButton *backBtn1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
     [backBtn1 addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -76,7 +78,10 @@
    
 
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [SVProgressHUD dismiss];
+}
 - (void)loadData{
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
@@ -113,6 +118,7 @@
             tableview.gradeNumItem = self.GradeNumItem;
             tableview.bounces = NO;
             [self.view addSubview:tableview];
+           
         }else{
             
             [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
@@ -166,16 +172,16 @@
 
 #pragma mark - TreeTableCellDelegate
 // cell的点击方法
--(void)cellClick:(GradeContentItem *)item1 andVerVolItem:(GradeVerVolItem *)item andTreeNode:(TreeNode *)node{
+-(void)cellClick:(TreeNode *)item1 andVerVolItem:(GradeVerVolItem *)item andTreeNode:(TreeNode *)node{
 
        
         ChapterChoiceController *chapterVC = [[ChapterChoiceController alloc] init];
         
-        chapterVC.g_id = item1.g_id;
+        chapterVC.g_id = item1.nodeId;
         chapterVC.gradeid = item.gradeid;
         chapterVC.verid = item.verid;
         chapterVC.volid = item.volid;
-        
+        chapterVC.t_text = item1.name;
         [self.navigationController pushViewController:chapterVC animated:YES];
         
     

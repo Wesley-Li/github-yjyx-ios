@@ -117,11 +117,11 @@
 
 #pragma mark - TreeTableCellDelegate
 
-- (void)cellClick:(GradeContentItem *)item1 andVerVolItem:(GradeVerVolItem *)item andTreeNode:(TreeNode *)node {
+- (void)cellClick:(TreeNode *)item1 andVerVolItem:(GradeVerVolItem *)item andTreeNode:(TreeNode *)node {
 
     ChapterChoiceController *chapterVC = [[ChapterChoiceController alloc] init];
     
-    chapterVC.knowledgetreeidvalue = [NSString stringWithFormat:@"%@=%@", self.root_id, item1.g_id];
+    chapterVC.knowledgetreeidvalue = [NSString stringWithFormat:@"%@=%@", self.root_id, item1.nodeId];
     
     
     

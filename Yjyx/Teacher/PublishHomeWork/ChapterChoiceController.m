@@ -83,7 +83,10 @@
     [self.tableView reloadData];
     
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [SVProgressHUD dismiss];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadBackBtn];
@@ -93,7 +96,7 @@
     
     self.bottom_button.backgroundColor = RGBACOLOR(3, 138, 228, 1);
 
-    
+    self.title = self.t_text;
     // 导航栏右按钮的使用
     self.siftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _siftBtn.frame = CGRectMake(0, 0, 50, 50);
@@ -104,6 +107,7 @@
     // tableview的属性设置
     self.tableView.backgroundColor = COMMONCOLOR;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, -49, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // 注册cell
@@ -325,10 +329,10 @@
 
     NSInteger row = sender.tag - 200;
     ChaperContentItem *model = self.dataSoruce[row];
-    
-    if (!sender.selected) {
+    sender.selected = !sender.selected;
+    model.add = sender.selected;
+    if (sender.selected) {
         
-        sender.selected = YES;
         [[QuestionDataBase shareDataBase] insertQuestion:model];
         NSMutableArray *arr = [[QuestionDataBase shareDataBase] selectAllQuestion];
         NSNotification *notice = [NSNotification notificationWithName:@"bottomBtnNameChange" object:nil userInfo:@{@"key":arr}];
@@ -336,7 +340,6 @@
         
     }else {
     
-        sender.selected = NO;
         [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", model.t_id] andQuestionType:model.subject_type];
         NSMutableArray *arr = [[QuestionDataBase shareDataBase] selectAllQuestion];
         NSNotification *notice = [NSNotification notificationWithName:@"bottomBtnNameChange" object:nil userInfo:@{@"key":arr}];
@@ -362,9 +365,16 @@
     OneSubjectController *oneVC = [[OneSubjectController alloc] init];
     
     ChaperContentItem *model = self.dataSoruce[indexPath.row];
-    
-    oneVC.qtype = model.subject_type;
+    oneVC.chaperContentModel = model;
+
+    NSString *str = @"choice";
+    if ([model.subject_type isEqualToString:@"2"]) {
+        str = @"blankfill";
+     }
+    oneVC.qtype = str;
     oneVC.w_id = [NSString stringWithFormat:@"%ld", model.t_id];
+    oneVC.is_select = model.add ? 1 : 0;
+  
     
     [self.navigationController pushViewController:oneVC animated:YES];
     

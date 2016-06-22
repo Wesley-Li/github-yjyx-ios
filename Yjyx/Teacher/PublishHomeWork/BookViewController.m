@@ -43,7 +43,7 @@ static BookViewController *_instance;
     [super viewDidLoad];
     self.navigationItem.title = @"选择教材课本";
     [self loadBackBtn];
-    
+   
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ChooseMaterialCell class]) bundle:nil] forCellReuseIdentifier:ID];
     self.types = [[NSArray alloc] initWithObjects:@"选择教材版本", @"选择课本", nil];
     self.tableView.rowHeight = 65;
@@ -102,7 +102,7 @@ static BookViewController *_instance;
         [self.view makeToast:@"请选择课本" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
-    [SVProgressHUD showWithStatus:@"正在加载数据..."];
+
     NSString *vol= [cell2.detail_label.text substringFromIndex:3];
     NSString *grade = [cell2.detail_label.text substringToIndex:3];
     NSInteger volid = 1;

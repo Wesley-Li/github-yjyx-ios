@@ -31,7 +31,7 @@
 #import "StuClassEntity.h"
 #import "StuGroupEntity.h"
 
-
+#import "QuestionDataBase.h"
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define _IPHONE80_ 80000
 
@@ -253,7 +253,7 @@
     }
     
     if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {
-        
+       
         if (!_tabBar) {
             _tabBar = [[UITabBarController alloc] init];
         }
@@ -261,12 +261,6 @@
         NavRootViewController *home = [[NavRootViewController alloc] initWithRootViewController:[[ParentHomeViewController alloc] initWithNibName:@"ParentHomeViewController" bundle:nil]];
         home.tabBarItem = [UITabBarItem itemWithTitle:@"首页" image:[UIImage imageNamed:@"tab_home"] selectedImage:[UIImage imageNamed:@"tab_homes"]];
         home.navigationBarHidden = YES;
-        
-//        NavRootViewController *community = [[NavRootViewController alloc] initWithRootViewController:[[ParentCommunityViewController alloc] initWithNibName:@"ParentCommunityViewController" bundle:nil]];
-//        community.tabBarItem = [UITabBarItem itemWithTitle:@"社区" image:[UIImage imageNamed:@"tab_community"] selectedImage:[UIImage imageNamed:@"tab_communitys"]];
-//        community.navigationBarHidden = YES;
-        
-//        memberCenter.tabBarItem = [UITabBarItem itemWithTitle:@"会员中心" image:[UIImage imageNamed:@"tab_memberCenter"] selectedImage:[UIImage imageNamed:@"tab_memberCenter"]];
         
         NavRootViewController *personal = [[NavRootViewController alloc] initWithRootViewController:[[ParentPersonalViewController alloc] initWithNibName:@"ParentPersonalViewController" bundle:nil]];
         personal.tabBarItem = [UITabBarItem itemWithTitle:@"个人中心" image:[UIImage imageNamed:@"tab_personal"] selectedImage:[UIImage imageNamed:@"tab_personals"]];

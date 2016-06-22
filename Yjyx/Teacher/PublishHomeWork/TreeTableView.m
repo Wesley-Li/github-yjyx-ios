@@ -120,7 +120,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
     NSLog(@"%zd", indexPath.row);
     //先修改数据源
     TreeNode *parentNode = [_tempData objectAtIndex:indexPath.row];
-    GradeContentItem *item = self.chapterArray[indexPath.row + 1];
+    GradeContentItem *item = self.chapterArray[indexPath.row];
     GradeVerVolItem *item1 = self.gradeNumItem;
   
     
@@ -161,7 +161,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
     }else{
         if(indexPathArray.count <= 0){
             if (_treeTableCellDelegate && [_treeTableCellDelegate respondsToSelector:@selector(cellClick:andVerVolItem:andTreeNode:)]) {
-                [_treeTableCellDelegate cellClick:item andVerVolItem:item1 andTreeNode:parentNode];
+                [_treeTableCellDelegate cellClick:parentNode andVerVolItem:item1 andTreeNode:parentNode];
             }
             return;
         }
