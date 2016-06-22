@@ -8,14 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@class ChaperContentItem;
+@class ChaperContentItem, YjyxWrongSubModel;
 @interface QuestionPreviewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *questionNumberLabel;
 @property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 @property (nonatomic, assign) CGFloat height;
-@property (nonatomic, strong) ChaperContentItem *model;
+//@property (nonatomic, strong) ChaperContentItem *model;
 
 
 - (void)setValueWithModel:(ChaperContentItem *)model;
 
+- (void)setWrongWithModel:(YjyxWrongSubModel *)model;
 @end

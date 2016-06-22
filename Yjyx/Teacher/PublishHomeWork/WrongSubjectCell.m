@@ -9,7 +9,8 @@
 #import "WrongSubjectCell.h"
 #import "YjyxWrongSubModel.h"
 #import "RCLabel.h"
-#import "WrongDataBase.h"
+//#import "WrongDataBase.h"
+#import "QuestionDataBase.h"
 @interface WrongSubjectCell()
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
@@ -54,7 +55,7 @@
     self.contentLabel.componentsAndPlainText = componentsDS;
   
     // 判断是否已经被选中
-    NSMutableArray *tempArr = [[WrongDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", wrongSubModel.questionid] andQuestionType:[NSString stringWithFormat:@"%ld", wrongSubModel.questiontype]];
+    NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", wrongSubModel.questionid] andQuestionType:[NSString stringWithFormat:@"%ld", wrongSubModel.questiontype]];
     if(tempArr.count){
         wrongSubModel.isSelected = YES;
     }else{
@@ -80,11 +81,11 @@
     sender.selected = !sender.selected;
     self.wrongSubModel.isSelected = sender.selected;
     if(sender.selected){
-        [[WrongDataBase shareDataBase] insertQuestion:_wrongSubModel];
+        [[QuestionDataBase shareDataBase] insertWrong:_wrongSubModel];
     
         [[NSNotificationCenter defaultCenter] postNotificationName:@"BUTTON_IS_SELEND" object:nil];
     }else{
-        [[WrongDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", _wrongSubModel.questionid] andQuestionType: [NSString stringWithFormat:@"%ld", _wrongSubModel.questiontype]];
+        [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", _wrongSubModel.questionid] andQuestionType: [NSString stringWithFormat:@"%ld", _wrongSubModel.questiontype]];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"BUTTON_NO_SELEND" object:nil];
     }
     

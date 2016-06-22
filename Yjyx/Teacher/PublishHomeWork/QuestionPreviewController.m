@@ -11,7 +11,7 @@
 #import "QuestionPreviewCell.h"
 #import "QuestionDataBase.h"
 #import "ReleaseHomeWorkController.h"
-
+#import "YjyxWrongSubModel.h"
 #define kIndentifier @"fhdsjfhdskjhf"
 @interface QuestionPreviewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIButton *configurePublishBtn;
@@ -73,8 +73,16 @@
 
     QuestionPreviewCell *cell = [tableView dequeueReusableCellWithIdentifier:kIndentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    ChaperContentItem *item = self.selectArr[indexPath.row];
-    [cell setValueWithModel:item];
+
+    if ([self.selectArr[indexPath.row] isKindOfClass:[ChaperContentItem class]]) {
+        ChaperContentItem *item = self.selectArr[indexPath.row];
+        [cell setValueWithModel:item];
+    }else{
+        YjyxWrongSubModel *model = self.selectArr[indexPath.row];
+        [cell setWrongWithModel:self.selectArr[indexPath.row]];
+        
+    }
+    
     
     cell.questionNumberLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row + 1];
     cell.deleteBtn.tag = indexPath.row + 200;
@@ -93,9 +101,16 @@
 #pragma mark - delete
 - (void)deleteBtnClick:(UIButton *)sender {
 
-    ChaperContentItem *model = self.selectArr[sender.tag - 200];
-    [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", model.t_id] andQuestionType:model.subject_type];
-    [self.selectArr removeObject:model];
+    if ([self.selectArr[sender.tag - 200] isKindOfClass:[ChaperContentItem class]]) {
+        ChaperContentItem *model = self.selectArr[sender.tag - 200];
+        [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", model.t_id] andQuestionType:model.subject_type];
+        [self.selectArr removeObject:model];
+    }else{
+        YjyxWrongSubModel *model = self.selectArr[sender.tag - 200];
+        [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", model.t_id] andQuestionType:[NSString stringWithFormat:@"%ld", model.questiontype]];
+        [self.selectArr removeObject:model];
+    }
+   
     
     NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:0];
     [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
