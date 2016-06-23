@@ -14,7 +14,7 @@
 // 标题属性
 @property (copy, nonatomic) NSString *title1;
 // 书本编号模型
-@property (strong, nonatomic) GradeVerVolItem *GradeNumItem;
+//@property (strong, nonatomic) GradeVerVolItem *GradeNumItem;
 
 @property (assign, nonatomic) NSInteger gradeid;
 @property (assign, nonatomic) NSInteger volid;

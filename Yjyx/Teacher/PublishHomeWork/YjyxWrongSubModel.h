@@ -24,8 +24,12 @@
 // 题目id
 @property (assign, nonatomic) NSInteger questionid;
 
+// 底部条需要拉伸的长度
+@property (assign, nonatomic) CGFloat pullHeight;
 // 是否是选题
 @property (assign, nonatomic) BOOL isSelected;
+// 是否需要加载更多答案
+@property (assign, nonatomic) BOOL isLoadMore;
 // cell的高度
 @property (assign, nonatomic) CGFloat cellHeight;
 // RCLabel的frame

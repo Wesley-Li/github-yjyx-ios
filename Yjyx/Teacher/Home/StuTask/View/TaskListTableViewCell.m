@@ -38,23 +38,24 @@
     NSArray *arr2 = [arr[1] componentsSeparatedByString:@":"];
     NSString *timeString = [NSString stringWithFormat:@"%@日%@:%@", arr[0], arr2[0], arr2[1]];
     self.timeLabel.text = timeString;
-    NSString *mainName = model.resourcename;
-    if([model.resourcename isEqual:[NSNull null]] || [model.t_description isEqual:[NSNull null]]){
-        if ([model.t_description isEqual:[NSNull null]] && ![model.resourcename isEqual:[NSNull null]]) {
-            mainName = model.resourcename;
-        }
-        mainName = @"学生作业";
-    }else if ([model.resourcename isEqualToString:@""] && [model.t_description isEqualToString:@""]) {
-        mainName = @"学生作业";
-    }else if([model.resourcename isEqualToString:@""]){
-        mainName = model.t_description;
-    }
-    self.descriptionLabel.text = mainName;
+    
+    self.descriptionLabel.text = model.resourcename;
+    
+    
     if([model.t_description isEqualToString:@""]){
         self.resourcenameLabel.hidden = YES;
     }
     self.resourcenameLabel.hidden = NO;
     self.resourcenameLabel.text = model.t_description;
+    
+    UIFont *font = [UIFont fontWithName:@"Helvetica Neue" size:14.0];
+    self.resourcenameLabel.font = font;
+    CGRect frame = [_resourcenameLabel.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 40, 999) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil] context:nil];
+    
+//    self.height = frame.size.height + 120;
+    
+    model.height = frame.size.height + 120;
+    
     NSNumberFormatter *numberF = [[NSNumberFormatter alloc] init];
     if ([model.finished isEqual:model.total]) {
         self.finishedLabel.text = @"全部已交";

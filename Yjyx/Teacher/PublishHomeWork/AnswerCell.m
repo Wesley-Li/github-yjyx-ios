@@ -22,7 +22,9 @@
 - (void)setModel:(OneSubjectModel *)model
 {
     _model = model;
+
     self.answerLabel.text = model.answer;
+   
 }
 - (void)setFrame:(CGRect)frame
 {

@@ -119,20 +119,18 @@
 
 #pragma mark - TreeTableCellDelegate
 
-- (void)cellClick:(TreeNode *)item1 andVerVolItem:(GradeVerVolItem *)item andTreeNode:(TreeNode *)node {
+- (void)cellClick:(TreeNode *)node {
 
     ChapterChoiceController *chapterVC = [[ChapterChoiceController alloc] init];
     
-    chapterVC.knowledgetreeidvalue = [NSString stringWithFormat:@"%@=%@", self.root_id, item1.nodeId];
-    
-    
+    chapterVC.knowledgetreeidvalue = [NSString stringWithFormat:@"%@=%@", self.root_id, node.nodeId];
+ 
     
     [self.navigationController pushViewController:chapterVC animated:YES];
-    
 
-    
-    
 }
+
+
 
 
 

@@ -24,6 +24,13 @@
 @property (copy, nonatomic) NSString *selWord;
 
 @property (strong, nonatomic) NSMutableArray *chapterArr;
+
+// 年级数组
+@property (strong, nonatomic) NSArray *gradeArr;
+// 版本数组
+@property (strong, nonatomic) NSArray *versionArr;
+// 册号数组
+@property (strong, nonatomic) NSArray *volArr;
 @end
 
 @implementation BookViewController
@@ -103,28 +110,33 @@ static BookViewController *_instance;
         return;
     }
 
-    NSString *vol= [cell2.detail_label.text substringFromIndex:3];
-    NSString *grade = [cell2.detail_label.text substringToIndex:3];
+    NSString *grade = [cell2.detail_label.text substringToIndex:cell2.detail_label.text.length - 2];
     NSInteger volid = 1;
-    NSInteger gradeid = 1;
-    NSInteger verid = 1;
-    if([vol isEqualToString:@"下册"]){
+    NSInteger gradeid = 0;
+    NSInteger verid = 0;
+    if([cell2.detail_label.text containsString:@"下"]){
         volid = 2;
     }
-    if([grade isEqualToString:@"八年级"]){
-        gradeid = 2;
-    }else if([grade isEqualToString:@"九年级"]){
-        gradeid = 3;
+    for (NSArray *tempArr in _gradeArr) {
+        if([tempArr[1] isEqualToString:grade]){
+            gradeid = [tempArr[0] integerValue];
+            break;
+        }
     }
-    if([cell1.detail_label.text isEqualToString:@"人教版"]){
-        verid = 2;
+    for (NSArray *tempArr in _versionArr) {
+        if ([tempArr[1] isEqualToString:cell1.detail_label.text]) {
+            verid = [tempArr[0] integerValue];
+            break;
+        }
     }
+//    else if(cell)
     [self.chapterArr removeAllObjects];
     NSString *title = [NSString stringWithFormat:@"%@-%@",cell1.detail_label.text, cell2.detail_label.text];
     [[NSUserDefaults standardUserDefaults] setObject:title forKey:@"TeacherPostTitle"];
-    GradeVerVolItem *item = [GradeVerVolItem gradeVerVolItemWithGrade:gradeid andVolid:volid andVerid:verid];
+    [[NSUserDefaults standardUserDefaults] setObject:@[@(volid), @(gradeid), @(verid)] forKey:@"ChaperContentPamar"];
+//    GradeVerVolItem *item = [GradeVerVolItem gradeVerVolItemWithGrade:gradeid andVolid:volid andVerid:verid];
     ChapterViewController *chapterVc = [[ChapterViewController alloc] init];
-    chapterVc.GradeNumItem = item;
+//    chapterVc.GradeNumItem = item;
     chapterVc.title1 = title;
     chapterVc.gradeid = gradeid;
     chapterVc.volid = volid;
@@ -200,8 +212,10 @@ static BookViewController *_instance;
         NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
         pamar[@"action"] = @"list";
         [mgr GET:[BaseURL stringByAppendingString:@"/api/teacher/vgsv/"] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-            [responseObject writeToFile:@"/Users/wangdapeng/Desktop/文件/2.plist" atomically:YES];
-            
+//            [responseObject writeToFile:@"/Users/wangdapeng/Desktop/文件/2.plist" atomically:YES];
+            _gradeArr = responseObject[@"grade_list"];
+            _versionArr = responseObject[@"version_list"];
+            _volArr = responseObject[@"vol_list"];
             if (indexPath.row == 0) {
                 NSArray *arr = responseObject[@"version_list"];
                 for (NSInteger i = 0; i < arr.count; i++){

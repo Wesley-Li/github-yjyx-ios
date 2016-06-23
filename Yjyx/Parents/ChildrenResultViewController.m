@@ -211,6 +211,7 @@
             
             NSString *key = [NSString stringWithFormat:@"%@",[[_resultblankfills objectAtIndex:indexPath.row] firstObject]];
             NSString *content = [[_blankfills objectForKey:key] objectForKey:@"content"];
+            NSLog(@"%@", content);
             content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
             if (content == nil) {
                 return 0;
@@ -224,6 +225,7 @@
             
             NSString *isOpne = [selectDic objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row+[_resultchoices count]]];
             NSArray *resultary = [[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:1];
+            NSLog(@"%@", [[_blankfills objectForKey:key] objectForKey:@"answer"]);
             NSArray *tureAnswerAry = [[[_blankfills objectForKey:key] objectForKey:@"answer"] JSONValue];
 
             NSArray *cornerAry =[NSArray arrayWithObjects:@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨",@"⑩",@"⑪",@"⑫",@"⑬",@"⑭",@"⑮",@"⑯",@"⑰",@"⑱",@"⑲",@"⑳", nil];
@@ -691,6 +693,7 @@
     
     NSInteger row = btn.tag -[_resultchoices count];
     [_resultTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    
 }
 
 #pragma mark - Scroll
