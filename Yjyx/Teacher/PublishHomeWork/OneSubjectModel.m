@@ -18,15 +18,32 @@
     model.videourl = dict[@"videourl"];
     model.explanation = dict[@"explanation"];
     model.level = [dict[@"level"] integerValue];
-    NSInteger i = [dict[@"answer"] integerValue];
+    // 填空题答案与选择题答案的处理
+    if([[dict[@"answer"] JSONValue] isKindOfClass:[NSArray class]]){
+        NSArray *arr = @[@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨",@"⑩",@"⑪",@"⑫",@"⑬",@"⑭",@"⑮",@"⑯",@"⑰",@"⑱",@"⑲",@"⑳"];
+        NSArray *tempArr = [model.answer JSONValue];
+        if ([[model.answer JSONValue] isKindOfClass:[NSArray class]]) {
+            NSString *tempStr = nil;
+            NSInteger i = 0;
+            for (NSString *b_answer in tempArr) {
+                if (tempStr == nil) {
+                    tempStr = [NSString stringWithFormat:@"%@%@",arr[i],b_answer];
+                }else{
+                    tempStr = [NSString stringWithFormat:@"%@\n%@%@", tempStr, arr[i], b_answer];
+                }
+                i++;
+            }
+            model.answer = tempStr;
+        }
+    }else{
     NSString *str = nil;
     if([dict[@"answer"] containsString:@"|"]){
     NSArray *answerArr = [dict[@"answer"] componentsSeparatedByString:@"|"];
     for(int j = 0; j < answerArr.count; j++){
         if (str == nil) {
-            str = arr[[answerArr[i] integerValue]];
+            str = arr[[answerArr[j] integerValue]];
         }else{
-            str = [NSString stringWithFormat:@"%@%@", str, arr[[answerArr[i] integerValue]]];
+            str = [NSString stringWithFormat:@"%@%@", str, arr[[answerArr[j] integerValue]]];
         }
         model.answer = str;
     }
@@ -34,7 +51,7 @@
         NSInteger j = [dict[@"answer"] integerValue];
         model.answer = [NSString stringWithFormat:@"%@", arr[j]];
     }
-    
+    }
     model.t_id = [dict[@"id"] integerValue];
     return model;
 }
@@ -53,6 +70,24 @@
     self.firstFrame = CGRectMake(5, 5, optimalSize.width, optimalSize.height);
     cellHeight += 25;
     return cellHeight + 10;
+}
+- (CGFloat)secondCellHeight
+{
+    CGFloat cellHeight = 0;
+    cellHeight += 30;
+    NSArray *tempArr = [self.answer JSONValue];
+    if ([[self.answer JSONValue] isKindOfClass:[NSArray class]]){
+        NSString *tempStr = nil;
+        for (NSString *b_answer in tempArr) {
+            tempStr = [NSString stringWithFormat:@"%@%@", @"①", b_answer];
+           CGRect rect = [tempStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 35, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@
+             {NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil];
+            cellHeight += rect.size.height;
+        }
+    }else{
+        cellHeight += 30;
+    }
+    return cellHeight;
 }
 - (CGFloat)threeCellHeight
 {

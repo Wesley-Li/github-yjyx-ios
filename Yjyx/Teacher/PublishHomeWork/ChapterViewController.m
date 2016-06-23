@@ -117,7 +117,7 @@
             TreeTableView *tableview = [[TreeTableView alloc] initWithFrame:CGRectMake(0, 64+49, SCREEN_WIDTH , SCREEN_HEIGHT - 64 - 49) withData:_data];
             tableview.treeTableCellDelegate = self;
             tableview.chapterArray = self.chaperArr;
-            tableview.gradeNumItem = self.GradeNumItem;
+//            tableview.gradeNumItem = self.GradeNumItem;
             tableview.bounces = NO;
             [self.view addSubview:tableview];
            
@@ -174,15 +174,15 @@
 
 #pragma mark - TreeTableCellDelegate
 // cell的点击方法
--(void)cellClick:(TreeNode *)item1 andVerVolItem:(GradeVerVolItem *)item andTreeNode:(TreeNode *)node{
+-(void)cellClick:(TreeNode *)item1{
 
        
         ChapterChoiceController *chapterVC = [[ChapterChoiceController alloc] init];
         
         chapterVC.g_id = item1.nodeId;
-        chapterVC.gradeid = item.gradeid;
-        chapterVC.verid = item.verid;
-        chapterVC.volid = item.volid;
+        chapterVC.gradeid = self.gradeid;
+        chapterVC.verid = self.verid;
+        chapterVC.volid = self.volid;
         chapterVC.t_text = item1.name;
         [self.navigationController pushViewController:chapterVC animated:YES];
         

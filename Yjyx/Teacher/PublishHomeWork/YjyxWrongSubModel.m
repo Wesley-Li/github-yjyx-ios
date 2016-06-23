@@ -14,23 +14,39 @@
 {
    NSArray *arr = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", nil];
     YjyxWrongSubModel  *model = [[self alloc] init];
-    NSInteger i = [dict[@"answer"] integerValue];
-    NSString *str = nil;
-    if([dict[@"answer"] containsString:@"|"]){
-    NSArray *answerArr = [dict[@"answer"] componentsSeparatedByString:@"|"];
-    
-    for(int j = 0; j < answerArr.count; j++){
-        if (str == nil) {
-            str = arr[[answerArr[i] integerValue] ];
-        }else{
-            str = [NSString stringWithFormat:@"%@%@", str, arr[[answerArr[i] integerValue]]];
+    // 填空题答案与选择题答案的处理
+    if([[dict[@"answer"] JSONValue] isKindOfClass:[NSArray class]]){
+        NSArray *arr = @[@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨",@"⑩",@"⑪",@"⑫",@"⑬",@"⑭",@"⑮",@"⑯",@"⑰",@"⑱",@"⑲",@"⑳"];
+        NSArray *tempArr = [model.answer JSONValue];
+        if ([[model.answer JSONValue] isKindOfClass:[NSArray class]]) {
+            NSString *tempStr = nil;
+            NSInteger i = 0;
+            for (NSString *b_answer in tempArr) {
+                if (tempStr == nil) {
+                    tempStr = [NSString stringWithFormat:@"%@%@",arr[i],b_answer];
+                }else{
+                    tempStr = [NSString stringWithFormat:@"%@\n%@%@", tempStr, arr[i], b_answer];
+                }
+                i++;
+            }
+            model.answer = tempStr;
         }
-        
-    }
-        model.answer = str;
     }else{
-        NSInteger j = [dict[@"answer"] integerValue];
-        model.answer = [NSString stringWithFormat:@"%@", arr[j]];
+        NSString *str = nil;
+        if([dict[@"answer"] containsString:@"|"]){
+            NSArray *answerArr = [dict[@"answer"] componentsSeparatedByString:@"|"];
+            for(int j = 0; j < answerArr.count; j++){
+                if (str == nil) {
+                    str = arr[[answerArr[j] integerValue]];
+                }else{
+                    str = [NSString stringWithFormat:@"%@%@", str, arr[[answerArr[j] integerValue]]];
+                }
+                model.answer = str;
+            }
+        }else{
+            NSInteger j = [dict[@"answer"] integerValue];
+            model.answer = [NSString stringWithFormat:@"%@", arr[j]];
+        }
     }
     
     model.content = dict[@"content"];
@@ -58,6 +74,23 @@
     cellHeight += optimalSize.height;
     self.cellFrame = CGRectMake(2, 2, optimalSize.width, optimalSize.height);
     cellHeight += 60;
+    if ([[self.answer JSONValue] isKindOfClass:[NSArray class]]) {
+        if (self.isLoadMore) {
+        NSArray *arr = [self.answer componentsSeparatedByString:@"\n"];
+        CGRect rect = [arr[0] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 307, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil];
+        if (rect.size.height > 43) {
+            cellHeight += rect.size.height - 43;
+            self.pullHeight += rect.size.height - 43;
+        }
+        NSMutableArray *tempArr = [NSMutableArray arrayWithArray:arr];
+        [tempArr removeObjectAtIndex:0];
+        NSString *tempStr = [tempArr componentsJoinedByString:@"\n"];
+        CGRect rect1 = [tempStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 185, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil];
+        cellHeight += rect1.size.height;
+            self.pullHeight += rect1.size.height;
+        }
+    }
+    
     return cellHeight + 10;
 }
 
