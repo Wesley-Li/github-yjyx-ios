@@ -122,9 +122,9 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
     TreeNode *parentNode = [_tempData objectAtIndex:indexPath.row];
 
     
-    GradeContentItem *item = self.chapterArray[indexPath.row + 1];
+//    GradeContentItem *item = self.chapterArray[indexPath.row + 1];
 
-    GradeVerVolItem *item1 = self.gradeNumItem;
+//    GradeVerVolItem *item1 = self.gradeNumItem;
   
     
     NSUInteger startPosition = indexPath.row+1;
@@ -165,8 +165,8 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
         [self insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
     }else{
         if(indexPathArray.count <= 0){
-            if (_treeTableCellDelegate && [_treeTableCellDelegate respondsToSelector:@selector(cellClick:andVerVolItem:andTreeNode:)]) {
-                [_treeTableCellDelegate cellClick:parentNode andVerVolItem:item1 andTreeNode:parentNode];
+            if (_treeTableCellDelegate && [_treeTableCellDelegate respondsToSelector:@selector(cellClick:)]) {
+                [_treeTableCellDelegate cellClick:parentNode];
             }
             return;
         }

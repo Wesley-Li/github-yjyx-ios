@@ -91,32 +91,15 @@
 - (IBAction)handleBookBtn:(UIButton *)sender {
     
     NSString *chapterTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"TeacherPostTitle"];
+    NSArray  *arr = [[NSUserDefaults standardUserDefaults] objectForKey:@"ChaperContentPamar"];
     if(chapterTitle != nil){
-        NSString *ver = [chapterTitle substringToIndex:3];
-        NSString *grade = [chapterTitle substringWithRange:NSMakeRange(4, 3)];
-        NSString *vol = [chapterTitle substringFromIndex:7];
-       
-        NSInteger volid = 1;
-        NSInteger gradeid = 1;
-        NSInteger verid = 1;
-        if([vol isEqualToString:@"下册"]){
-            volid = 2;
-        }
-        if([grade isEqualToString:@"八年级"]){
-            gradeid = 2;
-        }else if([grade isEqualToString:@"九年级"]){
-            gradeid = 3;
-        }
-        if([ver isEqualToString:@"人教版"]){
-            verid = 2;
-        }
-        GradeVerVolItem *item = [GradeVerVolItem gradeVerVolItemWithGrade:gradeid andVolid:volid andVerid:verid];
+        
         ChapterViewController *chapterVc = [[ChapterViewController alloc] init];
-        chapterVc.GradeNumItem = item;
+       
         chapterVc.title1 = chapterTitle;
-        chapterVc.gradeid = gradeid;
-        chapterVc.verid = verid;
-        chapterVc.volid = volid;
+        chapterVc.gradeid = [arr[1] integerValue];
+        chapterVc.verid = [arr[2] integerValue];
+        chapterVc.volid = [arr[0] integerValue];
         [self.navigationController pushViewController:chapterVc animated:YES];
     }else{
     BookViewController *bookVC = [[BookViewController alloc] initWithNibName:@"BookViewController" bundle:nil];

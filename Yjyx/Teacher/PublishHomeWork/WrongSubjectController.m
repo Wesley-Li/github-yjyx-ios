@@ -53,8 +53,8 @@ static NSString *ID = @"cell";
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, -49, 0);
     // 注册通知 接收添加按钮的点击
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btnIsSelected) name:@"BUTTON_IS_SELEND" object:nil];
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btnNoSelected) name:@"BUTTON_NO_SELEND" object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btnNoSelected) name:@"BUTTON_NO_SELEND" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMoreBtnSelected) name:@"LoadMoreIsClicked" object:nil];
     // 集成下拉刷新控件
     [self loadRefresh];
     
@@ -102,6 +102,7 @@ static NSString *ID = @"cell";
     }else{
         _count = _index + _count;
     }
+    [self.tableView reloadData];
     [self.tableView footerEndRefreshing];
 }
 - (void)loadData
@@ -151,6 +152,10 @@ static NSString *ID = @"cell";
     self.selectedBtn.titleLabel.text = [NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count ] ;
     [self.selectedBtn setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count] forState:UIControlStateNormal];
     
+}
+- (void)loadMoreBtnSelected
+{
+    [self.tableView reloadData];
 }
 - (IBAction)selectedBtnClick:(UIButton *)sender {
     if ([[sender titleForState:UIControlStateNormal] isEqualToString:@"点击预览作业(已选0题)"]) {

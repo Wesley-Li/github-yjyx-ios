@@ -18,9 +18,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *rightAnswerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 @property (weak, nonatomic) IBOutlet UIButton *collectBtn;
+@property (weak, nonatomic) IBOutlet UIButton *loadMoreBtn;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomHeightConstant;
 
+@property (weak, nonatomic) IBOutlet UILabel *moreAnswerLabel;
 @property (weak, nonatomic) RCLabel *contentLabel;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
 @end
 
 @implementation WrongSubjectCell
@@ -40,8 +44,15 @@
     
     templabel.componentsAndPlainText = componentsDS;
     
-    
+    self.collectBtn.hidden = YES;
     [self.bgView addSubview:templabel];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewClick)];
+    [self.bottomView addGestureRecognizer:tap];
+}
+- (void)viewClick
+{
+    
 }
 - (void)setWrongSubModel:(YjyxWrongSubModel *)wrongSubModel
 {
@@ -67,7 +78,26 @@
     }else{
         self.addBtn.selected = NO;
     }
-    
+    // 判断是否是填空题
+    if([wrongSubModel.answer containsString:@"①"]){
+        self.loadMoreBtn.hidden = NO;
+        NSArray *arr = [wrongSubModel.answer componentsSeparatedByString:@"\n"];
+        self.rightAnswerLabel.text = arr[0];
+        NSMutableArray *tempArr = [NSMutableArray arrayWithArray:arr];
+        [tempArr removeObjectAtIndex:0];
+        NSString *tempStr = [tempArr componentsJoinedByString:@"\n"];
+        self.moreAnswerLabel.text = tempStr;
+        
+    }else{
+        self.loadMoreBtn.hidden = YES;
+    }
+    if (_wrongSubModel.isLoadMore) {
+        self.bottomHeightConstant.constant = 49 + wrongSubModel.pullHeight;
+        self.moreAnswerLabel.hidden = NO;
+    }else{
+        self.bottomHeightConstant.constant = 49;
+        self.moreAnswerLabel.hidden = YES;
+    }
 }
 - (void)layoutSubviews
 {
@@ -89,6 +119,11 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"BUTTON_NO_SELEND" object:nil];
     }
     
+}
+- (IBAction)loadMoreBtnClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    _wrongSubModel.isLoadMore = sender.selected;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMoreIsClicked" object:nil];
 }
 
 @end
