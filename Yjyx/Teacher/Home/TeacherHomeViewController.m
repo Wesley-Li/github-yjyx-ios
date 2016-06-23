@@ -9,6 +9,7 @@
 #import "TeacherHomeViewController.h"
 #import "UIImageView+WebCache.h"
 #import "StuTaskTableViewController.h"
+#import "StatisticController.h"
 
 @interface TeacherHomeViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -228,7 +229,8 @@
 #pragma mark - 点击数据统计
 - (IBAction)handleAcount:(id)sender {
     
-    [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
+    StatisticController *staVC = [[StatisticController alloc] init];
+    [self.navigationController pushViewController:staVC animated:YES];
 }
 
 
