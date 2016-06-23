@@ -491,7 +491,7 @@ static NSString *VideoID = @"VIDEOCELL";
     if (indexPath.row == 0) {
         return _model.firstCellHeight;
     }else if(indexPath.row == 1){
-        return 60;
+        return _model.secondCellHeight;
     }else if(indexPath.row == 2){
         if ([_model.explanation isEqualToString:@""]) {
             return 0;

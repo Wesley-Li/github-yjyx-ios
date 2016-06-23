@@ -12,7 +12,7 @@
 @class GradeContentItem;
 @protocol TreeTableCellDelegate <NSObject>
 
--(void)cellClick : (TreeNode *)node andVerVolItem:(GradeVerVolItem *)item andTreeNode:(TreeNode *)node;
+-(void)cellClick : (TreeNode *)node ;
 
 @end
 
@@ -22,7 +22,7 @@
 // 保存章节的模型数组
 @property (strong, nonatomic) NSMutableArray *chapterArray;
 // 保存书的版本号等的模型
-@property (strong, nonatomic) GradeVerVolItem  *gradeNumItem;
+//@property (strong, nonatomic) GradeVerVolItem  *gradeNumItem;
 -(instancetype)initWithFrame:(CGRect)frame withData : (NSArray *)data;
 
 @end

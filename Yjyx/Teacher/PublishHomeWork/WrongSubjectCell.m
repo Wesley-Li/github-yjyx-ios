@@ -18,8 +18,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *rightAnswerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 @property (weak, nonatomic) IBOutlet UIButton *collectBtn;
+@property (weak, nonatomic) IBOutlet UIButton *loadMoreBtn;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomHeightConstant;
 
+@property (weak, nonatomic) IBOutlet UILabel *moreAnswerLabel;
 @property (weak, nonatomic) RCLabel *contentLabel;
 @end
 
@@ -40,7 +43,7 @@
     
     templabel.componentsAndPlainText = componentsDS;
     
-    
+    self.collectBtn.hidden = YES;
     [self.bgView addSubview:templabel];
 }
 - (void)setWrongSubModel:(YjyxWrongSubModel *)wrongSubModel
@@ -67,7 +70,19 @@
     }else{
         self.addBtn.selected = NO;
     }
-    
+    // 判断是否是填空题
+    if([[wrongSubModel.answer JSONValue] isKindOfClass:[NSArray class]]){
+        self.loadMoreBtn.hidden = NO;
+    }else{
+        self.loadMoreBtn.hidden = YES;
+    }
+    if (_wrongSubModel.isLoadMore) {
+        self.bottomHeightConstant.constant = 49 + wrongSubModel.pullHeight;
+        self.moreAnswerLabel.hidden = NO;
+    }else{
+        self.bottomHeightConstant.constant = 49;
+        self.moreAnswerLabel.hidden = YES;
+    }
 }
 - (void)layoutSubviews
 {
@@ -89,6 +104,11 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"BUTTON_NO_SELEND" object:nil];
     }
     
+}
+- (IBAction)loadMoreBtnClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    _wrongSubModel.isLoadMore = sender.selected;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMoreIsClicked" object:nil];
 }
 
 @end
