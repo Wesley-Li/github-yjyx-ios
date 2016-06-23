@@ -17,8 +17,8 @@
     // 填空题答案与选择题答案的处理
     if([[dict[@"answer"] JSONValue] isKindOfClass:[NSArray class]]){
         NSArray *arr = @[@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨",@"⑩",@"⑪",@"⑫",@"⑬",@"⑭",@"⑮",@"⑯",@"⑰",@"⑱",@"⑲",@"⑳"];
-        NSArray *tempArr = [model.answer JSONValue];
-        if ([[model.answer JSONValue] isKindOfClass:[NSArray class]]) {
+        NSArray *tempArr = [dict[@"answer"] JSONValue];
+        if ([[dict[@"answer"] JSONValue] isKindOfClass:[NSArray class]]) {
             NSString *tempStr = nil;
             NSInteger i = 0;
             for (NSString *b_answer in tempArr) {
@@ -74,21 +74,23 @@
     cellHeight += optimalSize.height;
     self.cellFrame = CGRectMake(2, 2, optimalSize.width, optimalSize.height);
     cellHeight += 60;
-    if ([[self.answer JSONValue] isKindOfClass:[NSArray class]]) {
+    if ([self.answer containsString:@"①"]) {
+        CGFloat pullHeight = 0;
         if (self.isLoadMore) {
         NSArray *arr = [self.answer componentsSeparatedByString:@"\n"];
         CGRect rect = [arr[0] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 307, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil];
         if (rect.size.height > 43) {
             cellHeight += rect.size.height - 43;
-            self.pullHeight += rect.size.height - 43;
+            pullHeight += rect.size.height - 43;
         }
         NSMutableArray *tempArr = [NSMutableArray arrayWithArray:arr];
         [tempArr removeObjectAtIndex:0];
         NSString *tempStr = [tempArr componentsJoinedByString:@"\n"];
         CGRect rect1 = [tempStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 185, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil];
         cellHeight += rect1.size.height;
-            self.pullHeight += rect1.size.height;
+            pullHeight += rect1.size.height + 20;
         }
+        self.pullHeight = pullHeight;
     }
     
     return cellHeight + 10;

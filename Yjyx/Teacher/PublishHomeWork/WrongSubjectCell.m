@@ -24,6 +24,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *moreAnswerLabel;
 @property (weak, nonatomic) RCLabel *contentLabel;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
 @end
 
 @implementation WrongSubjectCell
@@ -45,6 +46,13 @@
     
     self.collectBtn.hidden = YES;
     [self.bgView addSubview:templabel];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewClick)];
+    [self.bottomView addGestureRecognizer:tap];
+}
+- (void)viewClick
+{
+    
 }
 - (void)setWrongSubModel:(YjyxWrongSubModel *)wrongSubModel
 {
@@ -71,8 +79,15 @@
         self.addBtn.selected = NO;
     }
     // 判断是否是填空题
-    if([[wrongSubModel.answer JSONValue] isKindOfClass:[NSArray class]]){
+    if([wrongSubModel.answer containsString:@"①"]){
         self.loadMoreBtn.hidden = NO;
+        NSArray *arr = [wrongSubModel.answer componentsSeparatedByString:@"\n"];
+        self.rightAnswerLabel.text = arr[0];
+        NSMutableArray *tempArr = [NSMutableArray arrayWithArray:arr];
+        [tempArr removeObjectAtIndex:0];
+        NSString *tempStr = [tempArr componentsJoinedByString:@"\n"];
+        self.moreAnswerLabel.text = tempStr;
+        
     }else{
         self.loadMoreBtn.hidden = YES;
     }

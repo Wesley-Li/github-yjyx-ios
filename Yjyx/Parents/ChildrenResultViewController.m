@@ -693,6 +693,7 @@
     
     NSInteger row = btn.tag -[_resultchoices count];
     [_resultTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    
 }
 
 #pragma mark - Scroll

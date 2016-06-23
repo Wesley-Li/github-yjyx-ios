@@ -102,6 +102,7 @@ static NSString *ID = @"cell";
     }else{
         _count = _index + _count;
     }
+    [self.tableView reloadData];
     [self.tableView footerEndRefreshing];
 }
 - (void)loadData

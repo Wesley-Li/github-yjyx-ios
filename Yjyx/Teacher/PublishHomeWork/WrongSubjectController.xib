@@ -60,7 +60,7 @@
                 <constraint firstAttribute="trailing" secondItem="rZl-dt-ejh" secondAttribute="trailing" id="vqu-2O-Gxg"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="593" y="284"/>
+            <point key="canvasLocation" x="332" y="227"/>
         </view>
     </objects>
 </document>

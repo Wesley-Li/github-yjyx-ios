@@ -74,7 +74,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1P-D4-8CJ">
-                                        <rect key="frame" x="165" y="16" width="102" height="18"/>
+                                        <rect key="frame" x="165" y="16" width="97" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.07444966032" green="0.55273154769999999" blue="0.39778147209999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -85,10 +85,10 @@
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B8f-Vq-uFY">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B8f-Vq-uFY">
                                         <rect key="frame" x="165" y="49" width="224" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.07444966032" green="0.55273154769999999" blue="0.39778147209999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="juz-qe-nPf">
@@ -113,7 +113,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="juz-qe-nPf" firstAttribute="leading" secondItem="G1P-D4-8CJ" secondAttribute="trailing" id="1Mf-zP-lHs"/>
+                                    <constraint firstItem="juz-qe-nPf" firstAttribute="leading" secondItem="G1P-D4-8CJ" secondAttribute="trailing" constant="5" id="1Mf-zP-lHs"/>
                                     <constraint firstItem="juz-qe-nPf" firstAttribute="top" secondItem="5ji-Bw-GwN" secondAttribute="top" priority="750" id="1jG-RI-4NC"/>
                                     <constraint firstItem="Zc4-1O-eDu" firstAttribute="top" secondItem="5ji-Bw-GwN" secondAttribute="top" id="4Fw-lB-Dee"/>
                                     <constraint firstItem="Bvb-xf-SGd" firstAttribute="centerY" secondItem="5ji-Bw-GwN" secondAttribute="centerY" id="4Yt-le-N3R"/>
@@ -193,6 +193,7 @@
                 <outlet property="addBtn" destination="Zc4-1O-eDu" id="GiS-5b-seO"/>
                 <outlet property="bgView" destination="E9K-d3-ajp" id="HpQ-qP-VGL"/>
                 <outlet property="bottomHeightConstant" destination="e3K-ff-ZO6" id="15M-mZ-Mxx"/>
+                <outlet property="bottomView" destination="5ji-Bw-GwN" id="msL-20-F1e"/>
                 <outlet property="collectBtn" destination="Qxg-Du-ZfD" id="X03-Pb-QD2"/>
                 <outlet property="loadMoreBtn" destination="juz-qe-nPf" id="wK9-cR-slM"/>
                 <outlet property="moreAnswerLabel" destination="B8f-Vq-uFY" id="bhd-0f-yfm"/>

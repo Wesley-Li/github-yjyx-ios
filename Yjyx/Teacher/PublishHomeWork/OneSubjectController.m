@@ -361,7 +361,8 @@ static NSString *VideoID = @"VIDEOCELL";
     param[@"qid"] = self.w_id;
     NSLog(@"%@, %@", self.qtype, self.w_id);
     [mgr GET:[BaseURL stringByAppendingString:@"/api/teacher/mobile/question/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-//        NSLog(@"%@", responseObject);
+        NSLog(@"%@", responseObject);
+        
         if ([responseObject[@"retcode"] isEqual:@0]) {
             OneSubjectModel *model = [OneSubjectModel oneSubjectModelWithDict:responseObject];
             self.model = model;

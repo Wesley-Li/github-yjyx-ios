@@ -19,10 +19,11 @@
     model.explanation = dict[@"explanation"];
     model.level = [dict[@"level"] integerValue];
     // 填空题答案与选择题答案的处理
+    NSLog(@"%@", [dict[@"answer"] JSONValue]);
     if([[dict[@"answer"] JSONValue] isKindOfClass:[NSArray class]]){
         NSArray *arr = @[@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨",@"⑩",@"⑪",@"⑫",@"⑬",@"⑭",@"⑮",@"⑯",@"⑰",@"⑱",@"⑲",@"⑳"];
-        NSArray *tempArr = [model.answer JSONValue];
-        if ([[model.answer JSONValue] isKindOfClass:[NSArray class]]) {
+        NSArray *tempArr = [dict[@"answer"] JSONValue];
+        if ([[dict[@"answer"] JSONValue] isKindOfClass:[NSArray class]]) {
             NSString *tempStr = nil;
             NSInteger i = 0;
             for (NSString *b_answer in tempArr) {
@@ -75,15 +76,12 @@
 {
     CGFloat cellHeight = 0;
     cellHeight += 30;
-    NSArray *tempArr = [self.answer JSONValue];
-    if ([[self.answer JSONValue] isKindOfClass:[NSArray class]]){
-        NSString *tempStr = nil;
-        for (NSString *b_answer in tempArr) {
-            tempStr = [NSString stringWithFormat:@"%@%@", @"①", b_answer];
-           CGRect rect = [tempStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 35, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@
+    
+    if ([self.answer containsString:@"①"]){
+           CGRect rect = [self.answer boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 35, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@
              {NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil];
-            cellHeight += rect.size.height;
-        }
+            cellHeight += rect.size.height + 10;
+
     }else{
         cellHeight += 30;
     }
