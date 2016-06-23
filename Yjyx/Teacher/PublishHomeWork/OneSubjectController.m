@@ -16,6 +16,7 @@
 #import "ChaperContentItem.h"
 #import "QuestionDataBase.h"
 #import "YjyxWrongSubModel.h"
+#import "KnowledgeViewController.h"
 #import "ChapterViewController.h"
 @interface OneSubjectController ()<UITableViewDelegate, UITableViewDataSource>
 {
@@ -42,7 +43,7 @@ static NSString *VideoID = @"VIDEOCELL";
     [super viewDidLoad];
     
     [SVProgressHUD showWithStatus:@"正在加载..."];
-    self.title = @"预览作业";
+    self.title = @"题目详情";
     // 加载返回按钮
     [self loadBackBtn];
     // 加载数据
@@ -401,7 +402,7 @@ static NSString *VideoID = @"VIDEOCELL";
         [[QuestionDataBase shareDataBase] insertWrong:_wrongSubjectModel];
         }
     }
-    if([self.navigationController.childViewControllers[1] isKindOfClass:[ChapterViewController class]]){
+    if([self.navigationController.childViewControllers[1] isKindOfClass:[ChapterViewController class]] || [self.navigationController.childViewControllers[1] isKindOfClass:[KnowledgeViewController class]]){
          [self.navigationController popToViewController:self.navigationController.childViewControllers[2] animated:YES];
     }else{
          [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];

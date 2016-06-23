@@ -135,7 +135,10 @@
 
     
 //    cell.textLabel.text = model.name;
-    [self.titleArr addObject:cell.textLabel.text];
+    if(!(cell.textLabel.text == nil)){
+        [self.titleArr addObject:cell.textLabel.text];
+    }
+    
     NSNumberFormatter *numberF = [[NSNumberFormatter alloc] init];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"邀请码:%@", [numberF stringFromNumber: model.invitecode]];
     cell.detailTextLabel.textColor = [UIColor lightGrayColor];
