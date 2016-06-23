@@ -113,17 +113,26 @@
     NSArray *dataAry = [dic objectForKey:@"data"];
     for (int i = 0; i < [dataAry count]; i++) {
         NSDictionary *content = [dataAry objectAtIndex:i];
+        NSInteger effctivedays = [[content objectForKey:@"effctivedays"] integerValue];
         ChildrenEntity *entity = [[YjyxOverallData sharedInstance] getChildrenWithCid:[content objectForKey:@"cid"]];
         UILabel *trailLb = [UILabel labelWithFrame:CGRectMake(35, (contentLb.frame.origin.y+contentLb.frame.size.height + 10)+i*25, 200, 20) textColor:[UIColor redColor] font:[UIFont systemFontOfSize:15] context:@""];
         if ([[content objectForKey:@"purchasetype"] integerValue] == 2) {
             if ([[content objectForKey:@"status"] integerValue] ==2) {
                 trailLb.text = [NSString stringWithFormat:@"%@:试用期已过期",entity.name];
             }else{
+                
                 trailLb.text = [NSString stringWithFormat:@"%@:试用天数还剩%@天",entity.name,[content objectForKey:@"effctivedays"]];
             }
-        }
-        else{
-            trailLb.text = [NSString stringWithFormat:@"%@:会员剩余%@天",entity.name,[content objectForKey:@"effctivedays"]];
+        }else{
+            
+            if ([[content objectForKey:@"status"] integerValue] ==2) {
+                trailLb.text = [NSString stringWithFormat:@"%@:会员已过期",entity.name];
+
+            }else {
+            
+                trailLb.text = [NSString stringWithFormat:@"%@:会员剩余%@天",entity.name,[content objectForKey:@"effctivedays"]];
+            }
+            
         }
         trailLb.tag = 1000+i;
         [_detailView addSubview:trailLb];

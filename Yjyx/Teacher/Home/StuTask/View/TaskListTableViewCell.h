@@ -10,6 +10,7 @@
 @class TaskModel;
 @interface TaskListTableViewCell : UITableViewCell
 
+@property (nonatomic, assign) CGFloat height;
 
 - (void)setValueWithTaskModel:(TaskModel *)model;
 

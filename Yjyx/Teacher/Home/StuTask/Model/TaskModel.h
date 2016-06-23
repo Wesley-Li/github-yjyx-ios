@@ -20,6 +20,8 @@
 @property (nonatomic, strong) NSNumber *t_id;// 任务id号
 @property (nonatomic, strong) NSNumber *relatedresourceid;// 相关资源数id
 
+@property (nonatomic, assign) CGFloat height;
+
 
 - (void)initTaskModelWithDic:(NSDictionary *)dic;
 

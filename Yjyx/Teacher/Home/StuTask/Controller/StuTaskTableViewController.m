@@ -22,6 +22,8 @@
 @property (nonatomic, strong) NSNumber *hasmore;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
+@property (nonatomic, assign) CGFloat cellHeight;
+
 
 @end
 
@@ -203,12 +205,18 @@
 //    NSLog(@"%@", model);
     
     [cell setValueWithTaskModel:model];
+    
+//    self.cellHeight = cell.height;
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    return 140;
+    TaskModel *model = self.dataSource[indexPath.row];
+    
+    
+    return model.height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

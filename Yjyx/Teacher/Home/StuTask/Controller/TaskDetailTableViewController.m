@@ -89,7 +89,7 @@
     
     headerHeight = 50;
     
-    self.title = self.taskModel.t_description;
+    self.title = self.taskModel.resourcename;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = RGBACOLOR(239, 239, 244,1);
     
