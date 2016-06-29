@@ -68,7 +68,7 @@
                             <rect key="frame" x="17" y="43" width="303" height="40"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" secureTextEntry="YES"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="wsb-Zz-K2Q"/>
                             </connections>
