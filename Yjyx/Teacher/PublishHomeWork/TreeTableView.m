@@ -73,7 +73,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
 
     if (node.depth == 1) {
         if (node.expand == YES) {
-            cell.imageV.image = [UIImage imageNamed:@"list_icon_1展开"];
+            cell.imageV.image = [UIImage imageNamed:@"list_icon_1_expand"];
         }else{
             cell.imageV.image = [UIImage imageNamed:@"list_icon_1"];
         }
@@ -84,7 +84,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
      
             if(node.nodeId == sNode.parentId){
                 if (node.expand) {
-                    cell.imageV.image = [UIImage imageNamed:@"list_icon_2展开"];
+                    cell.imageV.image = [UIImage imageNamed:@"list_icon_2_expand"];
                 }else{
                     cell.imageV.image = [UIImage imageNamed:@"list_icon_2"];
                 }

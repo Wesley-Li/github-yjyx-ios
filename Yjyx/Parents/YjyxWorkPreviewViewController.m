@@ -8,8 +8,13 @@
 
 #import "YjyxWorkPreviewViewController.h"
 #import "RCLabel.h"
+#import "PPreviewCell.h"
 
-@interface YjyxWorkPreviewViewController ()
+#define ID @"Cell"
+@interface YjyxWorkPreviewViewController ()<UIWebViewDelegate>
+
+@property (nonatomic, strong) NSMutableDictionary *choiceCellHeightDic;
+@property (nonatomic, strong) NSMutableDictionary *blankfillHeightDic;
 
 @end
 
@@ -24,18 +29,49 @@
     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
     self.navigationController.navigationBarHidden = NO;
     [self loadBackBtn];
-    [self getchildResult:_previewRid];
+    
     _choices = [[NSArray alloc] init];
     _blankfills = [[NSArray alloc] init];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTable) name:@"RCLabelReload" object:nil];
+    self.choiceCellHeightDic = [[NSMutableDictionary alloc] init];
+    self.blankfillHeightDic = [[NSMutableDictionary alloc] init];
+    
+    // 请求网络数据
+    [self getchildResult:_previewRid];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCellHeight:) name:@"cellHeighChange" object:nil];
+    
+    [self.previewTable registerNib:[UINib nibWithNibName:NSStringFromClass([PPreviewCell class]) bundle:nil] forCellReuseIdentifier:ID];
+    
+    
+    
     // Do any additional setup after loading the view from its nib.
 }
 
--(void)reloadTable
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [_previewTable reloadData];
-    });
+- (void)refreshCellHeight:(NSNotification *)sender {
+    
+    PPreviewCell *cell = [sender object];
+    
+    // 保存高度
+    if (cell.indexPath.section == 0) {
+        
+        if (![self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height)
+        {
+            [self.choiceCellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld",cell.tag]];
+            [self.previewTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:0 ]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        
+    }else {
+        if (![self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height)
+        {
+            [self.blankfillHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld",cell.tag]];
+            [self.previewTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:1 ]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        
+    }
+
+    
+
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -49,7 +85,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RCLabelReload" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cellHeighChange" object:nil];
     [super viewWillDisappear:YES];
 }
 
@@ -85,22 +121,13 @@
 #pragma mark -UITableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([_choices count]>0&&[_blankfills  count]>0) {
-        return 2;
-    }else if ([_choices count] == 0&&[_blankfills count] == 0)
-    {
-        return 0;
-    }
-    return 1;
+    return 2;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        if ([_choices count]>0) {
-            return [_choices count];
-        }
-        return [_blankfills count];
+        return [_choices count];
     }else{
         return [_blankfills count];
     }
@@ -108,124 +135,114 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 25;
+    if (section == 0) {
+    
+        if (_choices.count > 0) {
+            return 25;
+        }else {
+        
+            return 0;
+        }
+    }else {
+        
+        if (_blankfills.count > 0) {
+            return 25;
+        }else {
+        
+            return 0;
+        }
+    
+    }
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        if ([_choices count]) {
+        if ([_choices count] > 0) {
             UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    选择题"];
             return titlelb;
         }else{
-            UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    填空题"];
-            return titlelb;
+            return nil;
         }
     }else{
-        UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    填空题"];
-        return titlelb;
+        
+        if ([_blankfills count] > 0) {
+            UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    填空题"];
+            return titlelb;
+        }else {
+        
+            return nil;
+        
+        }
+        
     }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (indexPath.section == 0) {
-        if ([_choices count]>0) {
-            NSString *content = [[_choices objectAtIndex:indexPath.row] objectForKey:@"content"];
-            content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-            RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
-            templabel.userInteractionEnabled = NO;
-            templabel.font = [UIFont systemFontOfSize:14];
-            RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-            templabel.componentsAndPlainText = componentsDS;
-            CGSize optimalSize = [templabel optimumSize];
-            return optimalSize.height + 10;
-        }else{
-            NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
-            content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-            RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
-            templabel.userInteractionEnabled = NO;
-            templabel.font = [UIFont systemFontOfSize:14];
-            RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-            templabel.componentsAndPlainText = componentsDS;
-            CGSize optimalSize = [templabel optimumSize];
-            return optimalSize.height + 10;
+        
+        CGFloat height = [[self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] floatValue];
+        
+        if (height == 0) {
+            
+            return 300;
+            
+        }else {
+            
+            return height;
         }
-    }else{
-        NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
-        content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-        RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
-        templabel.userInteractionEnabled = NO;
-        templabel.font = [UIFont systemFontOfSize:14];
-        RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-        templabel.componentsAndPlainText = componentsDS;
-        CGSize optimalSize = [templabel optimumSize];
-        return optimalSize.height + 10;
+        
+        
+    }else {
+        
+        CGFloat height = [[self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] floatValue];
+        
+        if (height == 0) {
+            
+            return 300;
+            
+        }else {
+            
+            return height;
+        }
+        
     }
+
+
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *simpleCell = @"simpleCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleCell];
-    for (UIView *view in cell.contentView.subviews) {
-        [view removeFromSuperview];
-    }
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleCell];
-        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    }
-    UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(5, 2, SCREEN_WIDTH-10, 120-4)];
-    bg.backgroundColor = [UIColor clearColor];
-    bg.layer.borderWidth = 1;
-    bg.layer.borderColor = RGBACOLOR(225, 225, 225, 1).CGColor;
     
+    PPreviewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
+    cell.indexPath = indexPath;
+    
+        
     if (indexPath.section == 0) {
-        if ([_choices count]>0) {
-            NSString *content = [[_choices objectAtIndex:indexPath.row] objectForKey:@"content"];
-            content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-            RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-            templabel.userInteractionEnabled = NO;
-            templabel.font = [UIFont systemFontOfSize:14];
-            RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-            templabel.componentsAndPlainText = componentsDS;
-            CGSize optimalSize = [templabel optimumSize];
-            
-            bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 5);
-            [cell.contentView addSubview:bg];
-            
-            [bg addSubview:templabel];
-        }else{
-            NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
-            content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-            RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-            templabel.userInteractionEnabled = NO;
-            templabel.font = [UIFont systemFontOfSize:14];
-            RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-            templabel.componentsAndPlainText = componentsDS;
-            CGSize optimalSize = [templabel optimumSize];
-            
-            bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 5);
-            [cell.contentView addSubview:bg];
-            [bg addSubview:templabel];
-        }
-    }else{
+        // 选择题
+        NSString *content = [[_choices objectAtIndex:indexPath.row] objectForKey:@"content"];
+        [cell setSubviewWithContent:content];
+        cell.tag = indexPath.row;
+        
+        
+    }else {
+        // 填空题
         NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
-        content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-        RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-        templabel.userInteractionEnabled = NO;
-        templabel.font = [UIFont systemFontOfSize:14];
-        RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-        templabel.componentsAndPlainText = componentsDS;
-        CGSize optimalSize = [templabel optimumSize];
-        bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 5);
-        [cell.contentView addSubview:bg];
-        [bg addSubview:templabel];
+        [cell setSubviewWithContent:content];
+        cell.tag = indexPath.row;
     }
     
     
     return cell;
+    
 }
+
+
+
+
 
 #pragma mark - Scroll
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

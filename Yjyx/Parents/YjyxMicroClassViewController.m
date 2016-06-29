@@ -9,7 +9,10 @@
 #import "YjyxMicroClassViewController.h"
 #import "WMPlayer.h"
 #import "RCLabel.h"
+#import "PMicroPreviewModel.h"
+#import "MicroCell.h"
 
+#define ID @"cell"
 @interface YjyxMicroClassViewController ()
 {
     WMPlayer *wmPlayer;
@@ -22,9 +25,36 @@
 
 }
 
+@property (nonatomic, copy) NSString *videoURL;
+@property (nonatomic, copy) NSString *microName;
+@property (nonatomic, copy) NSString *knowledgeName;
+
+@property (nonatomic, strong) NSMutableDictionary *choiceCellHeightDic;
+@property (nonatomic, strong) NSMutableDictionary *blankfillHeightDic;
+
+
+
 @end
 
 @implementation YjyxMicroClassViewController
+
+- (NSMutableArray *)choices {
+
+    if (!_choices) {
+        self.choices = [NSMutableArray array];
+    }
+    return _choices;
+}
+
+- (NSMutableArray *)blankfills {
+
+    if (!_blankfills) {
+        self.blankfills = [NSMutableArray alloc];
+    }
+    return _blankfills;
+}
+
+
 -(BOOL)prefersStatusBarHidden{
     if (wmPlayer) {
         if (wmPlayer.isFullscreen) {
@@ -187,7 +217,45 @@
     self.navigationController.navigationBarHidden = NO;
     [self loadBackBtn];
     self.view.backgroundColor = RGBACOLOR(240, 240, 240, 1);
+    
+    self.choiceCellHeightDic = [[NSMutableDictionary alloc] init];
+    self.blankfillHeightDic = [[NSMutableDictionary alloc] init];
+    
     [self getchildResult:_previewRid];
+    
+    
+    
+    // 注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCellHeight:) name:@"cellHeighChange" object:nil];
+    
+    
+}
+
+- (void)refreshCellHeight:(NSNotification *)sender {
+    
+    MicroCell *cell = [sender object];
+    
+    // 保存高度
+    if (cell.indexPath.section == 0) {
+        
+        if (![self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height)
+        {
+            [self.choiceCellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld",cell.tag]];
+            [self.subjectTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:0 ]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        
+    }else {
+        if (![self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height)
+        {
+            [self.blankfillHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld",cell.tag]];
+            [self.subjectTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:1 ]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        
+    }
+    
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -224,13 +292,47 @@
     [[YjxService sharedInstance] getChildrenPreviewResult:dic withBlock:^(id result,NSError *error){
         [self.view hideToastActivity];
         if (result != nil) {
-            NSLog(@"%@",result);
+            
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
-                [self initView:[result objectForKey:@"lessonobj"] questionDic:[result objectForKey:@"questions"]];
-                lessDic = [result objectForKey:@"lessonobj"];
+                
+                // 视频和表头信息
+                self.videoURL = [[[[result[@"lessonobj"] objectForKey:@"videoobjlist"] JSONValue] firstObject] objectForKey:@"url"];
+                self.microName = [result[@"lessonobj"] objectForKey:@"name"];
+                self.knowledgeName = [result[@"lessonobj"] objectForKey:@"knowledgedesc"];
+                // 配置视频
+                [self configureWMPlayer];
+                
+                // tableview数据源
+                // 选择题
+                NSArray *choiceArr = [[result[@"questions"] objectForKey:@"choice"] objectForKey:@"questionlist"];
+                for (NSDictionary *dic in choiceArr) {
+                    PMicroPreviewModel *model = [[PMicroPreviewModel alloc] init];
+                    [model initModelWithDic:dic];
+                    [self.choices addObject:model];
+                }
+                
+                // 填空题
+                NSArray *blankfillArr = [[result[@"questions"] objectForKey:@"blankfill"] objectForKey:@"questionlist"];
+                for (NSDictionary *dic in blankfillArr) {
+                    PMicroPreviewModel *model = [[PMicroPreviewModel alloc] init];
+                    [model initModelWithDic:dic];
+                    [self.blankfills addObject:model];
+                }
+                
+                // 配置tableview
+                [self configureTableview];
+                [self.subjectTable registerNib:[UINib nibWithNibName:NSStringFromClass([MicroCell class]) bundle:nil] forCellReuseIdentifier:ID];
+                
+                // 配置表头
+                [self configureTableviewHeaderview];
+                
+                [self.subjectTable reloadData];
+                
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
+            
+            
         }else{
             [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
@@ -238,162 +340,91 @@
 }
 
 
-//- (void)viewDidLayoutSubviews
-//{
-//    [super viewDidLayoutSubviews];
-//    _namelb.frame = CGRectMake(0, 0, SCREEN_WIDTH, 40);
-//    _knowledgeView.frame = CGRectMake(0, _namelb.frame.origin.y + 50, SCREEN_WIDTH, 60);
-//}
+#pragma mark - 配置视频
+- (void)configureWMPlayer {
 
--(void)initView:(NSDictionary *)lessionDic questionDic:(NSDictionary *)questionDic
-{
-//    NSArray *tempArr = [[lessionDic objectForKey:@"videoobjlist"] JSONValue];
-//    for (int i = 0; i < tempArr.count; i++) {
-//        NSString *videoStr = [tempArr[i] objectForKey:@"url"];
-//        playerFrame = CGRectMake(0, 64 + ((SCREEN_WIDTH)*184/320+4) * i , SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
-//        WMPlayer *player = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:videoStr];
-////        wmPlayer = player;
-//        player.closeBtn.hidden = YES;
-//        player.layer.masksToBounds = YES;
-//        [self.view addSubview:player];
-//        [player.player pause];
-//        
-//        UIImageView *tempImageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64 + ((SCREEN_WIDTH)*184/320 + 4) * i , SCREEN_WIDTH, (SCREEN_WIDTH)*184/320 + 4)];
-//        tempImageV.tag = self.view.subviews.count;
-////        videoImage = tempImageV;
-//        tempImageV.image = [UIImage imageNamed:@"Common_video.png"];
-//        tempImageV.layer.masksToBounds = YES;
-//        tempImageV.userInteractionEnabled = YES;
-//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playVideo:)];
-//        
-//        [tempImageV addGestureRecognizer:tap];
-//        [self.view addSubview:tempImageV];
-//    }
-    NSString *videoStr = [[[[lessionDic objectForKey:@"videoobjlist"] JSONValue] firstObject] objectForKey:@"url"];
-    NSLog(@"%@", videoStr);
-    playerFrame = CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
-    wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:videoStr];
-    wmPlayer.closeBtn.hidden = YES;
-    wmPlayer.layer.masksToBounds = YES;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-    [self.view addSubview:wmPlayer];
-    [wmPlayer.player pause];
+    if (self.videoURL != nil || self.videoURL.length != 0) {
+        playerFrame = CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
+        wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.videoURL];
+        wmPlayer.closeBtn.hidden = YES;
+        wmPlayer.layer.masksToBounds = YES;
+        [self.view addSubview:wmPlayer];
+        [wmPlayer.player pause];
+        
+        videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
+        videoImage.image = [UIImage imageNamed:@"Common_video.png"];
+        videoImage.layer.masksToBounds = YES;
+        videoImage.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playVideo)];
+        [videoImage addGestureRecognizer:tap];
+        [self.view addSubview:videoImage];
+
+    }
     
-   videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
-    videoImage.image = [UIImage imageNamed:@"Common_video.png"];
-    videoImage.layer.masksToBounds = YES;
-    videoImage.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playVideo)];
-    [videoImage addGestureRecognizer:tap];
-    [self.view addSubview:videoImage];
+
+}
+
+#pragma mark - 配置tableview 
+- (void)configureTableview {
+
+    self.subjectTable = [[UITableView alloc] initWithFrame:CGRectMake(0, playerFrame.size.height + 64, SCREEN_WIDTH, SCREEN_HEIGHT - playerFrame.size.height - 64) style:UITableViewStylePlain];
+    _subjectTable.dataSource = self;
+    _subjectTable.delegate = self;
+    _subjectTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.view addSubview:_subjectTable];
     
-    // scrollview
-    UIScrollView *contentScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64 + playerFrame.size.height , SCREEN_WIDTH, SCREEN_HEIGHT - playerFrame.size.height -64)];
-    [self.view addSubview:contentScroll];
-    _contentScroll = contentScroll;
-    UILabel * namelb = [UILabel labelWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:[lessionDic objectForKey:@"name"]];
-    _namelb = namelb;
-    contentScroll.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    namelb.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    namelb.backgroundColor = [UIColor whiteColor];
+}
+
+#pragma mark - 配置tableview表头视图
+- (void)configureTableviewHeaderview {
+
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = COMMONCOLOR;
     
-    [contentScroll addSubview:namelb];
+    // name
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+    nameLabel.backgroundColor = [UIColor whiteColor];
+    nameLabel.text = self.microName;
+    [headerView addSubview:nameLabel];
     
-    UIView *knowledgeView = [[UIView alloc] initWithFrame:CGRectMake(0, namelb.frame.origin.y + 50, SCREEN_WIDTH, 60)];
-    knowledgeView.backgroundColor = [UIColor whiteColor];
-    _knowledgeView = knowledgeView;
-    UILabel *title = [UILabel labelWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"知识清单"];
-    [knowledgeView addSubview:title];
+    // 知识清单
+    UILabel *kowLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, nameLabel.origin.y + 40 + 5, SCREEN_WIDTH, 40)];
+    kowLabel.backgroundColor = [UIColor whiteColor];
+    kowLabel.text = @"知识清单";
+    [headerView addSubview:kowLabel];
     
-    
-    NSString *content = [lessionDic objectForKey:@"knowledgedesc"];
+    // 清单内容
+    NSString *content = _knowledgeName;
     content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 30, SCREEN_WIDTH - 20, 999)];
+    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, kowLabel.origin.y + 40, SCREEN_WIDTH, 40)];
+    templabel.backgroundColor = [UIColor whiteColor];
     templabel.userInteractionEnabled = NO;
     templabel.font = [UIFont systemFontOfSize:14];
     RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
     templabel.componentsAndPlainText = componentsDS;
     CGSize optimalSize = [templabel optimumSize];
-    [knowledgeView addSubview:templabel];
-    knowledgeView.frame = CGRectMake(0, namelb.frame.origin.y + 50, SCREEN_WIDTH, optimalSize.height + 30);
+    templabel.frame = CGRectMake(0, kowLabel.origin.y + 40, SCREEN_WIDTH, optimalSize.height);
+    [headerView addSubview:templabel];
     
-    [contentScroll addSubview:knowledgeView];
+    headerView.frame = CGRectMake(0, playerFrame.size.height + 64, SCREEN_WIDTH, templabel.origin.y + optimalSize.height + 5);
     
-    _choices= [[questionDic objectForKey:@"choice"] objectForKey:@"questionlist"];
-    _blankfills = [[questionDic objectForKey:@"blankfill"] objectForKey:@"questionlist"];
-    
-    // 选择题和填空题的内容,tableviw
-    if (_choices.count > 0 || _blankfills.count > 0) {
-        _subjectTable = [[UITableView alloc] initWithFrame:CGRectMake(0, knowledgeView.frame.origin.y+knowledgeView.frame.size.height +10, SCREEN_WIDTH, 1500) style:UITableViewStylePlain];
-        _subjectTable.dataSource = self;
-        _subjectTable.delegate = self;
-        _subjectTable.userInteractionEnabled = NO;
-        _subjectTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-        self.automaticallyAdjustsScrollViewInsets = NO;
-        [contentScroll addSubview:_subjectTable];
-    }
-    
-    NSMutableString *contentStr = [[NSMutableString alloc] init];
-    NSArray *choiceAry = [[questionDic objectForKey:@"choice"] objectForKey:@"questionlist"];
-    NSArray *blankfillAry = [[questionDic objectForKey:@"blankfill"] objectForKey:@"questionlist"];
-    if ([choiceAry count]>0) {
-        [contentStr appendString:[NSString stringWithFormat:@"%@\n",@"选择题"]];
-    }
-    for (int i = 0; i<[choiceAry count]; i++) {
-        [contentStr appendString:[NSString stringWithFormat:@"%d、 %@\n",(i+1),[[choiceAry objectAtIndex:i] objectForKey:@"content"]]];
-    }
-    
-    if ([blankfillAry count]>0) {
-        [contentStr appendString:[NSString stringWithFormat:@"%@\n",@"填空题"]];
-    }
-    
-    for (int i = 0; i<[blankfillAry count]; i++) {
-        [contentStr appendString:[NSString stringWithFormat:@"%d、 %@\n",(i+1),[[blankfillAry objectAtIndex:i] objectForKey:@"content"]]];
-    }
-    
-    // 问题背景view
-    UIView *questionView = [[UIView alloc] initWithFrame:CGRectMake(0, knowledgeView.frame.origin.y+knowledgeView.frame.size.height+10, SCREEN_WIDTH , 10000)];
-    questionView.backgroundColor = [UIColor redColor];
-    
-    UILabel *hometitle = [UILabel labelWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"作业内容"];
-    [questionView addSubview:hometitle];
-
-    
-    
-    NSString *questionStr = [contentStr stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *tempLable1 = [[RCLabel alloc] initWithFrame:CGRectMake(0, 30, SCREEN_WIDTH , 999)];
-    tempLable1.font = [UIFont systemFontOfSize:14];
-    tempLable1.textColor = [UIColor blackColor];
-    tempLable1.userInteractionEnabled = NO;
-    RTLabelComponentsStructure *componentsDS1 = [RCLabel extractTextStyle:questionStr];
-    tempLable1.componentsAndPlainText = componentsDS1;
-    CGSize optimalSize1 = [tempLable1 optimumSize];
-    
-    
-    CGFloat height = ([_choices count]+[_blankfills count]) *10;
-    
-    contentScroll.contentSize = CGSizeMake(SCREEN_WIDTH, questionView.frame.origin.y + optimalSize1.height + height + 30);
+    self.subjectTable.tableHeaderView = headerView;
     
 }
-#pragma mark -UITableViewDelegate
+
+
 #pragma mark -UITableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([_choices count]>0&&[_blankfills  count]>0) {
-        return 2;
-    }else if ([_choices count] == 0&&[_blankfills count] == 0)
-    {
-        return 0;
-    }
-    return 1;
+    
+    return 2;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        if ([_choices count]>0) {
-            return [_choices count];
-        }
-        return [_blankfills count];
+        return [_choices count];
     }else{
         return [_blankfills count];
     }
@@ -411,116 +442,87 @@
             UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    选择题"];
             return titlelb;
         }else{
-            UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    填空题"];
-            return titlelb;
+            return nil;
         }
     }else{
-        UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    填空题"];
-        return titlelb;
+        if ([_blankfills count]) {
+            UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    填空题"];
+            return titlelb;
+        }else {
+        
+            return nil;
+        }
     }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        if ([_choices count]>0) {
-            NSString *content = [[_choices objectAtIndex:indexPath.row] objectForKey:@"content"];
-            content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-            RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
-            templabel.userInteractionEnabled = NO;
-            templabel.font = [UIFont systemFontOfSize:14];
-            RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-            templabel.componentsAndPlainText = componentsDS;
-            CGSize optimalSize = [templabel optimumSize];
-            return optimalSize.height + 10;
-        }else{
-            NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
-            content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-            RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
-            templabel.userInteractionEnabled = NO;
-            templabel.font = [UIFont systemFontOfSize:14];
-            RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-            templabel.componentsAndPlainText = componentsDS;
-            CGSize optimalSize = [templabel optimumSize];
-            return optimalSize.height + 10;
+        
+        CGFloat height = [[self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] floatValue];
+        
+        if (height == 0) {
+            
+            return 300;
+            
+        }else {
+            
+            return height;
         }
-    }else{
-        NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
-        content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-        RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 999)];
-        templabel.userInteractionEnabled = NO;
-        templabel.font = [UIFont systemFontOfSize:14];
-        RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-        templabel.componentsAndPlainText = componentsDS;
-        CGSize optimalSize = [templabel optimumSize];
-        return optimalSize.height + 10;
+        
+        
+    }else {
+        
+        CGFloat height = [[self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] floatValue];
+        
+        if (height == 0) {
+            
+            return 300;
+            
+        }else {
+            
+            return height;
+        }
+        
     }
-  
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *simpleCell = @"simpleCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleCell];
-    for (UIView *view in cell.contentView.subviews) {
-        [view removeFromSuperview];
-    }
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleCell];
-        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    }
-    UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(5, 2, SCREEN_WIDTH-10, 120-4)];
-    bg.backgroundColor = [UIColor clearColor];
-    bg.layer.borderWidth = 1;
-    bg.layer.borderColor = RGBACOLOR(225, 225, 225, 1).CGColor;
+       
+    MicroCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
+    cell.indexPath = indexPath;
     
     if (indexPath.section == 0) {
-        if ([_choices count]>0) {
-            NSString *content = [[_choices objectAtIndex:indexPath.row] objectForKey:@"content"];
-            content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-            RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-            templabel.userInteractionEnabled = NO;
-            templabel.font = [UIFont systemFontOfSize:14];
-            RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-            templabel.componentsAndPlainText = componentsDS;
-            CGSize optimalSize = [templabel optimumSize];
-            
-            bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 5);
-            [cell.contentView addSubview:bg];
-            _contentScroll.contentSize = CGSizeMake(SCREEN_WIDTH, _subjectTable.contentSize.height + _namelb.frame.size.height + _knowledgeView.frame.size.height + 20);
-            [bg addSubview:templabel];
-        }else{
-            NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
-            content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-            RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-            templabel.userInteractionEnabled = NO;
-            templabel.font = [UIFont systemFontOfSize:14];
-            RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-            templabel.componentsAndPlainText = componentsDS;
-            CGSize optimalSize = [templabel optimumSize];
-            
-            bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 5);
-            [cell.contentView addSubview:bg];
-            _contentScroll.contentSize = CGSizeMake(SCREEN_WIDTH, _subjectTable.contentSize.height + _namelb.frame.size.height + _knowledgeView.frame.size.height + 20);
-            [bg addSubview:templabel];
-        }
-    }else{
-        NSString *content = [[_blankfills objectAtIndex:indexPath.row] objectForKey:@"content"];
-        content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-        RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-        templabel.userInteractionEnabled = NO;
-        templabel.font = [UIFont systemFontOfSize:14];
-        RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-        templabel.componentsAndPlainText = componentsDS;
-        CGSize optimalSize = [templabel optimumSize];
-        bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 5);
-        [cell.contentView addSubview:bg];
-        _contentScroll.contentSize = CGSizeMake(SCREEN_WIDTH, _subjectTable.contentSize.height + _namelb.frame.size.height + _knowledgeView.frame.size.height + 20);
-        [bg addSubview:templabel];
+        PMicroPreviewModel *model = self.choices[indexPath.row];
+        [cell setValuesWithModel:model];
+        cell.tag = indexPath.row;
+    }else {
+    
+        PMicroPreviewModel *model = self.blankfills[indexPath.row];
+        [cell setValuesWithModel:model];
+        cell.tag = indexPath.row;
     }
-   
+    
+
     
     return cell;
+}
+
+#pragma mark - Scroll
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGFloat sectionHeaderHeight = 40;
+    //固定section 随着cell滚动而滚动
+    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+        
+        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+        
+    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+        
+        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+        
+    }
+    
 }
 
 
