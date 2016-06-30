@@ -20,7 +20,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *myAnswerLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *RWimageView;
 
+@property (weak, nonatomic) IBOutlet UILabel *correctLabel;
+@property (weak, nonatomic) IBOutlet UIButton *stuAnswer;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightAnswerBottomConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *myAnswerBottomConstraint;
 
 
 @end
@@ -30,12 +35,30 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    self.correctLabel.textColor = RGBACOLOR(22, 156, 111, 1);
+    self.stuAnswer.backgroundColor = [UIColor whiteColor];
+    [self.stuAnswer setTitleColor:RGBACOLOR(22, 156, 111, 1) forState:UIControlStateNormal];
+    
     self.BGVIEW.layer.borderWidth = 1;
     self.BGVIEW.layer.borderColor = RGBACOLOR(140.0, 140.0, 140.0, 1).CGColor;
     self.lineView.backgroundColor = RGBACOLOR(140.0, 140.0, 140.0, 1);
     self.rightAnswerLabel.textColor = RGBACOLOR(100, 174, 99, 1);
-    self.solutionBtn.backgroundColor = RGBACOLOR(22, 156, 111, 1);
-    [self.solutionBtn setCornerRadius:5];
+    
+    self.solutionBtn.layer.cornerRadius = 5;
+    self.solutionBtn.layer.borderWidth = 1;
+    self.solutionBtn.layer.masksToBounds = YES;
+    self.solutionBtn.layer.borderColor = RGBACOLOR(22, 156, 111, 1).CGColor;
+    [self.solutionBtn setTitleColor:RGBACOLOR(22, 156, 111, 1) forState:UIControlStateNormal];
+    
+    
+    self.annotationBtn.hidden = YES;
+    self.annotationBtn.layer.cornerRadius = 5;
+    self.annotationBtn.layer.borderWidth = 1;
+    self.solutionBtn.layer.masksToBounds = YES;
+    self.annotationBtn.layer.borderColor = RGBACOLOR(22, 156, 111, 1).CGColor;
+    [self.annotationBtn setTitleColor:RGBACOLOR(22, 156, 111, 1) forState:UIControlStateNormal];
+    
+   
     
     
 }
@@ -88,7 +111,7 @@
             
         }
         
-        self.rightAnswerLabel.text = [NSString stringWithFormat:@"正确答案:%@", tureAnswer];
+        self.rightAnswerLabel.text = [NSString stringWithFormat:@"  %@", tureAnswer];
         
         // 学生答案显示
         
@@ -110,6 +133,35 @@
     }else {
         // 填空题
         
+        // 展开按钮的显示
+        self.expandBtn.hidden = [model.answerCount integerValue] > 1 ? NO : YES;
+        
+        NSLog(@"------%@", self.expandBtn.selected ? @"yes" : @"no");
+        
+        // 填空的显示
+        NSArray *cornerAry =[NSArray arrayWithObjects:@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨",@"⑩",@"⑪",@"⑫",@"⑬",@"⑭",@"⑮",@"⑯",@"⑰",@"⑱",@"⑲",@"⑳", nil];
+        NSArray *answerArr = [model.answer JSONValue];
+        if (!self.expandBtn.selected) {
+            self.rightAnswerLabel.text = [NSString stringWithFormat:@"%@%@", cornerAry[0], answerArr.firstObject];
+            self.myAnswerLabel.text = [NSString stringWithFormat:@"%@%@", cornerAry[0], resultModel.myAnswer.firstObject];
+        }else {
+            // 正确答案显示
+            NSString *tempString1 = @"";
+            for (int i = 0; i < answerArr.count; i++) {
+                tempString1 = [tempString1 stringByAppendingString:[NSString stringWithFormat:@"%@%@\n", cornerAry[i], answerArr[i]]];
+            }
+            
+            self.rightAnswerLabel.text = tempString1;
+            
+            // 学生答案的展示
+            NSString *tempString2 = @"";
+            for (int i = 0; i < resultModel.myAnswer.count; i++) {
+                tempString2 = [tempString2 stringByAppendingString:[NSString stringWithFormat:@"%@%@\n", cornerAry[i], resultModel.myAnswer[i]]];
+            }
+            
+            self.myAnswerLabel.text = tempString2;
+            
+        }
     
     }
     
@@ -160,7 +212,29 @@
     
     frame.size.height = webView.scrollView.contentSize.height;
     webView.frame = frame;
-    self.height = frame.size.height + 70;
+    
+    
+    
+    // 正确答案文本高度
+    CGFloat rightAnswerHeight = [self.rightAnswerLabel.text boundingRectWithSize:CGSizeMake(self.rightAnswerLabel.width, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.rightAnswerLabel.font, NSFontAttributeName, nil] context:nil].size.height;
+    
+    CGFloat myAnswerHeight = [self.myAnswerLabel.text boundingRectWithSize:CGSizeMake(self.myAnswerLabel.width, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.myAnswerLabel.font, NSFontAttributeName, nil] context:nil].size.height;
+    
+    CGFloat customHeight = rightAnswerHeight > myAnswerHeight ? rightAnswerHeight : myAnswerHeight;
+    
+    if (rightAnswerHeight > myAnswerHeight) {
+        self.myAnswerBottomConstraint.constant = rightAnswerHeight - myAnswerHeight + 7;
+    }else if (rightAnswerHeight == myAnswerHeight){
+    
+        self.rightAnswerBottomConstraint.constant = 10;
+        self.myAnswerBottomConstraint.constant = 10;
+    }else {
+    
+        self.rightAnswerBottomConstraint.constant = myAnswerHeight - rightAnswerHeight + 7;
+    }
+    
+    
+    self.height = frame.size.height + 10 + 25 + 10 + 10 + customHeight + 30;
     
     // 用通知发送加载完成后的高度
     [[NSNotificationCenter defaultCenter] postNotificationName:@"WEBVIEW_HEIGHT" object:self userInfo:nil];

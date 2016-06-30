@@ -36,6 +36,7 @@
 
 @property (nonatomic, strong) NSMutableDictionary *choiceCellHeightDic;
 @property (nonatomic, strong) NSMutableDictionary *blankfillHeightDic;
+@property (nonatomic, strong) NSMutableDictionary *blankfillExpandDic;
 
 @end
 
@@ -80,6 +81,7 @@
     
     self.choiceCellHeightDic = [[NSMutableDictionary alloc] init];
     self.blankfillHeightDic = [[NSMutableDictionary alloc] init];
+    self.blankfillExpandDic = [[NSMutableDictionary alloc] init];
     
     // 获取数据源
     [self getchildResult:self.taskResultId];
@@ -111,8 +113,13 @@
     }else {
         if (![self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height)
         {
+            
+            NSLog(@"%@", [self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]);
+            NSLog(@"%.f", cell.height);
+            
             [self.blankfillHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld",cell.tag]];
             [self.resultTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:1 ]] withRowAnimation:UITableViewRowAnimationNone];
+            
         }
 
     }
@@ -331,6 +338,10 @@
     
     cell.indexPath = indexPath;
     
+    if (cell.solutionBtn.hidden == NO) {
+        [cell.solutionBtn addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
     if (indexPath.section == 0) {
         ResultModel *resultModel = self.resultchoices[indexPath.row];
         
@@ -342,9 +353,6 @@
         
         [cell setSubviewsWithChildrenResultModel:model andResultModel:resultModel];
         
-        if (cell.solutionBtn.hidden == NO) {
-            [cell.solutionBtn addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
-        }
         
         cell.tag = indexPath.row;
     
@@ -356,7 +364,20 @@
         ChildrenResultModel *model = [self.blankfillModelDic objectForKey:[NSString stringWithFormat:@"%@", resultModel.q_id]];
         model.questionType = @"blankfill";
         resultModel.questionType = @"blankfill";
+        [cell.expandBtn addTarget:self action:@selector(changeCellHeight:) forControlEvents:UIControlEventTouchUpInside];
+        cell.expandBtn.selected = [[self.blankfillExpandDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] boolValue];
+        
+        NSString *expand = [self.blankfillExpandDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]];
+        
+        if (expand == nil) {
+            cell.expandBtn.selected = NO;
+        }else {
+            cell.expandBtn.selected = [expand boolValue];
+        }
+        
+        
         [cell setSubviewsWithChildrenResultModel:model andResultModel:resultModel];
+        
         cell.tag = indexPath.row;
         
     }
@@ -365,439 +386,24 @@
     return cell;
     
     
-//    static NSString *simpleCell = @"simpleCell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleCell];
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleCell];
-//        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//    }
-//    for (UIView *subview in cell.contentView.subviews) {
-//        [subview removeFromSuperview];
-//    }
-//    
-//    UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(5, 2, SCREEN_WIDTH-10, 120-4)];
-//    bg.backgroundColor = [UIColor clearColor];
-//    bg.layer.borderWidth = 1;
-//    bg.layer.borderColor = RGBACOLOR(225, 225, 225, 1).CGColor;
-//    
-//    if (indexPath.section == 0) {
-//        if ([_resultchoices count]>0) {//选择题
-//            NSString *key = [NSString stringWithFormat:@"%@",[[_resultchoices objectAtIndex:indexPath.row] firstObject]];
-//            
-//      
-//            NSString *content = [[_choices objectForKey:key] objectForKey:@"content"];
-//            
-//            UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 1000)];
-//            [web loadHTMLString:content baseURL:nil];
-//            
-//            content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-//            if (content == nil) {
-//                return cell;
-//            }
-//            
-//            RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-//            templabel.userInteractionEnabled = NO;
-//            templabel.font = [UIFont systemFontOfSize:14];
-//            RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-//         
-//            templabel.componentsAndPlainText = componentsDS;
-//            CGSize optimalSize = [templabel optimumSize];
-//            bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , optimalSize.height + 50);
-//            
-//            ChildrenResultModel *model = [[ChildrenResultModel alloc] init];
-//            [model initModelWithDic:[_choices objectForKey:key]];
-//            model.height = bg.frame.size.height;
-//            [self.choiceModelArr addObject:model];
-//            
-//            
-//            [cell.contentView addSubview:bg];
-//            
-//            [bg addSubview:web];
-//            
-//            // 分割线
-//            UIImageView *imageLine = [[UIImageView alloc] initWithFrame:CGRectMake(8, web.height + 8, SCREEN_WIDTH - 16, 1)];
-//            imageLine.backgroundColor = RGBACOLOR(220, 220, 220, 1);
-//            [cell.contentView addSubview:imageLine];
-//            // 如果是多项选择
-//            NSString *tureAnswer = nil;
-//            if ([[[_choices objectForKey:key] objectForKey:@"answer"] containsString:@"|"]) {
-//                NSArray *tempArr =  [[[_choices objectForKey:key] objectForKey:@"answer"] componentsSeparatedByString:@"|"];
-//                for (NSString *str in tempArr) {
-//                    NSString *tempStr = [letterAry objectAtIndex:[str integerValue]];
-//                    if (tureAnswer == nil) {
-//                        tureAnswer = [NSString stringWithFormat:@"%@", tempStr];
-//                    }else{
-//                    tureAnswer = [NSString stringWithFormat:@"%@%@", tureAnswer,tempStr];
-//                    }
-//                }
-//                
-//            }else{
-//            tureAnswer = [letterAry objectAtIndex:[[[_choices objectForKey:key] objectForKey:@"answer"] integerValue]];
-//            }
-//            UILabel *answerLb = [UILabel labelWithFrame:CGRectMake(10, web.height + 12, 150, 38) textColor:RGBACOLOR(100, 174, 99, 1) font:[UIFont systemFontOfSize:14] context:[NSString stringWithFormat:@"正确答案:%@",tureAnswer]];
-//            [cell.contentView addSubview:answerLb];
-//            
-//            UIButton *explainText = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 40, web.height+19, 60, 20)];
-//            explainText.tag = indexPath.row;
-//            [explainText addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
-////            [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
-//            // 解题方法按钮
-//            [explainText setTitle:@"解题方法" forState:UIControlStateNormal];
-//            [explainText setCornerRadius:5];
-//            explainText.titleLabel.font = [UIFont systemFontOfSize:12];
-//            explainText.backgroundColor = RGBACOLOR(22, 156, 111, 1);
-//            [cell.contentView addSubview:explainText];
-//            
-////            NSLog(@"%@", [_choices objectForKey:key]);
-//            //  是否是会员
-//            if ([[[_choices objectForKey:key] objectForKey:@"showview"] isEqual:@1]) {
-//                explainText.hidden = NO;
-//            }else {
-//            
-//                explainText.hidden = YES;
-//            }
-//            
-//
-//            NSString *myanswer1 = [[NSString alloc] initWithFormat:@""];
-//            NSArray *resultary = [[_resultchoices objectAtIndex:indexPath.row] objectAtIndex:1];
-//            NSLog(@"%@", _resultchoices);
-//            NSLog(@"%@", resultary);
-//            for (int i = 0; i< [resultary count]; i++) {
-//                myanswer1 = [myanswer1 stringByAppendingString:[NSString stringWithFormat:@" %@",[letterAry objectAtIndex:[[resultary objectAtIndex:i] integerValue]]]];
-//            }
-//            
-//            NSString *myanswer = [[NSString alloc] initWithFormat:@""];
-//            NSInteger answerCount = [[[_choices objectForKey:key] objectForKey:@"choicecount"] integerValue];
-//            NSLog(@"%ld", answerCount);
-//            for (int i =0 ; i< answerCount; i++) {
-//                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@" %@",[letterAry objectAtIndex:i]]];
-//            }
-//            NSLog(@"%@", myanswer);
-//            NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:myanswer];
-//            
-//            BOOL isture = [[[_resultchoices objectAtIndex:indexPath.row] objectAtIndex:2] boolValue];
-//            
-//            for (int i = 0; i < resultary.count; i++) {
-//                NSRange range =  NSMakeRange([resultary[i] integerValue] * 2 + 1, 1);
-////                BOOL isture = [[[_resultchoices objectAtIndex:indexPath.row] objectAtIndex:1][i] boolValue];
-//                if (isture) {
-//                    [attributeString addAttribute:NSForegroundColorAttributeName value:RGBACOLOR(100, 174, 99, 1) range:range];
-//                }else{
-//                    [attributeString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:range];
-//                }
-//                [attributeString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:range];
-//            }
-////            NSLog(@"%@", [_resultchoices objectAtIndex:indexPath.row]);
-////            NSRange range = [myanswer rangeOfString:myanswer1];
-////            NSLog(@"%@", NSStringFromRange(range));
-////            if (isture) {
-////                [attributeString addAttribute:NSForegroundColorAttributeName value:RGBACOLOR(100, 174, 99, 1) range:range];
-////            }else{
-////                [attributeString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:range];
-////            }
-////            [attributeString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:range];
-//            
-//            UILabel *childrenAnswer = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 + 40, optimalSize.height +12, SCREEN_WIDTH/2 - 50, 38)];
-//            childrenAnswer.attributedText = attributeString;
-//            childrenAnswer.font = [UIFont systemFontOfSize:13];
-//            [cell.contentView addSubview:childrenAnswer];
-//            
-//            UIButton *truebtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 35, optimalSize.height+15, 30, 28)];
-//            [truebtn setImage:[UIImage imageNamed:isture?@"homework_3":@"homework_4"] forState:UIControlStateNormal];
-//            [cell.contentView addSubview:truebtn];
-//            
-//        }else{//填空题
-//            
-//            NSString *key = [NSString stringWithFormat:@"%@",[[_resultblankfills objectAtIndex:indexPath.row] firstObject]];
-//            
-//            //题目内容
-//            NSString *content = [[_blankfills objectForKey:key] objectForKey:@"content"];
-//            content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-//            if (content == nil) {
-//                return cell;
-//            }
-//            RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-//            templabel.userInteractionEnabled = NO;
-//            templabel.font = [UIFont systemFontOfSize:14];
-//            RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-//            templabel.componentsAndPlainText = componentsDS;
-//            CGSize optimalSize = [templabel optimumSize];
-//            
-//            NSArray *tureAnswerAry = [[[_blankfills objectForKey:key] objectForKey:@"answer"] JSONValue];
-//            NSArray *resultary = [[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:1];
-//            
-//            NSString *isOpne = [selectDic objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row+[_resultchoices count]]];
-//            
-//            CGFloat height = optimalSize.height +22;
-//            
-//            NSArray *cornerAry =[NSArray arrayWithObjects:@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨",@"⑩",@"⑪",@"⑫",@"⑬",@"⑭",@"⑮",@"⑯",@"⑰",@"⑱",@"⑲",@"⑳", nil];
-//            if ([isOpne isEqualToString:@"0"]) {
-//                //正确答案
-//                NSString *tureAnswer = [NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:0],[tureAnswerAry objectAtIndex:0]];
-//                UILabel *turemyanswerLb = [UILabel labelWithFrame:CGRectMake(65, optimalSize.height+22, SCREEN_WIDTH/2 - 110, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:tureAnswer];
-//                [bg addSubview:turemyanswerLb];
-//                
-//                //自己答案
-//                NSString *myanswer = [NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:0],[resultary objectAtIndex:0]];
-//                UILabel *myanswerLb = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH/2+30, optimalSize.height+22, SCREEN_WIDTH/2 - 90, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:myanswer];
-//                [bg addSubview:myanswerLb];
-//            }else{
-//                for (int i = 0; i< [resultary count]; i++) {
-//                    //正确答案
-//                    NSString *tureStr =[NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:i],[tureAnswerAry objectAtIndex:i]];
-//                    UILabel *turecontentLb = [UILabel labelWithFrame:CGRectMake(65, height, SCREEN_WIDTH/2 - 110, 12) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:tureStr];
-//                    turecontentLb.numberOfLines = 0;
-//                    [turecontentLb sizeToFit];
-//                    CGSize turesize = [tureStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH/2 - 110, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
-//                    
-//                    //自己答案
-//                    NSString *contentStr =[NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:i],[resultary objectAtIndex:i]];
-//                    UILabel *contentLb = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH/2+30, height, SCREEN_WIDTH/2 - 90, 12) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:contentStr];
-//                    contentLb.numberOfLines = 0;
-//                    [contentLb sizeToFit];
-//                    CGSize size = [contentStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH/2 - 90, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
-//                    
-//                    height = height + (turesize.height>size.height?turesize.height:size.height) +5;
-//                    
-//                    UIImageView *imageline = [[UIImageView alloc] initWithFrame:CGRectMake(40, height-2, SCREEN_WIDTH - 100, 1)];
-//                    imageline.backgroundColor = RGBACOLOR(230, 230, 230, 1);
-//                    [bg addSubview:imageline];
-//                    [bg addSubview:contentLb];
-//                    [bg addSubview:turecontentLb];
-//                }
-//                
-//            }
-//            
-//            
-//            bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , 20 + height);
-//            
-//            ChildrenResultModel *model = [[ChildrenResultModel alloc] init];
-//            [model initModelWithDic:[_blankfills objectForKey:key]];
-//            model.height = bg.frame.size.height;
-//            [self.blankfillModelArr addObject:model];
-//            
-//            [cell.contentView addSubview:bg];
-//            
-//            [bg addSubview:templabel];
-//            
-//            UIImageView *imageLine = [[UIImageView alloc] initWithFrame:CGRectMake(8, optimalSize.height + 8, SCREEN_WIDTH - 16, 1)];
-//            imageLine.backgroundColor = RGBACOLOR(220, 220, 220, 1);
-//            [cell.contentView addSubview:imageLine];
-//            
-//            
-//            
-//            //正确答案
-//            UILabel *answerLb = [UILabel labelWithFrame:CGRectMake(10, optimalSize.height + 12, 60, 38) textColor:RGBACOLOR(100, 174, 99, 1) font:[UIFont systemFontOfSize:14] context:[NSString stringWithFormat:@"正确答案"]];
-//            [cell.contentView addSubview:answerLb];
-//            
-//            
-//            
-//            //解析图标显示
-//            UIButton *explainText = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 35, optimalSize.height+19, 60, 20)];
-//            explainText.tag = indexPath.row+100;
-//            [explainText addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
-//            [explainText setTitle:@"解题方法" forState:UIControlStateNormal];
-//            [explainText setCornerRadius:5];
-//            explainText.titleLabel.font = [UIFont systemFontOfSize:12];
-//            explainText.backgroundColor = RGBACOLOR(22, 156, 111, 1);
-////            [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
-//            [cell.contentView addSubview:explainText];
-//            
-//            if ([[[_blankfills objectForKey:key] objectForKey:@"showview"] isEqual:@1]) {
-//                explainText.hidden = NO;
-//            }else {
-//            
-//                explainText.hidden = YES;
-//            }
-//            
-//            
-//            //收起展开按钮显示
-//            UIButton *expandBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 55, optimalSize.height+21, 16, 16)];
-//            
-//            if ([isOpne isEqualToString:@"0"]) {
-//                [expandBtn setImage:[UIImage imageNamed:@"homework_open.png"] forState:UIControlStateNormal];
-//            }else{
-//                [expandBtn setImage:[UIImage imageNamed:@"homework_close.png"] forState:UIControlStateNormal];
-//            }
-//            [expandBtn addTarget:self action:@selector(showMoreContent:) forControlEvents:UIControlEventTouchUpInside];
-//            expandBtn.tag = [_resultchoices count] + indexPath.row;
-//            
-//            
-//            if ([self showArrow:indexPath.row]) {
-//                [cell.contentView addSubview:expandBtn];
-//            }
-//            
-//            
-//            //对错按钮显示
-//            UIButton *truebtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 35, optimalSize.height+15, 30, 28)];
-//            BOOL isture = [[[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:2] boolValue];
-//            [truebtn setImage:[UIImage imageNamed:isture?@"homework_3":@"homework_4"] forState:UIControlStateNormal];
-//            [cell.contentView addSubview:truebtn];
-//            
-//
-//        }
-//        
-//        
-//    }else{//填空题
-//        
-//        NSString *key = [NSString stringWithFormat:@"%@",[[_resultblankfills objectAtIndex:indexPath.row] firstObject]];
-//        
-//        //题目内容
-//        NSString *content = [[_blankfills objectForKey:key] objectForKey:@"content"];
-//        content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-//        if (content == nil) {
-//            return cell;
-//        }
-//        RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-//        templabel.userInteractionEnabled = NO;
-//        templabel.font = [UIFont systemFontOfSize:14];
-//        RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-//        templabel.componentsAndPlainText = componentsDS;
-//        CGSize optimalSize = [templabel optimumSize];
-//        
-//        NSArray *tureAnswerAry = [[[_blankfills objectForKey:key] objectForKey:@"answer"] JSONValue];
-//        NSArray *resultary = [[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:1];
-//        
-//        NSString *isOpne = [selectDic objectForKey:[NSString stringWithFormat:@"%ld",(long)indexPath.row+[_resultchoices count]]];
-//        
-//        CGFloat height = optimalSize.height +22;
-//        NSArray *cornerAry =[NSArray arrayWithObjects:@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨",@"⑩",@"⑪",@"⑫",@"⑬",@"⑭",@"⑮",@"⑯",@"⑰",@"⑱",@"⑲",@"⑳", nil];
-//        if ([isOpne isEqualToString:@"0"]) {
-//            //正确答案
-//            NSString *tureAnswer = [NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:0],[tureAnswerAry objectAtIndex:0]];
-//            UILabel *turemyanswerLb = [UILabel labelWithFrame:CGRectMake(65, optimalSize.height+22, SCREEN_WIDTH/2 - 110, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:tureAnswer];
-//            [bg addSubview:turemyanswerLb];
-//            
-//            //自己答案
-//            NSString *myanswer = [NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:0],[resultary objectAtIndex:0]];
-//            UILabel *myanswerLb = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH/2+30, optimalSize.height+22, SCREEN_WIDTH/2 - 90, 15) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:myanswer];
-//            [bg addSubview:myanswerLb];
-//        }else{
-//            for (int i = 0; i< [resultary count]; i++) {
-//                //正确答案
-//                NSString *tureStr =[NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:i],[tureAnswerAry objectAtIndex:i]];
-//                UILabel *turecontentLb = [UILabel labelWithFrame:CGRectMake(65, height, SCREEN_WIDTH/2 - 110, 12) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:tureStr];
-//                turecontentLb.numberOfLines = 0;
-//                [turecontentLb sizeToFit];
-//                CGSize turesize = [tureStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH/2 - 110, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
-//                
-//                //自己答案
-//                NSString *contentStr =[NSString stringWithFormat:@"%@%@",[cornerAry objectAtIndex:i],[resultary objectAtIndex:i]];
-//                UILabel *contentLb = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH/2+30, height, SCREEN_WIDTH/2 - 90, 12) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:14] context:contentStr];
-//                contentLb.numberOfLines = 0;
-//                [contentLb sizeToFit];
-//                CGSize size = [contentStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH/2 - 90, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size;
-//                
-//                height = height + (turesize.height>size.height?turesize.height:size.height) +5;
-//                
-//                UIImageView *imageline = [[UIImageView alloc] initWithFrame:CGRectMake(40, height-2, SCREEN_WIDTH - 100, 1)];
-//                imageline.backgroundColor = RGBACOLOR(230, 230, 230, 1);
-//                [bg addSubview:imageline];
-//                [bg addSubview:contentLb];
-//                [bg addSubview:turecontentLb];
-//            }
-//
-//        }
-//        
-//
-//        bg.frame = CGRectMake(5, 2, SCREEN_WIDTH -10 , 20 + height);
-//        
-//        ChildrenResultModel *model = [[ChildrenResultModel alloc] init];
-//        [model initModelWithDic:[_blankfills objectForKey:key]];
-//        model.height = bg.frame.size.height;
-//        [self.blankfillModelArr addObject:model];
-//
-//        
-//        [cell.contentView addSubview:bg];
-//        
-//        [bg addSubview:templabel];
-//        
-//        UIImageView *imageLine = [[UIImageView alloc] initWithFrame:CGRectMake(8, optimalSize.height + 8, SCREEN_WIDTH - 16, 1)];
-//        imageLine.backgroundColor = RGBACOLOR(220, 220, 220, 1);
-//        [cell.contentView addSubview:imageLine];
-//        
-//
-//        
-//        //正确答案
-//        UILabel *answerLb = [UILabel labelWithFrame:CGRectMake(10, optimalSize.height + 12, 60, 38) textColor:RGBACOLOR(100, 174, 99, 1) font:[UIFont systemFontOfSize:14] context:[NSString stringWithFormat:@"正确答案"]];
-//        [cell.contentView addSubview:answerLb];
-//
-//        
-//
-//        //解析图标显示
-//        UIButton *explainText = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 35, optimalSize.height+19, 60, 20)];
-//        explainText.tag = indexPath.row+100;
-//        [explainText addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
-//        [explainText setTitle:@"解题方法" forState:UIControlStateNormal];
-//        [explainText setCornerRadius:5];
-//        explainText.titleLabel.font = [UIFont systemFontOfSize:12];
-//        explainText.backgroundColor = RGBACOLOR(22, 156, 111, 1);
-////        [explainText setImage:[UIImage imageNamed:@"homework_1.png"] forState:UIControlStateNormal];
-//        [cell.contentView addSubview:explainText];
-//        
-//        if ([[[_blankfills objectForKey:key] objectForKey:@"showview"] isEqual:@1]) {
-//            explainText.hidden = NO;
-//        }else {
-//            
-//            explainText.hidden = YES;
-//        }
-//
-//    
-//
-//        
-//
-//        //收起展开按钮显示
-//        UIButton *expandBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 55, optimalSize.height+21, 16, 16)];
-//
-//        if ([isOpne isEqualToString:@"0"]) {
-//            [expandBtn setImage:[UIImage imageNamed:@"homework_open.png"] forState:UIControlStateNormal];
-//        }else{
-//            [expandBtn setImage:[UIImage imageNamed:@"homework_close.png"] forState:UIControlStateNormal];
-//        }
-//        [expandBtn addTarget:self action:@selector(showMoreContent:) forControlEvents:UIControlEventTouchUpInside];
-//        expandBtn.tag = [_resultchoices count] + indexPath.row;
-//        if ([self showArrow:indexPath.row]) {
-//            [cell.contentView addSubview:expandBtn];
-//        }
-//        
-//        //对错按钮显示
-//        UIButton *truebtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 35, optimalSize.height+15, 30, 28)];
-//        BOOL isture = [[[_resultblankfills objectAtIndex:indexPath.row] objectAtIndex:2] boolValue];
-//        [truebtn setImage:[UIImage imageNamed:isture?@"homework_3":@"homework_4"] forState:UIControlStateNormal];
-//        [cell.contentView addSubview:truebtn];
-//        
-//        
-//    }
-//    
-//    
-//    return cell;
 }
 
 
+- (void)changeCellHeight:(UIButton *)sender {
 
-
-
--(void)showMoreContent:(id)sender
-{
-    UIButton *btn = (UIButton *)sender;
-    NSString *isOpne = [selectDic objectForKey:[NSString stringWithFormat:@"%ld",(long)btn.tag]];
-    [selectDic removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)btn.tag]];
-    if ([isOpne isEqualToString:@"0"]) {
-        [selectDic setObject:@"1" forKey:[NSString stringWithFormat:@"%ld",(long)btn.tag]];
-    }else{
-        [selectDic setObject:@"0" forKey:[NSString stringWithFormat:@"%ld",(long)btn.tag]];
-    }
-    [_resultTable reloadData];
+    ChildrenResultCell *cell = (ChildrenResultCell *)sender.superview.superview.superview;
+    cell.expandBtn.selected = !cell.expandBtn.selected;
     
-    NSInteger section = btn.tag>=[_resultchoices count]?1:0;
-    if ([_resultchoices count] == 0) {
-        section = 0;
+    if (cell.expandBtn.selected == YES) {
+        [self.blankfillExpandDic setObject:@"YES" forKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]];
+    }else {
+        [self.blankfillExpandDic setObject:@"NO" forKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]];
     }
     
-    NSInteger row = btn.tag -[_resultchoices count];
-    [_resultTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-    
+    [_resultTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.indexPath.row inSection:cell.indexPath.section]] withRowAnimation:UITableViewRowAnimationNone];
+    [_resultTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:cell.indexPath.row inSection:cell.indexPath.section] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
+
 
 #pragma mark - Scroll
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

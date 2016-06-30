@@ -11,14 +11,15 @@
 @class ResultModel;
 @interface ChildrenResultCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIButton *solutionBtn;
+@property (weak, nonatomic) IBOutlet UIButton *solutionBtn;// 亿教解析
 
-@property (weak, nonatomic) IBOutlet UIButton *expandBtn;
+@property (weak, nonatomic) IBOutlet UIButton *expandBtn;// 展开按钮
+
+@property (weak, nonatomic) IBOutlet UIButton *annotationBtn;// 老师批注
 
 @property (assign, nonatomic) CGFloat height;
 
 @property (strong, nonatomic) NSIndexPath *indexPath;
-
 
 
 
