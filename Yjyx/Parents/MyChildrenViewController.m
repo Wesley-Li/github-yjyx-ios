@@ -37,7 +37,8 @@
     totalAry = [[NSMutableArray alloc] init];
     _activities = [[NSMutableArray alloc] init];
     _childrenAry = [[NSMutableArray alloc] init];
-    self.title = @"孩子动态";
+    
+    self.navigationItem.title = @"孩子动态";
     [self loadBackBtn];
     
     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;//将跳转页面标志置为空
@@ -265,7 +266,7 @@
     if ([children.tasktype integerValue] == 2&&[children.finished integerValue] == 0) {//微课预览
         YjyxMicroClassViewController *result = [[YjyxMicroClassViewController alloc] init];
         result.previewRid = children.rid;
-        result.navigationItem.title = children.title;
+        result.navigationController.navigationItem.title = children.title;
         [self.navigationController pushViewController:result animated:YES];
 
     }

@@ -32,7 +32,7 @@
     billionView.hidden = YES;
     
     type = 1;
-    self.title = @"数据统计";
+    self.navigationItem.title = @"数据统计";
     [self loadBackBtn];
     if ([[[YjyxOverallData sharedInstance] parentInfo].childrens count] != 0) {
         childrenEntity = [[[YjyxOverallData sharedInstance] parentInfo].childrens objectAtIndex:0];
@@ -62,7 +62,8 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = YES;
-    [super viewWillDisappear:YES];
+    
+//    [super viewWillDisappear:YES];
 }
 
 - (void)initView
@@ -186,7 +187,9 @@
         PNPieChartDataItem *item = [PNPieChartDataItem dataItemWithValue:value color:[colorAry objectAtIndex:i%4] description:[NSString stringWithFormat:@"%.0f%%%@",value*100,[dic objectForKey:@"course"]]];
         [items addObject:item];
     }
+    
     [pieChart removeFromSuperview];
+    
     pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 200)/2, 45, 200, 200) items:items];
     pieChart.descriptionTextColor = [UIColor blackColor];
     pieChart.descriptionTextFont  = [UIFont boldSystemFontOfSize:13];

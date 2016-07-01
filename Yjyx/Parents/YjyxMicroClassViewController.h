@@ -10,7 +10,7 @@
 
 @interface YjyxMicroClassViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong) NSString *previewRid;//rid请求详细信息时，需要带
-@property (nonatomic,strong) NSArray *blankfills;//填充题
-@property (nonatomic,strong) NSArray *choices;//选择题
+@property (nonatomic,strong) NSMutableArray *blankfills;//填充题
+@property (nonatomic,strong) NSMutableArray *choices;//选择题
 @property (nonatomic,strong) UITableView *subjectTable;
 @end
