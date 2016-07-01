@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *collectBtn;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 
-
+@property (assign, nonatomic) NSInteger flag;
 @property (strong, nonatomic) ChaperContentItem *item;
 
 

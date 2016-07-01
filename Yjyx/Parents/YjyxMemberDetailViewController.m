@@ -129,8 +129,13 @@
                 trailLb.text = [NSString stringWithFormat:@"%@:会员已过期",entity.name];
 
             }else {
-            
+                if([[content objectForKey:@"effctivedays"] isEqual:@0])
+                {
+                    trailLb.text = [NSString stringWithFormat:@"%@:会员即将到期",entity.name];
+
+                }else{
                 trailLb.text = [NSString stringWithFormat:@"%@:会员剩余%@天",entity.name,[content objectForKey:@"effctivedays"]];
+                }
             }
             
         }

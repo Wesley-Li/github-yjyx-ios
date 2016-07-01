@@ -55,7 +55,7 @@
 {
     _item = item;
     NSString *subjectType = nil;
-    subjectType = [item.subject_type isEqualToString:@"choice"]?@"选择题":@"填空题";
+    subjectType = [item.subject_type isEqualToString:@"1"]?@"选择题":@"填空题";
     self.subjectTypeLabel.text = subjectType;
     NSString *subjectLevel = nil;
     if (item.level == -1) {
@@ -74,7 +74,16 @@
     
     self.contentLabel.componentsAndPlainText = componentsDS;
     // 判断是否已经被选中
-    NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", item.t_id] andQuestionType:item.subject_type];
+    NSMutableArray *tempArr = [NSMutableArray array];
+    
+    if (_flag == 1) {
+        NSMutableArray *arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"];
+        NSLog(@"%ld------%@---%@", item.t_id, item.subject_type , arr);
+         tempArr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", (long)item.t_id] andQuestionType:item.subject_type andJumpType:@"2"];
+    }else{
+        tempArr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", (long)item.t_id] andQuestionType:item.subject_type andJumpType:@"1"];
+    }
+   
     if(tempArr.count){
         item.add = YES;
     }else{

@@ -161,6 +161,7 @@
         if (result) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 achievementAry = [result objectForKey:@"data"];
+                NSLog(@"%@", achievementAry);
                 if ([achievementAry count] == 0) {
                     [self.view makeToast:@"该小孩暂无相关数据" duration:1.0 position:SHOW_CENTER complete:nil];
                 }

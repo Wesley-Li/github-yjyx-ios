@@ -11,6 +11,7 @@
 #import "RCLabel.h"
 //#import "WrongDataBase.h"
 #import "QuestionDataBase.h"
+#import "MicroSubjectModel.h"
 @interface WrongSubjectCell()
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
@@ -66,7 +67,13 @@
     self.contentLabel.componentsAndPlainText = componentsDS;
   
     // 判断是否已经被选中
-    NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", wrongSubModel.questionid] andQuestionType:[NSString stringWithFormat:@"%ld", wrongSubModel.questiontype]];
+    NSMutableArray *tempArr = [NSMutableArray array];
+    if(_flag == 1){
+         tempArr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", wrongSubModel.questionid] andQuestionType:[NSString stringWithFormat:@"%ld", wrongSubModel.questiontype] andJumpType:@"2"];
+    }else{
+        tempArr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", wrongSubModel.questionid] andQuestionType:[NSString stringWithFormat:@"%ld", wrongSubModel.questiontype] andJumpType:@"1"];
+    }
+    
     if(tempArr.count){
         wrongSubModel.isSelected = YES;
     }else{
@@ -110,12 +117,31 @@
 - (IBAction)addBtnClick:(UIButton *)sender {
     sender.selected = !sender.selected;
     self.wrongSubModel.isSelected = sender.selected;
+    MicroSubjectModel *model = [[MicroSubjectModel alloc] init];
+    model.s_id = [NSNumber numberWithInteger:_wrongSubModel.t_id];
+    model.type = _wrongSubModel.questiontype;
+    model.content = _wrongSubModel.content;
+    NSString *str = @"简单";
+    if(_wrongSubModel.level == 2){
+        str = @"中等";
+    }else{
+        str = @"较难";
+    }
+    model.level = str;
     if(sender.selected){
+       
+        if (_flag == 1) {
+            [[QuestionDataBase shareDataBase] insertMirco:model];
+        }else{
         [[QuestionDataBase shareDataBase] insertWrong:_wrongSubModel];
-    
+        }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"BUTTON_IS_SELEND" object:nil];
     }else{
-        [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", _wrongSubModel.questionid] andQuestionType: [NSString stringWithFormat:@"%ld", _wrongSubModel.questiontype]];
+        if(_flag == 1){
+            [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", _wrongSubModel.questionid] andQuestionType: [NSString stringWithFormat:@"%ld", _wrongSubModel.questiontype] andJumpType:@"2"];
+        }else{
+        [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", _wrongSubModel.questionid] andQuestionType: [NSString stringWithFormat:@"%ld", _wrongSubModel.questiontype] andJumpType:@"1"];
+        }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"BUTTON_NO_SELEND" object:nil];
     }
     

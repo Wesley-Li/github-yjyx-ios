@@ -54,7 +54,7 @@
                 <outlet property="playBtn" destination="dpA-iy-5B9" id="iK7-c9-uN6"/>
                 <outlet property="videoLabel" destination="ypu-ZW-ip6" id="xvB-zN-7fa"/>
             </connections>
-            <point key="canvasLocation" x="510" y="306"/>
+            <point key="canvasLocation" x="333" y="313"/>
         </tableViewCell>
     </objects>
     <resources>

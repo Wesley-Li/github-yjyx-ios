@@ -9,9 +9,12 @@
 #import "RegistOneViewController.h"
 #import "RegistViewController.h"
 #import "RegistFinalViewController.h"
-
+#import "RegistStudentController.h"
 @interface RegistOneViewController ()
-
+@property (weak, nonatomic) IBOutlet UILabel *CodeTypeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *studentBtn;
+@property (weak, nonatomic) IBOutlet UIButton *parentBtn;
+@property (strong, nonatomic) UIButton *preSelBtn;
 @end
 
 @implementation RegistOneViewController
@@ -24,7 +27,10 @@
     
     // Do any additional setup after loading the view from its nib.
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = YES;
+}
 -(IBAction)checkCode:(id)sender
 {
     if (codeTextField.text.length == 0) {
@@ -32,6 +38,7 @@
         return;
     }
     [self.view makeToastActivity:SHOW_CENTER];
+    if([self.preSelBtn isEqual:_parentBtn]){
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:codeTextField.text,@"code",nil];
     [[YjxService sharedInstance] registcheckcode:dic withBlock:^(id result, NSError *error){
         [self.view hideToastActivity];
@@ -55,6 +62,31 @@
             [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
+    }else{
+        [self.view hideToastActivity];
+        //  学生注册
+        AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+        NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
+        pamar[@"action"] = @"checkcode";
+        pamar[@"code"] = codeTextField.text;
+        [mgr POST:[BaseURL stringByAppendingString:@"/api/student/mobile/register/"] parameters:pamar  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+            if ([responseObject[@"retcode"] isEqual:@0]) {
+                RegistStudentController *vc = [[RegistStudentController alloc] init];
+                NSMutableArray *tempArr = [NSMutableArray array];
+                [tempArr addObject:responseObject[@"schoolname"]];
+                [tempArr addObject:responseObject[@"gradename"]];
+                [tempArr addObject:responseObject[@"classname"]];
+                [tempArr addObject:codeTextField.text];
+                vc.attrArr = tempArr;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else{
+                [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
+        }];
+    }
 }
 
 
@@ -63,12 +95,18 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)selectRoleRegist:(id)sender
+-(IBAction)selectRoleRegist:(UIButton *)sender
 {
+    self.preSelBtn.selected = NO;
+    self.preSelBtn = sender;
+    sender.selected = YES;
+    codeTextField.text = nil;
     UIButton *btn = (UIButton *)sender;
     if (btn.tag == 1) {
-        partentRegistView.hidden = YES;
+        partentRegistView.hidden = NO;
+        self.CodeTypeLabel.text = @"请输入您班级的邀请码";
     }else{
+        self.CodeTypeLabel.text = @"请输入您孩子的邀请码";
         partentRegistView.hidden = NO;
     }
 }

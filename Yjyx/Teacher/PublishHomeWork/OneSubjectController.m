@@ -18,6 +18,11 @@
 #import "YjyxWrongSubModel.h"
 #import "KnowledgeViewController.h"
 #import "ChapterViewController.h"
+#import "MicroDetailViewController.h"
+#import "PublishHomeworkViewController.h"
+#import "ChapterChoiceController.h"
+#import "WrongSubjectController.h"
+#import "MicroSubjectModel.h"
 @interface OneSubjectController ()<UITableViewDelegate, UITableViewDataSource>
 {
     WMPlayer *wmPlayer;
@@ -31,7 +36,9 @@
 @property (assign, nonatomic) NSInteger count;
 @property (strong, nonatomic) OneSubjectModel *model;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstant;
 @property (strong, nonatomic) ReleaseVideoCell *videoCell;
+@property (assign, nonatomic) NSInteger flag;
 @end
 
 @implementation OneSubjectController
@@ -43,6 +50,7 @@ static NSString *VideoID = @"VIDEOCELL";
     [super viewDidLoad];
     
     [SVProgressHUD showWithStatus:@"正在加载..."];
+    self.navigationController.navigationBarHidden = NO;
     self.title = @"题目详情";
     // 加载返回按钮
     [self loadBackBtn];
@@ -72,15 +80,25 @@ static NSString *VideoID = @"VIDEOCELL";
                                                  name:WMPlayerClosedNotification
                                                object:nil
      ];
+    for (UIViewController *vc in self.parentViewController.childViewControllers) {
+        if ([vc isKindOfClass:[MicroDetailViewController class]]) {
+//            [self.moveToReleaseBtn removeFromSuperview];
+            _flag = 1;
+            self.heightConstant.constant = 0;
+            self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+           
+        }
+        if ([vc isKindOfClass:[PublishHomeworkViewController class]]) {
+//            [self.moveToReleaseBtn removeFromSuperview];
+            self.heightConstant.constant = 49;
+            self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+          
+        }
+    }
     
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-    if(_is_select == 0){
-        [self.moveToReleaseBtn setTitle:@"出题" forState:UIControlStateNormal];
-    }else{
-        [self.moveToReleaseBtn setTitle:@"移除本题" forState:UIControlStateNormal];
-    }
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
     
     //旋转屏幕通知
@@ -89,6 +107,15 @@ static NSString *VideoID = @"VIDEOCELL";
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil
      ];
+//    self.moveToReleaseBtn.hidden = NO;
+    if(_is_select == 0){
+        [self.moveToReleaseBtn setTitle:@"出题" forState:UIControlStateNormal];
+    }else{
+        [self.moveToReleaseBtn setTitle:@"移除本题" forState:UIControlStateNormal];
+    }
+
+   
+    NSLog(@"%@$$$$$$$", self.parentViewController);
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -104,6 +131,18 @@ static NSString *VideoID = @"VIDEOCELL";
     [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
+}
+- (BOOL)prefersStatusBarHidden
+{
+    if (wmPlayer) {
+        if (wmPlayer.isFullscreen) {
+            return YES;
+        }else{
+            return NO;
+        }
+    }else{
+        return NO;
+    }
 }
 #pragma mark - wmPlayer的方法
 -(void)videoDidFinished:(NSNotification *)notice{
@@ -360,7 +399,7 @@ static NSString *VideoID = @"VIDEOCELL";
     param[@"action"] = @"m_getone";
     param[@"qtype"] = self.qtype;
     param[@"qid"] = self.w_id;
-    NSLog(@"%@, %@", self.qtype, self.w_id);
+//    NSLog(@"%@, %@", self.qtype, self.w_id);
     [mgr GET:[BaseURL stringByAppendingString:@"/api/teacher/mobile/question/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         NSLog(@"%@", responseObject);
         
@@ -391,22 +430,66 @@ static NSString *VideoID = @"VIDEOCELL";
      }
     if([sender.titleLabel.text isEqualToString:@"移除本题"]){
         if (_wrongSubjectModel == nil) {
-            [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", _chaperContentModel.t_id] andQuestionType:_chaperContentModel.subject_type];
+            if (_flag == 1) {
+                 [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", _chaperContentModel.t_id] andQuestionType:_chaperContentModel.subject_type andJumpType:@"2"];
+            }else{
+                 [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", _chaperContentModel.t_id] andQuestionType:_chaperContentModel.subject_type andJumpType:@"1"];
+            }
         }else{
-        [[QuestionDataBase shareDataBase] deleteQuestionByid:_w_id andQuestionType:str];
+            if (_flag == 1) {
+                [[QuestionDataBase shareDataBase] deleteQuestionByid:_w_id andQuestionType:str andJumpType:@"2"];
+            }else{
+                [[QuestionDataBase shareDataBase] deleteQuestionByid:_w_id andQuestionType:str andJumpType:@"1"];
+            }
         }
     }else{
         if (_wrongSubjectModel == nil) {
+            MicroSubjectModel *model = [[MicroSubjectModel alloc] init];
+            model.s_id = [NSNumber numberWithInt: _chaperContentModel.t_id];
+            model.type = [_chaperContentModel.subject_type integerValue];
+            NSString  *str = @"简单";
+            if(_chaperContentModel.level == 2){
+                str = @"中等";
+            }else{
+                str = @"较难";
+            }
+                
+            model.level = str;
+            model.content = _chaperContentModel.content_text;
+            if (_flag == 1) {
+                [[QuestionDataBase shareDataBase] insertMirco:model];
+            }
             [[QuestionDataBase shareDataBase] insertQuestion:_chaperContentModel];
         }else{
-        [[QuestionDataBase shareDataBase] insertWrong:_wrongSubjectModel];
+            if (_flag == 1) {
+                MicroSubjectModel *model = [[MicroSubjectModel alloc] init];
+                model.s_id = [NSNumber numberWithInt: _wrongSubjectModel.t_id];
+                model.type = _wrongSubjectModel.questiontype;
+                NSString  *str = @"简单";
+                if(_wrongSubjectModel.level == 2){
+                    str = @"中等";
+                }else{
+                    str = @"较难";
+                }
+                
+                model.level = str;
+                model.content = _wrongSubjectModel.content;
+                [[QuestionDataBase shareDataBase] insertMirco:model];
+            }else{
+           
+             [[QuestionDataBase shareDataBase] insertWrong:_wrongSubjectModel];
+            }
         }
     }
-    if([self.navigationController.childViewControllers[1] isKindOfClass:[ChapterViewController class]] || [self.navigationController.childViewControllers[1] isKindOfClass:[KnowledgeViewController class]]){
-         [self.navigationController popToViewController:self.navigationController.childViewControllers[2] animated:YES];
-    }else{
-         [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
+    for (UIViewController *vc in self.parentViewController.childViewControllers) {
+        if ([vc isKindOfClass:[ChapterChoiceController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+        }
+        if ([vc isKindOfClass:[WrongSubjectController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+        }
     }
+
     
 }
 

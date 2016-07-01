@@ -18,6 +18,7 @@
 #import "ChapterViewController.h"
 #import "QuestionPreviewController.h"
 #import "QuestionDataBase.h"
+#import "MicroDetailViewController.h"
 
 @interface PublishHomeworkViewController ()
 
@@ -27,6 +28,8 @@
 
 @property (nonatomic, strong) NSMutableArray *selectArr;
 
+@property (assign, nonatomic) NSInteger flag;
+@property (weak, nonatomic) IBOutlet UILabel *microLabel;
 @end
 
 @implementation PublishHomeworkViewController
@@ -43,7 +46,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:3/255.0 green:136/255.0 blue:227/255.0 alpha:1.0];
-    self.navigationController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_btn_back"] style:UIBarButtonItemStylePlain target:self action:@selector(navPop)];
+//    self.navigationController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_btn_back"] style:UIBarButtonItemStylePlain target:self action:@selector(navPop)];
+    
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
@@ -52,18 +56,41 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.navigationController.navigationBarHidden = NO;
+    for (UIViewController *vc in self.parentViewController.childViewControllers) {
+        if([vc isKindOfClass:[MicroDetailViewController class]]){
+            _flag = 1;
+            break;
+        }
+    }
+    if (_flag == 1) {
+        [self loadBackBtn];
+        ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
+        ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
+        ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
+       self.microLabel.text = @"微课作业";
+    }else{
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = NO;
-    
-    self.selectArr = [[[QuestionDataBase shareDataBase] selectAllQuestion] mutableCopy];
+        self.microLabel.text = @"预览作业";
+    }
+   
+    if (_flag == 1) {
+         self.selectArr = [[[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"] mutableCopy];
+    }else{
+   
+        self.selectArr = [[[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"] mutableCopy];
+   
+    }
     if (_selectArr.count == 0) {
         
         self.question_countLabel.hidden = YES;
         self.previewBtn.hidden = YES;
+        self.microLabel.hidden = YES;
         
     }else {
-    
+        self.microLabel.hidden = NO;
         self.question_countLabel.hidden = NO;
         self.previewBtn.hidden = NO;
         self.question_countLabel.layer.cornerRadius = 10;
@@ -146,10 +173,23 @@
 
 // 预览选题
 - (IBAction)previewBtnClick:(UIButton *)sender {
-    
-    QuestionPreviewController *previewVC = [[QuestionPreviewController alloc] init];
-    previewVC.selectArr = _selectArr;
-    [self.navigationController pushViewController:previewVC animated:YES];
+    NSMutableArray *arr = [NSMutableArray array];
+    if(_flag == 1){
+        arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"];
+        for (UIViewController *vc in self.parentViewController.childViewControllers) {
+            if ([vc isKindOfClass:[MicroDetailViewController class]]) {
+                MicroDetailViewController *vc1 = (MicroDetailViewController *)vc;
+                vc1.addMicroArr = arr;
+                [self.navigationController popToViewController:vc animated:YES];
+                break;
+            }
+        }
+    }else{
+        QuestionPreviewController *previewVC = [[QuestionPreviewController alloc] init];
+        previewVC.selectArr = _selectArr;
+        [self.navigationController pushViewController:previewVC animated:YES];
+    }
+   
     
 }
 

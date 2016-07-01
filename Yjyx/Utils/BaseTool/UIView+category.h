@@ -72,10 +72,15 @@ typedef enum SHOW_POSITION {
 - (void)setHeight:(CGFloat)height;
 
 /**
- * 设置中心点
+ * 设置中心点X
  */
 - (CGFloat)centerX;
 - (void)setCenterX:(CGFloat)centerX;
+/**
+ * 设置中心点Y
+ */
+- (CGFloat)centerY;
+- (void)setCenterY:(CGFloat)centerY;
 /**
  * 设置y值
  */
