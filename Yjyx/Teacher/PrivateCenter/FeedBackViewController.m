@@ -85,7 +85,7 @@
     contentText.placeholder = @"请简要描述您的问题和意见";
     contentText.font = [UIFont systemFontOfSize:14];
     [_textBGview addSubview:contentText];
-    [contentText becomeFirstResponder];
+//    [contentText becomeFirstResponder];
 
 }
 

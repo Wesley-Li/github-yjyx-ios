@@ -30,8 +30,8 @@
     web.scrollView.showsHorizontalScrollIndicator = NO;
     web.scrollView.bounces = NO;
     web.delegate = self;
-    
-    [web loadHTMLString:content baseURL:nil];
+    NSString *jsStrig = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", content];
+    [web loadHTMLString:jsStrig baseURL:nil];
     
     [self.bgView addSubview:web];
     

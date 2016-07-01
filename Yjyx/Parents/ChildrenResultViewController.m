@@ -161,6 +161,7 @@
         if (result != nil) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 
+                NSLog(@"%@", result);
                 
                 [self.resultchoices removeAllObjects];
                 [self.resultblankfills removeAllObjects];
@@ -401,7 +402,7 @@
     }
     
     [_resultTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.indexPath.row inSection:cell.indexPath.section]] withRowAnimation:UITableViewRowAnimationNone];
-    [_resultTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:cell.indexPath.row inSection:cell.indexPath.section] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    
 }
 
 

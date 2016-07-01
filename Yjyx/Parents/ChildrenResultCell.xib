@@ -48,7 +48,7 @@
                                     <constraint firstAttribute="width" constant="120" id="yja-77-KvZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -97,7 +97,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fde-B5-nSw">
                                 <rect key="frame" x="66" y="207" width="138" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -116,7 +116,7 @@
                             <constraint firstItem="5g3-tE-UxI" firstAttribute="leading" secondItem="GkW-bG-IAJ" secondAttribute="trailing" constant="10" id="OaZ-bl-rhL"/>
                             <constraint firstItem="GkW-bG-IAJ" firstAttribute="top" secondItem="XMZ-7c-7jJ" secondAttribute="bottom" constant="10" id="Oxd-VT-Wfp"/>
                             <constraint firstItem="7LA-EH-DwT" firstAttribute="top" secondItem="M1p-SE-HAP" secondAttribute="bottom" constant="20" id="QjX-ee-kQN"/>
-                            <constraint firstItem="Jtl-um-AYO" firstAttribute="leading" secondItem="Fde-B5-nSw" secondAttribute="trailing" constant="20" id="Ran-Id-gcN"/>
+                            <constraint firstItem="Jtl-um-AYO" firstAttribute="leading" secondItem="Fde-B5-nSw" secondAttribute="trailing" constant="5" id="Ran-Id-gcN"/>
                             <constraint firstItem="GkW-bG-IAJ" firstAttribute="leading" secondItem="Jtl-um-AYO" secondAttribute="trailing" constant="30" id="Rpe-Tp-nZC"/>
                             <constraint firstItem="GkW-bG-IAJ" firstAttribute="leading" secondItem="Jtl-um-AYO" secondAttribute="trailing" id="UXg-OS-ree"/>
                             <constraint firstAttribute="trailing" secondItem="xWr-eh-mwX" secondAttribute="trailing" constant="10" id="VcK-NR-mws"/>
