@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="179" id="KGk-i7-Jjw" customClass="ReleaseMicroCell">
+            <rect key="frame" x="0.0" y="0.0" width="453" height="179"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="453" height="178"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video_pic.png" translatesAutoresizingMaskIntoConstraints="NO" id="LlM-F9-hZ4">
+                        <rect key="frame" x="0.0" y="0.0" width="453" height="178"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doD-4g-Ljm">
+                        <rect key="frame" x="187" y="49" width="80" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="Mcy-mc-UYe"/>
+                            <constraint firstAttribute="width" secondItem="doD-4g-Ljm" secondAttribute="height" id="suU-18-wIy"/>
+                        </constraints>
+                        <state key="normal" title="Button" image="start_btn.png"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmo-7P-aAz">
+                        <rect key="frame" x="5" y="0.0" width="44" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="Dz0-ca-D3H"/>
+                            <constraint firstAttribute="width" constant="44" id="bcI-0N-nN7"/>
+                        </constraints>
+                        <state key="normal" image="Parent_VideoBack.png"/>
+                        <connections>
+                            <action selector="backBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="X2M-0l-TFL"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="LlM-F9-hZ4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="38Q-db-8tL"/>
+                    <constraint firstAttribute="bottom" secondItem="LlM-F9-hZ4" secondAttribute="bottom" id="Ajo-tX-8V8"/>
+                    <constraint firstItem="cmo-7P-aAz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="AnD-fX-Wd3"/>
+                    <constraint firstItem="doD-4g-Ljm" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Fhp-EF-fyH"/>
+                    <constraint firstItem="LlM-F9-hZ4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="MKI-gu-8sj"/>
+                    <constraint firstItem="cmo-7P-aAz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="dEF-MF-3Wf"/>
+                    <constraint firstAttribute="trailing" secondItem="LlM-F9-hZ4" secondAttribute="trailing" id="rDY-Z7-hrh"/>
+                    <constraint firstItem="doD-4g-Ljm" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="vAH-3a-B1M"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="backgroundIV" destination="LlM-F9-hZ4" id="ZMG-kP-e37"/>
+                <outlet property="playBtn" destination="doD-4g-Ljm" id="VIz-lZ-yWQ"/>
+            </connections>
+            <point key="canvasLocation" x="450.5" y="214.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Parent_VideoBack.png" width="28" height="28"/>
+        <image name="start_btn.png" width="152" height="150"/>
+        <image name="video_pic.png" width="1125" height="631"/>
+    </resources>
+</document>

@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OneSubjectController">
             <connections>
+                <outlet property="heightConstant" destination="6gh-DX-7j1" id="k17-kE-DFp"/>
                 <outlet property="moveToReleaseBtn" destination="3iE-iQ-cBd" id="4mf-33-uvU"/>
                 <outlet property="tableView" destination="0iU-6O-gXO" id="tQo-TE-Kfs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -44,6 +45,7 @@
             <constraints>
                 <constraint firstItem="0iU-6O-gXO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="3ou-ng-EAl"/>
                 <constraint firstAttribute="bottom" secondItem="3iE-iQ-cBd" secondAttribute="bottom" id="O29-Gb-1JZ"/>
+                <constraint firstAttribute="bottom" secondItem="0iU-6O-gXO" secondAttribute="bottom" priority="750" id="TgW-38-JYL"/>
                 <constraint firstItem="3iE-iQ-cBd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kAI-rD-T4I"/>
                 <constraint firstAttribute="trailing" secondItem="3iE-iQ-cBd" secondAttribute="trailing" id="rnd-OS-FA9"/>
                 <constraint firstItem="3iE-iQ-cBd" firstAttribute="top" secondItem="0iU-6O-gXO" secondAttribute="bottom" id="t0y-nY-vMV"/>

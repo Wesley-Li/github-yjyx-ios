@@ -62,7 +62,7 @@
     contentText.placeholder = @"请简要描述您的问题和意见";
     contentText.font = [UIFont systemFontOfSize:14];
     [feedView addSubview:contentText];
-    [contentText becomeFirstResponder];
+//    [contentText becomeFirstResponder];
     // Do any additional setup after loading the view from its nib.
     
     // 调用

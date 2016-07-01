@@ -14,8 +14,11 @@
 #import "QuestionPreviewController.h"
 #import "QuestionDataBase.h"
 #import "OneSubjectController.h"
-
+#import "MicroDetailViewController.h"
+#import "MicroSubjectModel.h"
+#import "MicroDetailViewController.h"
 #define ID @"subjectContentCell"
+
 @interface ChapterChoiceController ()<UITableViewDelegate, UITableViewDataSource, siftContentViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -30,6 +33,8 @@
 @property (nonatomic, copy) NSString *urlString;
 
 @property (nonatomic, strong) NSMutableDictionary *tagDic;// 标签字典
+
+@property (assign, nonatomic) NSInteger flag;
 
 
 @end
@@ -79,7 +84,11 @@
     // 注册通知
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(notice:) name:@"bottomBtnNameChange" object:nil];
-    [self.bottom_button setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", [[[QuestionDataBase shareDataBase] selectAllQuestion] count]] forState:UIControlStateNormal];
+    if(_flag == 1){
+      [self.bottom_button setTitle:[NSString stringWithFormat:@"确定(已选%ld题)", [[[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"] count]] forState:UIControlStateNormal];
+    }else{
+    [self.bottom_button setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", [[[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"] count]] forState:UIControlStateNormal];
+    }
     [self.tableView reloadData];
     
 }
@@ -91,6 +100,13 @@
     [super viewDidLoad];
     [self loadBackBtn];
     
+   
+    for (UIViewController *vc in self.parentViewController.childViewControllers) {
+        if([vc isKindOfClass:[MicroDetailViewController class]]){
+            _flag = 1;
+            break;
+        }
+    }
     self.last_id = @0;
     [self readDataFromNetWork];
     
@@ -295,12 +311,16 @@
 {
     subjectContentCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.flag = _flag;
     cell.item = self.dataSoruce[indexPath.row];
     
     if (cell.item != nil) {
-        
-        NSMutableArray *arr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", cell.item.t_id] andQuestionType:cell.item.subject_type];
-        
+        NSMutableArray *arr = [NSMutableArray array];
+        if (_flag == 1) {
+            arr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", cell.item.t_id] andQuestionType:cell.item.subject_type andJumpType:@"2"];
+        }else{
+           arr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", cell.item.t_id] andQuestionType:cell.item.subject_type andJumpType:@"1"];
+        }
         if (arr.count != 0) {
             cell.addBtn.selected = YES;
         }else {
@@ -329,19 +349,44 @@
 
     NSInteger row = sender.tag - 200;
     ChaperContentItem *model = self.dataSoruce[row];
+    MicroSubjectModel *m_model = [[MicroSubjectModel alloc] init];
+    m_model.s_id = [NSNumber numberWithInteger: model.t_id];
+    m_model.content = model.content_text;
+    NSLog(@"%@", model.subject_type);
+
+    m_model.type = [model.subject_type integerValue];
+    NSString *str = @"简单";
+    if(model.level == 2){
+        str = @"中等";
+    }else if(model.level == 3){
+        str = @"较难";
+    }
+    m_model.level = str;
+    NSLog(@"%@", m_model);
     sender.selected = !sender.selected;
     model.add = sender.selected;
+  
     if (sender.selected) {
-        
+        NSMutableArray *arr = [NSMutableArray array];
+        if(_flag == 0){
         [[QuestionDataBase shareDataBase] insertQuestion:model];
-        NSMutableArray *arr = [[QuestionDataBase shareDataBase] selectAllQuestion];
+        arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
+        }else{
+            [[QuestionDataBase shareDataBase] insertMirco:m_model];
+            arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"];
+        }
         NSNotification *notice = [NSNotification notificationWithName:@"bottomBtnNameChange" object:nil userInfo:@{@"key":arr}];
         [[NSNotificationCenter defaultCenter] postNotification:notice];
         
     }else {
-    
-        [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", model.t_id] andQuestionType:model.subject_type];
-        NSMutableArray *arr = [[QuestionDataBase shareDataBase] selectAllQuestion];
+        NSMutableArray *arr = [NSMutableArray array];
+        if (_flag == 0) {
+            [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", model.t_id] andQuestionType:model.subject_type andJumpType:@"1"];
+            arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
+        }else{
+            [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%@", m_model.s_id] andQuestionType:[NSString stringWithFormat:@"%ld", m_model.type] andJumpType:@"2"];
+            arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"];
+        }
         NSNotification *notice = [NSNotification notificationWithName:@"bottomBtnNameChange" object:nil userInfo:@{@"key":arr}];
         [[NSNotificationCenter defaultCenter] postNotification:notice];
         
@@ -353,7 +398,12 @@
 - (void)notice:(NSNotification *)sender {
 
     NSLog(@"%@",sender.userInfo[@"key"]);
-    [self.bottom_button setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", [sender.userInfo[@"key"] count]] forState:UIControlStateNormal];
+    if(_flag == 1){
+        [self.bottom_button setTitle:[NSString stringWithFormat:@"确定(已选%ld题)", [sender.userInfo[@"key"] count]] forState:UIControlStateNormal];
+    }else{
+       [self.bottom_button setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", [sender.userInfo[@"key"] count]] forState:UIControlStateNormal];
+    }
+    
     
 
 
@@ -384,20 +434,36 @@
 
 // 点击底部预览
 - (IBAction)bottomBtnClick:(UIButton *)sender {
-    
+ 
     QuestionPreviewController *previewVC = [[QuestionPreviewController alloc] init];
-    NSMutableArray *arr = [[QuestionDataBase shareDataBase] selectAllQuestion];
-
-    if (arr.count == 0) {
+    
+    NSMutableArray *arr = [NSMutableArray array];
+    if (_flag == 1) {
+        arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"];
+        for (UIViewController *vc in self.parentViewController.childViewControllers) {
+            if ([vc isKindOfClass:[MicroDetailViewController class]]) {
+                MicroDetailViewController *vc1 = (MicroDetailViewController *)vc;
+                vc1.addMicroArr = arr;
+                [self.navigationController popToViewController:vc animated:YES];
+                break;
+            }
+        }
         
-        [self.view makeToast:@"您还没有选择题目,请选择" duration:1.0 position:SHOW_BOTTOM complete:nil];
-    }else {
         
-        previewVC.selectArr = [arr mutableCopy];
-        previewVC.navigationItem.title = @"预览作业";
-        [self.navigationController pushViewController:previewVC animated:YES];
-
+    }else{
+        arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
+        if (arr.count == 0) {
+            
+            [self.view makeToast:@"您还没有选择题目,请选择" duration:1.0 position:SHOW_BOTTOM complete:nil];
+        }else {
+            
+            previewVC.selectArr = [arr mutableCopy];
+            previewVC.navigationItem.title = @"预览作业";
+            [self.navigationController pushViewController:previewVC animated:YES];
+            
+        }
     }
+ 
     
     
 }

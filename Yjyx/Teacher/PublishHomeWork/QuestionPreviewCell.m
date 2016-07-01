@@ -44,9 +44,9 @@
     
     self.subject_typeLabel.text = model.subject_type;
     
-    if ([model.subject_type isEqualToString:@"choice"]) {
+    if ([model.subject_type isEqualToString:@"1"]) {
         self.subject_typeLabel.text = @"选择题";
-    }else if ([model.subject_type isEqualToString:@"blankfill"]) {
+    }else if ([model.subject_type isEqualToString:@"2"]) {
     
         self.subject_typeLabel.text = @"填空题";
     }

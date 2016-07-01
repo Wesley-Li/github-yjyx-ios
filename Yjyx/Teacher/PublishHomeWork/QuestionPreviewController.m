@@ -113,7 +113,7 @@
             str = @"blankfill";
         }
         vc.qtype = str;
-        vc.w_id = [NSString stringWithFormat:@"%ld", model.questionid];
+        vc.w_id = [NSString stringWithFormat:@"%ld", (long)model.questionid];
     
         vc.wrongSubjectModel = model;
         
@@ -125,7 +125,7 @@
             str = @"blankfill";
         }
         vc.qtype = str;
-        vc.w_id = [NSString stringWithFormat:@"%ld", model.t_id];
+        vc.w_id = [NSString stringWithFormat:@"%ld", (long)model.t_id];
      
         vc.chaperContentModel = model;
     }
@@ -136,11 +136,11 @@
 
     if ([self.selectArr[sender.tag - 200] isKindOfClass:[ChaperContentItem class]]) {
         ChaperContentItem *model = self.selectArr[sender.tag - 200];
-        [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", model.t_id] andQuestionType:model.subject_type];
+        [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", (long)model.t_id] andQuestionType:model.subject_type andJumpType:@"1"];
         [self.selectArr removeObject:model];
     }else{
         YjyxWrongSubModel *model = self.selectArr[sender.tag - 200];
-        [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", model.t_id] andQuestionType:[NSString stringWithFormat:@"%ld", model.questiontype]];
+        [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", (long)model.t_id] andQuestionType:[NSString stringWithFormat:@"%ld", model.questiontype] andJumpType:@"1"];
         [self.selectArr removeObject:model];
     }
    
@@ -148,7 +148,7 @@
     NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:0];
     [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
     
-    if ([[[QuestionDataBase shareDataBase] selectAllQuestion] count] ==0) {
+    if ([[[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"] count] ==0) {
         [self.navigationController popViewControllerAnimated:YES];
     }
     

@@ -78,7 +78,7 @@
         CGFloat pullHeight = 0;
         if (self.isLoadMore) {
         NSArray *arr = [self.answer componentsSeparatedByString:@"\n"];
-        CGRect rect = [arr[0] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 307, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil];
+        CGRect rect = [arr[0] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 277, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil];
         if (rect.size.height > 43) {
             cellHeight += rect.size.height - 43;
             pullHeight += rect.size.height - 43;
@@ -86,7 +86,7 @@
         NSMutableArray *tempArr = [NSMutableArray arrayWithArray:arr];
         [tempArr removeObjectAtIndex:0];
         NSString *tempStr = [tempArr componentsJoinedByString:@"\n"];
-        CGRect rect1 = [tempStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 185, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil];
+        CGRect rect1 = [tempStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 175, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil];
         cellHeight += rect1.size.height;
             pullHeight += rect1.size.height + 20;
         }

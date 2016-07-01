@@ -213,6 +213,10 @@ static NSString *ID = @"CELL";
         [self.view makeToast:@"请输入作业名称" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
+    if (tempArr.count == 0) {
+        [self.view makeToast:@"请勾选需要发布的学生" duration:1.0 position:SHOW_CENTER complete:nil];
+        return;
+    }
     [SVProgressHUD showWithStatus:@"正在发布..."];
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     
@@ -223,7 +227,7 @@ static NSString *ID = @"CELL";
     // 题目列表
     
     NSMutableArray *choiceArr = [NSMutableArray array];
-    for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"choice"]) {
+    for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"choice" andJumpType:@"1"]) {
         if ([model isKindOfClass:[ChaperContentItem class]]) {
             ChaperContentItem *tempModel = (ChaperContentItem *)model;
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", nil];
@@ -238,7 +242,7 @@ static NSString *ID = @"CELL";
     
     
     NSMutableArray *blankfillArr = [NSMutableArray array];
-    for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"blankfill"]) {
+    for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"blankfill" andJumpType:@"1"]) {
         if ([model isKindOfClass:[ChaperContentItem class]]) {
             ChaperContentItem *tempModel = (ChaperContentItem *)model;
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", nil];

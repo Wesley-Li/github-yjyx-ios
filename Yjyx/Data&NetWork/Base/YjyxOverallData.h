@@ -10,7 +10,7 @@
 #import "ParentEntity.h"
 #import "ChildrenEntity.h"
 #import "TeacherEntity.h"
-
+#import "OneStudentEntity.h"
 
 typedef enum PUSH_TYPE{
     PUSHTYPE_PREVIEWHOME = 1,
@@ -25,7 +25,7 @@ typedef enum PUSH_TYPE{
 @property(strong, nonatomic) NSString *baseUrl;
 @property(strong, nonatomic) ParentEntity *parentInfo;
 @property(strong, nonatomic) TeacherEntity *teacherInfo;
-
+@property(strong, nonatomic) OneStudentEntity *studentInfo;
 
 @property(assign, nonatomic) PUSH_TYPE pushType;
 @property(strong, nonatomic) NSString *historyId;

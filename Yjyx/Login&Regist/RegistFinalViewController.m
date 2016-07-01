@@ -74,6 +74,7 @@
     NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
     pamar[@"action"] = @"checkuserexist";
     pamar[@"username"] = textField.text;
+        
         [mgr GET:[BaseURL stringByAppendingString:USERNAME_ISEXIST_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
             if([responseObject[@"retcode"] isEqual: @0]){
                 if ([responseObject[@"exist"] isEqual: @1]) {
@@ -199,6 +200,7 @@
 #pragma mark - 注册
 -(void)regist
 {
+    [self resetTimer];
     [self.view makeToastActivity:SHOW_CENTER];
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_verifyCode,@"code",parentNameText.text,@"name",parentPasswordText.text,@"password",phoneText.text,@"phone",relationText.text,@"relation",_childrenEntity.cid,@"cid",@"",@"sessionid",@"1",@"ostype",@"123456734",@"devicetoken",[[UIDevice currentDevice] model],@"description",nil];
     [[YjxService sharedInstance] parentsRegist:dic withBlock:^(id result, NSError *error){

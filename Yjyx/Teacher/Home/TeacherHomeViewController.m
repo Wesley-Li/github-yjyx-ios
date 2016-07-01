@@ -9,7 +9,12 @@
 #import "TeacherHomeViewController.h"
 #import "UIImageView+WebCache.h"
 #import "StuTaskTableViewController.h"
+
 #import "StatisticController.h"
+
+
+#import "MyMicroMainController.h"
+#import "ReleaseMicroController.h"
 
 @interface TeacherHomeViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -236,8 +241,10 @@
 
 #pragma mark - 点击我的微课
 - (IBAction)handleMicroClass:(id)sender {
+    MyMicroMainController *microVc = [[MyMicroMainController alloc] init];
+    [self.navigationController pushViewController:microVc animated:YES];
+   
     
-    [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
 }
 
 #pragma mark - 点击积分商城

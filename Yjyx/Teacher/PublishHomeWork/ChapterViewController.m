@@ -13,9 +13,9 @@
 #import "GradeVerVolItem.h"
 #import "ChapterChoiceController.h"
 #import "ChaperContentItem.h"
-
+#import "MicroDetailViewController.h"
 #import "BookViewController.h"
-
+#import "PublishHomeworkViewController.h"
 
 
 
@@ -25,7 +25,7 @@
 @property (strong, nonatomic) NSMutableArray *chaperItemArr;
 
 @property (strong, nonatomic) NSMutableArray *data;
-
+@property (assign, nonatomic) NSInteger flag;
 @end
 
 @implementation ChapterViewController
@@ -71,6 +71,12 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    for (UIViewController *vc in self.parentViewController.childViewControllers) {
+        if ([vc isKindOfClass:[MicroDetailViewController class]]) {
+            _flag = 1;
+            break;
+        }
+    }
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
@@ -138,7 +144,12 @@
 }
 #pragma mark - 私有方法
 - (void)goBack{
-    [self.navigationController popToViewController:self.navigationController.childViewControllers[0] animated:YES];
+  
+    for (UIViewController *vc in self.parentViewController.childViewControllers) {
+        if ([vc isKindOfClass:[PublishHomeworkViewController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+        }
+    }
 }
 
 
@@ -162,12 +173,24 @@
 - (void)titleClicked
 {
 
-    if (self.navigationController.childViewControllers.count == 2) {
-            BookViewController *bookVc = [[BookViewController alloc] init];
+//    if (self.navigationController.childViewControllers.count == 2) {
+//            BookViewController *bookVc = [[BookViewController alloc] init];
+//        bookVc.verVolArr = [self.title1 componentsSeparatedByString:@"-"];
+//            [self.navigationController pushViewController:bookVc animated:YES];
+//    }else{
+//         [self.navigationController popViewControllerAnimated:YES];
+//    }
+    NSInteger index = 0;
+    for (UIViewController *vc in self.parentViewController.childViewControllers) {
+        if ([vc isKindOfClass:[BookViewController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            index = 1;
+        }
+    }
+    if (index == 0) {
+        BookViewController *bookVc = [[BookViewController alloc] init];
         bookVc.verVolArr = [self.title1 componentsSeparatedByString:@"-"];
-            [self.navigationController pushViewController:bookVc animated:YES];
-    }else{
-         [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController pushViewController:bookVc animated:YES];
     }
     
 }

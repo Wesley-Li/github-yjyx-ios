@@ -38,8 +38,7 @@
 }
 - (void)setMaterialArr:(NSMutableArray *)materialArr
 {
-//    self.picker_view.dataSource = self;
-//    self.picker_view.delegate = self;
+
 
     _materialArr = materialArr;
     [self.picker_view reloadComponent:0];

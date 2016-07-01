@@ -11,4 +11,6 @@
 @interface WrongSubjectCell : UITableViewCell
 // 错题模型
 @property (strong, nonatomic) YjyxWrongSubModel *wrongSubModel;
+
+@property (assign, nonatomic) NSInteger flag;
 @end

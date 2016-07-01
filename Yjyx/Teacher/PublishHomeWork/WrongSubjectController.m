@@ -14,6 +14,7 @@
 #import "QuestionDataBase.h"
 #import "MJRefresh.h"
 #import "QuestionPreviewController.h"
+#import "MicroDetailViewController.h"
 @interface WrongSubjectController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *promptLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -25,6 +26,9 @@
 @property (assign, nonatomic) NSInteger count;
 // 判断还有没有数据
 @property (assign, nonatomic) NSInteger index;
+
+// 跳转类型
+@property (assign, nonatomic) NSInteger flag;
 @end
 
 @implementation WrongSubjectController
@@ -44,7 +48,12 @@ static NSString *ID = @"cell";
     [self loadBackBtn];
     // 加载错题数据
     [self loadData];
-    
+    for (UIViewController *vc in self.parentViewController.childViewControllers) {
+        if ([vc isKindOfClass:[MicroDetailViewController class]]) {
+            _flag = 1;
+            break;
+        }
+    }
     [SVProgressHUD showWithStatus:@"正在加载..."];
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([WrongSubjectCell class]) bundle:nil] forCellReuseIdentifier:ID];
@@ -66,11 +75,18 @@ static NSString *ID = @"cell";
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
     
     // 底部button标题赋值
-    NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectAllQuestion];
-    NSMutableArray *currentArr = [[QuestionDataBase shareDataBase] selectAllQuestion];
-    _questionArr = currentArr;
+    if (_flag == 1) {
+        NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"];
+      
+        self.selectedBtn.titleLabel.text = [NSString stringWithFormat:@"确定(已选%ld题)", tempArr.count] ;
+        [self.selectedBtn setTitle:[NSString stringWithFormat:@"确定(已选%ld题)", tempArr.count] forState:UIControlStateNormal];
+    }else{
+    NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
+//    NSMutableArray *currentArr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
+//    _questionArr = currentArr;
     self.selectedBtn.titleLabel.text = [NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count] ;
     [self.selectedBtn setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count] forState:UIControlStateNormal];
+    }
     [self.tableView reloadData];
 }
 - (void)didReceiveMemoryWarning {
@@ -142,29 +158,53 @@ static NSString *ID = @"cell";
 }
 - (void)btnIsSelected
 {
-    NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectAllQuestion];
+    if(_flag == 1){
+        NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"];
+        self.selectedBtn.titleLabel.text = [NSString stringWithFormat:@"确定(已选%ld题)", tempArr.count] ;
+        [self.selectedBtn setTitle:[NSString stringWithFormat:@"确定(已选%ld题)", tempArr.count] forState:UIControlStateNormal];
+    }else{
+    NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
     self.selectedBtn.titleLabel.text = [NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count] ;
     [self.selectedBtn setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count] forState:UIControlStateNormal];
+    }
 }
 - (void)btnNoSelected
 {
-    NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectAllQuestion];
+    if(_flag == 1){
+        NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"];
+        self.selectedBtn.titleLabel.text = [NSString stringWithFormat:@"确定(已选%ld题)", tempArr.count ] ;
+        [self.selectedBtn setTitle:[NSString stringWithFormat:@"确定(已选%ld题)", tempArr.count] forState:UIControlStateNormal];
+  }else{
+    NSMutableArray *tempArr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
     self.selectedBtn.titleLabel.text = [NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count ] ;
     [self.selectedBtn setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count] forState:UIControlStateNormal];
-    
+  }
 }
 - (void)loadMoreBtnSelected
 {
     [self.tableView reloadData];
 }
 - (IBAction)selectedBtnClick:(UIButton *)sender {
+    NSMutableArray *arr = [NSMutableArray array];
+    if(_flag == 1){
+        arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"];
+        for (UIViewController *vc in self.parentViewController.childViewControllers) {
+            if ([vc isKindOfClass:[MicroDetailViewController class]]) {
+                MicroDetailViewController *vc1 = (MicroDetailViewController *)vc;
+                vc1.addMicroArr = arr;
+                [self.navigationController popToViewController:vc animated:YES];
+                break;
+            }
+        }
+    }else{
     if ([[sender titleForState:UIControlStateNormal] isEqualToString:@"点击预览作业(已选0题)"]) {
         [self.view makeToast:@"您还没有选择题目,请选择" duration:1.0 position:SHOW_BOTTOM complete:nil];
         return;
     }
     QuestionPreviewController *vc = [[QuestionPreviewController alloc] init];
-    vc.selectArr = [[QuestionDataBase shareDataBase] selectAllQuestion];
+    vc.selectArr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
     [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - UITableView数据源方法
@@ -178,7 +218,9 @@ static NSString *ID = @"cell";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     YjyxWrongSubModel *model = self.wrongSubjectArr[indexPath.row];
+    cell.flag = _flag;
     cell.wrongSubModel = model;
+    
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

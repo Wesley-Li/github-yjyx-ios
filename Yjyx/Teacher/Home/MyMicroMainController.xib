@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyMicroMainController">
+            <connections>
+                <outlet property="searchBar" destination="z3c-dc-OcI" id="nyw-qk-ICQ"/>
+                <outlet property="tableView" destination="UEb-g2-qWK" id="RMF-TJ-hjV"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="z3c-dc-OcI">
+                    <rect key="frame" x="0.0" y="64" width="320" height="54"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="pQT-1Z-de7"/>
+                    </constraints>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UEb-g2-qWK">
+                    <rect key="frame" x="0.0" y="118" width="320" height="362"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="q69-qA-ERi"/>
+                        <outlet property="delegate" destination="-1" id="r0K-fu-8jb"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="UEb-g2-qWK" secondAttribute="trailing" id="FLf-5C-7Ru"/>
+                <constraint firstAttribute="bottom" secondItem="UEb-g2-qWK" secondAttribute="bottom" id="Lly-ZW-ZKc"/>
+                <constraint firstItem="UEb-g2-qWK" firstAttribute="top" secondItem="z3c-dc-OcI" secondAttribute="bottom" id="PNa-ay-KW2"/>
+                <constraint firstItem="z3c-dc-OcI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PyI-UN-aX0"/>
+                <constraint firstItem="z3c-dc-OcI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="YBR-IP-WD7"/>
+                <constraint firstAttribute="trailing" secondItem="z3c-dc-OcI" secondAttribute="trailing" id="ZQ7-Sj-AN9"/>
+                <constraint firstItem="UEb-g2-qWK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nha-du-18g"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="637" y="254"/>
+        </view>
+    </objects>
+</document>

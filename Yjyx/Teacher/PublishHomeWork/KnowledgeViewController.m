@@ -125,7 +125,7 @@
     
     chapterVC.knowledgetreeidvalue = [NSString stringWithFormat:@"%@=%@", self.root_id, node.nodeId];
  
-    
+    chapterVC.t_text = node.name;
     [self.navigationController pushViewController:chapterVC animated:YES];
 
 }

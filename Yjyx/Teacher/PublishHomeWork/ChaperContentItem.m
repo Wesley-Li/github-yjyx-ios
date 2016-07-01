@@ -24,7 +24,12 @@
     }else{
     item.level = [arr[5] integerValue];
     }
-    item.subject_type = arr[6];
+    if ([arr[6] isEqualToString:@"choice"]) {
+        item.subject_type = @"1";
+    }else{
+        item.subject_type = @"2";
+    }
+    
     
     item.add = NO;
     

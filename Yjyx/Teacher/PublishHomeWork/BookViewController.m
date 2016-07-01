@@ -51,6 +51,7 @@ static BookViewController *_instance;
     self.navigationItem.title = @"选择教材课本";
     [self loadBackBtn];
    
+    [self loadData];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ChooseMaterialCell class]) bundle:nil] forCellReuseIdentifier:ID];
     self.types = [[NSArray alloc] initWithObjects:@"选择教材版本", @"选择课本", nil];
     self.tableView.rowHeight = 65;
@@ -96,6 +97,20 @@ static BookViewController *_instance;
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
     
 }
+- (void)loadData
+{
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
+    pamar[@"action"] = @"list";
+    [mgr GET:[BaseURL stringByAppendingString:@"/api/teacher/vgsv/"] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        
+        self.gradeArr = responseObject[@"grade_list"];
+        self.versionArr = responseObject[@"version_list"];
+        self.volArr = responseObject[@"vol_list"];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"$$$$$$$$$$$");
+    }];
+}
 // 确定按钮的点击
 - (IBAction)goSure:(id)sender {
     
@@ -109,7 +124,7 @@ static BookViewController *_instance;
         [self.view makeToast:@"请选择课本" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
-
+    NSLog(@"%@---%@",cell1.detail_label.text, cell2.detail_label.text );
     NSString *grade = [cell2.detail_label.text substringToIndex:cell2.detail_label.text.length - 2];
     NSInteger volid = 1;
     NSInteger gradeid = 0;
@@ -129,14 +144,14 @@ static BookViewController *_instance;
             break;
         }
     }
-//    else if(cell)
+    NSLog(@"%ld----%ld-----%ld", verid, volid, gradeid);
     [self.chapterArr removeAllObjects];
     NSString *title = [NSString stringWithFormat:@"%@-%@",cell1.detail_label.text, cell2.detail_label.text];
     [[NSUserDefaults standardUserDefaults] setObject:title forKey:@"TeacherPostTitle"];
     [[NSUserDefaults standardUserDefaults] setObject:@[@(volid), @(gradeid), @(verid)] forKey:@"ChaperContentPamar"];
-//    GradeVerVolItem *item = [GradeVerVolItem gradeVerVolItemWithGrade:gradeid andVolid:volid andVerid:verid];
+
     ChapterViewController *chapterVc = [[ChapterViewController alloc] init];
-//    chapterVc.GradeNumItem = item;
+
     chapterVc.title1 = title;
     chapterVc.gradeid = gradeid;
     chapterVc.volid = volid;
@@ -208,32 +223,24 @@ static BookViewController *_instance;
 
     [_materialArr removeAllObjects];
     [_bookArr removeAllObjects];
-        AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-        NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
-        pamar[@"action"] = @"list";
-        [mgr GET:[BaseURL stringByAppendingString:@"/api/teacher/vgsv/"] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-//            [responseObject writeToFile:@"/Users/wangdapeng/Desktop/文件/2.plist" atomically:YES];
-            _gradeArr = responseObject[@"grade_list"];
-            _versionArr = responseObject[@"version_list"];
-            _volArr = responseObject[@"vol_list"];
+ 
             if (indexPath.row == 0) {
-                NSArray *arr = responseObject[@"version_list"];
+                NSArray *arr = self.versionArr;
+                NSLog(@"%@", arr);
                 for (NSInteger i = 0; i < arr.count; i++){
                     [self.materialArr addObject:  arr[i][1]];
                 }
-                _selectMatieral.materialArr = _materialArr;
+                self.selectMatieral.materialArr = _materialArr;
             }else{
-                NSArray *arr = responseObject[@"grade_list"];
+                NSArray *arr = self.gradeArr;
                 for (NSInteger i = 0; i < arr.count; i++) {
                     [self.bookArr addObject:[arr[i][1] stringByAppendingString:@"上册"]];
                     [self.bookArr addObject:[arr[i][1] stringByAppendingString:@"下册"]];
                 }
-                _selectMatieral.materialArr = _bookArr;
+                self.selectMatieral.materialArr = _bookArr;
             }
             
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"$$$$$$$$$$$");
-        }];
+    
     
        [self  selectMatieral];
     

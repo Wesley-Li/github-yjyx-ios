@@ -32,6 +32,13 @@
 #import "StuGroupEntity.h"
 
 #import "QuestionDataBase.h"
+
+#import "YjyxMineController.h"
+#import "YjyxStatistController.h"
+#import "YjyxYiTeachController.h"
+#import "YjyxHomeWorkController.h"
+#import "YjyxCommonNavController.h"
+#import "YjyxCommonTabController.h"
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define _IPHONE80_ 80000
 
@@ -97,7 +104,7 @@
         _deviceToken = @"1231231312da1231sqwc1213";
         LoginViewController *loginView = [[LoginViewController alloc] init];
         _navigation = [[NavRootViewController alloc] initWithRootViewController:loginView];
-        _navigation.navigationBar.hidden = YES;
+//        _navigation.navigationBar.hidden = YES;
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         self.window.backgroundColor = [UIColor whiteColor];
         self.window.rootViewController = _navigation;
@@ -332,7 +339,29 @@
     }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"student"]) {
         
         // 学生登录
+        YjyxHomeWorkController *homeWorkVc = [[YjyxHomeWorkController alloc] init];
+        homeWorkVc.view.backgroundColor = [UIColor redColor];
+        YjyxCommonNavController *navVc1 = [[YjyxCommonNavController alloc] initWithRootViewController:homeWorkVc];
+        
+        YjyxStatistController *statistVc = [[YjyxStatistController alloc] init];
+        statistVc.view.backgroundColor = [UIColor greenColor];
+        YjyxCommonNavController *navVc2 = [[YjyxCommonNavController alloc] initWithRootViewController:statistVc];
+        
+        YjyxYiTeachController *yiTeachVc = [[YjyxYiTeachController alloc] init];
+        yiTeachVc.view.backgroundColor = [UIColor blueColor];
+        YjyxCommonNavController *navVc3 = [[YjyxCommonNavController alloc] initWithRootViewController:yiTeachVc];
+        
+        YjyxMineController *mineVc = [[YjyxMineController alloc] init];
+        mineVc.view.backgroundColor = [UIColor brownColor];
+        YjyxCommonNavController *navVc4 = [[YjyxCommonNavController alloc] initWithRootViewController:mineVc];
     
+        YjyxCommonTabController *tabBarVc = [[YjyxCommonTabController alloc] init];
+        [tabBarVc addChildViewController:navVc1];
+        [tabBarVc addChildViewController:navVc2];
+        [tabBarVc addChildViewController:navVc3];
+        [tabBarVc addChildViewController:navVc4];
+        
+        self.window.rootViewController = tabBarVc;
     }
     
     
