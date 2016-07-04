@@ -484,11 +484,19 @@
 		8094E4C31D129DB800EF221A /* QuestionPreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8094E4C11D129DB800EF221A /* QuestionPreviewCell.xib */; };
 		80CCF43F1CF2F0EC000C93D9 /* UnSubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80CCF43D1CF2F0EC000C93D9 /* UnSubmitCell.m */; };
 		80CCF4401CF2F0EC000C93D9 /* UnSubmitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CCF43E1CF2F0EC000C93D9 /* UnSubmitCell.xib */; };
+		80D978E61D265B80000BD95E /* CustomSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D978E51D265B80000BD95E /* CustomSectionView.m */; };
+		80D978E81D265BAF000BD95E /* CustomSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D978E71D265BAF000BD95E /* CustomSectionView.xib */; };
+		80D978EC1D27A71D000BD95E /* OneStuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D978EA1D27A71C000BD95E /* OneStuViewController.m */; };
+		80D978ED1D27A71D000BD95E /* OneStuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D978EB1D27A71D000BD95E /* OneStuViewController.xib */; };
+		80D978F11D27DE07000BD95E /* GetTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D978EF1D27DE07000BD95E /* GetTaskViewController.m */; };
+		80D978F21D27DE07000BD95E /* GetTaskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D978F01D27DE07000BD95E /* GetTaskViewController.xib */; };
+		80D978F61D28CC6E000BD95E /* GetTaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D978F41D28CC6E000BD95E /* GetTaskCell.m */; };
+		80D978F71D28CC6E000BD95E /* GetTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D978F51D28CC6E000BD95E /* GetTaskCell.xib */; };
+		80D978FA1D28E1E4000BD95E /* GetTaskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D978F91D28E1E4000BD95E /* GetTaskModel.m */; };
 		80F718C01CF28961007C0B75 /* StuConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BB1CF28961007C0B75 /* StuConditionCell.m */; };
 		80F718C11CF28961007C0B75 /* StuConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80F718BC1CF28961007C0B75 /* StuConditionCell.xib */; };
 		80F718C21CF28961007C0B75 /* SubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BE1CF28961007C0B75 /* SubmitCell.m */; };
 		80F718C31CF28961007C0B75 /* SubmitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80F718BF1CF28961007C0B75 /* SubmitCell.xib */; };
-
 		80FEB6861D1BB545009EB126 /* StatisticController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80FEB6791D1BB545009EB126 /* StatisticController.m */; };
 		80FEB6871D1BB545009EB126 /* StatisticController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80FEB67A1D1BB545009EB126 /* StatisticController.xib */; };
 		80FEB6881D1BB545009EB126 /* StudentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80FEB67C1D1BB545009EB126 /* StudentViewController.m */; };
@@ -497,9 +505,6 @@
 		80FEB68B1D1BB545009EB126 /* TaskStatisticViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80FEB6801D1BB545009EB126 /* TaskStatisticViewController.xib */; };
 		80FEB68C1D1BB545009EB126 /* WrongQuestionStatisticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80FEB6821D1BB545009EB126 /* WrongQuestionStatisticViewController.m */; };
 		80FEB68D1D1BB545009EB126 /* WrongQuestionStatisticViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80FEB6831D1BB545009EB126 /* WrongQuestionStatisticViewController.xib */; };
-		80FEB6911D1BB759009EB126 /* StatisticClassCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80FEB68F1D1BB759009EB126 /* StatisticClassCell.m */; };
-		80FEB6921D1BB759009EB126 /* StatisticClassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80FEB6901D1BB759009EB126 /* StatisticClassCell.xib */; };
-
 		80FEB6961D1CD070009EB126 /* ChildrenResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80FEB6941D1CD070009EB126 /* ChildrenResultCell.m */; };
 		80FEB6971D1CD070009EB126 /* ChildrenResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80FEB6951D1CD070009EB126 /* ChildrenResultCell.xib */; };
 		80FEB69A1D1CFA8E009EB126 /* ChildrenResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80FEB6991D1CFA8E009EB126 /* ChildrenResultModel.m */; };
@@ -509,7 +514,6 @@
 		80FEB6A81D23A4E3009EB126 /* PMicroPreviewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80FEB6A71D23A4E3009EB126 /* PMicroPreviewModel.m */; };
 		80FEB6AC1D23B0A2009EB126 /* MicroCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80FEB6AA1D23B0A2009EB126 /* MicroCell.m */; };
 		80FEB6AD1D23B0A2009EB126 /* MicroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80FEB6AB1D23B0A2009EB126 /* MicroCell.xib */; };
-
 		CB40047F1C609BCD00556AA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB40047E1C609BCD00556AA7 /* main.m */; };
 		CB4004821C609BCD00556AA7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4004811C609BCD00556AA7 /* AppDelegate.m */; };
 		CB4004851C609BCD00556AA7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4004841C609BCD00556AA7 /* ViewController.m */; };
@@ -1307,13 +1311,26 @@
 		80CCF43C1CF2F0EC000C93D9 /* UnSubmitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnSubmitCell.h; sourceTree = "<group>"; };
 		80CCF43D1CF2F0EC000C93D9 /* UnSubmitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnSubmitCell.m; sourceTree = "<group>"; };
 		80CCF43E1CF2F0EC000C93D9 /* UnSubmitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnSubmitCell.xib; sourceTree = "<group>"; };
+		80D978E41D265B80000BD95E /* CustomSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomSectionView.h; path = ../Controller/CustomSectionView.h; sourceTree = "<group>"; };
+		80D978E51D265B80000BD95E /* CustomSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomSectionView.m; path = ../Controller/CustomSectionView.m; sourceTree = "<group>"; };
+		80D978E71D265BAF000BD95E /* CustomSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomSectionView.xib; path = ../Controller/CustomSectionView.xib; sourceTree = "<group>"; };
+		80D978E91D27A71C000BD95E /* OneStuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneStuViewController.h; sourceTree = "<group>"; };
+		80D978EA1D27A71C000BD95E /* OneStuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneStuViewController.m; sourceTree = "<group>"; };
+		80D978EB1D27A71D000BD95E /* OneStuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OneStuViewController.xib; sourceTree = "<group>"; };
+		80D978EE1D27DE07000BD95E /* GetTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskViewController.h; sourceTree = "<group>"; };
+		80D978EF1D27DE07000BD95E /* GetTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskViewController.m; sourceTree = "<group>"; };
+		80D978F01D27DE07000BD95E /* GetTaskViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GetTaskViewController.xib; sourceTree = "<group>"; };
+		80D978F31D28CC6E000BD95E /* GetTaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskCell.h; sourceTree = "<group>"; };
+		80D978F41D28CC6E000BD95E /* GetTaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskCell.m; sourceTree = "<group>"; };
+		80D978F51D28CC6E000BD95E /* GetTaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GetTaskCell.xib; sourceTree = "<group>"; };
+		80D978F81D28E1E4000BD95E /* GetTaskModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskModel.h; sourceTree = "<group>"; };
+		80D978F91D28E1E4000BD95E /* GetTaskModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskModel.m; sourceTree = "<group>"; };
 		80F718BA1CF28961007C0B75 /* StuConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuConditionCell.h; sourceTree = "<group>"; };
 		80F718BB1CF28961007C0B75 /* StuConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuConditionCell.m; sourceTree = "<group>"; };
 		80F718BC1CF28961007C0B75 /* StuConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StuConditionCell.xib; sourceTree = "<group>"; };
 		80F718BD1CF28961007C0B75 /* SubmitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitCell.h; sourceTree = "<group>"; };
 		80F718BE1CF28961007C0B75 /* SubmitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitCell.m; sourceTree = "<group>"; };
 		80F718BF1CF28961007C0B75 /* SubmitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubmitCell.xib; sourceTree = "<group>"; };
-
 		80FEB6781D1BB545009EB126 /* StatisticController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticController.h; sourceTree = "<group>"; };
 		80FEB6791D1BB545009EB126 /* StatisticController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticController.m; sourceTree = "<group>"; };
 		80FEB67A1D1BB545009EB126 /* StatisticController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatisticController.xib; sourceTree = "<group>"; };
@@ -1326,10 +1343,6 @@
 		80FEB6811D1BB545009EB126 /* WrongQuestionStatisticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WrongQuestionStatisticViewController.h; sourceTree = "<group>"; };
 		80FEB6821D1BB545009EB126 /* WrongQuestionStatisticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WrongQuestionStatisticViewController.m; sourceTree = "<group>"; };
 		80FEB6831D1BB545009EB126 /* WrongQuestionStatisticViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WrongQuestionStatisticViewController.xib; sourceTree = "<group>"; };
-		80FEB68E1D1BB759009EB126 /* StatisticClassCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticClassCell.h; sourceTree = "<group>"; };
-		80FEB68F1D1BB759009EB126 /* StatisticClassCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticClassCell.m; sourceTree = "<group>"; };
-		80FEB6901D1BB759009EB126 /* StatisticClassCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatisticClassCell.xib; sourceTree = "<group>"; };
-
 		80FEB6931D1CD070009EB126 /* ChildrenResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildrenResultCell.h; sourceTree = "<group>"; };
 		80FEB6941D1CD070009EB126 /* ChildrenResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildrenResultCell.m; sourceTree = "<group>"; };
 		80FEB6951D1CD070009EB126 /* ChildrenResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChildrenResultCell.xib; sourceTree = "<group>"; };
@@ -1345,7 +1358,6 @@
 		80FEB6A91D23B0A2009EB126 /* MicroCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicroCell.h; sourceTree = "<group>"; };
 		80FEB6AA1D23B0A2009EB126 /* MicroCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicroCell.m; sourceTree = "<group>"; };
 		80FEB6AB1D23B0A2009EB126 /* MicroCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MicroCell.xib; sourceTree = "<group>"; };
-
 		CB40047A1C609BCD00556AA7 /* Yjyx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yjyx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB40047E1C609BCD00556AA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CB4004801C609BCD00556AA7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2892,6 +2904,12 @@
 				80FEB67B1D1BB545009EB126 /* StudentViewController.h */,
 				80FEB67C1D1BB545009EB126 /* StudentViewController.m */,
 				80FEB67D1D1BB545009EB126 /* StudentViewController.xib */,
+				80D978E91D27A71C000BD95E /* OneStuViewController.h */,
+				80D978EA1D27A71C000BD95E /* OneStuViewController.m */,
+				80D978EB1D27A71D000BD95E /* OneStuViewController.xib */,
+				80D978EE1D27DE07000BD95E /* GetTaskViewController.h */,
+				80D978EF1D27DE07000BD95E /* GetTaskViewController.m */,
+				80D978F01D27DE07000BD95E /* GetTaskViewController.xib */,
 				80FEB67E1D1BB545009EB126 /* TaskStatisticViewController.h */,
 				80FEB67F1D1BB545009EB126 /* TaskStatisticViewController.m */,
 				80FEB6801D1BB545009EB126 /* TaskStatisticViewController.xib */,
@@ -2905,6 +2923,8 @@
 		80FEB6841D1BB545009EB126 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				80D978F81D28E1E4000BD95E /* GetTaskModel.h */,
+				80D978F91D28E1E4000BD95E /* GetTaskModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2912,9 +2932,12 @@
 		80FEB6851D1BB545009EB126 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				80FEB68E1D1BB759009EB126 /* StatisticClassCell.h */,
-				80FEB68F1D1BB759009EB126 /* StatisticClassCell.m */,
-				80FEB6901D1BB759009EB126 /* StatisticClassCell.xib */,
+				80D978E41D265B80000BD95E /* CustomSectionView.h */,
+				80D978E51D265B80000BD95E /* CustomSectionView.m */,
+				80D978E71D265BAF000BD95E /* CustomSectionView.xib */,
+				80D978F31D28CC6E000BD95E /* GetTaskCell.h */,
+				80D978F41D28CC6E000BD95E /* GetTaskCell.m */,
+				80D978F51D28CC6E000BD95E /* GetTaskCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3121,12 +3144,12 @@
 				3BE01BE11CDDCA8200781B86 /* TCustomView.xib in Resources */,
 				3AE894021C6C28C300E8BA97 /* login_btn@3x.png in Resources */,
 				3BB773961CD86B3A00A24485 /* home_img_camera.png in Resources */,
-				80FEB6921D1BB759009EB126 /* StatisticClassCell.xib in Resources */,
 				3A3C1B441C9562A900514C32 /* YjyxMicroClassViewController.xib in Resources */,
 				3BB7739A1CD86B3A00A24485 /* home_img_private.png in Resources */,
 				3B35DBA31CE070DB000B7F83 /* VideoCell.xib in Resources */,
 				80CCF4401CF2F0EC000C93D9 /* UnSubmitCell.xib in Resources */,
 				3BCF191F1CDC66E600E2EA1A /* list_icon_note_nor.png in Resources */,
+				80D978F21D27DE07000BD95E /* GetTaskViewController.xib in Resources */,
 				3AC1D1ED1CCDE7EE006291D0 /* regist_text_bg@3x.png in Resources */,
 				3A905D151C7F3587005AB12F /* YjyxSoundViewController.xib in Resources */,
 				3BCF191A1CDC66E600E2EA1A /* list_btn_right.png in Resources */,
@@ -3148,6 +3171,7 @@
 				3A38278B1CDF185F00EAB979 /* YjyxFeedBackViewController.xib in Resources */,
 				3CC473971D055529009FAC16 /* PickerView.xib in Resources */,
 				3A03CB691C8EB876007B5136 /* Parent_weike@3x.png in Resources */,
+				80D978F71D28CC6E000BD95E /* GetTaskCell.xib in Resources */,
 				3B48644D1CCF10C200D2DE3C /* new.png in Resources */,
 				3A5A00F51C79EA2A004584E6 /* MJRefresh.bundle in Resources */,
 				3A8827921C6EEFEF0008367F /* Personal_children@3x.png in Resources */,
@@ -3195,6 +3219,7 @@
 				3CF541D51D1CD990000EBAB5 /* MyMicroCell.xib in Resources */,
 				3CE0989A1D122F660054C42B /* ReleaseHomeWorkController.xib in Resources */,
 				3BCF19191CDC66E600E2EA1A /* list_btn_nor@3x.png in Resources */,
+				80D978E81D265BAF000BD95E /* CustomSectionView.xib in Resources */,
 				3BB773A91CD8784000A24485 /* BookViewController.xib in Resources */,
 				3BCF19251CDC66E600E2EA1A /* stu_pic.png in Resources */,
 				80FEB6891D1BB545009EB126 /* StudentViewController.xib in Resources */,
@@ -3203,6 +3228,7 @@
 				3BC7DBE01CDB27ED00E5E12F /* ClassCustomTableViewCell.xib in Resources */,
 				3B91A6F81CE6010D0082A92C /* YourAnswerCell.xib in Resources */,
 				3AF339471C770FDC00586A37 /* AutoLoginViewController.xib in Resources */,
+				80D978ED1D27A71D000BD95E /* OneStuViewController.xib in Resources */,
 				3BCF19241CDC66E600E2EA1A /* nav_btn_back@3x.png in Resources */,
 				3B4864751CCF117300D2DE3C /* PrivateCenterViewController.xib in Resources */,
 				3AD1FD991C72CBC200E362B9 /* children_downline@3x.png in Resources */,
@@ -3386,11 +3412,8 @@
 				3A04A5D21C93E6290040D913 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				3A04A5CC1C93E6290040D913 /* MASConstraint.m in Sources */,
 				3A04A5D91C93E6590040D913 /* ChildrenVideoViewController.m in Sources */,
-
 				3CF541D41D1CD990000EBAB5 /* MyMicroCell.m in Sources */,
-
 				80FEB69D1D2202DA009EB126 /* ResultModel.m in Sources */,
-
 				3A4057111CCF859B00258784 /* ForgetThreeViewController.m in Sources */,
 				3AEF27251C61F08A0028BE09 /* UIDevice+Space.m in Sources */,
 				801F44AB1CDF164800B7E7E1 /* NSDataEx.m in Sources */,
@@ -3452,14 +3475,12 @@
 				3AEF27291C61F08A0028BE09 /* UIViewController+util.m in Sources */,
 				3CF541E71D1D47D2000EBAB5 /* SubjectDetailCell.m in Sources */,
 				3A8CAEB91C70B36200BDEB6B /* SDWebImageDownloader.m in Sources */,
+				80D978F61D28CC6E000BD95E /* GetTaskCell.m in Sources */,
 				80590BF21D0CF9AA00867D9B /* KnowledgeViewController.m in Sources */,
 				3BFE3B7C1CD9816D00502769 /* ParentEntity.m in Sources */,
 				3C15669E1D0D615D006670D6 /* subjectContentCell.m in Sources */,
-
 				3CE18E8F1D20C2E4007E0874 /* ReleaseMicroCell.m in Sources */,
-
 				80FEB6961D1CD070009EB126 /* ChildrenResultCell.m in Sources */,
-
 				3BFE3B7A1CD9816D00502769 /* ChildrenActivity.m in Sources */,
 				3BD9C7F21CEEACC9008232D7 /* UploadImageTool.m in Sources */,
 				8094E4BE1D123E9700EF221A /* QuestionDataBase.m in Sources */,
@@ -3489,11 +3510,7 @@
 				3A38278A1CDF185F00EAB979 /* YjyxFeedBackViewController.m in Sources */,
 				3A91F48F1C760CF4001568AA /* PNBar.m in Sources */,
 				8013D3391CF4521100F82301 /* CardCell.m in Sources */,
-
-				80FEB6911D1BB759009EB126 /* StatisticClassCell.m in Sources */,
-
 				3CE18E9E1D2121EE007E0874 /* ReleaseFinishTimeCell.m in Sources */,
-
 				3AEF27201C61F08A0028BE09 /* RTSpinKitView.m in Sources */,
 				3BCF194B1CDCC2B500E2EA1A /* TaskDetailTableViewController.m in Sources */,
 				3AB212B31CA2E11900DCC618 /* KWFormView.m in Sources */,
@@ -3530,6 +3547,8 @@
 				8013D3411CF45A3E00F82301 /* SubTimeCell.m in Sources */,
 				3A188F9F1CE5D60B00F055DD /* YjyxOrderViewController.m in Sources */,
 				80FEB6861D1BB545009EB126 /* StatisticController.m in Sources */,
+				80D978E61D265B80000BD95E /* CustomSectionView.m in Sources */,
+				80D978FA1D28E1E4000BD95E /* GetTaskModel.m in Sources */,
 				80FEB68C1D1BB545009EB126 /* WrongQuestionStatisticViewController.m in Sources */,
 				CB40047F1C609BCD00556AA7 /* main.m in Sources */,
 				3CA896381D06B3890092D292 /* TreeNode.m in Sources */,
@@ -3579,6 +3598,8 @@
 				3CF01B4B1D0E49C5001C4251 /* siftContentView.m in Sources */,
 				3A5A00F81C79EA2A004584E6 /* MJRefreshFooterView.m in Sources */,
 				3BFE3B791CD9816D00502769 /* YjyxOverallData.m in Sources */,
+				80D978EC1D27A71D000BD95E /* OneStuViewController.m in Sources */,
+				80D978F11D27DE07000BD95E /* GetTaskViewController.m in Sources */,
 				80F718C21CF28961007C0B75 /* SubmitCell.m in Sources */,
 				3AEF271F1C61F08A0028BE09 /* GTMBase64.m in Sources */,
 				801F44A91CDF164800B7E7E1 /* DataVerifier.m in Sources */,

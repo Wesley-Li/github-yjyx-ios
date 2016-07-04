@@ -87,6 +87,7 @@ typedef enum
 	id<RTLabelDelegate> _delegate;
     id<RTLabelSizeDelegate> _sizeDelegate;
     CTFramesetterRef _framesetter;
+    CGMutablePathRef _path;
     CTFrameRef _ctFrame;
     CFRange _visibleRange;
     NSString *_paragraphReplacement;

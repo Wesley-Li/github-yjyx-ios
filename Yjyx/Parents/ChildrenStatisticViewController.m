@@ -63,7 +63,7 @@
 {
     self.navigationController.navigationBarHidden = YES;
     
-//    [super viewWillDisappear:YES];
+    [super viewWillDisappear:YES];
 }
 
 - (void)initView

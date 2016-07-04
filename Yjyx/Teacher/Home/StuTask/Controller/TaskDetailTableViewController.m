@@ -699,7 +699,7 @@
     
     StudentDetailController *stuDetailVC = [[StudentDetailController alloc] init];
     FinshedModel *model = _finishedArr[sender.tag - 200];
-    stuDetailVC.finshedModel = model;
+    stuDetailVC.studentID = model.studentID;
     stuDetailVC.taskID = self.taskModel.t_id;
     
     [self.navigationController pushViewController:stuDetailVC animated:YES];

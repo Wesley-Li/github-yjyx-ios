@@ -15,6 +15,7 @@
 
 
 @property (nonatomic, strong) NSNumber *taskID;
+@property (nonatomic, strong) NSNumber *studentID;
 @property (nonatomic,strong)  FinshedModel * finshedModel;
 
 @end

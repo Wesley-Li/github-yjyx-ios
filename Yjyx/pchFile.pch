@@ -163,7 +163,12 @@
 
 #define SEARCH_WRONG_CONNET_GET @"/api/teacher/stats/"
 
+// 学生统计
+// 获取学生任务和题目数目和趋势图数据
+#define TEACHER_STATISTIC_GET @"/api/teacher/stats/"
 
+// 获取该老师发给学生的任务列表（完成或未完成任务）
+#define TEACHER_SEND_STATISTIC_GET @"/api/teacher/mobile/task/"
 
 // 学生部分
 

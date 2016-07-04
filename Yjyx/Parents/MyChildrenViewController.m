@@ -171,6 +171,7 @@
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
 
     self.navigationController.navigationBarHidden = NO;
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -266,7 +267,7 @@
     if ([children.tasktype integerValue] == 2&&[children.finished integerValue] == 0) {//微课预览
         YjyxMicroClassViewController *result = [[YjyxMicroClassViewController alloc] init];
         result.previewRid = children.rid;
-        result.navigationController.navigationItem.title = children.title;
+        result.navigationItem.title = children.title;
         [self.navigationController pushViewController:result animated:YES];
 
     }

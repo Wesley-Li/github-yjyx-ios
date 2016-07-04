@@ -88,7 +88,7 @@
 
 - (void)readDataFromNetWork {
     
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"gettaskonestudentdetail", @"action",self.taskID,@"taskid",self.finshedModel.studentID, @"suid",  nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"gettaskonestudentdetail", @"action",self.taskID,@"taskid",self.studentID, @"suid",  nil];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[BaseURL stringByAppendingString:TEACHER_DETAIL_ACTION_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {

@@ -12,7 +12,9 @@
 #import "StudentEntity.h"
 #import "StuClassEntity.h"
 #import "ClassCustomTableViewCell.h"
-#import "StatisticClassCell.h"
+#import "CustomSectionView.h"
+#import "OneStuViewController.h"
+
 
 #define iD @"StatisticClassCell"
 #define identi @"ClassCustomTableViewCell"
@@ -27,6 +29,8 @@
 @property (strong, nonatomic) NSMutableArray *stuArr;
 // 保存班级里的学生信息
 @property (strong, nonatomic) NSMutableArray *classStuArr;
+
+@property (strong, nonatomic) NSMutableDictionary *dic;
 
 @end
 
@@ -79,7 +83,9 @@
     [goBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:goBackBtn];
     self.navigationItem.leftBarButtonItem = leftBtnItem;
+    self.edgesForExtendedLayout = UIRectEdgeBottom;
     
+    self.dic = [[NSMutableDictionary alloc] init];
     
     // 获取数据源
     self.classArr = [[StuDataBase shareStuDataBase] selectAllClass];
@@ -88,7 +94,6 @@
         NSMutableArray *tempArr = [NSMutableArray array];
         for (NSNumber *num in stuClassModel.memberlist) {
             StudentEntity *stuModel = [[StuDataBase shareStuDataBase] selectStuById:num];
-            [self.stuArr addObject:stuModel];
             [tempArr addObject:stuModel];
         }
         [self.classStuArr addObject:tempArr];
@@ -96,19 +101,114 @@
     
     
     // 注册cell
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([StatisticClassCell class]) bundle:nil] forCellReuseIdentifier:iD];
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ClassCustomTableViewCell class]) bundle:nil] forCellReuseIdentifier:identi];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ClassCustomTableViewCell class]) bundle:nil] forCellReuseIdentifier:iD];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.backgroundColor = COMMONCOLOR;
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return self.classArr.count;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    return 80;
+}
+
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+
+    
+    CustomSectionView *view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CustomSectionView class]) owner:nil options:nil] firstObject];
+    StuClassEntity *model = self.classArr[section];
+    view.titleLabel.text = model.name;
+    view.section = section;
+    view.expandBtn.selected = [[self.dic objectForKey:[NSString stringWithFormat:@"%ld", view.section]] boolValue];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(showMoreStudent:)];
+    
+    [view addGestureRecognizer: tap];
+    return view;
+
+}
+
+- (void)showMoreStudent:(UITapGestureRecognizer *)sender {
+
+    CustomSectionView *view = (CustomSectionView *)sender.view;
+    
+    view.expandBtn.selected = !view.expandBtn.selected;
+    if ([[self.dic objectForKey:[NSString stringWithFormat:@"%ld", view.section]] isEqualToString:@"YES"]) {
+        
+        [self.dic setObject:@"NO" forKey:[NSString stringWithFormat:@"%ld", view.section]];
+        
+    }else {
+        
+        [self.dic setObject:@"YES" forKey:[NSString stringWithFormat:@"%ld", view.section]];
+    }
+    NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:view.section];
+    [self.tableView reloadSections:indexSet  withRowAnimation:UITableViewRowAnimationFade];
+    
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    if ([[self.dic objectForKey:[NSString stringWithFormat:@"%ld", section]] isEqualToString:@"YES"]) {
+        return [self.classStuArr[section] count];
+    }else {
+    
+        return 0;
+    }
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return 60;
     
 }
 
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    ClassCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:iD forIndexPath:indexPath];
+    
+    StudentEntity *model = self.classStuArr[indexPath.section][indexPath.row];
+    
+    [cell setValueWithStudentEntity:model];
+    
+    
+    return cell;
+    
+}
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    OneStuViewController *oneStuVC = [[OneStuViewController alloc] init];
+    
+    StudentEntity *model = self.classStuArr[indexPath.section][indexPath.row];
+    oneStuVC.stuID = model.user_id;
+    oneStuVC.navigationItem.title = [NSString stringWithFormat:@"%@统计", model.realname];
+    
+    [self.navigationController pushViewController:oneStuVC animated:YES];
 
+}
 
-
-
+#pragma mark - Scroll
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGFloat sectionHeaderHeight = 80;
+    //固定section 随着cell滚动而滚动
+    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+        
+        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+        
+    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+        
+        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+        
+    }
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

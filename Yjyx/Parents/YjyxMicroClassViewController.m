@@ -212,6 +212,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
     self.navigationController.navigationBarHidden = NO;
@@ -223,12 +224,15 @@
     
     [self getchildResult:_previewRid];
     
-    
-    
     // 注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCellHeight:) name:@"cellHeighChange" object:nil];
     
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+
+    [self.subjectTable reloadData];
 }
 
 - (void)refreshCellHeight:(NSNotification *)sender {
@@ -435,18 +439,22 @@
     return 25;
 }
 
+
+
+
+
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
         if ([_choices count]) {
-            UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    选择题"];
+            UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    选择题"];
             return titlelb;
         }else{
             return nil;
         }
     }else{
         if ([_blankfills count]) {
-            UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, 200, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    填空题"];
+            UILabel *titlelb = [UILabel labelWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 25) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:@"    填空题"];
             return titlelb;
         }else {
         
@@ -454,6 +462,8 @@
         }
     }
 }
+ 
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

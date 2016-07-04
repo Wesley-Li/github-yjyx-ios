@@ -210,6 +210,7 @@ static NSInteger totalCount = 0;
 		_lineBreakMode = kCTLineBreakByWordWrapping;
 		_attrString = NULL;
         _ctFrame = NULL;
+        _path = NULL;
         _framesetter = NULL;
         _optimumSize = self.frame.size;
         _paragraphReplacement = @"\n";
@@ -239,6 +240,7 @@ static NSInteger totalCount = 0;
         //_lineBreakMode = kCTLineBreakByTruncatingTail;
 		_attrString = NULL;
         _ctFrame = NULL;
+        _path = NULL;
         _framesetter = NULL;
         _optimumSize = _frame.size;
         _paragraphReplacement = @"\n";
@@ -612,16 +614,21 @@ CGFloat MyGetWidthCallback( void* refCon ){
     _framesetter = CTFramesetterCreateWithAttributedString(_attrString);
     
     // Initialize a rectangular path.
-	CGMutablePathRef path = CGPathCreateMutable();
+    if (_path) {
+        CFRelease(_path);
+        _path = NULL;
+    }
+    
+	_path = CGPathCreateMutable();
 	CGRect bounds = CGRectMake(0.0, 0.0, self.frame.size.width, self.frame.size.height);
-	CGPathAddRect(path, NULL, bounds);
+	CGPathAddRect(_path, NULL, bounds);
 	
 	// Create the frame and draw it into the graphics context
     if (_ctFrame) {
         CFRelease(_ctFrame);
         _ctFrame = NULL;
     }
-	_ctFrame = CTFramesetterCreateFrame(_framesetter,CFRangeMake(0, 0), path, NULL);
+	_ctFrame = CTFramesetterCreateFrame(_framesetter,CFRangeMake(0, 0), _path, NULL);
 	
 	CFRange range;
 	CGSize constraint = CGSizeMake(self.frame.size.width, 1000000);
@@ -645,7 +652,7 @@ CGFloat MyGetWidthCallback( void* refCon ){
             
             
             
-            CGRect rect = CGPathGetBoundingBox(path);
+            CGRect rect = CGPathGetBoundingBox(_path);
             // for each line
             for (int i = 0; i < CFArrayGetCount(lines); i++) {
                 CTLineRef line = CFArrayGetValueAtIndex(lines, i);
@@ -717,6 +724,7 @@ CGFloat MyGetWidthCallback( void* refCon ){
             
         CGAffineTransform flipVertical = CGAffineTransformMake(1,0,0,-1,0,self.frame.size.height);
         CGContextConcatCTM(context, flipVertical);
+
         CTFrameDraw(_ctFrame, context);
         //Calculate the bounding for image
 
@@ -823,7 +831,7 @@ CGFloat MyGetWidthCallback( void* refCon ){
 	
     
 	
-	CGPathRelease(path);
+//	CGPathRelease(path);
     
     
 }
