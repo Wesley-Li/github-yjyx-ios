@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIView *bgview;
 
 @property (nonatomic, strong) PNLineChart *lineChart;
-
+@property (nonatomic, strong) NSMutableArray *lineArr;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *corectNumLabel;
@@ -41,6 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.lineArr = [NSMutableArray array];
     self.edgesForExtendedLayout = UIRectEdgeBottom;
     [self readDataFromNet];
     
@@ -76,7 +77,8 @@
             self.questionWrongLabel.text = [NSString stringWithFormat:@"%@", dic[@"questionwrong"]];
             
             // 折线图显示
-            [self configureTheLineChartWithArray:responseObject[@"chartdata"]];
+            self.lineArr = responseObject[@"chartdata"];
+            [self configureTheLineChartWithArray:_lineArr];
             
         }else {
         
@@ -132,6 +134,32 @@
     [_lineChart strokeChart];
     [self.bgview addSubview:_lineChart];
 
+    
+}
+
+- (void)userClickedOnLinePoint:(CGPoint)point lineIndex:(NSInteger)lineIndex {
+
+}
+
+
+- (void)userClickedOnLineKeyPoint:(CGPoint)point
+                        lineIndex:(NSInteger)lineIndex
+                       pointIndex:(NSInteger)pointIndex
+{
+    NSString *title = [[_lineArr objectAtIndex:pointIndex] objectForKey:@"task__description"];
+    
+    NSNumber *questionRight = [[[[_lineArr objectAtIndex:pointIndex] objectForKey:@"summary"] JSONValue] objectForKey:@"correct"];
+    
+    NSNumber *questionwrong = [[[[_lineArr objectAtIndex:pointIndex] objectForKey:@"summary"] JSONValue] objectForKey:@"wrong"];
+    
+    NSString *rate = [NSString stringWithFormat:@"正确率: %.f%%", [questionRight floatValue]*100/([questionRight floatValue] + [questionwrong floatValue])];
+    
+    self.titleLabel.text = title;
+    self.corectNumLabel.text = [NSString stringWithFormat:@"正确:%@   ", questionRight];
+    self.corectNumLabel.textColor = RGBACOLOR(100, 174, 99, 1);
+    self.wrongNumLabel.text = [NSString stringWithFormat:@"   错误:%@", questionwrong];
+    self.rateLabel.text = rate;
+    
     
 }
 

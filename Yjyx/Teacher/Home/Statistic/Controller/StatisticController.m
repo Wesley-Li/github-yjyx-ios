@@ -10,7 +10,8 @@
 
 #import "StudentViewController.h"
 #import "TaskStatisticViewController.h"
-#import "WrongQuestionStatisticViewController.h"
+#import "WrongSubjectController.h"
+
 
 @interface StatisticController ()
 
@@ -50,10 +51,6 @@
     self.navigationItem.leftBarButtonItem = leftBtnItem;
     
     
-   
-
-    
-    
 }
 
 #pragma mark -IBAction
@@ -78,8 +75,10 @@
 #pragma mark -点击错题库按钮
 - (IBAction)wrongQuestionBtnClick:(UIButton *)sender {
     
-    WrongQuestionStatisticViewController *wrongVC = [[WrongQuestionStatisticViewController alloc] init];
+    WrongSubjectController *wrongVC = [[WrongSubjectController alloc] initWithNibName:@"WrongSubjectController" bundle:nil];
+    wrongVC.title = @"错题榜";
     [self.navigationController pushViewController:wrongVC animated:YES];
+
     
 }
 
