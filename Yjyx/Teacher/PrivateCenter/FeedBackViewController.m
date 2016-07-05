@@ -18,7 +18,7 @@
 #import "SVProgressHUD.h"
 #import "UploadImageTool.h"
 #import "YjxService.h"
-
+#import "YjyxPrivateViewController.h"
 
 @interface FeedBackViewController ()<TZImagePickerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -65,6 +65,13 @@
     // finishBtn设置
     self.finishBtn.layer.cornerRadius = 20;
     self.finishBtn.backgroundColor = TEACHERCOLOR;
+    for (UIViewController *vc in self.navigationController.childViewControllers) {
+        if ([vc isKindOfClass:[YjyxPrivateViewController class]]) {
+            self.finishBtn.backgroundColor = STUDENTCOLOR;
+            break;
+        }
+    }
+    
     
     // 配置textview
     [self configureTextview];

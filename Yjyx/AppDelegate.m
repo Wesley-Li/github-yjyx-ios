@@ -339,29 +339,44 @@
     }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"student"]) {
         
         // 学生登录
+        // 作业
         YjyxHomeWorkController *homeWorkVc = [[YjyxHomeWorkController alloc] init];
-        homeWorkVc.view.backgroundColor = [UIColor redColor];
+//        homeWorkVc.view.backgroundColor = [UIColor redColor];
         YjyxCommonNavController *navVc1 = [[YjyxCommonNavController alloc] initWithRootViewController:homeWorkVc];
+        navVc1.tabBarItem = [UITabBarItem itemWithTitle:@"作业" image:[UIImage imageNamed:@"亿学"] selectedImage:[UIImage imageNamed:@"亿学点击"]];
+//        navVc1.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5);
         
+        // 统计
         YjyxStatistController *statistVc = [[YjyxStatistController alloc] init];
         statistVc.view.backgroundColor = [UIColor greenColor];
         YjyxCommonNavController *navVc2 = [[YjyxCommonNavController alloc] initWithRootViewController:statistVc];
-        
+        navVc2.tabBarItem = [UITabBarItem itemWithTitle:@"统计" image:[UIImage imageNamed:@"首页"] selectedImage:[UIImage imageNamed:@"首页点击"]];
+//        navVc2.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+        // 亿教
         YjyxYiTeachController *yiTeachVc = [[YjyxYiTeachController alloc] init];
         yiTeachVc.view.backgroundColor = [UIColor blueColor];
         YjyxCommonNavController *navVc3 = [[YjyxCommonNavController alloc] initWithRootViewController:yiTeachVc];
+        navVc3.tabBarItem = [UITabBarItem itemWithTitle:@"亿教" image:[UIImage imageNamed:@"亿教"] selectedImage:[UIImage imageNamed:@"亿教点击"]];
+//        navVc3.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5);
         
+        //  我的
         YjyxMineController *mineVc = [[YjyxMineController alloc] init];
         mineVc.view.backgroundColor = [UIColor brownColor];
         YjyxCommonNavController *navVc4 = [[YjyxCommonNavController alloc] initWithRootViewController:mineVc];
-    
+        navVc4.tabBarItem = [UITabBarItem itemWithTitle:@"我的" image:[UIImage imageNamed:@"我的"] selectedImage:[UIImage imageNamed:@"我的点击"]];
+     
         YjyxCommonTabController *tabBarVc = [[YjyxCommonTabController alloc] init];
+        
+//        tabBarVc.tabBarItem.imageInsets = UIEdgeInsetsMake(20, 0, 20, 0);
         [tabBarVc addChildViewController:navVc1];
         [tabBarVc addChildViewController:navVc2];
         [tabBarVc addChildViewController:navVc3];
         [tabBarVc addChildViewController:navVc4];
         
+        
         self.window.rootViewController = tabBarVc;
+        // 判断版本更新并获取学生列表
+        [self judgeAndUpdate];
     }
     
     

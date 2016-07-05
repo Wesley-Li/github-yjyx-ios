@@ -34,7 +34,10 @@
     stuEntity.gradename = dict[@"gradename"];
     stuEntity.schoolname = dict[@"schoolname"];
     stuEntity.avatar_url = dict[@"avatar_url"];
-    stuEntity.notify_setting = dict[@"notify_setting"];
+    stuEntity.notify_shake = dict[@"notify_setting"][@"notify_shake"];
+    stuEntity.notify_with_sound = dict[@"notify_setting"][@"notify_with_sound"];
+    stuEntity.notify_sound = dict[@"notify_setting"][@"notify_sound"];
+    stuEntity.receive_notify = dict[@"notify_setting"][@"receive_notify"];
     return stuEntity;
 }
 @end

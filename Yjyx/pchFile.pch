@@ -60,6 +60,8 @@
 #define COMMONCOLOR RGBACOLOR(239, 239, 244,1);
 // 老师端统一色
 #define TEACHERCOLOR RGBACOLOR(3, 136, 227, 1)
+// 学生端统一色
+#define STUDENTCOLOR RGBACOLOR(0, 229.0, 199.0, 1)
 //随机颜色
 #define RANDOMCOLOR [UIColor colorWithRed:(arc4random() % 256)/255.0 green:(arc4random() % 256)/255.0 blue:(arc4random() % 256)/255.0 alpha:1.0]
 //屏幕大小
@@ -171,5 +173,13 @@
 #define TEACHER_SEND_STATISTIC_GET @"/api/teacher/mobile/task/"
 
 // 学生部分
-
-
+// 学生登录
+#define STUDENT_LOGIN_CONNET_POST  @"/api/student/mobile/login/"
+// 修改名字和手机号
+#define STUDENT_NAME_AND_PHONE_CONNECT_POST @"/api/student/setting/"
+//  上报消息通知
+#define STUDENT_UPLOAD_SOUND_SETTING_CONNECT_POST @"/api/student/setting/"
+// 学生修改头像
+#define STUDENT_PIC_SETTING_CONNECT_GET @"/api/student/qiniu/"
+// 学生上传头像到七牛
+#define STUDENT_UPLOAD_PIC_CONNECT_POST @"/api/student/setting/"

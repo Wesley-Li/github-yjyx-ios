@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="116" id="KGk-i7-Jjw" customClass="YjyxHomeWorkCell">
+            <rect key="frame" x="0.0" y="0.0" width="416" height="116"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="416" height="115"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zIy-K8-ba2">
+                        <rect key="frame" x="15" y="28" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="Psh-Hn-t00"/>
+                            <constraint firstAttribute="width" constant="60" id="hm8-XP-ZCN"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gsk-ug-MXH">
+                        <rect key="frame" x="85" y="47" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_icon_choose" translatesAutoresizingMaskIntoConstraints="NO" id="g8e-9v-csr">
+                        <rect key="frame" x="386" y="48" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="8bF-9b-Hti"/>
+                            <constraint firstAttribute="width" constant="20" id="hrE-Lo-If2"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="twH-YA-cxo">
+                        <rect key="frame" x="344" y="47" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="gsk-ug-MXH" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3od-eh-YzY"/>
+                    <constraint firstItem="twH-YA-cxo" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="7Rd-qq-9YO"/>
+                    <constraint firstItem="g8e-9v-csr" firstAttribute="leading" secondItem="twH-YA-cxo" secondAttribute="trailing" id="F6F-V3-TjX"/>
+                    <constraint firstItem="g8e-9v-csr" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="J4H-kH-oz2"/>
+                    <constraint firstItem="zIy-K8-ba2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Lj4-Wf-BXZ"/>
+                    <constraint firstAttribute="trailing" secondItem="g8e-9v-csr" secondAttribute="trailing" constant="10" id="kAu-Be-rwF"/>
+                    <constraint firstItem="gsk-ug-MXH" firstAttribute="leading" secondItem="zIy-K8-ba2" secondAttribute="trailing" constant="10" id="m5a-aa-RX4"/>
+                    <constraint firstItem="zIy-K8-ba2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="pTB-Ao-QdG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="doneCountLabel" destination="twH-YA-cxo" id="yGx-5c-OEK"/>
+                <outlet property="subjectImageView" destination="zIy-K8-ba2" id="CBp-3o-IiL"/>
+                <outlet property="subjectNameLabel" destination="gsk-ug-MXH" id="Ouu-vg-LoT"/>
+            </connections>
+            <point key="canvasLocation" x="606" y="316"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="list_icon_choose" width="36" height="36"/>
+    </resources>
+</document>

@@ -247,7 +247,7 @@ static QuestionDataBase *singleton = nil;
         model.cellFrame = CGRectFromString(cellFrame);
         model.answer = answer;
         model.total_wrong_num = total_wrong_num;
-        
+
         [group addObject:model];
         
     }
