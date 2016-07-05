@@ -543,11 +543,55 @@
 #pragma mark - 学生相关接口实现
 
 // 学生登录
-- (void)studentLogin:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block {
+- (void)studentLogin:(NSDictionary *)params autoLogin:(BOOL)autoLogin withBlock:(void(^)(id result, NSError *error))block {
     
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    if (autoLogin) {
+        NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"TSessionID"];
+        if([cookiesdata length]) {
+            NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
+            NSHTTPCookie *cookie;
+            for (cookie in cookies) {
+                [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+            }
+        }
+    }
+    [manager POST:[BaseURL stringByAppendingString:STUDENT_LOGIN_CONNET_POST] parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            if ([[responseObject objectForKey:@"retcode"] integerValue] == 0) {
+                NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:[BaseURL stringByAppendingString:STUDENT_LOGIN_CONNET_POST]]];
+                NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:data forKey:@"TSessionID"];
+                [defaults synchronize];
+            }
+            
+            block(responseObject, nil);
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
     
 }
 
+// 学生上传青牛云
+-(void)studentUploadFile:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block {
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:[BaseURL stringByAppendingString:STUDENT_UPLOAD_PIC_CONNECT_POST] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+        
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+    
+}
 
 
 

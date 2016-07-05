@@ -117,7 +117,10 @@
  */
 - (void)studentLogin:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 
+- (void)studentLogin:(NSDictionary *)params autoLogin:(BOOL)autoLogin withBlock:(void(^)(id result, NSError *error))block;
 
+// 学生上传青牛云
+-(void)studentUploadFile:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 /*
  ******************************老师相关接口*************************
  */

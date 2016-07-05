@@ -31,6 +31,10 @@
 @property (strong, nonatomic) NSString *schoolname; // 学校名称
 @property (strong, nonatomic) NSString *avatar_url; // 小孩头像
 @property (strong, nonatomic) NSDictionary *notify_setting; // 消息推送设置
+@property (strong, nonatomic) NSString *notify_shake; // 震动
+@property (strong, nonatomic) NSString *notify_with_sound; // 声音
+@property (strong, nonatomic) NSString *notify_sound; // 声音类型
+@property (strong, nonatomic) NSString *receive_notify; // 接收通知
 
 + (instancetype)studentEntityWithDict:(NSDictionary *)dict;
 @end

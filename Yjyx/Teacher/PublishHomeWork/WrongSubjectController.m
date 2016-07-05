@@ -126,6 +126,8 @@ static NSString *ID = @"cell";
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"action"] = @"m_get_most_failed_questions";
+    NSLog(@"%@?action=%@", [BaseURL stringByAppendingString:SEARCH_WRONG_CONNET_GET], @"m_get_most_failed_questions");
+    NSLog(@"%@", @"\u672a\u767b\u5f55");
     [mgr GET:[BaseURL stringByAppendingString:SEARCH_WRONG_CONNET_GET] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         if([responseObject[@"retcode"] isEqual:@0]){
 //            [responseObject[@"retlist"] writeToFile:@"/Users/wangdapeng/Desktop/文件/9.plist" atomically:YES];

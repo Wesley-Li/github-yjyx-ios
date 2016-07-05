@@ -16,6 +16,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "ForgetOneViewController.h"
 #import "ForgetTwoViewController.h"
+#import "OneStudentEntity.h"
 
 @interface LoginViewController ()
 {
@@ -300,10 +301,50 @@
                 
             }else if ([((AppDelegate*)SYS_DELEGATE).role isEqualToString:@"student"]){
                 // 学生
-                [self.view makeToast:@"正在建设中,敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
-                
-                [self.view hideToastActivity];
-                
+//                [self.view makeToast:@"正在建设中,敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
+                NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_uesrNameTF.text,@"username",_passWordTF.text,@"password",@"1",@"ostype",((AppDelegate*)SYS_DELEGATE).deviceToken,@"devicetoken",[[UIDevice currentDevice] model],@"description",nil];
+               
+                [[YjxService sharedInstance] studentLogin:dic autoLogin:NO withBlock:^(id result, NSError *error){
+                     [self.view hideToastActivity];
+                    if (result != nil) {
+                        
+                        if ([result[@"retcode"] integerValue] == 0) {
+                            [(AppDelegate *)SYS_DELEGATE fillViews];
+                            
+                            [YjyxOverallData sharedInstance].studentInfo = [OneStudentEntity studentEntityWithDict:result];
+                            
+                            //                            [YjyxOverallData sharedInstance].teacherInfo.name = _uesrNameTF.text;
+                            NSString *desPassWord = [_passWordTF.text des3:kCCEncrypt withPass:@"12345678asdf"];
+                            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", _uesrNameTF.text,@"username",desPassWord,@"password", nil];
+                            
+                            [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
+                            [SYS_CACHE synchronize];
+                            
+                            // GCD写定时器启动
+                            //                            dispatch_resume(((AppDelegate*)SYS_DELEGATE).timer);
+                            //
+                        }else {
+                            
+                            if ([result[@"msg"] length] > 20) {
+                                [self.view makeToast:@"您的网络可能不太好,请重试!" duration:1.0 position:SHOW_CENTER complete:nil];
+                                
+                            }else {
+                                
+                                [self.view makeToast:result[@"msg"]duration:1.0 position:SHOW_CENTER complete:nil];
+                                
+                            }
+                            
+                        }
+                    }else {
+                        
+                        if (error.code == -1009) {
+                            [self.view makeToast:@"您的网络可能不太好,请重试!" duration:3.0 position:SHOW_CENTER complete:nil];
+                            return;
+                        }
+                        [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:3.0 position:SHOW_CENTER complete:nil];
+                    }
+
+                }];
             }
             
         }

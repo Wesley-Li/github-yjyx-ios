@@ -9,7 +9,7 @@
 #import "AutoLoginViewController.h"
 #import "LoginViewController.h"
 #import "TeacherEntity.h"
-
+#import "OneStudentEntity.h"
 @interface AutoLoginViewController ()
 
 @end
@@ -91,7 +91,37 @@
         }];
     }else {
         // 学生的自动登录实现,此处保留
-        
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:username,@"username",password,@"password",@"1",@"ostype",model,@"description",devicetoken,@"devicetoken", nil];
+        [[YjxService sharedInstance] studentLogin:dic autoLogin:YES withBlock:^(id result, NSError *error) {
+            [self.view hideToastActivity];
+            if (result != nil) {
+                if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                    [YjyxOverallData sharedInstance].studentInfo = [OneStudentEntity studentEntityWithDict:result];
+                    [(AppDelegate *)SYS_DELEGATE fillViews];
+                    
+                    // 开启GCD
+                    //                    dispatch_resume(((AppDelegate*)SYS_DELEGATE).timer);
+                    
+                    
+                    
+                }else {
+                    LoginViewController *loginView = [[LoginViewController alloc] init];
+                    UINavigationController* navigation = [[NavRootViewController alloc] initWithRootViewController:loginView];
+                    navigation.navigationBar.hidden = YES;
+                    [(AppDelegate *)SYS_DELEGATE window].rootViewController =navigation;
+                    [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                    
+                }
+            }else {
+                
+                LoginViewController *loginView = [[LoginViewController alloc] init];
+                UINavigationController* navigation = [[NavRootViewController alloc] initWithRootViewController:loginView];
+                navigation.navigationBar.hidden = YES;
+                [(AppDelegate *)SYS_DELEGATE window].rootViewController =navigation;
+                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                
+            }
+        }];
     
     }
 }

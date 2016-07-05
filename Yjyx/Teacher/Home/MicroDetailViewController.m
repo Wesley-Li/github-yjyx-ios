@@ -294,6 +294,7 @@ static NSString *TitleID = @"TitleCELL";
         }else{
             [blankfillArr addObject:model];
         }
+        model.btnIsShow = YES;
     }
     [self.allSubjectArr removeAllObjects];
     [self.allSubjectArr addObjectsFromArray:choiceArr];

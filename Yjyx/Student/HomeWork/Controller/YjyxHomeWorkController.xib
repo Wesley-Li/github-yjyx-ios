@@ -1,19 +1,112 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YjyxHomeWorkController">
             <connections>
+                <outlet property="btnView" destination="WZ2-e8-r6r" id="73F-lu-t0E"/>
+                <outlet property="clickBtn" destination="Kff-Yf-pj7" id="qXL-9r-AAS"/>
+                <outlet property="homeWorkBtn" destination="0zD-Gd-7Rj" id="Xbm-N3-JDT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BANNER" translatesAutoresizingMaskIntoConstraints="NO" id="lBF-c3-cei">
+                    <rect key="frame" x="0.0" y="64" width="320" height="160"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="160" id="a3P-68-G2f"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WZ2-e8-r6r">
+                    <rect key="frame" x="0.0" y="224" width="320" height="40"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="点击" translatesAutoresizingMaskIntoConstraints="NO" id="Kff-Yf-pj7">
+                            <rect key="frame" x="13" y="2" width="135" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="uIN-mu-QjS"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="uIN-mu-QjS"/>
+                                </mask>
+                            </variation>
+                        </imageView>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zD-Gd-7Rj">
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="作业">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.0" green="0.8980392157" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="workBtnClick:" destination="-1" eventType="touchUpInside" id="KZk-5V-Oix"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uft-bA-DHC">
+                            <rect key="frame" x="160" y="0.0" width="160" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="错题榜">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.0" green="0.8980392157" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="workBtnClick:" destination="-1" eventType="touchUpInside" id="39D-JB-ToP"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Kff-Yf-pj7" firstAttribute="centerY" secondItem="0zD-Gd-7Rj" secondAttribute="centerY" id="7iI-xa-tXf"/>
+                        <constraint firstAttribute="height" constant="40" id="8ai-Ih-Z14"/>
+                        <constraint firstItem="0zD-Gd-7Rj" firstAttribute="leading" secondItem="WZ2-e8-r6r" secondAttribute="leading" id="FJ4-ju-7ZL"/>
+                        <constraint firstItem="Kff-Yf-pj7" firstAttribute="height" secondItem="0zD-Gd-7Rj" secondAttribute="height" id="HM3-8W-h57"/>
+                        <constraint firstAttribute="trailing" secondItem="Uft-bA-DHC" secondAttribute="trailing" id="L68-AM-rbN"/>
+                        <constraint firstAttribute="bottom" secondItem="Kff-Yf-pj7" secondAttribute="bottom" constant="-2" id="OvN-VP-Ibt"/>
+                        <constraint firstItem="Kff-Yf-pj7" firstAttribute="centerX" secondItem="0zD-Gd-7Rj" secondAttribute="centerX" id="Qow-KK-LsQ"/>
+                        <constraint firstItem="Kff-Yf-pj7" firstAttribute="width" secondItem="0zD-Gd-7Rj" secondAttribute="width" constant="-25" id="Ycx-WT-SZ3"/>
+                        <constraint firstItem="Uft-bA-DHC" firstAttribute="leading" secondItem="0zD-Gd-7Rj" secondAttribute="trailing" id="bw6-r5-Rmi"/>
+                        <constraint firstItem="Uft-bA-DHC" firstAttribute="top" secondItem="WZ2-e8-r6r" secondAttribute="top" id="qKA-Nj-HBk"/>
+                        <constraint firstItem="0zD-Gd-7Rj" firstAttribute="top" secondItem="WZ2-e8-r6r" secondAttribute="top" id="rJZ-NX-xTN"/>
+                        <constraint firstItem="0zD-Gd-7Rj" firstAttribute="width" secondItem="WZ2-e8-r6r" secondAttribute="width" multiplier="0.5" id="ru1-ec-JtG"/>
+                        <constraint firstAttribute="bottom" secondItem="Uft-bA-DHC" secondAttribute="bottom" id="vvt-In-iQ4"/>
+                        <constraint firstAttribute="bottom" secondItem="0zD-Gd-7Rj" secondAttribute="bottom" id="z4Y-zW-ucZ"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="7iI-xa-tXf"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="WZ2-e8-r6r" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Cra-Ax-fo7"/>
+                <constraint firstItem="lBF-c3-cei" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Qnn-hz-cFK"/>
+                <constraint firstItem="WZ2-e8-r6r" firstAttribute="top" secondItem="lBF-c3-cei" secondAttribute="bottom" id="gH4-Hd-DMv"/>
+                <constraint firstItem="lBF-c3-cei" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="keg-qI-Ra9"/>
+                <constraint firstAttribute="trailing" secondItem="lBF-c3-cei" secondAttribute="trailing" id="ndd-Du-lDS"/>
+                <constraint firstAttribute="trailing" secondItem="WZ2-e8-r6r" secondAttribute="trailing" id="s1j-ap-Bgt"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="618" y="119"/>
         </view>
     </objects>
+    <resources>
+        <image name="BANNER" width="750" height="320"/>
+        <image name="点击" width="316" height="80"/>
+    </resources>
 </document>
