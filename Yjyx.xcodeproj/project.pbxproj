@@ -3598,10 +3598,9 @@
 				3A38278A1CDF185F00EAB979 /* YjyxFeedBackViewController.m in Sources */,
 				3A91F48F1C760CF4001568AA /* PNBar.m in Sources */,
 				8013D3391CF4521100F82301 /* CardCell.m in Sources */,
-<<<<<<< HEAD
-=======
+
 				80FEB6911D1BB759009EB126 /* StatisticClassCell.m in Sources */,
->>>>>>> local
+
 				3CE18E9E1D2121EE007E0874 /* ReleaseFinishTimeCell.m in Sources */,
 				3AEF27201C61F08A0028BE09 /* RTSpinKitView.m in Sources */,
 				3BCF194B1CDCC2B500E2EA1A /* TaskDetailTableViewController.m in Sources */,
