@@ -15,6 +15,7 @@
 #import "MJRefresh.h"
 #import "YjyxHomeWrongModel.h"
 #import "YjyxOneSubjectViewController.h"
+#import "YjyxStuWrongListViewController.h"
 @interface YjyxHomeWorkController ()<UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *clickBtn;
 
@@ -260,6 +261,13 @@ static NSString *DETAILID = @"detailID";
             [self.navigationController pushViewController:VC animated:YES];
         }
 
+    }else{
+        YjyxHomeWrongModel *model = self.wrongArr[indexPath.row];
+        
+        YjyxStuWrongListViewController *vc = [[YjyxStuWrongListViewController alloc] init];
+        vc.subjectid  = model.subjectid;
+        vc.targetlist = [model.failedquestions JSONString];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
 }
