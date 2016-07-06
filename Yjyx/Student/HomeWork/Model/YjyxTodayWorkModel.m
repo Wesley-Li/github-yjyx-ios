@@ -27,13 +27,13 @@
 }
 - (NSString *)task_delivertime
 {
-    NSLog(@"%@", _task_delivertime);
+//    NSLog(@"%@", _task_delivertime);
     NSArray *arr = [_task_delivertime componentsSeparatedByString:@"."];
     NSString *timeStr = arr.firstObject;
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
     fmt.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
     NSDate *tempDate = [fmt dateFromString:timeStr];
-    NSLog(@"%@", tempDate);
+//    NSLog(@"%@", tempDate);
     fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     NSString *str = [fmt stringFromDate:tempDate];
     return str;

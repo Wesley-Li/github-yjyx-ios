@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *releaseTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *teacherDescLabel;
 @property (weak, nonatomic) IBOutlet UIButton *progressBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leadConstant;
 @end
 @implementation YjyxWorkDetailCell
 
@@ -45,18 +46,33 @@
     NSString *str1 = [fmt stringFromDate: date];
     self.releaseTimeLabel.text = [NSString stringWithFormat:@"今天%@", str1];
     self.teacherDescLabel.text = [NSString stringWithFormat:@"由%@老师发布", todayWorkModel.delivername];
+    if ([todayWorkModel.finished isEqual:@1]) {
+        [self.progressBtn setTitle:@"已完成" forState:UIControlStateNormal];
+        self.progressBtn.backgroundColor = STUDENTCOLOR;
+    }else{
+        [self.progressBtn setTitle:@"做作业" forState:UIControlStateNormal];
+        self.progressBtn.backgroundColor = RGBACOLOR(10.0, 96.0, 254.0, 1);
+    }
 }
 - (void)setOneSubjectModel:(YjyxTodayWorkModel *)OneSubjectModel
 {
     _OneSubjectModel = OneSubjectModel;
+    self.leadConstant.constant = 10;
     if ([OneSubjectModel.tasktype isEqual:@1]) {
         self.workImageView.image = [UIImage imageNamed:@"作业"];
     }else{
         self.workImageView.image = [UIImage imageNamed:@"视频"];
     }
     self.workDescLabel.text = OneSubjectModel.task_description;
-    self.releaseTimeLabel.text = [NSString stringWithFormat:@"今天%@", OneSubjectModel.task_delivertime];
+    self.releaseTimeLabel.text = [NSString stringWithFormat:@"%@", OneSubjectModel.task_delivertime];
     self.teacherDescLabel.text = [NSString stringWithFormat:@"由%@老师发布", OneSubjectModel.delivername];
+    if ([OneSubjectModel.finished isEqual:@1]) {
+        [self.progressBtn setTitle:@"已完成" forState:UIControlStateNormal];
+        self.progressBtn.backgroundColor = STUDENTCOLOR;
+    }else{
+        [self.progressBtn setTitle:@"做作业" forState:UIControlStateNormal];
+         self.progressBtn.backgroundColor = RGBACOLOR(10.0, 96.0, 254.0, 1);
+    }
     
 }
 @end

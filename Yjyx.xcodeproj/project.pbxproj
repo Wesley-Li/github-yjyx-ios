@@ -426,6 +426,8 @@
 		3CD7E45B1D2B593800769FDE /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD7E4531D2B593800769FDE /* UIView+MJExtension.m */; };
 		3CD7E45E1D2B819600769FDE /* YjyxHomeWrongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD7E45D1D2B819600769FDE /* YjyxHomeWrongModel.m */; };
 		3CD7E4611D2B962500769FDE /* YjyxOneSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD7E4601D2B962500769FDE /* YjyxOneSubjectViewController.m */; };
+		3CD7E4641D2BD33D00769FDE /* YjyxSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD7E4631D2BD33D00769FDE /* YjyxSearchView.m */; };
+		3CD7E4661D2BD39200769FDE /* YjyxSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CD7E4651D2BD39200769FDE /* YjyxSearchView.xib */; };
 		3CE098991D122F660054C42B /* ReleaseHomeWorkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE098971D122F660054C42B /* ReleaseHomeWorkController.m */; };
 		3CE0989A1D122F660054C42B /* ReleaseHomeWorkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE098981D122F660054C42B /* ReleaseHomeWorkController.xib */; };
 		3CE0989E1D123EF10054C42B /* PostStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0989C1D123EF10054C42B /* PostStudentCell.m */; };
@@ -440,6 +442,9 @@
 		3CE18E9F1D2121EE007E0874 /* ReleaseFinishTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE18E9D1D2121EE007E0874 /* ReleaseFinishTimeCell.xib */; };
 		3CE18EA31D2122ED007E0874 /* ReleaseStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE18EA11D2122ED007E0874 /* ReleaseStudentCell.m */; };
 		3CE18EA41D2122ED007E0874 /* ReleaseStudentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE18EA21D2122ED007E0874 /* ReleaseStudentCell.xib */; };
+		3CECA4AB1D2C99310039DCB6 /* YjyxTimeField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CECA4AA1D2C99310039DCB6 /* YjyxTimeField.m */; };
+		3CECA4AE1D2CDAEB0039DCB6 /* YjyxWorkDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CECA4AD1D2CDAEB0039DCB6 /* YjyxWorkDetailController.m */; };
+		3CECA4B01D2CDE9B0039DCB6 /* YjyxWorkDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CECA4AF1D2CDE9B0039DCB6 /* YjyxWorkDetailController.xib */; };
 		3CF01B4B1D0E49C5001C4251 /* siftContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF01B4A1D0E49C5001C4251 /* siftContentView.m */; };
 		3CF01B4D1D0E49E5001C4251 /* siftContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF01B4C1D0E49E5001C4251 /* siftContentView.xib */; };
 		3CF01B501D0E543E001C4251 /* siftButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF01B4F1D0E543E001C4251 /* siftButton.m */; };
@@ -1165,6 +1170,9 @@
 		3CD7E45D1D2B819600769FDE /* YjyxHomeWrongModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxHomeWrongModel.m; sourceTree = "<group>"; };
 		3CD7E45F1D2B962500769FDE /* YjyxOneSubjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxOneSubjectViewController.h; sourceTree = "<group>"; };
 		3CD7E4601D2B962500769FDE /* YjyxOneSubjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxOneSubjectViewController.m; sourceTree = "<group>"; };
+		3CD7E4621D2BD33D00769FDE /* YjyxSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxSearchView.h; sourceTree = "<group>"; };
+		3CD7E4631D2BD33D00769FDE /* YjyxSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxSearchView.m; sourceTree = "<group>"; };
+		3CD7E4651D2BD39200769FDE /* YjyxSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxSearchView.xib; sourceTree = "<group>"; };
 		3CE098961D122F660054C42B /* ReleaseHomeWorkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseHomeWorkController.h; sourceTree = "<group>"; };
 		3CE098971D122F660054C42B /* ReleaseHomeWorkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseHomeWorkController.m; sourceTree = "<group>"; };
 		3CE098981D122F660054C42B /* ReleaseHomeWorkController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseHomeWorkController.xib; sourceTree = "<group>"; };
@@ -1186,6 +1194,11 @@
 		3CE18EA01D2122ED007E0874 /* ReleaseStudentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseStudentCell.h; sourceTree = "<group>"; };
 		3CE18EA11D2122ED007E0874 /* ReleaseStudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseStudentCell.m; sourceTree = "<group>"; };
 		3CE18EA21D2122ED007E0874 /* ReleaseStudentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseStudentCell.xib; sourceTree = "<group>"; };
+		3CECA4A91D2C99310039DCB6 /* YjyxTimeField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxTimeField.h; sourceTree = "<group>"; };
+		3CECA4AA1D2C99310039DCB6 /* YjyxTimeField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxTimeField.m; sourceTree = "<group>"; };
+		3CECA4AC1D2CDAEB0039DCB6 /* YjyxWorkDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxWorkDetailController.h; sourceTree = "<group>"; };
+		3CECA4AD1D2CDAEB0039DCB6 /* YjyxWorkDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxWorkDetailController.m; sourceTree = "<group>"; };
+		3CECA4AF1D2CDE9B0039DCB6 /* YjyxWorkDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxWorkDetailController.xib; sourceTree = "<group>"; };
 		3CF01B491D0E49C5001C4251 /* siftContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = siftContentView.h; sourceTree = "<group>"; };
 		3CF01B4A1D0E49C5001C4251 /* siftContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = siftContentView.m; sourceTree = "<group>"; };
 		3CF01B4C1D0E49E5001C4251 /* siftContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = siftContentView.xib; sourceTree = "<group>"; };
@@ -2467,8 +2480,14 @@
 				3C3D93C81D26119500AA22AE /* YjyxHomeWorkController.xib */,
 				3CD7E45F1D2B962500769FDE /* YjyxOneSubjectViewController.h */,
 				3CD7E4601D2B962500769FDE /* YjyxOneSubjectViewController.m */,
+
 				80D978FB1D2CA753000BD95E /* YjyxStuWrongListViewController.h */,
 				80D978FC1D2CA753000BD95E /* YjyxStuWrongListViewController.m */,
+
+				3CECA4AC1D2CDAEB0039DCB6 /* YjyxWorkDetailController.h */,
+				3CECA4AD1D2CDAEB0039DCB6 /* YjyxWorkDetailController.m */,
+				3CECA4AF1D2CDE9B0039DCB6 /* YjyxWorkDetailController.xib */,
+
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2497,9 +2516,17 @@
 				3C4274C81D2A7736008A30FA /* YjyxWorkDetailCell.h */,
 				3C4274C91D2A7736008A30FA /* YjyxWorkDetailCell.m */,
 				3C4274CA1D2A7736008A30FA /* YjyxWorkDetailCell.xib */,
+
 				80D979011D2CD048000BD95E /* YjyxStuWrongListCell.h */,
 				80D979021D2CD048000BD95E /* YjyxStuWrongListCell.m */,
 				80D979031D2CD048000BD95E /* YjyxStuWrongListCell.xib */,
+
+				3CD7E4621D2BD33D00769FDE /* YjyxSearchView.h */,
+				3CD7E4631D2BD33D00769FDE /* YjyxSearchView.m */,
+				3CD7E4651D2BD39200769FDE /* YjyxSearchView.xib */,
+				3CECA4A91D2C99310039DCB6 /* YjyxTimeField.h */,
+				3CECA4AA1D2C99310039DCB6 /* YjyxTimeField.m */,
+
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3164,6 +3191,7 @@
 				3BCF19151CDC66E600E2EA1A /* list_btn_corrected@3x.png in Resources */,
 				3A905D201C7F3A51005AB12F /* push4.caf in Resources */,
 				3CA04CE31D17CE1E0054A05D /* WrongSubjectCell.xib in Resources */,
+				3CD7E4661D2BD39200769FDE /* YjyxSearchView.xib in Resources */,
 				3A905D211C7F3A51005AB12F /* push5.caf in Resources */,
 				8013D33A1CF4521100F82301 /* CardCell.xib in Resources */,
 				3A905D221C7F3A51005AB12F /* push6.caf in Resources */,
@@ -3248,6 +3276,7 @@
 				3B35DB8F1CE066F5000B7F83 /* TaskCell.xib in Resources */,
 				3AE894051C6C28C300E8BA97 /* login_username_icon@3x.png in Resources */,
 				3BCF19231CDC66E600E2EA1A /* nav_btn_back.png in Resources */,
+				3CECA4B01D2CDE9B0039DCB6 /* YjyxWorkDetailController.xib in Resources */,
 				3BCF19211CDC66E600E2EA1A /* list_icon_note_nor2@3x.png in Resources */,
 				3A3E6DE71CD8F4B8002133D8 /* Parent_read@3x.png in Resources */,
 				3A5477961CE41ACF001233C1 /* homework_close@3x.png in Resources */,
@@ -3527,6 +3556,8 @@
 				3CA04CE71D17D03E0054A05D /* YjyxWrongSubModel.m in Sources */,
 				3A91F49C1C760CF4001568AA /* PNScatterChart.m in Sources */,
 				3A91F4951C760CF4001568AA /* PNLineChart.m in Sources */,
+				3CD7E4641D2BD33D00769FDE /* YjyxSearchView.m in Sources */,
+				3CECA4AE1D2CDAEB0039DCB6 /* YjyxWorkDetailController.m in Sources */,
 				3CD2F1701D27909E0031AF2E /* YjyxChangePhoneController.m in Sources */,
 				8094E4C21D129DB800EF221A /* QuestionPreviewCell.m in Sources */,
 				3BB773BC1CD878B900A24485 /* PrivateViewController.m in Sources */,
@@ -3615,6 +3646,9 @@
 				3A38278A1CDF185F00EAB979 /* YjyxFeedBackViewController.m in Sources */,
 				3A91F48F1C760CF4001568AA /* PNBar.m in Sources */,
 				8013D3391CF4521100F82301 /* CardCell.m in Sources */,
+
+				3CECA4AB1D2C99310039DCB6 /* YjyxTimeField.m in Sources */,
+
 				3CE18E9E1D2121EE007E0874 /* ReleaseFinishTimeCell.m in Sources */,
 				3AEF27201C61F08A0028BE09 /* RTSpinKitView.m in Sources */,
 				3BCF194B1CDCC2B500E2EA1A /* TaskDetailTableViewController.m in Sources */,
@@ -3836,8 +3870,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -3863,7 +3897,7 @@
 					"\"$(PROJECT_DIR)/Yjyx/Alipay/AliSDK/openssl\"",
 				);
 				INFOPLIST_FILE = Yjyx/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3875,7 +3909,7 @@
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8738e8ea-9b10-4c1a-9734-06599c5639a1";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -3888,8 +3922,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -3915,7 +3949,7 @@
 					"\"$(PROJECT_DIR)/Yjyx/Alipay/AliSDK/openssl\"",
 				);
 				INFOPLIST_FILE = Yjyx/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3926,7 +3960,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8738e8ea-9b10-4c1a-9734-06599c5639a1";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
