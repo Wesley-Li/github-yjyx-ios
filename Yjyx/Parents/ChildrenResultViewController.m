@@ -141,7 +141,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = YES;
-
+    
 //    [super viewWillDisappear:YES];
 }
 
@@ -486,6 +486,13 @@
 
     }
 }
+
+
+- (void)dealloc {
+    // 移除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 /*
 是否现实展开箭头

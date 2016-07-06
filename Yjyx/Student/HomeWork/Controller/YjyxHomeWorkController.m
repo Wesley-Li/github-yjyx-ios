@@ -265,6 +265,7 @@ static NSString *DETAILID = @"detailID";
         YjyxHomeWrongModel *model = self.wrongArr[indexPath.row];
         
         YjyxStuWrongListViewController *vc = [[YjyxStuWrongListViewController alloc] init];
+        vc.navigationItem.title = model.subjectname;
         vc.subjectid  = model.subjectid;
         vc.targetlist = [model.failedquestions JSONString];
         [self.navigationController pushViewController:vc animated:YES];
