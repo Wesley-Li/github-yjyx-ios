@@ -25,7 +25,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(iconImageViewClick)];
     [self.iconImageView addGestureRecognizer:tap];
     // 头像
-    if ([[YjyxOverallData sharedInstance].teacherInfo.avatar isEqual:[NSNull null]]) {
+    if ([[YjyxOverallData sharedInstance].studentInfo.avatar_url isEqual:[NSNull null]]) {
         
         [self.iconImageView setImage:[UIImage imageNamed:@"teacher_p"]];
         

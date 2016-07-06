@@ -183,3 +183,39 @@
 #define STUDENT_PIC_SETTING_CONNECT_GET @"/api/student/qiniu/"
 // 学生上传头像到七牛
 #define STUDENT_UPLOAD_PIC_CONNECT_POST @"/api/student/setting/"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 学生错题列表
+#define STUDENT_GET_WRONG_LIST_GET @"/api/student/stats/"

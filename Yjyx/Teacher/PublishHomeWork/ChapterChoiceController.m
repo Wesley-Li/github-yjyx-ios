@@ -250,7 +250,6 @@
         
         if ([responseObject[@"retcode"] isEqual: @0]) {
             
-            NSLog(@"%@", responseObject);
             
             for (NSArray *tempArr in responseObject[@"retlist"]) {
               

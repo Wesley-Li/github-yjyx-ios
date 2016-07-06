@@ -509,6 +509,10 @@
 		80D978F61D28CC6E000BD95E /* GetTaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D978F41D28CC6E000BD95E /* GetTaskCell.m */; };
 		80D978F71D28CC6E000BD95E /* GetTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D978F51D28CC6E000BD95E /* GetTaskCell.xib */; };
 		80D978FA1D28E1E4000BD95E /* GetTaskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D978F91D28E1E4000BD95E /* GetTaskModel.m */; };
+		80D978FD1D2CA753000BD95E /* YjyxStuWrongListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D978FC1D2CA753000BD95E /* YjyxStuWrongListViewController.m */; };
+		80D979001D2CC928000BD95E /* YjyxStuWrongListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D978FF1D2CC928000BD95E /* YjyxStuWrongListModel.m */; };
+		80D979041D2CD048000BD95E /* YjyxStuWrongListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D979021D2CD048000BD95E /* YjyxStuWrongListCell.m */; };
+		80D979051D2CD048000BD95E /* YjyxStuWrongListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D979031D2CD048000BD95E /* YjyxStuWrongListCell.xib */; };
 		80F718C01CF28961007C0B75 /* StuConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BB1CF28961007C0B75 /* StuConditionCell.m */; };
 		80F718C11CF28961007C0B75 /* StuConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80F718BC1CF28961007C0B75 /* StuConditionCell.xib */; };
 		80F718C21CF28961007C0B75 /* SubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BE1CF28961007C0B75 /* SubmitCell.m */; };
@@ -1366,6 +1370,13 @@
 		80D978F51D28CC6E000BD95E /* GetTaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GetTaskCell.xib; sourceTree = "<group>"; };
 		80D978F81D28E1E4000BD95E /* GetTaskModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTaskModel.h; sourceTree = "<group>"; };
 		80D978F91D28E1E4000BD95E /* GetTaskModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTaskModel.m; sourceTree = "<group>"; };
+		80D978FB1D2CA753000BD95E /* YjyxStuWrongListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxStuWrongListViewController.h; sourceTree = "<group>"; };
+		80D978FC1D2CA753000BD95E /* YjyxStuWrongListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxStuWrongListViewController.m; sourceTree = "<group>"; };
+		80D978FE1D2CC928000BD95E /* YjyxStuWrongListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxStuWrongListModel.h; sourceTree = "<group>"; };
+		80D978FF1D2CC928000BD95E /* YjyxStuWrongListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxStuWrongListModel.m; sourceTree = "<group>"; };
+		80D979011D2CD048000BD95E /* YjyxStuWrongListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxStuWrongListCell.h; sourceTree = "<group>"; };
+		80D979021D2CD048000BD95E /* YjyxStuWrongListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxStuWrongListCell.m; sourceTree = "<group>"; };
+		80D979031D2CD048000BD95E /* YjyxStuWrongListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxStuWrongListCell.xib; sourceTree = "<group>"; };
 		80F718BA1CF28961007C0B75 /* StuConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuConditionCell.h; sourceTree = "<group>"; };
 		80F718BB1CF28961007C0B75 /* StuConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuConditionCell.m; sourceTree = "<group>"; };
 		80F718BC1CF28961007C0B75 /* StuConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StuConditionCell.xib; sourceTree = "<group>"; };
@@ -2456,6 +2467,8 @@
 				3C3D93C81D26119500AA22AE /* YjyxHomeWorkController.xib */,
 				3CD7E45F1D2B962500769FDE /* YjyxOneSubjectViewController.h */,
 				3CD7E4601D2B962500769FDE /* YjyxOneSubjectViewController.m */,
+				80D978FB1D2CA753000BD95E /* YjyxStuWrongListViewController.h */,
+				80D978FC1D2CA753000BD95E /* YjyxStuWrongListViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2469,6 +2482,8 @@
 				3C4274C61D2A5301008A30FA /* YjyxTodayWorkModel.m */,
 				3CD7E45C1D2B819600769FDE /* YjyxHomeWrongModel.h */,
 				3CD7E45D1D2B819600769FDE /* YjyxHomeWrongModel.m */,
+				80D978FE1D2CC928000BD95E /* YjyxStuWrongListModel.h */,
+				80D978FF1D2CC928000BD95E /* YjyxStuWrongListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2482,6 +2497,9 @@
 				3C4274C81D2A7736008A30FA /* YjyxWorkDetailCell.h */,
 				3C4274C91D2A7736008A30FA /* YjyxWorkDetailCell.m */,
 				3C4274CA1D2A7736008A30FA /* YjyxWorkDetailCell.xib */,
+				80D979011D2CD048000BD95E /* YjyxStuWrongListCell.h */,
+				80D979021D2CD048000BD95E /* YjyxStuWrongListCell.m */,
+				80D979031D2CD048000BD95E /* YjyxStuWrongListCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3366,6 +3384,7 @@
 				3CF01B4D1D0E49E5001C4251 /* siftContentView.xib in Resources */,
 				3B4864501CCF10C200D2DE3C /* privatecenter_click@3x.png in Resources */,
 				3AF11DDA1CB211D600F98A03 /* YjyxMemberDetailViewController.xib in Resources */,
+				80D979051D2CD048000BD95E /* YjyxStuWrongListCell.xib in Resources */,
 				3B4864521CCF10C200D2DE3C /* publishhw_click@3x.png in Resources */,
 				3AC1D1E21CCDE70E006291D0 /* RegistFinalViewController.xib in Resources */,
 				3A04A5E01C9406850040D913 /* YjyxWorkPreviewViewController.xib in Resources */,
@@ -3488,11 +3507,8 @@
 				3A04A5CC1C93E6290040D913 /* MASConstraint.m in Sources */,
 				3A04A5D91C93E6590040D913 /* ChildrenVideoViewController.m in Sources */,
 				3CF541D41D1CD990000EBAB5 /* MyMicroCell.m in Sources */,
-
 				80FEB69D1D2202DA009EB126 /* ResultModel.m in Sources */,
-
 				3CD2F16B1D2790640031AF2E /* YjyxChangeNameController.m in Sources */,
-
 				3A4057111CCF859B00258784 /* ForgetThreeViewController.m in Sources */,
 				3AEF27251C61F08A0028BE09 /* UIDevice+Space.m in Sources */,
 				801F44AB1CDF164800B7E7E1 /* NSDataEx.m in Sources */,
@@ -3591,6 +3607,7 @@
 				3B84D5851CEC6E9D003F659B /* TZTestCell.m in Sources */,
 				3A8CAEBC1C70B36200BDEB6B /* UIButton+WebCache.m in Sources */,
 				80FEB6881D1BB545009EB126 /* StudentViewController.m in Sources */,
+				80D979041D2CD048000BD95E /* YjyxStuWrongListCell.m in Sources */,
 				3A91F46A1C7606FB001568AA /* ChildrenStatisticViewController.m in Sources */,
 				3C15669A1D0D5B49006670D6 /* ChapterChoiceController.m in Sources */,
 				3CD7E4611D2B962500769FDE /* YjyxOneSubjectViewController.m in Sources */,
@@ -3598,9 +3615,6 @@
 				3A38278A1CDF185F00EAB979 /* YjyxFeedBackViewController.m in Sources */,
 				3A91F48F1C760CF4001568AA /* PNBar.m in Sources */,
 				8013D3391CF4521100F82301 /* CardCell.m in Sources */,
-
-				80FEB6911D1BB759009EB126 /* StatisticClassCell.m in Sources */,
-
 				3CE18E9E1D2121EE007E0874 /* ReleaseFinishTimeCell.m in Sources */,
 				3AEF27201C61F08A0028BE09 /* RTSpinKitView.m in Sources */,
 				3BCF194B1CDCC2B500E2EA1A /* TaskDetailTableViewController.m in Sources */,
@@ -3631,6 +3645,7 @@
 				3A04A5D31C93E6290040D913 /* View+MASAdditions.m in Sources */,
 				3BE01BD71CDD7DD700781B86 /* ChoiceModel.m in Sources */,
 				3C3D93E11D26119500AA22AE /* YjyxCommonNavController.m in Sources */,
+				80D979001D2CC928000BD95E /* YjyxStuWrongListModel.m in Sources */,
 				3A88277C1C6EE1820008367F /* ParentPersonalViewController.m in Sources */,
 				3CD2F1741D27A3C70031AF2E /* YjyxChangeSoundViewController.m in Sources */,
 				3A04A5D11C93E6290040D913 /* NSArray+MASAdditions.m in Sources */,
@@ -3696,6 +3711,7 @@
 				801F44A91CDF164800B7E7E1 /* DataVerifier.m in Sources */,
 				3AEF27211C61F08A0028BE09 /* NSObject+category.m in Sources */,
 				3AEF27281C61F08A0028BE09 /* UIView+category.m in Sources */,
+				80D978FD1D2CA753000BD95E /* YjyxStuWrongListViewController.m in Sources */,
 				801F44B01CDF164800B7E7E1 /* Order.m in Sources */,
 				3B4864761CCF117300D2DE3C /* PublishHomeworkViewController.m in Sources */,
 				3AF27E3B1C73465400698673 /* AccessJudge.m in Sources */,

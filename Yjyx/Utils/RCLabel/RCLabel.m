@@ -718,7 +718,6 @@ CGFloat MyGetWidthCallback( void* refCon ){
             
         CGAffineTransform flipVertical = CGAffineTransformMake(1,0,0,-1,0,self.frame.size.height);
         CGContextConcatCTM(context, flipVertical);
-
         
         CTFrameDraw(_ctFrame, context);
         //Calculate the bounding for image
