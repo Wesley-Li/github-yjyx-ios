@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) CGFloat height;
 @property (weak, nonatomic) IBOutlet UILabel *solutionLabel;
+@property (nonatomic, strong) NSIndexPath *indexPath;
 
 - (void)setSolutionValueWithDiction:(NSDictionary *)dic;
 

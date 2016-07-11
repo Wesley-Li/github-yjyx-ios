@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CorectCell : UITableViewCell
-
+@property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, assign) CGFloat height;
 
 /**

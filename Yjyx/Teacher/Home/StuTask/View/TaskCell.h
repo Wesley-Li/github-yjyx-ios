@@ -12,7 +12,7 @@
 
 @property (nonatomic, assign) CGSize optimalSize;
 @property (nonatomic, assign) CGFloat height;
-
+@property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, strong) NSDictionary *dic;
 
 /**

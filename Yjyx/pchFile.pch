@@ -219,3 +219,14 @@
 
 // 学生错题列表
 #define STUDENT_GET_WRONG_LIST_GET @"/api/student/stats/"
+// 获取各学科统计汇总
+#define STUDENT_STATISTIC_GET @"/api/student/stats/"
+// 获取单个学科趋势图数据
+#define STUDENT_LINECHART_GET @"/api/student/tasks/"
+
+
+
+
+
+
+

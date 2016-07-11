@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RCLabel.h"
 
 @interface ChildrenExplantionViewController : BaseViewController
 @property (strong , nonatomic) NSString *explantionStr;

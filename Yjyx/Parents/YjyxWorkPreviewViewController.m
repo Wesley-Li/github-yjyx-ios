@@ -7,7 +7,6 @@
 //
 
 #import "YjyxWorkPreviewViewController.h"
-#import "RCLabel.h"
 #import "PPreviewCell.h"
 
 #define ID @"Cell"

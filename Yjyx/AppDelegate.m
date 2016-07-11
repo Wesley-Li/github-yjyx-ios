@@ -348,13 +348,11 @@
         
         // 统计
         YjyxStatistController *statistVc = [[YjyxStatistController alloc] init];
-        statistVc.view.backgroundColor = [UIColor greenColor];
         YjyxCommonNavController *navVc2 = [[YjyxCommonNavController alloc] initWithRootViewController:statistVc];
-        navVc2.tabBarItem = [UITabBarItem itemWithTitle:@"统计" image:[UIImage imageNamed:@"首页"] selectedImage:[UIImage imageNamed:@"首页点击"]];
+        navVc2.tabBarItem = [UITabBarItem itemWithTitle:@"统计" image:[UIImage imageNamed:@"student_sta"] selectedImage:[UIImage imageNamed:@"student_sta_tap"]];
 //        navVc2.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5);
         // 亿教
         YjyxYiTeachController *yiTeachVc = [[YjyxYiTeachController alloc] init];
-        yiTeachVc.view.backgroundColor = [UIColor blueColor];
         YjyxCommonNavController *navVc3 = [[YjyxCommonNavController alloc] initWithRootViewController:yiTeachVc];
         navVc3.tabBarItem = [UITabBarItem itemWithTitle:@"亿教" image:[UIImage imageNamed:@"亿教"] selectedImage:[UIImage imageNamed:@"亿教点击"]];
 //        navVc3.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5);

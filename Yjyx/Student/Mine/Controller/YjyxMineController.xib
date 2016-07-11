@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -112,9 +111,13 @@
                                 </mask>
                             </variation>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hjB-vh-imk">
-                            <rect key="frame" x="264" y="25" width="46" height="30"/>
-                            <state key="normal" title="Button"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hjB-vh-imk">
+                            <rect key="frame" x="285" y="25" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="CnC-9O-UK8"/>
+                                <constraint firstAttribute="height" constant="25" id="Zl8-Do-nPO"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="student_home_setting"/>
                             <connections>
                                 <action selector="setterBtnClick:" destination="-1" eventType="touchUpInside" id="s9u-25-olD"/>
                             </connections>
@@ -310,6 +313,7 @@
     <resources>
         <image name="report.png" width="59" height="59"/>
         <image name="score.png" width="50" height="50"/>
+        <image name="student_home_setting" width="51" height="51"/>
         <image name="常用工具" width="230" height="230"/>
         <image name="我的统计" width="230" height="230"/>
         <image name="私密日记" width="230" height="230"/>

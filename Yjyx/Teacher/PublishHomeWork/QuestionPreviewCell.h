@@ -19,4 +19,8 @@
 - (void)setValueWithModel:(ChaperContentItem *)model;
 
 - (void)setWrongWithModel:(YjyxWrongSubModel *)model;
+
+
+
+
 @end

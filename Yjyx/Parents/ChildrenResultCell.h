@@ -11,6 +11,7 @@
 @class ResultModel;
 @interface ChildrenResultCell : UITableViewCell
 
+
 @property (weak, nonatomic) IBOutlet UIButton *solutionBtn;// 亿教解析
 
 @property (weak, nonatomic) IBOutlet UIButton *expandBtn;// 展开按钮

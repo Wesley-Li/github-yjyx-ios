@@ -9,11 +9,11 @@
 #import "TaskCell.h"
 #import "RCLabel.h"
 
-@interface TaskCell ()
+@interface TaskCell ()<UIWebViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *webBGVIEW;
 
 @property (weak, nonatomic) IBOutlet UILabel *dificultyLabel;
-@property (nonatomic, strong) RCLabel *contentLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *bg_view;
 
@@ -26,37 +26,26 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-
-    
-    NSString *content = [NSString stringWithFormat:@"%@", [_dic[@"question"] objectForKey:@"content"]];
-    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH - 20, 999)];
-    self.contentLabel = templabel;
-    templabel.userInteractionEnabled = NO;
-    templabel.font = [UIFont systemFontOfSize:14];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    templabel.componentsAndPlainText = componentsDS;
-    
-    [self.bg_view addSubview:templabel];
-    
     
 }
 
 - (void)setValueWithDictionary:(NSDictionary *)dic {
     
-
-    if (dic == nil) {
-        return;
+    for (UIView *view in [self.webBGVIEW subviews]) {
+        [view removeFromSuperview];
     }
     
     NSString *htmlString = [NSString stringWithFormat:@"%@", [dic[@"question"] objectForKey:@"content"]];
-    NSString *content = [htmlString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    self.contentLabel.componentsAndPlainText = componentsDS;
     
-    CGSize optimalSize = [_contentLabel optimumSize];
-    self.height = optimalSize.height + 15 + 30;
-
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", htmlString];
+    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH - 20, 50)];
+    web.scrollView.showsHorizontalScrollIndicator = NO;
+    web.scrollView.scrollEnabled = NO;
+    web.scrollView.bounces = NO;
+    web.delegate = self;
+    web.backgroundColor = [UIColor redColor];
+    [web loadHTMLString:jsString baseURL:nil];
+    [self.webBGVIEW addSubview:web];
 
 
     NSInteger level;
@@ -85,15 +74,32 @@
     
 }
 
-
-
-
-- (void)setFrame:(CGRect)frame
-{
-    CGRect rect = frame;
-    rect.size.height -= 1;
-    frame = rect;
-    [super setFrame: frame];
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    
+    CGRect frame = webView.frame;
+    
+    NSString *js = @"function imgAutoFit() { \
+    var imgs = document.getElementsByTagName('img'); \
+    for (var i = 0; i < imgs.length; ++i) {\
+    var img = imgs[i];   \
+    if (img.width > %f) {\
+    img.style.maxWidth = %f; \
+    }\
+    } \
+    }";
+    js = [NSString stringWithFormat:js, SCREEN_WIDTH - 40, SCREEN_WIDTH - 40];
+    
+    [webView stringByEvaluatingJavaScriptFromString:js];
+    [webView stringByEvaluatingJavaScriptFromString:@"imgAutoFit()"];
+    
+    frame.size.height = webView.scrollView.contentSize.height;
+    webView.frame = frame;
+    
+    self.height = frame.size.height + 15 + 30;
+    NSLog(@"**********%.f", self.height);
+    // 发通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeight" object:self userInfo:nil];
+    
 }
 
 

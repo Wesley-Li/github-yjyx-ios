@@ -161,7 +161,6 @@
         if (result != nil) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 
-                NSLog(@"%@", result);
                 
                 [self.resultchoices removeAllObjects];
                 [self.resultblankfills removeAllObjects];
@@ -203,6 +202,7 @@
                     [model initModelWithArray:arr];
                     [self.resultblankfills addObject:model];
                 }
+                
         
                 [_resultTable reloadData];
                 
@@ -345,7 +345,6 @@
     
     if (indexPath.section == 0) {
         ResultModel *resultModel = self.resultchoices[indexPath.row];
-        
         // 选择题
         ChildrenResultModel *model = [self.choiceModelDic objectForKey:[NSString stringWithFormat:@"%@", resultModel.q_id]];
         
@@ -354,7 +353,6 @@
         
         [cell setSubviewsWithChildrenResultModel:model andResultModel:resultModel];
         
-        
         cell.tag = indexPath.row;
     
         
@@ -362,6 +360,7 @@
         
         // 填空题
         ResultModel *resultModel = self.resultblankfills[indexPath.row];
+        NSLog(@"^^^^^^^^%@", resultModel.q_id);
         ChildrenResultModel *model = [self.blankfillModelDic objectForKey:[NSString stringWithFormat:@"%@", resultModel.q_id]];
         model.questionType = @"blankfill";
         resultModel.questionType = @"blankfill";

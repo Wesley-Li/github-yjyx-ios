@@ -78,7 +78,6 @@
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:@"getonesubjectfailedquestion", @"action", self.subjectid, @"subjectid", self.targetlist, @"targetlist", nil];
     [manager GET:[BaseURL stringByAppendingString:STUDENT_GET_WRONG_LIST_GET] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
-        NSLog(@"%@", responseObject);
         
         if ([responseObject[@"retcode"] isEqual:@0]) {
             

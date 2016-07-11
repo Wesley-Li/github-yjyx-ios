@@ -13,7 +13,7 @@
 #import "MicroCell.h"
 
 #define ID @"cell"
-@interface YjyxMicroClassViewController ()
+@interface YjyxMicroClassViewController ()<UIWebViewDelegate>
 {
     WMPlayer *wmPlayer;
     CGRect playerFrame;
@@ -22,6 +22,7 @@
     UIView *_knowledgeView;
     UILabel *_namelb;
     NSDictionary *lessDic;
+    UIView *headerView;
 
 }
 
@@ -230,10 +231,6 @@
     
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-
-    [self.subjectTable reloadData];
-}
 
 - (void)refreshCellHeight:(NSNotification *)sender {
     
@@ -383,7 +380,7 @@
 #pragma mark - 配置tableview表头视图
 - (void)configureTableviewHeaderview {
 
-    UIView *headerView = [[UIView alloc] init];
+    headerView = [[UIView alloc] init];
     headerView.backgroundColor = COMMONCOLOR;
     
     // name
@@ -400,21 +397,46 @@
     
     // 清单内容
     NSString *content = _knowledgeName;
-    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, kowLabel.origin.y + 40, SCREEN_WIDTH, 40)];
-    templabel.backgroundColor = [UIColor whiteColor];
-    templabel.userInteractionEnabled = NO;
-    templabel.font = [UIFont systemFontOfSize:14];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    templabel.componentsAndPlainText = componentsDS;
-    CGSize optimalSize = [templabel optimumSize];
-    templabel.frame = CGRectMake(0, kowLabel.origin.y + 40, SCREEN_WIDTH, optimalSize.height);
-    [headerView addSubview:templabel];
+    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, kowLabel.origin.y + 40, SCREEN_WIDTH, 10)];
+    web.scrollView.scrollEnabled = NO;
+    web.scrollView.showsHorizontalScrollIndicator = NO;
+    web.delegate = self;
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", content];
+    [web loadHTMLString:jsString baseURL:nil];
     
-    headerView.frame = CGRectMake(0, playerFrame.size.height + 64, SCREEN_WIDTH, templabel.origin.y + optimalSize.height + 5);
+    
+    [headerView addSubview:web];
+    
+    headerView.frame = CGRectMake(0, playerFrame.size.height + 64, SCREEN_WIDTH, web.origin.y + web.height + 5);
     
     self.subjectTable.tableHeaderView = headerView;
     
+}
+
+#pragma mark - UIWebViewDelegate
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+
+    CGRect frame = webView.frame;
+    
+    NSString *js = @"function imgAutoFit() { \
+    var imgs = document.getElementsByTagName('img'); \
+    for (var i = 0; i < imgs.length; ++i) {\
+    var img = imgs[i];   \
+    if (img.width > %f) {\
+    img.style.maxWidth = %f; \
+    }\
+    } \
+    }";
+    js = [NSString stringWithFormat:js, SCREEN_WIDTH - 40, SCREEN_WIDTH - 40];
+    
+    [webView stringByEvaluatingJavaScriptFromString:js];
+    [webView stringByEvaluatingJavaScriptFromString:@"imgAutoFit()"];
+    
+    frame.size.height = webView.scrollView.contentSize.height;
+    webView.frame = frame;
+    headerView.frame = CGRectMake(0, playerFrame.size.height + 64, SCREEN_WIDTH, webView.origin.y + webView.frame.size.height + 5);
+
+    self.subjectTable.tableHeaderView = headerView;
 }
 
 

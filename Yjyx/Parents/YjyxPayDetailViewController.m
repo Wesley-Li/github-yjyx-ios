@@ -46,6 +46,8 @@
 {
     titleLb.text = [NSString stringWithFormat:@"%@会员特权",self.productEntity.subject_name];
     NSString *content = [self.productEntity.content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    
+    // 此处rclabel也不受影响,暂时不改
     contentLb = [[RCLabel alloc] initWithFrame:CGRectMake(35, 46, SCREEN_WIDTH - 50, 999)];
     contentLb.userInteractionEnabled = NO;
     contentLb.font = [UIFont systemFontOfSize:12];

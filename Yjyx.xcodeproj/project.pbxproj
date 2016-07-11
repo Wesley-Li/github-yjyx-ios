@@ -518,6 +518,8 @@
 		80D979001D2CC928000BD95E /* YjyxStuWrongListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D978FF1D2CC928000BD95E /* YjyxStuWrongListModel.m */; };
 		80D979041D2CD048000BD95E /* YjyxStuWrongListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D979021D2CD048000BD95E /* YjyxStuWrongListCell.m */; };
 		80D979051D2CD048000BD95E /* YjyxStuWrongListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D979031D2CD048000BD95E /* YjyxStuWrongListCell.xib */; };
+		80D979081D2DEEE6000BD95E /* YjyxStatisticModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D979071D2DEEE6000BD95E /* YjyxStatisticModel.m */; };
+		80D9790C1D2E21A5000BD95E /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D9790B1D2E21A5000BD95E /* iCarousel.m */; };
 		80F718C01CF28961007C0B75 /* StuConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BB1CF28961007C0B75 /* StuConditionCell.m */; };
 		80F718C11CF28961007C0B75 /* StuConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80F718BC1CF28961007C0B75 /* StuConditionCell.xib */; };
 		80F718C21CF28961007C0B75 /* SubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BE1CF28961007C0B75 /* SubmitCell.m */; };
@@ -1390,6 +1392,10 @@
 		80D979011D2CD048000BD95E /* YjyxStuWrongListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxStuWrongListCell.h; sourceTree = "<group>"; };
 		80D979021D2CD048000BD95E /* YjyxStuWrongListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxStuWrongListCell.m; sourceTree = "<group>"; };
 		80D979031D2CD048000BD95E /* YjyxStuWrongListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxStuWrongListCell.xib; sourceTree = "<group>"; };
+		80D979061D2DEEE6000BD95E /* YjyxStatisticModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YjyxStatisticModel.h; path = Yjyx/Student/HomeWork/View/YjyxStatisticModel.h; sourceTree = SOURCE_ROOT; };
+		80D979071D2DEEE6000BD95E /* YjyxStatisticModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YjyxStatisticModel.m; path = Yjyx/Student/HomeWork/View/YjyxStatisticModel.m; sourceTree = SOURCE_ROOT; };
+		80D9790A1D2E21A5000BD95E /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		80D9790B1D2E21A5000BD95E /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		80F718BA1CF28961007C0B75 /* StuConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuConditionCell.h; sourceTree = "<group>"; };
 		80F718BB1CF28961007C0B75 /* StuConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuConditionCell.m; sourceTree = "<group>"; };
 		80F718BC1CF28961007C0B75 /* StuConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StuConditionCell.xib; sourceTree = "<group>"; };
@@ -1950,6 +1956,7 @@
 		3AEF26DB1C61F08A0028BE09 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				80D979091D2E21A5000BD95E /* iCarousel */,
 				3BD9C7EF1CEEAC93008232D7 /* QiniuHelper */,
 				3A44A1E61CC0C63100B93F6A /* Third Library */,
 				3AB212AE1CA2E11900DCC618 /* KWFormView */,
@@ -2451,6 +2458,8 @@
 		3C3D93C21D26119500AA22AE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				80D979061D2DEEE6000BD95E /* YjyxStatisticModel.h */,
+				80D979071D2DEEE6000BD95E /* YjyxStatisticModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2480,14 +2489,11 @@
 				3C3D93C81D26119500AA22AE /* YjyxHomeWorkController.xib */,
 				3CD7E45F1D2B962500769FDE /* YjyxOneSubjectViewController.h */,
 				3CD7E4601D2B962500769FDE /* YjyxOneSubjectViewController.m */,
-
 				80D978FB1D2CA753000BD95E /* YjyxStuWrongListViewController.h */,
 				80D978FC1D2CA753000BD95E /* YjyxStuWrongListViewController.m */,
-
 				3CECA4AC1D2CDAEB0039DCB6 /* YjyxWorkDetailController.h */,
 				3CECA4AD1D2CDAEB0039DCB6 /* YjyxWorkDetailController.m */,
 				3CECA4AF1D2CDE9B0039DCB6 /* YjyxWorkDetailController.xib */,
-
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2516,17 +2522,14 @@
 				3C4274C81D2A7736008A30FA /* YjyxWorkDetailCell.h */,
 				3C4274C91D2A7736008A30FA /* YjyxWorkDetailCell.m */,
 				3C4274CA1D2A7736008A30FA /* YjyxWorkDetailCell.xib */,
-
 				80D979011D2CD048000BD95E /* YjyxStuWrongListCell.h */,
 				80D979021D2CD048000BD95E /* YjyxStuWrongListCell.m */,
 				80D979031D2CD048000BD95E /* YjyxStuWrongListCell.xib */,
-
 				3CD7E4621D2BD33D00769FDE /* YjyxSearchView.h */,
 				3CD7E4631D2BD33D00769FDE /* YjyxSearchView.m */,
 				3CD7E4651D2BD39200769FDE /* YjyxSearchView.xib */,
 				3CECA4A91D2C99310039DCB6 /* YjyxTimeField.h */,
 				3CECA4AA1D2C99310039DCB6 /* YjyxTimeField.m */,
-
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3002,6 +3005,15 @@
 				801F44A21CDF164800B7E7E1 /* x509v3.h */,
 			);
 			path = openssl;
+			sourceTree = "<group>";
+		};
+		80D979091D2E21A5000BD95E /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				80D9790A1D2E21A5000BD95E /* iCarousel.h */,
+				80D9790B1D2E21A5000BD95E /* iCarousel.m */,
+			);
+			path = iCarousel;
 			sourceTree = "<group>";
 		};
 		80FEB6621D1B77BA009EB126 /* Statistic */ = {
@@ -3526,6 +3538,7 @@
 				3CD7E4571D2B593800769FDE /* MJRefreshFooterView.m in Sources */,
 				3AC1D1E11CCDE70E006291D0 /* RegistFinalViewController.m in Sources */,
 				3CD7E4581D2B593800769FDE /* MJRefreshHeaderView.m in Sources */,
+				80D979081D2DEEE6000BD95E /* YjyxStatisticModel.m in Sources */,
 				8013D34A1CF47CB700F82301 /* TaskConditonModel.m in Sources */,
 				3B4864741CCF117300D2DE3C /* PrivateCenterViewController.m in Sources */,
 				3BB773A81CD8784000A24485 /* BookViewController.m in Sources */,
@@ -3625,6 +3638,7 @@
 				3CD1BC181D1E325E009ED261 /* SubjectTitleCell.m in Sources */,
 				3A91F4931C760CF4001568AA /* PNColor.m in Sources */,
 				3AD1FD9E1C72CE5000E362B9 /* CommonWebViewController.m in Sources */,
+				80D9790C1D2E21A5000BD95E /* iCarousel.m in Sources */,
 				3A4166781CEAE014005D2032 /* YjyxShopMallViewController.m in Sources */,
 				3AEF27241C61F08A0028BE09 /* UICountingLabel.m in Sources */,
 				3AFE02B91CA291BD0097CC83 /* BaseViewController.m in Sources */,
@@ -3646,9 +3660,7 @@
 				3A38278A1CDF185F00EAB979 /* YjyxFeedBackViewController.m in Sources */,
 				3A91F48F1C760CF4001568AA /* PNBar.m in Sources */,
 				8013D3391CF4521100F82301 /* CardCell.m in Sources */,
-
 				3CECA4AB1D2C99310039DCB6 /* YjyxTimeField.m in Sources */,
-
 				3CE18E9E1D2121EE007E0874 /* ReleaseFinishTimeCell.m in Sources */,
 				3AEF27201C61F08A0028BE09 /* RTSpinKitView.m in Sources */,
 				3BCF194B1CDCC2B500E2EA1A /* TaskDetailTableViewController.m in Sources */,

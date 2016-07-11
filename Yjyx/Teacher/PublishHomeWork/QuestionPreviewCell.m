@@ -10,7 +10,8 @@
 #import "ChaperContentItem.h"
 #import "RCLabel.h"
 #import "YjyxWrongSubModel.h"
-@interface QuestionPreviewCell ()
+
+@interface QuestionPreviewCell ()<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *subject_typeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *levelLabel;
@@ -69,18 +70,47 @@
     self.bg_view.layer.borderWidth = 1;
     self.bg_view.layer.borderColor = RGBACOLOR(140.0, 140.0, 140.0, 1).CGColor;
     
-    NSString *content = model.content_text;
-    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-    templabel.userInteractionEnabled = NO;
-    templabel.font = [UIFont systemFontOfSize:14];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    templabel.componentsAndPlainText = componentsDS;
+    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 50)];
+    web.delegate = self;
+    web.scrollView.scrollEnabled = NO;
+    web.scrollView.bounces = NO;
+    web.scrollView.showsHorizontalScrollIndicator = NO;
     
-    [self.BGVIEW addSubview:templabel];
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content_text];
+    
+    [web loadHTMLString:jsString baseURL:nil];
+    
+    
+    [self.BGVIEW addSubview:web];
 
     
 }
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+
+    CGRect frame = webView.frame;
+    
+    NSString *js = @"function imgAutoFit() { \
+    var imgs = document.getElementsByTagName('img'); \
+    for (var i = 0; i < imgs.length; ++i) {\
+    var img = imgs[i];   \
+    if (img.width > %f) {\
+    img.style.maxWidth = %f; \
+    }\
+    } \
+    }";
+    js = [NSString stringWithFormat:js, SCREEN_WIDTH - 40, SCREEN_WIDTH - 40];
+    
+    [webView stringByEvaluatingJavaScriptFromString:js];
+    [webView stringByEvaluatingJavaScriptFromString:@"imgAutoFit()"];
+    
+    frame.size.height = webView.scrollView.contentSize.height;
+    webView.frame = frame;
+
+}
+
+
+
 - (void)setWrongWithModel:(YjyxWrongSubModel *)model
 {
     for (UIView *view in [self.BGVIEW subviews]) {
@@ -120,15 +150,17 @@
     self.bg_view.layer.borderWidth = 1;
     self.bg_view.layer.borderColor = RGBACOLOR(140.0, 140.0, 140.0, 1).CGColor;
     
-    NSString *content = model.content;
-    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-    templabel.userInteractionEnabled = NO;
-    templabel.font = [UIFont systemFontOfSize:14];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    templabel.componentsAndPlainText = componentsDS;
+    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 50)];
+    web.delegate = self;
+    web.scrollView.scrollEnabled = NO;
+    web.scrollView.bounces = NO;
+    web.scrollView.showsHorizontalScrollIndicator = NO;
     
-    [self.BGVIEW addSubview:templabel];
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
+    
+    [web loadHTMLString:jsString baseURL:nil];
+    
+    [self.BGVIEW addSubview:web];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

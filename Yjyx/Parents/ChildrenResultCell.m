@@ -66,6 +66,7 @@
 
 - (void)setSubviewsWithChildrenResultModel:(ChildrenResultModel *)model andResultModel:(ResultModel *)resultModel {
     
+    
     for (UIView *view in [self.bg_view subviews]) {
         [view removeFromSuperview];
     }
@@ -228,9 +229,10 @@
     if (rightAnswerHeight > myAnswerHeight) {
         self.myAnswerBottomConstraint.constant = rightAnswerHeight - myAnswerHeight + 7;
     }else if (rightAnswerHeight == myAnswerHeight){
-    
+        
         self.rightAnswerBottomConstraint.constant = 10;
         self.myAnswerBottomConstraint.constant = 10;
+    
     }else {
     
         self.rightAnswerBottomConstraint.constant = myAnswerHeight - rightAnswerHeight + 7;

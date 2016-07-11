@@ -13,7 +13,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "YjyxPayDetailViewController.h"
 
-@interface YjyxMemberDetailViewController ()
+@interface YjyxMemberDetailViewController ()<UIWebViewDelegate>
 {
     UIView *chooseView;
     UIView *payView;
@@ -36,8 +36,11 @@
     openChildAry = [[NSMutableArray alloc] init];
     payBtn.hidden = YES;
     
+
     titleLb.text = [NSString stringWithFormat:@"%@会员特权",self.productEntity.subject_name];
+    
     NSString *content = [self.productEntity.content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    // 此处rclabel暂时不受影响,可不改
     contentLb = [[RCLabel alloc] initWithFrame:CGRectMake(35, 46, SCREEN_WIDTH - 50, 999)];
     contentLb.userInteractionEnabled = NO;
     contentLb.font = [UIFont systemFontOfSize:12];

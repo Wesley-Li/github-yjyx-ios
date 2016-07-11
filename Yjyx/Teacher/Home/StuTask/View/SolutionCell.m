@@ -9,7 +9,7 @@
 #import "SolutionCell.h"
 #import "RCLabel.h"
 
-@interface SolutionCell ()
+@interface SolutionCell ()<UIWebViewDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UILabel *title_label;
@@ -38,23 +38,49 @@
     }
     
     NSString *htmlString = [dic[@"question"] objectForKey:@"explanation"];
-    if ([htmlString isEqualToString:@""]) {
-        self.title_label.text = @"";
+    if (htmlString != nil && htmlString.length != 0) {
+        NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", htmlString];
+        UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH - 20, 50)];
+        web.scrollView.showsHorizontalScrollIndicator = NO;
+        web.scrollView.scrollEnabled = NO;
+        web.scrollView.bounces = NO;
+        web.delegate = self;
+        [web loadHTMLString:jsString baseURL:nil];
+        [self.bg_view addSubview:web];
+        
     }
-    NSString *content = [htmlString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *contentLabel = [[RCLabel alloc] initWithFrame:CGRectMake(10, 40, SCREEN_WIDTH - 20, 500)];
-
-    contentLabel.userInteractionEnabled = NO;
-
-    contentLabel.font = [UIFont systemFontOfSize:12];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    contentLabel.componentsAndPlainText = componentsDS;
-    CGSize optimalSize = [contentLabel optimumSize];
-    self.height = optimalSize.height + 40 + 40;
-    [self.bg_view addSubview:contentLabel];
-  
+    
     
 }
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    
+    CGRect frame = webView.frame;
+    
+    
+    NSString *js = @"function imgAutoFit() { \
+    var imgs = document.getElementsByTagName('img'); \
+    for (var i = 0; i < imgs.length; ++i) {\
+    var img = imgs[i];   \
+    if (img.width > %f) {\
+    img.style.maxWidth = %f; \
+    }\
+    } \
+    }";
+    js = [NSString stringWithFormat:js, SCREEN_WIDTH - 40, SCREEN_WIDTH - 40];
+    
+    [webView stringByEvaluatingJavaScriptFromString:js];
+    [webView stringByEvaluatingJavaScriptFromString:@"imgAutoFit()"];
+    
+    frame.size.height = webView.scrollView.contentSize.height;
+    webView.frame = frame;
+    
+    self.height = frame.size.height + 40 + 40;
+    // 发通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeight" object:self];
+    
+}
+
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

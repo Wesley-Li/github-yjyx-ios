@@ -43,6 +43,9 @@
 @property (nonatomic, assign) CGFloat submitCellHeight;
 @property (nonatomic, assign) CGFloat unsubmitCellHeight;
 
+@property (nonatomic, assign) BOOL finishExpand;
+@property (nonatomic, assign) BOOL unfinishExpand;
+
 @property (nonatomic, strong) TaskConditionTableViewCell *tcell;
 
 
@@ -88,6 +91,9 @@
     [super viewDidLoad];
     
     headerHeight = 50;
+    
+    self.finishExpand = NO;
+    self.unfinishExpand = NO;
     
     self.title = self.taskModel.resourcename;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -195,11 +201,7 @@
 }
 
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-
-    
     
     if (indexPath.row == 0) {
         
@@ -266,6 +268,10 @@
             cell.contentView.hidden = NO;
         }
         
+        [cell.showMoreBtn addTarget:self action:@selector(showMore:) forControlEvents:UIControlEventTouchUpInside];
+        cell.showMoreBtn.selected = self.finishExpand ? YES : NO;
+        
+        
         [self cell:cell addSubViewsWithFinishedArr:_finishedArr];
 
         
@@ -285,6 +291,8 @@
             cell.contentView.hidden = NO;
         }
         
+        [cell.showMoreBtn addTarget:self action:@selector(unfinishShowMore:) forControlEvents:UIControlEventTouchUpInside];
+        cell.showMoreBtn.selected = self.unfinishExpand ? YES : NO;
         [self cell:cell addSubViewsWithUnfinishedArr:_unfinishedArr];
         
 
@@ -298,6 +306,21 @@
     
 
 
+}
+
+- (void)showMore:(UIButton *)sender {
+
+    sender.selected = !sender.selected;
+    self.finishExpand = sender.selected ? YES : NO;
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)unfinishShowMore:(UIButton *)sender {
+
+    NSLog(@"点击了");
+    sender.selected = !sender.selected;
+    self.unfinishExpand = sender.selected ? YES : NO;
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:4 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 
@@ -561,9 +584,18 @@
     CGFloat tWidth = (SCREEN_WIDTH - 20 - padding *(num + 1)) / num;
     CGFloat tHeigh = tWidth + 20;
     
-    //      NSLog(@"%@", self.choiceArr);
+    NSInteger tempCount;
+    if (arr.count > num ) {
+        cell.showMoreBtn.hidden = NO;
+        if (cell.showMoreBtn.selected == NO) {
+            tempCount = num;
+        }else {
+        
+            tempCount = arr.count;
+        }
+    }
     
-    for (int i = 0; i < arr.count; i++) {
+    for (int i = 0; i < tempCount; i++) {
         
         UIView *taskView = [[UIView alloc] init];
         taskView.frame = CGRectMake(size.width, size.height, tWidth, tHeigh);
@@ -573,7 +605,7 @@
         if (SCREEN_WIDTH - 20 - size.width <= 0) {
             // 换行
             size.width = 10;
-            if (arr.count - i > 1) {
+            if (tempCount - i > 1) {
                 size.height += tHeigh + 10;
             }
 
@@ -608,11 +640,6 @@
         [cell.BGVIEW addSubview:taskView];
     }
     
-    // 判断显示更多按钮是否需要显示
-    
-    
-    cell.showMoreBtn.hidden = YES;
-    
     
     self.submitCellHeight = size.height + tHeigh + 30 + 30;
     
@@ -637,9 +664,18 @@
     
     CGFloat tHeigh = tWidth + 20;
     
-    //      NSLog(@"%@", self.choiceArr);
+    NSInteger tempCount;
+    if (arr.count > num ) {
+        cell.showMoreBtn.hidden = NO;
+        if (cell.showMoreBtn.selected == NO) {
+            tempCount = num;
+        }else {
+            
+            tempCount = arr.count;
+        }
+    }
     
-    for (int i = 0; i < arr.count; i++) {
+    for (int i = 0; i < tempCount; i++) {
         
         UIView *taskView = [[UIView alloc] init];
         [cell.BGVIEW addSubview:taskView];
@@ -650,7 +686,7 @@
         if (SCREEN_WIDTH - 20 - size.width <= 0) {
             // 换行
             size.width = 10;
-            if (arr.count - i > 1) {
+            if (tempCount - i > 1) {
                 size.height += tHeigh + 10;
             }
 
@@ -687,7 +723,7 @@
 //        [cell.bg_view addSubview:taskView];
     }
     self.unsubmitCellHeight = size.height + tHeigh + 30 + 30;
-    cell.showMoreBtn.hidden = YES;
+    
     
 
 }
@@ -706,18 +742,7 @@
     
 }
 
-#pragma mark - 点击未交头像进入详情
-//- (void)unImageBtnClick:(UIButton *)sender {
-//    
-//    StudentDetailViewController *stuDetailVC = [[StudentDetailViewController alloc] init];
-//    FinshedModel *model = _unfinishedArr[sender.tag - 200];
-//    stuDetailVC.finshedModel = model;
-//    stuDetailVC.taskID = self.taskModel.t_id;
-//    
-//    [self.navigationController pushViewController:stuDetailVC animated:YES];
-//    
-//    
-//}
+
 
 
 @end
