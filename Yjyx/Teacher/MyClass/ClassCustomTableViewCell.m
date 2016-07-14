@@ -32,7 +32,7 @@
     
 //    NSLog(@"######%@", model.isyjmember);
 
-    [self.picImage setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:[UIImage imageNamed:@"hpic_placeholder"]];
+    [self.picImage setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:[UIImage imageNamed:@"student_p"]];
     
     if ([model.isyjmember isEqual:[NSNull null]]) {
         self.vipImageView.hidden = YES;

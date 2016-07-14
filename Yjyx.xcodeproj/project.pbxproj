@@ -520,6 +520,8 @@
 		80D979051D2CD048000BD95E /* YjyxStuWrongListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D979031D2CD048000BD95E /* YjyxStuWrongListCell.xib */; };
 		80D979081D2DEEE6000BD95E /* YjyxStatisticModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D979071D2DEEE6000BD95E /* YjyxStatisticModel.m */; };
 		80D9790C1D2E21A5000BD95E /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D9790B1D2E21A5000BD95E /* iCarousel.m */; };
+		80D979101D36352B000BD95E /* TeacherDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D9790E1D36352B000BD95E /* TeacherDrawViewController.m */; };
+		80D979111D36352B000BD95E /* TeacherDrawViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D9790F1D36352B000BD95E /* TeacherDrawViewController.xib */; };
 		80F718C01CF28961007C0B75 /* StuConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BB1CF28961007C0B75 /* StuConditionCell.m */; };
 		80F718C11CF28961007C0B75 /* StuConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80F718BC1CF28961007C0B75 /* StuConditionCell.xib */; };
 		80F718C21CF28961007C0B75 /* SubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BE1CF28961007C0B75 /* SubmitCell.m */; };
@@ -1396,6 +1398,9 @@
 		80D979071D2DEEE6000BD95E /* YjyxStatisticModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YjyxStatisticModel.m; path = Yjyx/Student/HomeWork/View/YjyxStatisticModel.m; sourceTree = SOURCE_ROOT; };
 		80D9790A1D2E21A5000BD95E /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		80D9790B1D2E21A5000BD95E /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		80D9790D1D36352B000BD95E /* TeacherDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherDrawViewController.h; sourceTree = "<group>"; };
+		80D9790E1D36352B000BD95E /* TeacherDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherDrawViewController.m; sourceTree = "<group>"; };
+		80D9790F1D36352B000BD95E /* TeacherDrawViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherDrawViewController.xib; sourceTree = "<group>"; };
 		80F718BA1CF28961007C0B75 /* StuConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuConditionCell.h; sourceTree = "<group>"; };
 		80F718BB1CF28961007C0B75 /* StuConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuConditionCell.m; sourceTree = "<group>"; };
 		80F718BC1CF28961007C0B75 /* StuConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StuConditionCell.xib; sourceTree = "<group>"; };
@@ -2286,6 +2291,9 @@
 				3B35DB891CE0560F000B7F83 /* NextTableViewController.m */,
 				3B831A271CE4B19D00724E6B /* OneStuTaskDetailViewController.h */,
 				3B831A281CE4B19D00724E6B /* OneStuTaskDetailViewController.m */,
+				80D9790D1D36352B000BD95E /* TeacherDrawViewController.h */,
+				80D9790E1D36352B000BD95E /* TeacherDrawViewController.m */,
+				80D9790F1D36352B000BD95E /* TeacherDrawViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3360,6 +3368,7 @@
 				3AD1FD941C72BD8F00E362B9 /* MyChildrenTableViewCell.xib in Resources */,
 				3BC7DBE01CDB27ED00E5E12F /* ClassCustomTableViewCell.xib in Resources */,
 				3B91A6F81CE6010D0082A92C /* YourAnswerCell.xib in Resources */,
+				80D979111D36352B000BD95E /* TeacherDrawViewController.xib in Resources */,
 				3AF339471C770FDC00586A37 /* AutoLoginViewController.xib in Resources */,
 				80D978ED1D27A71D000BD95E /* OneStuViewController.xib in Resources */,
 				3BCF19241CDC66E600E2EA1A /* nav_btn_back@3x.png in Resources */,
@@ -3703,6 +3712,7 @@
 				80FEB6861D1BB545009EB126 /* StatisticController.m in Sources */,
 				80D978E61D265B80000BD95E /* CustomSectionView.m in Sources */,
 				80D978FA1D28E1E4000BD95E /* GetTaskModel.m in Sources */,
+				80D979101D36352B000BD95E /* TeacherDrawViewController.m in Sources */,
 				CB40047F1C609BCD00556AA7 /* main.m in Sources */,
 				3CD7E4551D2B593800769FDE /* MJRefreshBaseView.m in Sources */,
 				3CA896381D06B3890092D292 /* TreeNode.m in Sources */,

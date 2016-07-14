@@ -62,7 +62,7 @@
     
     
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:24/255.0 green:138/255.0 blue:224/255.0 alpha:1.0]];
-    self.navigationItem.title = self.finshedModel.Name;
+    self.navigationItem.title = self.titleName;
     
     UIButton *goBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     goBackBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
@@ -122,13 +122,9 @@
         
         if ([[responseObject[@"result"] allKeys] containsObject:@"blankfill"]) {
             
-            
-            
-            
+
             NSString *jsonStringB = [responseObject[@"result"] objectForKey:@"blankfill"];
-//            NSString *jsonStringB2 = [jsonStringB stringByReplacingOccurrencesOfString:@"u''" withString:@"2"];
-//            NSString *jsonSB = [jsonStringB stringByReplacingOccurrencesOfString:@"False" withString:@"false"];
-//            NSString *jsonSBA = [jsonSB stringByReplacingOccurrencesOfString:@"True" withString:@"true"];
+
             
             NSData *dataB = [jsonStringB dataUsingEncoding:NSUTF8StringEncoding];
             
@@ -171,153 +167,86 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    if (_blankfillArray.count == 0 || _choiceArray.count == 0) {
-        return 4;
-    }else {
-    
-        return 5;
-    }
+    return 5;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
-    if (_choiceArray.count == 0 || _blankfillArray.count == 0) {
-        if (indexPath.row == 0) {
-            return 40;
-        }else if (indexPath.row == 1) {
-            
-            return 60;
-        }else if (indexPath.row == 2){
-            
-            return 50;
-        }else {
-            
-            if (_choiceArray.count == 0) {
-                return _blankfillCellHeight;
-            }else {
-            
-                return _choiceCellHeight;
-            }
-        
-        }
 
+    
+    if (indexPath.row == 0) {
+        return 40;
+    }else if (indexPath.row == 1) {
+        
+        return 60;
+    }else if (indexPath.row == 2){
+        
+        return 50;
+    }else if (indexPath.row == 3) {
+        
+        return _choiceCellHeight;
     }else {
     
     
-        if (indexPath.row == 0) {
-            return 40;
-        }else if (indexPath.row == 1) {
-            
-            return 60;
-        }else if (indexPath.row == 2){
-            
-            return 50;
-        }else if (indexPath.row == 3) {
-            
-            return _choiceCellHeight;
-        }else {
-        
-        
-            return _blankfillCellHeight;
-        }
-
-    
+        return _blankfillCellHeight;
     }
-    
+
+
 
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+  
+        
+    if (indexPath.row == 0) {
+        SpendTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:kSpendTime forIndexPath:indexPath];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [cell setValueWithDic:_dic];
+        return cell;
+    }else if (indexPath.row == 1) {
+        SubTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:kSubMit forIndexPath:indexPath];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [cell setValueWithDic:_dic];
+        return cell;
+    }else if (indexPath.row == 2) {
+        
+        CardCell *cell = [tableView dequeueReusableCellWithIdentifier:kCard forIndexPath:indexPath];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        return cell;
+        
+    }else if (indexPath.row == 3) {
     
-    if (_choiceArray.count == 0 || _blankfillArray == 0) {
-        
-        if (indexPath.row == 0) {
-            SpendTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:kSpendTime forIndexPath:indexPath];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            [cell setValueWithDic:_dic];
-            return cell;
-        }else if (indexPath.row == 1) {
-            SubTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:kSubMit forIndexPath:indexPath];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            [cell setValueWithDic:_dic];
-            return cell;
-        }else if (indexPath.row == 2) {
-            
-            CardCell *cell = [tableView dequeueReusableCellWithIdentifier:kCard forIndexPath:indexPath];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            return cell;
-            
+        ChoiceCell *cell = [tableView dequeueReusableCellWithIdentifier:kChoice forIndexPath:indexPath];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        if (_choiceArray.count == 0) {
+            cell.titleLabel.hidden = YES;
         }else {
-            
-            if (_blankfillArray.count == 0) {
-                
-                ChoiceCell *cell = [tableView dequeueReusableCellWithIdentifier:kChoice forIndexPath:indexPath];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                
-                [self cell:cell addSubviewsWithChoiceArray:_choiceArray];
-
-                return cell;
-            }else {
-            
-                BlankfillCell *cell = [tableView dequeueReusableCellWithIdentifier:kBlank forIndexPath:indexPath];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                
-                [self cell:cell addSubviewsWithBlankfillArray:_blankfillArray];
-                
-                return cell;
-            
-            }
-            
         
-            
+            cell.titleLabel.hidden = NO;
         }
+        [self cell:cell addSubviewsWithChoiceArray:_choiceArray];
         
+        return cell;
         
     }else {
-        
-        
-        if (indexPath.row == 0) {
-            SpendTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:kSpendTime forIndexPath:indexPath];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            [cell setValueWithDic:_dic];
-            return cell;
-        }else if (indexPath.row == 1) {
-            SubTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:kSubMit forIndexPath:indexPath];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            [cell setValueWithDic:_dic];
-            return cell;
-        }else if (indexPath.row == 2) {
-            
-            CardCell *cell = [tableView dequeueReusableCellWithIdentifier:kCard forIndexPath:indexPath];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            return cell;
-            
-        }else if (indexPath.row == 3) {
-        
-            ChoiceCell *cell = [tableView dequeueReusableCellWithIdentifier:kChoice forIndexPath:indexPath];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            [self cell:cell addSubviewsWithChoiceArray:_choiceArray];
-            
-            return cell;
-            
+    
+        BlankfillCell *cell = [tableView dequeueReusableCellWithIdentifier:kBlank forIndexPath:indexPath];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        if (_blankfillArray.count == 0) {
+            cell.titleLabel.hidden = YES;
         }else {
         
-            BlankfillCell *cell = [tableView dequeueReusableCellWithIdentifier:kBlank forIndexPath:indexPath];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            
-            [self cell:cell addSubviewsWithBlankfillArray:_blankfillArray];
-            
-            return cell;
-            
+            cell.titleLabel.hidden = NO;
         }
-    
-    
-    
+        [self cell:cell addSubviewsWithBlankfillArray:_blankfillArray];
+        
+        return cell;
+        
     }
+    
     
 }
 
@@ -402,10 +331,10 @@
     OneStuTaskDetailViewController *oneTaskVC = [[OneStuTaskDetailViewController alloc] init];
     oneTaskVC.taskid = self.taskID;
     oneTaskVC.qtype = @1;
-    oneTaskVC.suid = self.finshedModel.studentID;
+    oneTaskVC.suid = self.studentID;
     TaskConditonModel *model = _choiceArray[sender.tag - 200];
     oneTaskVC.qid = model.t_id;
-    oneTaskVC.title = [NSString stringWithFormat:@"%@", self.finshedModel.Name];
+    oneTaskVC.title = [NSString stringWithFormat:@"%@", self.titleName];
     if ([model.rightOrWrong isEqual:@1]) {
         oneTaskVC.right = @"YES";
     }
@@ -485,10 +414,10 @@
     OneStuTaskDetailViewController *oneTaskVC = [[OneStuTaskDetailViewController alloc] init];
     oneTaskVC.taskid = self.taskID;
     oneTaskVC.qtype = @2;
-    oneTaskVC.suid = self.finshedModel.studentID;
+    oneTaskVC.suid = self.studentID;
     TaskConditonModel *model = _blankfillArray[sender.tag - 200];
     oneTaskVC.qid = model.t_id;
-    oneTaskVC.title = [NSString stringWithFormat:@"%@", self.finshedModel.Name];
+    oneTaskVC.title = [NSString stringWithFormat:@"%@", self.titleName];
     if ([model.rightOrWrong isEqual:@1]) {
         oneTaskVC.right = @"YES";
     }

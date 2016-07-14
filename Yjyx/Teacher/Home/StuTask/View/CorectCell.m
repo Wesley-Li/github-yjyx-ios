@@ -7,7 +7,6 @@
 //
 
 #import "CorectCell.h"
-#import "RCLabel.h"
 
 
 
@@ -67,13 +66,16 @@
     UILabel *answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH - 20, 40)];
     answerLabel.text = tureAnswer;
     answerLabel.font = [UIFont systemFontOfSize:13];
-    
-    
     [self.bg_view addSubview:answerLabel];
     self.height = answerLabel.frame.size.height + 20 + 10;
     
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeightChange" object:self userInfo:nil];
+
+    
+    
 }
+
 - (void)setFrame:(CGRect)frame
 {
     CGRect rect = frame;
@@ -115,7 +117,7 @@
     webView.frame = frame;
     self.height = frame.size.height + 15 + 30;
     // 用通知发送加载完成后的高度
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeight" object:self userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeightChange" object:self userInfo:nil];
 
     
 }

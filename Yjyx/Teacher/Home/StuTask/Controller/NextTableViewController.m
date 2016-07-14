@@ -15,13 +15,16 @@
 #import "SolutionCell.h"
 #import "VideoCell.h"
 #import "WMPlayer.h"
+#import "OneStuTaskDetailViewController.h"
+#import "StudentEntity.h"
+#import "StuDataBase.h"
 
 #define KTaskCell @"Cell1"
 #define KAnswerSituationCell @"Cell2"
 #define KCorectCell @"Cell3"
 #define KSolutionCell @"Cell4"
 #define KVideoCell @"Cell5"
-@interface NextTableViewController ()
+@interface NextTableViewController ()<AnswerSituationCellDelegate>
 
 {
     WMPlayer *wmPlayer;
@@ -31,6 +34,8 @@
     NSString *_explanation;
     NSString *_videourl;
     NSInteger rows;
+    
+    
 }
 
 @property (nonatomic, strong) NSDictionary *dic;
@@ -282,6 +287,9 @@
     // 初始状态
     isSmallScreen = NO;
     isPlay = NO;
+    self.isCorrectShowMore = NO;
+    self.isWrongShowMore = NO;
+    
     // 请求网络
     [self readDataFromNetWork];
     
@@ -313,9 +321,10 @@
      ];
     
     // cell高度通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCellHeight:) name:@"CellHeight" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCellHeight:) name:@"CellHeightChange" object:nil];
     
     self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
 }
 
@@ -353,16 +362,15 @@
             
                 rows = 5;
             }
-           
             
+            [self.tableView reloadData];
+            [SVProgressHUD showSuccessWithStatus:@"数据加载成功"];
+            [SVProgressHUD dismissWithDelay:0.8];
+           
         }else {
             
             [self.tableView makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
         }
-        
-        [self.tableView reloadData];
-        [SVProgressHUD showSuccessWithStatus:@"数据加载成功"];
-        [SVProgressHUD dismissWithDelay:0.8];
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [self.view makeToast:@"网络连接出错,请重试或检查您的网络!" duration:1.0 position:SHOW_CENTER complete:nil];
@@ -374,13 +382,18 @@
 }
 - (void)viewWillDisappear:(BOOL)animated {
     
+    if (isPlay) {
+        [self closeTheVideo:nil];
+    }
     [self releaseWMPlayer];
     [wmPlayer removeFromSuperview];
     [SVProgressHUD dismiss];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)goBack {
     
     [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 
@@ -390,11 +403,13 @@
 }
 
 - (void)changeCellHeight:(NSNotification *)sender {
+    
+    
     if ([[sender object] isMemberOfClass:[TaskCell class]]) {
         TaskCell *cell = [sender object];
         if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] || [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] floatValue] != cell.height) {
             [self.cellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]];
-            NSLog(@"-----%@", self.cellHeightDic);
+           
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         }
 
@@ -416,8 +431,7 @@
         }
 
     
-    }
-    
+    }    
     
 }
 
@@ -431,7 +445,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    NSLog(@"=======%ld", rows);
     return rows;
 }
 
@@ -440,35 +454,24 @@
     
     if (indexPath.row == 0) {
         CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
-        if (height == 0) {
-            return 300;
-        }else {
         
-            return height;
-        }
+        return height;
+        
         
     }else if (indexPath.row == 1) {
         
-        
         return _AnswerSituationCell.height;
+        
     }else if (indexPath.row == 2) {
         CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
-        if (height == 0) {
-            return 60;
-        }else {
-            
-            return height;
-        }
+        return height;
+        
 
     }else if (indexPath.row == 3) {
-        if ([_explanation isEqualToString:@""]) {
-            _solutionCell.solutionLabel.hidden = YES;
-            return 0;
-  
-        }
         CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
-
+        
         return height;
+        
     }else {
         if([_videourl isEqualToString:@""] ){
             _videoCell.videoLabel.hidden = YES;
@@ -492,20 +495,13 @@
         
         return _taskCell;
     }else if (indexPath.row == 1) {
-    
-        NSLog(@"%@", _dic);
         
         self.AnswerSituationCell = [tableView dequeueReusableCellWithIdentifier:KAnswerSituationCell forIndexPath:indexPath];
         self.AnswerSituationCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        _AnswerSituationCell.r_arr = [_dic[@"summary"] objectForKey:@"CNL"];
-        _AnswerSituationCell.w_arr = [_dic[@"summary"] objectForKey:@"WNL"];
-        _AnswerSituationCell.qtype = self.qtype;
-        _AnswerSituationCell.taskid = self.taskid;
-        _AnswerSituationCell.navi = self;
-        _AnswerSituationCell.qid = self.qid;
-        
-        
+        _AnswerSituationCell.delegate = self;
+        _AnswerSituationCell.c_isExpand = _isCorrectShowMore ? YES : NO;
+        _AnswerSituationCell.w_isExpand = _isWrongShowMore ? YES : NO;
         [_AnswerSituationCell setValueWithCorrectArray:[_dic[@"summary"] objectForKey:@"CNL"] andWrongArray:[_dic[@"summary"] objectForKey:@"WNL"]];
         return _AnswerSituationCell;
     }else if (indexPath.row == 2) {
@@ -588,6 +584,7 @@
     
     
 }
+
 
 
 -(void)startPlayVideo:(UIButton *)sender{
@@ -696,12 +693,53 @@
 }
 
 
+#pragma mark - AnswerSituationCellDelegate
+
+- (void)handlePushCorrectWithSender:(UIButton *)sender {
+    
+    OneStuTaskDetailViewController *oneTaskVC = [[OneStuTaskDetailViewController alloc] init];
+    oneTaskVC.taskid = self.taskid;
+    oneTaskVC.qtype = self.qtype;
+    oneTaskVC.suid = [_dic[@"summary"] objectForKey:@"CNL"][sender.tag - 200];
+    oneTaskVC.right = @"YES";
+    oneTaskVC.qid = self.qid;
+    StudentEntity *stu = [[StuDataBase shareStuDataBase] selectStuById:[_dic[@"summary"] objectForKey:@"CNL"][sender.tag - 200]];
+    oneTaskVC.title = stu.realname;
+    [self.navigationController pushViewController:oneTaskVC animated:YES];
+
+}
+
+- (void)handlePushWrongWithSender:(UIButton *)sender {
+    
+    OneStuTaskDetailViewController *oneTaskVC = [[OneStuTaskDetailViewController alloc] init];
+    oneTaskVC.taskid = self.taskid;
+    oneTaskVC.qtype = self.qtype;
+    oneTaskVC.suid = [_dic[@"summary"] objectForKey:@"WNL"][sender.tag - 200];
+    oneTaskVC.qid = self.qid;
+    StudentEntity *stu = [[StuDataBase shareStuDataBase] selectStuById:[_dic[@"summary"] objectForKey:@"WNL"][sender.tag - 200]];
+    oneTaskVC.title = stu.realname;
+    [self.navigationController pushViewController:oneTaskVC animated:YES];
+}
+
+- (void)handleTapCorrectExpandBtn:(UIButton *)sender {
+    
+    sender.selected = !sender.selected;
+    self.isCorrectShowMore = sender.selected ? YES : NO;
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+
+}
+- (void)handleTapWrongExpandBtn:(UIButton *)sender {
+    
+    sender.selected = !sender.selected;
+    self.isWrongShowMore = sender.selected ? YES : NO;
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+}
 
 
 -(void)dealloc{
     [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    //    NSLog(@"player deallco");
+    NSLog(@"player deallco");
 }
 
 

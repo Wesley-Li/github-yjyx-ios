@@ -75,9 +75,9 @@
     frame.size.height = webView.scrollView.contentSize.height;
     webView.frame = frame;
     
-    self.height = frame.size.height + 40 + 40;
+    self.height = frame.size.height + 40;
     // 发通知
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeight" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeightChange" object:self];
     
 }
 

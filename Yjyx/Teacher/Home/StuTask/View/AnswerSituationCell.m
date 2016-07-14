@@ -31,21 +31,6 @@
     
 }
 
-- (NSArray *)r_arr {
-
-    if (!_r_arr) {
-        self.r_arr = [NSArray array];
-    }
-    return _r_arr;
-}
-
-- (NSArray *)w_arr {
-
-    if (!_w_arr) {
-        self.w_arr = [NSArray array];
-    }
-    return _w_arr;
-}
 
 - (void)setValueWithCorrectArray:(NSArray *)correctArray andWrongArray:(NSArray *)wrongArray {
     
@@ -63,7 +48,7 @@
         contentLabel.text = [NSString stringWithFormat:@"答题人数%ld人, 正确率为%.f%%;", (long)totalCount, (correctArray.count * 1.0) * 100 / (totalCount * 1.0)];
     }
     
-    contentLabel.font = [UIFont systemFontOfSize:12];
+    contentLabel.font = [UIFont systemFontOfSize:13];
     [self.bg_view addSubview:contentLabel];
     
     
@@ -72,7 +57,9 @@
 //    _correctView.backgroundColor = [UIColor yellowColor];
     UILabel *correctLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 150, 20)];
     correctLabel.text = [NSString stringWithFormat:@"答题正确人数(%ld/%ld)", (long)correctArray.count, (long)totalCount];
-    correctLabel.font = [UIFont systemFontOfSize:12];
+    correctLabel.font = [UIFont systemFontOfSize:13];
+    
+    
     
     // 初始位置
     CGSize size = CGSizeMake(10, 30);
@@ -82,55 +69,88 @@
     
     CGFloat tWidth = (_correctView.width - 40 - padding *(num + 1)) * 1.0 / num * 1.0;
     CGFloat tHeigh = tWidth + 20;
+    
+    UIButton *c_expandBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [c_expandBtn addTarget:self action:@selector(handleClickc_expandBtn:) forControlEvents:UIControlEventTouchUpInside];
+    c_expandBtn.frame = CGRectMake(SCREEN_WIDTH - 30, 0, 20, 20);
+    if (_c_isExpand) {
+        c_expandBtn.selected = YES;
+        [c_expandBtn setImage:[UIImage imageNamed:@"fold_icon"] forState:UIControlStateNormal];
+    }else {
+        c_expandBtn.selected = NO;
+        [c_expandBtn setImage:[UIImage imageNamed:@"unfold_icon"] forState:UIControlStateNormal];
+
+    }
+    [self.correctView addSubview:c_expandBtn];
 
     if (correctArray.count == 0) {
+        c_expandBtn.hidden = YES;
         _correctView.frame = CGRectMake(0, contentLabel.origin.y + contentLabel.height, SCREEN_WIDTH, 0);
     }else{
     // 循环创建正确人数
-    for (int i = 0; i < correctArray.count; i++) {
-        
-        UIView *taskView = [[UIView alloc] init];
-        taskView.frame = CGRectMake(size.width, size.height, tWidth, tHeigh);
-        
-        size.width += tWidth + padding;
-        
-        if (_correctView.width - 40 - size.width == 0) {
-            size.width = 10;
-            size.height += tHeigh + 10;
-        }
-        
-        // 头像
-        UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        imageBtn.frame = CGRectMake(0, 0, tWidth, tWidth);
-        imageBtn.tag = 200 + i;
-        StudentEntity *studentEntity = [[StuDataBase shareStuDataBase] selectStuById:correctArray[i]];
-        
-        if ([studentEntity.avatar_url isEqual:[NSNull null]]) {
-            
-            [imageBtn setBackgroundImage:[UIImage imageNamed:@"stu_pic"] forState:UIControlStateNormal];
-            
+        NSInteger tempCount;
+        if (correctArray.count > num ) {
+            c_expandBtn.hidden = NO;
+            if (_c_isExpand == NO) {
+                tempCount = num;
+            }else {
+                
+                tempCount = correctArray.count;
+            }
         }else {
-        
-            [imageBtn setBackgroundImageWithURL:[NSURL URLWithString:studentEntity.avatar_url] placeholderImage:[UIImage imageNamed:@"stu_pic"]];
+            c_expandBtn.hidden = YES;
+            tempCount = correctArray.count;
         }
+
+        for (int i = 0; i < tempCount; i++) {
+            
+            UIView *taskView = [[UIView alloc] init];
+            taskView.frame = CGRectMake(size.width, size.height, tWidth, tHeigh);
+            
+            size.width += tWidth + padding;
+            
+            if (_correctView.width - 40 - size.width == 0) {
+                size.width = 10;
+                
+                if (tempCount - i > 1) {
+                    size.height += tHeigh + 10;
+                }
+                
+            }
+            
+            // 头像
+            UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            imageBtn.frame = CGRectMake(0, 0, tWidth, tWidth);
+            imageBtn.layer.cornerRadius = tWidth / 2;
+            imageBtn.layer.masksToBounds = YES;
+            imageBtn.tag = 200 + i;
+            StudentEntity *studentEntity = [[StuDataBase shareStuDataBase] selectStuById:correctArray[i]];
+            
+            if ([studentEntity.avatar_url isEqual:[NSNull null]]) {
+                
+                [imageBtn setBackgroundImage:[UIImage imageNamed:@"student_p"] forState:UIControlStateNormal];
+                
+            }else {
+            
+                [imageBtn setBackgroundImageWithURL:[NSURL URLWithString:studentEntity.avatar_url] placeholderImage:[UIImage imageNamed:@"student_p"]];
+            }
+            
+            [imageBtn addTarget:self action:@selector(imageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            
+            // 姓名
+            UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, tWidth, tWidth, 20)];
+            nameLabel.text = [NSString stringWithFormat:@"%@", studentEntity.realname];
+            nameLabel.font = [UIFont systemFontOfSize:12];
+            nameLabel.textAlignment = NSTextAlignmentCenter;
         
-        [imageBtn addTarget:self action:@selector(imageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        // 姓名
-        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, tWidth, tWidth, 20)];
-        nameLabel.text = [NSString stringWithFormat:@"%@", studentEntity.realname];
-        nameLabel.font = [UIFont systemFontOfSize:12];
-        nameLabel.textAlignment = NSTextAlignmentCenter;
+            [taskView addSubview:imageBtn];
+            [taskView addSubview:nameLabel];
+            [_correctView addSubview:correctLabel];
+            [_correctView addSubview:taskView];
     
-        [taskView addSubview:imageBtn];
-        [taskView addSubview:nameLabel];
-        [_correctView addSubview:correctLabel];
-        [_correctView addSubview:taskView];
-    
-    }
+        }
     
     CGRect cframe = _correctView.frame;
-    cframe.size.width = SCREEN_WIDTH - 40;
     cframe.size.height = size.height + tHeigh + 20;
     _correctView.frame = cframe;
     }
@@ -147,7 +167,7 @@
 //    _wrongView.backgroundColor = [UIColor redColor];
     UILabel *wrongLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 150, 20)];
     wrongLabel.text = [NSString stringWithFormat:@"答题错误人数(%ld/%ld)", (long)wrongArray.count, (long)totalCount];
-    wrongLabel.font = [UIFont systemFontOfSize:12];
+    wrongLabel.font = [UIFont systemFontOfSize:13];
     
     // 初始位置
     CGSize size2 = CGSizeMake(10, 30);
@@ -158,102 +178,119 @@
     CGFloat tWidth2 = (_wrongView.width - 40 - padding2 *(num2 + 1)) * 1.0 / num2 * 1.0;
     CGFloat tHeigh2 = tWidth + 20;
 
+    UIButton *w_expandBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [w_expandBtn addTarget:self action:@selector(handleClickW_expandBtn:) forControlEvents:UIControlEventTouchUpInside];
+    w_expandBtn.frame = CGRectMake(SCREEN_WIDTH - 30, 0, 20, 20);
+    
+    if (_w_isExpand) {
+        w_expandBtn.selected = YES;
+        [w_expandBtn setImage:[UIImage imageNamed:@"fold_icon"] forState:UIControlStateNormal];
+    }else {
+        w_expandBtn.selected = NO;
+        [w_expandBtn setImage:[UIImage imageNamed:@"unfold_icon"] forState:UIControlStateNormal];
+        
+    }
+    [self.wrongView addSubview:w_expandBtn];
     
     if (wrongArray.count == 0) {
+        w_expandBtn.hidden = YES;
         _wrongView.frame = CGRectMake(0, _correctView.origin.y + _correctView.height, SCREEN_WIDTH, 0);
     }else{
     // 循环创建错误人数
-    for (int i = 0; i < wrongArray.count; i++) {
-        
-        UIView *taskView = [[UIView alloc] init];
-        taskView.frame = CGRectMake(size2.width, size2.height, tWidth2, tHeigh2);
-        
-        size2.width += tWidth2 + padding2;
-        
-        if (_wrongView.width - 40 - size2.width == 0) {
-            size2.width = 10;
-            size2.height += tHeigh2 + 10;
-        }
-        
-        // 头像
-        UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        imageBtn.frame = CGRectMake(0, 0, tWidth2, tWidth2);
-        imageBtn.tag = 200 + i;
-        StudentEntity *studentEntity = [[StuDataBase shareStuDataBase] selectStuById:wrongArray[i]];
-        
-        if ([studentEntity.avatar_url isEqual:[NSNull null]]) {
-            
-            [imageBtn setBackgroundImage:[UIImage imageNamed:@"stu_pic"] forState:UIControlStateNormal];
-            
+        NSInteger tempCount;
+        if (wrongArray.count > num2 ) {
+            w_expandBtn.hidden = NO;
+            if (_w_isExpand == NO) {
+                tempCount = num2;
+            }else {
+                
+                tempCount = wrongArray.count;
+            }
         }else {
-            
-            [imageBtn setBackgroundImageWithURL:[NSURL URLWithString:studentEntity.avatar_url] placeholderImage:[UIImage imageNamed:@"stu_pic"]];
+            w_expandBtn.hidden = YES;
+            tempCount = wrongArray.count;
         }
+
         
-        [imageBtn addTarget:self action:@selector(handleImageBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
-        // 姓名
-        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, tWidth2, tWidth2, 20)];
-        nameLabel.text = [NSString stringWithFormat:@"%@", studentEntity.realname];
-        nameLabel.font = [UIFont systemFontOfSize:12];
-        nameLabel.textAlignment = NSTextAlignmentCenter;
-        
-        [taskView addSubview:imageBtn];
-        [taskView addSubview:nameLabel];
-        [_wrongView addSubview:wrongLabel];
-        [_wrongView addSubview:taskView];
-        
-    }
+        for (int i = 0; i < tempCount; i++) {
+            
+            UIView *taskView = [[UIView alloc] init];
+            taskView.frame = CGRectMake(size2.width, size2.height, tWidth2, tHeigh2);
+            
+            size2.width += tWidth2 + padding2;
+            
+            if (_wrongView.width - 40 - size2.width <= 0) {
+                size2.width = 10;
+                if (tempCount - i > 1) {
+                    size2.height += tHeigh2 + 10;
+                }
+                
+            }
+            
+            // 头像
+            UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            imageBtn.frame = CGRectMake(0, 0, tWidth2, tWidth2);
+            imageBtn.layer.cornerRadius = tWidth2 / 2;
+            imageBtn.layer.masksToBounds = YES;
+            imageBtn.tag = 200 + i;
+            StudentEntity *studentEntity = [[StuDataBase shareStuDataBase] selectStuById:wrongArray[i]];
+            
+            if ([studentEntity.avatar_url isEqual:[NSNull null]]) {
+                
+                [imageBtn setBackgroundImage:[UIImage imageNamed:@"student_p"] forState:UIControlStateNormal];
+                
+            }else {
+                
+                [imageBtn setBackgroundImageWithURL:[NSURL URLWithString:studentEntity.avatar_url] placeholderImage:[UIImage imageNamed:@"student_p"]];
+            }
+            
+            [imageBtn addTarget:self action:@selector(handleImageBtn:) forControlEvents:UIControlEventTouchUpInside];
+            
+            // 姓名
+            UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, tWidth2, tWidth2, 20)];
+            nameLabel.text = [NSString stringWithFormat:@"%@", studentEntity.realname];
+            nameLabel.font = [UIFont systemFontOfSize:12];
+            nameLabel.textAlignment = NSTextAlignmentCenter;
+            
+            [taskView addSubview:imageBtn];
+            [taskView addSubview:nameLabel];
+            [_wrongView addSubview:wrongLabel];
+            [_wrongView addSubview:taskView];
+            
+        }
     
     CGRect wFrame = _wrongView.frame;
-    wFrame.size.width = SCREEN_WIDTH - 40;
     wFrame.size.height = size2.height + tHeigh2 + 20;
     _wrongView.frame = wFrame;
     } 
     [self.bg_view addSubview:_wrongView];
     
     self.height = _wrongView.origin.y + _wrongView.height + 30;
+    
+    
 
 }
 
 - (void)imageBtnClick:(UIButton *)sender {
     
-//    NSLog(@"点击了正确头像");
-    
-    OneStuTaskDetailViewController *oneTaskVC = [[OneStuTaskDetailViewController alloc] init];
-    oneTaskVC.taskid = self.taskid;
-    oneTaskVC.qtype = self.qtype;
-    oneTaskVC.suid = _r_arr[sender.tag - 200];
-    oneTaskVC.right = @"YES";
-
-    oneTaskVC.qid = self.qid;
-    
-    StudentEntity *stu = [[StuDataBase shareStuDataBase] selectStuById:_r_arr[sender.tag - 200]];
-    
-    oneTaskVC.title = [NSString stringWithFormat:@"%@", stu.realname];
-
-    [self.navi.navigationController pushViewController:oneTaskVC animated:YES];
-
-
+    [self.delegate handlePushCorrectWithSender:sender];
     
 }
 
 - (void)handleImageBtn:(UIButton *)sender {
 
-//    NSLog(@"点击了错误头像");
+    [self.delegate handlePushWrongWithSender:sender];
+
+}
+
+- (void)handleClickc_expandBtn:(UIButton *)sender {
+
+    [self.delegate handleTapCorrectExpandBtn:sender];
+}
+
+- (void)handleClickW_expandBtn:(UIButton *)sender {
     
-    OneStuTaskDetailViewController *oneTaskVC = [[OneStuTaskDetailViewController alloc] init];
-    oneTaskVC.taskid = self.taskid;
-    oneTaskVC.qtype = self.qtype;
-    oneTaskVC.suid = _w_arr[sender.tag - 200];
-//    TaskConditonModel *model = _w_arr[sender.tag - 200];
-    oneTaskVC.qid = self.qid;
-    StudentEntity *stu = [[StuDataBase shareStuDataBase] selectStuById:_w_arr[sender.tag - 200]];
-    oneTaskVC.title = [NSString stringWithFormat:@"%@", stu.realname];
-//    oneTaskVC.answerArr = model.answerArr;
-    [self.navi.navigationController pushViewController:oneTaskVC animated:YES];
-
-
+    [self.delegate handleTapWrongExpandBtn:sender];
 }
 
 

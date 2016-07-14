@@ -56,6 +56,7 @@
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = NO;
     
+    
     self.dataSource = [[[StuDataBase shareStuDataBase] selectAllClass] mutableCopy];
     
     if (self.dataSource.count == 0) {
@@ -163,11 +164,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    ClassDetailViewController *detailVC = [[ClassDetailViewController alloc] initWithNibName:@"ClassDetailViewController" bundle:nil];
-    detailVC.model = self.dataSource[indexPath.row];
-    detailVC.currentIndex = indexPath.row;
-    detailVC.navigationItem.title = self.titleArr[indexPath.row];
-    [self.navigationController pushViewController:detailVC animated:YES];
+    if (self.dataSource.count != 0) {
+        
+        ClassDetailViewController *detailVC = [[ClassDetailViewController alloc] initWithNibName:@"ClassDetailViewController" bundle:nil];
+        detailVC.model = self.dataSource[indexPath.row];
+        detailVC.currentIndex = indexPath.row;
+        detailVC.navigationItem.title = self.titleArr[indexPath.row];
+        [self.navigationController pushViewController:detailVC animated:YES];
+
+    }
     
 }
 

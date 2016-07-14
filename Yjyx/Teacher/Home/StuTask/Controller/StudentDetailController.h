@@ -16,6 +16,6 @@
 
 @property (nonatomic, strong) NSNumber *taskID;
 @property (nonatomic, strong) NSNumber *studentID;
-@property (nonatomic,strong)  FinshedModel * finshedModel;
+@property (nonatomic, copy) NSString *titleName;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "OneStuTaskDetailViewController.h"
+#import "TeacherDrawViewController.h"
 
 #import "TaskCell.h"
 #import "CorectCell.h"
@@ -22,7 +23,7 @@
 #define Kidentifier5 @"kCell5"
 
 
-@interface OneStuTaskDetailViewController ()
+@interface OneStuTaskDetailViewController ()<YourAnswerCellDelegate>
 
 {
     WMPlayer *wmPlayer;
@@ -36,6 +37,7 @@
 }
 
 @property (nonatomic, strong) NSDictionary *dic;
+@property (nonatomic, strong) NSMutableDictionary *cellHeightDic;
 
 @property (nonatomic, strong) TaskCell *taskCell;
 @property (nonatomic, strong) YourAnswerCell *yourAnswerCell;
@@ -251,24 +253,6 @@
 }
 
 
-// 强制加载单个cell
-- (void)viewDidAppear:(BOOL)animated {
-
-    if (_rows != 0) {
-        
-        NSIndexPath *indexPath1 = [NSIndexPath indexPathForRow:0 inSection:0];
-        NSIndexPath *indexPath2 = [NSIndexPath indexPathForRow:3 inSection:0];
-        NSArray *indexPathArray = [NSArray arrayWithObjects:indexPath1,indexPath2, nil];
-        [self.tableView reloadRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
-        
-    }
-    
-}
-
-//- (void)viewWillDisappear:(BOOL)animated
-//{
-//    [wmPlayer removeFromSuperview];
-//}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -279,6 +263,8 @@
     [goBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:goBackBtn];
     self.navigationItem.leftBarButtonItem = leftBtnItem;
+    
+    self.cellHeightDic = [NSMutableDictionary dictionary];
     
     // 初始状态
     isSmallScreen = NO;
@@ -306,15 +292,75 @@
                                                object:nil
      ];
     
+    // cell高度通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCellHeight:) name:@"CellHeightChange" object:nil];
+    
     
     self.view.backgroundColor = RGBACOLOR(239, 239, 244,1);
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
 
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
+    if (isPlay) {
+        [self closeTheVideo:nil];
+    }
+    
     [self releaseWMPlayer];
     [wmPlayer removeFromSuperview];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+
+- (void)changeCellHeight:(NSNotification *)sender {
+
+    if ([[sender object] isMemberOfClass:[TaskCell class]]) {
+        TaskCell *cell = [sender object];
+        
+        if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] || [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] floatValue] != cell.height) {
+            [self.cellHeightDic setObject:[NSString stringWithFormat:@"%.f", cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]];
+            
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        
+        
+    }else if ([[sender object] isMemberOfClass:[YourAnswerCell class]]) {
+    
+        YourAnswerCell *cell = [sender object];
+        
+        if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] || [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] floatValue] != cell.height) {
+            [self.cellHeightDic setObject:[NSString stringWithFormat:@"%.f", cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]];
+            
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+
+        
+        
+    }else if ([[sender object] isMemberOfClass:[CorectCell class]]) {
+        CorectCell *cell = [sender object];
+        if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] || [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] floatValue] != cell.height) {
+            [self.cellHeightDic setObject:[NSString stringWithFormat:@"%.f", cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]];
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        
+        
+        
+    }else if ([[sender object] isMemberOfClass:[SolutionCell class]]) {
+        SolutionCell *cell = [sender object];
+        if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] || [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] floatValue] != cell.height) {
+            [self.cellHeightDic setObject:[NSString stringWithFormat:@"%.f", cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]];
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        
+        
+    }
+
+    
+}
+
+
 #pragma mark - 网络请求
 
 - (void)readDataFromNetWork {
@@ -333,6 +379,8 @@
             
             self.dic = [NSDictionary dictionaryWithDictionary:responseObject];
             
+            _rows = 5;
+            [self.tableView reloadData];
         }else {
             
             [self.tableView makeToast:[NSString stringWithFormat:@"%@", responseObject[@"msg"]] duration:1.0 position:SHOW_CENTER complete:nil];
@@ -345,8 +393,7 @@
 //        }else{
 //            _rows = 5;
 //        }
-        _rows = 5;
-        [self.tableView reloadData];
+        
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
        
@@ -390,19 +437,52 @@
 }
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSLog(@"%@", self.cellHeightDic);
+    
+    if (indexPath.row == 0) {
+        
+        CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
+        
+        return height;
+        
+    }else if (indexPath.row == 1) {
+        return self.yourAnswerCell.height;
+        
+    }else if (indexPath.row == 2) {
+        CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
+        
+        return height;
+        
+    }else if (indexPath.row == 3) {
+        CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
+        
+        return height;
+        
+    }else {
+        if ([_videourl isEqualToString:@""]) {
+            return 0;
+        }
+        return (SCREEN_WIDTH)*184/320 + 20;
+    }
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 0) {
         self.taskCell = [tableView dequeueReusableCellWithIdentifier:kidentifier1 forIndexPath:indexPath];
+        _taskCell.indexPath = indexPath;
         _taskCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_taskCell setValueWithDictionary:self.dic];
         return _taskCell;
     }else if (indexPath.row == 1) {
     
         self.yourAnswerCell = [tableView dequeueReusableCellWithIdentifier:kidentifier2 forIndexPath:indexPath];
         _yourAnswerCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+        _yourAnswerCell.indexPath = indexPath;
+        _yourAnswerCell.delegate = self;
         if ([self.qtype isEqual:@1]) {
             
             if ([self.right isEqualToString:@"YES"]) {
@@ -424,6 +504,7 @@
         
         self.corectCell = [tableView dequeueReusableCellWithIdentifier:Kidentifier3 forIndexPath:indexPath];
         _corectCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        _corectCell.indexPath = indexPath;
         if ([self.qtype isEqual:@1]) {
             [_corectCell setChoiceValueWithDictionary:_dic];
             
@@ -432,11 +513,13 @@
             [_corectCell setBlankfillValueWithDictionary:_dic];
             
         }
+
         return _corectCell;
         
     }else if (indexPath.row == 3) {
         
         self.solutionCell = [tableView dequeueReusableCellWithIdentifier:Kidentifier4 forIndexPath:indexPath];
+        _solutionCell.indexPath = indexPath;
         if([_explanation isEqualToString:@""]  ){
             _solutionCell.solutionLabel.hidden = YES;
         }
@@ -535,6 +618,7 @@
     self.videoCell.playBtn.hidden = YES;
     [self.tableView reloadData];
     
+    
 }
 
 
@@ -601,37 +685,21 @@
     wmPlayer = nil;
 }
 
+#pragma mark - YourAnswerCellDelegate
+- (void)handlePushClick:(UITapGestureRecognizer *)sender {
+
+    TeacherDrawViewController *drawVC = [[TeacherDrawViewController alloc] init];
+    [self.navigationController pushViewController:drawVC animated:YES];
+    
+}
+
+
 
 
 -(void)dealloc{
     [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"player dealloc");
-}
-
-
-
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    if (indexPath.row == 0) {
-        return _taskCell.height;
-    }else if (indexPath.row == 1) {
-        return 50;
-    }else if (indexPath.row == 2) {
-        return _corectCell.height;
-    }else if (indexPath.row == 3) {
-        if ([_explanation isEqualToString:@""]) {
-            return 0;
-        }
-        return _solutionCell.height;
-    }else {
-        if ([_videourl isEqualToString:@""]) {
-            return 0;
-        }
-        return (SCREEN_WIDTH)*184/320 + 20;
-    }
 }
 
 /*

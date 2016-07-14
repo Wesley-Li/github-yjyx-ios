@@ -271,7 +271,6 @@
         [cell.showMoreBtn addTarget:self action:@selector(showMore:) forControlEvents:UIControlEventTouchUpInside];
         cell.showMoreBtn.selected = self.finishExpand ? YES : NO;
         
-        
         [self cell:cell addSubViewsWithFinishedArr:_finishedArr];
 
         
@@ -293,6 +292,7 @@
         
         [cell.showMoreBtn addTarget:self action:@selector(unfinishShowMore:) forControlEvents:UIControlEventTouchUpInside];
         cell.showMoreBtn.selected = self.unfinishExpand ? YES : NO;
+        
         [self cell:cell addSubViewsWithUnfinishedArr:_unfinishedArr];
         
 
@@ -317,7 +317,6 @@
 
 - (void)unfinishShowMore:(UIButton *)sender {
 
-    NSLog(@"点击了");
     sender.selected = !sender.selected;
     self.unfinishExpand = sender.selected ? YES : NO;
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:4 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
@@ -397,7 +396,6 @@
     
     CGFloat tHeigh = tWidth + 20;
     
-    //    NSLog(@"%@", self.choiceArr);
     
     for (int i = 0; i < arr.count; i++) {
         
@@ -426,9 +424,8 @@
         UIButton *choiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         choiceBtn.frame = CGRectMake(0, 20, tWidth, tWidth);
         
-        
         NSString *titleString;
-        if (_finishedArr.count == 0) {
+        if (_finishedArr.count == 0 || [model.C_count floatValue] == 0) {
             titleString = [NSString stringWithFormat:@"0%%"];
         }else {
         
@@ -493,8 +490,6 @@
     
     CGFloat tHeigh = tWidth + 20;
     
-    //      NSLog(@"%@", self.choiceArr);
-    
     for (int i = 0; i < arr.count; i++) {
         
         UIView *taskView = [[UIView alloc] init];
@@ -521,7 +516,7 @@
         
         
         NSString *titleString;
-        if (_finishedArr.count == 0) {
+        if (_finishedArr.count == 0 || [model.C_count floatValue] == 0) {
             titleString = [NSString stringWithFormat:@"0%%"];
         }else {
             
@@ -593,6 +588,9 @@
         
             tempCount = arr.count;
         }
+    }else {
+        cell.showMoreBtn.hidden = YES;
+        tempCount = arr.count;
     }
     
     for (int i = 0; i < tempCount; i++) {
@@ -617,14 +615,16 @@
         UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
         imageBtn.frame = CGRectMake(0, 0, tWidth, tWidth);
+        imageBtn.layer.cornerRadius = tWidth / 2;
+        imageBtn.layer.masksToBounds = YES;
         
         if ([model.ImageAvatar isEqual:[NSNull null]]) {
 //            [imageBtn setImage:[UIImage imageNamed:@"stu_pic"] forState:UIControlStateNormal];
-            [imageBtn setBackgroundImage:[UIImage imageNamed:@"stu_pic"] forState:UIControlStateNormal];
+            [imageBtn setBackgroundImage:[UIImage imageNamed:@"student_p"] forState:UIControlStateNormal];
         }else {
             
 //            [imageBtn setImageWithURL:[NSURL URLWithString:model.ImageAvatar] placeholderImage:[UIImage imageNamed:@"stu_pic"]];
-            [imageBtn setBackgroundImageWithURL:[NSURL URLWithString:model.ImageAvatar] placeholderImage:[UIImage imageNamed:@"stu_pic"]];
+            [imageBtn setBackgroundImageWithURL:[NSURL URLWithString:model.ImageAvatar] placeholderImage:[UIImage imageNamed:@"student_p"]];
         }
         
         
@@ -673,6 +673,9 @@
             
             tempCount = arr.count;
         }
+    }else {
+        cell.showMoreBtn.hidden = YES;
+        tempCount = arr.count;
     }
     
     for (int i = 0; i < tempCount; i++) {
@@ -680,8 +683,6 @@
         UIView *taskView = [[UIView alloc] init];
         [cell.BGVIEW addSubview:taskView];
         taskView.frame = CGRectMake(size.width, size.height, tWidth , tHeigh);
-        
-        NSLog(@"%f", size.width );
         size.width += tWidth + padding;
         if (SCREEN_WIDTH - 20 - size.width <= 0) {
             // 换行
@@ -700,18 +701,20 @@
         UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
         imageBtn.frame = CGRectMake(0, 0, tWidth, tWidth);
+        imageBtn.layer.cornerRadius = tWidth / 2;
+        imageBtn.layer.masksToBounds = YES;
+
         
         if ([model.ImageAvatar isEqual:[NSNull null]]) {
-            [imageBtn setImage:[UIImage imageNamed:@"stu_pic"] forState:UIControlStateNormal];
+            [imageBtn setImage:[UIImage imageNamed:@"student_p"] forState:UIControlStateNormal];
         }else {
             
-            [imageBtn setImageWithURL:[NSURL URLWithString:model.ImageAvatar] placeholderImage:[UIImage imageNamed:@"stu_pic"]];
+            [imageBtn setImageWithURL:[NSURL URLWithString:model.ImageAvatar] placeholderImage:[UIImage imageNamed:@"student_p"]];
             
         }
         
         
         imageBtn.tag = 200 + i;
-//        [imageBtn addTarget:self action:@selector(unImageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         
         label.text = [NSString stringWithFormat:@"%@", model.Name];
         label.textAlignment = NSTextAlignmentCenter;
@@ -720,7 +723,7 @@
         [taskView addSubview:label];
         [taskView addSubview:imageBtn];
         
-//        [cell.bg_view addSubview:taskView];
+
     }
     self.unsubmitCellHeight = size.height + tHeigh + 30 + 30;
     
@@ -737,7 +740,7 @@
     FinshedModel *model = _finishedArr[sender.tag - 200];
     stuDetailVC.studentID = model.studentID;
     stuDetailVC.taskID = self.taskModel.t_id;
-    
+    stuDetailVC.titleName = model.Name;
     [self.navigationController pushViewController:stuDetailVC animated:YES];
     
 }

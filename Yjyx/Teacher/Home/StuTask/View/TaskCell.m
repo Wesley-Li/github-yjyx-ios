@@ -96,11 +96,12 @@
     webView.frame = frame;
     
     self.height = frame.size.height + 15 + 30;
-    NSLog(@"**********%.f", self.height);
     // 发通知
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeight" object:self userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeightChange" object:self userInfo:nil];
     
 }
+
+
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

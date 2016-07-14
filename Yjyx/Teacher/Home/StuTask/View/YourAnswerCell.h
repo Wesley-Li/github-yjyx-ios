@@ -8,11 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol YourAnswerCellDelegate <NSObject>
+
+- (void)handlePushClick:(UITapGestureRecognizer *)sender;
+
+@end
+
 @interface YourAnswerCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *yourAnswerLable;
-
-
+@property (assign, nonatomic) CGFloat height;
+@property (strong, nonatomic) NSIndexPath *indexPath;
+@property (weak, nonatomic) IBOutlet UIView *imageBGView;
+@property (weak, nonatomic) id <YourAnswerCellDelegate> delegate;
 
 /**
  *选择题赋值方法

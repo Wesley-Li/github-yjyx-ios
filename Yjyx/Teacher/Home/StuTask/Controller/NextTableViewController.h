@@ -19,6 +19,8 @@
 @property (nonatomic, assign) NSInteger totalNumber;// 总题数
 @property (nonatomic, assign) NSInteger currentNumber;// 当前题号
 
+@property (nonatomic, assign) BOOL isCorrectShowMore;
+@property (nonatomic, assign) BOOL isWrongShowMore;
 
 
 @end

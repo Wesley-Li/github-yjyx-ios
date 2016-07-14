@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class YourAnswerCell;
+
 @interface OneStuTaskDetailViewController : UITableViewController
 
 

@@ -73,8 +73,10 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:@"TaskListTableViewCell" bundle:nil]forCellReuseIdentifier:kk];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.backgroundColor = COMMONCOLOR;
     
-    NSLog(@"%@", NSStringFromCGRect(self.tableView.frame));
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
