@@ -42,6 +42,9 @@
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <state key="normal" title="未完成"/>
+                        <connections>
+                            <action selector="doingBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="e9u-HL-GhM"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" verticalHuggingPriority="200" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvE-CP-Qyk">
                         <rect key="frame" x="109" y="45" width="183" height="17"/>

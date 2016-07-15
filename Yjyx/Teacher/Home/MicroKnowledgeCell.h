@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class MicroDetailModel;
+@class MicroDetailModel, YjyxMicroWorkModel;
 @interface MicroKnowledgeCell : UITableViewCell
 
 @property (strong, nonatomic) MicroDetailModel *model;
+
+@property (strong, nonatomic) YjyxMicroWorkModel *workModel;
 @end

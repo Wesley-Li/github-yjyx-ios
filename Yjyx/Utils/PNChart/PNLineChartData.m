@@ -16,7 +16,10 @@
     
     return self;
 }
-
+- (void)dealloc
+{
+    NSLog(@"dataDELOOC");
+}
 - (void)setupDefaultValues
 {
     _inflexionPointStyle = PNLineChartPointStyleNone;

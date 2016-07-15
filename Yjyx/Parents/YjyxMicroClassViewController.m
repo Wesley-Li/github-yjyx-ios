@@ -11,7 +11,9 @@
 #import "RCLabel.h"
 #import "PMicroPreviewModel.h"
 #import "MicroCell.h"
-
+#import "YjyxCommonNavController.h"
+#import "YjyxDoingWorkModel.h"
+#import "YjyxDoingWorkController.h"
 #define ID @"cell"
 @interface YjyxMicroClassViewController ()
 {
@@ -32,8 +34,10 @@
 @property (nonatomic, strong) NSMutableDictionary *choiceCellHeightDic;
 @property (nonatomic, strong) NSMutableDictionary *blankfillHeightDic;
 
+@property (assign, nonatomic) NSInteger jumpType;
+@property (strong, nonatomic) UIButton *backBtn;
 
-
+@property (strong, nonatomic) NSMutableArray *doWorkArr;
 @end
 
 @implementation YjyxMicroClassViewController
@@ -56,6 +60,9 @@
 
 
 -(BOOL)prefersStatusBarHidden{
+    if(self.jumpType == 1){
+        return YES;
+    }else{
     if (wmPlayer) {
         if (wmPlayer.isFullscreen) {
             return YES;
@@ -64,6 +71,7 @@
         }
     }else{
         return NO;
+    }
     }
 }
 - (instancetype)init
@@ -78,16 +86,24 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self setNeedsStatusBarAppearanceUpdate];
     //旋转屏幕通知
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onDeviceOrientationChange)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil
      ];
+    if(self.jumpType == 1){
+        self.navigationController.navigationBar.barTintColor = STUDENTCOLOR;
+    }else{
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
+    }
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
-
+    if(self.jumpType == 1){
+        self.navigationController.navigationBarHidden = YES;
+    }else{
     self.navigationController.navigationBarHidden = NO;
+    }
 }
 
 
@@ -134,7 +150,7 @@
         wmPlayer.transform = CGAffineTransformIdentity;
         wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
         wmPlayer.playerLayer.frame =  wmPlayer.bounds;
-        [self.view addSubview:wmPlayer];
+        [self.view insertSubview:wmPlayer belowSubview:_backBtn];
         [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(wmPlayer).with.offset(0);
             make.right.equalTo(wmPlayer).with.offset(0);
@@ -222,12 +238,18 @@
     self.choiceCellHeightDic = [[NSMutableDictionary alloc] init];
     self.blankfillHeightDic = [[NSMutableDictionary alloc] init];
     
-    [self getchildResult:_previewRid];
+    _doWorkArr = [NSMutableArray array];
     
     // 注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCellHeight:) name:@"cellHeighChange" object:nil];
     
-    
+    if([self.navigationController isKindOfClass:[YjyxCommonNavController class]]){
+        self.jumpType = 1;
+        
+        [self loadData];
+    }else{
+         [self getchildResult:_previewRid];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -343,12 +365,109 @@
     }];
 }
 
+- (void)loadData{
+    [self.view makeToastActivity:SHOW_CENTER];
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"action"] = @"m_get_task_lesson_preview_data";
+    param[@"taskid"] = self.taskid;
+    param[@"lessonid"] = self.lessonid;
+    [mgr GET:[BaseURL stringByAppendingString:@"/api/student/tasks/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        NSLog(@"%@", responseObject);
+        [self.view hideToastActivity];
+            
+            if ([[responseObject objectForKey:@"retcode"] integerValue] == 0) {
+                for (NSDictionary *dict in responseObject[@"retobj"][@"questions"][@"choice"][@"questionlist"]) {
+                    //                [responseObject[@"retobj"][@"lessonobj"][@"quizcontent"] JSONValue][@"questionList"]
+                    YjyxDoingWorkModel *model = [YjyxDoingWorkModel doingWorkModelWithDict:dict];
+                    model.questiontype = 1;
+                    [self.doWorkArr addObject:model];
+                }
+                for (NSDictionary *dict in responseObject[@"retobj"][@"questions"][@"blankfill"][@"questionlist"]) {
+                    YjyxDoingWorkModel *model = [YjyxDoingWorkModel doingWorkModelWithDict:dict];
+                    model.questiontype = 2;
+                    [self.doWorkArr addObject:model];
+                }
+                
+                NSInteger i = 0;
+                for (NSArray *arr in [responseObject[@"retobj"][@"lessonobj"][@"quizcontent"] JSONValue][@"questionList"]) {
+                    if(arr.count == 0){
+                        continue;
+                    }
+                    if ([arr[0] isEqualToString:@"choice"]) {
+                        for (NSDictionary *dict in arr[1]) {
+                            YjyxDoingWorkModel *model = self.doWorkArr[i];
+                            model.requireprocess = dict[@"requireprocess"];
+                            i++;
+                        }
+                    }
+                    if ([arr[0] isEqualToString:@"blankfill"]) {
+                        for (NSDictionary *dict in arr[1]) {
+                            YjyxDoingWorkModel *model = self.doWorkArr[i];
+                            model.requireprocess = dict[@"requireprocess"];
+                            i++;
+                        }
+                    }
+                }
 
+                // 视频和表头信息
+                self.videoURL = [[responseObject[@"retobj"][@"lessonobj"][@"videoobjlist"] JSONValue] firstObject][@"url"];
+                self.microName = responseObject[@"retobj"][@"lessonobj"][@"name"];
+                self.knowledgeName = responseObject[@"retobj"][@"lessonobj"][@"knowledgedesc"];
+                // 配置视频
+                [self configureWMPlayer];
+                
+                // tableview数据源
+                // 选择题
+                NSArray *choiceArr = responseObject[@"retobj"][@"questions"][@"choice"][@"questionlist"];
+                for (NSDictionary *dic in choiceArr) {
+                    PMicroPreviewModel *model = [[PMicroPreviewModel alloc] init];
+                    [model initModelWithDic:dic];
+                    [self.choices addObject:model];
+                }
+                
+                // 填空题
+                NSArray *blankfillArr = responseObject[@"retobj"][@"questions"][@"blankfill"][@"questionlist"];
+                for (NSDictionary *dic in blankfillArr) {
+                    PMicroPreviewModel *model = [[PMicroPreviewModel alloc] init];
+                    [model initModelWithDic:dic];
+                    [self.blankfills addObject:model];
+                }
+                
+                // 配置tableview
+                [self configureTableview];
+                [self.subjectTable registerNib:[UINib nibWithNibName:NSStringFromClass([MicroCell class]) bundle:nil] forCellReuseIdentifier:ID];
+                
+                // 配置表头
+                [self configureTableviewHeaderview];
+                
+                [self.subjectTable reloadData];
+            }else{
+                [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
+            }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
+    }];
+}
+// 做作业按钮被点击
+- (IBAction)doWorkBtnClick:(UIButton *)sender {
+    YjyxDoingWorkController *vc = [[YjyxDoingWorkController alloc] init];
+    vc.desc = self.navigationItem.title;
+    vc.type = @2;
+    vc.jumpDoworkArr = self.doWorkArr;
+    vc.taskid = self.taskid;
+    vc.examid =  self.lessonid;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 #pragma mark - 配置视频
 - (void)configureWMPlayer {
 
     if (self.videoURL != nil || self.videoURL.length != 0) {
         playerFrame = CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
+        if (self.jumpType == 1) {
+            playerFrame.origin.y = 0;
+        }
         wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.videoURL];
         wmPlayer.closeBtn.hidden = YES;
         wmPlayer.layer.masksToBounds = YES;
@@ -357,17 +476,31 @@
         
         videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
         videoImage.image = [UIImage imageNamed:@"Common_video.png"];
+        if (self.jumpType == 1) {
+            videoImage.y = 0;
+        }
         videoImage.layer.masksToBounds = YES;
         videoImage.userInteractionEnabled = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playVideo)];
         [videoImage addGestureRecognizer:tap];
         [self.view addSubview:videoImage];
 
+        UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _backBtn = backBtn;
+        backBtn.frame = CGRectMake(0, 0, 50, 50);
+        [backBtn setImage:[UIImage imageNamed:@"Parent_VideoBack"] forState:UIControlStateNormal];
+        [backBtn addTarget:self action:@selector(backBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+        if (self.jumpType == 1) {
+            [self.view insertSubview:backBtn aboveSubview:videoImage];
+        }
     }
     
 
 }
-
+- (void)backBtnClicked
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 #pragma mark - 配置tableview 
 - (void)configureTableview {
 
@@ -375,6 +508,11 @@
     _subjectTable.dataSource = self;
     _subjectTable.delegate = self;
     _subjectTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    if(self.jumpType == 1){
+        self.subjectTable.y = playerFrame.size.height;
+        self.subjectTable.height = SCREEN_HEIGHT - playerFrame.size.height - 49;
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:_subjectTable];
     

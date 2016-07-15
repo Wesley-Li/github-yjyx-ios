@@ -501,5 +501,7 @@
     [super layoutSubviews];
     [self strokeChart];
 }
-
+- (void)dealloc{
+    NSLog(@"%@", @"piedelloc");
+}
 @end

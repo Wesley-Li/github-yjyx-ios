@@ -227,7 +227,7 @@ static NSString *ID = @"CELL";
     // 题目列表
     
     NSMutableArray *choiceArr = [NSMutableArray array];
-    for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"choice" andJumpType:@"1"]) {
+    for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"1" andJumpType:@"1"]) {
         if ([model isKindOfClass:[ChaperContentItem class]]) {
             ChaperContentItem *tempModel = (ChaperContentItem *)model;
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", nil];
@@ -242,7 +242,7 @@ static NSString *ID = @"CELL";
     
     
     NSMutableArray *blankfillArr = [NSMutableArray array];
-    for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"blankfill" andJumpType:@"1"]) {
+    for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"2" andJumpType:@"1"]) {
         if ([model isKindOfClass:[ChaperContentItem class]]) {
             ChaperContentItem *tempModel = (ChaperContentItem *)model;
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", nil];

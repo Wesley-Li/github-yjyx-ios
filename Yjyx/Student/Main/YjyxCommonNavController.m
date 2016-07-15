@@ -7,7 +7,7 @@
 //
 
 #import "YjyxCommonNavController.h"
-
+#import "YjyxDoingWorkController.h"
 @interface YjyxCommonNavController ()
 
 @end
@@ -35,5 +35,37 @@
         viewController.hidesBottomBarWhenPushed = YES;
     }
     [super pushViewController:viewController animated:animated];
+}
+-(id)initWithRootViewController:(UIViewController *)rootViewController
+{
+    YjyxCommonNavController* nvc = [super initWithRootViewController:rootViewController];
+    self.interactivePopGestureRecognizer.delegate = (id)self;
+    nvc.delegate = (id)self;
+    return nvc;
+}
+
+-(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (navigationController.viewControllers.count == 1 || [viewController isKindOfClass:[YjyxDoingWorkController class]])
+        self.currentShowVC = Nil;
+    else
+        self.currentShowVC = viewController;
+}
+
+-(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    BOOL isPriview = NO;
+    //    for (UIView *view in gestureRecognizer.view.subviews) {
+    //        if ([view isKindOfClass:[ImgScrollView class]]) {
+    //            isPriview = YES;
+    //        }
+    //    }
+    if (isPriview) {
+        return NO;
+    }
+    if (gestureRecognizer == self.interactivePopGestureRecognizer) {
+        return (self.currentShowVC == self.topViewController); //the most important
+    }
+    return YES;
 }
 @end

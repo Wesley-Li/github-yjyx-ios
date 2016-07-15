@@ -487,6 +487,13 @@
     }
 }
 
+
+- (void)dealloc {
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+}
+
 /*
 是否现实展开箭头
 */

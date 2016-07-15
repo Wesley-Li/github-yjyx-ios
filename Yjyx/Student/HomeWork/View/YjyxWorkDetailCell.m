@@ -8,6 +8,8 @@
 
 #import "YjyxWorkDetailCell.h"
 #import "YjyxTodayWorkModel.h"
+#import "YjyxDoingWorkController.h"
+#import "YjyxWorkDetailController.h"
 @interface YjyxWorkDetailCell()
 @property (weak, nonatomic) IBOutlet UIImageView *workImageView;
 @property (weak, nonatomic) IBOutlet UILabel *workDescLabel;
@@ -74,5 +76,27 @@
          self.progressBtn.backgroundColor = RGBACOLOR(10.0, 96.0, 254.0, 1);
     }
     
+}
+- (IBAction)doingBtnClick:(UIButton *)sender {
+    if([[sender titleForState:UIControlStateNormal] isEqualToString:@"做作业"]){
+        YjyxDoingWorkController *vc = [[YjyxDoingWorkController alloc] init];
+        NSLog(@"%@", _todayWorkModel);
+        vc.type = _todayWorkModel == nil ? _OneSubjectModel.tasktype : _todayWorkModel.tasktype;
+        vc.desc = _todayWorkModel == nil ? _OneSubjectModel.task_description : _todayWorkModel.task_description;
+        vc.taskid = _todayWorkModel == nil ? _OneSubjectModel.task_id : _todayWorkModel.task_id;
+        vc.examid = _todayWorkModel == nil ? _OneSubjectModel.task_relatedresourceid : _todayWorkModel.task_relatedresourceid;
+        [((UINavigationController *)([UIApplication  sharedApplication].keyWindow.rootViewController.childViewControllers[0])) pushViewController:vc animated:YES];
+    }else{
+        YjyxWorkDetailController *vc = [[YjyxWorkDetailController alloc] init];
+        NSNumber *t_id = _todayWorkModel == nil ? _OneSubjectModel.t_id : _todayWorkModel.t_id;
+        NSNumber *type = _todayWorkModel == nil ? _OneSubjectModel.tasktype : _todayWorkModel.tasktype;
+        NSString *desc = _todayWorkModel == nil ? _OneSubjectModel.task_description : _todayWorkModel.task_description;
+        vc.t_id = t_id;
+        vc.taskType = type;
+        vc.title = desc;
+        [((UINavigationController *)([UIApplication  sharedApplication].keyWindow.rootViewController.childViewControllers[0])) pushViewController:vc animated:YES];
+        
+    }
+  
 }
 @end

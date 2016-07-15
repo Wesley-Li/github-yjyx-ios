@@ -13,4 +13,8 @@
 @property (nonatomic,strong) NSMutableArray *blankfills;//填充题
 @property (nonatomic,strong) NSMutableArray *choices;//选择题
 @property (nonatomic,strong) UITableView *subjectTable;
+
+// 学生端参数
+@property (strong, nonatomic) NSNumber *taskid;
+@property (strong, nonatomic) NSNumber *lessonid;
 @end

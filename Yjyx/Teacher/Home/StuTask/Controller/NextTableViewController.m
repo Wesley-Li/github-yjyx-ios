@@ -642,7 +642,7 @@
 -(void)dealloc{
     [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    NSLog(@"player deallco");
+    NSLog(@"player deallco");
 }
 
 

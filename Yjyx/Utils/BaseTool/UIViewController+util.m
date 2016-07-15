@@ -7,7 +7,7 @@
 //
 
 #import "UIViewController+util.h"
-
+#import "YjyxOneSubjectViewController.h"
 @implementation UIViewController (util)
 
 - (void)loadBackBtn{

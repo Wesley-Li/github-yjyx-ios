@@ -376,6 +376,12 @@
 		3C4274C71D2A5301008A30FA /* YjyxTodayWorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4274C61D2A5301008A30FA /* YjyxTodayWorkModel.m */; };
 		3C4274CB1D2A7736008A30FA /* YjyxWorkDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4274C91D2A7736008A30FA /* YjyxWorkDetailCell.m */; };
 		3C4274CC1D2A7736008A30FA /* YjyxWorkDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4274CA1D2A7736008A30FA /* YjyxWorkDetailCell.xib */; };
+		3C9C92281D2F801800B0159D /* ReleaseMicroController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9C92261D2F801800B0159D /* ReleaseMicroController.m */; };
+		3C9C92291D2F801800B0159D /* ReleaseMicroController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C9C92271D2F801800B0159D /* ReleaseMicroController.xib */; };
+		3C9C922D1D2F8F1600B0159D /* YjyxDoingWorkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9C922B1D2F8F1600B0159D /* YjyxDoingWorkController.m */; };
+		3C9C922E1D2F8F1600B0159D /* YjyxDoingWorkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C9C922C1D2F8F1600B0159D /* YjyxDoingWorkController.xib */; };
+		3C9C92341D2FA7E400B0159D /* YjyxDoingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9C92331D2FA7E400B0159D /* YjyxDoingView.m */; };
+		3C9C92361D2FA7F400B0159D /* YjyxDoingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C9C92351D2FA7F400B0159D /* YjyxDoingView.xib */; };
 		3CA04CDB1D17CDD30054A05D /* WrongSubjectController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA04CD81D17CDD30054A05D /* WrongSubjectController.xib */; };
 		3CA04CDC1D17CDD30054A05D /* WrongSubjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA04CD91D17CDD30054A05D /* WrongSubjectController.m */; };
 		3CA04CE31D17CE1E0054A05D /* WrongSubjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CA04CE01D17CE1E0054A05D /* WrongSubjectCell.xib */; };
@@ -428,23 +434,28 @@
 		3CD7E4611D2B962500769FDE /* YjyxOneSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD7E4601D2B962500769FDE /* YjyxOneSubjectViewController.m */; };
 		3CD7E4641D2BD33D00769FDE /* YjyxSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD7E4631D2BD33D00769FDE /* YjyxSearchView.m */; };
 		3CD7E4661D2BD39200769FDE /* YjyxSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CD7E4651D2BD39200769FDE /* YjyxSearchView.xib */; };
+		3CD90A531D2E266200088742 /* YjyxMicroWorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD90A521D2E266200088742 /* YjyxMicroWorkModel.m */; };
 		3CE098991D122F660054C42B /* ReleaseHomeWorkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE098971D122F660054C42B /* ReleaseHomeWorkController.m */; };
 		3CE0989A1D122F660054C42B /* ReleaseHomeWorkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE098981D122F660054C42B /* ReleaseHomeWorkController.xib */; };
 		3CE0989E1D123EF10054C42B /* PostStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0989C1D123EF10054C42B /* PostStudentCell.m */; };
 		3CE0989F1D123EF10054C42B /* PostStudentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE0989D1D123EF10054C42B /* PostStudentCell.xib */; };
 		3CE18E8F1D20C2E4007E0874 /* ReleaseMicroCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE18E8D1D20C2E4007E0874 /* ReleaseMicroCell.m */; };
 		3CE18E901D20C2E4007E0874 /* ReleaseMicroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE18E8E1D20C2E4007E0874 /* ReleaseMicroCell.xib */; };
-		3CE18E941D211E56007E0874 /* ReleaseMicroController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE18E921D211E56007E0874 /* ReleaseMicroController.m */; };
-		3CE18E951D211E56007E0874 /* ReleaseMicroController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE18E931D211E56007E0874 /* ReleaseMicroController.xib */; };
 		3CE18E991D212184007E0874 /* ReleaseDescrpitionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE18E971D212184007E0874 /* ReleaseDescrpitionCell.m */; };
 		3CE18E9A1D212184007E0874 /* ReleaseDescrpitionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE18E981D212184007E0874 /* ReleaseDescrpitionCell.xib */; };
 		3CE18E9E1D2121EE007E0874 /* ReleaseFinishTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE18E9C1D2121EE007E0874 /* ReleaseFinishTimeCell.m */; };
 		3CE18E9F1D2121EE007E0874 /* ReleaseFinishTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE18E9D1D2121EE007E0874 /* ReleaseFinishTimeCell.xib */; };
 		3CE18EA31D2122ED007E0874 /* ReleaseStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE18EA11D2122ED007E0874 /* ReleaseStudentCell.m */; };
 		3CE18EA41D2122ED007E0874 /* ReleaseStudentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE18EA21D2122ED007E0874 /* ReleaseStudentCell.xib */; };
+		3CEA95A21D30973500F4773D /* YjyxDoingWorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA95A11D30973500F4773D /* YjyxDoingWorkModel.m */; };
+		3CEA95A51D30F18E00F4773D /* YjyxWorkResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA95A41D30F18E00F4773D /* YjyxWorkResultView.m */; };
 		3CECA4AB1D2C99310039DCB6 /* YjyxTimeField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CECA4AA1D2C99310039DCB6 /* YjyxTimeField.m */; };
 		3CECA4AE1D2CDAEB0039DCB6 /* YjyxWorkDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CECA4AD1D2CDAEB0039DCB6 /* YjyxWorkDetailController.m */; };
 		3CECA4B01D2CDE9B0039DCB6 /* YjyxWorkDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CECA4AF1D2CDE9B0039DCB6 /* YjyxWorkDetailController.xib */; };
+		3CECA4B81D2CF4E20039DCB6 /* YjyxStuAnswerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CECA4B71D2CF4E20039DCB6 /* YjyxStuAnswerModel.m */; };
+		3CECA4BB1D2CF50B0039DCB6 /* YjyxWorkDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CECA4BA1D2CF50B0039DCB6 /* YjyxWorkDetailModel.m */; };
+		3CECA4BF1D2D03F60039DCB6 /* YjyxWorkContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CECA4BD1D2D03F60039DCB6 /* YjyxWorkContentCell.m */; };
+		3CECA4C01D2D03F60039DCB6 /* YjyxWorkContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CECA4BE1D2D03F60039DCB6 /* YjyxWorkContentCell.xib */; };
 		3CF01B4B1D0E49C5001C4251 /* siftContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF01B4A1D0E49C5001C4251 /* siftContentView.m */; };
 		3CF01B4D1D0E49E5001C4251 /* siftContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF01B4C1D0E49E5001C4251 /* siftContentView.xib */; };
 		3CF01B501D0E543E001C4251 /* siftButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF01B4F1D0E543E001C4251 /* siftButton.m */; };
@@ -462,6 +473,10 @@
 		3CF541E31D1D33F6000EBAB5 /* MicroSubjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF541E21D1D33F6000EBAB5 /* MicroSubjectModel.m */; };
 		3CF541E71D1D47D2000EBAB5 /* SubjectDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF541E51D1D47D2000EBAB5 /* SubjectDetailCell.m */; };
 		3CF541E81D1D47D2000EBAB5 /* SubjectDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF541E61D1D47D2000EBAB5 /* SubjectDetailCell.xib */; };
+		3CFE92711D337C2E004DE4A8 /* YjyxDraftView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFE92701D337C2E004DE4A8 /* YjyxDraftView.m */; };
+		3CFE92751D337C4B004DE4A8 /* YjyxDraftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CFE92741D337C4B004DE4A8 /* YjyxDraftView.xib */; };
+		3CFE92781D338CB2004DE4A8 /* YjyxDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFE92771D338CB2004DE4A8 /* YjyxDrawView.m */; };
+		3CFE927B1D3394ED004DE4A8 /* YjyxBezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFE927A1D3394ED004DE4A8 /* YjyxBezierPath.m */; };
 		3F4CA6281CE17FC000F4B791 /* FinshedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4CA6271CE17FC000F4B791 /* FinshedModel.m */; };
 		3FF740601CE308DD00D3C0F7 /* list_btn_shutdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */; };
 		3FF740621CE3090500D3C0F7 /* list_btn_shutdown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF740611CE3090500D3C0F7 /* list_btn_shutdown@3x.png */; };
@@ -1086,6 +1101,15 @@
 		3C4274C81D2A7736008A30FA /* YjyxWorkDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxWorkDetailCell.h; sourceTree = "<group>"; };
 		3C4274C91D2A7736008A30FA /* YjyxWorkDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxWorkDetailCell.m; sourceTree = "<group>"; };
 		3C4274CA1D2A7736008A30FA /* YjyxWorkDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxWorkDetailCell.xib; sourceTree = "<group>"; };
+		3C9C92251D2F801800B0159D /* ReleaseMicroController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseMicroController.h; sourceTree = "<group>"; };
+		3C9C92261D2F801800B0159D /* ReleaseMicroController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseMicroController.m; sourceTree = "<group>"; };
+		3C9C92271D2F801800B0159D /* ReleaseMicroController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseMicroController.xib; sourceTree = "<group>"; };
+		3C9C922A1D2F8F1600B0159D /* YjyxDoingWorkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxDoingWorkController.h; sourceTree = "<group>"; };
+		3C9C922B1D2F8F1600B0159D /* YjyxDoingWorkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxDoingWorkController.m; sourceTree = "<group>"; };
+		3C9C922C1D2F8F1600B0159D /* YjyxDoingWorkController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxDoingWorkController.xib; sourceTree = "<group>"; };
+		3C9C92321D2FA7E400B0159D /* YjyxDoingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxDoingView.h; sourceTree = "<group>"; };
+		3C9C92331D2FA7E400B0159D /* YjyxDoingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxDoingView.m; sourceTree = "<group>"; };
+		3C9C92351D2FA7F400B0159D /* YjyxDoingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxDoingView.xib; sourceTree = "<group>"; };
 		3CA04CD81D17CDD30054A05D /* WrongSubjectController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WrongSubjectController.xib; sourceTree = "<group>"; };
 		3CA04CD91D17CDD30054A05D /* WrongSubjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WrongSubjectController.m; sourceTree = "<group>"; };
 		3CA04CDA1D17CDD30054A05D /* WrongSubjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WrongSubjectController.h; sourceTree = "<group>"; };
@@ -1173,6 +1197,8 @@
 		3CD7E4621D2BD33D00769FDE /* YjyxSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxSearchView.h; sourceTree = "<group>"; };
 		3CD7E4631D2BD33D00769FDE /* YjyxSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxSearchView.m; sourceTree = "<group>"; };
 		3CD7E4651D2BD39200769FDE /* YjyxSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxSearchView.xib; sourceTree = "<group>"; };
+		3CD90A511D2E266200088742 /* YjyxMicroWorkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxMicroWorkModel.h; sourceTree = "<group>"; };
+		3CD90A521D2E266200088742 /* YjyxMicroWorkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxMicroWorkModel.m; sourceTree = "<group>"; };
 		3CE098961D122F660054C42B /* ReleaseHomeWorkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseHomeWorkController.h; sourceTree = "<group>"; };
 		3CE098971D122F660054C42B /* ReleaseHomeWorkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseHomeWorkController.m; sourceTree = "<group>"; };
 		3CE098981D122F660054C42B /* ReleaseHomeWorkController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseHomeWorkController.xib; sourceTree = "<group>"; };
@@ -1182,9 +1208,6 @@
 		3CE18E8C1D20C2E4007E0874 /* ReleaseMicroCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseMicroCell.h; sourceTree = "<group>"; };
 		3CE18E8D1D20C2E4007E0874 /* ReleaseMicroCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseMicroCell.m; sourceTree = "<group>"; };
 		3CE18E8E1D20C2E4007E0874 /* ReleaseMicroCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseMicroCell.xib; sourceTree = "<group>"; };
-		3CE18E911D211E56007E0874 /* ReleaseMicroController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseMicroController.h; sourceTree = "<group>"; };
-		3CE18E921D211E56007E0874 /* ReleaseMicroController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseMicroController.m; sourceTree = "<group>"; };
-		3CE18E931D211E56007E0874 /* ReleaseMicroController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseMicroController.xib; sourceTree = "<group>"; };
 		3CE18E961D212184007E0874 /* ReleaseDescrpitionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseDescrpitionCell.h; sourceTree = "<group>"; };
 		3CE18E971D212184007E0874 /* ReleaseDescrpitionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseDescrpitionCell.m; sourceTree = "<group>"; };
 		3CE18E981D212184007E0874 /* ReleaseDescrpitionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseDescrpitionCell.xib; sourceTree = "<group>"; };
@@ -1194,11 +1217,22 @@
 		3CE18EA01D2122ED007E0874 /* ReleaseStudentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseStudentCell.h; sourceTree = "<group>"; };
 		3CE18EA11D2122ED007E0874 /* ReleaseStudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseStudentCell.m; sourceTree = "<group>"; };
 		3CE18EA21D2122ED007E0874 /* ReleaseStudentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseStudentCell.xib; sourceTree = "<group>"; };
+		3CEA95A01D30973500F4773D /* YjyxDoingWorkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxDoingWorkModel.h; sourceTree = "<group>"; };
+		3CEA95A11D30973500F4773D /* YjyxDoingWorkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxDoingWorkModel.m; sourceTree = "<group>"; };
+		3CEA95A31D30F18E00F4773D /* YjyxWorkResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxWorkResultView.h; sourceTree = "<group>"; };
+		3CEA95A41D30F18E00F4773D /* YjyxWorkResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxWorkResultView.m; sourceTree = "<group>"; };
 		3CECA4A91D2C99310039DCB6 /* YjyxTimeField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxTimeField.h; sourceTree = "<group>"; };
 		3CECA4AA1D2C99310039DCB6 /* YjyxTimeField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxTimeField.m; sourceTree = "<group>"; };
 		3CECA4AC1D2CDAEB0039DCB6 /* YjyxWorkDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxWorkDetailController.h; sourceTree = "<group>"; };
 		3CECA4AD1D2CDAEB0039DCB6 /* YjyxWorkDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxWorkDetailController.m; sourceTree = "<group>"; };
 		3CECA4AF1D2CDE9B0039DCB6 /* YjyxWorkDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxWorkDetailController.xib; sourceTree = "<group>"; };
+		3CECA4B61D2CF4E20039DCB6 /* YjyxStuAnswerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxStuAnswerModel.h; sourceTree = "<group>"; };
+		3CECA4B71D2CF4E20039DCB6 /* YjyxStuAnswerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxStuAnswerModel.m; sourceTree = "<group>"; };
+		3CECA4B91D2CF50B0039DCB6 /* YjyxWorkDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxWorkDetailModel.h; sourceTree = "<group>"; };
+		3CECA4BA1D2CF50B0039DCB6 /* YjyxWorkDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxWorkDetailModel.m; sourceTree = "<group>"; };
+		3CECA4BC1D2D03F60039DCB6 /* YjyxWorkContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxWorkContentCell.h; sourceTree = "<group>"; };
+		3CECA4BD1D2D03F60039DCB6 /* YjyxWorkContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxWorkContentCell.m; sourceTree = "<group>"; };
+		3CECA4BE1D2D03F60039DCB6 /* YjyxWorkContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxWorkContentCell.xib; sourceTree = "<group>"; };
 		3CF01B491D0E49C5001C4251 /* siftContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = siftContentView.h; sourceTree = "<group>"; };
 		3CF01B4A1D0E49C5001C4251 /* siftContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = siftContentView.m; sourceTree = "<group>"; };
 		3CF01B4C1D0E49E5001C4251 /* siftContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = siftContentView.xib; sourceTree = "<group>"; };
@@ -1227,6 +1261,13 @@
 		3CF541E41D1D47D2000EBAB5 /* SubjectDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectDetailCell.h; sourceTree = "<group>"; };
 		3CF541E51D1D47D2000EBAB5 /* SubjectDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectDetailCell.m; sourceTree = "<group>"; };
 		3CF541E61D1D47D2000EBAB5 /* SubjectDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubjectDetailCell.xib; sourceTree = "<group>"; };
+		3CFE926F1D337C2E004DE4A8 /* YjyxDraftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxDraftView.h; sourceTree = "<group>"; };
+		3CFE92701D337C2E004DE4A8 /* YjyxDraftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxDraftView.m; sourceTree = "<group>"; };
+		3CFE92741D337C4B004DE4A8 /* YjyxDraftView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxDraftView.xib; sourceTree = "<group>"; };
+		3CFE92761D338CB2004DE4A8 /* YjyxDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxDrawView.h; sourceTree = "<group>"; };
+		3CFE92771D338CB2004DE4A8 /* YjyxDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxDrawView.m; sourceTree = "<group>"; };
+		3CFE92791D3394ED004DE4A8 /* YjyxBezierPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxBezierPath.h; sourceTree = "<group>"; };
+		3CFE927A1D3394ED004DE4A8 /* YjyxBezierPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxBezierPath.m; sourceTree = "<group>"; };
 		3F4CA6261CE17FC000F4B791 /* FinshedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinshedModel.h; sourceTree = "<group>"; };
 		3F4CA6271CE17FC000F4B791 /* FinshedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinshedModel.m; sourceTree = "<group>"; };
 		3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_btn_shutdown.png; sourceTree = "<group>"; };
@@ -2480,14 +2521,14 @@
 				3C3D93C81D26119500AA22AE /* YjyxHomeWorkController.xib */,
 				3CD7E45F1D2B962500769FDE /* YjyxOneSubjectViewController.h */,
 				3CD7E4601D2B962500769FDE /* YjyxOneSubjectViewController.m */,
-
 				80D978FB1D2CA753000BD95E /* YjyxStuWrongListViewController.h */,
 				80D978FC1D2CA753000BD95E /* YjyxStuWrongListViewController.m */,
-
 				3CECA4AC1D2CDAEB0039DCB6 /* YjyxWorkDetailController.h */,
 				3CECA4AD1D2CDAEB0039DCB6 /* YjyxWorkDetailController.m */,
 				3CECA4AF1D2CDE9B0039DCB6 /* YjyxWorkDetailController.xib */,
-
+				3C9C922A1D2F8F1600B0159D /* YjyxDoingWorkController.h */,
+				3C9C922B1D2F8F1600B0159D /* YjyxDoingWorkController.m */,
+				3C9C922C1D2F8F1600B0159D /* YjyxDoingWorkController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2503,6 +2544,14 @@
 				3CD7E45D1D2B819600769FDE /* YjyxHomeWrongModel.m */,
 				80D978FE1D2CC928000BD95E /* YjyxStuWrongListModel.h */,
 				80D978FF1D2CC928000BD95E /* YjyxStuWrongListModel.m */,
+				3CECA4B61D2CF4E20039DCB6 /* YjyxStuAnswerModel.h */,
+				3CECA4B71D2CF4E20039DCB6 /* YjyxStuAnswerModel.m */,
+				3CECA4B91D2CF50B0039DCB6 /* YjyxWorkDetailModel.h */,
+				3CECA4BA1D2CF50B0039DCB6 /* YjyxWorkDetailModel.m */,
+				3CD90A511D2E266200088742 /* YjyxMicroWorkModel.h */,
+				3CD90A521D2E266200088742 /* YjyxMicroWorkModel.m */,
+				3CEA95A01D30973500F4773D /* YjyxDoingWorkModel.h */,
+				3CEA95A11D30973500F4773D /* YjyxDoingWorkModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2516,17 +2565,29 @@
 				3C4274C81D2A7736008A30FA /* YjyxWorkDetailCell.h */,
 				3C4274C91D2A7736008A30FA /* YjyxWorkDetailCell.m */,
 				3C4274CA1D2A7736008A30FA /* YjyxWorkDetailCell.xib */,
-
 				80D979011D2CD048000BD95E /* YjyxStuWrongListCell.h */,
 				80D979021D2CD048000BD95E /* YjyxStuWrongListCell.m */,
 				80D979031D2CD048000BD95E /* YjyxStuWrongListCell.xib */,
-
 				3CD7E4621D2BD33D00769FDE /* YjyxSearchView.h */,
 				3CD7E4631D2BD33D00769FDE /* YjyxSearchView.m */,
 				3CD7E4651D2BD39200769FDE /* YjyxSearchView.xib */,
 				3CECA4A91D2C99310039DCB6 /* YjyxTimeField.h */,
 				3CECA4AA1D2C99310039DCB6 /* YjyxTimeField.m */,
-
+				3CECA4BC1D2D03F60039DCB6 /* YjyxWorkContentCell.h */,
+				3CECA4BD1D2D03F60039DCB6 /* YjyxWorkContentCell.m */,
+				3CECA4BE1D2D03F60039DCB6 /* YjyxWorkContentCell.xib */,
+				3C9C92321D2FA7E400B0159D /* YjyxDoingView.h */,
+				3C9C92331D2FA7E400B0159D /* YjyxDoingView.m */,
+				3C9C92351D2FA7F400B0159D /* YjyxDoingView.xib */,
+				3CEA95A31D30F18E00F4773D /* YjyxWorkResultView.h */,
+				3CEA95A41D30F18E00F4773D /* YjyxWorkResultView.m */,
+				3CFE926F1D337C2E004DE4A8 /* YjyxDraftView.h */,
+				3CFE92701D337C2E004DE4A8 /* YjyxDraftView.m */,
+				3CFE92741D337C4B004DE4A8 /* YjyxDraftView.xib */,
+				3CFE92761D338CB2004DE4A8 /* YjyxDrawView.h */,
+				3CFE92771D338CB2004DE4A8 /* YjyxDrawView.m */,
+				3CFE92791D3394ED004DE4A8 /* YjyxBezierPath.h */,
+				3CFE927A1D3394ED004DE4A8 /* YjyxBezierPath.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2790,9 +2851,9 @@
 				3CF541D91D1D1A41000EBAB5 /* MicroDetailViewController.h */,
 				3CF541DA1D1D1A41000EBAB5 /* MicroDetailViewController.m */,
 				3CF541DB1D1D1A41000EBAB5 /* MicroDetailViewController.xib */,
-				3CE18E911D211E56007E0874 /* ReleaseMicroController.h */,
-				3CE18E921D211E56007E0874 /* ReleaseMicroController.m */,
-				3CE18E931D211E56007E0874 /* ReleaseMicroController.xib */,
+				3C9C92251D2F801800B0159D /* ReleaseMicroController.h */,
+				3C9C92261D2F801800B0159D /* ReleaseMicroController.m */,
+				3C9C92271D2F801800B0159D /* ReleaseMicroController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -3195,6 +3256,7 @@
 				3A905D211C7F3A51005AB12F /* push5.caf in Resources */,
 				8013D33A1CF4521100F82301 /* CardCell.xib in Resources */,
 				3A905D221C7F3A51005AB12F /* push6.caf in Resources */,
+				3C9C922E1D2F8F1600B0159D /* YjyxDoingWorkController.xib in Resources */,
 				3CF541DD1D1D1A41000EBAB5 /* MicroDetailViewController.xib in Resources */,
 				3B4864771CCF117300D2DE3C /* PublishHomeworkViewController.xib in Resources */,
 				3A44A1EC1CC0C76200B93F6A /* memberCenter_bg2@3x.png in Resources */,
@@ -3203,12 +3265,12 @@
 				3BCF19521CDCC2B500E2EA1A /* TaskListTableViewCell.xib in Resources */,
 				3A5BE7121CD0BCB800DA848F /* tab_memberCenters@3x.png in Resources */,
 				3A44A1EC1CC0C76200B93F6A /* memberCenter_bg2@3x.png in Resources */,
+				3CFE92751D337C4B004DE4A8 /* YjyxDraftView.xib in Resources */,
 				3A41974E1CD36178006BD7D2 /* common_delete@2x.png in Resources */,
 				3A8827771C6EE1470008367F /* ParentCommunityViewController.xib in Resources */,
 				3CE18E9F1D2121EE007E0874 /* ReleaseFinishTimeCell.xib in Resources */,
 				3FF740621CE3090500D3C0F7 /* list_btn_shutdown@3x.png in Resources */,
 				3BB773A41CD8781400A24485 /* SmartViewController.xib in Resources */,
-				3CE18E951D211E56007E0874 /* ReleaseMicroController.xib in Resources */,
 				3BCF19181CDC66E600E2EA1A /* list_btn_nor.png in Resources */,
 				3A26EE611C71A81B009C3242 /* Parent_default@3x.png in Resources */,
 				3A6CA5A31CE32F7C00F6A7C0 /* deletbutton.png in Resources */,
@@ -3369,6 +3431,7 @@
 				3A8CAE921C70A11800BDEB6B /* ParentMoifyNameViewController.xib in Resources */,
 				3B48644F1CCF10C200D2DE3C /* privatecenter@3x.png in Resources */,
 				3CD1BC191D1E325E009ED261 /* SubjectTitleCell.xib in Resources */,
+				3CECA4C01D2D03F60039DCB6 /* YjyxWorkContentCell.xib in Resources */,
 				3AFE02C81CA29D540097CC83 /* memberCenter_bg1@3x.png in Resources */,
 				3BCF191C1CDC66E600E2EA1A /* list_btn_wrong.png in Resources */,
 				3BC7DBDA1CDB264800E5E12F /* clssPic.png in Resources */,
@@ -3413,6 +3476,8 @@
 				3CF01B4D1D0E49E5001C4251 /* siftContentView.xib in Resources */,
 				3B4864501CCF10C200D2DE3C /* privatecenter_click@3x.png in Resources */,
 				3AF11DDA1CB211D600F98A03 /* YjyxMemberDetailViewController.xib in Resources */,
+				3C9C92291D2F801800B0159D /* ReleaseMicroController.xib in Resources */,
+				3C9C92361D2FA7F400B0159D /* YjyxDoingView.xib in Resources */,
 				80D979051D2CD048000BD95E /* YjyxStuWrongListCell.xib in Resources */,
 				3B4864521CCF10C200D2DE3C /* publishhw_click@3x.png in Resources */,
 				3AC1D1E21CCDE70E006291D0 /* RegistFinalViewController.xib in Resources */,
@@ -3503,6 +3568,7 @@
 				3A905D141C7F3587005AB12F /* YjyxSoundViewController.m in Sources */,
 				80FEB6A41D235C48009EB126 /* PPreviewCell.m in Sources */,
 				3CF01B501D0E543E001C4251 /* siftButton.m in Sources */,
+				3CD90A531D2E266200088742 /* YjyxMicroWorkModel.m in Sources */,
 				3BC7DBDF1CDB27ED00E5E12F /* ClassCustomTableViewCell.m in Sources */,
 				3BCF194A1CDCC2B500E2EA1A /* StuTaskTableViewController.m in Sources */,
 				801F44AA1CDF164800B7E7E1 /* MD5DataSigner.m in Sources */,
@@ -3512,13 +3578,14 @@
 				3BB773C11CD883C700A24485 /* NameChageViewController.m in Sources */,
 				3CF541DC1D1D1A41000EBAB5 /* MicroDetailViewController.m in Sources */,
 				3A04A5CB1C93E6290040D913 /* MASCompositeConstraint.m in Sources */,
+				3CFE927B1D3394ED004DE4A8 /* YjyxBezierPath.m in Sources */,
 				3B4864701CCF117300D2DE3C /* MessageViewController.m in Sources */,
 				3AEF27221C61F08A0028BE09 /* PasswordStipulateCheckin.m in Sources */,
 				3CA8963F1D06DF540092D292 /* ParentChapterCell.m in Sources */,
 				CB4004821C609BCD00556AA7 /* AppDelegate.m in Sources */,
 				3BE01BD41CDD7DBE00781B86 /* BlankFillModel.m in Sources */,
 				3A91F49A1C760CF4001568AA /* PNRadarChart.m in Sources */,
-				3CE18E941D211E56007E0874 /* ReleaseMicroController.m in Sources */,
+				3CECA4BF1D2D03F60039DCB6 /* YjyxWorkContentCell.m in Sources */,
 				3CD1BC1D1D1E33BA009ED261 /* MicroKnowledgeCell.m in Sources */,
 				3AF339461C770FDC00586A37 /* AutoLoginViewController.m in Sources */,
 				3CF0D1771D24B0B7002EE9BF /* RegistStudentController.m in Sources */,
@@ -3527,6 +3594,7 @@
 				3AC1D1E11CCDE70E006291D0 /* RegistFinalViewController.m in Sources */,
 				3CD7E4581D2B593800769FDE /* MJRefreshHeaderView.m in Sources */,
 				8013D34A1CF47CB700F82301 /* TaskConditonModel.m in Sources */,
+				3CFE92781D338CB2004DE4A8 /* YjyxDrawView.m in Sources */,
 				3B4864741CCF117300D2DE3C /* PrivateCenterViewController.m in Sources */,
 				3BB773A81CD8784000A24485 /* BookViewController.m in Sources */,
 				3CE18E991D212184007E0874 /* ReleaseDescrpitionCell.m in Sources */,
@@ -3575,6 +3643,7 @@
 				3A04A5DF1C9406850040D913 /* YjyxWorkPreviewViewController.m in Sources */,
 				3AEF272B1C61F08A0028BE09 /* JSONKit.m in Sources */,
 				3BD9C7F51CEEAE8B008232D7 /* QiniuUploadHelper.m in Sources */,
+				3CECA4BB1D2CF50B0039DCB6 /* YjyxWorkDetailModel.m in Sources */,
 				3C4274C41D2A503D008A30FA /* YjyxHomeDataModel.m in Sources */,
 				3A04A5CF1C93E6290040D913 /* MASViewAttribute.m in Sources */,
 				3A8CAEBB1C70B36200BDEB6B /* SDWebImagePrefetcher.m in Sources */,
@@ -3602,6 +3671,7 @@
 				3A91F4971C760CF4001568AA /* PNLineChartDataItem.m in Sources */,
 				3A04A5D51C93E6290040D913 /* WMPlayer.m in Sources */,
 				3BFE3B7E1CD9816D00502769 /* TeacherEntity.m in Sources */,
+				3C9C922D1D2F8F1600B0159D /* YjyxDoingWorkController.m in Sources */,
 				3CD7E4591D2B593800769FDE /* UIScrollView+MJExtension.m in Sources */,
 				3C3D93E51D26119500AA22AE /* YjyxYiTeachController.m in Sources */,
 				3A3C1B431C9562A900514C32 /* YjyxMicroClassViewController.m in Sources */,
@@ -3627,6 +3697,7 @@
 				3AD1FD9E1C72CE5000E362B9 /* CommonWebViewController.m in Sources */,
 				3A4166781CEAE014005D2032 /* YjyxShopMallViewController.m in Sources */,
 				3AEF27241C61F08A0028BE09 /* UICountingLabel.m in Sources */,
+				3C9C92341D2FA7E400B0159D /* YjyxDoingView.m in Sources */,
 				3AFE02B91CA291BD0097CC83 /* BaseViewController.m in Sources */,
 				3BFE3B841CD99E6100502769 /* StuDataBase.m in Sources */,
 				3CA896321D0671D60092D292 /* GradeContentItem.m in Sources */,
@@ -3646,9 +3717,8 @@
 				3A38278A1CDF185F00EAB979 /* YjyxFeedBackViewController.m in Sources */,
 				3A91F48F1C760CF4001568AA /* PNBar.m in Sources */,
 				8013D3391CF4521100F82301 /* CardCell.m in Sources */,
-
+				3CEA95A51D30F18E00F4773D /* YjyxWorkResultView.m in Sources */,
 				3CECA4AB1D2C99310039DCB6 /* YjyxTimeField.m in Sources */,
-
 				3CE18E9E1D2121EE007E0874 /* ReleaseFinishTimeCell.m in Sources */,
 				3AEF27201C61F08A0028BE09 /* RTSpinKitView.m in Sources */,
 				3BCF194B1CDCC2B500E2EA1A /* TaskDetailTableViewController.m in Sources */,
@@ -3681,7 +3751,9 @@
 				3C3D93E11D26119500AA22AE /* YjyxCommonNavController.m in Sources */,
 				80D979001D2CC928000BD95E /* YjyxStuWrongListModel.m in Sources */,
 				3A88277C1C6EE1820008367F /* ParentPersonalViewController.m in Sources */,
+				3CECA4B81D2CF4E20039DCB6 /* YjyxStuAnswerModel.m in Sources */,
 				3CD2F1741D27A3C70031AF2E /* YjyxChangeSoundViewController.m in Sources */,
+				3CEA95A21D30973500F4773D /* YjyxDoingWorkModel.m in Sources */,
 				3A04A5D11C93E6290040D913 /* NSArray+MASAdditions.m in Sources */,
 				3BCF194C1CDCC2B500E2EA1A /* TaskModel.m in Sources */,
 				3CF541CF1D1CD160000EBAB5 /* MyMicroMainController.m in Sources */,
@@ -3725,6 +3797,7 @@
 				3AF11DD91CB211D600F98A03 /* YjyxMemberDetailViewController.m in Sources */,
 				3A8827761C6EE1470008367F /* ParentCommunityViewController.m in Sources */,
 				3C3D93DF1D26119500AA22AE /* YjyxHomeWorkController.m in Sources */,
+				3CFE92711D337C2E004DE4A8 /* YjyxDraftView.m in Sources */,
 				3AEF272D1C61F08A0028BE09 /* SBJsonParser.m in Sources */,
 				3CE0989E1D123EF10054C42B /* PostStudentCell.m in Sources */,
 				3B35DB931CE06FE7000B7F83 /* AnswerSituationCell.m in Sources */,
@@ -3750,6 +3823,7 @@
 				3B4864761CCF117300D2DE3C /* PublishHomeworkViewController.m in Sources */,
 				3AF27E3B1C73465400698673 /* AccessJudge.m in Sources */,
 				3AEF272E1C61F08A0028BE09 /* SBJsonWriter.m in Sources */,
+				3C9C92281D2F801800B0159D /* ReleaseMicroController.m in Sources */,
 				3BCF194F1CDCC2B500E2EA1A /* TaskConditionTableViewCell.m in Sources */,
 				3CD7E45A1D2B593800769FDE /* UIScrollView+MJRefresh.m in Sources */,
 				3CF541D81D1CFD09000EBAB5 /* MyMicroModel.m in Sources */,

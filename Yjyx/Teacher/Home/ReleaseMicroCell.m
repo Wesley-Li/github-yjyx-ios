@@ -7,7 +7,12 @@
 //
 
 #import "ReleaseMicroCell.h"
+#import "YjyxMicroWorkModel.h"
 
+@interface ReleaseMicroCell()
+@property (weak, nonatomic) IBOutlet UIButton *backBTN;
+
+@end
 @implementation ReleaseMicroCell
 
 - (void)awakeFromNib {
@@ -19,6 +24,18 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+- (void)setModel:(YjyxMicroWorkModel *)model
+{
+    _model = model;
+    
+    if (model.videoobjlist.count == 0) {
+        self.playBtn.hidden = YES;
+        self.backBTN.hidden = YES;
+    }else{
+        
+        self.backBTN.hidden = NO;
+    }
 }
 - (IBAction)backBtnClick:(UIButton *)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"BackButtonClicked" object:nil];

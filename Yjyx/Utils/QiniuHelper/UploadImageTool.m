@@ -37,7 +37,7 @@
         [manager GET:[BaseURL stringByAppendingString:PARENTS_GETQINIUTOKEN] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             
             if (responseObject) {
-                NSLog(@"++++%@", responseObject);
+//                NSLog(@"++++%@", responseObject);
                 success(responseObject[@"uptoken"]);
             }
             
@@ -49,6 +49,20 @@
     }else {
     
         // 留学生端
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        [manager GET:[BaseURL stringByAppendingString:STUDENT_PIC_SETTING_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+            
+            if (responseObject) {
+//                NSLog(@"++++%@", responseObject);
+//                NSLog(@"%@", responseObject[@"reason"]);
+                success(responseObject[@"uptoken"]);
+            }
+            
+        } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+            failure();
+        }];
     
     }
 
@@ -139,13 +153,13 @@
 //    
 //    __block CGFloat partProgress =1.0f / [imageArray count];
     
-    __block NSUInteger currentIndex =0;
+    __block NSUInteger currentIndex = 0;
     
     QiniuUploadHelper*uploadHelper = [QiniuUploadHelper sharedUploadHelper];
     
     __weak typeof(uploadHelper) weakHelper = uploadHelper;
     
-    /*
+    
     uploadHelper.singleFailureBlock= ^() {
         
         failure();
@@ -153,10 +167,11 @@
         return;
         
     };
-    */
+    
     uploadHelper.singleSuccessBlock= ^(NSString*url) {
         
         [array addObject:url];
+        NSLog(@"%@", array);
         
 //        totalProgress += partProgress;
 //        
@@ -167,6 +182,7 @@
         if([array count] == [imageArray count]) {
             
             success([array copy]);
+            currentIndex = 0;
             
             return;
             

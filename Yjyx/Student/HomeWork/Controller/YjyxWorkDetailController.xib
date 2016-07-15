@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YjyxWorkDetailController">
             <connections>
+                <outlet property="tableView" destination="CMz-yq-FxC" id="oi9-Jy-lOd"/>
                 <outlet property="view" destination="iN0-l3-epB" id="hhI-IT-WQj"/>
             </connections>
         </placeholder>
@@ -17,6 +18,10 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CMz-yq-FxC">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="zED-qS-QTj"/>
+                        <outlet property="delegate" destination="-1" id="v7V-7o-wQx"/>
+                    </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -27,7 +32,7 @@
                 <constraint firstItem="CMz-yq-FxC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zSS-iR-snz"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="361" y="162"/>
+            <point key="canvasLocation" x="36" y="138"/>
         </view>
     </objects>
 </document>

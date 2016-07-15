@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class ChildrenResultModel;
-@class ResultModel;
+@class ResultModel, YjyxStuAnswerModel, YjyxWorkDetailModel;
 @interface ChildrenResultCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIButton *solutionBtn;// 亿教解析
@@ -27,7 +27,7 @@
 // 题目内容赋值
 - (void)setSubviewsWithChildrenResultModel:(ChildrenResultModel *)model andResultModel:(ResultModel *)resultModel;
 
-
-
+// 学生端
+- (void)setSubviewsWithWorkDetailModel:(YjyxWorkDetailModel *)model andStuResultModel:(YjyxStuAnswerModel *)resultModel;
 
 @end

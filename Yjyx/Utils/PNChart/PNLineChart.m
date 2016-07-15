@@ -34,7 +34,10 @@
 @synthesize pathAnimation = _pathAnimation;
 
 #pragma mark initialization
-
+- (void)dealloc
+{
+    NSLog(@"linedelloc");
+}
 - (id)initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
