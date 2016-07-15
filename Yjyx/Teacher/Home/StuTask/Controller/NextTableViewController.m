@@ -695,6 +695,7 @@
 
 #pragma mark - AnswerSituationCellDelegate
 
+
 - (void)handlePushCorrectWithSender:(UIButton *)sender {
     
     OneStuTaskDetailViewController *oneTaskVC = [[OneStuTaskDetailViewController alloc] init];
@@ -706,8 +707,18 @@
     StudentEntity *stu = [[StuDataBase shareStuDataBase] selectStuById:[_dic[@"summary"] objectForKey:@"CNL"][sender.tag - 200]];
     oneTaskVC.title = stu.realname;
     [self.navigationController pushViewController:oneTaskVC animated:YES];
-
 }
+-(void)dealloc{
+    [self releaseWMPlayer];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSLog(@"player deallco");
+}
+
+
+
+
+#pragma mark - 行高
+
 
 - (void)handlePushWrongWithSender:(UIButton *)sender {
     
@@ -736,11 +747,6 @@
 }
 
 
--(void)dealloc{
-    [self releaseWMPlayer];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSLog(@"player deallco");
-}
 
 
 /*

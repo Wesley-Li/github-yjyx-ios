@@ -217,7 +217,7 @@
 }
 
 - (IBAction)goSureBtnClick:(UIButton *)sender {
-    [self resetTimer];
+    
     if (_loginNameTextField.text.length == 0||_pswTextField.text.length == 0||_conFirmpswTextField.text.length == 0||_realNameTextField.text.length == 0||_codeTextField.text.length == 0 || _phoneTextField.text.length == 0) {
         [self.view makeToast:@"请输入完整信息" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
@@ -233,6 +233,7 @@
                     [self regist];//注册
                 }else{
                     [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                    [self resetTimer];
                 }
             }else{
                 if (error.code == -1009) {
@@ -241,6 +242,7 @@
                 }
                 [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:3.0 position:SHOW_CENTER complete:nil];
             }
+            [self resetTimer];
         }];
         
     }

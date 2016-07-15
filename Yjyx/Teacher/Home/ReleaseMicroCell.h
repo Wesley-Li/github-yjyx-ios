@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class YjyxMicroWorkModel;
 @interface ReleaseMicroCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundIV;
+
+@property (strong, nonatomic) YjyxMicroWorkModel *model;
 @end

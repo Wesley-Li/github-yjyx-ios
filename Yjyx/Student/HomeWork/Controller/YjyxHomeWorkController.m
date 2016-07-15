@@ -16,6 +16,9 @@
 #import "YjyxHomeWrongModel.h"
 #import "YjyxOneSubjectViewController.h"
 #import "YjyxStuWrongListViewController.h"
+#import "YjyxWorkDetailController.h"
+#import "YjyxWorkPreviewViewController.h"
+#import "YjyxMicroClassViewController.h"
 @interface YjyxHomeWorkController ()<UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *clickBtn;
 
@@ -66,7 +69,7 @@ static NSString *DETAILID = @"detailID";
     [self.workTableV registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxWorkDetailCell class]) bundle:nil] forCellReuseIdentifier:DETAILID];
     [self.wrongWorkTableV registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxHomeWorkCell class]) bundle:nil] forCellReuseIdentifier:WORKID];
 
-    
+
 }
 - (void)viewDidLayoutSubviews
 {
@@ -133,7 +136,7 @@ static NSString *DETAILID = @"detailID";
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"action"] = @"m_gettaskhomepagedata";
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/tasks/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-//        NSLog(@"%@", responseObject);
+        NSLog(@"%@", responseObject);
 //        NSLog(@"%@", responseObject[@"retlist"][0][@"name"]);
         if([responseObject[@"retcode"] isEqual:@0]){
         NSMutableArray *tempArr = [NSMutableArray array];
@@ -159,7 +162,7 @@ static NSString *DETAILID = @"detailID";
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"action"] = @"getfailedquestionhomepagedata";
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/stats/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] isEqual:@0]) {
             NSMutableArray *tempArr = [NSMutableArray array];
             for (NSDictionary *dict in responseObject[@"data"]) {
@@ -186,9 +189,9 @@ static NSString *DETAILID = @"detailID";
 }
 
 - (void)scrollToViewWithClick:(UIButton *)btn{
-    if(btn.tag == 2){
-        [self wrongWorkTableV];
-    }
+//    if(btn.tag == 2){
+//        [self wrongWorkTableV];
+//    }
     [self.scrollV setContentOffset:CGPointMake(SCREEN_WIDTH * (btn.tag - 1), 0) animated:YES];
     
 }
@@ -205,10 +208,10 @@ static NSString *DETAILID = @"detailID";
 {
     if ([tableView isEqual:_workTableV]) {
         YjyxHomeDataModel *model = self.subjectTypeArr[section];
-        NSLog(@"%ld", model.todaytasks.count + 1);
+//        NSLog(@"%ld", model.todaytasks.count + 1);
         return model.todaytasks.count + 1;
     }else{
-        NSLog(@"%ld", self.wrongArr.count);
+//        NSLog(@"%ld", self.wrongArr.count);
     return self.wrongArr.count;
     }
 }
@@ -252,16 +255,45 @@ static NSString *DETAILID = @"detailID";
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([tableView isEqual:self.workTableV]) {
+    if ([tableView isEqual:self.workTableV]) { // 点中作业
         if(indexPath.row == 0){
             YjyxOneSubjectViewController *VC = [[YjyxOneSubjectViewController alloc] init];
             YjyxHomeDataModel *model = self.subjectTypeArr[indexPath.section];
             VC.navTitle = model.name;
             VC.subjectid = model.s_id;
             [self.navigationController pushViewController:VC animated:YES];
+        }else{
+            // 已完成
+            YjyxHomeDataModel *homeDataM = self.subjectTypeArr[indexPath.section];
+            YjyxTodayWorkModel *model = homeDataM.todaytasks[indexPath.row - 1];
+            YjyxWorkDetailController *workDetailVc = [[YjyxWorkDetailController alloc] init];
+            workDetailVc.title = model.task_description;
+            workDetailVc.taskType = model.tasktype;
+            workDetailVc.t_id = model.t_id;
+            // 未完成之普通作业
+            YjyxWorkPreviewViewController *doingVc = [[YjyxWorkPreviewViewController alloc] init];
+            doingVc.taskid = model.task_id;
+            doingVc.examid = model.task_relatedresourceid;
+            doingVc.title = model.task_description;
+            // 未完成之微课作业
+            YjyxMicroClassViewController *microVc = [[YjyxMicroClassViewController alloc] init];
+            microVc.taskid = model.task_id;
+            microVc.lessonid = model.task_relatedresourceid;
+            microVc.title = model.task_description;
+            
+            if ([model.finished isEqual:@1]) {
+                [self.navigationController pushViewController:workDetailVc animated:YES];
+            }else{
+                if ([model.tasktype integerValue] == 1) {
+                    [self.navigationController pushViewController:doingVc animated:YES];
+                }else{
+                    [self.navigationController pushViewController:microVc animated:YES];
+                }
+                
+            }
         }
 
-    }else{
+    }else{// 点击了错题榜
         YjyxHomeWrongModel *model = self.wrongArr[indexPath.row];
         
         YjyxStuWrongListViewController *vc = [[YjyxStuWrongListViewController alloc] init];
@@ -280,7 +312,7 @@ static NSString *DETAILID = @"detailID";
     }
     CGPoint offsetP = scrollView.contentOffset;
     NSInteger index = (offsetP.x + SCREEN_WIDTH * 0.5) / SCREEN_WIDTH;
-    NSLog(@"%ld", index);
+//    NSLog(@"%ld", index);
     for (UIView *view in self.btnView.subviews) {
         if(view.tag == index + 1){
             [self workBtnClick:((UIButton *)view)];

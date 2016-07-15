@@ -8,9 +8,11 @@
 
 #import "MicroKnowledgeCell.h"
 #import "MicroDetailModel.h"
+#import "YjyxMicroWorkModel.h"
 @interface MicroKnowledgeCell()
 @property (weak, nonatomic) IBOutlet UILabel *knowLedgeLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *knowLabel;
 @end
 @implementation MicroKnowledgeCell
 
@@ -23,6 +25,17 @@
 {
     _model = model;
     self.knowLedgeLabel.text = model.knowledgedesc;
+    
 }
 
+- (void)setWorkModel:(YjyxMicroWorkModel *)workModel
+{
+    _workModel = workModel;
+    self.knowLedgeLabel.text = workModel.knowledgedesc;
+    if (workModel.knowledgedesc == nil) {
+        self.knowLabel.hidden = YES;
+    }else{
+        self.knowLabel.hidden = NO;
+    }
+}
 @end

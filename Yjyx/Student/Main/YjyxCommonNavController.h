@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface YjyxCommonNavController : UINavigationController
-
+@property(nonatomic,weak) UIViewController* currentShowVC;
 @end

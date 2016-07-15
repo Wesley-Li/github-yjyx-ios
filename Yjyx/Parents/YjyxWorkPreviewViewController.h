@@ -13,4 +13,8 @@
 @property (nonatomic,strong) NSString *previewRid;
 @property (nonatomic,strong) NSArray *blankfills;//填充题
 @property (nonatomic,strong) NSArray *choices;//选择题
+
+// 学生端 传递过的参数
+@property (strong, nonatomic) NSNumber *taskid;
+@property (strong, nonatomic) NSNumber *examid;
 @end

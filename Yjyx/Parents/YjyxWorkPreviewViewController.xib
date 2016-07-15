@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YjyxWorkPreviewViewController">
             <connections>
+                <outlet property="beginWorkBtn" destination="5ns-I7-7nk" id="SUF-tg-onq"/>
+                <outlet property="bottomConstrait" destination="zNN-Tn-snH" id="7L9-y0-uO0"/>
                 <outlet property="previewTable" destination="N5i-qZ-Ye4" id="UDd-4o-uKD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -16,18 +17,35 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N5i-qZ-Ye4">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N5i-qZ-Ye4">
+                    <rect key="frame" x="0.0" y="-59" width="320" height="562"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="BUM-yW-mJ5"/>
                         <outlet property="delegate" destination="-1" id="7Yb-0S-XLN"/>
                     </connections>
                 </tableView>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ns-I7-7nk">
+                    <rect key="frame" x="0.0" y="511" width="320" height="49"/>
+                    <color key="backgroundColor" red="0.0" green="0.8980392157" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="R9A-E9-9Kp"/>
+                    </constraints>
+                    <state key="normal" title="开始作业">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="beginWorkClicked:" destination="-1" eventType="touchUpInside" id="XBO-lY-ER1"/>
+                        <action selector="doWorkBtnClick:" destination="-1" eventType="touchUpInside" id="8Aa-sV-wfx"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="N5i-qZ-Ye4" secondAttribute="trailing" id="C4m-nA-qFH"/>
+                <constraint firstItem="5ns-I7-7nk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="E3a-ts-odw"/>
+                <constraint firstAttribute="trailing" secondItem="5ns-I7-7nk" secondAttribute="trailing" id="KJR-oG-7RW"/>
+                <constraint firstAttribute="bottom" secondItem="5ns-I7-7nk" secondAttribute="bottom" id="dy8-rO-NJm"/>
                 <constraint firstItem="N5i-qZ-Ye4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nzC-yR-aNa"/>
                 <constraint firstItem="N5i-qZ-Ye4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vnO-6H-D2g"/>
                 <constraint firstAttribute="bottom" secondItem="N5i-qZ-Ye4" secondAttribute="bottom" id="zNN-Tn-snH"/>

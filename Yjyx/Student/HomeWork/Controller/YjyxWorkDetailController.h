@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) NSString *t_title;
 @property (strong, nonatomic) NSNumber *t_id;
+@property (strong, nonatomic) NSNumber *taskType;
+
 @end

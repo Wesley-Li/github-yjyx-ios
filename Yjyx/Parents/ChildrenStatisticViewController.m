@@ -546,7 +546,10 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
-
+- (void)dealloc
+{
+    NSLog(@"------------");
+}
 /*
 #pragma mark - Navigation
 

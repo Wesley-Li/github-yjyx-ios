@@ -139,12 +139,12 @@
     }
 
     [SVProgressHUD showWithStatus:@"正在拼命上传"];
-    
+    NSLog(@"%@", _selectedPhotos);
     [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArray) {
         
             
             NSString *jsonString = [urlArray JSONString];
-            
+            NSLog(@"%@", jsonString);
             // 上传给自己的服务器
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:contentText.text,@"description", jsonString,@"images", nil];
             
@@ -169,7 +169,7 @@
                 }
                 
             } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//                [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
+                [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
             }];
             
 

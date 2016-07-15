@@ -8,42 +8,55 @@
 
 #import "YjyxWorkPreviewViewController.h"
 #import "PPreviewCell.h"
-
+#import "YjyxCommonNavController.h"
+#import "YjyxDoingWorkModel.h"
+#import "YjyxDoingWorkController.h"
 #define ID @"Cell"
 @interface YjyxWorkPreviewViewController ()<UIWebViewDelegate>
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstrait;
 
 @property (nonatomic, strong) NSMutableDictionary *choiceCellHeightDic;
 @property (nonatomic, strong) NSMutableDictionary *blankfillHeightDic;
 
+@property (weak, nonatomic) IBOutlet UIButton *beginWorkBtn;
+
+@property (assign, nonatomic) NSInteger jumpType;
+
+@property (strong, nonatomic) NSMutableArray *doWorkArr;
 @end
 
 @implementation YjyxWorkPreviewViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
-    {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
+//    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+//    {
+//        self.edgesForExtendedLayout = UIRectEdgeNone;
+//    }
     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
     self.navigationController.navigationBarHidden = NO;
     [self loadBackBtn];
-    
+    _doWorkArr = [NSMutableArray array];
     _choices = [[NSArray alloc] init];
     _blankfills = [[NSArray alloc] init];
     self.choiceCellHeightDic = [[NSMutableDictionary alloc] init];
     self.blankfillHeightDic = [[NSMutableDictionary alloc] init];
     
-    // 请求网络数据
-    [self getchildResult:_previewRid];
+   
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCellHeight:) name:@"cellHeighChange" object:nil];
     
     [self.previewTable registerNib:[UINib nibWithNibName:NSStringFromClass([PPreviewCell class]) bundle:nil] forCellReuseIdentifier:ID];
     
+    if ([self.navigationController isKindOfClass:[YjyxCommonNavController class]]) {
+        self.jumpType = 1;
+        // 请求学生端数据
+        [self loadData];
+    }else{
+        // 请求网络数据
+        [self getchildResult:_previewRid];
+    }
     
-    
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)refreshCellHeight:(NSNotification *)sender {
@@ -76,10 +89,18 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+     self.navigationController.navigationBarHidden = NO;
+    if(self.jumpType == 1){
+         self.beginWorkBtn.hidden = NO;
+//        self.previewTable.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
+        self.bottomConstrait.constant = 49;
+        self.navigationController.navigationBar.barTintColor = STUDENTCOLOR;
+    }else{
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
+    }
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
     
-    self.navigationController.navigationBarHidden = NO;
+   
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -87,7 +108,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cellHeighChange" object:nil];
     [super viewWillDisappear:YES];
 }
-
+- (void)dealloc{
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -115,8 +138,71 @@
         }
     }];
 }
+- (void)loadData
+{
+    [self.view makeToastActivity:SHOW_CENTER];
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"action"] = @"m_get_task_exam_preview_data";
+    param[@"taskid"] = self.taskid;
+    param[@"examid"] = self.examid;
+    [mgr GET:[BaseURL stringByAppendingString:@"/api/student/tasks/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        [self.view hideToastActivity];
+        NSLog(@"%@", responseObject);
+        if ([responseObject[@"retcode"] isEqual:@0]) {
+            _choices = responseObject[@"retobj"][@"questions"][@"choice"][@"questionlist"];
+            _blankfills = responseObject[@"retobj"][@"questions"][@"blankfill"][@"questionlist"];
+            [_previewTable reloadData];
+            for (NSDictionary *dict in responseObject[@"retobj"][@"questions"][@"choice"][@"questionlist"]) {
+                YjyxDoingWorkModel *model = [YjyxDoingWorkModel doingWorkModelWithDict:dict];
+                model.questiontype = 1;
+                [self.doWorkArr addObject:model];
+            }
+            for (NSDictionary *dict in responseObject[@"retobj"][@"questions"][@"blankfill"][@"questionlist"]) {
+                YjyxDoingWorkModel *model = [YjyxDoingWorkModel doingWorkModelWithDict:dict];
+                model.questiontype = 2;
+                [self.doWorkArr addObject:model];
+            }
+            
+            
+            NSInteger i = 0;
+            for (NSArray *arr in [responseObject[@"retobj"][@"examobj"][@"questionlist"] JSONValue]) {
+                if(arr.count == 0){
+                    continue;
+                }
+                if ([arr[0] isEqualToString:@"choice"]) {
+                    for (NSDictionary *dict in arr[1]) {
+                        YjyxDoingWorkModel *model = self.doWorkArr[i];
+                        model.requireprocess = dict[@"requireprocess"];
+                        i++;
+                    }
+                }
+                if ([arr[0] isEqualToString:@"blankfill"]) {
+                    for (NSDictionary *dict in arr[1]) {
+                        YjyxDoingWorkModel *model = self.doWorkArr[i];
+                        model.requireprocess = dict[@"requireprocess"];
+                        i++;
+                    }
+                }
+            }
 
-
+        }else{
+           [self.view makeToast:[responseObject objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
+    }];
+}
+// 开始作业 按钮的点击
+- (IBAction)doWorkBtnClick:(UIButton *)sender {
+    YjyxDoingWorkController *vc = [[YjyxDoingWorkController alloc] init];
+    vc.desc= self.navigationItem.title;
+    vc.type = @1;
+    vc.jumpDoworkArr = self.doWorkArr;
+    vc.examid = self.examid;
+    vc.taskid = self.taskid;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 #pragma mark -UITableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -259,6 +345,8 @@
     
 }
 
+- (IBAction)beginWorkClicked:(UIButton *)sender {
+}
 
 /*
 #pragma mark - Navigation
