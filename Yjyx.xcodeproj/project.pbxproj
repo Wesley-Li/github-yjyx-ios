@@ -522,6 +522,8 @@
 		80D9790C1D2E21A5000BD95E /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D9790B1D2E21A5000BD95E /* iCarousel.m */; };
 		80D979101D36352B000BD95E /* TeacherDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D9790E1D36352B000BD95E /* TeacherDrawViewController.m */; };
 		80D979111D36352B000BD95E /* TeacherDrawViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D9790F1D36352B000BD95E /* TeacherDrawViewController.xib */; };
+		80D979151D388271000BD95E /* YjyxDrawlineInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D979141D388271000BD95E /* YjyxDrawlineInfo.m */; };
+		80D979181D3882AE000BD95E /* YjyxDrawLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D979171D3882AE000BD95E /* YjyxDrawLine.m */; };
 		80F718C01CF28961007C0B75 /* StuConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BB1CF28961007C0B75 /* StuConditionCell.m */; };
 		80F718C11CF28961007C0B75 /* StuConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80F718BC1CF28961007C0B75 /* StuConditionCell.xib */; };
 		80F718C21CF28961007C0B75 /* SubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BE1CF28961007C0B75 /* SubmitCell.m */; };
@@ -1401,6 +1403,10 @@
 		80D9790D1D36352B000BD95E /* TeacherDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherDrawViewController.h; sourceTree = "<group>"; };
 		80D9790E1D36352B000BD95E /* TeacherDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherDrawViewController.m; sourceTree = "<group>"; };
 		80D9790F1D36352B000BD95E /* TeacherDrawViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeacherDrawViewController.xib; sourceTree = "<group>"; };
+		80D979131D388271000BD95E /* YjyxDrawlineInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxDrawlineInfo.h; sourceTree = "<group>"; };
+		80D979141D388271000BD95E /* YjyxDrawlineInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxDrawlineInfo.m; sourceTree = "<group>"; };
+		80D979161D3882AE000BD95E /* YjyxDrawLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxDrawLine.h; sourceTree = "<group>"; };
+		80D979171D3882AE000BD95E /* YjyxDrawLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxDrawLine.m; sourceTree = "<group>"; };
 		80F718BA1CF28961007C0B75 /* StuConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuConditionCell.h; sourceTree = "<group>"; };
 		80F718BB1CF28961007C0B75 /* StuConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuConditionCell.m; sourceTree = "<group>"; };
 		80F718BC1CF28961007C0B75 /* StuConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StuConditionCell.xib; sourceTree = "<group>"; };
@@ -1961,6 +1967,7 @@
 		3AEF26DB1C61F08A0028BE09 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				80D979121D388212000BD95E /* ImageDrawing */,
 				80D979091D2E21A5000BD95E /* iCarousel */,
 				3BD9C7EF1CEEAC93008232D7 /* QiniuHelper */,
 				3A44A1E61CC0C63100B93F6A /* Third Library */,
@@ -3024,6 +3031,17 @@
 			path = iCarousel;
 			sourceTree = "<group>";
 		};
+		80D979121D388212000BD95E /* ImageDrawing */ = {
+			isa = PBXGroup;
+			children = (
+				80D979131D388271000BD95E /* YjyxDrawlineInfo.h */,
+				80D979141D388271000BD95E /* YjyxDrawlineInfo.m */,
+				80D979161D3882AE000BD95E /* YjyxDrawLine.h */,
+				80D979171D3882AE000BD95E /* YjyxDrawLine.m */,
+			);
+			path = ImageDrawing;
+			sourceTree = "<group>";
+		};
 		80FEB6621D1B77BA009EB126 /* Statistic */ = {
 			isa = PBXGroup;
 			children = (
@@ -3659,6 +3677,7 @@
 				3A91F4921C760CF4001568AA /* PNCircleChart.m in Sources */,
 				3AF27E371C73239400698673 /* AddChildrenViewController.m in Sources */,
 				3B84D5851CEC6E9D003F659B /* TZTestCell.m in Sources */,
+				80D979151D388271000BD95E /* YjyxDrawlineInfo.m in Sources */,
 				3A8CAEBC1C70B36200BDEB6B /* UIButton+WebCache.m in Sources */,
 				80FEB6881D1BB545009EB126 /* StudentViewController.m in Sources */,
 				80D979041D2CD048000BD95E /* YjyxStuWrongListCell.m in Sources */,
@@ -3757,6 +3776,7 @@
 				3AA1655C1C91AB40006B8756 /* RCLabel.m in Sources */,
 				3C3D93DD1D26119500AA22AE /* YjyxStatistController.m in Sources */,
 				3A40570C1CCF732800258784 /* ForgetTwoViewController.m in Sources */,
+				80D979181D3882AE000BD95E /* YjyxDrawLine.m in Sources */,
 				8013D32F1CF4495300F82301 /* SpendTimeCell.m in Sources */,
 				3CF01B4B1D0E49C5001C4251 /* siftContentView.m in Sources */,
 				3BFE3B791CD9816D00502769 /* YjyxOverallData.m in Sources */,

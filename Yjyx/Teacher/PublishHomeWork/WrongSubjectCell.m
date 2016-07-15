@@ -8,11 +8,10 @@
 
 #import "WrongSubjectCell.h"
 #import "YjyxWrongSubModel.h"
-#import "RCLabel.h"
 //#import "WrongDataBase.h"
 #import "QuestionDataBase.h"
 #import "MicroSubjectModel.h"
-@interface WrongSubjectCell()
+@interface WrongSubjectCell()<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UILabel *wrongTimesLabel;
@@ -24,8 +23,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomHeightConstant;
 
 @property (weak, nonatomic) IBOutlet UILabel *moreAnswerLabel;
-@property (weak, nonatomic) RCLabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UIView *webBgview;
+
 @end
 
 @implementation WrongSubjectCell
@@ -35,18 +35,8 @@
     _bgView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _bgView.layer.borderWidth = 1;
     
-    NSString *content = _wrongSubModel.content;
-    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-    self.contentLabel = templabel;
-    templabel.userInteractionEnabled = NO;
-    templabel.font = [UIFont systemFontOfSize:14];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    
-    templabel.componentsAndPlainText = componentsDS;
     
     self.collectBtn.hidden = YES;
-    [self.bgView addSubview:templabel];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewClick)];
     [self.bottomView addGestureRecognizer:tap];
@@ -60,11 +50,22 @@
     _wrongSubModel = wrongSubModel;
     self.wrongTimesLabel.text = wrongSubModel.total_wrong_num;
     self.rightAnswerLabel.text = wrongSubModel.answer;
-    // RCLabel赋值
-    NSString *content = wrongSubModel.content;
-    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    self.contentLabel.componentsAndPlainText = componentsDS;
+    
+    for (UIView *view in [self.webBgview subviews]) {
+        [view removeFromSuperview];
+    }
+    
+    // web赋值
+    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 50)];
+    web.scrollView.showsHorizontalScrollIndicator = NO;
+    web.scrollView.bounces = NO;
+    web.scrollView.scrollEnabled = NO;
+    web.delegate = self;
+    [self.webBgview addSubview:web];
+
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", wrongSubModel.content];
+    [web loadHTMLString:jsString baseURL:nil];
+    
   
     // 判断是否已经被选中
     NSMutableArray *tempArr = [NSMutableArray array];
@@ -106,10 +107,35 @@
         self.moreAnswerLabel.hidden = YES;
     }
 }
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+
+    CGRect frame = webView.frame;
+    
+    NSString *js = @"function imgAutoFit() { \
+    var imgs = document.getElementsByTagName('img'); \
+    for (var i = 0; i < imgs.length; ++i) {\
+    var img = imgs[i];   \
+    if (img.width > %f) {\
+    img.style.maxWidth = %f; \
+    }\
+    } \
+    }";
+    js = [NSString stringWithFormat:js, SCREEN_WIDTH - 40, SCREEN_WIDTH - 40];
+    
+    [webView stringByEvaluatingJavaScriptFromString:js];
+    [webView stringByEvaluatingJavaScriptFromString:@"imgAutoFit()"];
+    
+    frame.size.height = webView.scrollView.contentSize.height;
+    webView.frame = frame;
+    self.height = frame.size.height + 80 + self.bottomHeightConstant.constant;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"WrongSubjectCellHeight" object:self userInfo:nil];
+    
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.contentLabel.frame = _wrongSubModel.cellFrame;
     
 }
 - (IBAction)collectBtnClick:(id)sender {

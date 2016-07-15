@@ -27,6 +27,7 @@
 @property (strong, nonatomic) siftContentView *siftV;// 筛选菜单
 @property (nonatomic, strong) NSMutableArray *dataSoruce;// 数据源
 @property (nonatomic, strong) NSMutableArray *addArray;// 已选题目
+@property (strong, nonatomic) NSMutableDictionary *cellHeightDic;
 
 @property (nonatomic, strong) NSNumber *last_id;
 
@@ -84,6 +85,7 @@
     // 注册通知
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(notice:) name:@"bottomBtnNameChange" object:nil];
+    [center addObserver:self selector:@selector(cellHeightChage:) name:@"subjectContentCellHeight" object:nil];
     if(_flag == 1){
       [self.bottom_button setTitle:[NSString stringWithFormat:@"确定(已选%ld题)", [[[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"] count]] forState:UIControlStateNormal];
     }else{
@@ -100,7 +102,7 @@
     [super viewDidLoad];
     [self loadBackBtn];
     
-   
+    self.cellHeightDic = [NSMutableDictionary dictionary];
     for (UIViewController *vc in self.parentViewController.childViewControllers) {
         if([vc isKindOfClass:[MicroDetailViewController class]]){
             _flag = 1;
@@ -313,8 +315,10 @@
     subjectContentCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.flag = _flag;
-    cell.item = self.dataSoruce[indexPath.row];
+    cell.tag = indexPath.row;
     
+    cell.item = self.dataSoruce[indexPath.row];
+//    [cell setSubviewsWithModel:item];
     if (cell.item != nil) {
         NSMutableArray *arr = [NSMutableArray array];
         if (_flag == 1) {
@@ -339,10 +343,26 @@
     return cell;
 }
 
+- (void)cellHeightChage:(NSNotification *)sender {
+
+    subjectContentCell *cell = [sender object];
+    
+    if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.tag]] || [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.tag]] floatValue] != cell.height ) {
+        
+        [self.cellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.tag]];
+        
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    }
+
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ChaperContentItem *item = self.dataSoruce[indexPath.row];
-    return item.cellHeight;
+    CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
+    if (height == 0) {
+        return 200;
+    }
+    return height;
 }
 
 // 点击加号,选题

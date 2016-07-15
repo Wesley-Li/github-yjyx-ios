@@ -688,7 +688,11 @@
 #pragma mark - YourAnswerCellDelegate
 - (void)handlePushClick:(UITapGestureRecognizer *)sender {
 
+    UIImageView *view = (UIImageView *)sender.view;
+    NSArray *processArr = [_dic[@"summary"][4] objectForKey:@"writeprocess"];
+    NSString *imgURL = [processArr[view.tag - 200] objectForKey:@"img"];
     TeacherDrawViewController *drawVC = [[TeacherDrawViewController alloc] init];
+    drawVC.imgURL = imgURL;
     [self.navigationController pushViewController:drawVC animated:YES];
     
 }

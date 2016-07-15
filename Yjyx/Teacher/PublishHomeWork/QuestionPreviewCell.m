@@ -8,14 +8,12 @@
 
 #import "QuestionPreviewCell.h"
 #import "ChaperContentItem.h"
-#import "RCLabel.h"
 #import "YjyxWrongSubModel.h"
 
 @interface QuestionPreviewCell ()<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *subject_typeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *levelLabel;
-@property (weak, nonatomic) RCLabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIView *bg_view;
 @property (weak, nonatomic) IBOutlet UIView *lineView;
 @property (weak, nonatomic) IBOutlet UIView *BGVIEW;
@@ -106,6 +104,8 @@
     
     frame.size.height = webView.scrollView.contentSize.height;
     webView.frame = frame;
+    self.height = frame.size.height + 50;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"QuestionPreviewCellHeight" object:self userInfo:nil];
 
 }
 

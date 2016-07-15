@@ -8,15 +8,15 @@
 
 #import "subjectContentCell.h"
 #import "ChaperContentItem.h"
-#import "RCLabel.h"
 #import "QuestionDataBase.h"
-@interface subjectContentCell()
+@interface subjectContentCell()<UIWebViewDelegate>
 
+
+@property (weak, nonatomic) IBOutlet UIView *webBgView;
 
 @property (weak, nonatomic) IBOutlet UILabel *subjectTypeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subjectLevelLabel;
 
-@property (weak, nonatomic) RCLabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 
 @end
@@ -34,25 +34,45 @@
     
     self.bgView.layer.borderWidth = 1;
     self.bgView.layer.borderColor = RGBACOLOR(140.0, 140.0, 140.0, 1).CGColor;
-    NSString *content = _item.content_text;
-    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-    self.contentLabel = templabel;
-    templabel.userInteractionEnabled = NO;
-    templabel.font = [UIFont systemFontOfSize:14];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
     
-    templabel.componentsAndPlainText = componentsDS;
-//    CGSize optimalSize = [templabel optimumSize];
-    
-    
-    
-    [self.bgView addSubview:templabel];
-
 }
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+
+    CGRect frame = webView.frame;
+    
+    NSString *js = @"function imgAutoFit() { \
+    var imgs = document.getElementsByTagName('img'); \
+    for (var i = 0; i < imgs.length; ++i) {\
+    var img = imgs[i];   \
+    if (img.width > %f) {\
+    img.style.maxWidth = %f; \
+    }\
+    } \
+    }";
+    js = [NSString stringWithFormat:js, SCREEN_WIDTH - 40, SCREEN_WIDTH - 40];
+    
+    [webView stringByEvaluatingJavaScriptFromString:js];
+    [webView stringByEvaluatingJavaScriptFromString:@"imgAutoFit()"];
+    
+    frame.size.height = webView.scrollView.contentSize.height;
+    webView.frame = frame;
+    self.height = frame.size.height + 120;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"subjectContentCellHeight" object:self userInfo:nil];
+
+    
+    
+}
+
+
+
 
 - (void)setItem:(ChaperContentItem *)item
 {
+    
+    for (UIView *view in [self.webBgView subviews]) {
+        [view removeFromSuperview];
+    }
     _item = item;
     NSString *subjectType = nil;
     subjectType = [item.subject_type isEqualToString:@"1"]?@"选择题":@"填空题";
@@ -68,11 +88,17 @@
         subjectLevel = @"较难";
     }
     self.subjectLevelLabel.text = subjectLevel;
-    NSString *content = _item.content_text;
-    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
     
-    self.contentLabel.componentsAndPlainText = componentsDS;
+    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 50)];
+    web.delegate = self;
+    web.scrollView.scrollEnabled = NO;
+    web.scrollView.showsHorizontalScrollIndicator = NO;
+    web.scrollView.bounces = NO;
+
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", _item.content_text];
+    [web loadHTMLString:jsString baseURL:nil];
+    [self.webBgView addSubview:web];
+
     // 判断是否已经被选中
     NSMutableArray *tempArr = [NSMutableArray array];
     
@@ -95,7 +121,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.contentLabel.frame = _item.RCLabelFrame;
+    
 
 }
 
