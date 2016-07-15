@@ -18,8 +18,7 @@
 @interface QuestionPreviewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIButton *configurePublishBtn;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-
+@property (strong, nonatomic) NSMutableDictionary *cellHeightDic;
 
 
 @end
@@ -48,14 +47,14 @@
     NSLog(@"%@", self.selectArr);
     [self loadBackBtn];
     self.configurePublishBtn.backgroundColor = RGBACOLOR(3, 138, 228, 1);
-    
+    self.cellHeightDic = [NSMutableDictionary dictionary];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
     self.tableView.scrollIndicatorInsets =  UIEdgeInsetsMake(0, 0, -49, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:@"QuestionPreviewCell" bundle:nil] forCellReuseIdentifier:kIndentifier];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeightChange:) name:@"QuestionPreviewCellHeight" object:nil];
     
 }
 
@@ -76,7 +75,7 @@
 
     QuestionPreviewCell *cell = [tableView dequeueReusableCellWithIdentifier:kIndentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    cell.tag = indexPath.row;
     if ([self.selectArr[indexPath.row] isKindOfClass:[ChaperContentItem class]]) {
         ChaperContentItem *item = self.selectArr[indexPath.row];
         [cell setValueWithModel:item];
@@ -95,10 +94,26 @@
     return cell;
 }
 
+- (void)cellHeightChange:(NSNotification *)sender {
+
+    QuestionPreviewCell *cell = [sender object];
+    if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height) {
+        
+        [self.cellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.tag]];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    }
+    
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ChaperContentItem *item = self.selectArr[indexPath.row];
-    return item.cellHeight - 40;
+    CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
+    if (height == 0) {
+        return 300;
+    }
+    return height;
+    
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -10,4 +10,6 @@
 
 @interface TeacherDrawViewController : UIViewController
 
+@property (nonatomic, copy) NSString *imgURL;
+
 @end

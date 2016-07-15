@@ -22,6 +22,7 @@
 // 错题数组
 @property (strong, nonatomic) NSMutableArray *wrongSubjectArr;
 @property (strong, nonatomic) NSMutableArray *questionArr;
+@property (strong, nonatomic) NSMutableDictionary *cellHeightDic;
 // 返回数据的最大个数
 @property (assign, nonatomic) NSInteger count;
 // 判断还有没有数据
@@ -60,10 +61,12 @@ static NSString *ID = @"cell";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, -49, 0);
+    self.cellHeightDic = [NSMutableDictionary dictionary];
     // 注册通知 接收添加按钮的点击
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btnIsSelected) name:@"BUTTON_IS_SELEND" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btnNoSelected) name:@"BUTTON_NO_SELEND" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMoreBtnSelected) name:@"LoadMoreIsClicked" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeightChange:) name:@"WrongSubjectCellHeight" object:nil];
     // 集成下拉刷新控件
     [self loadRefresh];
     
@@ -218,6 +221,7 @@ static NSString *ID = @"cell";
 {
     WrongSubjectCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.tag = indexPath.row;
     
     YjyxWrongSubModel *model = self.wrongSubjectArr[indexPath.row];
     cell.flag = _flag;
@@ -225,10 +229,26 @@ static NSString *ID = @"cell";
     
     return cell;
 }
+
+- (void)cellHeightChange:(NSNotification *)sender {
+
+    WrongSubjectCell *cell = [sender object];
+    if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height) {
+        
+        [self.cellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.tag]];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    }
+
+        
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    YjyxWrongSubModel *model = self.wrongSubjectArr[indexPath.row];
-    return model.cellHeight;
+    CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
+    if (height == 0) {
+        return 300;
+    }
+    return height;
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

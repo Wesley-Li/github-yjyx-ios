@@ -11,6 +11,7 @@
 @interface WrongSubjectCell : UITableViewCell
 // 错题模型
 @property (strong, nonatomic) YjyxWrongSubModel *wrongSubModel;
+@property (assign, nonatomic) CGFloat height;
 
 @property (assign, nonatomic) NSInteger flag;
 @end

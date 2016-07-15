@@ -270,6 +270,7 @@ static NSString *TitleID = @"TitleCELL";
 }
 - (void)releaseBtnClicked
 {
+    [self closeTheVideo:nil];
     ReleaseMicroController *vc = [[ReleaseMicroController alloc] init];
     vc.w_id = self.m_id;
     [self.navigationController pushViewController:vc animated:YES];

@@ -110,6 +110,7 @@ static NSString *StudentID = @"StudentCell";
 }
 - (void)releaseBtnClicked
 {
+
     NSMutableArray *tempArr = [NSMutableArray array];
     for (StudentEntity *stuModel in self.stuArr) {
         if(stuModel.isSelect == YES){
