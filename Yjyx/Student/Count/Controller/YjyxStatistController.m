@@ -27,7 +27,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *wrongLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rateLabel;
 
-@property (weak, nonatomic) IBOutlet UIView *lineChartBgview;
+@property (weak, nonatomic) IBOutlet UIScrollView *lineChartScrollview;
+
 
 @property (nonatomic, strong) NSMutableArray *dataSource;// 学科数据源
 @property (nonatomic, strong) NSMutableArray *lineChartDataSource;// 折线图数据源
@@ -216,17 +217,19 @@
 #pragma mark - 配置折线图及赋值
 - (void)configurePNLineChartWithArray:(NSArray *)array {
 
-    for (UIView *view in [self.lineChartBgview subviews]) {
+    for (UIView *view in [self.lineChartScrollview subviews]) {
         [view removeFromSuperview];
     }
-    
+    NSInteger num;
+    num = ceil(array.count / 30.0);
+    self.lineChartScrollview.contentSize = CGSizeMake(num * SCREEN_WIDTH, self.lineChartScrollview.height);
     
     self.titleLabel.text = @"";
     self.rightLabel.text = @"";
     self.wrongLabel.text = @"";
     self.rateLabel.text = @"";
     
-    PNLineChart *lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 0, self.lineChartBgview.width, self.lineChartBgview.height)];
+    PNLineChart *lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 0, self.lineChartScrollview.contentSize.width , self.lineChartScrollview.height)];
     lineChart.delegate = self;
     lineChart.backgroundColor = [UIColor clearColor];
     lineChart.showCoordinateAxis =YES;
@@ -262,7 +265,7 @@
     };
     lineChart.chartData = @[data];
     [lineChart strokeChart];
-    [self.lineChartBgview addSubview:lineChart];
+    [self.lineChartScrollview addSubview:lineChart];
     
 
     

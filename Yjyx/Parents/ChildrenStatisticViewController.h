@@ -34,6 +34,7 @@
     UILabel *label1;//做题数目
     UILabel *label2;//正确率
     UILabel *label3;//日前
+    UIScrollView *lineScroll;
     
     IBOutlet UIView *taskView;//任务页面，任务相关数据
     NSMutableArray *taskDataAry;//任务数据

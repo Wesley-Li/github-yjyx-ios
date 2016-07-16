@@ -20,7 +20,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *questionFinishLabel;
 @property (weak, nonatomic) IBOutlet UILabel *questionRightLabel;
 @property (weak, nonatomic) IBOutlet UILabel *questionWrongLabel;
-@property (weak, nonatomic) IBOutlet UIView *bgview;
+
+@property (weak, nonatomic) IBOutlet UIView *titleView;
+@property (weak, nonatomic) IBOutlet UIScrollView *bgScrollView;
 
 @property (nonatomic, strong) PNLineChart *lineChart;
 @property (nonatomic, strong) NSMutableArray *lineArr;
@@ -95,8 +97,12 @@
 }
 
 - (void)configureTheLineChartWithArray:(NSArray *)array {
+    
+    NSInteger num;
+    num = ceil(array.count/30.0);// 每页显示30个点
+    self.bgScrollView.contentSize = CGSizeMake(SCREEN_WIDTH *num, self.bgScrollView.frame.size.height);
 
-    self.lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 60, self.bgview.width, self.bgview.height - 20 - 60)];
+    self.lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 10, self.bgScrollView.contentSize.width, self.bgScrollView.height - 20)];
     _lineChart.delegate = self;
     _lineChart.backgroundColor = [UIColor clearColor];
     _lineChart.showCoordinateAxis =YES;
@@ -132,7 +138,7 @@
     };
     _lineChart.chartData = @[data];
     [_lineChart strokeChart];
-    [self.bgview addSubview:_lineChart];
+    [self.bgScrollView addSubview:_lineChart];
 
     
 }
