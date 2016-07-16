@@ -32,14 +32,22 @@
 - (void)setHomeWorkModel:(YjyxHomeDataModel *)homeWorkModel
 {
     _homeWorkModel = homeWorkModel;
+    if([homeWorkModel.icon isEqual:[NSNull null]]){
+        self.subjectImageView.image = [UIImage imageNamed:@"default_image"];
+    }else{
     [self.subjectImageView setImageWithURL:[NSURL URLWithString:homeWorkModel.icon]];
+    }
     self.subjectNameLabel.text = homeWorkModel.name;
     self.doneCountLabel.text = @"所有作业";
 }
 - (void)setHomeWrongModel:(YjyxHomeWrongModel *)homeWrongModel
 {
     _homeWrongModel = homeWrongModel;
-    [self.subjectImageView setImageWithURL:[NSURL URLWithString:homeWrongModel.icon]];
+    if([homeWrongModel.icon isEqual:[NSNull null]]){
+        self.subjectImageView.image = [UIImage imageNamed:@"default_image"];
+    }else{
+    [self.subjectImageView setImageWithURL:[NSURL URLWithString:homeWrongModel.icon] ];
+    }
     self.subjectNameLabel.text = homeWrongModel.subjectname;
     self.doneCountLabel.text = [NSString stringWithFormat:@"共做错%ld题", homeWrongModel.failedquestions.count];
 }

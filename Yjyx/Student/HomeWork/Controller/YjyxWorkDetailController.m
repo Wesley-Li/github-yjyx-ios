@@ -141,10 +141,16 @@ static NSString *KnowID = @"KnowID";
 #pragma mark - 私有方法
 - (void)backBtnClicked
 {
+    NSInteger flag = 0;
     for (UIViewController *vc in self.navigationController.childViewControllers) {
         if([vc isKindOfClass:[YjyxOneSubjectViewController class]]){
             [self.navigationController popToViewController:vc animated:YES];
+            flag = 1;
+            break;
         }
+    }
+    if(flag == 0){
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 // 通知方法
@@ -775,7 +781,7 @@ static NSString *KnowID = @"KnowID";
                 return 40;
             }else{
                 CGFloat height = [[self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] floatValue];
-                return height;
+                return height == 0 ? 300 : height;
                 
             }
         }else{
@@ -783,7 +789,8 @@ static NSString *KnowID = @"KnowID";
                 return 40;
             }else{
                 CGFloat height = [[self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] floatValue];
-                return height;
+                
+                return height == 0 ? 300 : height;
             }
         }
     }else{
@@ -791,7 +798,7 @@ static NSString *KnowID = @"KnowID";
             return 40;
         }else{
             CGFloat height = [[self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] floatValue];
-            return height;
+            return height == 0 ? 300 : height;
         }
     }
     
