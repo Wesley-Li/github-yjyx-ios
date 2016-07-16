@@ -611,6 +611,19 @@
     
 
 }
-
+//  学生端会员中心，商品列表
+-(void)getStudentProductList:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/student/mobile/m_product/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject,nil);
+        }else{
+            block(nil,nil);
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        block(nil,error);
+    }];
+}
 
 @end

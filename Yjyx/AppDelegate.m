@@ -359,7 +359,7 @@
         
         //  我的
         YjyxMineController *mineVc = [[YjyxMineController alloc] init];
-        mineVc.view.backgroundColor = [UIColor brownColor];
+//        mineVc.view.backgroundColor = [UIColor brownColor];
         YjyxCommonNavController *navVc4 = [[YjyxCommonNavController alloc] initWithRootViewController:mineVc];
         navVc4.tabBarItem = [UITabBarItem itemWithTitle:@"我的" image:[UIImage imageNamed:@"我的"] selectedImage:[UIImage imageNamed:@"我的点击"]];
      

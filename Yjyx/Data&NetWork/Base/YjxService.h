@@ -151,8 +151,10 @@
  *老师获取所有学生列表
  */
 //- (void)teacherGetAllStuList:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
-
-
+/*
+ * 获取学生商品列表
+ */
+-(void)getStudentProductList:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 
 
 

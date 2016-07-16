@@ -11,10 +11,11 @@
 #import "ProductEntity.h"
 #import "YjyxMemberDetailViewController.h"
 #import "ZLScrolling.h"
-
+#import "YjyxCommonNavController.h"
 @interface YjyxPMemberCenterViewController ()<ZLScrollingDelegate>
 {
     ZLScrolling *zlScroll;
+    NSInteger jumpType; // 1 代表学生端会员中心  2 代表家长端
 }
 @end
 
@@ -24,7 +25,7 @@
     [super viewDidLoad];
     self.title = @"会员中心";
     productAry = [[NSMutableArray alloc] init];
-    [self getProductList];
+    
     
     NSArray *imageAry = @[@"memberCenter_bg1",@"memberCenter_bg2",@"memberCenter_bg3"];
     zlScroll = [[ZLScrolling alloc] initWithCurrentController:self frame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*179/320) photos:imageAry placeholderImage:nil];
@@ -32,14 +33,24 @@
     zlScroll.delegate = self;
     
     [self.view addSubview:zlScroll.view];
-    // Do any additional setup after loading the view from its nib.
+    if([self.navigationController isKindOfClass:[YjyxCommonNavController class]]){
+        jumpType = 1;
+        [self getStudentProductList];
+    }else{
+        [self getProductList];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
+    if (jumpType != 1) {
+        [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
+        [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
+    }else{
+        self.navigationController.navigationBarHidden = NO;
+    }
+    
 }
 /*
 获取商品列表
@@ -48,6 +59,39 @@
 {
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"list",@"action",@"0",@"firstid",@"0",@"lastid",@"ASC",@"direction", nil];
     [[YjxService sharedInstance] getProductList:dic withBlock:^(id result, NSError *error){
+        if (result != nil) {
+            
+            NSLog(@"%@", result);
+            
+            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                for (int i = 0; i<[[result objectForKey:@"products"] count]; i++) {
+                    ProductEntity *entity = [ProductEntity wrapProductEntityWithDic:[[result objectForKey:@"products"] objectAtIndex:i]];
+                    
+                    if ([entity.status isEqual:@1]) {
+                        // status 为1的代表正常的,为2代表下架的
+                        [productAry addObject:entity];
+                    }
+                    
+                    
+                }
+                
+                
+                [self initView];
+            }else{
+                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+        }else{
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+    }];
+}
+/*
+ 获取学生商品列表
+ */
+-(void)getStudentProductList
+{
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"list",@"action",@"0",@"firstid",@"0",@"lastid",@"ASC",@"direction", nil];
+    [[YjxService sharedInstance] getStudentProductList:dic withBlock:^(id result, NSError *error){
         if (result != nil) {
             
             NSLog(@"%@", result);

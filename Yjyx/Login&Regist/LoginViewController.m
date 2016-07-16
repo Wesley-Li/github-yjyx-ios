@@ -312,7 +312,7 @@
                             [(AppDelegate *)SYS_DELEGATE fillViews];
                             
                             [YjyxOverallData sharedInstance].studentInfo = [OneStudentEntity studentEntityWithDict:result];
-                            
+                            NSLog(@"%@--", [YjyxOverallData sharedInstance].studentInfo.avatar_url);
                             //                            [YjyxOverallData sharedInstance].teacherInfo.name = _uesrNameTF.text;
                             NSString *desPassWord = [_passWordTF.text des3:kCCEncrypt withPass:@"12345678asdf"];
                             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", _uesrNameTF.text,@"username",desPassWord,@"password", nil];
