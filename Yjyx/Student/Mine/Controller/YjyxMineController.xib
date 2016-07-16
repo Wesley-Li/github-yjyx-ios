@@ -112,12 +112,13 @@
                             </variation>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hjB-vh-imk">
-                            <rect key="frame" x="285" y="25" width="25" height="25"/>
+                            <rect key="frame" x="275" y="28" width="35" height="35"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="25" id="CnC-9O-UK8"/>
-                                <constraint firstAttribute="height" constant="25" id="Zl8-Do-nPO"/>
+                                <constraint firstAttribute="width" constant="35" id="CnC-9O-UK8"/>
+                                <constraint firstAttribute="height" constant="35" id="Zl8-Do-nPO"/>
                             </constraints>
-                            <state key="normal" backgroundImage="student_home_setting"/>
+                            <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                            <state key="normal" image="student_home_setting"/>
                             <connections>
                                 <action selector="setterBtnClick:" destination="-1" eventType="touchUpInside" id="s9u-25-olD"/>
                             </connections>
@@ -137,7 +138,7 @@
                         <constraint firstItem="iMe-Ww-xXh" firstAttribute="centerX" secondItem="9H3-Yx-4kx" secondAttribute="centerX" id="5Pq-el-sK1"/>
                         <constraint firstItem="2E4-PT-SQs" firstAttribute="leading" secondItem="Qjf-Ak-Vf5" secondAttribute="leading" id="8mT-51-wGH"/>
                         <constraint firstItem="RR8-Il-ycT" firstAttribute="height" secondItem="qtk-8O-OkP" secondAttribute="height" id="9Zs-Rv-2Xe"/>
-                        <constraint firstItem="hjB-vh-imk" firstAttribute="top" secondItem="Qjf-Ak-Vf5" secondAttribute="top" constant="25" id="9qd-cq-oqx"/>
+                        <constraint firstItem="hjB-vh-imk" firstAttribute="top" secondItem="Qjf-Ak-Vf5" secondAttribute="top" constant="28" id="9qd-cq-oqx"/>
                         <constraint firstAttribute="bottom" secondItem="iMe-Ww-xXh" secondAttribute="bottom" constant="10" id="GQT-0h-sXC"/>
                         <constraint firstItem="qtk-8O-OkP" firstAttribute="centerY" secondItem="RR8-Il-ycT" secondAttribute="centerY" id="JMT-BR-0Ib"/>
                         <constraint firstItem="Dfs-TZ-Oj8" firstAttribute="centerX" secondItem="Qjf-Ak-Vf5" secondAttribute="centerX" id="N2H-jh-ckB"/>
@@ -307,7 +308,7 @@
                     <exclude reference="w7r-8W-P8B"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="659" y="99"/>
+            <point key="canvasLocation" x="560" y="-56"/>
         </view>
     </objects>
     <resources>

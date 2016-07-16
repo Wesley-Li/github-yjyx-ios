@@ -8,7 +8,7 @@
 
 #import "YjyxMineController.h"
 #import "YjyxPrivateViewController.h"
-
+#import "YjyxPMemberCenterViewController.h"
 @interface YjyxMineController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
@@ -24,22 +24,7 @@
     [super viewDidLoad];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(iconImageViewClick)];
     [self.iconImageView addGestureRecognizer:tap];
-    // 头像
-    if ([[YjyxOverallData sharedInstance].studentInfo.avatar_url isEqual:[NSNull null]]) {
-        
-        [self.iconImageView setImage:[UIImage imageNamed:@"teacher_p"]];
-        
-    }else {
-        
-        [self.iconImageView setImageWithURL:[NSURL URLWithString:[YjyxOverallData sharedInstance].studentInfo.avatar_url] placeholderImage:[UIImage imageNamed:@"pic"]];
-    }
-    
-    
-    self.iconImageView.layer.masksToBounds = YES;
-    self.iconImageView.contentMode = UIViewContentModeScaleAspectFit;
-    
-    self.iconImageView.layer.borderColor = [UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
-    self.iconImageView.layer.borderWidth = 4.0f;
+ 
    
     
 }
@@ -57,6 +42,22 @@
     self.gradeLabel.text = [NSString stringWithFormat:@"%@%@%@%@%@", str1, str2, str3, str4, str5];
     self.coinLabel.text = [[YjyxOverallData sharedInstance].studentInfo.coins stringValue];
     self.codeLabel.text = [NSString stringWithFormat:@"家长邀请码: %@" ,[YjyxOverallData sharedInstance].studentInfo.invitecode ];
+    // 头像
+    if ([[YjyxOverallData sharedInstance].studentInfo.avatar_url isEqual:[NSNull null]]) {
+        
+        [self.iconImageView setImage:[UIImage imageNamed:@"teacher_p"]];
+        
+    }else {
+        
+        [self.iconImageView setImageWithURL:[NSURL URLWithString:[YjyxOverallData sharedInstance].studentInfo.avatar_url] placeholderImage:[UIImage imageNamed:@"pic"]];
+    }
+    
+    
+    self.iconImageView.layer.masksToBounds = YES;
+    self.iconImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    self.iconImageView.layer.borderColor = [UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
+    self.iconImageView.layer.borderWidth = 4.0f;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -165,6 +166,8 @@
                 //                [_picImage setCornerRadius:_picImage.height /2];
                 
                 [YjyxOverallData sharedInstance].studentInfo.avatar_url = url;
+                
+                NSLog(@"%@+++++", [YjyxOverallData sharedInstance].studentInfo.avatar_url);
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
@@ -205,7 +208,8 @@
 
 // 点击私密日记
 - (IBAction)privateDiaryBtnClick:(UIButton *)sender {
-    [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
+    YjyxPMemberCenterViewController *vc = [[YjyxPMemberCenterViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

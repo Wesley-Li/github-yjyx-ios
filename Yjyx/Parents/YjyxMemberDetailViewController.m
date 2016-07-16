@@ -165,7 +165,7 @@
         return;
     }
     
-    chooseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+    chooseView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
     chooseView.backgroundColor = RGBACOLOR(0, 0, 0, 0.5);
     [self.view addSubview:chooseView];
     CGFloat height = trailChildAry.count*50+70;
