@@ -229,6 +229,7 @@
 
 -(void)userClickedOnPieIndexItem:(NSInteger)pieIndex
 {
+    
     if (type == 1) {
         label1.text = @"";
         label2.text = @"";
@@ -238,9 +239,17 @@
         NSString *questionwrong = [[linechartDic objectForKey:@"total"] objectForKey:@"questionwrong"];
         subjectLb.text = [linechartDic objectForKey:@"course"];
         detailLb.text = [NSString stringWithFormat:@"正确%@,错误%@",questioncorrect,questionwrong];
+        NSInteger num;
+        num = ceil([[linechartDic objectForKey:@"items"] count] / 30.0);
+        [lineScroll removeFromSuperview];
+        lineScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 290, SCREEN_WIDTH, SCREEN_HEIGHT-94-320)];
+        lineScroll.contentSize = CGSizeMake(SCREEN_WIDTH * num, lineScroll.frame.size.height);
+        lineScroll.backgroundColor = [UIColor clearColor];
+        lineScroll.showsHorizontalScrollIndicator = NO;
+        [subjectView addSubview:lineScroll];
         
         [pieLineChart removeFromSuperview];
-        pieLineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 290, SCREEN_WIDTH, SCREEN_HEIGHT-94-320)];
+        pieLineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 0, lineScroll.contentSize.width, lineScroll.contentSize.height)];
         pieLineChart.backgroundColor = [UIColor clearColor];
         pieLineChart.showCoordinateAxis =YES;
         pieLineChart.yFixedValueMax = 100;
@@ -274,7 +283,7 @@
         };
         pieLineChart.chartData = @[data];
         [pieLineChart strokeChart];
-        [subjectView addSubview:pieLineChart];
+        [lineScroll addSubview:pieLineChart];
 
     }else if (type == 2)
     {

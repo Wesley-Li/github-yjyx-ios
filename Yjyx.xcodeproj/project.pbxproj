@@ -2550,11 +2550,9 @@
 				3CECA4AC1D2CDAEB0039DCB6 /* YjyxWorkDetailController.h */,
 				3CECA4AD1D2CDAEB0039DCB6 /* YjyxWorkDetailController.m */,
 				3CECA4AF1D2CDE9B0039DCB6 /* YjyxWorkDetailController.xib */,
-
 				3C9C922A1D2F8F1600B0159D /* YjyxDoingWorkController.h */,
 				3C9C922B1D2F8F1600B0159D /* YjyxDoingWorkController.m */,
 				3C9C922C1D2F8F1600B0159D /* YjyxDoingWorkController.xib */,
-
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2599,7 +2597,6 @@
 				3CD7E4651D2BD39200769FDE /* YjyxSearchView.xib */,
 				3CECA4A91D2C99310039DCB6 /* YjyxTimeField.h */,
 				3CECA4AA1D2C99310039DCB6 /* YjyxTimeField.m */,
-
 				3CECA4BC1D2D03F60039DCB6 /* YjyxWorkContentCell.h */,
 				3CECA4BD1D2D03F60039DCB6 /* YjyxWorkContentCell.m */,
 				3CECA4BE1D2D03F60039DCB6 /* YjyxWorkContentCell.xib */,
@@ -2615,7 +2612,6 @@
 				3CFE92771D338CB2004DE4A8 /* YjyxDrawView.m */,
 				3CFE92791D3394ED004DE4A8 /* YjyxBezierPath.h */,
 				3CFE927A1D3394ED004DE4A8 /* YjyxBezierPath.m */,
-
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3769,9 +3765,7 @@
 				3A38278A1CDF185F00EAB979 /* YjyxFeedBackViewController.m in Sources */,
 				3A91F48F1C760CF4001568AA /* PNBar.m in Sources */,
 				8013D3391CF4521100F82301 /* CardCell.m in Sources */,
-
 				3CEA95A51D30F18E00F4773D /* YjyxWorkResultView.m in Sources */,
-
 				3CECA4AB1D2C99310039DCB6 /* YjyxTimeField.m in Sources */,
 				3CE18E9E1D2121EE007E0874 /* ReleaseFinishTimeCell.m in Sources */,
 				3AEF27201C61F08A0028BE09 /* RTSpinKitView.m in Sources */,
@@ -4000,8 +3994,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -4027,7 +4021,7 @@
 					"\"$(PROJECT_DIR)/Yjyx/Alipay/AliSDK/openssl\"",
 				);
 				INFOPLIST_FILE = Yjyx/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4039,7 +4033,7 @@
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8738e8ea-9b10-4c1a-9734-06599c5639a1";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -4052,8 +4046,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -4079,7 +4073,7 @@
 					"\"$(PROJECT_DIR)/Yjyx/Alipay/AliSDK/openssl\"",
 				);
 				INFOPLIST_FILE = Yjyx/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4090,7 +4084,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8738e8ea-9b10-4c1a-9734-06599c5639a1";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
