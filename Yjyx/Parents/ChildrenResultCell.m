@@ -7,7 +7,6 @@
 //
 
 #import "ChildrenResultCell.h"
-#import "RCLabel.h"
 #import "ChildrenResultModel.h"
 #import "ResultModel.h"
 #import "YjyxStuAnswerModel.h"
@@ -15,7 +14,7 @@
 @interface ChildrenResultCell ()<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *BGVIEW;// 大背景
-@property (weak, nonatomic) IBOutlet UIView *bg_view;// RCLabel背景
+@property (weak, nonatomic) IBOutlet UIView *bg_view;// 背景
 @property (weak, nonatomic) IBOutlet UIView *lineView;
 @property (weak, nonatomic) IBOutlet UILabel *rightAnswerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *myAnswerLabel;

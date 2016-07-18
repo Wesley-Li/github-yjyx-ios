@@ -19,6 +19,7 @@
 #import "QuestionPreviewController.h"
 #import "QuestionDataBase.h"
 #import "MicroDetailViewController.h"
+#import "ChapterChoiceController.h"
 
 @interface PublishHomeworkViewController ()
 
@@ -109,7 +110,7 @@
 - (IBAction)handleSmartBtn:(UIButton *)sender {
     
     SmartViewController *smartVC = [[SmartViewController alloc] initWithNibName:@"SmartViewController" bundle:nil];
-    smartVC.title = @"智能出题";
+    smartVC.navigationItem.title = @"智能出题";
     [self.navigationController pushViewController:smartVC animated:YES];
     
 }
@@ -130,7 +131,7 @@
         [self.navigationController pushViewController:chapterVc animated:YES];
     }else{
     BookViewController *bookVC = [[BookViewController alloc] initWithNibName:@"BookViewController" bundle:nil];
-    bookVC.title = @"教材同步";
+    bookVC.navigationItem.title = @"教材同步";
     [self.navigationController pushViewController:bookVC animated:YES];
     }
 }
@@ -139,7 +140,7 @@
 - (IBAction)handleTestBtn:(UIButton *)sender {
     
     TestViewController *testVC = [[TestViewController alloc] initWithNibName:@"TestViewController" bundle:nil];
-    testVC.title = @"套卷出题";
+    testVC.navigationItem.title = @"套卷出题";
     [self.navigationController pushViewController:testVC animated:YES];
 
 }
@@ -148,7 +149,7 @@
 - (IBAction)knowledgeBtn:(UIButton *)sender {
     
     KnowledgeViewController *knowledgeVC = [[KnowledgeViewController alloc] initWithNibName:@"KnowledgeViewController" bundle:nil];
-    knowledgeVC.title = @"知识点出题";
+    knowledgeVC.navigationItem.title = @"知识点出题";
     [self.navigationController pushViewController:knowledgeVC animated:YES];
     
 }
@@ -157,7 +158,7 @@
 - (IBAction)wrongBtn:(UIButton *)sender {
     
     WrongSubjectController *wrongVC = [[WrongSubjectController alloc] initWithNibName:@"WrongSubjectController" bundle:nil];
-    wrongVC.title = @"错题榜";
+    wrongVC.navigationItem.title = @"错题榜";
     [self.navigationController pushViewController:wrongVC animated:YES];
     
 }
@@ -166,8 +167,9 @@
 // 点击私有题库
 - (IBAction)handlePrivateBtn:(UIButton *)sender {
     
-    PrivateViewController *privateVC = [[PrivateViewController alloc] initWithNibName:@"PrivateViewController" bundle:nil];
-    privateVC.title = @"私有题库";
+    ChapterChoiceController *privateVC = [[ChapterChoiceController alloc] init];
+    privateVC.onlysearchmine = @1;
+    privateVC.navigationItem.title = @"私有题库";
     [self.navigationController pushViewController:privateVC animated:YES];
 }
 

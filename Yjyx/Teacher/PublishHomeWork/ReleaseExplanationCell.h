@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 @class OneSubjectModel;
 @interface ReleaseExplanationCell : UITableViewCell
-
+@property (assign, nonatomic) CGFloat height;
 @property (strong, nonatomic) OneSubjectModel *model;
 @end

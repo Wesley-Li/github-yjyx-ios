@@ -21,8 +21,7 @@
 
 // cell的高度
 @property (assign, nonatomic) CGFloat cellHeight;
-// RCLabel的rect
-@property (assign, nonatomic) CGRect RCLabelFrame;
+
 // 按钮是否展示
 @property (assign, nonatomic) BOOL btnIsShow;
 // 记录cell的个数

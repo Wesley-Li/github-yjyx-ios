@@ -35,7 +35,7 @@
 
 @property (assign, nonatomic) NSInteger count;
 @property (strong, nonatomic) OneSubjectModel *model;
-
+@property (strong, nonatomic) NSMutableDictionary *cellHeightDic;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstant;
 @property (strong, nonatomic) ReleaseVideoCell *videoCell;
 @property (assign, nonatomic) NSInteger flag;
@@ -60,6 +60,7 @@ static NSString *VideoID = @"VIDEOCELL";
     self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = COMMONCOLOR;
+    self.cellHeightDic = [NSMutableDictionary dictionary];
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([TitleContentCell class]) bundle:nil] forCellReuseIdentifier:TitleID];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([AnswerCell class]) bundle:nil] forCellReuseIdentifier:AnswerID];
@@ -80,6 +81,12 @@ static NSString *VideoID = @"VIDEOCELL";
                                                  name:WMPlayerClosedNotification
                                                object:nil
      ];
+    
+    // cell高度通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeightChange:) name:@"webHeight" object:nil];
+
+    
+    
     for (UIViewController *vc in self.parentViewController.childViewControllers) {
         if ([vc isKindOfClass:[MicroDetailViewController class]]) {
 //            [self.moveToReleaseBtn removeFromSuperview];
@@ -503,6 +510,7 @@ static NSString *VideoID = @"VIDEOCELL";
     if(indexPath.row == 0){
        TitleContentCell *cell =  [tableView dequeueReusableCellWithIdentifier:TitleID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.tag = indexPath.row;
         cell.model = _model;
         return cell;
     }else if(indexPath.row == 1){
@@ -513,6 +521,7 @@ static NSString *VideoID = @"VIDEOCELL";
     }else if (indexPath.row == 2){
         ReleaseExplanationCell *cell = [tableView dequeueReusableCellWithIdentifier:ExplanationID];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.tag = indexPath.row;
         cell.model = _model;
         return cell;
     }else {
@@ -570,18 +579,46 @@ static NSString *VideoID = @"VIDEOCELL";
     }
 
 }
+
+- (void)cellHeightChange:(NSNotification *)sender {
+
+    if ([[sender object] isMemberOfClass:[TitleContentCell class]]) {
+        TitleContentCell *cell = [sender object];
+        if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height) {
+            
+            [self.cellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.tag]];
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+
+        
+    }else if ([[sender object] isMemberOfClass:[ReleaseExplanationCell class]]) {
+    
+        ReleaseExplanationCell *cell = [sender object];
+        if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height) {
+            
+            [self.cellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.tag]];
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+
+    
+    }
+    
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     if (indexPath.row == 0) {
-        return _model.firstCellHeight;
+        CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
+        if (height == 0) {
+            return 300;
+        }
+        return height;
     }else if(indexPath.row == 1){
         return _model.secondCellHeight;
     }else if(indexPath.row == 2){
-        if ([_model.explanation isEqualToString:@""]) {
-            return 0;
-        }
-        return _model.threeCellHeight;
+        CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
+        return height;
+        
     }else{
         if([_model.videourl isEqualToString:@""] ){
             return 0;
@@ -625,4 +662,12 @@ static NSString *VideoID = @"VIDEOCELL";
         
     }
 }
+
+
+
+
+
+
+
+
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "YjyxWrongSubModel.h"
-#import "RCLabel.h"
+
 @implementation YjyxWrongSubModel
 
 + (instancetype)wrongSubjectModelWithDict:(NSDictionary *)dict
@@ -59,41 +59,6 @@
     return model;
 }
 
-- (CGFloat)cellHeight
-{
-    CGFloat cellHeight = 0;
-    cellHeight += 30;
-    NSString *content = self.content;
-    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-    templabel.userInteractionEnabled = NO;
-    templabel.font = [UIFont systemFontOfSize:14];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    templabel.componentsAndPlainText = componentsDS;
-    CGSize optimalSize = [templabel optimumSize];
-    cellHeight += optimalSize.height;
-    self.cellFrame = CGRectMake(2, 2, optimalSize.width, optimalSize.height);
-    cellHeight += 60;
-    if ([self.answer containsString:@"①"]) {
-        CGFloat pullHeight = 0;
-        if (self.isLoadMore) {
-        NSArray *arr = [self.answer componentsSeparatedByString:@"\n"];
-        CGRect rect = [arr[0] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 277, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil];
-        if (rect.size.height > 43) {
-            cellHeight += rect.size.height - 43;
-            pullHeight += rect.size.height - 43;
-        }
-        NSMutableArray *tempArr = [NSMutableArray arrayWithArray:arr];
-        [tempArr removeObjectAtIndex:0];
-        NSString *tempStr = [tempArr componentsJoinedByString:@"\n"];
-        CGRect rect1 = [tempStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 175, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil];
-        cellHeight += rect1.size.height;
-            pullHeight += rect1.size.height + 20;
-        }
-        self.pullHeight = pullHeight;
-    }
-    
-    return cellHeight + 10;
-}
+
 
 @end

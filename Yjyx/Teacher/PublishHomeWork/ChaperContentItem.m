@@ -8,7 +8,7 @@
 
 #import "ChaperContentItem.h"
 
-#import "RCLabel.h"
+
 @implementation ChaperContentItem
 
 + (instancetype)chaperContentItemWithArray:(NSArray *)arr
@@ -35,23 +35,5 @@
     
     return item;
 }
-- (CGFloat)cellHeight
-{
-   
-    CGFloat cellHeight = 0;
-    cellHeight += 30;
-    NSString *content = self.content_text;
-    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-    templabel.userInteractionEnabled = NO;
-    templabel.font = [UIFont systemFontOfSize:14];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    templabel.componentsAndPlainText = componentsDS;
-    CGSize optimalSize = [templabel optimumSize];
-    cellHeight += optimalSize.height;
-    self.RCLabelFrame = CGRectMake(2, 2, optimalSize.width, optimalSize.height);
-    cellHeight += 80;
-    return cellHeight + 10;
-    
-}
+
 @end

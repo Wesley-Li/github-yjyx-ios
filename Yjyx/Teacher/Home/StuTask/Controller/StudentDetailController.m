@@ -319,7 +319,7 @@
         
         [cell.bg_view addSubview:taskView];
     }
-    self.choiceCellHeight = size.height + tHeigh + 30;
+    self.choiceCellHeight = array.count == 0 ? 0 : size.height + tHeigh + 30;
     
 
 
@@ -403,7 +403,7 @@
         
         [cell.bg_view addSubview:taskView];
     }
-    self.blankfillCellHeight = size.height + tHeigh + 30;
+    self.blankfillCellHeight = array.count == 0 ? 0 : size.height + tHeigh + 30;
     
 
     

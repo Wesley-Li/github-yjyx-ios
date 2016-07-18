@@ -439,20 +439,21 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"%@", self.cellHeightDic);
+    NSLog(@"===========%@", self.cellHeightDic);
     
     if (indexPath.row == 0) {
         
         CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
-        
+    
         return height;
         
     }else if (indexPath.row == 1) {
+        
         return self.yourAnswerCell.height;
         
     }else if (indexPath.row == 2) {
         CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
-        
+    
         return height;
         
     }else if (indexPath.row == 3) {

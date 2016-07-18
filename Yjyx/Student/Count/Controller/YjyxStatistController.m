@@ -241,7 +241,7 @@
     
     NSMutableArray *arr = [NSMutableArray array];
     for (int i = 0; i < array.count; i++) {
-        [arr addObject:[NSString stringWithFormat:@"%d", i]];
+        [arr addObject:[NSString stringWithFormat:@""]];
     }
     [lineChart setXLabels:arr];
     

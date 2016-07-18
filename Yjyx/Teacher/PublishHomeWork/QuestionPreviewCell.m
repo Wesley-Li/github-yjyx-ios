@@ -69,6 +69,7 @@
     self.bg_view.layer.borderColor = RGBACOLOR(140.0, 140.0, 140.0, 1).CGColor;
     
     UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 50)];
+    web.userInteractionEnabled = NO;
     web.delegate = self;
     web.scrollView.scrollEnabled = NO;
     web.scrollView.bounces = NO;

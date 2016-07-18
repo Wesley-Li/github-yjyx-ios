@@ -7,7 +7,7 @@
 //
 
 #import "YjyxWorkContentCell.h"
-#import "RCLabel.h"
+
 #import "YjyxWorkDetailModel.h"
 #import "YjyxStuAnswerModel.h"
 @interface YjyxWorkContentCell()<UIWebViewDelegate>
@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *isRightImageV;
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
-@property (strong, nonatomic) RCLabel *templabel;
+
 @property (strong, nonatomic) UIWebView *web;
 @property (assign, nonatomic) CGRect webFrame;
 @end
@@ -91,7 +91,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-//    self.web.frame = _finishModel.RcLabelFrame;
+
 }
 - (IBAction)showMoreBtn:(id)sender {
 }

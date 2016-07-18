@@ -23,8 +23,7 @@
 @property (strong, nonatomic) NSString *subject_type;
 // cell的高度
 @property (assign, nonatomic) CGFloat cellHeight;
-// RClabel的frame
-@property (assign, nonatomic) CGRect RCLabelFrame;
+
 
 @property (nonatomic, assign) BOOL add;// 添加标识
 

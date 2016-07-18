@@ -30,16 +30,25 @@
                         <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjR-h2-SCK">
+                        <rect key="frame" x="10" y="58" width="374" height="84"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="yjR-h2-SCK" secondAttribute="bottom" id="7eu-bf-nxe"/>
                     <constraint firstItem="M1U-6S-6Fc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="9bF-Na-9o0"/>
+                    <constraint firstItem="yjR-h2-SCK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="ILo-JU-Gsw"/>
                     <constraint firstItem="fHH-2h-fCN" firstAttribute="top" secondItem="M1U-6S-6Fc" secondAttribute="bottom" constant="8" id="JvF-5j-G1t"/>
+                    <constraint firstAttribute="trailing" secondItem="yjR-h2-SCK" secondAttribute="trailing" constant="10" id="Mgd-2k-pdi"/>
+                    <constraint firstItem="yjR-h2-SCK" firstAttribute="top" secondItem="fHH-2h-fCN" secondAttribute="bottom" id="YGH-3P-dmf"/>
                     <constraint firstItem="fHH-2h-fCN" firstAttribute="leading" secondItem="M1U-6S-6Fc" secondAttribute="leading" id="nkC-u4-LYp"/>
                     <constraint firstItem="M1U-6S-6Fc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="xxh-8K-br7"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="answerLabel" destination="fHH-2h-fCN" id="drb-rr-HR4"/>
+                <outlet property="bgview" destination="yjR-h2-SCK" id="FiC-Il-yTq"/>
                 <outlet property="explanationLabel" destination="M1U-6S-6Fc" id="1cc-zv-wau"/>
             </connections>
             <point key="canvasLocation" x="327" y="267.5"/>

@@ -61,6 +61,7 @@
     web.scrollView.bounces = NO;
     web.scrollView.scrollEnabled = NO;
     web.delegate = self;
+    web.userInteractionEnabled = NO;
     [self.webBgview addSubview:web];
 
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", wrongSubModel.content];

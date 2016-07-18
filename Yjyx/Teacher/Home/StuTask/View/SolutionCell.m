@@ -7,7 +7,7 @@
 //
 
 #import "SolutionCell.h"
-#import "RCLabel.h"
+
 
 @interface SolutionCell ()<UIWebViewDelegate>
 

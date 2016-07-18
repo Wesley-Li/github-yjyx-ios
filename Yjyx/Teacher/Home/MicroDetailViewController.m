@@ -27,7 +27,7 @@
     BOOL isPlay;
 }
 @property (strong, nonatomic) MicroDetailModel *microDetailM;
-
+@property (strong, nonatomic) NSMutableDictionary *cellHeightDic;
 // 所有的题目数组
 @property (strong, nonatomic) NSMutableArray *allSubjectArr;
 // 多少组
@@ -77,7 +77,7 @@ static NSString *TitleID = @"TitleCELL";
     self.tableView.backgroundColor = COMMONCOLOR;
     self.tableView.sectionHeaderHeight = 15;
     self.tableView.sectionFooterHeight = 0;
-  
+    self.cellHeightDic = [NSMutableDictionary dictionary];
     //注册播放完成通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     //注册播放完成通知
@@ -94,6 +94,8 @@ static NSString *TitleID = @"TitleCELL";
                                                  name:WMPlayerClosedNotification
                                                object:nil
      ];
+    // web高度通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webviewHeight:) name:@"webviewHeight" object:nil];
     
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -678,6 +680,7 @@ static NSString *TitleID = @"TitleCELL";
         }else{
             SubjectDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:subjectID forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.tag = indexPath.row;
             cell.delegate = self;
             cell.model = self.allSubjectArr[indexPath.row - 1];
             cell.subjectNumLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
@@ -687,6 +690,18 @@ static NSString *TitleID = @"TitleCELL";
     }
    
     return nil;
+
+}
+
+- (void)webviewHeight:(NSNotification *)sender {
+
+    SubjectDetailCell *cell = [sender object];
+    if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height) {
+        
+        [self.cellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.tag]];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:3]] withRowAnimation:UITableViewRowAnimationNone];
+    }
+
 
 }
 
@@ -702,8 +717,9 @@ static NSString *TitleID = @"TitleCELL";
         if (indexPath.row == 0) {
             return 30;
         }else{
-            MicroSubjectModel *model = self.allSubjectArr[indexPath.row - 1];
-            return model.cellHeight;
+            CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
+            
+            return height == 0 ? 300 : height;
         }
     }
     return 0;

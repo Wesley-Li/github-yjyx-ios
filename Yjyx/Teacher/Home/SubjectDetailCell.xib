@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
@@ -149,13 +150,21 @@
                                     <constraint firstAttribute="height" constant="1" id="1kC-DE-lyw"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zpc-Rk-BQZ">
+                                <rect key="frame" x="0.0" y="45" width="367" height="264"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="zpc-Rk-BQZ" firstAttribute="leading" secondItem="e6e-l1-wiA" secondAttribute="leading" id="Gsg-cq-Yd3"/>
                             <constraint firstItem="hMl-nK-ZKY" firstAttribute="leading" secondItem="e6e-l1-wiA" secondAttribute="leading" id="M60-Mj-DnF"/>
+                            <constraint firstAttribute="bottom" secondItem="zpc-Rk-BQZ" secondAttribute="bottom" id="QaM-Pe-whh"/>
                             <constraint firstAttribute="trailing" secondItem="hMl-nK-ZKY" secondAttribute="trailing" id="SF1-F9-wuN"/>
+                            <constraint firstItem="zpc-Rk-BQZ" firstAttribute="top" secondItem="vA3-ek-40w" secondAttribute="bottom" id="Uaz-Ks-HKH"/>
                             <constraint firstItem="vA3-ek-40w" firstAttribute="leading" secondItem="e6e-l1-wiA" secondAttribute="leading" constant="10" id="bG6-DI-xtC"/>
                             <constraint firstItem="hMl-nK-ZKY" firstAttribute="top" secondItem="e6e-l1-wiA" secondAttribute="top" id="jJj-iM-Ksj"/>
+                            <constraint firstAttribute="trailing" secondItem="zpc-Rk-BQZ" secondAttribute="trailing" id="jqe-EJ-Ssn"/>
                             <constraint firstItem="vA3-ek-40w" firstAttribute="top" secondItem="hMl-nK-ZKY" secondAttribute="bottom" id="nHf-XH-x1P"/>
                             <constraint firstAttribute="trailing" secondItem="vA3-ek-40w" secondAttribute="trailing" constant="10" id="zd5-eH-ekE"/>
                         </constraints>
@@ -186,6 +195,7 @@
                 <outlet property="subjectNumLabel" destination="3CE-bJ-CBx" id="AcL-qi-QO0"/>
                 <outlet property="subjectTypeLabel" destination="DRN-OC-YEX" id="SSk-hf-erO"/>
                 <outlet property="topView" destination="hMl-nK-ZKY" id="vd2-xi-hE8"/>
+                <outlet property="webBgview" destination="zpc-Rk-BQZ" id="kV6-1g-kPY"/>
             </connections>
             <point key="canvasLocation" x="487.5" y="267"/>
         </tableViewCell>

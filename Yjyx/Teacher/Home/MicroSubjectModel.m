@@ -7,7 +7,7 @@
 //
 
 #import "MicroSubjectModel.h"
-#import "RCLabel.h"
+
 @implementation MicroSubjectModel
 
 + (instancetype)microSubjectModel:(NSDictionary *)dict andType:(NSInteger)type
@@ -29,21 +29,5 @@
     return model;
 }
 
-- (CGFloat)cellHeight
-{
-    CGFloat cellHeight = 0;
-    cellHeight += 45;
-    NSString *content = self.content;
-    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-    templabel.userInteractionEnabled = NO;
-    templabel.font = [UIFont systemFontOfSize:14];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    templabel.componentsAndPlainText = componentsDS;
-    CGSize optimalSize = [templabel optimumSize];
-    cellHeight += optimalSize.height;
-    self.RCLabelFrame = CGRectMake(2, 47, optimalSize.width, optimalSize.height);
-    
-    return cellHeight += 15;
-}
+
 @end

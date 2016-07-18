@@ -32,8 +32,7 @@
 @property (assign, nonatomic) BOOL isLoadMore;
 // cell的高度
 @property (assign, nonatomic) CGFloat cellHeight;
-// RCLabel的frame
-@property (assign, nonatomic) CGRect cellFrame;
+
 
 + (instancetype)wrongSubjectModelWithDict:(NSDictionary *)dict;
 @end

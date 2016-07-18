@@ -7,7 +7,7 @@
 //
 
 #import "OneSubjectModel.h"
-#import "RCLabel.h"
+
 @implementation OneSubjectModel
 
 + (instancetype)oneSubjectModelWithDict:(NSDictionary *)dict
@@ -56,22 +56,7 @@
     model.t_id = [dict[@"id"] integerValue];
     return model;
 }
-- (CGFloat)firstCellHeight
-{
-    CGFloat cellHeight = 0;
-    NSString *content = self.content;
-    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-    templabel.userInteractionEnabled = NO;
-    templabel.font = [UIFont systemFontOfSize:14];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    templabel.componentsAndPlainText = componentsDS;
-    CGSize optimalSize = [templabel optimumSize];
-    cellHeight += optimalSize.height;
-    self.firstFrame = CGRectMake(5, 5, optimalSize.width, optimalSize.height);
-    cellHeight += 25;
-    return cellHeight + 10;
-}
+
 - (CGFloat)secondCellHeight
 {
     CGFloat cellHeight = 0;
@@ -87,20 +72,7 @@
     }
     return cellHeight;
 }
-- (CGFloat)threeCellHeight
-{
-    CGFloat cellHeight = 0;
-    cellHeight += 60;
-    NSString *content = self.explanation;
-    content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    RCLabel *templabel = [[RCLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 999)];
-    templabel.userInteractionEnabled = NO;
-    templabel.font = [UIFont systemFontOfSize:14];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    templabel.componentsAndPlainText = componentsDS;
-    CGSize optimalSize = [templabel optimumSize];
-    cellHeight += optimalSize.height;
-    self.threeFrame = CGRectMake(5, 60, optimalSize.width, optimalSize.height);
-    return cellHeight + 10;
-}
+
+
+
 @end

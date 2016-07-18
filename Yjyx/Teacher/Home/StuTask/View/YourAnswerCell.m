@@ -43,6 +43,9 @@
         self.yourAnswerLable.textColor = RGBACOLOR(100, 174, 99, 1);
     }
     
+    CGFloat myAnswerHeight = [self.yourAnswerLable.text boundingRectWithSize:CGSizeMake(self.yourAnswerLable.width, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.yourAnswerLable.font, NSFontAttributeName, nil] context:nil].size.height;
+
+    
     
     // 如果有作业过程
     CGFloat imageBGHeight;
@@ -111,7 +114,7 @@
         
     }
     
-    self.height = 70 + 20 + imageBGHeight;
+    self.height = 70 + imageBGHeight + myAnswerHeight;
     
 
 }
@@ -124,6 +127,8 @@
     self.yourAnswerLable.text = [NSString stringWithFormat:@"%@", ansString];
     
     CGFloat myAnswerHeight = [self.yourAnswerLable.text boundingRectWithSize:CGSizeMake(self.yourAnswerLable.width, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.yourAnswerLable.font, NSFontAttributeName, nil] context:nil].size.height;
+    
+    
     
     // 如果有作业过程
     CGFloat imageBGHeight;

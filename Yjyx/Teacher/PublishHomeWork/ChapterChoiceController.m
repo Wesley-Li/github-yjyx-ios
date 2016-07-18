@@ -81,6 +81,10 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
 
     // 注册通知
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
@@ -203,6 +207,12 @@
     pamar[@"lastid"]  = _last_id;
     
     self.urlString = [BaseURL stringByAppendingString:[NSString stringWithFormat:@"%@?action=%@&question_type=%@&lastid=%@", SEARCH_QUESTION_GET, pamar[@"action"], pamar[@"question_type"], pamar[@"lastid"]]];
+    
+#pragma mark - 可选参数
+    // 私有题目可选
+    if (self.onlysearchmine != nil) {
+        self.urlString = [self.urlString stringByAppendingString:[NSString stringWithFormat:@"&onlysearchmine=%@", self.onlysearchmine]];
+    }
 
     // 章节可选
     if (self.g_id != nil && self.verid != nil && self.gradeid != nil && self.volid != nil) {
@@ -360,7 +370,7 @@
 {
     CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
     if (height == 0) {
-        return 200;
+        return 300;
     }
     return height;
 }

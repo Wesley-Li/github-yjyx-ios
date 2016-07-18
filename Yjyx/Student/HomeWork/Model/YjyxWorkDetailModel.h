@@ -17,7 +17,6 @@
 @property (strong, nonatomic) NSString *content;
 @property (strong, nonatomic) NSString *answer;
 @property (assign, nonatomic) CGFloat cellHeight;
-@property (assign, nonatomic) CGRect RcLabelFrame;
 @property (assign, nonatomic) NSInteger choicecount;
 
 + (instancetype)workDetailModelWithDict:(NSDictionary *)dict;

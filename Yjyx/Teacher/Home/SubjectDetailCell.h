@@ -18,7 +18,7 @@
 @end
 @interface SubjectDetailCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *subjectNumLabel;
-
+@property (assign, nonatomic) CGFloat height;
 @property (strong, nonatomic) MicroSubjectModel *model;
 
 @property (assign, nonatomic) id<SubjectDetailCellDelegate> delegate;

@@ -7,7 +7,7 @@
 //
 
 #import "TaskCell.h"
-#import "RCLabel.h"
+
 
 @interface TaskCell ()<UIWebViewDelegate>
 
@@ -43,7 +43,7 @@
     web.scrollView.scrollEnabled = NO;
     web.scrollView.bounces = NO;
     web.delegate = self;
-    web.backgroundColor = [UIColor redColor];
+
     [web loadHTMLString:jsString baseURL:nil];
     [self.webBGVIEW addSubview:web];
 
@@ -96,6 +96,7 @@
     webView.frame = frame;
     
     self.height = frame.size.height + 15 + 30;
+    
     // 发通知
     [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeightChange" object:self userInfo:nil];
     

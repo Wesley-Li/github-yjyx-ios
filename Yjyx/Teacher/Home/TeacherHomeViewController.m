@@ -124,7 +124,7 @@
     [alertVC addAction:[UIAlertAction actionWithTitle:@"从图库选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         UIImagePickerController *pickerIamge = [[UIImagePickerController alloc] init];
-        pickerIamge.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        pickerIamge.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         // 允许编辑
         pickerIamge.allowsEditing = YES;
         pickerIamge.delegate = self;

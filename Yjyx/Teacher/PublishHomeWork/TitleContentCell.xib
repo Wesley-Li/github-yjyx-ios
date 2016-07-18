@@ -30,8 +30,16 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xVu-cR-sPo">
+                        <rect key="frame" x="10" y="0.0" width="300" height="130"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="xVu-cR-sPo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="4AV-kY-61t"/>
+                    <constraint firstItem="xVu-cR-sPo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="7Xj-0C-DXH"/>
+                    <constraint firstItem="42b-nz-vN5" firstAttribute="top" secondItem="xVu-cR-sPo" secondAttribute="bottom" id="9GT-Ij-ccJ"/>
+                    <constraint firstAttribute="trailing" secondItem="xVu-cR-sPo" secondAttribute="trailing" constant="10" id="IHv-qS-Up6"/>
                     <constraint firstItem="bIJ-mB-dfH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="lRh-mz-u6Z"/>
                     <constraint firstAttribute="bottom" secondItem="bIJ-mB-dfH" secondAttribute="bottom" constant="5" id="ozg-Sx-iyL"/>
                     <constraint firstItem="42b-nz-vN5" firstAttribute="leading" secondItem="bIJ-mB-dfH" secondAttribute="trailing" constant="4" id="wA3-ig-j4E"/>
@@ -39,6 +47,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bgview" destination="xVu-cR-sPo" id="qgu-MK-k67"/>
                 <outlet property="levelLabel" destination="42b-nz-vN5" id="rjH-xi-jjL"/>
             </connections>
             <point key="canvasLocation" x="305" y="206.5"/>

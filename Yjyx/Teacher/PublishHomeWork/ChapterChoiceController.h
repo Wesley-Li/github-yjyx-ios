@@ -27,5 +27,7 @@
 @property (nonatomic, copy) NSString *questionType;// 题目类型
 @property (nonatomic, copy) NSString *level;// 难度
 @property (nonatomic, copy) NSString *knowledgetreeidvalue;// 知识点
+@property (nonatomic, strong) NSNumber *onlysearchmine;// 私有题目
+
 
 @end

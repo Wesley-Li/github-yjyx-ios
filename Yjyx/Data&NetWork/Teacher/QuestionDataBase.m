@@ -66,8 +66,8 @@ static QuestionDataBase *singleton = nil;
 // 创建数据表
 - (void)creatQuestionTable {
 
-    BOOL isSuccess = [self.question_db executeUpdate:@"create table if not exists Question(id integer PRIMARY KEY AUTOINCREMENT, t_id text, content_text, person_type, p_id, level, subject_type, cellHeight, RCLabelFrame, jumpType)"];
-    [self.question_db executeUpdate:@"create table if not exists Wrong(id integer PRIMARY KEY AUTOINCREMENT, w_id text, answer, content, total_wrong_num, questionid, level, questiontype, cellHeight, cellFrame, jumpType)"];
+    BOOL isSuccess = [self.question_db executeUpdate:@"create table if not exists Question(id integer PRIMARY KEY AUTOINCREMENT, t_id text, content_text, person_type, p_id, level, subject_type, cellHeight, jumpType)"];
+    [self.question_db executeUpdate:@"create table if not exists Wrong(id integer PRIMARY KEY AUTOINCREMENT, w_id text, answer, content, total_wrong_num, questionid, level, questiontype, cellHeight, jumpType)"];
     [self.question_db executeUpdate:@"create table if not exists Micro(id integer PRIMARY KEY AUTOINCREMENT, s_id text, content, level, questiontype,  jumpType)"];
     NSLog(@"%@", isSuccess ? @"试题表建立成功" : @"试题表建立失败");
 }
@@ -132,9 +132,8 @@ static QuestionDataBase *singleton = nil;
     NSString *p_id = [NSString stringWithFormat:@"%ld", (long)model.p_id];
     NSString *level = [NSString stringWithFormat:@"%ld", (long)model.level];
     NSString *cellHeight = [NSString stringWithFormat:@"%f", model.cellHeight];
-    NSString *RCLabelFrame = NSStringFromCGRect(model.RCLabelFrame);
     NSString *jumpType = @"1";
-    BOOL isSuccess = [self.question_db executeUpdate:@"insert into Question(t_id, content_text, person_type, p_id, level, subject_type, cellHeight, RCLabelFrame,jumpType) values(?,?,?,?,?,?,?,?,?)", t_id, model.content_text, person_type, p_id, level, model.subject_type, cellHeight, RCLabelFrame, jumpType];
+    BOOL isSuccess = [self.question_db executeUpdate:@"insert into Question(t_id, content_text, person_type, p_id, level, subject_type, cellHeight,jumpType) values(?,?,?,?,?,?,?,?)", t_id, model.content_text, person_type, p_id, level, model.subject_type, cellHeight, jumpType];
     
     NSLog(@"%@", isSuccess ? @"添加试题成功" : @"添加试题失败");
 
@@ -149,12 +148,11 @@ static QuestionDataBase *singleton = nil;
     NSString *questionid = [NSString stringWithFormat:@"%ld", (long)model.questionid];
     NSString *level = [NSString stringWithFormat:@"%ld", (long)model.level];
     NSString *cellHeight = [NSString stringWithFormat:@"%f", model.cellHeight];
-    NSString *cellFrame = NSStringFromCGRect(model.cellFrame);
     NSString *answer = model.answer;
     NSString *content = model.content;
     NSString *total_wrong_num =  model.total_wrong_num;
     NSString *jumpType = @"1";
-    BOOL isSuccess = [self.question_db executeUpdate:@"insert into Wrong(w_id, content, questiontype, questionid, level, cellHeight, cellFrame, answer, total_wrong_num, jumpType) values(?,?,?,?,?,?,?,?,?,?)", w_id, content, questiontype, questionid, level,  cellHeight, cellFrame, answer, total_wrong_num, jumpType];
+    BOOL isSuccess = [self.question_db executeUpdate:@"insert into Wrong(w_id, content, questiontype, questionid, level, cellHeight, answer, total_wrong_num, jumpType) values(?,?,?,?,?,?,?,?,?)", w_id, content, questiontype, questionid, level,  cellHeight, answer, total_wrong_num, jumpType];
     
     NSLog(@"%@", isSuccess ? @"添加试题成功" : @"添加试题失败");
     
@@ -200,7 +198,6 @@ static QuestionDataBase *singleton = nil;
         NSString *level = [set stringForColumn:@"level"];
         NSString *subject_type = [set stringForColumn:@"subject_type"];
         NSString *cellHeight = [set stringForColumn:@"cellHeight"];
-        NSString *RCLabelFrame = [set stringForColumn:@"RCLabelFrame"];
         NSString *jumpType = [set stringForColumn:@"jumpType"];
         NSLog(@"%@", jumpType);
         if(![jumpType isEqualToString:jumpT]){
@@ -215,7 +212,7 @@ static QuestionDataBase *singleton = nil;
         model.level = [level integerValue];
         model.subject_type = subject_type;
         model.cellHeight = [cellHeight floatValue];
-        model.RCLabelFrame = CGRectFromString(RCLabelFrame);
+       
         
         [group addObject:model];
         
@@ -229,7 +226,6 @@ static QuestionDataBase *singleton = nil;
         NSString *questionid = [set1 stringForColumn:@"questionid"];
         NSString *level = [set1 stringForColumn:@"level"];
         NSString *cellHeight = [set1 stringForColumn:@"cellHeight"];
-        NSString *cellFrame = [set1 stringForColumn:@"cellFrame"];
         NSString *answer = [set1 stringForColumn:@"answer"];
         NSString *total_wrong_num = [set1 stringForColumn:@"total_wrong_num"];
         NSString *jumpType = [set1 stringForColumn:@"jumpType"];
@@ -244,7 +240,6 @@ static QuestionDataBase *singleton = nil;
         model.questionid = [questionid integerValue];
         model.level = [level integerValue];
         model.cellHeight = [cellHeight floatValue];
-        model.cellFrame = CGRectFromString(cellFrame);
         model.answer = answer;
         model.total_wrong_num = total_wrong_num;
 
@@ -298,7 +293,6 @@ static QuestionDataBase *singleton = nil;
         NSString *level = [set stringForColumn:@"level"];
         NSString *subject_type = [set stringForColumn:@"subject_type"];
         NSString *cellHeight = [set stringForColumn:@"cellHeight"];
-        NSString *RCLabelFrame = [set stringForColumn:@"RCLabelFrame"];
         NSString *jumpType = [set stringForColumn:@"jumpType"];
         if(![jumpType isEqualToString:jumpT]){
             break;
@@ -312,7 +306,7 @@ static QuestionDataBase *singleton = nil;
         model.level = [level integerValue];
         model.subject_type = subject_type;
         model.cellHeight = [cellHeight floatValue];
-        model.RCLabelFrame = CGRectFromString(RCLabelFrame);
+        
         
         [group addObject:model];
         
@@ -325,7 +319,6 @@ static QuestionDataBase *singleton = nil;
         NSString *questionid = [set1 stringForColumn:@"questionid"];
         NSString *level = [set1 stringForColumn:@"level"];
         NSString *cellHeight = [set1 stringForColumn:@"cellHeight"];
-        NSString *cellFrame = [set1 stringForColumn:@"cellFrame"];
         NSString *answer = [set1 stringForColumn:@"answer"];
         NSString *total_wrong_num = [set1 stringForColumn:@"total_wrong_num"];
         NSString *jumpType = [set1 stringForColumn:@"jumpType"];
@@ -340,7 +333,6 @@ static QuestionDataBase *singleton = nil;
         model.questionid = [questionid integerValue];
         model.level = [level integerValue];
         model.cellHeight = [cellHeight floatValue];
-        model.cellFrame = CGRectFromString(cellFrame);
         model.answer = answer;
         model.total_wrong_num = total_wrong_num;
         
@@ -394,7 +386,6 @@ static QuestionDataBase *singleton = nil;
         NSString *level = [set stringForColumn:@"level"];
         NSString *subject_type = [set stringForColumn:@"subject_type"];
         NSString *cellHeight = [set stringForColumn:@"cellHeight"];
-        NSString *RCLabelFrame = [set stringForColumn:@"RCLabelFrame"];
         NSString *jumpType = [set stringForColumn:@"jumpType"];
         if(![jumpType isEqualToString:jumpT]){
             break;
@@ -408,7 +399,6 @@ static QuestionDataBase *singleton = nil;
         model.level = [level integerValue];
         model.subject_type = subject_type;
         model.cellHeight = [cellHeight floatValue];
-        model.RCLabelFrame = CGRectFromString(RCLabelFrame);
         
         [group addObject:model];
         
@@ -422,7 +412,6 @@ static QuestionDataBase *singleton = nil;
         NSString *questionid = [set1 stringForColumn:@"questionid"];
         NSString *level = [set1 stringForColumn:@"level"];
         NSString *cellHeight = [set1 stringForColumn:@"cellHeight"];
-        NSString *cellFrame = [set1 stringForColumn:@"cellFrame"];
         NSString *answer = [set1 stringForColumn:@"answer"];
         NSString *jumpType = [set1 stringForColumn:@"jumpType"];
         NSString *total_wrong_num = [set1 stringForColumn:@"total_wrong_num"];
@@ -437,7 +426,6 @@ static QuestionDataBase *singleton = nil;
         model.questionid = [questionid integerValue];
         model.level = [level integerValue];
         model.cellHeight = [cellHeight floatValue];
-        model.cellFrame = CGRectFromString(cellFrame);
         model.answer = answer;
         model.total_wrong_num = total_wrong_num;
         

@@ -25,14 +25,12 @@
 @property (assign, nonatomic) NSInteger t_id;
 // 第一行cell的高度
 @property (assign, nonatomic) CGFloat firstCellHeight;
-// 第一行RCLabel的frame
-@property (assign, nonatomic) CGRect firstFrame;
+
 // 第二行cell的高度
 @property (assign, nonatomic) CGFloat secondCellHeight;
 // 第三行cell的高度
 @property (assign, nonatomic) CGFloat threeCellHeight;
-// 第三行RCLabel的frame
-@property (assign, nonatomic) CGRect threeFrame;
+
 
 + (instancetype)oneSubjectModelWithDict:(NSDictionary *)dict;
 @end
