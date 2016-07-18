@@ -155,7 +155,16 @@
  * 获取学生商品列表
  */
 -(void)getStudentProductList:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
-
-
-
+/*
+ * 获取学生学科的状态
+ */
+-(void)getStudentSubjectStatus:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
+/*
+ *学生试用某个会员产品
+ */
+-(void)studentTrialProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
+/*
+*学生购买某个会员产品
+*/
+-(void)purchaseStudentProduct:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 @end

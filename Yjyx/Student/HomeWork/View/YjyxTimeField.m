@@ -33,6 +33,7 @@
     dataPick.backgroundColor = [UIColor whiteColor];
     dataPick.datePickerMode = UIDatePickerModeDate;
     self.inputView  = dataPick;
+    [dataPick addTarget:self action:@selector(dateValueChange:) forControlEvents:UIControlEventValueChanged];
     UIView *accView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
     UIButton *cancalBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [cancalBtn setTitle:@"取消" forState:UIControlStateNormal];
@@ -61,5 +62,9 @@
     fmt.dateFormat = @"yyyy年MM月dd日";
     self.text = [fmt stringFromDate:_dataPick.date];
     [self resignFirstResponder];
+}
+- (void)dateValueChange:(UIDatePicker *)picker
+{
+    NSLog(@"---");
 }
 @end

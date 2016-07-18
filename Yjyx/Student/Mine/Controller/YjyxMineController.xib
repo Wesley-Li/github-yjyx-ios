@@ -9,6 +9,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YjyxMineController">
             <connections>
                 <outlet property="codeLabel" destination="iMe-Ww-xXh" id="3TU-7w-013"/>
+                <outlet property="coinBtn" destination="JNW-VP-Pdd" id="p4E-GM-Ygu"/>
                 <outlet property="coinLabel" destination="IiM-ai-6q7" id="k3N-d5-QfU"/>
                 <outlet property="gradeLabel" destination="Dfs-TZ-Oj8" id="jFi-Mz-7cY"/>
                 <outlet property="iconImageView" destination="RR8-Il-ycT" id="CgR-5V-hlG"/>
@@ -27,11 +28,11 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="背景" translatesAutoresizingMaskIntoConstraints="NO" id="2E4-PT-SQs">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="234"/>
                         </imageView>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="abQ-yt-dAC">
-                            <rect key="frame" x="201" y="60" width="119" height="80"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abQ-yt-dAC">
+                            <rect key="frame" x="197" y="60" width="123" height="74"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sBe-Vw-QQO">
-                                    <rect key="frame" x="47" y="28" width="25" height="25"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sBe-Vw-QQO">
+                                    <rect key="frame" x="49" y="25" width="25" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="25" id="dG7-sS-a3p"/>
                                         <constraint firstAttribute="height" constant="25" id="v5L-L6-uey"/>
@@ -41,9 +42,9 @@
                                         <action selector="signBtnClick:" destination="-1" eventType="touchUpInside" id="dak-KY-2xw"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="签到有奖" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8MX-r4-h9J">
-                                    <rect key="frame" x="34" y="53" width="52" height="16"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="签到有奖" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8MX-r4-h9J">
+                                    <rect key="frame" x="38" y="55" width="48" height="15"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -51,38 +52,38 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="8MX-r4-h9J" firstAttribute="centerX" secondItem="sBe-Vw-QQO" secondAttribute="centerX" id="6S8-ve-bgZ"/>
-                                <constraint firstItem="8MX-r4-h9J" firstAttribute="top" secondItem="sBe-Vw-QQO" secondAttribute="bottom" id="QAC-2W-xh2"/>
+                                <constraint firstItem="8MX-r4-h9J" firstAttribute="top" secondItem="sBe-Vw-QQO" secondAttribute="bottom" constant="5" id="QAC-2W-xh2"/>
                                 <constraint firstItem="sBe-Vw-QQO" firstAttribute="centerY" secondItem="abQ-yt-dAC" secondAttribute="centerY" id="Xbv-wK-5dF"/>
                                 <constraint firstItem="sBe-Vw-QQO" firstAttribute="centerX" secondItem="abQ-yt-dAC" secondAttribute="centerX" id="eax-Id-zz7"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qtk-8O-OkP">
-                            <rect key="frame" x="0.0" y="60" width="121" height="80"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qtk-8O-OkP">
+                            <rect key="frame" x="0.0" y="60" width="123" height="74"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JNW-VP-Pdd">
-                                    <rect key="frame" x="49" y="26" width="25" height="25"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="25" id="PQv-pv-hK9"/>
-                                        <constraint firstAttribute="width" constant="25" id="hIo-Sp-OzH"/>
-                                    </constraints>
-                                    <state key="normal" image="score.png"/>
-                                    <connections>
-                                        <action selector="coinBtnClick:" destination="-1" eventType="touchUpInside" id="QDD-k2-3D4"/>
-                                    </connections>
-                                </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiM-ai-6q7">
-                                    <rect key="frame" x="45" y="51" width="33" height="16"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiM-ai-6q7">
+                                    <rect key="frame" x="45" y="53" width="33" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JNW-VP-Pdd">
+                                    <rect key="frame" x="44" y="15" width="35" height="35"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="35" id="PQv-pv-hK9"/>
+                                        <constraint firstAttribute="width" constant="35" id="hIo-Sp-OzH"/>
+                                    </constraints>
+                                    <state key="normal" image="p_money"/>
+                                    <connections>
+                                        <action selector="coinBtnClick:" destination="-1" eventType="touchUpInside" id="QDD-k2-3D4"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="IiM-ai-6q7" firstAttribute="centerX" secondItem="JNW-VP-Pdd" secondAttribute="centerX" id="5T2-VF-nNE"/>
-                                <constraint firstItem="JNW-VP-Pdd" firstAttribute="centerY" secondItem="qtk-8O-OkP" secondAttribute="centerY" id="bzf-7n-CvJ"/>
+                                <constraint firstItem="JNW-VP-Pdd" firstAttribute="centerY" secondItem="qtk-8O-OkP" secondAttribute="centerY" constant="-5" id="bzf-7n-CvJ"/>
                                 <constraint firstItem="JNW-VP-Pdd" firstAttribute="centerX" secondItem="qtk-8O-OkP" secondAttribute="centerX" id="nIf-Z9-LRZ"/>
-                                <constraint firstItem="IiM-ai-6q7" firstAttribute="top" secondItem="JNW-VP-Pdd" secondAttribute="bottom" id="oM4-MQ-72j"/>
+                                <constraint firstItem="IiM-ai-6q7" firstAttribute="top" secondItem="JNW-VP-Pdd" secondAttribute="bottom" constant="3" id="oM4-MQ-72j"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9H3-Yx-4kx">
@@ -97,8 +98,8 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="report.png" translatesAutoresizingMaskIntoConstraints="NO" id="RR8-Il-ycT">
-                            <rect key="frame" x="119" y="60" width="84" height="84"/>
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="report.png" translatesAutoresizingMaskIntoConstraints="NO" id="RR8-Il-ycT">
+                            <rect key="frame" x="123" y="60" width="74" height="74"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="hCC-Dr-TaX"/>
                                 <constraint firstAttribute="height" constant="80" id="mjG-sG-mGI"/>
@@ -312,8 +313,8 @@
         </view>
     </objects>
     <resources>
+        <image name="p_money" width="49" height="49"/>
         <image name="report.png" width="59" height="59"/>
-        <image name="score.png" width="50" height="50"/>
         <image name="student_home_setting" width="51" height="51"/>
         <image name="常用工具" width="230" height="230"/>
         <image name="我的统计" width="230" height="230"/>

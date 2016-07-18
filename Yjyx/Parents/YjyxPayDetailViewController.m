@@ -59,12 +59,17 @@
     
     _detailView.frame = CGRectMake(0, 0, SCREEN_WIDTH, (contentLb.frame.origin.y+contentLb.frame.size.height + 20));
     
+    // 会员种类
     productView = [[UIView alloc] initWithFrame:CGRectMake(0, _detailView.frame.size.height + 8, SCREEN_WIDTH, 90)];
+    if(_jumpType == 1){
+        productView.height = 80;
+    }
     productView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:productView];
     UILabel *typeLb = [UILabel labelWithFrame:CGRectMake(35, 10, SCREEN_WIDTH-35, 20) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:12] context:[NSString stringWithFormat:@"会员种类：%@",_productEntity.subject_name]];
     [productView addSubview:typeLb];
     
+    if(_jumpType == 2){
     UILabel *childrenLb = [UILabel labelWithFrame:CGRectMake(35, 35, 60, 20) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:12] context:@"小孩:"];
     [productView addSubview:childrenLb];
     
@@ -88,20 +93,37 @@
             [self selectChildren:childrenBtn];
         }
     }
-    
+    }
     
     UILabel *timeLb = [UILabel labelWithFrame:CGRectMake(35, 60, 80, 20) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:12] context:@"时间选择:"];
+    if(_jumpType == 1){
+        timeLb.y = 38;
+    }
     [productView addSubview:timeLb];
     
     for (int i = 0; i < [self.productEntity.price_pacakge count]; i++) {
         NSDictionary *dic = [self.productEntity.price_pacakge objectAtIndex:i];
-        UIButton *timeBtn = [[UIButton alloc] initWithFrame:CGRectMake(90+i*82, 63, 80, 15)];
+        
+        UIButton *timeBtn = [[UIButton alloc] init];
+      
+//        timeBtn.frame = CGRectMake(90+i*82, 63, 80, 15);
+        NSLog(@"%f", CGRectGetMaxX(timeBtn.frame));
         NSString *str = [NSString stringWithFormat:@"%@元/%@天",[dic objectForKey:@"price"],[dic objectForKey:@"days"]];
         [timeBtn setTitle:str forState:UIControlStateNormal];
         [timeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         timeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         timeBtn.layer.borderWidth = 0.5;
         timeBtn.layer.cornerRadius = 2;
+        [timeBtn sizeToFit];
+        if(_jumpType == 2){
+        timeBtn.frame = CGRectMake(90+i*82, 63, 80, 15);
+        }else{
+            timeBtn.x = 90 + i*82;
+            timeBtn.y = 41;
+            timeBtn.height = 15;
+            timeBtn.width = timeBtn.width + 2;
+        }
+        NSLog(@"%@", NSStringFromCGRect(timeBtn.frame));
         [timeBtn addTarget:self action:@selector(selectTime:) forControlEvents:UIControlEventTouchUpInside];
         timeBtn.tag = 1000+i;
         [productView addSubview:timeBtn];
@@ -109,7 +131,9 @@
             [self selectTime:timeBtn];
         }
     }
-    
+    if(_jumpType == 1){
+        [self showPayView];
+    }
 
 }
 
@@ -163,6 +187,7 @@
 - (void)getPayContent
 {
     [self.view makeToastActivity:SHOW_CENTER];
+    if(_jumpType == 2){
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"purchase",@"action",childrenCid
                          ,@"cid",self.productEntity.productID,@"productid", ppiIndex,@"ppi",nil];
     [[YjxService sharedInstance] purchaseProduct:dic withBlock:^(id result, NSError *error){
@@ -181,6 +206,25 @@
             [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
+    }else{
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"purchase",@"action", self.productEntity.productID,@"productid", ppiIndex,@"ppi",nil];
+        [[YjxService sharedInstance] purchaseStudentProduct:dic withBlock:^(id result, NSError *error){
+            [self.view hideToastActivity];
+            if (result != nil) {
+                if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                    AlipayStr = [result objectForKey:@"params"];
+                    NSString *appScheme = @"yjyx";
+                    [[AlipaySDK defaultService] payOrder:AlipayStr fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+                        [self dealPayResult:resultDic resultstr:AlipayStr];
+                    }];
+                }else{
+                    [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                }
+            }else{
+                [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+        }];
+    }
     
 }
 
@@ -188,7 +232,7 @@
 {
     [payView removeFromSuperview];
     payView = nil;
-    payView = [[UIView alloc] initWithFrame:CGRectMake(0, productView.frame.origin.y + 110, SCREEN_WIDTH, 75)];
+    payView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(productView.frame) + 10, SCREEN_WIDTH, 75)];
     payView.backgroundColor = [UIColor whiteColor];
     
     UILabel *priceLb = [UILabel labelWithFrame:CGRectMake(15, 0, 50, 30) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:13] context:@"支付:"];

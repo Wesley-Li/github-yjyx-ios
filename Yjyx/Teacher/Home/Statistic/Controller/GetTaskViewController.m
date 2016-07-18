@@ -177,6 +177,7 @@
     GetTaskModel *model = self.dataSouece[indexPath.row];
     stuVC.taskID = model.taskid;
     stuVC.studentID = self.stuID;
+    stuVC.titleName =  [NSString stringWithFormat:@"%@-%@", self.navigationItem.title, model.descriptionText];
     [self.navigationController pushViewController:stuVC animated:YES];
     
 }

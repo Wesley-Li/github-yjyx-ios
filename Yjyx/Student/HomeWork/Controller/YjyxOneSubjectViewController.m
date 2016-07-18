@@ -94,6 +94,7 @@ static NSString *ID = @"CELL";
 // 请求数据
 - (void)loadData
 {
+    [self.view  makeToastActivity:SHOW_CENTER];
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"action"] = @"list_tasks_to_me";
@@ -105,7 +106,7 @@ static NSString *ID = @"CELL";
 //    NSLog(@"%@, %@, %@", self.workType, self.beginTime, self.endTime);
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/tasks/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
 //        NSLog(@"%@", responseObject);
-        
+        [self.view hideToastActivity];
         if ([responseObject[@"retcode"] isEqual:@0]) {
             NSMutableArray *tempArr = [NSMutableArray array];
             for (NSDictionary *dict in responseObject[@"retlist"]) {

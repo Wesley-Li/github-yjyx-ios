@@ -8,7 +8,7 @@
 
 #import "MicroNameCell.h"
 #import "MicroDetailModel.h"
-@interface MicroNameCell()
+@interface MicroNameCell()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *createTimeLabel;
 @property (weak, nonatomic) IBOutlet UITextField *microNameTextField;
@@ -19,7 +19,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.microNameTextField.delegate = self;
+    
 }
 
 - (void)setModel:(MicroDetailModel *)model
@@ -57,5 +58,13 @@
     }
   
 }
-
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.microNameTextField.width = self.microNameTextField.width + 60;
+}
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    NSLog(@"----");
+    return YES;
+}
 @end

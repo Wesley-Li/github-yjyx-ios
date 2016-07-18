@@ -76,6 +76,7 @@
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:@"getonesubjectfailedquestion", @"action", self.subjectid, @"subjectid", self.targetlist, @"targetlist", nil];
+    NSLog(@"%@", param);
     [manager GET:[BaseURL stringByAppendingString:STUDENT_GET_WRONG_LIST_GET] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
         
@@ -97,8 +98,12 @@
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+
         
         NSLog(@"%@", error);
+
+//        NSLog(@"%@", error.localizedDescription);
+
         [self.view makeToast:@"数据请求失败,请检查您的网络" duration:1.0 position:SHOW_CENTER complete:nil];
     }];
     

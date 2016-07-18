@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -174,22 +173,22 @@
                         <constraint firstItem="ZyU-Rp-rvq" firstAttribute="width" secondItem="L9a-mt-1JI" secondAttribute="width" id="wsd-o9-HMW"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Sc-8z-1M9">
-                    <rect key="frame" x="0.0" y="56" width="136" height="60"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Sc-8z-1M9">
+                    <rect key="frame" x="0.0" y="72" width="119" height="60"/>
                     <subviews>
-                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yyG-ae-gbK">
-                            <rect key="frame" x="46" y="18" width="25" height="25"/>
+                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yyG-ae-gbK">
+                            <rect key="frame" x="42" y="8" width="35" height="35"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="25" id="3J8-LI-rVT"/>
-                                <constraint firstAttribute="height" constant="25" id="LDt-ab-g5s"/>
+                                <constraint firstAttribute="width" constant="35" id="3J8-LI-rVT"/>
+                                <constraint firstAttribute="height" constant="35" id="LDt-ab-g5s"/>
                             </constraints>
-                            <state key="normal" backgroundImage="score.png"/>
+                            <state key="normal" image="p_money"/>
                             <connections>
                                 <action selector="handleScoreBtn:" destination="-1" eventType="touchUpInside" id="wTc-Yx-kc3"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="6462784" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYz-d1-kSe">
-                            <rect key="frame" x="0.0" y="43" width="136" height="20"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6462784" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYz-d1-kSe">
+                            <rect key="frame" x="0.0" y="43" width="119" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="IRc-kb-hTF"/>
                             </constraints>
@@ -201,14 +200,14 @@
                     <constraints>
                         <constraint firstItem="iYz-d1-kSe" firstAttribute="top" secondItem="yyG-ae-gbK" secondAttribute="bottom" id="JAO-nI-7ml"/>
                         <constraint firstAttribute="trailing" secondItem="iYz-d1-kSe" secondAttribute="trailing" id="b44-XO-wSq"/>
-                        <constraint firstItem="yyG-ae-gbK" firstAttribute="centerY" secondItem="5Sc-8z-1M9" secondAttribute="centerY" id="hIb-uM-rfo"/>
+                        <constraint firstItem="yyG-ae-gbK" firstAttribute="centerY" secondItem="5Sc-8z-1M9" secondAttribute="centerY" constant="-5" id="hIb-uM-rfo"/>
                         <constraint firstItem="yyG-ae-gbK" firstAttribute="centerX" secondItem="5Sc-8z-1M9" secondAttribute="centerX" id="kne-v3-A8e"/>
                         <constraint firstItem="iYz-d1-kSe" firstAttribute="leading" secondItem="5Sc-8z-1M9" secondAttribute="leading" id="oeL-Ze-dnZ"/>
                         <constraint firstAttribute="height" constant="60" id="wfQ-Eo-azL"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UPI-xg-NWk">
-                    <rect key="frame" x="186" y="56" width="134" height="60"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPI-xg-NWk">
+                    <rect key="frame" x="202" y="72" width="118" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zga-Cy-2H5">
                             <rect key="frame" x="54" y="18" width="25" height="25"/>
@@ -274,8 +273,8 @@
         <image name="hw_stats.png" width="312" height="312"/>
         <image name="mall.png" width="312" height="313"/>
         <image name="mymclass.png" width="312" height="313"/>
+        <image name="p_money" width="49" height="49"/>
         <image name="report.png" width="59" height="59"/>
-        <image name="score.png" width="50" height="50"/>
         <image name="stu_hw.png" width="312" height="312"/>
         <image name="top_bg.png" width="1080" height="711"/>
     </resources>

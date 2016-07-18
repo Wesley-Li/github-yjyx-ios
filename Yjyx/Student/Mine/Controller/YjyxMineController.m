@@ -16,12 +16,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *codeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *coinLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
+@property (weak, nonatomic) IBOutlet UIButton *coinBtn;
 @end
 
 @implementation YjyxMineController
-
+- (void)awakeFromNib
+{
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.coinBtn.imageView.contentMode = UIViewContentModeScaleToFill;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(iconImageViewClick)];
     [self.iconImageView addGestureRecognizer:tap];
  
