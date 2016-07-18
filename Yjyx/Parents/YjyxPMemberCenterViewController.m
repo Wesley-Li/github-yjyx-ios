@@ -145,6 +145,7 @@
     YjyxMemberDetailViewController *detail = [[YjyxMemberDetailViewController alloc] init];
     detail.title = [entity.subject_name stringByAppendingString:@"会员"];
     detail.productEntity = entity;
+    detail.jumpType = jumpType;
     [detail setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:detail animated:YES];
 }

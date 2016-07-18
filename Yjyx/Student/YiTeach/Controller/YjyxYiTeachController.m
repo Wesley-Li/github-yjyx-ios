@@ -16,7 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.navigationItem.title = @"亿教";
+    UILabel *label = [[UILabel alloc] init];
+    label.text = @"敬请期待...";
+    [label sizeToFit ];
+    label.center = self.view.center;
+    label.textColor = [UIColor blackColor];
+    [self.view addSubview:label];
 }
 
 - (void)didReceiveMemoryWarning {

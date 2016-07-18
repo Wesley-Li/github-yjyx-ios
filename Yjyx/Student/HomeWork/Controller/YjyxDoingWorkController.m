@@ -60,7 +60,7 @@
 @property (strong, nonatomic) NSMutableDictionary *viewDict; // 保存图片数组的字典
 @property (strong, nonatomic) NSMutableDictionary *urlDict; // 保存图片url的字典
 
-
+@property (assign, nonatomic) NSInteger flag;
 @property (weak, nonatomic) YjyxDraftView *draftV;
 
 @end
@@ -168,14 +168,18 @@
 - (void)viewDidAppear:(BOOL)animated
 {
 //    NSLog(@"--+++%@", NSStringFromCGRect(self.scrollView.frame));
+    if(_flag == 0){
     if([self.type integerValue] == 1){
         if(self.jumpDoworkArr != nil){
             [self scrollViewAddChildSubview:self.doWorkArr];
+            _flag = 1;
         }
     }else{
         if(self.jumpDoworkArr != nil){
             [self scrollViewAddChildSubview:self.doWorkArr];
+            _flag = 1;
         }
+    }
     }
 }
 
@@ -373,6 +377,7 @@
 // scrollV添加子控件
 - (void)scrollViewAddChildSubview:(NSArray *)arr
 {
+    
     // 解题步骤相关数组
     NSMutableDictionary *viewDict = [NSMutableDictionary dictionary];
     _viewDict = viewDict;
@@ -491,10 +496,16 @@
     
     [self presentViewController:alertVc animated:YES completion:nil];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        NSInteger flag = 0;
         for (UIViewController *vc in self.navigationController.childViewControllers) {
             if([vc isKindOfClass:[YjyxOneSubjectViewController class]]){
                 [self.navigationController popToViewController:vc animated:YES];
+                flag = 1;
+                break;
             }
+        }
+        if(flag == 0){
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
     }];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -890,6 +901,10 @@
     _selectedAssets = self.viewDict[str][2];
     _layout = self.viewDict[str][3];
     _urlArr = self.urlDict[str];
+    if(sender.tag >= _urlArr.count){
+        [SVProgressHUD showWithStatus:@"正在上传,请稍等..."];
+        return;
+    }
     [_selectedPhotos removeObjectAtIndex:sender.tag];
     if (!(_selectedAssets.count == 0)) {
          [_selectedAssets removeObjectAtIndex:sender.tag];

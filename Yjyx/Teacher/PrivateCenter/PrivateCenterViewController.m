@@ -151,7 +151,7 @@
                 [cell.detailTextLabel setText:@"圆号"];
             }
             if ([[YjyxOverallData sharedInstance].teacherInfo.notify_sound isEqualToString:@"push5.caf"]) {
-                [cell.detailTextLabel setText:@"铃声"];
+                [cell.detailTextLabel setText:@"铃音"];
             }
             if ([[YjyxOverallData sharedInstance].teacherInfo.notify_sound isEqualToString:@"push6.caf"]) {
                 [cell.detailTextLabel setText:@"电子乐"];

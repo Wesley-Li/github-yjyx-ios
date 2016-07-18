@@ -57,7 +57,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    if(self.jumpType == 1){
+        [self getStudentStatus];
+    }else{
     [self getChildrenStatus];
+    }
     self.navigationController.navigationBarHidden = NO;
 }
 
@@ -160,11 +164,11 @@
 #pragma mark -MyEvent
 - (IBAction)probationClicked:(id)sender //试用按钮
 {
+    if(_jumpType == 2){
     if (trailChildAry.count== 0) {
         [self.view makeToast:@"暂无可试用小孩" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
-    
     chooseView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
     chooseView.backgroundColor = RGBACOLOR(0, 0, 0, 0.5);
     [self.view addSubview:chooseView];
@@ -205,6 +209,21 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dissmissChooseView:)];
     chooseView.userInteractionEnabled = YES;
     [chooseView addGestureRecognizer:tap];
+    }else{
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"trial",@"action", self.productEntity.productID,@"productid", nil];
+
+        [[YjxService sharedInstance] studentTrialProduct:dic withBlock:^(id result, NSError *error){
+            if (result != nil) {
+                if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                    [self getStudentStatus];//开通以后重新刷新界面
+                }else{
+                    [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                }
+            }else{
+                [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+        }];
+    }
     
 }
 
@@ -242,6 +261,7 @@
     YjyxPayDetailViewController *vc =[[YjyxPayDetailViewController alloc] init];
     vc.productEntity = self.productEntity;
     vc.title = self.title;
+    vc.jumpType = self.jumpType;
     [self.navigationController pushViewController:vc animated:YES];
     return;
     
@@ -297,7 +317,88 @@
 
     
 }
+#pragma mark - 学生端相关
+// 获取学生状态
+- (void)getStudentStatus
+{
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"subjectstatus",@"action" ,self.productEntity.subject_id,@"subjectid", nil];
+    [[YjxService sharedInstance] getStudentSubjectStatus:dic withBlock:^(id result, NSError *error){
+        if (result != nil) {
+            NSLog(@"%@", result);
+            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
 
+                [self reloadStudentView:result];//显示试用期的科目
+            }else{
+                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+        }else{
+            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+    }];
+
+
+}
+// 加载学生这科的状态
+-(void)reloadStudentView:(NSDictionary *)dic
+{
+    
+    for (UIView *view in _detailView.subviews) {
+        if (view.tag>=1000) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    NSArray *dataAry = [dic objectForKey:@"data"];
+    
+    for (int i = 0; i < [dataAry count]; i++) {
+        NSDictionary *content = [dataAry objectAtIndex:i];
+        NSInteger effctivedays = [[content objectForKey:@"effctivedays"] integerValue];
+        OneStudentEntity *entity = [YjyxOverallData sharedInstance].studentInfo;
+        UILabel *trailLb = [UILabel labelWithFrame:CGRectMake(35, (contentLb.frame.origin.y+contentLb.frame.size.height + 10)+i*25, SCREEN_WIDTH - 35, 20) textColor:[UIColor redColor] font:[UIFont systemFontOfSize:15] context:@""];
+        if ([[content objectForKey:@"purchasetype"] integerValue] == 2) {
+            if ([[content objectForKey:@"status"] integerValue] ==2) {
+                trailLb.text = [NSString stringWithFormat:@"%@:试用期已过期",entity.realname];
+            }else{
+                if(effctivedays == 0){
+                     trailLb.text = [NSString stringWithFormat:@"%@:会员即将到期",entity.realname];
+                }else{
+                trailLb.text = [NSString stringWithFormat:@"%@:试用天数还剩%@天",entity.realname,[content objectForKey:@"effctivedays"]];
+                }
+            }
+        }else{
+            
+            if ([[content objectForKey:@"status"] integerValue] ==2) {
+                trailLb.text = [NSString stringWithFormat:@"%@:会员已过期",entity.realname];
+                
+            }else {
+                if(effctivedays == 0)
+                {
+                    trailLb.text = [NSString stringWithFormat:@"%@:会员即将到期",entity.realname];
+                    
+                }else{
+                    trailLb.text = [NSString stringWithFormat:@"%@:会员剩余%@天",entity.realname,[content objectForKey:@"effctivedays"]];
+                }
+            }
+            
+        }
+        
+//        openBtn.hidden =  [content[@"purchasetype"] integerValue] == 1 && [content[@"status"] integerValue] == 1 ? YES:NO;
+        trailLb.tag = 1000+i;
+        [_detailView addSubview:trailLb];
+    }
+    
+    _detailView.frame = CGRectMake(0, 0, SCREEN_WIDTH, (contentLb.frame.origin.y+contentLb.frame.size.height + 20)+dataAry.count*25);
+    trailBtn.frame = CGRectMake(trailBtn.frame.origin.x, _detailView.frame.size.height+40, trailBtn.frame.size.width, trailBtn.frame.size.height);
+    openBtn.frame = CGRectMake(openBtn.frame.origin.x, trailBtn.frame.origin.y + 45, openBtn.frame.size.width, openBtn.frame.size.height);
+    trailBtn.hidden = dataAry.count == 0 ? NO:YES;
+   
+}
+
+
+
+
+
+#pragma mark - 支付相关
 -(void)selectChildren:(id)sender
 {
     for (UIView *view in productView.subviews) {

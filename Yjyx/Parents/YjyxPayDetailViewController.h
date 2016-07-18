@@ -20,4 +20,5 @@
 
 @property (strong,nonatomic) ProductEntity *productEntity;
 @property (weak,nonatomic) IBOutlet UIView *detailView;
+@property (assign, nonatomic) NSInteger jumpType;
 @end
