@@ -160,7 +160,7 @@
     
     GetTaskCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
     GetTaskModel *model = self.dataSouece[indexPath.row];
-    [cell setValueWithModel:model];
+    [cell setValueWithModel:model andtip:self.tip];
     
     if (self.tip == 1) {
         cell.userInteractionEnabled = NO;

@@ -29,7 +29,10 @@
 - (void)setup
 {
     UIDatePicker *dataPick = [[UIDatePicker alloc] init];
+    dataPick.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     self.dataPick = dataPick;
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];//设置为中文显示
+    dataPick.locale = locale;
     dataPick.backgroundColor = [UIColor whiteColor];
     dataPick.datePickerMode = UIDatePickerModeDate;
     self.inputView  = dataPick;
@@ -50,6 +53,21 @@
     accView.backgroundColor = [UIColor whiteColor];
     self.inputAccessoryView = accView;
     
+    NSTimeZone* localzone = [NSTimeZone localTimeZone];
+    NSTimeZone* GTMzone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *str = [dateFormatter stringFromDate:dataPick.date];
+    [dateFormatter setTimeZone:GTMzone];
+    NSDate *bdate = [dateFormatter dateFromString:str];
+    
+//    NSDate *day = [NSDate dateWithTimeInterval:3600 sinceDate:bdate];
+    
+    [dateFormatter setTimeZone:localzone];
+//    NSLog(@"CurrentTime = %@", [dateFormatter stringFromDate:day]);
+    [dataPick setDate:bdate animated:YES];
+    NSLog(@"%@", dataPick.date);
+    
 }
 - (void)cancel:(UIButton *)btn
 {
@@ -57,9 +75,11 @@
 }
 - (void)done:(UIButton *)btn
 {
-    NSLog(@"%@", _dataPick.date);
+    NSLog(@"++++%@", _dataPick.date);
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    NSTimeZone* GTMzone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     fmt.dateFormat = @"yyyy年MM月dd日";
+    fmt.timeZone = GTMzone;
     self.text = [fmt stringFromDate:_dataPick.date];
     [self resignFirstResponder];
 }

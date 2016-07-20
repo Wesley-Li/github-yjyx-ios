@@ -33,13 +33,15 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSi-4m-vVE">
+                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSi-4m-vVE">
                         <rect key="frame" x="404" y="22" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="eNP-ry-weQ"/>
                             <constraint firstAttribute="height" constant="50" id="v0z-Nv-qm2"/>
                         </constraints>
                         <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                        <state key="normal" image="list_icon_2"/>
+                        <state key="selected" image="list_icon_2_expand"/>
                         <connections>
                             <action selector="showBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="uB4-av-jxL"/>
                         </connections>
@@ -70,6 +72,8 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="list_icon_2" width="26" height="26"/>
+        <image name="list_icon_2_expand" width="26" height="26"/>
         <image name="list_icon_nor" width="36" height="36"/>
         <image name="list_icon_sel" width="36" height="36"/>
     </resources>

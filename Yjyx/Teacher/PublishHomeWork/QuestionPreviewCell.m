@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIView *lineView;
 @property (weak, nonatomic) IBOutlet UIView *BGVIEW;
 
+@property (weak, nonatomic) IBOutlet UIButton *requireProBtn;
 
 @end
 
@@ -81,7 +82,7 @@
     
     
     [self.BGVIEW addSubview:web];
-
+    self.requireProBtn.selected = model.isRequireProcess;
     
 }
 
@@ -110,6 +111,23 @@
 
 }
 
+- (IBAction)requireProcessBtnClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if(sender.selected == YES){
+        if(_chaperItem == nil){
+            _wrongModel.isRequireProcess = YES;
+        }else{
+            _chaperItem.isRequireProcess = YES;
+        }
+    }else{
+        if(_chaperItem == nil){
+            _wrongModel.isRequireProcess = NO;
+        }else{
+            _chaperItem.isRequireProcess = NO;
+        }
+    }
+   
+}
 
 
 - (void)setWrongWithModel:(YjyxWrongSubModel *)model
@@ -160,7 +178,7 @@
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
     
     [web loadHTMLString:jsString baseURL:nil];
-    
+    self.requireProBtn.selected = model.isRequireProcess;
     [self.BGVIEW addSubview:web];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

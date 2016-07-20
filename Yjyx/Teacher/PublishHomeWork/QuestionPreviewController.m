@@ -56,8 +56,35 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"QuestionPreviewCell" bundle:nil] forCellReuseIdentifier:kIndentifier];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeightChange:) name:@"QuestionPreviewCellHeight" object:nil];
     
+    UIView *view = [[UIView alloc] init];
+    view.height = 35;
+    UIButton *requireProBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [requireProBtn setTitle:@"全部需要过程" forState:UIControlStateNormal];
+    [requireProBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [requireProBtn setTitleColor:RGBACOLOR(58, 158, 232, 1) forState:UIControlStateSelected];
+    [requireProBtn addTarget:self action:@selector(requireProcessBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [requireProBtn sizeToFit];
+    requireProBtn.x = 15;
+    requireProBtn.centerY = view.centerY;
+    [view addSubview:requireProBtn];
+    self.tableView.tableHeaderView = view;
+    
 }
-
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [[QuestionDataBase shareDataBase] deleteQuestionTable];
+    for (int i = 0; i < _selectArr.count; i++) {
+        if ([self.selectArr[i] isKindOfClass:[ChaperContentItem class]]) {
+            ChaperContentItem *item = self.selectArr[i];
+            [[QuestionDataBase shareDataBase] insertQuestion:item];
+        }else{
+            YjyxWrongSubModel *model = self.selectArr[i];
+            [[QuestionDataBase shareDataBase] insertWrong:model];
+            
+        }
+    }
+  
+}
 
 #pragma mark - delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -78,10 +105,11 @@
     cell.tag = indexPath.row;
     if ([self.selectArr[indexPath.row] isKindOfClass:[ChaperContentItem class]]) {
         ChaperContentItem *item = self.selectArr[indexPath.row];
+        cell.chaperItem = item;
         [cell setValueWithModel:item];
     }else{
         YjyxWrongSubModel *model = self.selectArr[indexPath.row];
-        [cell setWrongWithModel:self.selectArr[indexPath.row]];
+        [cell setWrongWithModel:model];
         
     }
     
@@ -115,7 +143,6 @@
     
     
 }
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OneSubjectController *vc = [[OneSubjectController alloc] init];
@@ -170,7 +197,35 @@
 //    [self.tableView reloadData];
     
 }
-
+// 全部需要解题步骤按钮的点击
+- (void)requireProcessBtnClick:(UIButton *)btn{
+    btn.selected = !btn.selected;
+    if (btn.selected == YES) {
+        for (int i = 0; i < _selectArr.count; i++) {
+            if ([self.selectArr[i] isKindOfClass:[ChaperContentItem class]]) {
+                ChaperContentItem *item = self.selectArr[i];
+                item.isRequireProcess = YES;
+            }else{
+                YjyxWrongSubModel *model = self.selectArr[i];
+                model.isRequireProcess = YES;
+                
+            }
+        }
+    }else{
+        for (int i = 0; i < _selectArr.count; i++) {
+            if ([self.selectArr[i] isKindOfClass:[ChaperContentItem class]]) {
+                ChaperContentItem *item = self.selectArr[i];
+                item.isRequireProcess = NO;
+            }else{
+                YjyxWrongSubModel *model = self.selectArr[i];
+                model.isRequireProcess = NO;
+                
+            }
+        }
+    }
+    [self.tableView reloadData];
+    
+}
 #pragma mark - push
 - (IBAction)configureBtnClick:(UIButton *)sender {
     

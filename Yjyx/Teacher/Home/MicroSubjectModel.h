@@ -27,5 +27,8 @@
 // 记录cell的个数
 @property (assign, nonatomic) NSInteger index;
 
+// 是否需要解题步骤
+@property (assign, nonatomic) BOOL isRequireProcess;
+
 + (instancetype)microSubjectModel:(NSDictionary *)dict andType:(NSInteger)type;
 @end

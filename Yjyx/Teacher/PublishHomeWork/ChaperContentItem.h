@@ -26,7 +26,7 @@
 
 
 @property (nonatomic, assign) BOOL add;// 添加标识
-
+@property (nonatomic, assign) BOOL isRequireProcess; // 是否需要过程
 
 + (instancetype)chaperContentItemWithArray:(NSArray *)array;
 

@@ -14,7 +14,7 @@
 - (void)subjectDetailCell:(SubjectDetailCell *)cell moveUpBtnClick:(UIButton *)btn;
 - (void)subjectDetailCell:(SubjectDetailCell *)cell moveDownBtnClick:(UIButton *)btn;
 - (void)subjectDetailCell:(SubjectDetailCell *)cell deletedBtnClick:(UIButton *)btn;
-
+- (void)subjectDetailCell:(SubjectDetailCell *)cell requireProcessBtnClick:(UIButton *)btn;
 @end
 @interface SubjectDetailCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *subjectNumLabel;

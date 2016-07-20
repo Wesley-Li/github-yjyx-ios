@@ -54,7 +54,7 @@
 - (NSMutableArray *)blankfills {
 
     if (!_blankfills) {
-        self.blankfills = [NSMutableArray alloc];
+        self.blankfills = [NSMutableArray array];
     }
     return _blankfills;
 }
@@ -229,7 +229,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+//    self.choices = [NSMutableArray array];
+//    self.blankfills = [NSMutableArray array];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
     self.navigationController.navigationBarHidden = NO;
@@ -300,7 +301,12 @@
     wmPlayer.playOrPauseBtn = nil;
     wmPlayer.playerLayer = nil;
 }
-
+- (void)viewDidDisappear:(BOOL)animated
+{
+    if(_jumpType == 1){
+    [self releaseWMPlayer];
+    }
+}
 -(void)dealloc{
     [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];

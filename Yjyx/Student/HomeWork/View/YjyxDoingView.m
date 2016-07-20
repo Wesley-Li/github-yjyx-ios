@@ -49,11 +49,14 @@
     for (int i = 0; i < count; i++) {
         UITextField *blankAnswer = [[UITextField alloc] init];
 //        blankAnswer1.borderStyle = UITextBorderStyleLine;
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 2)];
-        blankAnswer.leftView = view;
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 15, 39)];
+        label.text = [NSString stringWithFormat:@"%d", i + 1];
+        label.textAlignment = NSTextAlignmentCenter;
+        
+        blankAnswer.leftView = label;
         blankAnswer.leftViewMode = UITextFieldViewModeAlways;
         blankAnswer.backgroundColor = [UIColor whiteColor];
-        blankAnswer.placeholder = [NSString stringWithFormat:@"  %d:请填写答案", i + 1];
+        blankAnswer.placeholder = @" 请填写答案";
         blankAnswer.frame = CGRectMake(0, 40 * i , SCREEN_WIDTH - 70, 40 -1);
         [self.scrollView addSubview:blankAnswer];
     }

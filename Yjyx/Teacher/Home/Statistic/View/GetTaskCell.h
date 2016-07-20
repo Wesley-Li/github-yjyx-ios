@@ -12,6 +12,6 @@
 @interface GetTaskCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageview;
 
-- (void)setValueWithModel:(GetTaskModel *)model;
+- (void)setValueWithModel:(GetTaskModel *)model andtip:(NSInteger)tip;
 
 @end

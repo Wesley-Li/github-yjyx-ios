@@ -477,6 +477,7 @@
 		3CFE92751D337C4B004DE4A8 /* YjyxDraftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CFE92741D337C4B004DE4A8 /* YjyxDraftView.xib */; };
 		3CFE92781D338CB2004DE4A8 /* YjyxDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFE92771D338CB2004DE4A8 /* YjyxDrawView.m */; };
 		3CFE927B1D3394ED004DE4A8 /* YjyxBezierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFE927A1D3394ED004DE4A8 /* YjyxBezierPath.m */; };
+		3CFF2C991D3E0E6200F5EB63 /* YjyxTeacherButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFF2C981D3E0E6200F5EB63 /* YjyxTeacherButton.m */; };
 		3F4CA6281CE17FC000F4B791 /* FinshedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4CA6271CE17FC000F4B791 /* FinshedModel.m */; };
 		3FF740601CE308DD00D3C0F7 /* list_btn_shutdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */; };
 		3FF740621CE3090500D3C0F7 /* list_btn_shutdown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF740611CE3090500D3C0F7 /* list_btn_shutdown@3x.png */; };
@@ -1274,6 +1275,8 @@
 		3CFE92771D338CB2004DE4A8 /* YjyxDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxDrawView.m; sourceTree = "<group>"; };
 		3CFE92791D3394ED004DE4A8 /* YjyxBezierPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxBezierPath.h; sourceTree = "<group>"; };
 		3CFE927A1D3394ED004DE4A8 /* YjyxBezierPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxBezierPath.m; sourceTree = "<group>"; };
+		3CFF2C971D3E0E6200F5EB63 /* YjyxTeacherButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxTeacherButton.h; sourceTree = "<group>"; };
+		3CFF2C981D3E0E6200F5EB63 /* YjyxTeacherButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxTeacherButton.m; sourceTree = "<group>"; };
 		3F4CA6261CE17FC000F4B791 /* FinshedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinshedModel.h; sourceTree = "<group>"; };
 		3F4CA6271CE17FC000F4B791 /* FinshedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinshedModel.m; sourceTree = "<group>"; };
 		3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_btn_shutdown.png; sourceTree = "<group>"; };
@@ -2625,6 +2628,8 @@
 				3C3D93CF1D26119500AA22AE /* YjyxCommonTabController.m */,
 				3C3D93E91D26442000AA22AE /* YjyxButton.h */,
 				3C3D93EA1D26442000AA22AE /* YjyxButton.m */,
+				3CFF2C971D3E0E6200F5EB63 /* YjyxTeacherButton.h */,
+				3CFF2C981D3E0E6200F5EB63 /* YjyxTeacherButton.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -3658,6 +3663,7 @@
 				3C3D93EB1D26442000AA22AE /* YjyxButton.m in Sources */,
 				3BB773A31CD8781400A24485 /* SmartViewController.m in Sources */,
 				3C4274C01D2A4E4D008A30FA /* YjyxHomeWorkCell.m in Sources */,
+				3CFF2C991D3E0E6200F5EB63 /* YjyxTeacherButton.m in Sources */,
 				801F44AE1CDF164800B7E7E1 /* RSADataVerifier.m in Sources */,
 				801F44AC1CDF164800B7E7E1 /* openssl_wrapper.m in Sources */,
 				3CD7E45E1D2B819600769FDE /* YjyxHomeWrongModel.m in Sources */,
@@ -3994,7 +4000,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -4021,7 +4027,7 @@
 					"\"$(PROJECT_DIR)/Yjyx/Alipay/AliSDK/openssl\"",
 				);
 				INFOPLIST_FILE = Yjyx/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4046,7 +4052,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -4073,7 +4079,7 @@
 					"\"$(PROJECT_DIR)/Yjyx/Alipay/AliSDK/openssl\"",
 				);
 				INFOPLIST_FILE = Yjyx/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

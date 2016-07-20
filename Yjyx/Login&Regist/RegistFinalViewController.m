@@ -10,6 +10,7 @@
 
 @interface RegistFinalViewController ()
 
+@property (assign, nonatomic) NSInteger flag;
 @end
 
 @implementation RegistFinalViewController
@@ -58,7 +59,11 @@
                 
             }
             
+        }else{
+            textField.text = [textField.text substringToIndex:10];
+            [self.view makeToast:@"输入的长度不能大于10位" duration:1.0 position:SHOW_CENTER complete:nil];
         }
+
     }else if ([textField isEqual:parentPasswordText]){
         if (textField.text.length > 20){
             textField.text = [textField.text substringToIndex:20];
@@ -79,6 +84,8 @@
             if([responseObject[@"retcode"] isEqual: @0]){
                 if ([responseObject[@"exist"] isEqual: @1]) {
                     [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
+                }else{
+                    _flag = 1;
                 }
             }else{
                 [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
@@ -102,8 +109,12 @@
 #pragma mark - 获取验证码
 -(IBAction)getRegisterCode:(UIButton *)sender
 {
-    if (phoneText.text.length == 0 || phoneText.text.length < 11) {
-        [self.view makeToast:@"请输入正确的账号" duration:1.0 position:SHOW_CENTER complete:nil];
+    [self textFieldDidEndEditing:phoneText];
+    if(_flag == 0){
+        return;
+    }
+    if (phoneText.text.length != 11) {
+        [self.view makeToast:@"请输入正确的手机号" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
     if (parentPasswordText.text.length < 6){
@@ -127,12 +138,12 @@
                 //发送注册码按钮失效，防止频繁请求
                 [verifyBtn setEnabled:false];
             }else{
-                
+                NSLog(@"%@", result);
                 if ([result[@"msg"] isEqualToString:@"ratelimitted"]) {
                     [self.view makeToast:@"操作过快" duration:1.0 position:SHOW_CENTER complete:nil];
                 }else {
                 
-                    [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                    [self.view makeToast:@"此号码不存在" duration:1.0 position:SHOW_CENTER complete:nil];
                 
                 }
                 
@@ -183,7 +194,11 @@
                 if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                     [self regist];//注册
                 }else{
+                    if ([result[@"msg"] isEqualToString:@"ratelimitted"]) {
+                        [self.view makeToast:@"操作过快" duration:1.0 position:SHOW_CENTER complete:nil];
+                    }else{
                     [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                    }
                 }
             }else{
                 if (error.code == -1009) {
@@ -219,7 +234,11 @@
                 [YjyxOverallData sharedInstance].parentInfo = parentEntity;
                 [(AppDelegate *)SYS_DELEGATE fillViews];
             }else{
+                if ([result[@"msg"] isEqualToString:@"ratelimitted"]) {
+                    [self.view makeToast:@"操作过快" duration:1.0 position:SHOW_CENTER complete:nil];
+                }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                }
             }
         }else{
             [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];

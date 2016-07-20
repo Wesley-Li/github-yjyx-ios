@@ -66,8 +66,8 @@ static QuestionDataBase *singleton = nil;
 // 创建数据表
 - (void)creatQuestionTable {
 
-    BOOL isSuccess = [self.question_db executeUpdate:@"create table if not exists Question(id integer PRIMARY KEY AUTOINCREMENT, t_id text, content_text, person_type, p_id, level, subject_type, cellHeight, jumpType)"];
-    [self.question_db executeUpdate:@"create table if not exists Wrong(id integer PRIMARY KEY AUTOINCREMENT, w_id text, answer, content, total_wrong_num, questionid, level, questiontype, cellHeight, jumpType)"];
+    BOOL isSuccess = [self.question_db executeUpdate:@"create table if not exists Question(id integer PRIMARY KEY AUTOINCREMENT, t_id text, content_text, person_type, p_id, level, subject_type, cellHeight, jumpType, isRequirePro text)"];
+    [self.question_db executeUpdate:@"create table if not exists Wrong(id integer PRIMARY KEY AUTOINCREMENT, w_id text, answer, content, total_wrong_num, questionid, level, questiontype, cellHeight, jumpType, isRequirePro text)"];
     [self.question_db executeUpdate:@"create table if not exists Micro(id integer PRIMARY KEY AUTOINCREMENT, s_id text, content, level, questiontype,  jumpType)"];
     NSLog(@"%@", isSuccess ? @"试题表建立成功" : @"试题表建立失败");
 }
@@ -133,7 +133,10 @@ static QuestionDataBase *singleton = nil;
     NSString *level = [NSString stringWithFormat:@"%ld", (long)model.level];
     NSString *cellHeight = [NSString stringWithFormat:@"%f", model.cellHeight];
     NSString *jumpType = @"1";
-    BOOL isSuccess = [self.question_db executeUpdate:@"insert into Question(t_id, content_text, person_type, p_id, level, subject_type, cellHeight,jumpType) values(?,?,?,?,?,?,?,?)", t_id, model.content_text, person_type, p_id, level, model.subject_type, cellHeight, jumpType];
+    NSLog(@"%d", model.isRequireProcess);
+    NSString *isRequirePro = model.isRequireProcess == YES ? @"YES": @"NO";
+    
+    BOOL isSuccess = [self.question_db executeUpdate:@"insert into Question(t_id, content_text, person_type, p_id, level, subject_type, cellHeight,jumpType, isRequirePro) values(?,?,?,?,?,?,?,?,?)", t_id, model.content_text, person_type, p_id, level, model.subject_type, cellHeight, jumpType, isRequirePro];
     
     NSLog(@"%@", isSuccess ? @"添加试题成功" : @"添加试题失败");
 
@@ -152,7 +155,8 @@ static QuestionDataBase *singleton = nil;
     NSString *content = model.content;
     NSString *total_wrong_num =  model.total_wrong_num;
     NSString *jumpType = @"1";
-    BOOL isSuccess = [self.question_db executeUpdate:@"insert into Wrong(w_id, content, questiontype, questionid, level, cellHeight, answer, total_wrong_num, jumpType) values(?,?,?,?,?,?,?,?,?)", w_id, content, questiontype, questionid, level,  cellHeight, answer, total_wrong_num, jumpType];
+    NSString *isRequirePro = model.isRequireProcess == YES ? @"YES" : @"NO";
+    BOOL isSuccess = [self.question_db executeUpdate:@"insert into Wrong(w_id, content, questiontype, questionid, level, cellHeight, answer, total_wrong_num, jumpType, isRequirePro) values(?,?,?,?,?,?,?,?,?,?)", w_id, content, questiontype, questionid, level,  cellHeight, answer, total_wrong_num, jumpType, isRequirePro];
     
     NSLog(@"%@", isSuccess ? @"添加试题成功" : @"添加试题失败");
     
@@ -199,6 +203,7 @@ static QuestionDataBase *singleton = nil;
         NSString *subject_type = [set stringForColumn:@"subject_type"];
         NSString *cellHeight = [set stringForColumn:@"cellHeight"];
         NSString *jumpType = [set stringForColumn:@"jumpType"];
+        NSString *isRequireProcess = [set stringForColumn:@"isRequirePro"];
         NSLog(@"%@", jumpType);
         if(![jumpType isEqualToString:jumpT]){
             break;
@@ -212,7 +217,7 @@ static QuestionDataBase *singleton = nil;
         model.level = [level integerValue];
         model.subject_type = subject_type;
         model.cellHeight = [cellHeight floatValue];
-       
+        model.isRequireProcess = [isRequireProcess boolValue];
         
         [group addObject:model];
         
@@ -229,6 +234,7 @@ static QuestionDataBase *singleton = nil;
         NSString *answer = [set1 stringForColumn:@"answer"];
         NSString *total_wrong_num = [set1 stringForColumn:@"total_wrong_num"];
         NSString *jumpType = [set1 stringForColumn:@"jumpType"];
+        NSString *isRequireProcess = [set stringForColumn:@"isRequirePro"];
         if(![jumpType isEqualToString:jumpT]){
             break;
         }
@@ -242,7 +248,7 @@ static QuestionDataBase *singleton = nil;
         model.cellHeight = [cellHeight floatValue];
         model.answer = answer;
         model.total_wrong_num = total_wrong_num;
-
+        model.isRequireProcess = [isRequireProcess boolValue];
         [group addObject:model];
         
     }
@@ -256,6 +262,7 @@ static QuestionDataBase *singleton = nil;
         NSString *level = [set2 stringForColumn:@"level"];
         
         NSString *jumpType = [set2 stringForColumn:@"jumpType"];
+        
         if(![jumpType isEqualToString:jumpT]){
             break;
         }
@@ -294,6 +301,7 @@ static QuestionDataBase *singleton = nil;
         NSString *subject_type = [set stringForColumn:@"subject_type"];
         NSString *cellHeight = [set stringForColumn:@"cellHeight"];
         NSString *jumpType = [set stringForColumn:@"jumpType"];
+        NSString *requirePro = [set stringForColumn:@"isRequirePro"];
         if(![jumpType isEqualToString:jumpT]){
             break;
         }
@@ -306,7 +314,7 @@ static QuestionDataBase *singleton = nil;
         model.level = [level integerValue];
         model.subject_type = subject_type;
         model.cellHeight = [cellHeight floatValue];
-        
+        model.isRequireProcess = [requirePro boolValue];
         
         [group addObject:model];
         
@@ -322,6 +330,7 @@ static QuestionDataBase *singleton = nil;
         NSString *answer = [set1 stringForColumn:@"answer"];
         NSString *total_wrong_num = [set1 stringForColumn:@"total_wrong_num"];
         NSString *jumpType = [set1 stringForColumn:@"jumpType"];
+        NSString *requirePro = [set stringForColumn:@"isRequirePro"];
         if(![jumpType isEqualToString:jumpT]){
             break;
         }
@@ -335,7 +344,7 @@ static QuestionDataBase *singleton = nil;
         model.cellHeight = [cellHeight floatValue];
         model.answer = answer;
         model.total_wrong_num = total_wrong_num;
-        
+        model.isRequireProcess = [requirePro boolValue];
         [group addObject:model];
         
     }
@@ -387,6 +396,7 @@ static QuestionDataBase *singleton = nil;
         NSString *subject_type = [set stringForColumn:@"subject_type"];
         NSString *cellHeight = [set stringForColumn:@"cellHeight"];
         NSString *jumpType = [set stringForColumn:@"jumpType"];
+        NSString *requirePro = [set stringForColumn:@"isRequirePro"];
         if(![jumpType isEqualToString:jumpT]){
             break;
         }
@@ -399,7 +409,7 @@ static QuestionDataBase *singleton = nil;
         model.level = [level integerValue];
         model.subject_type = subject_type;
         model.cellHeight = [cellHeight floatValue];
-        
+        model.isRequireProcess = [requirePro boolValue];
         [group addObject:model];
         
     }
@@ -415,6 +425,7 @@ static QuestionDataBase *singleton = nil;
         NSString *answer = [set1 stringForColumn:@"answer"];
         NSString *jumpType = [set1 stringForColumn:@"jumpType"];
         NSString *total_wrong_num = [set1 stringForColumn:@"total_wrong_num"];
+        NSString *requirePro = [set stringForColumn:@"isRequirePro"];
         if(![jumpType isEqualToString:jumpT]){
             break;
         }
@@ -428,7 +439,7 @@ static QuestionDataBase *singleton = nil;
         model.cellHeight = [cellHeight floatValue];
         model.answer = answer;
         model.total_wrong_num = total_wrong_num;
-        
+        model.isRequireProcess = [requirePro boolValue];
         [group addObject:model];
         
     }

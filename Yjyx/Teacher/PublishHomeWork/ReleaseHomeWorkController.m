@@ -230,11 +230,11 @@ static NSString *ID = @"CELL";
     for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"1" andJumpType:@"1"]) {
         if ([model isKindOfClass:[ChaperContentItem class]]) {
             ChaperContentItem *tempModel = (ChaperContentItem *)model;
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", nil];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level",  @(tempModel.isRequireProcess), @"requireprocess", nil];
             [choiceArr addObject:dic];
         }else{
             YjyxWrongSubModel *tempModel = (YjyxWrongSubModel *)model;
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.questionid], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", nil];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.questionid], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", @(tempModel.isRequireProcess), @"requireprocess",nil];
             [choiceArr addObject:dic];
         }
        
@@ -245,11 +245,11 @@ static NSString *ID = @"CELL";
     for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"2" andJumpType:@"1"]) {
         if ([model isKindOfClass:[ChaperContentItem class]]) {
             ChaperContentItem *tempModel = (ChaperContentItem *)model;
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", nil];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", @(tempModel.isRequireProcess) ,@"requireprocess",nil];
             [blankfillArr addObject:dic];
         }else{
             YjyxWrongSubModel *tempModel = (YjyxWrongSubModel *)model;
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.questionid], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", nil];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.questionid], @"id", [NSNumber numberWithInteger: tempModel.level], @"level",@(tempModel.isRequireProcess) ,@"requireprocess",nil];
             [blankfillArr addObject:dic];
         }
     }
@@ -280,7 +280,20 @@ static NSString *ID = @"CELL";
 
     pamar[@"recipients"] = [pamarArr JSONString];
     pamar[@"name"] = self.homeWorkNameTextField.text;
-    pamar[@"desc"] = self.descriptionTextField.text;
+    
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = @"yyyy-MM-dd";
+    fmt.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    NSTimeZone *timeZone=[NSTimeZone systemTimeZone];
+    
+    NSInteger seconds=[timeZone secondsFromGMTForDate:[NSDate date]];
+    
+    NSDate *newDate=[[NSDate date] dateByAddingTimeInterval:seconds];
+    NSString *dateStr = [fmt stringFromDate:newDate];
+    
+    NSLog(@"%@--%@", [NSDate date], dateStr);
+    NSString *descStr = [NSString stringWithFormat:@"%@ 作业", dateStr];
+    pamar[@"desc"] = [self.descriptionTextField.text isEqualToString:@""] ? descStr : self.descriptionTextField.text;
     pamar[@"suggestspendtime"] = [self.timeTextField.text isEqualToString:@""] ? @"30" : self.timeTextField.text;
     pamar[@"questionlist"] = [self.questionList JSONString];
 

@@ -232,7 +232,20 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    NSLog(@"-----------");
+
+    // 上报消息设置
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"notify_setting",@"action",[YjyxOverallData sharedInstance].studentInfo.receive_notify,@"receive_notify",[YjyxOverallData sharedInstance].studentInfo.notify_with_sound,@"with_sound",[YjyxOverallData sharedInstance].studentInfo.notify_sound, @"sound",[YjyxOverallData sharedInstance].studentInfo.notify_shake,@"vibrate", nil];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+
+    [manager POST:[BaseURL stringByAppendingString:STUDENT_UPLOAD_SOUND_SETTING_CONNECT_POST] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+       
+        //        NSLog(@"%@", responseObject);
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+       
+        //        NSLog(@"%@", error);
+    }];
 }
 
 - (BOOL)application:(UIApplication *)application

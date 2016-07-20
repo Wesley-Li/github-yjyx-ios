@@ -33,6 +33,11 @@
 // 多少组
 @property (assign, nonatomic) NSInteger count;
 @property (strong, nonatomic) ReleaseMicroCell *videoCell;
+
+// 选择题个数
+@property (assign, nonatomic) NSInteger choicecount;
+// 填空题个数
+@property (assign, nonatomic) NSInteger blankcount;
 @end
 
 @implementation MicroDetailViewController
@@ -142,10 +147,30 @@ static NSString *TitleID = @"TitleCELL";
        
         for (NSDictionary *tempDict in responseObject[@"questions"][@"choice"][@"questionlist"]) {
             [self.allSubjectArr addObject:[MicroSubjectModel microSubjectModel:tempDict andType:1]];
+            self.choicecount++;
         }
         for (NSDictionary *tempDict in responseObject[@"questions"][@"blankfill"][@"questionlist"]) {
             [self.allSubjectArr addObject:[MicroSubjectModel microSubjectModel:tempDict andType:2]];
+            self.blankcount++;
         }
+        NSArray *currArr = [responseObject[@"lessonobj"][@"quizcontent"] JSONValue][@"questionList"];
+        NSInteger j = 0;
+        for (NSArray *arr in currArr) {
+            if ([arr[0] isEqualToString:@"choice"]) {
+                for (int i = 0; i < [arr[1] count]; i++) {
+                    MicroSubjectModel *model = self.allSubjectArr[i];
+                    model.isRequireProcess = [arr[1][i][@"requireprocess"] integerValue] == 1 ? YES : NO;
+                    j++;
+                }
+            }else{
+                for (int i = 0; i < [arr[1] count]; i++) {
+                    MicroSubjectModel *model = self.allSubjectArr[j];
+                    model.isRequireProcess = [arr[1][i][@"requireprocess"] integerValue] == 1 ? YES : NO;
+                    j++;
+                }
+            }
+        }
+       
         self.count = 4;
         // 设置footerView
         UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 80)];
@@ -193,12 +218,13 @@ static NSString *TitleID = @"TitleCELL";
             dict[@"id"] = model.s_id;
             
             dict[@"level"] = levelNum;
-           
+            dict[@"requireprocess"] = model.isRequireProcess ? @1 : @0;
             [choiceArr addObject:dict];
         }else{
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
             dict[@"id"] = model.s_id;
             dict[@"level"] = levelNum;
+            dict[@"requireprocess"] = model.isRequireProcess ? @1 : @0;
             [blankfillArr addObject:dict];
         }
             
@@ -221,6 +247,8 @@ static NSString *TitleID = @"TitleCELL";
     }
 
     pamar[@"questions"] = [pamarArr JSONString];
+    
+    pamar[@"name"] = _microDetailM.name;
     NSLog(@"%@", [pamarArr JSONString]);
     [mgr POST:[BaseURL stringByAppendingString:@"/api/teacher/mobile/lesson/"] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         [SVProgressHUD showSuccessWithStatus:@"修改内容成功"];
@@ -288,14 +316,30 @@ static NSString *TitleID = @"TitleCELL";
 }
 - (void)setAddMicroArr:(NSMutableArray *)addMicroArr
 {
+    if(self.choicecount + self.blankcount == addMicroArr.count){
+        return;
+    }
+    _microDetailM.isShouldProcess = NO;
     _addMicroArr = addMicroArr;
     NSMutableArray *choiceArr = [NSMutableArray array];
     NSMutableArray *blankfillArr = [NSMutableArray array];
+    NSInteger i = 0;
+    NSInteger j = 0;
     for (MicroSubjectModel *model in addMicroArr) {
         if(model.type == 1){
             [choiceArr addObject:model];
+            if(i < self.choicecount){
+                model.isRequireProcess = [self.allSubjectArr[i] isRequireProcess];
+                i++;
+            }
+            
         }else{
             [blankfillArr addObject:model];
+            if(j <  self.blankcount){
+                model.isRequireProcess = [self.allSubjectArr[self.choicecount + j] isRequireProcess];
+                j++;
+            }
+            
         }
         model.btnIsShow = YES;
     }
@@ -715,7 +759,7 @@ static NSString *TitleID = @"TitleCELL";
         return 70;
     }else if(indexPath.section == 3){
         if (indexPath.row == 0) {
-            return 30;
+            return 40;
         }else{
             CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
             
@@ -752,11 +796,31 @@ static NSString *TitleID = @"TitleCELL";
     }
     [self.tableView reloadData];
 }
+- (void)subjectTitleCell:(SubjectTitleCell *)cell requireProcessBtnClicked:(UIButton *)btn
+{
+    
+    if (btn.selected == YES) {
+        for (MicroSubjectModel *model in self.allSubjectArr) {
+            model.isRequireProcess = YES;
+        }
+    }else{
+        for (MicroSubjectModel *model in self.allSubjectArr) {
+            model.isRequireProcess = NO;
+        }
+    }
+    [self.tableView reloadData];
+}
 #pragma mark - SubjectDetailCell代理方法
 - (void)subjectDetailCell:(SubjectDetailCell *)cell deletedBtnClick:(UIButton *)btn
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     NSLog(@"%ld--%ld", indexPath.section, indexPath.row);
+    MicroSubjectModel *model = self.allSubjectArr[indexPath.row - 1];
+    if(model.type == 1){
+        self.choicecount--;
+    }else{
+        self.blankcount--;
+    }
     [self.allSubjectArr removeObjectAtIndex:(indexPath.row - 1)];
     NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:indexPath.section];
     [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -814,5 +878,12 @@ static NSString *TitleID = @"TitleCELL";
     NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:indexPath.section];
     [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
 }
-
+- (void)subjectDetailCell:(SubjectDetailCell *)cell requireProcessBtnClick:(UIButton *)btn
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    if (btn.selected == NO) {
+        _microDetailM.isShouldProcess = NO;
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
 @end

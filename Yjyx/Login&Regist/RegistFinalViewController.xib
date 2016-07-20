@@ -8,10 +8,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegistFinalViewController">
             <connections>
                 <outlet property="codeText" destination="hhl-oa-obl" id="ktK-74-xgo"/>
-                <outlet property="parentNameText" destination="fhd-uN-wdY" id="W1K-3s-tWN"/>
+                <outlet property="parentNameText" destination="HS8-0V-zTa" id="iMK-xO-qqZ"/>
                 <outlet property="parentPasswordText" destination="F0t-c3-x2a" id="9N9-Lc-Iva"/>
-                <outlet property="phoneText" destination="zdN-kg-v2j" id="Qay-YM-tkO"/>
-                <outlet property="relationText" destination="HS8-0V-zTa" id="8CF-n6-BCG"/>
+                <outlet property="phoneText" destination="fhd-uN-wdY" id="bDY-bj-ndT"/>
+                <outlet property="relationText" destination="zdN-kg-v2j" id="8KV-3c-KG7"/>
                 <outlet property="timeLb" destination="Tdv-li-uKk" id="F6c-nW-odc"/>
                 <outlet property="titleLb" destination="X4T-Nj-K4f" id="pvD-qo-JwD"/>
                 <outlet property="verifyBtn" destination="vN6-ii-EZD" id="UMc-PM-PvU"/>
@@ -92,15 +92,6 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号码(作为登录账户)" textAlignment="natural" minimumFontSize="17" id="zdN-kg-v2j">
-                            <rect key="frame" x="17" y="127" width="303" height="40"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="ywO-xU-KVg"/>
-                            </connections>
-                        </textField>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Ila-1B-bGL">
                             <rect key="frame" x="0.0" y="168" width="320" height="1"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -137,6 +128,15 @@
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号码(作为登录账户)" textAlignment="natural" minimumFontSize="17" id="zdN-kg-v2j">
+                            <rect key="frame" x="17" y="126" width="303" height="40"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="ywO-xU-KVg"/>
+                            </connections>
+                        </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>

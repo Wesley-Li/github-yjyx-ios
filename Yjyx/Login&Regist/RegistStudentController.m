@@ -98,6 +98,9 @@
                 
             }
             
+        }else{
+            textField.text = [textField.text substringToIndex:10];
+            [self.view makeToast:@"输入的长度不能大于10位" duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }else if ([textField isEqual:_pswTextField]){
         if (textField.text.length > 20){

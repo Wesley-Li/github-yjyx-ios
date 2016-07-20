@@ -13,6 +13,7 @@
 #import "ReleaseFinishTimeCell.h"
 #import "StuClassEntity.h"
 #import "StudentEntity.h"
+#import "StuTaskTableViewController.h"
 @interface ReleaseMicroController ()<UITableViewDelegate, UITableViewDataSource, ReleaseStudentCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -103,6 +104,10 @@ static NSString *StudentID = @"StudentCell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [SVProgressHUD dismiss];
+}
 #pragma mark - 私有方法
 - (void)loadData
 {
@@ -136,7 +141,19 @@ static NSString *StudentID = @"StudentCell";
     param[@"recipients"] = [pamarArr JSONString];
     param[@"tasktype"] = @"lesson";
     param[@"lessonid"] = self.w_id;
-    param[@"desc"] = self.descripStr;
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = @"yyyy-MM-dd";
+    fmt.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    NSTimeZone *timeZone=[NSTimeZone systemTimeZone];
+    
+    NSInteger seconds=[timeZone secondsFromGMTForDate:[NSDate date]];
+    
+    NSDate *newDate=[[NSDate date] dateByAddingTimeInterval:seconds];
+    NSString *dateStr = [fmt stringFromDate:newDate];
+    
+    NSLog(@"%@--%@", [NSDate date], dateStr);
+    NSString *descStr = [NSString stringWithFormat:@"%@ 微课", dateStr];
+    param[@"desc"] = [self.descripStr isEqualToString:@""] ? descStr : self.descripStr;
     param[@"suggestspendtime"] = [self.timeStr isEqualToString:@""] ? @"30" : self.timeStr;
 
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
@@ -145,9 +162,10 @@ static NSString *StudentID = @"StudentCell";
         NSLog(@"%@", responseObject[@"reason"]);
         if([responseObject[@"retcode"] isEqual:@0]){
             [SVProgressHUD showSuccessWithStatus:@"发布成功"];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [SVProgressHUD dismiss];
-            });
+            
+            // 跳转到学生作业列表
+            StuTaskTableViewController *stuTaskVC = [[StuTaskTableViewController alloc] init];
+            [self.navigationController pushViewController:stuTaskVC animated:YES];
         }else{
             [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
         }
@@ -229,7 +247,7 @@ static NSString *StudentID = @"StudentCell";
     }
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
-#pragma mrak - ReleaseStudentCell代理方法
+#pragma mark - ReleaseStudentCell代理方法
 - (void)releaseStudentCell:(ReleaseStudentCell *)cell allBtnSelectedClicked:(UIButton *)btn
 {
     NSIndexPath *indexpath = [self.tableView indexPathForCell:cell];
@@ -243,5 +261,13 @@ static NSString *StudentID = @"StudentCell";
         [self.tableView reloadData];
   
 }
-
+- (void)releaseStudentCell:(ReleaseStudentCell *)cell isSelectedClicked:(UIButton *)btn
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    if (btn.selected == NO) {
+        ReleaseStudentCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:indexPath.section]];
+        cell.classEntity.isSelect = NO;
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
 @end

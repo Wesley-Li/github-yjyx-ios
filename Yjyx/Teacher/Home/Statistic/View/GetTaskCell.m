@@ -26,11 +26,14 @@
 }
 
 
-- (void)setValueWithModel:(GetTaskModel *)model {
+- (void)setValueWithModel:(GetTaskModel *)model andtip:(NSInteger)tip{
 
     self.deliverLabel.text = model.delivertime;
     self.endlineLabel.text = [NSString stringWithFormat:@"截止时间:%@", model.finishtime];
     self.descriptionLabel.text = model.descriptionText;
+    if (tip == 1) {
+        self.endlineLabel.hidden = YES;
+    }
     
     
 }

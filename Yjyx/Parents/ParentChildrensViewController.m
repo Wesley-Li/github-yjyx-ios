@@ -121,7 +121,7 @@
 {
     UIButton *btn = (UIButton *)sender;
     ChildrenEntity *children = [_childrenAry objectAtIndex:btn.tag];
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"是否确定删除%@",children.name] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"是否确定删除%@?",children.name] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [alert show];
     objc_setAssociatedObject(alert, "deleteChildren", [NSString stringWithFormat:@"%ld",(long)btn.tag], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }

@@ -13,6 +13,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *trailingConstant;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
+// 包含添加题目及需要过程的按钮
+@property (weak, nonatomic) IBOutlet UIView *addBtnView;
+@property (weak, nonatomic) IBOutlet UIButton *requireProcessBtn;
 @end
 @implementation SubjectTitleCell
 
@@ -25,36 +28,28 @@
     _model = model;
     if (model.isSelected) {
         self.editBtn.selected = YES;
+        self.addBtnView.hidden = NO;
     }else{
         self.editBtn.selected = NO;
+        self.addBtnView.hidden = YES;
     }
-    if (self.editBtn.selected) {
-        self.trailingConstant.constant = 56;
-        self.addBtn.hidden = NO;
-    }else{
-        self.trailingConstant.constant = 8;
-        self.addBtn.hidden = YES;
+    
+    self.requireProcessBtn.selected = model.isShouldProcess;
+ 
+ 
+}
+- (IBAction)requireProcessBtnClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    _model.isShouldProcess = sender.selected;
+    if([self.delegate respondsToSelector:@selector(subjectTitleCell:requireProcessBtnClicked:)]){
+        [self.delegate subjectTitleCell:self requireProcessBtnClicked:sender];
     }
 }
 
 - (IBAction)editBtnClick:(UIButton *)sender {
     sender.selected = !sender.selected;
     _model.isSelected = sender.selected;
-    if(sender.selected){
-        [self.contentView layoutIfNeeded];
-        [UIView animateWithDuration:5.0 animations:^{
-            self.trailingConstant.constant = 56;
-            [self.contentView layoutIfNeeded];
-        }];
-        self.addBtn.hidden = NO;
-    }else{
-        [self.contentView layoutIfNeeded];
-        [UIView animateWithDuration:5.0 animations:^{
-            self.trailingConstant.constant = 8;
-            [self.contentView layoutIfNeeded];
-        }];
-        self.addBtn.hidden = YES;
-    }
+   
     if([self.delegate respondsToSelector:@selector(subjectTitleCell:editBtnClicked:)]){
         [self.delegate subjectTitleCell:self editBtnClicked:sender];
     }

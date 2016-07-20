@@ -13,8 +13,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *questionNumberLabel;
 @property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 @property (nonatomic, assign) CGFloat height;
-//@property (nonatomic, strong) ChaperContentItem *model;
 
+@property (nonatomic, strong) ChaperContentItem *chaperItem; //  知识点出题
+@property (nonatomic, strong) YjyxWrongSubModel *wrongModel; // 错题题目
 
 - (void)setValueWithModel:(ChaperContentItem *)model;
 

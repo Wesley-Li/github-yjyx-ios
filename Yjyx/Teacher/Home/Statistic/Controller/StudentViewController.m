@@ -32,6 +32,7 @@
 
 @property (strong, nonatomic) NSMutableDictionary *dic;
 
+@property (nonatomic, strong) NSMutableArray *gradeArr;
 @end
 
 @implementation StudentViewController
@@ -99,7 +100,7 @@
         [self.classStuArr addObject:tempArr];
     }
     
-    
+    self.gradeArr = [[[YjyxOverallData sharedInstance].teacherInfo.school_classes JSONValue] mutableCopy];
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ClassCustomTableViewCell class]) bundle:nil] forCellReuseIdentifier:iD];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -122,8 +123,26 @@
 
     
     CustomSectionView *view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([CustomSectionView class]) owner:nil options:nil] firstObject];
+    
     StuClassEntity *model = self.classArr[section];
-    view.titleLabel.text = model.name;
+    NSLog(@"%@, %@", model.gradeid, model.cid);
+    if ([model.name containsString:@"年级"]) {
+        view.titleLabel.text = model.name;
+        
+    }else {
+        
+        for (NSArray *arr in _gradeArr) {
+            if ([model.gradeid isEqual:arr[2]]) {
+                NSString *titleString = [NSString stringWithFormat:@"%@%@", arr[3], model.name];
+                view.titleLabel.text = titleString;
+                
+            }
+            
+        }
+        
+    }
+
+//    view.titleLabel.text = model.name;
     view.section = section;
     view.expandBtn.selected = [[self.dic objectForKey:[NSString stringWithFormat:@"%ld", view.section]] boolValue];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(showMoreStudent:)];

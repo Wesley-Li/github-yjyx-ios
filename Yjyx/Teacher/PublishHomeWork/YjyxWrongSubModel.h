@@ -33,6 +33,7 @@
 // cell的高度
 @property (assign, nonatomic) CGFloat cellHeight;
 
+@property (nonatomic, assign) BOOL isRequireProcess; // 是否需要过程
 
 + (instancetype)wrongSubjectModelWithDict:(NSDictionary *)dict;
 @end

@@ -27,10 +27,15 @@
 
 
 
-// 包装上下移及删除按钮的view
+// 需要过程及删除按钮的view
 @property (weak, nonatomic) IBOutlet UIView *btnSetView;
 // 上部分view
 @property (weak, nonatomic) IBOutlet UIView *topView;
+// 包含上下移的view
+@property (weak, nonatomic) IBOutlet UIView *upDownView;
+
+@property (weak, nonatomic) IBOutlet UIButton *requireProcessBtn;
+
 @end
 @implementation SubjectDetailCell
 
@@ -51,11 +56,19 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [self.topView addGestureRecognizer:tap];
 }
+- (IBAction)requireProcessBtnClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    _model.isRequireProcess = sender.selected;
+    if ([self.delegate respondsToSelector:@selector(subjectDetailCell:requireProcessBtnClick:)]) {
+        [self.delegate subjectDetailCell:self requireProcessBtnClick:sender];
+    }
+}
 - (void)tap{}
 
 - (void)setModel:(MicroSubjectModel *)model
 {
     _model = model;
+    self.requireProcessBtn.selected = model.isRequireProcess;
     self.subjectTypeLabel.text = model.type == 1 ? @"选择题" : @"填空题";
     self.levelLabel.text = model.level;
     
@@ -76,8 +89,10 @@
 
     if (model.btnIsShow) {
         self.btnSetView.hidden = NO ;
+        self.upDownView.hidden = NO;
     }else{
         self.btnSetView.hidden = YES;
+        self.upDownView.hidden = YES;
     }
 
 }
@@ -102,7 +117,7 @@
     
     frame.size.height = webView.scrollView.contentSize.height;
     webView.frame = frame;
-    self.height = frame.size.height + 80;
+    self.height = frame.size.height + 80 + 40;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"webviewHeight" object:self userInfo:nil];
     
 }

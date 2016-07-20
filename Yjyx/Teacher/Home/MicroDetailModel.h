@@ -24,5 +24,8 @@
 @property (strong, nonatomic) NSArray *questionList;
 // 编辑按钮是否是选中状态
 @property (assign, nonatomic) BOOL isSelected;
+
+// 全部需要解题步骤
+@property (assign, nonatomic) BOOL isShouldProcess;
 + (instancetype)microDetailModelWithDict:(NSDictionary *)dict;
 @end

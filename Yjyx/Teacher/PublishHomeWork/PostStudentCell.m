@@ -35,6 +35,11 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"FirstCellClicked" object:nil userInfo:@{@"BtnIsSelect" : sender, @"ClickIsSection": path}];
     }else{
         self.studentModel.isSelect = !self.studentModel.isSelect;
+        if(self.studentModel.isSelect == NO){
+          PostStudentCell *cell1 =[((UITableView *)self.superview.superview) cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:path.section]];
+            cell1.stuClassModel.isSelect = NO;
+            [((UITableView *)self.superview.superview) reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:path.section]] withRowAnimation:UITableViewRowAnimationNone];
+        }
     }
     
 }

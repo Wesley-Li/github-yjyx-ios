@@ -221,12 +221,26 @@
     
 }
 
-
+- (void)dealloc{
+    NSLog(@"-----------");
+}
 
 
 - (void)loginOut {
     
     NSLog(@"退出登录");
+    // 上报消息设置
+    NSDictionary *dic1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"notify_setting",@"action",[YjyxOverallData sharedInstance].studentInfo.receive_notify,@"receive_notify",[YjyxOverallData sharedInstance].studentInfo.notify_with_sound,@"with_sound",[YjyxOverallData sharedInstance].studentInfo.notify_sound, @"sound",[YjyxOverallData sharedInstance].studentInfo.notify_shake,@"vibrate", nil];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager POST:[BaseURL stringByAppendingString:STUDENT_UPLOAD_SOUND_SETTING_CONNECT_POST] parameters:dic1 success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        //        NSLog(@"%@", responseObject);
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+        //        NSLog(@"%@", error);
+    }];
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:[YjyxOverallData sharedInstance].parentInfo.pid,@"pid", nil];
     [self.view makeToastActivity:SHOW_CENTER];
     LoginViewController *loginVC = [[LoginViewController alloc] init];

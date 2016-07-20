@@ -11,7 +11,7 @@
 @protocol SubjectTitleCellDelegate <NSObject>
 
 - (void)subjectTitleCell:(SubjectTitleCell *)cell editBtnClicked:(UIButton *)btn;
-
+- (void)subjectTitleCell:(SubjectTitleCell *)cell requireProcessBtnClicked:(UIButton *)btn;
 @end
 @interface SubjectTitleCell : UITableViewCell
 

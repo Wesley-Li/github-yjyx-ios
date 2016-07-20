@@ -28,9 +28,10 @@
     self.selectBtn.hidden = NO;
     self.leadConstant.constant = 0;
     self.selectBtn.selected = classEntity.isSelect ? YES : NO;
+    NSLog(@"%d", classEntity.isExpanded);
     self.isShowBtn.selected = classEntity.isExpanded ? YES : NO;
-    [self.isShowBtn setImage:[UIImage imageNamed:@"list_icon_2"] forState:UIControlStateNormal];
-    [self.isShowBtn setImage:[UIImage imageNamed:@"list_icon_2展开"] forState:UIControlStateSelected];
+//    [self.isShowBtn setImage:[UIImage imageNamed:@"list_icon_2"] forState:UIControlStateNormal];
+//    [self.isShowBtn setImage:[UIImage imageNamed:@"list_icon_2展开"] forState:UIControlStateSelected];
     self.isShowBtn.userInteractionEnabled = NO;
     self.classOrStudentLabel.text = classEntity.name;
 }
