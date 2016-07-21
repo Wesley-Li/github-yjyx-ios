@@ -18,11 +18,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *rightAnswerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 @property (weak, nonatomic) IBOutlet UIButton *collectBtn;
-@property (weak, nonatomic) IBOutlet UIButton *loadMoreBtn;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomHeightConstant;
 
-@property (weak, nonatomic) IBOutlet UILabel *moreAnswerLabel;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *loadmoreTrailConstant;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *answerBottomHeight;
+
+
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UIView *webBgview;
 
@@ -35,8 +37,9 @@
     _bgView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _bgView.layer.borderWidth = 1;
     
-    
     self.collectBtn.hidden = YES;
+    
+    self.loadmoreTrailConstant.constant = self.collectBtn.hidden ? 10 : 30;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewClick)];
     [self.bottomView addGestureRecognizer:tap];
@@ -89,23 +92,27 @@
     }
     // 判断是否是填空题
     if([wrongSubModel.answer containsString:@"①"]){
-        self.loadMoreBtn.hidden = NO;
         NSArray *arr = [wrongSubModel.answer componentsSeparatedByString:@"\n"];
         self.rightAnswerLabel.text = arr[0];
-        NSMutableArray *tempArr = [NSMutableArray arrayWithArray:arr];
-        [tempArr removeObjectAtIndex:0];
-        NSString *tempStr = [tempArr componentsJoinedByString:@"\n"];
-        self.moreAnswerLabel.text = tempStr;
+        if (arr.count > 1) {
+            self.loadMoreBtn.hidden = NO;
+        }else {
+            self.loadMoreBtn.hidden = YES;
+        }
         
-    }else{
+        
+    }else {
+    
         self.loadMoreBtn.hidden = YES;
     }
-    if (_wrongSubModel.isLoadMore) {
-        self.bottomHeightConstant.constant = 49 + wrongSubModel.pullHeight;
-        self.moreAnswerLabel.hidden = NO;
+    
+    if (_loadMoreBtn.selected) {
+        
+        self.rightAnswerLabel.text = wrongSubModel.answer;
     }else{
-        self.bottomHeightConstant.constant = 49;
-        self.moreAnswerLabel.hidden = YES;
+        NSArray *arr = [wrongSubModel.answer componentsSeparatedByString:@"\n"];
+        self.rightAnswerLabel.text = arr[0];
+        
     }
 }
 
@@ -129,7 +136,10 @@
     
     frame.size.height = webView.scrollView.contentSize.height;
     webView.frame = frame;
-    self.height = frame.size.height + 80 + self.bottomHeightConstant.constant;
+    
+    CGFloat rightAswerHeight = [self.rightAnswerLabel.text boundingRectWithSize:CGSizeMake(self.rightAnswerLabel.width, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.rightAnswerLabel.font, NSFontAttributeName, nil] context:nil].size.height;
+    
+    self.height = frame.size.height + 50 + rightAswerHeight + 15;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"WrongSubjectCellHeight" object:self userInfo:nil];
     
 }
@@ -173,10 +183,6 @@
     }
     
 }
-- (IBAction)loadMoreBtnClick:(UIButton *)sender {
-    sender.selected = !sender.selected;
-    _wrongSubModel.isLoadMore = sender.selected;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMoreIsClicked" object:nil];
-}
+
 
 @end

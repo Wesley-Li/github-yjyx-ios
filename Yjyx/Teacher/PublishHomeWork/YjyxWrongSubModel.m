@@ -51,7 +51,13 @@
     
     model.content = dict[@"content"];
     model.t_id = [dict[@"id"] integerValue];
-    model.level = [dict[@"level"] integerValue];
+    if ([dict[@"level"] isEqual:[NSNull null]]) {
+        model.level = nil;
+    }else {
+    
+        model.level = [dict[@"level"] integerValue];
+
+    }
     model.questionid = [dict[@"questionid"] integerValue];
     model.questiontype = [dict[@"questiontype"] integerValue];
     model.total_wrong_num = [NSString stringWithFormat:@"%@次", dict[@"total_wrong_num"]];

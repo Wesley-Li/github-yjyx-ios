@@ -540,6 +540,12 @@
 		80D979111D36352B000BD95E /* TeacherDrawViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D9790F1D36352B000BD95E /* TeacherDrawViewController.xib */; };
 		80D979151D388271000BD95E /* YjyxDrawlineInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D979141D388271000BD95E /* YjyxDrawlineInfo.m */; };
 		80D979181D3882AE000BD95E /* YjyxDrawLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D979171D3882AE000BD95E /* YjyxDrawLine.m */; };
+		80D9791C1D3DBC41000BD95E /* VoiceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D9791A1D3DBC41000BD95E /* VoiceListCell.m */; };
+		80D9791D1D3DBC41000BD95E /* VoiceListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D9791B1D3DBC41000BD95E /* VoiceListCell.xib */; };
+		80D9792D1D3F0A32000BD95E /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 80D979211D3F0A32000BD95E /* amrFileCodec.mm */; };
+		80D9792E1D3F0A32000BD95E /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D979231D3F0A32000BD95E /* libopencore-amrnb.a */; };
+		80D9792F1D3F0A32000BD95E /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D979241D3F0A32000BD95E /* libopencore-amrwb.a */; };
+		80D979301D3F0A32000BD95E /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 80D9792C1D3F0A32000BD95E /* VoiceConverter.mm */; };
 		80F718C01CF28961007C0B75 /* StuConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BB1CF28961007C0B75 /* StuConditionCell.m */; };
 		80F718C11CF28961007C0B75 /* StuConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80F718BC1CF28961007C0B75 /* StuConditionCell.xib */; };
 		80F718C21CF28961007C0B75 /* SubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BE1CF28961007C0B75 /* SubmitCell.m */; };
@@ -1451,6 +1457,19 @@
 		80D979141D388271000BD95E /* YjyxDrawlineInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxDrawlineInfo.m; sourceTree = "<group>"; };
 		80D979161D3882AE000BD95E /* YjyxDrawLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxDrawLine.h; sourceTree = "<group>"; };
 		80D979171D3882AE000BD95E /* YjyxDrawLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxDrawLine.m; sourceTree = "<group>"; };
+		80D979191D3DBC41000BD95E /* VoiceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceListCell.h; sourceTree = "<group>"; };
+		80D9791A1D3DBC41000BD95E /* VoiceListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceListCell.m; sourceTree = "<group>"; };
+		80D9791B1D3DBC41000BD95E /* VoiceListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoiceListCell.xib; sourceTree = "<group>"; };
+		80D979201D3F0A32000BD95E /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
+		80D979211D3F0A32000BD95E /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
+		80D979231D3F0A32000BD95E /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
+		80D979241D3F0A32000BD95E /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
+		80D979261D3F0A32000BD95E /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
+		80D979271D3F0A32000BD95E /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
+		80D979291D3F0A32000BD95E /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
+		80D9792A1D3F0A32000BD95E /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
+		80D9792B1D3F0A32000BD95E /* VoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceConverter.h; sourceTree = "<group>"; };
+		80D9792C1D3F0A32000BD95E /* VoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VoiceConverter.mm; sourceTree = "<group>"; };
 		80F718BA1CF28961007C0B75 /* StuConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuConditionCell.h; sourceTree = "<group>"; };
 		80F718BB1CF28961007C0B75 /* StuConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuConditionCell.m; sourceTree = "<group>"; };
 		80F718BC1CF28961007C0B75 /* StuConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StuConditionCell.xib; sourceTree = "<group>"; };
@@ -1510,6 +1529,7 @@
 				3AA1655F1C91AE73006B8756 /* libicucore.A.tbd in Frameworks */,
 				3AF27E4B1C7349C500698673 /* AssetsLibrary.framework in Frameworks */,
 				3AF27E491C73493300698673 /* CoreMedia.framework in Frameworks */,
+				80D9792E1D3F0A32000BD95E /* libopencore-amrnb.a in Frameworks */,
 				3ADD4BD61C7409D100F0210C /* libUMessage_Sdk_1.2.6.a in Frameworks */,
 				3AF27E471C73492900698673 /* CoreVideo.framework in Frameworks */,
 				3AF27E451C73491A00698673 /* CoreTelephony.framework in Frameworks */,
@@ -1522,6 +1542,7 @@
 				3A44A91F1CBD0F5000348B49 /* AlipaySDK.framework in Frameworks */,
 				3AEF27391C61F1230028BE09 /* SystemConfiguration.framework in Frameworks */,
 				3AEF27371C61F11B0028BE09 /* AddressBook.framework in Frameworks */,
+				80D9792F1D3F0A32000BD95E /* libopencore-amrwb.a in Frameworks */,
 				7D453D9CA19A8B9493453E33 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2011,6 +2032,7 @@
 		3AEF26DB1C61F08A0028BE09 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				80D9791E1D3F0A32000BD95E /* VoiceConvert */,
 				80D979121D388212000BD95E /* ImageDrawing */,
 				80D979091D2E21A5000BD95E /* iCarousel */,
 				3BD9C7EF1CEEAC93008232D7 /* QiniuHelper */,
@@ -2420,6 +2442,9 @@
 				3B91A6F41CE6010D0082A92C /* YourAnswerCell.h */,
 				3B91A6F51CE6010D0082A92C /* YourAnswerCell.m */,
 				3B91A6F61CE6010D0082A92C /* YourAnswerCell.xib */,
+				80D979191D3DBC41000BD95E /* VoiceListCell.h */,
+				80D9791A1D3DBC41000BD95E /* VoiceListCell.m */,
+				80D9791B1D3DBC41000BD95E /* VoiceListCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3114,6 +3139,55 @@
 			path = ImageDrawing;
 			sourceTree = "<group>";
 		};
+		80D9791E1D3F0A32000BD95E /* VoiceConvert */ = {
+			isa = PBXGroup;
+			children = (
+				80D9791F1D3F0A32000BD95E /* amrwapper */,
+				80D979221D3F0A32000BD95E /* lib */,
+				80D979251D3F0A32000BD95E /* opencore-amrnb */,
+				80D979281D3F0A32000BD95E /* opencore-amrwb */,
+				80D9792B1D3F0A32000BD95E /* VoiceConverter.h */,
+				80D9792C1D3F0A32000BD95E /* VoiceConverter.mm */,
+			);
+			path = VoiceConvert;
+			sourceTree = "<group>";
+		};
+		80D9791F1D3F0A32000BD95E /* amrwapper */ = {
+			isa = PBXGroup;
+			children = (
+				80D979201D3F0A32000BD95E /* amrFileCodec.h */,
+				80D979211D3F0A32000BD95E /* amrFileCodec.mm */,
+			);
+			path = amrwapper;
+			sourceTree = "<group>";
+		};
+		80D979221D3F0A32000BD95E /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				80D979231D3F0A32000BD95E /* libopencore-amrnb.a */,
+				80D979241D3F0A32000BD95E /* libopencore-amrwb.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		80D979251D3F0A32000BD95E /* opencore-amrnb */ = {
+			isa = PBXGroup;
+			children = (
+				80D979261D3F0A32000BD95E /* interf_dec.h */,
+				80D979271D3F0A32000BD95E /* interf_enc.h */,
+			);
+			path = "opencore-amrnb";
+			sourceTree = "<group>";
+		};
+		80D979281D3F0A32000BD95E /* opencore-amrwb */ = {
+			isa = PBXGroup;
+			children = (
+				80D979291D3F0A32000BD95E /* dec_if.h */,
+				80D9792A1D3F0A32000BD95E /* if_rom.h */,
+			);
+			path = "opencore-amrwb";
+			sourceTree = "<group>";
+		};
 		80FEB6621D1B77BA009EB126 /* Statistic */ = {
 			isa = PBXGroup;
 			children = (
@@ -3317,6 +3391,7 @@
 				3CFE92751D337C4B004DE4A8 /* YjyxDraftView.xib in Resources */,
 				3A41974E1CD36178006BD7D2 /* common_delete@2x.png in Resources */,
 				3A8827771C6EE1470008367F /* ParentCommunityViewController.xib in Resources */,
+				80D9791D1D3DBC41000BD95E /* VoiceListCell.xib in Resources */,
 				3CE18E9F1D2121EE007E0874 /* ReleaseFinishTimeCell.xib in Resources */,
 				3FF740621CE3090500D3C0F7 /* list_btn_shutdown@3x.png in Resources */,
 				3BB773A41CD8781400A24485 /* SmartViewController.xib in Resources */,
@@ -3783,6 +3858,7 @@
 				801F44A71CDF164800B7E7E1 /* base64.m in Sources */,
 				80CCF43F1CF2F0EC000C93D9 /* UnSubmitCell.m in Sources */,
 				3A188F9A1CE5C51600F055DD /* OrderTableViewCell.m in Sources */,
+				80D979301D3F0A32000BD95E /* VoiceConverter.mm in Sources */,
 				3AEF27271C61F08A0028BE09 /* UIImageEffects.m in Sources */,
 				3CA04CDC1D17CDD30054A05D /* WrongSubjectController.m in Sources */,
 				3AD1FD931C72BD8F00E362B9 /* MyChildrenTableViewCell.m in Sources */,
@@ -3806,6 +3882,7 @@
 				80D979001D2CC928000BD95E /* YjyxStuWrongListModel.m in Sources */,
 				3A88277C1C6EE1820008367F /* ParentPersonalViewController.m in Sources */,
 				3CECA4B81D2CF4E20039DCB6 /* YjyxStuAnswerModel.m in Sources */,
+				80D9791C1D3DBC41000BD95E /* VoiceListCell.m in Sources */,
 				3CD2F1741D27A3C70031AF2E /* YjyxChangeSoundViewController.m in Sources */,
 				3CEA95A21D30973500F4773D /* YjyxDoingWorkModel.m in Sources */,
 				3A04A5D11C93E6290040D913 /* NSArray+MASAdditions.m in Sources */,
@@ -3884,6 +3961,7 @@
 				3CD7E45A1D2B593800769FDE /* UIScrollView+MJRefresh.m in Sources */,
 				3CF541D81D1CFD09000EBAB5 /* MyMicroModel.m in Sources */,
 				3A88276F1C6EE0DE0008367F /* ParentHomeViewController.m in Sources */,
+				80D9792D1D3F0A32000BD95E /* amrFileCodec.mm in Sources */,
 				3CA04D001D180EBD0054A05D /* ReleaseExplanationCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4035,6 +4113,7 @@
 					"$(PROJECT_DIR)/Yjyx",
 					"$(PROJECT_DIR)/Yjyx/Alipay",
 					"$(SRCROOT)/Yjyx/Alipay/AliSDK/openssl",
+					"$(PROJECT_DIR)/Yjyx/Utils/VoiceConvert/lib",
 				);
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
@@ -4087,6 +4166,7 @@
 					"$(PROJECT_DIR)/Yjyx",
 					"$(PROJECT_DIR)/Yjyx/Alipay",
 					"$(SRCROOT)/Yjyx/Alipay/AliSDK/openssl",
+					"$(PROJECT_DIR)/Yjyx/Utils/VoiceConvert/lib",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";

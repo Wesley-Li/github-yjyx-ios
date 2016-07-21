@@ -11,10 +11,14 @@
 @interface YjyxDrawLine : UIView
 
 //所有的线条信息，包含了颜色，坐标和粗细信息
-@property(nonatomic,strong) NSMutableArray  *allMyDrawPaletteLineInfos;
+@property (nonatomic,strong) NSMutableArray  *allMyDrawPaletteLineInfos;
+// 信息暂存
+@property (nonatomic, strong) NSMutableArray *tempInfos;
 //从外部传递的 笔刷长度和宽度，在包含画板的VC中 要是颜色、粗细有所改变 都应该将对应的值传进来
 @property (nonatomic,strong)UIColor *currentPaintBrushColor;
 @property (nonatomic)float currentPaintBrushWidth;
+
++ (YjyxDrawLine *)defaultLine;
 
 //外部调用的清空画板和撤销上一步
 - (void)cleanAllDrawBySelf;// 清空画板
