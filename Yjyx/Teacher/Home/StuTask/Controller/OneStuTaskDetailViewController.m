@@ -302,6 +302,12 @@
     
 
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     if (isPlay) {
@@ -690,10 +696,12 @@
 - (void)handlePushClick:(UITapGestureRecognizer *)sender {
 
     UIImageView *view = (UIImageView *)sender.view;
+    NSLog(@"%@", _dic);
     NSArray *processArr = [_dic[@"summary"][4] objectForKey:@"writeprocess"];
     NSString *imgURL = [processArr[view.tag - 200] objectForKey:@"img"];
     TeacherDrawViewController *drawVC = [[TeacherDrawViewController alloc] init];
     drawVC.imgURL = imgURL;
+    drawVC.voiceArr = [[processArr[view.tag - 200] objectForKey:@"teachervoice"] mutableCopy];
     [self.navigationController pushViewController:drawVC animated:YES];
     
 }

@@ -12,6 +12,6 @@
 // 错题模型
 @property (strong, nonatomic) YjyxWrongSubModel *wrongSubModel;
 @property (assign, nonatomic) CGFloat height;
-
+@property (weak, nonatomic) IBOutlet UIButton *loadMoreBtn;
 @property (assign, nonatomic) NSInteger flag;
 @end

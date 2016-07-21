@@ -16,6 +16,8 @@
 #import "QuestionPreviewController.h"
 #import "MicroDetailViewController.h"
 @interface WrongSubjectController ()<UITableViewDelegate, UITableViewDataSource>
+
+
 @property (weak, nonatomic) IBOutlet UILabel *promptLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *selectedBtn;
@@ -23,6 +25,7 @@
 @property (strong, nonatomic) NSMutableArray *wrongSubjectArr;
 @property (strong, nonatomic) NSMutableArray *questionArr;
 @property (strong, nonatomic) NSMutableDictionary *cellHeightDic;
+@property (strong, nonatomic) NSMutableDictionary *expandDic;// 保存是否展开信息
 // 返回数据的最大个数
 @property (assign, nonatomic) NSInteger count;
 // 判断还有没有数据
@@ -33,7 +36,7 @@
 @end
 
 @implementation WrongSubjectController
-static NSString *ID = @"cell";
+static NSString *ID = @"WrongSubjectCell";
 #pragma mark - 懒加载
 - (NSMutableArray *)wrongSubjectArr
 {
@@ -45,6 +48,8 @@ static NSString *ID = @"cell";
 #pragma mark - view的生命周期方法
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     // 重写导航栏的返回按钮
     [self loadBackBtn];
     // 加载错题数据
@@ -62,10 +67,10 @@ static NSString *ID = @"cell";
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, -49, 0);
     self.cellHeightDic = [NSMutableDictionary dictionary];
+    self.expandDic = [NSMutableDictionary dictionary];
     // 注册通知 接收添加按钮的点击
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btnIsSelected) name:@"BUTTON_IS_SELEND" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btnNoSelected) name:@"BUTTON_NO_SELEND" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMoreBtnSelected) name:@"LoadMoreIsClicked" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeightChange:) name:@"WrongSubjectCellHeight" object:nil];
     // 集成下拉刷新控件
     [self loadRefresh];
@@ -185,10 +190,7 @@ static NSString *ID = @"cell";
     [self.selectedBtn setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", tempArr.count] forState:UIControlStateNormal];
   }
 }
-- (void)loadMoreBtnSelected
-{
-    [self.tableView reloadData];
-}
+
 - (IBAction)selectedBtnClick:(UIButton *)sender {
     NSMutableArray *arr = [NSMutableArray array];
     if(_flag == 1){
@@ -222,12 +224,36 @@ static NSString *ID = @"cell";
     WrongSubjectCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.tag = indexPath.row;
+    cell.loadMoreBtn.tag = indexPath.row + 200;
+    NSString *expand = [self.expandDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]];
+    if (expand == nil) {
+        cell.loadMoreBtn.selected = NO;
+    }else {
     
+        cell.loadMoreBtn.selected = [expand boolValue];
+    }
+    
+    [cell.loadMoreBtn addTarget:self action:@selector(loadMore:) forControlEvents:UIControlEventTouchUpInside];
     YjyxWrongSubModel *model = self.wrongSubjectArr[indexPath.row];
     cell.flag = _flag;
     cell.wrongSubModel = model;
     
     return cell;
+}
+
+- (void)loadMore:(UIButton *)sender {
+
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        [self.expandDic setObject:@"YES" forKey:[NSString stringWithFormat:@"%ld", sender.tag - 200]];
+    }else {
+        
+        [self.expandDic setObject:@"NO" forKey:[NSString stringWithFormat:@"%ld", sender.tag - 200]];
+    }
+    
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:sender.tag - 200 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+
+    
 }
 
 - (void)cellHeightChange:(NSNotification *)sender {

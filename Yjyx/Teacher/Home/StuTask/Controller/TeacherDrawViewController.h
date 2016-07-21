@@ -11,5 +11,6 @@
 @interface TeacherDrawViewController : UIViewController
 
 @property (nonatomic, copy) NSString *imgURL;
+@property (strong, nonatomic) NSMutableArray *voiceArr;
 
 @end

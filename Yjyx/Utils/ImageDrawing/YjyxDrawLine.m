@@ -12,17 +12,38 @@
 @implementation YjyxDrawLine
 
 #pragma mark - init
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        _allMyDrawPaletteLineInfos = [[NSMutableArray alloc] initWithCapacity:10];
-        self.currentPaintBrushColor = [UIColor blackColor];
-        self.backgroundColor = [UIColor clearColor];
-        self.currentPaintBrushWidth =  4.f;
-    }
-    return self;
+static YjyxDrawLine *drawLine = nil;
++ (YjyxDrawLine *)defaultLine {
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        drawLine = [[YjyxDrawLine alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 49)];
+        
+        drawLine.allMyDrawPaletteLineInfos = [[NSMutableArray alloc] initWithCapacity:10];
+        drawLine.tempInfos = [NSMutableArray array];
+        drawLine.currentPaintBrushColor = [UIColor blackColor];
+        drawLine.backgroundColor = [UIColor clearColor];
+        drawLine.currentPaintBrushWidth = 2.f;
+
+    });
     
+    return drawLine;
+
 }
+
+
+//- (id)initWithFrame:(CGRect)frame {
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        _allMyDrawPaletteLineInfos = [[NSMutableArray alloc] initWithCapacity:10];
+//        _tempInfos = [NSMutableArray array];
+//        self.currentPaintBrushColor = [UIColor blackColor];
+//        self.backgroundColor = [UIColor clearColor];
+//        self.currentPaintBrushWidth = 3.f;
+//    }
+//    return self;
+//    
+//}
 
 #pragma  mark - draw event
 //根据现有的线条 绘制相应的图画
@@ -74,6 +95,7 @@
     [lastInfo.linePoints addObject:[NSValue valueWithCGPoint:mPoint]];
 }
 
+// 清空
 - (void)cleanAllDrawBySelf {
     if ([self.allMyDrawPaletteLineInfos count]>0)  {
         [self.allMyDrawPaletteLineInfos removeAllObjects];
@@ -81,12 +103,25 @@
     }
 }
 
+// 撤销上一步
 - (void)cleanFinallyDraw {
     if ([self.allMyDrawPaletteLineInfos count]>0) {
+        [self.tempInfos addObject:self.allMyDrawPaletteLineInfos.lastObject];
         [self.allMyDrawPaletteLineInfos  removeLastObject];
     }
     [self setNeedsDisplay];
 }
+
+// 恢复上一步
+- (void)recoverFinalDraw {
+
+    if ([self.tempInfos count] > 0) {
+        [self.allMyDrawPaletteLineInfos addObject:self.tempInfos.lastObject];
+        [self.tempInfos removeLastObject];
+    }
+    [self setNeedsDisplay];
+}
+
 
 #pragma mark - touch event
 //触摸开始
