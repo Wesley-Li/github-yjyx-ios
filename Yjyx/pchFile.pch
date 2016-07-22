@@ -155,6 +155,9 @@
 // 某次任务中某个学生的概况
 #define TEACHER_DETAIL_ACTION_CONNECT_GET @"/api/teacher/mobile/task/"
 
+// 批注
+#define TEACHER_ANOTITATION_POST @"/api/teacher/mobile/task/"
+
 // 发布作业时显示章节目录
 #define TEACHER_POST_CHAPTER_CONNECT_GET @"/api/teacher/vgsv/"
 // 发布作业

@@ -63,6 +63,10 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    // 申请网络
+    [self readDataFromNetWork];
+
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
     
     //旋转屏幕通知
@@ -269,8 +273,7 @@
     // 初始状态
     isSmallScreen = NO;
     
-    // 申请网络
-    [self readDataFromNetWork];
+    
     
     // 注册cell
     
@@ -295,7 +298,6 @@
     // cell高度通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCellHeight:) name:@"CellHeightChange" object:nil];
     
-    
     self.view.backgroundColor = RGBACOLOR(239, 239, 244,1);
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -303,8 +305,11 @@
 
 }
 
+
+
 - (void)viewDidAppear:(BOOL)animated {
 
+    
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 
@@ -697,11 +702,23 @@
 
     UIImageView *view = (UIImageView *)sender.view;
     NSLog(@"%@", _dic);
-    NSArray *processArr = [_dic[@"summary"][4] objectForKey:@"writeprocess"];
-    NSString *imgURL = [processArr[view.tag - 200] objectForKey:@"img"];
+    
     TeacherDrawViewController *drawVC = [[TeacherDrawViewController alloc] init];
-    drawVC.imgURL = imgURL;
-    drawVC.voiceArr = [[processArr[view.tag - 200] objectForKey:@"teachervoice"] mutableCopy];
+    drawVC.processArr = [[_dic[@"summary"][4] objectForKey:@"writeprocess"] mutableCopy];
+    drawVC.imageIndex = view.tag - 200;
+    drawVC.dic = [self.dic mutableCopy];
+    drawVC.taskid = self.taskid;
+    drawVC.suid = self.suid;
+    drawVC.qid = self.qid;
+    if ([self.qtype isEqual:@1]) {
+        drawVC.qtype = @"choice";
+    }else {
+    
+        drawVC.qtype = @"blankfill";
+        
+    }
+    drawVC.stuName = self.title;
+    
     [self.navigationController pushViewController:drawVC animated:YES];
     
 }

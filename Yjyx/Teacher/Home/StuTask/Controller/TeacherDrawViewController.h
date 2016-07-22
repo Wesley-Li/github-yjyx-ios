@@ -10,7 +10,16 @@
 
 @interface TeacherDrawViewController : UIViewController
 
-@property (nonatomic, copy) NSString *imgURL;
-@property (strong, nonatomic) NSMutableArray *voiceArr;
+
+
+@property (strong, nonatomic) NSNumber *taskid;
+@property (strong, nonatomic) NSNumber *suid;
+@property (copy, nonatomic) NSString *qtype;
+@property (strong, nonatomic) NSNumber *qid;
+
+@property (strong, nonatomic) NSMutableDictionary *dic;
+@property (assign, nonatomic) NSInteger imageIndex;
+@property (strong, nonatomic) NSMutableArray *processArr;
+@property (copy, nonatomic) NSString *stuName;
 
 @end

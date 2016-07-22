@@ -609,11 +609,13 @@
     if (wmPlayer) {
         [wmPlayer removeFromSuperview];
         wmPlayer.backBtn.hidden = YES;
+        
         [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
         [wmPlayer setVideoURLStr:[_dic[@"question"] objectForKey:@"videourl"]];
         [wmPlayer.player play];
     }else{
         wmPlayer = [[WMPlayer alloc]initWithFrame:self.videoCell.backgroundIV.bounds videoURLStr:[_dic[@"question"] objectForKey:@"videourl"]];
+
         wmPlayer.backBtn.hidden = YES;
         
     }

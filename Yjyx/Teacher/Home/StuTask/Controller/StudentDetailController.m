@@ -266,7 +266,7 @@
     NSInteger num = 7;
     
     CGFloat tWidth = (cell.contentView.frame.size.width - padding *(num + 1)) / num;
-    CGFloat tHeigh = tWidth + 20;
+    CGFloat tHeigh = tWidth + 20 + tWidth/2;
     
     //      NSLog(@"%@", self.choiceArr);
     
@@ -280,8 +280,6 @@
         
         if (cell.contentView.width - size.width <= 0) {
             
-            NSLog(@"%f-----%f", cell.contentView.width - size.width, tWidth + padding);
-            
             // 换行
             size.width = 10;
             if (array.count - i > 1) {
@@ -292,12 +290,11 @@
         
         //        taskView.backgroundColor = [UIColor redColor];
         TaskConditonModel *model = array[i];
+        // 题号
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tWidth, 20)];
-        
+        // 对错按钮
         UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        
         imageBtn.frame = CGRectMake(0, 20, tWidth, tWidth);
-        
         
         if ([model.rightOrWrong isEqual:@0]) {
             [imageBtn setImage:[UIImage imageNamed:@"list_btn_wrong"] forState:UIControlStateNormal];
@@ -313,6 +310,22 @@
         label.text = [NSString stringWithFormat:@"%d", i + 1];
         label.textAlignment = NSTextAlignmentCenter;
         label.font = [UIFont systemFontOfSize:12];
+        
+        // 批注标识
+        if (model.voiceShow) {
+            UIImageView *voiceImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"voice_icon"]];
+            voiceImage.frame = CGRectMake(0, 20 + tWidth, tWidth/2, tWidth/2);
+            [taskView addSubview:voiceImage];
+        }
+        
+        if (model.imgShow) {
+            UIImageView *imgImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image_icon"]];
+            imgImage.frame = CGRectMake(tWidth/2, 20 + tWidth, tWidth/2, tWidth/2);
+            [taskView addSubview:imgImage];
+
+        }
+        
+        
         
         [taskView addSubview:label];
         [taskView addSubview:imageBtn];
@@ -356,7 +369,7 @@
     NSInteger num = 7;
     
     CGFloat tWidth = (cell.contentView.width - padding *(num + 1)) / num;
-    CGFloat tHeigh = tWidth + 20;
+    CGFloat tHeigh = tWidth + 20 + tWidth/2;
     
     //      NSLog(@"%@", self.choiceArr);
     
@@ -397,6 +410,21 @@
         label.text = [NSString stringWithFormat:@"%d", i + 1];
         label.textAlignment = NSTextAlignmentCenter;
         label.font = [UIFont systemFontOfSize:12];
+        
+        // 批注标识
+        if (model.voiceShow) {
+            UIImageView *voiceImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"voice_icon"]];
+            voiceImage.frame = CGRectMake(0, 20 + tWidth, tWidth/2, tWidth/2);
+            [taskView addSubview:voiceImage];
+        }
+        
+        if (model.imgShow) {
+            UIImageView *imgImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"image_icon"]];
+            imgImage.frame = CGRectMake(tWidth/2, 20 + tWidth, tWidth/2, tWidth/2);
+            [taskView addSubview:imgImage];
+            
+        }
+
         
         [taskView addSubview:label];
         [taskView addSubview:imageBtn];

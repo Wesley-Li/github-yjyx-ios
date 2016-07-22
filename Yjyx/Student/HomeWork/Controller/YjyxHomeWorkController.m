@@ -79,6 +79,8 @@ static NSString *DETAILID = @"detailID";
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    // 自动刷新
+//    [self.workTableV headerBeginRefreshing];
     self.navigationController.navigationBarHidden = NO;
     [self.workTableV reloadData];
     [self.wrongWorkTableV reloadData];
@@ -116,6 +118,7 @@ static NSString *DETAILID = @"detailID";
     scrollV.bounces = NO;
     // 添加作业tableView
     UITableView *workTableV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, scrollV.height) style:UITableViewStylePlain];
+    
     self.workTableV = workTableV;
 //    self.workTableV.backgroundColor = [UIColor lightGrayColor];
     workTableV.delegate = self;

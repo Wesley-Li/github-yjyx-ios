@@ -49,7 +49,7 @@
     
     // 如果有作业过程
     CGFloat imageBGHeight;
-    if ([dic[@"summary"] count] == 5) {
+    if ([dic[@"summary"] count] == 5 && [[dic[@"summary"][4] objectForKey:@"writeprocess"] count] != 0) {
         
         for (UIView *view in [self.imageBGView subviews]) {
             [view removeFromSuperview];
@@ -81,7 +81,7 @@
             if ([[processArr[i] objectForKey:@"teachervoice"] count] > 0) {
                 
                 UIImageView *voiceView = [[UIImageView alloc] init];
-                voiceView.width = imageview.width / 3;
+                voiceView.width = imageview.width / 2;
                 voiceView.height = voiceView.width;
                 voiceView.center = imageview.center;
                 voiceView.image = [UIImage imageNamed:@"voice_icon"];
@@ -89,6 +89,9 @@
                 // 角标
                 UILabel *numLabel = [[UILabel alloc] initWithFrame:CGRectMake(voiceView.width - 15, 0, 15, 15)];
                 numLabel.backgroundColor = [UIColor redColor];
+                numLabel.layer.cornerRadius = 7.5;
+                numLabel.layer.masksToBounds = YES;
+                numLabel.textAlignment = NSTextAlignmentCenter;
                 numLabel.textColor = [UIColor whiteColor];
                 numLabel.text = [NSString stringWithFormat:@"%ld", [[processArr[i] objectForKey:@"teachervoice"] count]];
                 [voiceView addSubview:numLabel];
@@ -112,6 +115,9 @@
 
         
         
+    }else {
+    
+        imageBGHeight = 0;
     }
     
     self.height = 70 + imageBGHeight + myAnswerHeight;
@@ -132,7 +138,7 @@
     
     // 如果有作业过程
     CGFloat imageBGHeight;
-    if ([dic[@"summary"] count] == 5) {
+    if ([dic[@"summary"] count] == 5 && [[dic[@"summary"][4] objectForKey:@"writeprocess"] count] != 0) {
         
         for (UIView *view in [self.imageBGView subviews]) {
             [view removeFromSuperview];
@@ -164,13 +170,16 @@
             if ([[processArr[i] objectForKey:@"teachervoice"] count] > 0) {
                 
                 UIImageView *voiceView = [[UIImageView alloc] init];
-                voiceView.width = imageview.width / 3;
+                voiceView.width = imageview.width / 2;
                 voiceView.height = voiceView.width;
                 voiceView.center = imageview.center;
                 voiceView.image = [UIImage imageNamed:@"voice_icon"];
                 [imageview addSubview:voiceView];
                 // 角标
                 UILabel *numLabel = [[UILabel alloc] initWithFrame:CGRectMake(voiceView.width - 15, 0, 15, 15)];
+                numLabel.layer.cornerRadius = 7.5;
+                numLabel.layer.masksToBounds = YES;
+                numLabel.textAlignment = NSTextAlignmentCenter;
                 numLabel.backgroundColor = [UIColor redColor];
                 numLabel.textColor = [UIColor whiteColor];
                 numLabel.text = [NSString stringWithFormat:@"%ld", [[processArr[i] objectForKey:@"teachervoice"] count]];
@@ -196,7 +205,11 @@
         
         
         
+    }else {
+        
+        imageBGHeight = 0;
     }
+
 
     
     self.height = myAnswerHeight + 40 + 10 + imageBGHeight;

@@ -15,6 +15,8 @@
 @property (nonatomic, strong) NSArray *answerArr;// 答案数组
 @property (nonatomic, assign) NSNumber *rightOrWrong;// 对错
 @property (nonatomic, strong) NSNumber *time;// 用时
+@property (nonatomic, assign) BOOL voiceShow;
+@property (nonatomic, assign) BOOL imgShow;
 
 
 - (void)initModelWithArray:(NSArray *)arr;
