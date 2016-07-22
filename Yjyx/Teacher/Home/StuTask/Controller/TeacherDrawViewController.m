@@ -10,6 +10,7 @@
 #import "YjyxDrawLine.h"
 #import "VoiceListCell.h"
 #import "VoiceConverter.h"
+#import "OneStuTaskDetailViewController.h"
 
 
 @import AVFoundation;
@@ -20,10 +21,12 @@
     BOOL isExpand;
     NSDate *startDate;
     NSDate *endDate;
-    
+    NSInteger currentIndex;
 
 }
 
+@property (nonatomic, copy) NSString *imgURL;
+@property (strong, nonatomic) NSMutableArray *voiceArr;
 @property (weak, nonatomic) IBOutlet UITableView *voiceList;
 
 @property (weak, nonatomic) IBOutlet UIButton *voiceBtn;
@@ -40,6 +43,7 @@
 @property (strong, nonatomic) AVPlayer *player;
 @property (strong, nonatomic) NSString *recordFileName;
 @property (strong, nonatomic) NSString *recordFilePath;
+@property (strong, nonatomic) NSString *playFilePath;
 
 
 @end
@@ -58,10 +62,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self configureNavBar];
+    self.imgURL = [self.processArr[_imageIndex] objectForKey:@"img"];
+    self.voiceArr = [[self.processArr[_imageIndex] objectForKey:@"teachervoice"] mutableCopy];
+    
     if (self.voiceArr.count == 0) {
         self.voiceImage.hidden = YES;
         self.voiceNumLabel.hidden = YES;
+    }else {
+    
+        self.voiceNumLabel.text = [NSString stringWithFormat:@"%ld", self.voiceArr.count];
     }
+    
     
     self.voiceImage.userInteractionEnabled = YES;
     self.voiceNumLabel.layer.cornerRadius = 7.5;
@@ -69,6 +81,7 @@
     self.voiceNumLabel.userInteractionEnabled = NO;
     self.voiceBtn.layer.cornerRadius = 41;
     self.voiceBtn.layer.masksToBounds = YES;
+    self.imageview.userInteractionEnabled = NO;
     [self.imageview setImageWithURL:[NSURL URLWithString:_imgURL]];
     
     YjyxDrawLine *lineView = [YjyxDrawLine defaultLine];
@@ -91,12 +104,47 @@
     self.voiceList.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.voiceList.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    // 注册播放完成通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    
     
 }
+
+- (void)configureNavBar {
+
+    UIButton *goBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    goBackBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
+    [goBackBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [goBackBtn setImage:[UIImage imageNamed:@"nav_btn_back"] forState:UIControlStateNormal];
+    [goBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:goBackBtn];
+    self.navigationItem.leftBarButtonItem = leftBtnItem;
+    self.navigationItem.title = [NSString stringWithFormat:@"%@(%ld/%ld)", self.stuName, self.imageIndex + 1, self.processArr.count];
+    
+
+}
+
+- (void)goBack {
+
+    // 清空audio文件
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *filePath = [directory stringByAppendingPathComponent:@"audio"];
+    NSError *error = nil;
+    if([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error]) {
+        NSLog(@"清除音频文件成功");
+    } else {
+        NSLog(@"error=%@", error);
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
 
 // 点击声音按钮
 - (void)handleTap:(UITapGestureRecognizer *)sender {
 
+    self.imageview.userInteractionEnabled = NO;
     self.voiceNumLabel.hidden = YES;
     self.voiceImage.hidden = YES;
     [self.view bringSubviewToFront:self.voiceList];
@@ -107,10 +155,16 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
 
-    
-    self.voiceImage.hidden = NO;
-    self.voiceNumLabel.hidden = NO;
-    [self.view sendSubviewToBack:self.voiceList];
+    if (self.voiceArr.count == 0) {
+        self.voiceImage.hidden = YES;
+        self.voiceNumLabel.hidden = YES;
+    }else {
+        
+        self.voiceImage.hidden = NO;
+        self.voiceNumLabel.hidden = NO;
+        self.imageview.userInteractionEnabled = YES;
+        [self.view sendSubviewToBack:self.voiceList];
+    }
     
 
 }
@@ -144,6 +198,7 @@
     self.bluePenBtn.selected = YES;
     self.yellowPenBtn.selected = NO;
     self.redPenBtn.selected = NO;
+    self.imageview.userInteractionEnabled = YES;
     [YjyxDrawLine defaultLine].currentPaintBrushColor = [UIColor blueColor];
     
 }
@@ -153,6 +208,7 @@
     self.bluePenBtn.selected = NO;
     self.yellowPenBtn.selected = YES;
     self.redPenBtn.selected = NO;
+    self.imageview.userInteractionEnabled = YES;
     [YjyxDrawLine defaultLine].currentPaintBrushColor = [UIColor yellowColor];
 }
 
@@ -161,6 +217,7 @@
     self.bluePenBtn.selected = NO;
     self.yellowPenBtn.selected = NO;
     self.redPenBtn.selected = YES;
+    self.imageview.userInteractionEnabled = YES;
     [YjyxDrawLine defaultLine].currentPaintBrushColor = [UIColor redColor];
 }
 
@@ -211,6 +268,7 @@
     self.recordFileName = [TeacherDrawViewController getCurrentTimeString];
     // 获取路径
     self.recordFilePath = [TeacherDrawViewController getPathByFilename:_recordFileName ofType:@"wav"];
+    NSLog(@"%@", self.recordFilePath);
     // 初始化录音
     self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL URLWithString:_recordFilePath] settings:[VoiceConverter GetAudioRecorderSettingDict] error:nil];
     
@@ -224,20 +282,22 @@
     
 }
 
-// 录音结束
+#pragma mark - 录音结束
 - (void)speakEnd:(UIButton *)sender {
 
     // 停止录音
     [self.recorder stop];
     self.recorder = nil;
+    [self.animationImage stopAnimating];
+    self.animationImage.hidden = YES;
     // 转换格式
     endDate = [NSDate date];
     NSString *amrPath = [TeacherDrawViewController getPathByFilename:_recordFileName ofType:@"amr"];
-    NSString *wavPath = [TeacherDrawViewController getPathByFilename:_recordFileName ofType:@"wav"];
-    int result = [VoiceConverter ConvertWavToAmr:wavPath amrSavePath:amrPath];
+//    NSString *wavPath = [TeacherDrawViewController getPathByFilename:_recordFileName ofType:@"wav"];
+    int result = [VoiceConverter ConvertWavToAmr:_recordFilePath amrSavePath:amrPath];
     NSLog(@"%@", result == 1 ? @"格式转换成功" : @"格式转换失败");
     
-    // 上传七牛云
+    // 音频上传七牛云
     
     NSData *data = [NSData dataWithContentsOfFile:amrPath];
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
@@ -259,7 +319,7 @@
     
 }
 
-// 上传七牛云
+// 音频上传七牛云
 - (void)upfileToQiniu:(NSString *)upToken data:(NSData *)data {
 
     QNUploadManager *upManager = [[QNUploadManager alloc] init];
@@ -272,29 +332,111 @@
             
             // 发通知
             [[NSNotificationCenter defaultCenter] postNotificationName:@"voiceNumShow" object:self userInfo:nil];
-            [self.animationImage stopAnimating];
-            self.animationImage.hidden = YES;
+            
+        }else{
+            [self.view hideToastActivity];
+            [self.view makeToast:[info.error description] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+    } option:nil];   
+
+}
+
+
+#pragma mark - 存储
+- (void)saveImageAct:(id)sender {
+    // 生成图片
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(SCREEN_WIDTH, self.imageview.frame.size.height), YES, 1.0);
+    [self.imageview.layer renderInContext:UIGraphicsGetCurrentContext()];
+    __block UIImage *uiImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    self.imageview.image=uiImage;
+    self.imageview.userInteractionEnabled = NO;
+    
+    // 判断图片是否做了编辑
+    if ([YjyxDrawLine defaultLine].allMyDrawPaletteLineInfos.count != 0) {
+        // 图片有改动
+        // 图片上传七牛云
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        [manager GET:[BaseURL stringByAppendingString:TEACHER_PIC_SETTING_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+            
+            NSString *upToken = responseObject[@"uptoken"];
+            [self uploadImageToQiniu:upToken image:uiImage];
+            
+            
+            
+        } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+            NSLog(@"%@", error);
+        }];
+
+    }else {
+        // 图片没有改动
+        // 直接上传服务器
+        [self uploadAnonitionToSever:self.imgURL];
+        
+    }
+    
+    
+    
+    
+}
+
+// 图片上传七牛云
+- (void)uploadImageToQiniu:(NSString *)token image:(UIImage *)image {
+    
+    NSData *data = UIImageJPEGRepresentation(image, 0.4);
+    QNUploadManager *upManager = [[QNUploadManager alloc] init];
+    [upManager putData:data key:nil token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resq){
+        if (info.error == nil) {
+            NSString *imgUrl = [NSString stringWithFormat:@"%@%@",QiniuYunURL,[resq objectForKey:@"key"]];
+            // 将图片,声音上传服务器
+            [self uploadAnonitionToSever:imgUrl];
+            
         }else{
             [self.view hideToastActivity];
             [self.view makeToast:[info.error description] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     } option:nil];
 
-}
-
-
-// 保存
-- (void)saveImageAct:(id)sender {
-    
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(SCREEN_WIDTH, self.imageview.frame.size.height), YES, 1.0);
-    [self.imageview.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *uiImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    self.imageview.image=uiImage;
-    self.imageview.userInteractionEnabled = NO;
     
 }
+
+// 将批注信息上传服务器
+- (void)uploadAnonitionToSever:(NSString *)imgUrl {
+
+    [SVProgressHUD showWithStatus:@"正在为您保存"];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:imgUrl, @"img", self.voiceArr, @"teachervoice", nil];
+    
+    [self.processArr replaceObjectAtIndex:self.imageIndex withObject:dict];
+    NSDictionary *parm = [NSDictionary dictionaryWithObjectsAndKeys:@"commentquestionprocess", @"action", self.taskid, @"taskid", self.suid, @"suid", self.qtype, @"qtype", self.qid, @"qid", [self.processArr JSONString], @"writeprocess", nil];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:[BaseURL stringByAppendingString:TEACHER_ANOTITATION_POST] parameters:parm success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        NSLog(@"%@", responseObject);
+        
+        if ([responseObject[@"retcode"] isEqual:@0]) {
+            [SVProgressHUD showSuccessWithStatus:@"保存成功"];
+            [SVProgressHUD dismissWithDelay:1.5];
+            
+        }else {
+            [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@", responseObject[@"reason"]]];
+        
+        }
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+        [SVProgressHUD showErrorWithStatus:@"保存失败,请检查网络"];
+        [SVProgressHUD dismissWithDelay:1];
+        
+    }];
+    
+    
+}
+
 
 
 #pragma mark - tableview delegate
@@ -321,19 +463,101 @@
     cell.numLabel.text = [NSString stringWithFormat:@"%ld.", indexPath.row + 1];
     cell.timeLabel.text = [NSString stringWithFormat:@"%.f''",[[self.voiceArr[indexPath.row] objectForKey:@"time"] floatValue]];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(voiceShow:)];
+    [cell.voiceDelete addTarget:self action:@selector(deleteTheVoice:) forControlEvents:UIControlEventTouchUpInside];
     [cell.voiceView addGestureRecognizer:tap];
     cell.voiceView.tag = indexPath.row + 200;
+    cell.animationImage.tag = indexPath.row + 300;
+    cell.voiceDelete.tag = indexPath.row + 400;
+    
     
     return cell;
 }
 
+#pragma mark - 删除单个音频
+- (void)deleteTheVoice:(UIButton *)sender {
+
+    [self.voiceArr removeObjectAtIndex:sender.tag - 400];
+    [self.voiceList reloadData];
+}
+
+#pragma mark - 音频播放
 // 音频播放
 - (void)voiceShow:(UITapGestureRecognizer *)sender {
 
     VoiceListCell *cell = (VoiceListCell *)sender.view.superview.superview;
-    [cell.animationImage startAnimating];
+    NSURL *url = [NSURL URLWithString:[_voiceArr[sender.view.tag - 200] objectForKey:@"url"]];
+    [self changeAMRtoWAVbyUrl:url];
+    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:nil];
+    [[AVAudioSession sharedInstance] setActive:YES error:nil];
+
+    AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:self.playFilePath]];
+
     NSLog(@"%@", self.voiceArr);
     
+    if (self.player) {
+        if (currentIndex == sender.view.tag - 200) {
+            [_player pause];
+            [cell.animationImage stopAnimating];
+            _player = nil;
+        }else {
+        
+            [_player pause];
+            currentIndex = sender.view.tag - 200;
+            UIImageView *imageview = (UIImageView *)[self.view viewWithTag:currentIndex + 300];
+            [imageview stopAnimating];
+            [_player play];
+            currentIndex = sender.view.tag - 200;
+            [cell.animationImage startAnimating];
+
+        }
+    }else {
+    
+        self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+        [_player play];
+        [cell.animationImage startAnimating];
+        currentIndex = sender.view.tag - 200;
+    }
+    
+}
+
+// 播放结束,自动播放下一句
+- (void)playDidEnd:(NSNotification *)sender {
+
+    if (currentIndex < self.voiceArr.count - 1) {
+        currentIndex++;
+        UIImageView *imageview = (UIImageView *)[self.view viewWithTag:currentIndex - 1 + 300];
+        [imageview stopAnimating];
+        [_player pause];
+        NSURL *url = [NSURL URLWithString:[_voiceArr[currentIndex] objectForKey:@"url"]];
+        [self changeAMRtoWAVbyUrl:url];
+        AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:self.playFilePath]];
+        [_player replaceCurrentItemWithPlayerItem:playerItem];
+        [_player play];
+        UIImageView *imageview2 = (UIImageView *)[self.view viewWithTag:currentIndex + 300];
+        [imageview2 startAnimating];
+
+        
+    }else {
+    
+        [self.view makeToast:@"最后一句已经播放完毕" duration:1.0 position:SHOW_CENTER complete:nil];
+        UIImageView *imageview = (UIImageView *)[self.view viewWithTag:currentIndex + 300];
+        [imageview stopAnimating];
+
+    }
+    
+    
+    
+}
+
+// 获取amr音频并转码
+- (void)changeAMRtoWAVbyUrl:(NSURL *)url {
+
+    NSData *audioData = [NSData dataWithContentsOfURL:url];
+    NSString *amrPath = [TeacherDrawViewController getPathByFilename:[TeacherDrawViewController getCurrentTimeString] ofType:@"amr"];
+    [audioData writeToFile:amrPath atomically:YES];
+    self.playFilePath = [TeacherDrawViewController getPathByFilename:[TeacherDrawViewController getCurrentTimeString] ofType:@"wav"];
+    int result = [VoiceConverter ConvertAmrToWav:amrPath wavSavePath:_playFilePath];
+    NSLog(@"%@", result == 1 ? @"格式转换成功" : @"格式转换失败");
     
 }
 
@@ -350,8 +574,13 @@
 #pragma mark - 生成文件路径
 + (NSString *)getPathByFilename:(NSString *)fileName ofType:(NSString *)type {
 
+    // 创建audio文件夹
     NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *filePath = [[[directory stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:type] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *audioPath = [NSString stringWithFormat:@"%@/audio", directory];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:audioPath]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:audioPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    NSString *filePath = [[[audioPath stringByAppendingPathComponent: fileName] stringByAppendingPathExtension:type] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     return filePath;
 }
 

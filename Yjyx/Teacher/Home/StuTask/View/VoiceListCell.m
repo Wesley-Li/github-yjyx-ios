@@ -17,6 +17,8 @@
     self.voiceView.layer.cornerRadius = 6;
     self.voiceView.layer.masksToBounds = YES;
     
+    self.animationImage.image = [UIImage imageNamed:@"voice-4"];
+    
     // 播放音频动画
     self.animationImage.animationImages = @[[UIImage imageNamed:@"voice-2"],[UIImage imageNamed:@"voice-3"],[UIImage imageNamed:@"voice-1"],[UIImage imageNamed:@"voice-4"]];
     [self.animationImage setAnimationRepeatCount:0];
