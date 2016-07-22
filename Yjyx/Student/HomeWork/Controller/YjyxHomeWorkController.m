@@ -80,6 +80,8 @@ static NSString *DETAILID = @"detailID";
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = NO;
+    [self.workTableV reloadData];
+    [self.wrongWorkTableV reloadData];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -206,7 +206,7 @@
             [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }];
-    }else{
+    }else{ // 学生端
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"purchase",@"action", self.productEntity.productID,@"productid", ppiIndex,@"ppi",nil];
         [[YjxService sharedInstance] purchaseStudentProduct:dic withBlock:^(id result, NSError *error){
             [self.view hideToastActivity];

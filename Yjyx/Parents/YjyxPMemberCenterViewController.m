@@ -125,14 +125,21 @@
 
 - (void)initView
 {
-    CGFloat height = SCREEN_WIDTH/3 -20 ;
+    CGFloat margin = 15;
+    CGFloat height = (SCREEN_WIDTH - margin * 4)/3  ;
+    UIScrollView *scrollV = [[UIScrollView alloc] init];
+    scrollV.frame = CGRectMake(0, SCREEN_WIDTH*179/320, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - SCREEN_WIDTH*179/320);
+    [self.view addSubview:scrollV];
+    scrollV.showsVerticalScrollIndicator = NO;
+    scrollV.showsHorizontalScrollIndicator = NO;
+    scrollV.contentSize = CGSizeMake(SCREEN_WIDTH ,margin + (height + 25) * (productAry.count / 3));
     for (int i=0; i < [productAry count]; i++) {
         ProductEntity *entity = [productAry objectAtIndex:i];
-        UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(10+i*(SCREEN_WIDTH/3), SCREEN_WIDTH*179/320 + 20, height, height + 25)];
+        UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake( margin +(margin+ height)*(i % 3) , margin + (margin + (height + 25)) * (i / 3), height, height + 25)];
         [image setImageWithURL:[NSURL URLWithString:entity.img] placeholderImage:[UIImage imageNamed:@"member_kexue"]];
         image.tag = i;
-        [self.view addSubview:image];
-        
+        [scrollV addSubview:image];
+        NSLog(@"%@", NSStringFromCGRect(image.frame));
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(subjectSelect:)];
         image.userInteractionEnabled = YES;
         [image addGestureRecognizer:tap];

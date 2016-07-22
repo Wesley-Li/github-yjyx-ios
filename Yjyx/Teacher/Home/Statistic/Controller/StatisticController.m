@@ -26,9 +26,9 @@
 
     self.navigationController.navigationBarHidden = NO;
     
-    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = NO;
-    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
-    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = NO;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
+    ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
 
 }
 

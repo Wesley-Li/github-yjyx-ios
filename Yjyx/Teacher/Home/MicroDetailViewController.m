@@ -38,6 +38,8 @@
 @property (assign, nonatomic) NSInteger choicecount;
 // 填空题个数
 @property (assign, nonatomic) NSInteger blankcount;
+
+@property (assign, nonatomic) NSInteger flag;
 @end
 
 @implementation MicroDetailViewController
@@ -114,11 +116,13 @@ static NSString *TitleID = @"TitleCELL";
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil
      ];
+    [self.tableView reloadData];
 }
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
     [self releaseWMPlayer];
+    isPlay = NO;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -156,17 +160,31 @@ static NSString *TitleID = @"TitleCELL";
         NSArray *currArr = [responseObject[@"lessonobj"][@"quizcontent"] JSONValue][@"questionList"];
         NSInteger j = 0;
         for (NSArray *arr in currArr) {
+            if(arr.count == 0){
+                continue;
+            }
             if ([arr[0] isEqualToString:@"choice"]) {
                 for (int i = 0; i < [arr[1] count]; i++) {
+                    if(i >= self.allSubjectArr.count){
+                        continue;
+                    }
+                    
                     MicroSubjectModel *model = self.allSubjectArr[i];
+                    if([arr[1][i][@"id"] isEqual:model.s_id]){
                     model.isRequireProcess = [arr[1][i][@"requireprocess"] integerValue] == 1 ? YES : NO;
                     j++;
+                    }
                 }
             }else{
                 for (int i = 0; i < [arr[1] count]; i++) {
+                    if(j >= self.allSubjectArr.count){
+                        continue;
+                    }
                     MicroSubjectModel *model = self.allSubjectArr[j];
+                    if([arr[1][i][@"id"] isEqual:model.s_id]){
                     model.isRequireProcess = [arr[1][i][@"requireprocess"] integerValue] == 1 ? YES : NO;
                     j++;
+                    }
                 }
             }
         }
@@ -762,7 +780,9 @@ static NSString *TitleID = @"TitleCELL";
             return 40;
         }else{
             CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
-            
+            if(_flag == 1){
+                height += 40;
+            }
             return height == 0 ? 300 : height;
         }
     }
@@ -782,11 +802,12 @@ static NSString *TitleID = @"TitleCELL";
 #pragma mark - SubjectTitleCellDelegate代理方法
 - (void)subjectTitleCell:(SubjectTitleCell *)cell editBtnClicked:(UIButton *)btn
 {
+   
     if (btn.selected) {
         for (MicroSubjectModel *model in _allSubjectArr) {
             model.btnIsShow = YES;
         }
-        
+        _flag = 1;
     }else{
         
         [self modifiContentData];

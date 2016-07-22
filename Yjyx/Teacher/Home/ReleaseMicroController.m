@@ -155,7 +155,7 @@ static NSString *StudentID = @"StudentCell";
     NSString *descStr = [NSString stringWithFormat:@"%@ 微课", dateStr];
     param[@"desc"] = [self.descripStr isEqualToString:@""] ? descStr : self.descripStr;
     param[@"suggestspendtime"] = [self.timeStr isEqualToString:@""] ? @"30" : self.timeStr;
-
+    NSLog(@"%@", param);
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
 
     [mgr POST:[BaseURL stringByAppendingString:@"/api/teacher/mobile/general_task/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
