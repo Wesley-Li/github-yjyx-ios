@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="YjyxShopDetailCell">
+            <rect key="frame" x="0.0" y="0.0" width="160" height="152"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="160" height="152"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中国移动 30元话费" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kc5-mg-aFG">
+                        <rect key="frame" x="12" y="18" width="86" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sph-dA-0Ub">
+                        <rect key="frame" x="108" y="15" width="40" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="4J1-wZ-L0z"/>
+                            <constraint firstAttribute="width" constant="40" id="97s-LH-EkK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="兑换">
+                            <color key="titleColor" red="1" green="0.3529411764705882" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="唯一不同 处处不同" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wzr-3M-1Vo">
+                        <rect key="frame" x="12" y="41" width="116" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lcd-Nc-uuZ">
+                        <rect key="frame" x="12" y="62" width="135" height="65"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="65" id="fCb-DY-BFT"/>
+                            <constraint firstAttribute="width" constant="135" id="o0A-qs-ScU"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Yg-2V-GgH">
+                        <rect key="frame" x="131" y="130" width="17" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="1" green="0.3529411764705882" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shop_coin" translatesAutoresizingMaskIntoConstraints="NO" id="0jo-We-dbA">
+                        <rect key="frame" x="113" y="131" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="L2b-34-edt"/>
+                            <constraint firstAttribute="height" constant="15" id="pDw-zE-tKc"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="sph-dA-0Ub" firstAttribute="leading" secondItem="Kc5-mg-aFG" secondAttribute="trailing" constant="10" id="2M9-Dn-krw"/>
+                <constraint firstItem="Kc5-mg-aFG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="31F-PN-mBe"/>
+                <constraint firstItem="0jo-We-dbA" firstAttribute="centerY" secondItem="1Yg-2V-GgH" secondAttribute="centerY" id="93E-YG-C1P"/>
+                <constraint firstAttribute="trailing" secondItem="1Yg-2V-GgH" secondAttribute="trailing" constant="12" id="9cY-se-0mL"/>
+                <constraint firstItem="sph-dA-0Ub" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="260" id="F2B-rg-I4b"/>
+                <constraint firstItem="Wzr-3M-1Vo" firstAttribute="leading" secondItem="Kc5-mg-aFG" secondAttribute="leading" id="Rf2-cC-Hjl"/>
+                <constraint firstItem="Wzr-3M-1Vo" firstAttribute="top" secondItem="Kc5-mg-aFG" secondAttribute="bottom" constant="5" id="XCr-yf-Kb9"/>
+                <constraint firstItem="Lcd-Nc-uuZ" firstAttribute="top" secondItem="Wzr-3M-1Vo" secondAttribute="bottom" constant="4" id="Y2K-xz-3nw"/>
+                <constraint firstItem="1Yg-2V-GgH" firstAttribute="leading" secondItem="0jo-We-dbA" secondAttribute="trailing" constant="3" id="dGp-um-nKd"/>
+                <constraint firstItem="Kc5-mg-aFG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="18" id="hwf-h5-SSL"/>
+                <constraint firstItem="1Yg-2V-GgH" firstAttribute="top" secondItem="Lcd-Nc-uuZ" secondAttribute="bottom" constant="3" id="mK6-sx-IdK"/>
+                <constraint firstItem="sph-dA-0Ub" firstAttribute="centerY" secondItem="Kc5-mg-aFG" secondAttribute="centerY" id="u3S-dM-B4U"/>
+                <constraint firstItem="Lcd-Nc-uuZ" firstAttribute="leading" secondItem="Wzr-3M-1Vo" secondAttribute="leading" id="xZ3-gX-GT8"/>
+                <constraint firstAttribute="trailing" secondItem="sph-dA-0Ub" secondAttribute="trailing" constant="12" id="zOu-bH-YrY"/>
+            </constraints>
+            <size key="customSize" width="160" height="152"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="F2B-rg-I4b"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="convertBtn" destination="sph-dA-0Ub" id="HJf-gC-cBN"/>
+                <outlet property="requireCoinNumLabel" destination="1Yg-2V-GgH" id="cCJ-Wf-Xtg"/>
+                <outlet property="shopDescLabel" destination="Wzr-3M-1Vo" id="OMT-KJ-Wto"/>
+                <outlet property="shopIconImageView" destination="Lcd-Nc-uuZ" id="aNb-7L-6fs"/>
+                <outlet property="shopName" destination="Kc5-mg-aFG" id="cdh-dN-2IE"/>
+            </connections>
+            <point key="canvasLocation" x="613" y="190"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="shop_coin" width="30" height="30"/>
+    </resources>
+</document>

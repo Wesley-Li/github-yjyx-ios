@@ -225,7 +225,7 @@
                                         <constraint firstAttribute="width" secondItem="Rvq-bl-TIh" secondAttribute="height" constant="-15" id="wdR-ar-uMH"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <state key="normal" title="私密日记" image="私密日记">
+                                    <state key="normal" title="会员中心" image="student_member_icon">
                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
@@ -317,9 +317,9 @@
         <image name="p_money" width="49" height="49"/>
         <image name="report.png" width="59" height="59"/>
         <image name="student_home_setting" width="51" height="51"/>
+        <image name="student_member_icon" width="230" height="230"/>
         <image name="常用工具" width="230" height="230"/>
         <image name="我的统计" width="230" height="230"/>
-        <image name="私密日记" width="230" height="230"/>
         <image name="背景" width="750" height="579"/>
         <image name="课程表" width="230" height="230"/>
     </resources>

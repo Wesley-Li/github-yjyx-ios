@@ -15,7 +15,7 @@
 
 #import "MyMicroMainController.h"
 #import "ReleaseMicroController.h"
-
+#import "YjyxShopDisplayController.h"
 @interface TeacherHomeViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 
@@ -30,6 +30,8 @@
 
      _nameLabel.text = [YjyxOverallData sharedInstance].teacherInfo.name;
     self.navigationController.navigationBarHidden = YES;
+    // 积分
+    _scoreLabel.text = [YjyxOverallData sharedInstance].teacherInfo.coins;
     
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
@@ -62,8 +64,7 @@
     // 名字
     _nameLabel.text = [YjyxOverallData sharedInstance].teacherInfo.name;
     
-    // 积分
-    _scoreLabel.text = [YjyxOverallData sharedInstance].teacherInfo.coins;
+
     
     // 简介
 #warning 后续可能会加上老师的科目信息
@@ -89,14 +90,14 @@
 
 
 
-/*
+
 #pragma mark - 点击积分按钮
 - (IBAction)handleScoreBtn:(id)sender {
+  
     
-    [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
     
 }
- */
+
 #pragma mark - 点击签到按钮
 - (IBAction)handleReport:(id)sender {
     
@@ -250,7 +251,8 @@
 #pragma mark - 点击积分商城
 - (IBAction)handleMall:(id)sender {
     
-    [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
+    YjyxShopDisplayController *shopVc = [[YjyxShopDisplayController alloc] init];
+    [self.navigationController pushViewController:shopVc animated:YES];
 }
 
 

@@ -28,6 +28,8 @@
 @property (strong, nonatomic) NSNumber *beginTime;
 @property (strong, nonatomic) NSNumber *endTime;
 @property (strong, nonatomic) NSNumber *workType;
+
+@property (strong, nonatomic) NSNumber *hasmore;
 @end
 
 @implementation YjyxOneSubjectViewController
@@ -80,6 +82,7 @@ static NSString *ID = @"CELL";
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = NO;
+    [self.tableView reloadData];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -103,11 +106,12 @@ static NSString *ID = @"CELL";
     param[@"finished"] = self.workType;
     param[@"createtimebefore"] = self.endTime;
     param[@"createtimeafter"] = self.beginTime;
-//    NSLog(@"%@, %@, %@", self.workType, self.beginTime, self.endTime);
+    NSLog(@"%@, %@, %@", self.workType, self.beginTime, self.endTime);
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/tasks/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-//        NSLog(@"%@", responseObject);
+        NSLog(@"%@", responseObject);
         [self.view hideToastActivity];
         if ([responseObject[@"retcode"] isEqual:@0]) {
+            self.hasmore = responseObject[@"hasmore"];
             NSMutableArray *tempArr = [NSMutableArray array];
             for (NSDictionary *dict in responseObject[@"retlist"]) {
                 [tempArr addObject:[YjyxTodayWorkModel todayWorkModelWithDict:dict]];
@@ -172,6 +176,9 @@ static NSString *ID = @"CELL";
     YjyxTodayWorkModel *model = self.allWorkArray.lastObject;
     self.lastid = model.t_id;
     [self loadData];
+    if([self.hasmore isEqual:@0]){
+        self.tableView.footerRefreshingText = @"没有更多了";
+    }
 }
 #pragma mark - Table view data source
 

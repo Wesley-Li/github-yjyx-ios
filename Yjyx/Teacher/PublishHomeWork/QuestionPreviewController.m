@@ -64,7 +64,7 @@
     [requireProBtn setTitleColor:RGBACOLOR(58, 158, 232, 1) forState:UIControlStateSelected];
     [requireProBtn addTarget:self action:@selector(requireProcessBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [requireProBtn sizeToFit];
-    requireProBtn.x = 15;
+    requireProBtn.x = SCREEN_WIDTH - requireProBtn.width - 15;
     requireProBtn.centerY = view.centerY;
     [view addSubview:requireProBtn];
     self.tableView.tableHeaderView = view;

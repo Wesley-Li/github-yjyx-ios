@@ -399,16 +399,26 @@
                     }
                     if ([arr[0] isEqualToString:@"choice"]) {
                         for (NSDictionary *dict in arr[1]) {
+                            if(i >= self.doWorkArr.count){
+                                continue;
+                            }
                             YjyxDoingWorkModel *model = self.doWorkArr[i];
+                            if([dict[@"id"] isEqual:model.t_id]){
                             model.requireprocess = dict[@"requireprocess"];
                             i++;
+                            }
                         }
                     }
                     if ([arr[0] isEqualToString:@"blankfill"]) {
                         for (NSDictionary *dict in arr[1]) {
+                            if(i >= self.doWorkArr.count){
+                                continue;
+                            }
                             YjyxDoingWorkModel *model = self.doWorkArr[i];
+                            if([dict[@"id"] isEqual:model.t_id]){
                             model.requireprocess = dict[@"requireprocess"];
                             i++;
+                            }
                         }
                     }
                 }

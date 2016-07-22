@@ -65,6 +65,7 @@ static NSString *ID = @"CELL";
     [super viewDidLoad];
     
     self.classArr = [[StuDataBase shareStuDataBase] selectAllClass];
+    self.navigationItem.title = @"发布作业";
     NSLog(@"%@", self.classArr);
     for (StuClassEntity *stuClassModel in self.classArr) {
         NSMutableArray *tempArr = [NSMutableArray array];
@@ -230,11 +231,11 @@ static NSString *ID = @"CELL";
     for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"1" andJumpType:@"1"]) {
         if ([model isKindOfClass:[ChaperContentItem class]]) {
             ChaperContentItem *tempModel = (ChaperContentItem *)model;
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level",  @(tempModel.isRequireProcess), @"requireprocess", nil];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level",  tempModel.isRequireProcess == YES ? @1 : @0, @"requireprocess", nil];
             [choiceArr addObject:dic];
         }else{
             YjyxWrongSubModel *tempModel = (YjyxWrongSubModel *)model;
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.questionid], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", @(tempModel.isRequireProcess), @"requireprocess",nil];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.questionid], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", tempModel.isRequireProcess == YES ? @1 : @0, @"requireprocess",nil];
             [choiceArr addObject:dic];
         }
        
@@ -245,11 +246,11 @@ static NSString *ID = @"CELL";
     for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"2" andJumpType:@"1"]) {
         if ([model isKindOfClass:[ChaperContentItem class]]) {
             ChaperContentItem *tempModel = (ChaperContentItem *)model;
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", @(tempModel.isRequireProcess) ,@"requireprocess",nil];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", tempModel.isRequireProcess == YES ? @1 : @0 ,@"requireprocess",nil];
             [blankfillArr addObject:dic];
         }else{
             YjyxWrongSubModel *tempModel = (YjyxWrongSubModel *)model;
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.questionid], @"id", [NSNumber numberWithInteger: tempModel.level], @"level",@(tempModel.isRequireProcess) ,@"requireprocess",nil];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.questionid], @"id", [NSNumber numberWithInteger: tempModel.level], @"level",tempModel.isRequireProcess == YES ? @1 : @0 ,@"requireprocess",nil];
             [blankfillArr addObject:dic];
         }
     }
@@ -297,7 +298,7 @@ static NSString *ID = @"CELL";
     pamar[@"suggestspendtime"] = [self.timeTextField.text isEqualToString:@""] ? @"30" : self.timeTextField.text;
     pamar[@"questionlist"] = [self.questionList JSONString];
 
-    
+    NSLog(@"%@", pamar);
     [mgr POST:[BaseURL stringByAppendingString:TEACHER_RELEASE_CONNECT_POST] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         NSLog(@"%@", responseObject[@"msg"] );
         if([responseObject[@"retcode"] isEqual:@0]){

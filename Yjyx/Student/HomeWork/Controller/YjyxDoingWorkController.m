@@ -63,6 +63,10 @@
 @property (assign, nonatomic) NSInteger flag;
 @property (weak, nonatomic) YjyxDraftView *draftV;
 
+
+@property (strong, nonatomic) NSMutableArray *countTimeArr; // 每道题计时数组
+@property (assign, nonatomic) NSInteger preTime;
+@property (assign, nonatomic) NSInteger preIndex;
 @end
 
 @implementation YjyxDoingWorkController
@@ -78,6 +82,13 @@
         self.draftV = draftV;
     }
     return _draftV;
+}
+- (NSMutableArray *)countTimeArr
+{
+    if (_countTimeArr == nil) {
+        _countTimeArr = [NSMutableArray array];
+    }
+    return _countTimeArr;
 }
 #pragma mark - view生命周期
 - (void)viewDidLoad {
@@ -102,6 +113,12 @@
                 NSMutableArray *arr = [NSMutableArray array];
                 [self.answerArr addObject:arr];
             }
+            for (int i = 0; i < self.doWorkArr.count; i++) {
+                NSNumber *timeNum = [[NSNumber alloc ] initWithInt:0];
+                [self.countTimeArr addObject:timeNum];
+            }
+            self.preTime = 0;
+            self.preIndex = 1;
             if(count == 0){
                 [SVProgressHUD showInfoWithStatus:@"暂没有添加作业..."];
             }
@@ -125,6 +142,12 @@
                 NSMutableArray *arr = [NSMutableArray array];
                 [self.answerArr addObject:arr];
             }
+            for (int i = 0; i < self.doWorkArr.count; i++) {
+                NSNumber *timeNum = [[NSNumber alloc ] initWithInt:0];
+                [self.countTimeArr addObject:timeNum];
+            }
+            self.preTime = 0;
+            self.preIndex = 1;
             if(count == 0){
                 [SVProgressHUD showInfoWithStatus:@"暂没有添加作业..."];
             }
@@ -258,19 +281,27 @@
                     if ([arr[0] isEqualToString:@"choice"]) {
                         for (NSDictionary *dict in arr[1]) {
                             YjyxDoingWorkModel *model = self.doWorkArr[i];
+                            if([model.t_id isEqual:dict[@"id"]]){
                             model.requireprocess = dict[@"requireprocess"];
                             i++;
+                            }
                         }
                     }
                     if ([arr[0] isEqualToString:@"blankfill"]) {
                         for (NSDictionary *dict in arr[1]) {
                             YjyxDoingWorkModel *model = self.doWorkArr[i];
+                            if([model.t_id isEqual:dict[@"id"]]){
                             model.requireprocess = dict[@"requireprocess"];
                             i++;
+                            }
                         }
                     }
                 }
-         
+            for (int i = 0; i < self.doWorkArr.count; i++) {
+                NSNumber *timeNum = [[NSNumber alloc ] initWithInt:0];
+                [self.countTimeArr addObject:timeNum];
+            }
+            NSLog(@"%@", self.countTimeArr);
             self.totalTitleLabel.text = [NSString stringWithFormat:@"%ld", self.doWorkArr.count];
             self.titlenumberLabel.text = [NSString stringWithFormat:@"%@", self.doWorkArr.count > 0 ? @"1" : @"0"];
 //            self.workNameLabel.text = responseObject[@"retobj"][@"examobj"][@"name"];
@@ -281,6 +312,8 @@
                 NSMutableArray *arr = [NSMutableArray array];
                 [self.answerArr addObject:arr];
             }
+            self.preTime = 0;
+            self.preIndex = 1;
             if(count == 0){
                 [SVProgressHUD showInfoWithStatus:@"暂没有添加作业..."];
             }
@@ -331,15 +364,20 @@
                 if ([arr[0] isEqualToString:@"choice"]) {
                     for (NSDictionary *dict in arr[1]) {
                         YjyxDoingWorkModel *model = self.doWorkArr[i];
+                        if([model.t_id isEqual:dict[@"id"]]){
                         model.requireprocess = dict[@"requireprocess"];
                         i++;
+                        }
                     }
                 }
                 if ([arr[0] isEqualToString:@"blankfill"]) {
                     for (NSDictionary *dict in arr[1]) {
+                        
                         YjyxDoingWorkModel *model = self.doWorkArr[i];
+                        if([model.t_id isEqual:dict[@"id"]]){
                         model.requireprocess = dict[@"requireprocess"];
                         i++;
+                        }
                     }
                 }
             }
@@ -353,6 +391,12 @@
                 NSMutableArray *arr = [NSMutableArray array];
                 [self.answerArr addObject:arr];
             }
+            for (int i = 0; i < self.doWorkArr.count; i++) {
+                NSNumber *timeNum = [[NSNumber alloc ] initWithInt:0];
+                [self.countTimeArr addObject:timeNum];
+            }
+            self.preTime = 0;
+            self.preIndex = 1;
             if(count == 0){
                 [SVProgressHUD showInfoWithStatus:@"暂没有添加作业..."];
             }
@@ -592,7 +636,9 @@
     
     [self presentViewController:alertVc animated:YES completion:nil];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self scrollViewDidEndDecelerating:self.scrollView];
         [self submitHomeWork];
+        
     }];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -653,7 +699,7 @@
                 [oneChoiceArr addObject:@(bool_false)];
             }
             
-            [oneChoiceArr addObject:@(self.consumeTime)];
+            [oneChoiceArr addObject:self.countTimeArr[i]];
             [choiceArr addObject:oneChoiceArr];
             NSMutableDictionary *processDict = [NSMutableDictionary dictionary];
             [oneChoiceArr addObject:processDict];
@@ -687,7 +733,7 @@
                 [oneBlankArr addObject:@0];
             }
             
-            [oneBlankArr addObject:@(self.consumeTime)];
+            [oneBlankArr addObject:self.countTimeArr[i]];
             [choiceArr addObject:oneBlankArr];
             NSMutableDictionary *processDict = [NSMutableDictionary dictionary];
             [oneBlankArr addObject:processDict];
@@ -1025,11 +1071,29 @@
     webView.frame = frame;
 }
 #pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (decelerate == YES) {
+        NSLog(@"-----");
+    }else{
+    NSLog(@"没有减速");
+    }
+}
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
 //    NSLog(@"%@", self.viewDict);
     NSInteger index = scrollView.contentOffset.x / SCREEN_WIDTH;
     self.titlenumberLabel.text = [NSString stringWithFormat:@"%ld", index + 1];
+
+    NSNumber *num = self.countTimeArr[_preIndex - 1];
+    NSInteger conTime = self.consumeTime - self.preTime;
+    NSInteger numInt = [num integerValue];
+    numInt  += conTime;
+    NSLog(@"%ld", numInt);
+    num = [[NSNumber alloc ] initWithInt:numInt];
+    self.countTimeArr[_preIndex - 1] = num;
+    self.preTime = self.consumeTime;
+    self.preIndex = index + 1;
 
 }
 #pragma mark - DoingViewDelegate
@@ -1039,6 +1103,15 @@
         
         [self.scrollView setContentOffset:CGPointMake(view.tag  * SCREEN_WIDTH, 0) animated:YES];
        self.titlenumberLabel.text = [NSString stringWithFormat:@"%ld", view.tag + 1];
+        NSNumber *num = self.countTimeArr[_preIndex - 1];
+        NSInteger conTime = self.consumeTime - self.preTime;
+        NSInteger numInt = [num integerValue];
+        numInt  += conTime;
+        NSLog(@"%ld", numInt);
+        num = [[NSNumber alloc ] initWithInt:numInt];
+        self.countTimeArr[_preIndex - 1] = num;
+        self.preTime = self.consumeTime;
+        self.preIndex = view.tag + 1;
     }else{
         [self countStuAnswer];
         [self presentPromptMessage];
@@ -1052,11 +1125,14 @@
     [self answerResultBtnClick:self.answerWorkCardBtn];
     [self.scrollView setContentOffset:CGPointMake((btn.tag - 1) * SCREEN_WIDTH, 0) animated:YES];
     self.titlenumberLabel.text = [NSString stringWithFormat:@"%ld", btn.tag];
+
+    
     
 }
 // 提交按钮被点击
 - (void)workResultView:(YjyxWorkResultView *)view sumbitBtnClick:(UIButton *)btn
 {
+    NSLog(@"%@", self.countTimeArr);
     [self presentPromptMessage];
 }
 @end

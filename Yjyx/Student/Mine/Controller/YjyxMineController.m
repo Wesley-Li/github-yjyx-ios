@@ -211,7 +211,7 @@
     [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
 }
 
-// 点击私密日记
+// 点击会员中心
 - (IBAction)privateDiaryBtnClick:(UIButton *)sender {
     YjyxPMemberCenterViewController *vc = [[YjyxPMemberCenterViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];

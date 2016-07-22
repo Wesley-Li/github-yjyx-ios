@@ -81,6 +81,7 @@
     web.scrollView.showsHorizontalScrollIndicator = NO;
     web.scrollView.bounces = NO;
     web.scrollView.scrollEnabled = NO;
+    web.userInteractionEnabled = NO;
     web.delegate = self;
     [self.webBgview addSubview:web];
     
@@ -117,7 +118,7 @@
     
     frame.size.height = webView.scrollView.contentSize.height;
     webView.frame = frame;
-    self.height = frame.size.height + 80 + 40;
+    self.height = frame.size.height + 80 ;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"webviewHeight" object:self userInfo:nil];
     
 }

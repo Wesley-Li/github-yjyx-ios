@@ -27,6 +27,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *myAnswerBottomConstraint;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leadconstant; // 亿教解析右边距
 
 @end
 
@@ -58,7 +59,7 @@
     self.annotationBtn.layer.borderColor = RGBACOLOR(22, 156, 111, 1).CGColor;
     [self.annotationBtn setTitleColor:RGBACOLOR(22, 156, 111, 1) forState:UIControlStateNormal];
     
-   
+ 
     
     
 }
@@ -92,7 +93,7 @@
         
         NSArray *letterAry = [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"M", nil];
         NSString *tureAnswer = nil;
-        
+        self.leadconstant.constant = self.annotationBtn.hidden ? -60 : 10;
         // 正确答案显示
         if ([model.answer containsString:@"|"]) {
             // 多选
@@ -213,7 +214,7 @@
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
     
     [web loadHTMLString:jsString baseURL:nil];
-    
+    self.leadconstant.constant = self.annotationBtn.hidden ? -60 : 10;
     
     // 正确答案赋值
     // 选择题还是填空题,选择题是否多选
