@@ -16,6 +16,7 @@
     IBOutlet UITextField *phoneText;
     IBOutlet UITextField *codeText;
     IBOutlet UIButton *verifyBtn;
+    IBOutlet UITextField *confirmpwdField;
     IBOutlet UILabel *timeLb;
 }
 @property (nonatomic, strong) NSTimer *timer;

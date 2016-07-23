@@ -57,6 +57,9 @@
         }
         
         
+    }else{
+        textField.text = [textField.text substringToIndex:10];
+        [self.view makeToast:@"输入的长度不能大于10位" duration:1.0 position:SHOW_CENTER complete:nil];
     }
     
 }
@@ -72,8 +75,8 @@
     
     NSString *value = [NSString stringWithFormat:@"%@", _nameTF.text];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"modify", @"action", @"name", @"type", value, @"value", nil];
-    
-    if (_nameTF.text.length == 0) {
+    NSString *nameStr = [_nameTF.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (_nameTF.text.length == 0 || nameStr.length == 0) {
         [self.view makeToast:@"姓名为空,请重新输入" duration:1.0 position:SHOW_CENTER complete:nil];
     }else {
         

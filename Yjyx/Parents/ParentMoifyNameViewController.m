@@ -86,8 +86,9 @@
 -(void)goSure
 {
     [self.view hideKeyboard];
-    NSString *nickName = [_nickeNameTextfield.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if (nickName.length == 0 ) {
+//    NSString *nickName = [_nickeNameTextfield.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *nameStr =[_nickeNameTextfield.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (_nickeNameTextfield.text.length == 0 || nameStr.length == 0) {
         [self.view makeToast:@"请输入姓名"
                     duration:1.0
                     position:SHOW_TOP

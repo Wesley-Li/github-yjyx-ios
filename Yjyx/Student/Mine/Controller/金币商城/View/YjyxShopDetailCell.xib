@@ -36,7 +36,7 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lcd-Nc-uuZ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lcd-Nc-uuZ">
                         <rect key="frame" x="12" y="62" width="135" height="65"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="65" id="fCb-DY-BFT"/>
@@ -83,6 +83,7 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="coinImageView" destination="0jo-We-dbA" id="bo4-I4-1l3"/>
                 <outlet property="convertBtn" destination="sph-dA-0Ub" id="HJf-gC-cBN"/>
                 <outlet property="requireCoinNumLabel" destination="1Yg-2V-GgH" id="cCJ-Wf-Xtg"/>
                 <outlet property="shopDescLabel" destination="Wzr-3M-1Vo" id="OMT-KJ-Wto"/>

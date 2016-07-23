@@ -26,10 +26,13 @@
     phoneText.placeholder = @"手机号码(作为登录账户)";
     codeText.placeholder = @"4位验证码";
     phoneText.delegate  = self;
+    parentPasswordText.delegate  = self;
+    confirmpwdField.delegate  = self;
     [parentNameText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-     [relationText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-     [phoneText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-     [parentPasswordText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [relationText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [phoneText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [parentPasswordText addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [confirmpwdField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     // Do any additional setup after loading the view from its nib.
 }
 // 限制输入的长度
@@ -64,7 +67,7 @@
             [self.view makeToast:@"输入的长度不能大于10位" duration:1.0 position:SHOW_CENTER complete:nil];
         }
 
-    }else if ([textField isEqual:parentPasswordText]){
+    }else if ([textField isEqual:parentPasswordText] || [textField isEqual:confirmpwdField]){
         if (textField.text.length > 20){
             textField.text = [textField.text substringToIndex:20];
             [self.view makeToast:@"密码的长度不能大于20位" duration:1.0 position:SHOW_CENTER complete:nil];
@@ -94,6 +97,19 @@
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
         }];
+    }else{
+        if(textField.text.length < 6){
+            
+            [self.view makeToast:@"密码长度不能小于6位" duration:0.5 position:SHOW_CENTER complete:nil];
+            return;
+        }
+        if(parentPasswordText.text.length == 0 || confirmpwdField.text.length == 0){
+            return;
+        }
+        
+        if(![parentPasswordText.text isEqualToString:confirmpwdField.text]){
+            [self.view makeToast:@"两次密码输入不一样" duration:0.5 position:SHOW_CENTER complete:nil];
+        }
     }
 }
 
@@ -123,6 +139,10 @@
     }
     if ([parentPasswordText.text containsString:@" "]){
         [self.view makeToast:@"密码不能包含空格" duration:1.0 position:SHOW_CENTER complete:nil];
+        return;
+    }
+    if (![parentPasswordText.text isEqualToString:confirmpwdField.text]) {
+        [self.view makeToast:@"两次输入的密码不一致,请重新输入" duration:0.5 position:SHOW_CENTER complete:nil];
         return;
     }
     NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",phoneText.text];
