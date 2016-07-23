@@ -55,6 +55,7 @@
     self.requireCoinLabel.text = [NSString stringWithFormat:@"%ld", totalPrice];
     NSInteger coinNum = [[YjyxOverallData sharedInstance].teacherInfo.coins integerValue];
     self.exchangBtn.enabled = [self.requireCoinLabel.text integerValue] >= coinNum ? NO : YES;
+    self.promptLabel.hidden = [self.requireCoinLabel.text integerValue] >= coinNum ? NO : YES;
 }
 // 增加数量
 - (IBAction)addNumBtnClick:(UIButton *)sender {

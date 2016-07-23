@@ -72,6 +72,9 @@
             YjyxTeacherShopModel *model = [YjyxTeacherShopModel teacherShopModelWithDict:dict];
             [self.allProductArr addObject:model];
         }
+        if (self.allProductArr.count % 2 == 1) {
+            [self.allProductArr addObject:[YjyxTeacherShopModel teacherShopModelWithDict:nil]];
+        }
         [self.collectionView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
@@ -111,6 +114,9 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     YjyxTeacherShopModel *model = self.allProductArr[indexPath.row];
+    if (model.p_id == nil) {
+        return;
+    }
     YjyxOneShopDetailController *VC = [[YjyxOneShopDetailController alloc] init];
     VC.oneShopModel = model;
     [self.navigationController pushViewController:VC animated:YES];

@@ -264,7 +264,8 @@
         [self.view makeToast:@"您输入的内容超过了300字数限制" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
-    if (contentText.text.length ==0&&[_selectedPhotos count] == 0) {
+    NSString *contentStr = [contentText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if ((contentText.text.length ==0 || contentStr.length == 0)&&[_selectedPhotos count] == 0) {
         [self.view makeToast:@"请输入您的意见反馈" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }

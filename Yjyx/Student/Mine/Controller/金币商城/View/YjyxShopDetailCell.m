@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *shopDescLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *shopIconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *requireCoinNumLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *coinImageView;
 @end
 @implementation YjyxShopDetailCell
 
@@ -32,5 +33,14 @@
     self.shopDescLabel.text = productModel.goods_info;
     self.requireCoinNumLabel.text = [productModel.exchange_coins stringValue];
     [self.shopIconImageView setImageWithURL:[NSURL URLWithString:[productModel.goods_display JSONValue][@"small_img_url"]] placeholderImage:[UIImage imageNamed:@"conver_paper"]];
+    if (productModel.p_id == nil) {
+        self.convertBtn.hidden = YES;
+        self.shopIconImageView.hidden = YES;
+        self.coinImageView.hidden = YES;
+    }else{
+        self.convertBtn.hidden = NO;
+        self.shopIconImageView.hidden = NO;
+        self.coinImageView.hidden = NO;
+    }
 }
 @end
