@@ -14,6 +14,7 @@
 #import "ChildrenResultModel.h"
 #import "ChildrenResultCell.h"
 #import "ResultModel.h"
+#import "YjyxAnonatationController.h"
 
 
 #define ID @"result"
@@ -342,6 +343,10 @@
         [cell.solutionBtn addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
     }
     
+    if (cell.annotationBtn.hidden == NO) {
+        [cell.annotationBtn addTarget:self action:@selector(getTheAnotation:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
     if (indexPath.section == 0) {
         ResultModel *resultModel = self.resultchoices[indexPath.row];
         // 选择题
@@ -456,6 +461,25 @@
         [self.navigationController pushViewController:vc animated:YES];
 
     }
+}
+
+- (void)getTheAnotation:(UIButton *)sender {
+
+    ChildrenResultCell *cell = (ChildrenResultCell *)sender.superview.superview.superview;
+    
+    YjyxAnonatationController *anonatationVC = [[YjyxAnonatationController alloc] init];
+
+    if (cell.indexPath.section == 0) {//选择题
+        ResultModel *rmodel = self.resultchoices[cell.indexPath.row];
+        anonatationVC.processArr = [rmodel.writeprocess mutableCopy];
+    }else{//填空题
+        ResultModel *rmodel = self.resultblankfills[cell.indexPath.row];
+        anonatationVC.processArr = [rmodel.writeprocess mutableCopy];
+        
+    }
+    
+    [self.navigationController pushViewController:anonatationVC animated:YES];
+
 }
 
 #pragma mark -UIAlertViewDelegate

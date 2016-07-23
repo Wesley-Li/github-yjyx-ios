@@ -16,6 +16,9 @@
     self.myAnswer = array[1];
     self.rightOrWrong = array[2];
     self.time = array[3];
+    if (array.count == 5) {
+        self.writeprocess = [array[4] objectForKey:@"writeprocess"];
+    }
 }
 
 

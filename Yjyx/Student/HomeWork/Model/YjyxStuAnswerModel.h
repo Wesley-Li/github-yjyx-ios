@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSArray *stuAnswerArr;
 @property (strong, nonatomic) NSNumber *isRight;
 @property (strong, nonatomic) NSNumber *s_time;
+@property (strong, nonatomic) NSArray *writeprocess;
 
 + (instancetype)stuAnswerModelWithArr:(NSArray *)arr;
 @end

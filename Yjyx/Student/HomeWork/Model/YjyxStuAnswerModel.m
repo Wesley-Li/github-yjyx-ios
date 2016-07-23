@@ -17,6 +17,9 @@
     model.stuAnswerArr = arr[1];
     model.isRight = arr[2];
     model.s_time = arr[3];
+    if (arr.count == 5) {
+        model.writeprocess = arr[4];
+    }
     return model;
 }
 @end

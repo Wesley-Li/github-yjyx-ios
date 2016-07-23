@@ -557,6 +557,8 @@
 		80D9792E1D3F0A32000BD95E /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D979231D3F0A32000BD95E /* libopencore-amrnb.a */; };
 		80D9792F1D3F0A32000BD95E /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D979241D3F0A32000BD95E /* libopencore-amrwb.a */; };
 		80D979301D3F0A32000BD95E /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 80D9792C1D3F0A32000BD95E /* VoiceConverter.mm */; };
+		80D979361D430FB8000BD95E /* YjyxAnonatationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D979341D430FB8000BD95E /* YjyxAnonatationController.m */; };
+		80D979371D430FB8000BD95E /* YjyxAnonatationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D979351D430FB8000BD95E /* YjyxAnonatationController.xib */; };
 		80F718C01CF28961007C0B75 /* StuConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BB1CF28961007C0B75 /* StuConditionCell.m */; };
 		80F718C11CF28961007C0B75 /* StuConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80F718BC1CF28961007C0B75 /* StuConditionCell.xib */; };
 		80F718C21CF28961007C0B75 /* SubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BE1CF28961007C0B75 /* SubmitCell.m */; };
@@ -1499,6 +1501,9 @@
 		80D9792A1D3F0A32000BD95E /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
 		80D9792B1D3F0A32000BD95E /* VoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceConverter.h; sourceTree = "<group>"; };
 		80D9792C1D3F0A32000BD95E /* VoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VoiceConverter.mm; sourceTree = "<group>"; };
+		80D979331D430FB8000BD95E /* YjyxAnonatationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxAnonatationController.h; sourceTree = "<group>"; };
+		80D979341D430FB8000BD95E /* YjyxAnonatationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxAnonatationController.m; sourceTree = "<group>"; };
+		80D979351D430FB8000BD95E /* YjyxAnonatationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxAnonatationController.xib; sourceTree = "<group>"; };
 		80F718BA1CF28961007C0B75 /* StuConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuConditionCell.h; sourceTree = "<group>"; };
 		80F718BB1CF28961007C0B75 /* StuConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuConditionCell.m; sourceTree = "<group>"; };
 		80F718BC1CF28961007C0B75 /* StuConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StuConditionCell.xib; sourceTree = "<group>"; };
@@ -1731,6 +1736,9 @@
 				3A7864301C868062001BB65A /* ChildrenResultViewController.h */,
 				3A7864311C868062001BB65A /* ChildrenResultViewController.m */,
 				3A7864321C868062001BB65A /* ChildrenResultViewController.xib */,
+				80D979331D430FB8000BD95E /* YjyxAnonatationController.h */,
+				80D979341D430FB8000BD95E /* YjyxAnonatationController.m */,
+				80D979351D430FB8000BD95E /* YjyxAnonatationController.xib */,
 				3A66A8001C931BBA005E2D43 /* ChildrenExplantionViewController.h */,
 				3A66A8011C931BBA005E2D43 /* ChildrenExplantionViewController.m */,
 				3A66A8021C931BBA005E2D43 /* ChildrenExplantionViewController.xib */,
@@ -3507,6 +3515,7 @@
 				80FEB6871D1BB545009EB126 /* StatisticController.xib in Resources */,
 				3CA04CF71D180E6B0054A05D /* TitleContentCell.xib in Resources */,
 				3CA04CDB1D17CDD30054A05D /* WrongSubjectController.xib in Resources */,
+				80D979371D430FB8000BD95E /* YjyxAnonatationController.xib in Resources */,
 				3A7864341C868062001BB65A /* ChildrenResultViewController.xib in Resources */,
 				3A8827881C6EE5730008367F /* tab_homes@3x.png in Resources */,
 				3A8CAE9F1C70AD9200BDEB6B /* comm_sure@2x.png in Resources */,
@@ -3922,6 +3931,7 @@
 				3AF27E371C73239400698673 /* AddChildrenViewController.m in Sources */,
 				3B84D5851CEC6E9D003F659B /* TZTestCell.m in Sources */,
 				80D979151D388271000BD95E /* YjyxDrawlineInfo.m in Sources */,
+				80D979361D430FB8000BD95E /* YjyxAnonatationController.m in Sources */,
 				3A8CAEBC1C70B36200BDEB6B /* UIButton+WebCache.m in Sources */,
 				80FEB6881D1BB545009EB126 /* StudentViewController.m in Sources */,
 				80D979041D2CD048000BD95E /* YjyxStuWrongListCell.m in Sources */,

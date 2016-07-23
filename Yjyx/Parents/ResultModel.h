@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSArray *myAnswer;// 学生输入结果
 @property (nonatomic, strong) NSNumber *rightOrWrong;// 是否正确
 @property (nonatomic, strong) NSNumber *time;// 本题所花时间
+@property (nonatomic, strong) NSArray *writeprocess;// 批注
 
 - (void)initModelWithArray:(NSArray *)array;
 

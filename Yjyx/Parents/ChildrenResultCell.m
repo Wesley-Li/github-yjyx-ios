@@ -51,15 +51,12 @@
     self.solutionBtn.layer.borderColor = RGBACOLOR(22, 156, 111, 1).CGColor;
     [self.solutionBtn setTitleColor:RGBACOLOR(22, 156, 111, 1) forState:UIControlStateNormal];
     
-    
-    self.annotationBtn.hidden = YES;
     self.annotationBtn.layer.cornerRadius = 5;
     self.annotationBtn.layer.borderWidth = 1;
     self.solutionBtn.layer.masksToBounds = YES;
     self.annotationBtn.layer.borderColor = RGBACOLOR(22, 156, 111, 1).CGColor;
     [self.annotationBtn setTitleColor:RGBACOLOR(22, 156, 111, 1) forState:UIControlStateNormal];
     
- 
     
     
 }
@@ -177,6 +174,14 @@
     }else {
     
         self.solutionBtn.hidden = NO;
+    }
+    
+    // 批注按钮显示
+    if (resultModel.writeprocess != nil) {
+        self.annotationBtn.hidden = NO;
+    }else {
+    
+        self.annotationBtn.hidden = YES;
     }
     
 
@@ -310,6 +315,15 @@
         
         self.solutionBtn.hidden = NO;
     }
+    
+    // 批注按钮显示
+    if (resultModel.writeprocess != nil) {
+        self.annotationBtn.hidden = NO;
+    }else {
+        
+        self.annotationBtn.hidden = YES;
+    }
+
     
     
     // 对错按钮显示
