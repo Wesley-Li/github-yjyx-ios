@@ -177,7 +177,7 @@
     }
     
     // 批注按钮显示
-    if (resultModel.writeprocess != nil) {
+    if (resultModel.anonatationShow == YES && resultModel.writeprocess != nil) {
         self.annotationBtn.hidden = NO;
     }else {
     
@@ -317,7 +317,7 @@
     }
     
     // 批注按钮显示
-    if (resultModel.writeprocess != nil) {
+    if (resultModel.writeprocess != nil && resultModel.anonatationShow == YES) {
         self.annotationBtn.hidden = NO;
     }else {
         

@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSNumber *isRight;
 @property (strong, nonatomic) NSNumber *s_time;
 @property (strong, nonatomic) NSArray *writeprocess;
+@property (assign, nonatomic) BOOL anonatationShow;
 
 + (instancetype)stuAnswerModelWithArr:(NSArray *)arr;
 @end

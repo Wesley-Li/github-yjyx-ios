@@ -19,6 +19,24 @@
     model.s_time = arr[3];
     if (arr.count == 5) {
         model.writeprocess = arr[4];
+        if ([[arr[4] objectForKey:@"writeprocess"] count] == 0 ) {
+            
+            model.anonatationShow = NO;
+        }else {
+            NSArray *array = [arr[4] objectForKey:@"writeprocess"];
+            for (int i = 0; i < array.count; i++) {
+                if ([array[i][@"img"] length] != 0) {
+                    model.anonatationShow = YES;
+                    break;
+                }else {
+                    
+                    model.anonatationShow = NO;
+                }
+                
+            }
+            
+        }
+
     }
     return model;
 }
