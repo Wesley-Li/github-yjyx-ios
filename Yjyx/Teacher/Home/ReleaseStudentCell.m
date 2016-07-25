@@ -15,12 +15,16 @@
 @property (weak, nonatomic) IBOutlet UIButton *selectBtn;
 @property (weak, nonatomic) IBOutlet UIButton *isShowBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leadConstant;
+
+@property (strong, nonatomic) NSMutableArray *gradeArr;
 @end
 @implementation ReleaseStudentCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.gradeArr = [[[YjyxOverallData sharedInstance].teacherInfo.school_classes JSONValue] mutableCopy];
+
 }
 - (void)setClassEntity:(StuClassEntity *)classEntity
 {
@@ -30,10 +34,26 @@
     self.selectBtn.selected = classEntity.isSelect ? YES : NO;
     NSLog(@"%d", classEntity.isExpanded);
     self.isShowBtn.selected = classEntity.isExpanded ? YES : NO;
-//    [self.isShowBtn setImage:[UIImage imageNamed:@"list_icon_2"] forState:UIControlStateNormal];
-//    [self.isShowBtn setImage:[UIImage imageNamed:@"list_icon_2展开"] forState:UIControlStateSelected];
+    [self.isShowBtn setImage:[UIImage imageNamed:@"list_icon_2"] forState:UIControlStateNormal];
+    [self.isShowBtn setImage:[UIImage imageNamed:@"list_icon_2_expand"] forState:UIControlStateSelected];
     self.isShowBtn.userInteractionEnabled = NO;
     self.classOrStudentLabel.text = classEntity.name;
+    if ([classEntity.name containsString:@"年级"]) {
+        self.classOrStudentLabel.text = classEntity.name;
+        
+    }else {
+        
+        for (NSArray *arr in _gradeArr) {
+            if ([classEntity.gradeid isEqual:arr[2]]) {
+                NSString *titleString = [NSString stringWithFormat:@"%@%@", arr[3], classEntity.name];
+                self.classOrStudentLabel.text = titleString;
+                
+            }
+            
+        }
+        
+    }
+
 }
 - (void)setStuEntity:(StudentEntity *)stuEntity
 {

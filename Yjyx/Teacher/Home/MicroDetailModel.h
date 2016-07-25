@@ -16,8 +16,8 @@
 @property (copy, nonatomic) NSString *name;
 // 知识点描述
 @property (copy, nonatomic) NSString *knowledgedesc;
-// 视频地址
-@property (copy, nonatomic) NSString *videoUrl;
+// 视频地址数组
+@property (strong, nonatomic) NSMutableArray *videoUrlArr;
 // 微课id
 @property (strong, nonatomic) NSNumber *w_id;
 // 题目列表

@@ -20,7 +20,14 @@
     }
     model.knowledgedesc = str;
     model.name = dict[@"name"];
-    model.videoUrl = [dict[@"videoobjlist"] JSONValue][0][@"url"];
+    NSMutableArray *tempArr = [NSMutableArray array];
+    NSLog(@"%@-------", [dict[@"videoobjlist"] JSONValue]);
+    NSArray *arr = [dict[@"videoobjlist"] JSONValue];
+    for (NSDictionary *dict in arr) {
+        [tempArr addObject:dict[@"url"]];
+    }
+    model.videoUrlArr = tempArr;
+    NSLog(@"%@+++_---%@", model.videoUrlArr, tempArr);
     model.questionList = [dict[@"quizcontent"] JSONValue][@"questionList"] ;
     return model;
 }

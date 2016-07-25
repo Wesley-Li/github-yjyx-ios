@@ -19,7 +19,8 @@
 #import "OneSubjectController.h"
 #import "PublishHomeworkViewController.h"
 #import "QuestionDataBase.h"
-@interface MicroDetailViewController ()<SubjectTitleCellDelegate, SubjectDetailCellDelegate>
+#import "VideoNumShowCell.h"
+@interface MicroDetailViewController ()<SubjectTitleCellDelegate, SubjectDetailCellDelegate, VideoNumShowCellDelegate>
 {
     WMPlayer *wmPlayer;
     NSIndexPath *currentIndexPath;
@@ -40,6 +41,8 @@
 @property (assign, nonatomic) NSInteger blankcount;
 
 @property (assign, nonatomic) NSInteger flag;
+
+@property (strong, nonatomic) NSString *videoURL;
 @end
 
 @implementation MicroDetailViewController
@@ -49,6 +52,7 @@ static NSString *subjectID = @"subjectCELL";
 static NSString *NameID = @"NameCELL";
 static NSString *KnowledgeID = @"KnowledgeCELL";
 static NSString *TitleID = @"TitleCELL";
+static NSString *VideoNumID = @"VideoNum";
 #pragma mark - 懒加载
 - (NSMutableArray *)allSubjectArr
 {
@@ -77,12 +81,13 @@ static NSString *TitleID = @"TitleCELL";
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SubjectTitleCell class]) bundle:nil] forCellReuseIdentifier:TitleID];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([MicroNameCell class]) bundle:nil] forCellReuseIdentifier:NameID];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([MicroKnowledgeCell class]) bundle:nil] forCellReuseIdentifier:KnowledgeID];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([VideoNumShowCell class]) bundle:nil] forCellReuseIdentifier:VideoNumID];
     // tableview的属性
-    self.tableView.contentInset = UIEdgeInsetsMake(- 35, 0, -49, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(- 15, 0, -49, 0);
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, -49, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = COMMONCOLOR;
-    self.tableView.sectionHeaderHeight = 15;
+    self.tableView.sectionHeaderHeight = 0;
     self.tableView.sectionFooterHeight = 0;
     self.cellHeightDic = [NSMutableDictionary dictionary];
     //注册播放完成通知
@@ -205,6 +210,7 @@ static NSString *TitleID = @"TitleCELL";
         [releaseBtn setTintColor:[UIColor whiteColor]];
         [footerView addSubview:releaseBtn];
         self.tableView.tableFooterView = footerView;
+        self.videoURL = _microDetailM.videoUrlArr[0];
         // 刷新底部view
         [self.tableView reloadData];
         [SVProgressHUD dismiss];
@@ -572,10 +578,10 @@ static NSString *TitleID = @"TitleCELL";
         wmPlayer.backBtn.hidden = YES;
         wmPlayer.closeBtn.hidden = YES;
         [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
-        [wmPlayer setVideoURLStr:_microDetailM.videoUrl];
+        [wmPlayer setVideoURLStr:self.videoURL];
         [wmPlayer.player play];
     }else{
-        wmPlayer = [[WMPlayer alloc]initWithFrame:self.videoCell.backgroundIV.bounds videoURLStr:_microDetailM.videoUrl];
+        wmPlayer = [[WMPlayer alloc]initWithFrame:self.videoCell.backgroundIV.bounds videoURLStr:self.videoURL];
         wmPlayer.backBtn.hidden = YES;
         wmPlayer.closeBtn.hidden = YES;
         
@@ -654,7 +660,7 @@ static NSString *TitleID = @"TitleCELL";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return _count;
+    return _count + 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -662,7 +668,7 @@ static NSString *TitleID = @"TitleCELL";
         return 1;
     }else if(section == 1){
         return 1;
-    }else if(section == 2){
+    }else if(section == 2 || section == 3){
         return 1;
     }else{
         return self.allSubjectArr.count + 1;
@@ -728,11 +734,17 @@ static NSString *TitleID = @"TitleCELL";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else if(indexPath.section == 2){
-        MicroKnowledgeCell *cell = [tableView dequeueReusableCellWithIdentifier:KnowledgeID];
+        VideoNumShowCell *cell = [tableView dequeueReusableCellWithIdentifier:VideoNumID];
+        cell.delegate = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.model = _microDetailM;
         return cell;
     }else if(indexPath.section == 3){
+        MicroKnowledgeCell *cell = [tableView dequeueReusableCellWithIdentifier:KnowledgeID];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.model = _microDetailM;
+        return cell;
+    }else if(indexPath.section == 4){
         if (indexPath.row == 0) {
             SubjectTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:TitleID];
             cell.model = _microDetailM;
@@ -761,7 +773,7 @@ static NSString *TitleID = @"TitleCELL";
     if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height) {
         
         [self.cellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.tag]];
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:3]] withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:4]] withRowAnimation:UITableViewRowAnimationNone];
     }
 
 
@@ -774,8 +786,16 @@ static NSString *TitleID = @"TitleCELL";
     }else if (indexPath.section == 1) {
         return 70;
     }else if(indexPath.section == 2){
+        if (_microDetailM.videoUrlArr.count == 1) {
+            return 0;
+        }else{
+        return 80;
+        }
+    }else if (indexPath.section == 3){
+     
         return 70;
-    }else if(indexPath.section == 3){
+       
+    }else if(indexPath.section == 4){
         if (indexPath.row == 0) {
             return 40;
         }else{
@@ -791,13 +811,29 @@ static NSString *TitleID = @"TitleCELL";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section == 3 && indexPath.row != 0){
+    if(indexPath.section == 4 && indexPath.row != 0){
         OneSubjectController *vc = [[OneSubjectController alloc] init];
         MicroSubjectModel *model = self.allSubjectArr[indexPath.row - 1];
         vc.w_id =  [model.s_id stringValue];
         vc.qtype = model.type == 1 ? @"choice" : @"blankfill";
         [self.navigationController  pushViewController:vc animated:YES];
     }
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 2) {
+        if (_microDetailM.videoUrlArr.count == 1) {
+            return 0;
+        }else{
+            return 15;
+        }
+    }else{
+        return 15;
+    }
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0;
 }
 #pragma mark - SubjectTitleCellDelegate代理方法
 - (void)subjectTitleCell:(SubjectTitleCell *)cell editBtnClicked:(UIButton *)btn
@@ -830,6 +866,12 @@ static NSString *TitleID = @"TitleCELL";
         }
     }
     [self.tableView reloadData];
+}
+#pragma mark - VideoNumShowCellDelegate代理方法
+- (void)videoNumShowCell:(VideoNumShowCell *)cell videoNumBtnClick:(UIButton *)btn
+{
+    self.videoURL = _microDetailM.videoUrlArr[btn.tag];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
 #pragma mark - SubjectDetailCell代理方法
 - (void)subjectDetailCell:(SubjectDetailCell *)cell deletedBtnClick:(UIButton *)btn

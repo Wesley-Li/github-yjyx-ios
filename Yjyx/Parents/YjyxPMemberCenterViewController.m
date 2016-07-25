@@ -15,7 +15,7 @@
 @interface YjyxPMemberCenterViewController ()<ZLScrollingDelegate>
 {
     ZLScrolling *zlScroll;
-    NSInteger jumpType; // 1 代表学生端会员中心  2 代表家长端
+    NSInteger jumpType; // 1 代表学生端会员中心  0 代表家长端
 }
 @end
 
