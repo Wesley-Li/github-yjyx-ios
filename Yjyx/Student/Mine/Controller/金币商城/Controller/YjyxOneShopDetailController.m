@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadBackBtn];
-    self.navigationItem.title = @"积分商城";
+    
     self.paperNameLabel.text = self.oneShopModel.name;
     self.requireCoinLabel.text = [self.oneShopModel.exchange_coins stringValue];
     NSInteger coinNum = [[YjyxOverallData sharedInstance].teacherInfo.coins integerValue];
@@ -35,9 +35,16 @@
     
     
 }
-- (void)viewDidDisappear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    
+    self.navigationItem.title = @"积分商城";
+  
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    if (self.exchangBtn.enabled == NO) {
+        [self addMessageLabel];
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

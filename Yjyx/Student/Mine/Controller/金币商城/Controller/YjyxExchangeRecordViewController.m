@@ -36,12 +36,22 @@ static NSString *ID = @"cell";
     self.tableView.tableFooterView = [[UIView alloc] init];
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxExchangeRecordCell class]) bundle:nil] forCellReuseIdentifier:ID];
-    
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 64 , 0);
     [self setupRefresh];
 }
 -(void)viewDidDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"---coninset %@",  NSStringFromUIEdgeInsets(self.tableView.contentInset));
+    NSLog(@"---offset %@", NSStringFromCGPoint(self.tableView.contentOffset));
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"coninset %@",  NSStringFromUIEdgeInsets(self.tableView.contentInset));
+    NSLog(@"offset %@", NSStringFromCGPoint(self.tableView.contentOffset));
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

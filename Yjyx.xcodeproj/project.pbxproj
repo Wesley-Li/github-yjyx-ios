@@ -415,6 +415,8 @@
 		3CAC454E1D40EACA00ACBDA9 /* YjyxExchangeRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC454C1D40EACA00ACBDA9 /* YjyxExchangeRecordCell.m */; };
 		3CAC454F1D40EACA00ACBDA9 /* YjyxExchangeRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CAC454D1D40EACA00ACBDA9 /* YjyxExchangeRecordCell.xib */; };
 		3CAC45521D40EEDF00ACBDA9 /* YjyxExchangeRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAC45511D40EEDF00ACBDA9 /* YjyxExchangeRecordModel.m */; };
+		3CBA3E6A1D435016005F227E /* VideoNumShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA3E681D435016005F227E /* VideoNumShowCell.m */; };
+		3CBA3E6B1D435016005F227E /* VideoNumShowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CBA3E691D435016005F227E /* VideoNumShowCell.xib */; };
 		3CC4738E1D05130A009FAC16 /* ChooseMaterialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC4738C1D05130A009FAC16 /* ChooseMaterialCell.m */; };
 		3CC4738F1D05130A009FAC16 /* ChooseMaterialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CC4738D1D05130A009FAC16 /* ChooseMaterialCell.xib */; };
 		3CC473951D05551B009FAC16 /* PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CC473941D05551B009FAC16 /* PickerView.m */; };
@@ -1190,6 +1192,9 @@
 		3CAC454D1D40EACA00ACBDA9 /* YjyxExchangeRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxExchangeRecordCell.xib; sourceTree = "<group>"; };
 		3CAC45501D40EEDF00ACBDA9 /* YjyxExchangeRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxExchangeRecordModel.h; sourceTree = "<group>"; };
 		3CAC45511D40EEDF00ACBDA9 /* YjyxExchangeRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxExchangeRecordModel.m; sourceTree = "<group>"; };
+		3CBA3E671D435016005F227E /* VideoNumShowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoNumShowCell.h; sourceTree = "<group>"; };
+		3CBA3E681D435016005F227E /* VideoNumShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoNumShowCell.m; sourceTree = "<group>"; };
+		3CBA3E691D435016005F227E /* VideoNumShowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoNumShowCell.xib; sourceTree = "<group>"; };
 		3CC4738B1D05130A009FAC16 /* ChooseMaterialCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseMaterialCell.h; sourceTree = "<group>"; };
 		3CC4738C1D05130A009FAC16 /* ChooseMaterialCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseMaterialCell.m; sourceTree = "<group>"; };
 		3CC4738D1D05130A009FAC16 /* ChooseMaterialCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseMaterialCell.xib; sourceTree = "<group>"; };
@@ -3030,6 +3035,9 @@
 				3CE18EA01D2122ED007E0874 /* ReleaseStudentCell.h */,
 				3CE18EA11D2122ED007E0874 /* ReleaseStudentCell.m */,
 				3CE18EA21D2122ED007E0874 /* ReleaseStudentCell.xib */,
+				3CBA3E671D435016005F227E /* VideoNumShowCell.h */,
+				3CBA3E681D435016005F227E /* VideoNumShowCell.m */,
+				3CBA3E691D435016005F227E /* VideoNumShowCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3583,6 +3591,7 @@
 				8013D34F1CF4815300F82301 /* BlankfillCell.xib in Resources */,
 				3AFE02C21CA29D540097CC83 /* member_kexue@3x.png in Resources */,
 				3B91A6F31CE5B8BB0082A92C /* video_pic.png in Resources */,
+				3CBA3E6B1D435016005F227E /* VideoNumShowCell.xib in Resources */,
 				3AE894091C6C306700E8BA97 /* login_select@3x.png in Resources */,
 				3FF740601CE308DD00D3C0F7 /* list_btn_shutdown.png in Resources */,
 				3CD7E4541D2B593800769FDE /* MJRefresh.bundle in Resources */,
@@ -3797,6 +3806,7 @@
 				3CF541DC1D1D1A41000EBAB5 /* MicroDetailViewController.m in Sources */,
 				3A04A5CB1C93E6290040D913 /* MASCompositeConstraint.m in Sources */,
 				3CFE927B1D3394ED004DE4A8 /* YjyxBezierPath.m in Sources */,
+				3CBA3E6A1D435016005F227E /* VideoNumShowCell.m in Sources */,
 				3B4864701CCF117300D2DE3C /* MessageViewController.m in Sources */,
 				3AEF27221C61F08A0028BE09 /* PasswordStipulateCheckin.m in Sources */,
 				3CA8963F1D06DF540092D292 /* ParentChapterCell.m in Sources */,

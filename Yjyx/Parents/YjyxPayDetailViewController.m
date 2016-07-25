@@ -69,7 +69,7 @@
     UILabel *typeLb = [UILabel labelWithFrame:CGRectMake(35, 10, SCREEN_WIDTH-35, 20) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:12] context:[NSString stringWithFormat:@"会员种类：%@",_productEntity.subject_name]];
     [productView addSubview:typeLb];
     
-    if(_jumpType == 2){
+    if(_jumpType == 0){
     UILabel *childrenLb = [UILabel labelWithFrame:CGRectMake(35, 35, 60, 20) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:12] context:@"小孩:"];
     [productView addSubview:childrenLb];
     
@@ -115,7 +115,7 @@
         timeBtn.layer.borderWidth = 0.5;
         timeBtn.layer.cornerRadius = 2;
         [timeBtn sizeToFit];
-        if(_jumpType == 2){
+        if(_jumpType == 0){
         timeBtn.frame = CGRectMake(90+i*82, 63, 80, 15);
         }else{
             timeBtn.x = 90 + i*82;
@@ -187,7 +187,7 @@
 - (void)getPayContent
 {
     [self.view makeToastActivity:SHOW_CENTER];
-    if(_jumpType == 2){
+    if(_jumpType == 0){
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"purchase",@"action",childrenCid
                          ,@"cid",self.productEntity.productID,@"productid", ppiIndex,@"ppi",nil];
     [[YjxService sharedInstance] purchaseProduct:dic withBlock:^(id result, NSError *error){
