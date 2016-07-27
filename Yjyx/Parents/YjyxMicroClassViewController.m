@@ -34,9 +34,11 @@
 
 @property (nonatomic, strong) NSMutableDictionary *choiceCellHeightDic;
 @property (nonatomic, strong) NSMutableDictionary *blankfillHeightDic;
+@property (nonatomic, strong) NSMutableArray *microArr;// 微课视频数组
 
 @property (assign, nonatomic) NSInteger jumpType;
 @property (strong, nonatomic) UIButton *backBtn;
+@property (strong, nonatomic) UIButton *preBtn;
 
 @property (strong, nonatomic) NSMutableArray *doWorkArr;
 @end
@@ -324,7 +326,9 @@
             
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 
+                NSLog(@"%@", [[result[@"lessonobj"] objectForKey:@"videoobjlist"] JSONValue]);
                 // 视频和表头信息
+                self.microArr = [[[result[@"lessonobj"] objectForKey:@"videoobjlist"] JSONValue] mutableCopy];
                 self.videoURL = [[[[result[@"lessonobj"] objectForKey:@"videoobjlist"] JSONValue] firstObject] objectForKey:@"url"];
                 self.microName = [result[@"lessonobj"] objectForKey:@"name"];
                 self.knowledgeName = [result[@"lessonobj"] objectForKey:@"knowledgedesc"];
@@ -543,8 +547,51 @@
     nameLabel.text = self.microName;
     [headerView addSubview:nameLabel];
     
+    // 多视频选择按钮
+    UIView *bgView = [[UIView alloc] init];
+    bgView.backgroundColor = [UIColor whiteColor];
+    
+    CGSize size = CGSizeMake(10, 5);// 初始位置
+    CGFloat padding = 10;// 间距
+    NSInteger num = 6;
+    CGFloat tWidth = (SCREEN_WIDTH - 20 -(num - 1)*padding)/num;
+    CGFloat tHeight = tWidth;
+    if (self.microArr.count > 1) {
+        for (int i = 0; i < self.microArr.count; i++) {
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+            button.frame = CGRectMake(size.width, size.height, tWidth, tHeight);
+            size.width += tWidth + padding;
+            if (SCREEN_WIDTH - 20 - size.width <= 0) {
+                size.width = 10;
+                if (self.microArr.count - i > 1) {
+                    size.height += tHeight + 10;
+                }
+            }
+            button.tag = 500 + i;
+            button.tintColor = [UIColor lightGrayColor];
+            if (button.tag == 500) {
+                self.preBtn = button;
+                button.backgroundColor = [UIColor lightGrayColor];
+                button.tintColor = [UIColor whiteColor];
+                
+            }
+            [button setTitle:[NSString stringWithFormat:@"%d", i] forState:UIControlStateNormal];
+            button.layer.cornerRadius = tWidth / 2;
+            button.layer.masksToBounds = YES;
+            button.layer.borderWidth = 1;
+            button.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            [button addTarget:self action:@selector(microNumButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+            [bgView addSubview:button];
+            
+        }
+ 
+    }
+    CGFloat bgviewHeight = self.microArr.count >1 ? size.height + tHeight + 5 : 0;
+    bgView.frame = CGRectMake(0, nameLabel.origin.y + 40 + 1, SCREEN_WIDTH, bgviewHeight);
+    [headerView addSubview:bgView];
+    
     // 知识清单
-    UILabel *kowLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, nameLabel.origin.y + 40 + 5, SCREEN_WIDTH, 40)];
+    UILabel *kowLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, bgView.origin.y + bgView.height + 5, SCREEN_WIDTH, 40)];
     kowLabel.backgroundColor = [UIColor whiteColor];
     kowLabel.text = @"知识清单";
     [headerView addSubview:kowLabel];
@@ -564,6 +611,25 @@
     headerView.frame = CGRectMake(0, playerFrame.size.height + 64, SCREEN_WIDTH, web.origin.y + web.height + 5);
     
     self.subjectTable.tableHeaderView = headerView;
+    
+}
+
+- (void)microNumButtonClick:(UIButton *)sender {
+    
+    self.videoURL = [self.microArr[sender.tag - 500] objectForKey:@"url"];
+    [wmPlayer.player pause];
+    [wmPlayer removeFromSuperview];
+    [videoImage removeFromSuperview];
+    [self configureWMPlayer];
+    [wmPlayer.player play];
+    [self.view sendSubviewToBack:videoImage];
+    
+    self.preBtn.backgroundColor = [UIColor whiteColor];
+    self.preBtn.tintColor = [UIColor lightGrayColor];
+    sender.backgroundColor = [UIColor lightGrayColor];
+    self.preBtn.selected = NO;
+    sender.selected = YES;
+    self.preBtn = sender;
     
 }
 
