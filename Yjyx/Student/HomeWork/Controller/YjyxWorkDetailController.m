@@ -18,6 +18,7 @@
 #import "ChildrenResultCell.h"
 #import "WMPlayer.h"
 #import "YjyxOneSubjectViewController.h"
+#import "YjyxAnonatationController.h"
 @interface YjyxWorkDetailController ()<UITableViewDelegate, UITableViewDataSource>
 {
     WMPlayer *wmPlayer;
@@ -685,6 +686,7 @@ static NSString *KnowID = @"KnowID";
             }else{
                 ChildrenResultCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
                 [cell.solutionBtn addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.annotationBtn addTarget:self action:@selector(getTheAnotation:) forControlEvents:UIControlEventTouchUpInside];
                 YjyxWorkDetailModel *model = self.stuChoiceContentArr[indexPath.row - 1];
                 YjyxStuAnswerModel *model1 = self.stuChoiceAnswerArr[indexPath.row - 1];
                 [cell setSubviewsWithWorkDetailModel:model andStuResultModel:model1];
@@ -702,6 +704,7 @@ static NSString *KnowID = @"KnowID";
             }else{
                 ChildrenResultCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
                 [cell.solutionBtn addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.annotationBtn addTarget:self action:@selector(getTheAnotation:) forControlEvents:UIControlEventTouchUpInside];
                 YjyxWorkDetailModel *model = self.stuBlankContentArr[indexPath.row - 1];
                 YjyxStuAnswerModel *model1 = self.stuBlankAnswerArr[indexPath.row - 1];
                 
@@ -732,6 +735,7 @@ static NSString *KnowID = @"KnowID";
         }else{
             ChildrenResultCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
             [cell.solutionBtn addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.annotationBtn addTarget:self action:@selector(getTheAnotation:) forControlEvents:UIControlEventTouchUpInside];
             YjyxWorkDetailModel *model = self.stuBlankContentArr[indexPath.row - 1];
             YjyxStuAnswerModel *model1 = self.stuBlankAnswerArr[indexPath.row - 1];
             [cell setSubviewsWithWorkDetailModel:model andStuResultModel:model1];
@@ -816,4 +820,28 @@ static NSString *KnowID = @"KnowID";
         return 0;
     }
 }
+
+#pragma mark - 点击批注跳转
+- (void)getTheAnotation:(UIButton *)sender {
+    
+    ChildrenResultCell *cell = (ChildrenResultCell *)sender.superview.superview.superview;
+    
+    YjyxAnonatationController *anonatationVC = [[YjyxAnonatationController alloc] init];
+
+    if (cell.indexPath.section == 3) {//选择题
+        YjyxStuAnswerModel *rmodel = self.stuChoiceAnswerArr[cell.indexPath.row - 1];
+        anonatationVC.processArr = [rmodel.writeprocess mutableCopy];
+        
+    }else if (cell.indexPath.section == 4) {//填空题
+        YjyxStuAnswerModel *rmodel = self.stuBlankAnswerArr[cell.indexPath.row - 1];
+        anonatationVC.processArr = [rmodel.writeprocess mutableCopy];
+        
+    }
+    
+    [self.navigationController pushViewController:anonatationVC animated:YES];
+    
+}
+
+
+
 @end

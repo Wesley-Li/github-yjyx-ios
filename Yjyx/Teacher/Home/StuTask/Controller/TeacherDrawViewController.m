@@ -158,6 +158,7 @@
     if (self.voiceArr.count == 0) {
         self.voiceImage.hidden = YES;
         self.voiceNumLabel.hidden = YES;
+        [self.view sendSubviewToBack:self.voiceList];
     }else {
         
         self.voiceImage.hidden = NO;
@@ -477,6 +478,10 @@
 - (void)deleteTheVoice:(UIButton *)sender {
 
     [self.voiceArr removeObjectAtIndex:sender.tag - 400];
+    if (self.voiceArr.count == 0) {
+        // 移除通知
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
     [self.voiceList reloadData];
 }
 

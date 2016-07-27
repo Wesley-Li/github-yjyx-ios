@@ -45,8 +45,8 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.voiceArr = [[self.processArr[0] objectForKey:@"teachervoice"] mutableCopy];
 
-    [self configureNav];
     num = self.processArr.count;
+    [self configureNav];
     [self configureScroll];
     [self configurePageControll];
     
@@ -74,7 +74,7 @@
 
 - (void)configureScroll {
 
-    NSLog(@"%@",self.processArr);
+   
     self.scrollview.contentSize = CGSizeMake(SCREEN_WIDTH * num, SCREEN_HEIGHT - 64);
     self.scrollview.delegate = self;
     for (int i = 0; i < num; i++) {

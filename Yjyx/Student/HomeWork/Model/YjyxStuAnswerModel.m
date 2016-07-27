@@ -18,7 +18,8 @@
     model.isRight = arr[2];
     model.s_time = arr[3];
     if (arr.count == 5) {
-        model.writeprocess = arr[4];
+
+        model.writeprocess = [arr[4] objectForKey:@"writeprocess"];
         if ([[arr[4] objectForKey:@"writeprocess"] count] == 0 ) {
             
             model.anonatationShow = NO;
