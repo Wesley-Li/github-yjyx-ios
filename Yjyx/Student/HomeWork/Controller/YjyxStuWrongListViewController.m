@@ -9,9 +9,15 @@
 #import "YjyxStuWrongListViewController.h"
 #import "YjyxStuWrongListModel.h"
 #import "YjyxStuWrongListCell.h"
+#import "MJRefresh.h"
 
 #define ID @"YjyxStuWrongListCell"
 @interface YjyxStuWrongListViewController ()
+
+{
+    NSInteger num;// 判断还有没有数据
+    NSInteger count;// 返回cell个数
+}
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSMutableDictionary *heightDic;
@@ -54,6 +60,29 @@
     
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxStuWrongListCell class]) bundle:nil] forCellReuseIdentifier:ID ];
+    // 上拉加载
+    [self loadRefresh];
+}
+
+- (void)loadRefresh
+{
+    [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
+}
+- (void)loadMoreData
+{
+    num -= 20;
+    if(num < 0){
+        self.tableView.footerRefreshingText = @"没有更多了!!!";
+        [self.tableView footerEndRefreshing];
+        return;
+    }
+    if (num >= 20) {
+        count += 20;
+    }else{
+        count = num + count;
+    }
+    [self.tableView reloadData];
+    [self.tableView footerEndRefreshing];
 }
 
 
@@ -87,6 +116,14 @@
                 YjyxStuWrongListModel *model = [[YjyxStuWrongListModel alloc] init];
                 [model initModelWithDic:dic];
                 [self.dataSource addObject:model];
+            }
+            
+            num = self.dataSource.count;
+            if (self.dataSource.count < 20) {
+                count = self.dataSource.count;
+            }else {
+            
+                count = 20;
             }
             
             [self.tableView reloadData];
@@ -126,7 +163,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.dataSource.count;
+    return count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

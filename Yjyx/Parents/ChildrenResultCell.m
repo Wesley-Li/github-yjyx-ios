@@ -90,7 +90,7 @@
         
         NSArray *letterAry = [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"M", nil];
         NSString *tureAnswer = nil;
-        self.leadconstant.constant = self.annotationBtn.hidden ? -60 : 10;
+        
         // 正确答案显示
         if ([model.answer containsString:@"|"]) {
             // 多选
@@ -183,8 +183,8 @@
     
         self.annotationBtn.hidden = YES;
     }
+    self.leadconstant.constant = self.annotationBtn.hidden ? -60 : 10;
     
-
     // 对错按钮显示
     if ([resultModel.rightOrWrong isEqual:@0]) {
         self.RWimageView.image = [UIImage imageNamed:@"list_btn_wrong"];
@@ -219,7 +219,7 @@
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
     
     [web loadHTMLString:jsString baseURL:nil];
-    self.leadconstant.constant = self.annotationBtn.hidden ? -60 : 10;
+    
     
     // 正确答案赋值
     // 选择题还是填空题,选择题是否多选
@@ -323,7 +323,7 @@
         
         self.annotationBtn.hidden = YES;
     }
-
+    self.leadconstant.constant = self.annotationBtn.hidden ? -60 : 10;
     
     
     // 对错按钮显示

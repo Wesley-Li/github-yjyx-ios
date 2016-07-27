@@ -32,19 +32,6 @@ static YjyxDrawLine *drawLine = nil;
 }
 
 
-//- (id)initWithFrame:(CGRect)frame {
-//    self = [super initWithFrame:frame];
-//    if (self) {
-//        _allMyDrawPaletteLineInfos = [[NSMutableArray alloc] initWithCapacity:10];
-//        _tempInfos = [NSMutableArray array];
-//        self.currentPaintBrushColor = [UIColor blackColor];
-//        self.backgroundColor = [UIColor clearColor];
-//        self.currentPaintBrushWidth = 3.f;
-//    }
-//    return self;
-//    
-//}
-
 #pragma  mark - draw event
 //根据现有的线条 绘制相应的图画
 - (void)drawRect:(CGRect)rect  {
