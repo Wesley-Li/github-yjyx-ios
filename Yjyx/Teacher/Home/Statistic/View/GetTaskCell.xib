@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
@@ -85,6 +84,7 @@
                 <outlet property="descriptionLabel" destination="YlR-Bw-bMO" id="PIu-be-PdW"/>
                 <outlet property="endlineLabel" destination="9mW-11-zWb" id="vh5-od-Qm0"/>
                 <outlet property="imageview" destination="FLY-h6-Q9v" id="arQ-QK-81X"/>
+                <outlet property="indicatorImage" destination="61Z-m4-mHd" id="wsm-zp-Gi1"/>
             </connections>
             <point key="canvasLocation" x="336" y="346.5"/>
         </tableViewCell>

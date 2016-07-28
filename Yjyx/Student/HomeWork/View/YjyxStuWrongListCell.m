@@ -202,6 +202,7 @@
     
     if (rightAnswerHeight > myAnswerHeight) {
         self.stuAnswerBottom.constant = rightAnswerHeight - myAnswerHeight + 7;
+        
     }else if (rightAnswerHeight == myAnswerHeight){
         
         self.stuAnswerBottom.constant = 10;

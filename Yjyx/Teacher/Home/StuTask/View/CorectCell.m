@@ -10,7 +10,7 @@
 
 
 
-@interface CorectCell ()<UIWebViewDelegate>
+@interface CorectCell ()
 
 @property (weak, nonatomic) IBOutlet UIView *bg_view;
 
@@ -96,32 +96,36 @@
         [view removeFromSuperview];
     }
     
+    NSLog(@"%@", [dic[@"question"] objectForKey:@"answer"]);
     
-    NSString *htmlString = [NSString stringWithFormat:@"%@", [dic[@"question"] objectForKey:@"answer"]];
-    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", htmlString];
-    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH - 20, 50)];
-    web.scrollView.showsHorizontalScrollIndicator = NO;
-    web.scrollView.scrollEnabled = NO;
-    web.scrollView.bounces = NO;
-    web.delegate = self;
-    [web loadHTMLString:jsString baseURL:nil];
-    [self.bg_view addSubview:web];
+    // 填空的显示
+    NSArray *cornerAry =[NSArray arrayWithObjects:@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨",@"⑩",@"⑪",@"⑫",@"⑬",@"⑭",@"⑮",@"⑯",@"⑰",@"⑱",@"⑲",@"⑳", nil];
+    NSArray *arr = [[dic[@"question"] objectForKey:@"answer"] JSONValue];
+    NSString *tempString = @"";
+    for (int i = 0; i < arr.count; i++) {
+        
+        tempString = [tempString stringByAppendingString:[NSString stringWithFormat:@"%@%@\n", cornerAry[i], arr[i]]];
+        
+    }
     
-}
-
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-
-    CGRect frame = webView.frame;
-    frame.size.height = webView.scrollView.contentSize.height;
-    webView.frame = frame;
-    self.height = frame.size.height + 15 + 30;
+    UILabel *answerLabel = [[UILabel alloc] init];
+    answerLabel.text = tempString;
+    answerLabel.font = [UIFont systemFontOfSize:13];
+    answerLabel.numberOfLines = 0;
+    
+    
+    CGFloat height = [answerLabel.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[NSDictionary dictionaryWithObjectsAndKeys:answerLabel.font, NSFontAttributeName, nil] context:nil].size.height;
+    
+    answerLabel.frame = CGRectMake(10, 10, SCREEN_WIDTH - 20, height);
+    [self.bg_view addSubview:answerLabel];
+    
+    self.height = height + 15 + 30;
     // 用通知发送加载完成后的高度
     [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeightChange" object:self userInfo:nil];
+    
 
     
 }
-
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

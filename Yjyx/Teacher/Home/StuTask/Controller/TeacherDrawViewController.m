@@ -19,6 +19,8 @@
 @interface TeacherDrawViewController ()<AVAudioRecorderDelegate>
 {
     BOOL isExpand;
+    BOOL isStore;// 是否储存
+    BOOL isEdit;// 是否编辑
     NSDate *startDate;
     NSDate *endDate;
     NSInteger currentIndex;
@@ -62,6 +64,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    isStore = NO;
+    isEdit = NO;
     [self configureNavBar];
     self.imgURL = [self.processArr[_imageIndex] objectForKey:@"img"];
     self.voiceArr = [[self.processArr[_imageIndex] objectForKey:@"teachervoice"] mutableCopy];
@@ -125,18 +129,54 @@
 }
 
 - (void)goBack {
+    
+    // 如果做了编辑,判断是否储存
+    if ([YjyxDrawLine defaultLine].allMyDrawPaletteLineInfos.count != 0 || isEdit == YES) {
+        if (!isStore) {
+            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"您当前的操作还没有储存,如果返回,将会使操作丢失,是否确定返回?" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:nil];
+            UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                // 清空audio文件
+                NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+                NSString *filePath = [directory stringByAppendingPathComponent:@"audio"];
+                NSError *error = nil;
+                if([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error]) {
+                    NSLog(@"清除音频文件成功");
+                } else {
+                    NSLog(@"error=%@", error);
+                }
+                
+                // 清空画图
+                [[YjyxDrawLine defaultLine] cleanAllDrawBySelf];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            }];
+            
+            [alertVC addAction:action1];
+            [alertVC addAction:action2];
+            
+            [self presentViewController:alertVC animated:YES completion:nil];
+            
+        }
+ 
+    }else {
+    
+        // 清空audio文件
+        NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+        NSString *filePath = [directory stringByAppendingPathComponent:@"audio"];
+        NSError *error = nil;
+        if([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error]) {
+            NSLog(@"清除音频文件成功");
+        } else {
+            NSLog(@"error=%@", error);
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
 
-    // 清空audio文件
-    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *filePath = [directory stringByAppendingPathComponent:@"audio"];
-    NSError *error = nil;
-    if([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error]) {
-        NSLog(@"清除音频文件成功");
-    } else {
-        NSLog(@"error=%@", error);
+        
     }
     
-    [self.navigationController popViewControllerAnimated:YES];
     
 }
 
@@ -293,30 +333,38 @@
     self.animationImage.hidden = YES;
     // 转换格式
     endDate = [NSDate date];
-    NSString *amrPath = [TeacherDrawViewController getPathByFilename:_recordFileName ofType:@"amr"];
-//    NSString *wavPath = [TeacherDrawViewController getPathByFilename:_recordFileName ofType:@"wav"];
-    int result = [VoiceConverter ConvertWavToAmr:_recordFilePath amrSavePath:amrPath];
-    NSLog(@"%@", result == 1 ? @"格式转换成功" : @"格式转换失败");
+    NSTimeInterval timeInterval = [endDate timeIntervalSinceDate:startDate];
+    if (timeInterval < 1) {
+        [self.view makeToast:@"说话时间太短" duration:1.0 position:SHOW_CENTER complete:nil];
+    }else {
     
-    // 音频上传七牛云
-    
-    NSData *data = [NSData dataWithContentsOfFile:amrPath];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[BaseURL stringByAppendingString:TEACHER_PIC_SETTING_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSString *amrPath = [TeacherDrawViewController getPathByFilename:_recordFileName ofType:@"amr"];
+        //    NSString *wavPath = [TeacherDrawViewController getPathByFilename:_recordFileName ofType:@"wav"];
+        int result = [VoiceConverter ConvertWavToAmr:_recordFilePath amrSavePath:amrPath];
+        NSLog(@"%@", result == 1 ? @"格式转换成功" : @"格式转换失败");
         
-        //        NSLog(@"%@", responseObject);
-        NSString *upToken = responseObject[@"uptoken"];
+        // 音频上传七牛云
         
-        [self upfileToQiniu:upToken data:data];
+        NSData *data = [NSData dataWithContentsOfFile:amrPath];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager GET:[BaseURL stringByAppendingString:TEACHER_PIC_SETTING_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+            
+            //        NSLog(@"%@", responseObject);
+            NSString *upToken = responseObject[@"uptoken"];
+            
+            [self upfileToQiniu:upToken data:data];
+            
+            
+        } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+            NSLog(@"%@", error);
+        }];
+        
 
-        
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
-    }];
+    }
     
-
+    
     
 }
 
@@ -330,7 +378,7 @@
             NSTimeInterval timeInterval = [endDate timeIntervalSinceDate:startDate];
             NSDictionary *dic = @{@"url":voiceUrl, @"time":[NSNumber numberWithDouble:timeInterval]};
             [self.voiceArr addObject:dic];
-            
+            isEdit = YES;
             // 发通知
             [[NSNotificationCenter defaultCenter] postNotificationName:@"voiceNumShow" object:self userInfo:nil];
             
@@ -378,6 +426,7 @@
         // 直接上传服务器
         [self uploadAnonitionToSever:self.imgURL];
         
+        
     }
     
     
@@ -422,7 +471,7 @@
         if ([responseObject[@"retcode"] isEqual:@0]) {
             [SVProgressHUD showSuccessWithStatus:@"保存成功"];
             [SVProgressHUD dismissWithDelay:1.5];
-            
+            isStore = YES;
         }else {
             [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@", responseObject[@"reason"]]];
         

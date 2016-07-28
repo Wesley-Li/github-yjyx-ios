@@ -13,6 +13,7 @@
 @interface YjyxHomeWorkCell()
 @property (weak, nonatomic) IBOutlet UIImageView *subjectImageView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *indicatorImage;
 @property (weak, nonatomic) IBOutlet UILabel *subjectNameLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *doneCountLabel;
@@ -49,6 +50,9 @@
     [self.subjectImageView setImageWithURL:[NSURL URLWithString:homeWrongModel.icon] ];
     }
     self.subjectNameLabel.text = homeWrongModel.subjectname;
+    if (homeWrongModel.failedquestions.count == 0) {
+        self.indicatorImage.hidden = YES;
+    }
     self.doneCountLabel.text = [NSString stringWithFormat:@"共做错%ld题", homeWrongModel.failedquestions.count];
 }
 @end

@@ -117,11 +117,7 @@
     
 }
 
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//
-//{
-//    NSLog(@"%@", NSStringFromCGPoint(scrollView.contentOffset) );
-//}
+
 // 网络请求
 - (void)readDataFromNetWork {
     
@@ -158,8 +154,8 @@
             }
         
             [self.tableView reloadData];
-            [SVProgressHUD showSuccessWithStatus:@"数据加载成功"];
-            [SVProgressHUD dismissWithDelay:0.8];
+            
+            [SVProgressHUD dismissWithDelay:0.1];
 
         }else {
         

@@ -497,18 +497,18 @@
         _yourAnswerCell.delegate = self;
         if ([self.qtype isEqual:@1]) {
             
+            [_yourAnswerCell setChoiceValueWithDictionary:_dic];
             if ([self.right isEqualToString:@"YES"]) {
                 _yourAnswerCell.yourAnswerLable.textColor = [UIColor greenColor];
             }
-            
-            [_yourAnswerCell setChoiceValueWithDictionary:_dic];
+
         }else if ([self.qtype isEqual:@2]) {
             
+            [_yourAnswerCell setBlankfillValueWithDictionary:_dic];
             if ([self.right isEqualToString:@"YES"]) {
                 _yourAnswerCell.yourAnswerLable.textColor = [UIColor greenColor];
             }
-        
-            [_yourAnswerCell setBlankfillValueWithDictionary:_dic];
+
         }
         
         return _yourAnswerCell;

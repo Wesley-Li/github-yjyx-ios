@@ -137,7 +137,7 @@ static NSString *ID = @"WrongSubjectCell";
 
     [mgr GET:[BaseURL stringByAppendingString:SEARCH_WRONG_CONNET_GET] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         if([responseObject[@"retcode"] isEqual:@0]){
-//            [responseObject[@"retlist"] writeToFile:@"/Users/wangdapeng/Desktop/文件/9.plist" atomically:YES];
+            NSLog(@"%@", responseObject);
             NSArray *tempArr = responseObject[@"retlist"];
             for (NSDictionary *dict in tempArr) {
                 YjyxWrongSubModel *model = [YjyxWrongSubModel wrongSubjectModelWithDict:dict];

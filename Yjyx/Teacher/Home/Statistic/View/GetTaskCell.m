@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *deliverLabel;
 @property (weak, nonatomic) IBOutlet UILabel *endlineLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *indicatorImage;
 
 @end
 
@@ -33,6 +34,7 @@
     self.descriptionLabel.text = model.descriptionText;
     if (tip == 1) {
         self.endlineLabel.hidden = YES;
+        self.indicatorImage.hidden = YES;
     }
     
     

@@ -73,7 +73,6 @@
     
     if ([self.hasmore isEqual:@0]) {
         self.tableview.footerRefreshingText = @"没有更多了!!!";
-        
     }
     
     [self readDataFromNet];

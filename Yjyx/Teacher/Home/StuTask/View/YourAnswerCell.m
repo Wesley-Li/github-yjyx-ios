@@ -40,7 +40,8 @@
     }else {
     
         self.yourAnswerLable.text = [NSString stringWithFormat:@"%@", tureAnswer];
-        self.yourAnswerLable.textColor = RGBACOLOR(100, 174, 99, 1);
+        
+//        self.yourAnswerLable.textColor = RGBACOLOR(100, 174, 99, 1);
     }
     
     CGFloat myAnswerHeight = [self.yourAnswerLable.text boundingRectWithSize:CGSizeMake(self.yourAnswerLable.width, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.yourAnswerLable.font, NSFontAttributeName, nil] context:nil].size.height;
@@ -128,9 +129,17 @@
 
 - (void)setBlankfillValueWithDictionary:(NSDictionary *)dic {
 
-    NSString *ansString = [dic[@"summary"][1] componentsJoinedByString:@","];
+    // 填空的显示
+    NSArray *cornerAry =[NSArray arrayWithObjects:@"①",@"②",@"③",@"④",@"⑤",@"⑥",@"⑦",@"⑧",@"⑨",@"⑩",@"⑪",@"⑫",@"⑬",@"⑭",@"⑮",@"⑯",@"⑰",@"⑱",@"⑲",@"⑳", nil];
+    NSArray *arr = dic[@"summary"][1];
+    NSString *tempString = @"";
+    for (int i = 0; i < arr.count; i++) {
+        
+        tempString = [tempString stringByAppendingString:[NSString stringWithFormat:@"%@%@\n", cornerAry[i], arr[i]]];
+        
+    }
     
-    self.yourAnswerLable.text = [NSString stringWithFormat:@"%@", ansString];
+    self.yourAnswerLable.text = tempString;
     
     CGFloat myAnswerHeight = [self.yourAnswerLable.text boundingRectWithSize:CGSizeMake(self.yourAnswerLable.width, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.yourAnswerLable.font, NSFontAttributeName, nil] context:nil].size.height;
     

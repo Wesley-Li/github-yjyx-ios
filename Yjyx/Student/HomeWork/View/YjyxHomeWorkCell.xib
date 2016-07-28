@@ -53,6 +53,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="doneCountLabel" destination="twH-YA-cxo" id="yGx-5c-OEK"/>
+                <outlet property="indicatorImage" destination="g8e-9v-csr" id="rEd-CW-vYA"/>
                 <outlet property="subjectImageView" destination="zIy-K8-ba2" id="CBp-3o-IiL"/>
                 <outlet property="subjectNameLabel" destination="gsk-ug-MXH" id="Ouu-vg-LoT"/>
             </connections>

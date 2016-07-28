@@ -158,8 +158,7 @@
                 [self.unfinishedArr addObject:model];
             }
             [self.tableView reloadData];
-            [SVProgressHUD showSuccessWithStatus:@"数据加载成功"];
-            [SVProgressHUD dismissWithDelay:1.0];
+            [SVProgressHUD dismissWithDelay:0.1];
 
         }else {
         

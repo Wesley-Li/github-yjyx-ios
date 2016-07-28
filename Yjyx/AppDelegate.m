@@ -57,14 +57,6 @@
     ((AppDelegate*)SYS_DELEGATE).role = @"parents";
     ((AppDelegate*)SYS_DELEGATE).stuListArr = [NSMutableArray array];
     
-    // 创建定时器,并行,24小时执行一次
-//    dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
-//    ((AppDelegate*)SYS_DELEGATE).timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-//    dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, 24*60*60 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
-//    dispatch_source_set_event_handler(_timer, ^{
-//        NSLog(@"我被调用了");
-//        [(AppDelegate *)SYS_DELEGATE getStuList];
-//    });
 
     [self initUmeng:launchOptions];
     // Override point for customization after application launch.

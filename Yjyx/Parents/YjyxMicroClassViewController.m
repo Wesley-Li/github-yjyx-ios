@@ -43,7 +43,6 @@
 
 @property (strong, nonatomic) NSMutableArray *doWorkArr;
 
-@property (strong, nonatomic) UIButton *preBtn; //   视频被选中的按钮
 @property (weak, nonatomic) UIView *bgView; // 保存视频个数的背景view
 @end
 
