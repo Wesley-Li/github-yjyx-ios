@@ -153,8 +153,9 @@ static NSString *StudentID = @"StudentCell";
     
     NSLog(@"%@--%@", [NSDate date], dateStr);
     NSString *descStr = [NSString stringWithFormat:@"%@ 微课", dateStr];
-    param[@"desc"] = [self.descripStr isEqualToString:@""] ? descStr : self.descripStr;
-    param[@"suggestspendtime"] = [self.timeStr isEqualToString:@""] ? @"30" : self.timeStr;
+    NSString *descTempStr = [self.descripStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+    param[@"desc"] = [descTempStr isEqualToString:@""] ? descStr : self.descripStr;
+//    param[@"suggestspendtime"] = [self.timeStr isEqualToString:@""] ? @"30" : self.timeStr;
     NSLog(@"%@", param);
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
 
@@ -181,7 +182,7 @@ static NSString *StudentID = @"StudentCell";
 #pragma mark - UITableView数据源方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.classArr.count + 2;
+    return self.classArr.count + 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -198,15 +199,16 @@ static NSString *StudentID = @"StudentCell";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == self.classArr.count ){
-        ReleaseFinishTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:FinishTimeID];
-        self.timeStr = cell.timeLabel.text;
-        return cell;
-    }else if(indexPath.section == self.classArr.count + 1){
+//    if (indexPath.section == self.classArr.count ){
+//        ReleaseFinishTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:FinishTimeID];
+//        self.timeStr = cell.timeLabel.text;
+//        return cell;
+//   }else
+    if(indexPath.section == self.classArr.count){
         ReleaseDescrpitionCell *cell = [tableView dequeueReusableCellWithIdentifier:DescID];
         self.descripStr = cell.descriptionTextField.text;
         return cell;
-    }else{
+    } else{
         ReleaseStudentCell *cell = [tableView dequeueReusableCellWithIdentifier:StudentID];
         cell.delegate = self;
         if (indexPath.row == 0) {

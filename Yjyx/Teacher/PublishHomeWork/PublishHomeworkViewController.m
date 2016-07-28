@@ -53,7 +53,7 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
 
-    self.title = @"发布作业";
+    self.navigationItem.title = @"发布作业";
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -94,6 +94,11 @@
         self.microLabel.hidden = NO;
         self.question_countLabel.hidden = NO;
         self.previewBtn.hidden = NO;
+        if(_flag == 1){
+            self.previewBtn.hidden = YES;
+            self.microLabel.hidden = YES;
+            self.question_countLabel.hidden = YES;
+        }
         self.question_countLabel.layer.cornerRadius = 10;
         self.question_countLabel.layer.masksToBounds = YES;
         self.question_countLabel.text = [NSString stringWithFormat:@"%ld", _selectArr.count];
@@ -131,7 +136,7 @@
         [self.navigationController pushViewController:chapterVc animated:YES];
     }else{
     BookViewController *bookVC = [[BookViewController alloc] initWithNibName:@"BookViewController" bundle:nil];
-    bookVC.navigationItem.title = @"教材同步";
+
     [self.navigationController pushViewController:bookVC animated:YES];
     }
 }
@@ -149,7 +154,7 @@
 - (IBAction)knowledgeBtn:(UIButton *)sender {
     
     KnowledgeViewController *knowledgeVC = [[KnowledgeViewController alloc] initWithNibName:@"KnowledgeViewController" bundle:nil];
-    knowledgeVC.navigationItem.title = @"知识点出题";
+
     [self.navigationController pushViewController:knowledgeVC animated:YES];
     
 }
@@ -158,7 +163,7 @@
 - (IBAction)wrongBtn:(UIButton *)sender {
     
     WrongSubjectController *wrongVC = [[WrongSubjectController alloc] initWithNibName:@"WrongSubjectController" bundle:nil];
-    wrongVC.navigationItem.title = @"错题榜";
+    
     [self.navigationController pushViewController:wrongVC animated:YES];
     
 }

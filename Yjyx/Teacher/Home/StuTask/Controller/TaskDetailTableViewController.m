@@ -27,7 +27,7 @@
 #define submit @"submitCell"
 #define unSubmit @"unSubmitcell"
 
-@interface TaskDetailTableViewController ()
+@interface TaskDetailTableViewController ()<UnSubmitCellDelegate>
 
 {
     CGFloat headerHeight;
@@ -283,7 +283,7 @@
         
         UnSubmitCell *cell = [tableView dequeueReusableCellWithIdentifier:unSubmit forIndexPath:indexPath];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        
+        cell.delegate = self;
         if (self.unfinishedArr.count == 0) {
             cell.contentView.hidden = YES;
         }else {
@@ -746,6 +746,31 @@
 }
 
 
-
+#pragma mark - UnSubmitCellDelegate
+- (void)UnSubmitCell:(UnSubmitCell *)cell speedSubmitBtnIsClicked:(UIButton *)submitBtn
+{
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"action"] = @"hastentask";
+    param[@"taskid"] = self.taskModel.t_id;
+    NSMutableArray *stuArr = [NSMutableArray array];
+    for (FinshedModel *model in self.unfinishedArr) {
+        NSMutableDictionary *tempDict = [NSMutableDictionary dictionary];
+        [tempDict setObject:model.studentID forKey:@"id"];
+        [tempDict setObject:model.Name forKey:@"name"];
+        [stuArr addObject:tempDict];
+    }
+    NSLog(@"%@", stuArr);
+    param[@"students"] = [stuArr JSONString];
+    [mgr POST:[BaseURL stringByAppendingString:@"/api/teacher/mobile/task/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        if ([responseObject[@"retcode"] integerValue] == 0) {
+            [self.view makeToast:@"已下发催交通知" duration:0.5 position:SHOW_CENTER complete:nil];
+        }else{
+            [self.view makeToast:@"下发催交通知失败,请重试" duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
+    }];
+}
 
 @end

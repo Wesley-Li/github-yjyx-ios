@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class UnSubmitCell;
+@protocol UnSubmitCellDelegate <NSObject>
 
+- (void)UnSubmitCell:(UnSubmitCell *)cell speedSubmitBtnIsClicked:(UIButton *)submitBtn;
+
+@end
 @interface UnSubmitCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *submitLabel;
@@ -18,5 +23,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *BGVIEW;
 
+@property (weak, nonatomic) id<UnSubmitCellDelegate> delegate;
 
 @end

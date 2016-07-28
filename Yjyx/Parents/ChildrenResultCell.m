@@ -53,7 +53,7 @@
     
     self.annotationBtn.layer.cornerRadius = 5;
     self.annotationBtn.layer.borderWidth = 1;
-    self.solutionBtn.layer.masksToBounds = YES;
+    self.annotationBtn.layer.masksToBounds = YES;
     self.annotationBtn.layer.borderColor = RGBACOLOR(22, 156, 111, 1).CGColor;
     [self.annotationBtn setTitleColor:RGBACOLOR(22, 156, 111, 1) forState:UIControlStateNormal];
     
@@ -80,7 +80,7 @@
     
     [web loadHTMLString:jsString baseURL:nil];
     
-
+    self.leadconstant.constant = self.annotationBtn.hidden ? -60 : 10;
     // 正确答案赋值
     // 选择题还是填空题,选择题是否多选
     if ([model.questionType isEqualToString:@"choice"] && [resultModel.questionType isEqualToString:@"choice"]) {
@@ -90,7 +90,7 @@
         
         NSArray *letterAry = [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"M", nil];
         NSString *tureAnswer = nil;
-        
+
         // 正确答案显示
         if ([model.answer containsString:@"|"]) {
             // 多选
@@ -185,6 +185,7 @@
     }
     self.leadconstant.constant = self.annotationBtn.hidden ? -60 : 10;
     
+
     // 对错按钮显示
     if ([resultModel.rightOrWrong isEqual:@0]) {
         self.RWimageView.image = [UIImage imageNamed:@"list_btn_wrong"];
@@ -323,8 +324,9 @@
         
         self.annotationBtn.hidden = YES;
     }
+
     self.leadconstant.constant = self.annotationBtn.hidden ? -60 : 10;
-    
+
     
     // 对错按钮显示
     if ([resultModel.isRight isEqual:@0]) {

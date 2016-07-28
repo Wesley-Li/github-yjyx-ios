@@ -210,7 +210,8 @@ static NSString *ID = @"CELL";
             NSLog(@"%@", stuModel.realname);
         }
     }
-    if ([self.homeWorkNameTextField.text isEqualToString:@""]) {
+    NSString *nameStr = [self.homeWorkNameTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if ([nameStr isEqualToString:@""]) {
         [self.view makeToast:@"请输入作业名称" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
@@ -294,7 +295,8 @@ static NSString *ID = @"CELL";
     
     NSLog(@"%@--%@", [NSDate date], dateStr);
     NSString *descStr = [NSString stringWithFormat:@"%@ 作业", dateStr];
-    pamar[@"desc"] = [self.descriptionTextField.text isEqualToString:@""] ? descStr : self.descriptionTextField.text;
+    NSString *descTempStr = [self.descriptionTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    pamar[@"desc"] = [descTempStr isEqualToString:@""] ? descStr : self.descriptionTextField.text;
     pamar[@"suggestspendtime"] = [self.timeTextField.text isEqualToString:@""] ? @"30" : self.timeTextField.text;
     pamar[@"questionlist"] = [self.questionList JSONString];
 

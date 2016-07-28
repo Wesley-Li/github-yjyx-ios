@@ -51,6 +51,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalTitleLabel;  // 总题数
 @property (weak, nonatomic) IBOutlet UILabel *workNameLabel; // 作业描述
 @property (weak, nonatomic) IBOutlet UILabel *consumeTimeLabel;
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 
 @property (assign, nonatomic) NSInteger consumeTime; // 消耗的时间
 @property (strong, nonatomic) NSTimer *timer;
@@ -180,7 +181,7 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-//    NSLog(@"++++%@", NSStringFromCGRect(self.scrollView.frame));
+ 
     
 }
 - (void)viewDidLayoutSubviews
@@ -522,6 +523,7 @@
     _consumeTime++;
 
     self.consumeTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", _consumeTime / 60, _consumeTime % 60];
+    [self.bgView layoutIfNeeded];
    
 }
 // 草稿纸的点击
@@ -564,14 +566,16 @@
 //  答题卡按钮被点击
 - (IBAction)answerResultBtnClick:(UIButton *)sender {
     sender.selected = !sender.selected;
-   
+
     if (sender.selected) {
 
         [self countStuAnswer];
+    
+        
         YjyxWorkResultView *workResultV = [[YjyxWorkResultView alloc] init];
         workResultV.delegate = self;
-        workResultV.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
-       
+        workResultV.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+  
         [workResultV setWorkType:self.doWorkArr andArr:self.answerArr];
         [self.view addSubview:workResultV];
     }else{
@@ -582,10 +586,11 @@
                 break;
             }
         }
-        
+       
     }
      NSLog(@"%ld", _stuDoWorkNum);
 }
+
 // 统计学生做题答案
 - (void)countStuAnswer{
     _stuDoWorkNum = 0;
@@ -600,6 +605,11 @@
                 for (UIView *subview in view.subviews) {
                     if ([subview isKindOfClass:[UIScrollView class]]) {
                         for (UIView *finalSubview in subview.subviews){
+                            NSString *answerStr =[((UITextField *)finalSubview).text stringByReplacingOccurrencesOfString:@" " withString:@""
+                                                  ];
+                            if([answerStr isEqualToString:@""]){
+                                continue;
+                            }
                             [arr addObject: ((UITextField *)finalSubview).text];
                         }
                     }
@@ -618,6 +628,7 @@
                         }
                     }
                 }
+               
             }
             if (arr.count > 0) {
                 _stuDoWorkNum++;
@@ -628,6 +639,7 @@
 }
 // 弹出温馨提示
 - (void)presentPromptMessage{
+    NSLog(@"%@", self.answerArr);
     NSString *str = [NSString stringWithFormat:@"您还有%ld题没有完成,确定提交?", self.answerArr.count - _stuDoWorkNum];
     if (_stuDoWorkNum == self.answerArr.count) {
         str = @"您已完成所有作业,确认提交?";
@@ -734,7 +746,7 @@
             }
             
             [oneBlankArr addObject:self.countTimeArr[i]];
-            [choiceArr addObject:oneBlankArr];
+            [blankArr addObject:oneBlankArr];
             NSMutableDictionary *processDict = [NSMutableDictionary dictionary];
             [oneBlankArr addObject:processDict];
             if ([model.requireprocess integerValue] == 1) {
@@ -771,14 +783,18 @@
         param[@"examresult"] = examresult;
         param[@"examid"] = self.examid;
         param[@"action"] = @"task_exam_save_result";
+        NSLog(@"%@", param);
         [mgr POST:[BaseURL stringByAppendingString:STUDENT_UPLOAD_WORK_POST] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
             NSLog(@"%@", responseObject);
             if ([responseObject[@"retcode"] integerValue] == 0) {
                 [self.view makeToast:@"提交完成" duration:0.5 position:SHOW_CENTER complete:^{
+                    NSLog(@"%@", responseObject);
                     YjyxWorkDetailController *vc = [[YjyxWorkDetailController alloc] init];
+                    vc.isFinished = 1;
                     vc.t_id = responseObject[@"tasktrackid"];
                     vc.title = self.desc;
                     vc.taskType = self.type;
+                    NSLog(@"%@,%@,%@", self.desc, self.type, responseObject[@"tasktrackid"]);
                     [self.navigationController pushViewController:vc animated:YES];
                 }];
                 
@@ -802,7 +818,9 @@
             NSLog(@"%@", responseObject);
             if ([responseObject[@"retcode"] integerValue] == 0) {
                 [self.view makeToast:@"提交完成" duration:0.5 position:SHOW_CENTER complete:^{
+                    NSLog(@"%@", responseObject);
                     YjyxWorkDetailController *vc = [[YjyxWorkDetailController alloc] init];
+                    vc.isFinished = 1;
                     vc.t_id = responseObject[@"tasktrackid"];
                     vc.title = self.desc;
                     vc.taskType = self.type;
@@ -1134,5 +1152,10 @@
 {
     NSLog(@"%@", self.countTimeArr);
     [self presentPromptMessage];
+}
+// 点击答题卡空白处
+- (void)workResultView:(YjyxWorkResultView *)view
+{
+    self.answerWorkCardBtn.selected = NO;
 }
 @end

@@ -17,7 +17,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
+    NSLog(@"%@", _model);
 }
 
 - (void)setModel:(MicroDetailModel *)model

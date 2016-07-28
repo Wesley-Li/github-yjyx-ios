@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUB-9e-aSF">
-                        <rect key="frame" x="15" y="12" width="42" height="21"/>
+                        <rect key="frame" x="15" y="12" width="326" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -38,14 +38,8 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpF-q3-QLN">
-                        <rect key="frame" x="15" y="88" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNs-Pp-Usa">
-                        <rect key="frame" x="60" y="88" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpF-q3-QLN">
+                        <rect key="frame" x="15" y="88" width="324" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -58,25 +52,30 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="KUB-9e-aSF" secondAttribute="trailing" id="0Ab-7o-iMx"/>
                     <constraint firstItem="IpF-q3-QLN" firstAttribute="top" secondItem="ZaI-gS-CGy" secondAttribute="bottom" constant="8" id="AYc-mi-3SL"/>
                     <constraint firstItem="1NS-ln-eeP" firstAttribute="leading" secondItem="ZaI-gS-CGy" secondAttribute="trailing" constant="3" id="CKE-zW-tHo"/>
+                    <constraint firstAttribute="trailing" secondItem="IpF-q3-QLN" secondAttribute="trailing" constant="10" id="Rcd-MW-oFz"/>
                     <constraint firstItem="Fpr-ab-pOd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="S9e-Ud-s1f"/>
                     <constraint firstItem="ZaI-gS-CGy" firstAttribute="leading" secondItem="Fpr-ab-pOd" secondAttribute="leading" id="UFn-oe-Q2y"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="IpF-q3-QLN" secondAttribute="trailing" constant="10" id="ZPu-Zn-XTZ"/>
                     <constraint firstItem="KUB-9e-aSF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="cIr-Jg-s9s"/>
-                    <constraint firstItem="QNs-Pp-Usa" firstAttribute="centerY" secondItem="IpF-q3-QLN" secondAttribute="centerY" id="hGt-Qs-Z2b"/>
                     <constraint firstItem="KUB-9e-aSF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="jPm-21-kmb"/>
                     <constraint firstItem="bPE-MQ-7KX" firstAttribute="centerY" secondItem="Fpr-ab-pOd" secondAttribute="centerY" id="lna-5U-LzN"/>
                     <constraint firstItem="Fpr-ab-pOd" firstAttribute="top" secondItem="KUB-9e-aSF" secondAttribute="bottom" constant="2" id="mTg-bT-nbt"/>
                     <constraint firstItem="bPE-MQ-7KX" firstAttribute="leading" secondItem="Fpr-ab-pOd" secondAttribute="trailing" constant="20" id="qV5-ea-Bsc"/>
                     <constraint firstItem="ZaI-gS-CGy" firstAttribute="top" secondItem="Fpr-ab-pOd" secondAttribute="bottom" constant="3" id="rm6-FC-zRP"/>
-                    <constraint firstItem="QNs-Pp-Usa" firstAttribute="leading" secondItem="IpF-q3-QLN" secondAttribute="trailing" constant="3" id="zIr-3V-jhe"/>
                     <constraint firstItem="1NS-ln-eeP" firstAttribute="centerY" secondItem="ZaI-gS-CGy" secondAttribute="centerY" id="za6-sO-12e"/>
                     <constraint firstItem="IpF-q3-QLN" firstAttribute="leading" secondItem="ZaI-gS-CGy" secondAttribute="leading" id="zs1-gW-FOD"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="ZPu-Zn-XTZ"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="coinLabel" destination="ZaI-gS-CGy" id="lO3-zm-pea"/>
-                <outlet property="cordNumLabel" destination="QNs-Pp-Usa" id="pb0-9H-ARJ"/>
                 <outlet property="descLabel" destination="IpF-q3-QLN" id="vDW-sB-g60"/>
                 <outlet property="exchangeTimeLabel" destination="KUB-9e-aSF" id="Jd5-5F-gxB"/>
                 <outlet property="productNameLabel" destination="Fpr-ab-pOd" id="mqw-cF-41W"/>

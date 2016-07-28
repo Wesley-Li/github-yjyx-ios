@@ -45,8 +45,9 @@
         self.microNameTextField.userInteractionEnabled = YES;
         [self.microNameTextField becomeFirstResponder];
     }else{
-        if([self.microNameTextField.text isEqualToString:@""]){
-        [[UIApplication sharedApplication].keyWindow makeToast:@"请输入微课名称" duration:1.0 position:SHOW_TOP complete:nil];
+        NSString *nameStr = [self.microNameTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if([nameStr isEqualToString:@""]){
+        [[UIApplication sharedApplication].keyWindow makeToast:@"请输入微课名称" duration:1.0 position:SHOW_CENTER complete:nil];
             sender.selected = !sender.selected;
             return;
         }

@@ -113,12 +113,14 @@
             break;
         }
     }
+    
     self.last_id = @0;
     [self readDataFromNetWork];
     
     self.bottom_button.backgroundColor = RGBACOLOR(3, 138, 228, 1);
-
-    self.title = self.t_text;
+    if([self.onlysearchmine integerValue] != 1){
+    self.navigationItem.title = self.t_text;
+    }
     // 导航栏右按钮的使用
     self.siftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _siftBtn.frame = CGRectMake(0, 0, 50, 50);

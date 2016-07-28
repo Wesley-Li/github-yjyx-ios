@@ -68,6 +68,8 @@ static NSString *DETAILID = @"detailID";
     [self.workTableV registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxHomeWorkCell class]) bundle:nil] forCellReuseIdentifier:WORKID];
     [self.workTableV registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxWorkDetailCell class]) bundle:nil] forCellReuseIdentifier:DETAILID];
     [self.wrongWorkTableV registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxHomeWorkCell class]) bundle:nil] forCellReuseIdentifier:WORKID];
+    
+    self.workTableV.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
 
 
 }
@@ -80,10 +82,10 @@ static NSString *DETAILID = @"detailID";
 - (void)viewWillAppear:(BOOL)animated
 {
     // 自动刷新
-//    [self.workTableV headerBeginRefreshing];
+    [self.workTableV headerBeginRefreshing];
     self.navigationController.navigationBarHidden = NO;
-    [self.workTableV reloadData];
-    [self.wrongWorkTableV reloadData];
+//    [self.workTableV reloadData];
+//    [self.wrongWorkTableV reloadData];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

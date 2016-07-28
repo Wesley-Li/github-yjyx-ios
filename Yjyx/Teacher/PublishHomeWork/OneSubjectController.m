@@ -51,7 +51,7 @@ static NSString *VideoID = @"VIDEOCELL";
     
     [SVProgressHUD showWithStatus:@"正在加载..."];
     self.navigationController.navigationBarHidden = NO;
-    self.title = @"题目详情";
+    self.navigationItem.title = @"题目详情";
     // 加载返回按钮
     [self loadBackBtn];
     // 加载数据

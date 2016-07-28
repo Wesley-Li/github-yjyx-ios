@@ -30,4 +30,15 @@
     fmt.dateFormat = @"yyyy-MM-dd  HH:mm:ss";
     return [fmt stringFromDate:date];
 }
+- (CGFloat)cellHeight
+{
+    if(_cellHeight != 0){
+        return _cellHeight;
+    }
+    CGFloat cellHeight = 0;
+    cellHeight += 88;
+    CGRect rect = [self.specific_info boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 25, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil];
+    cellHeight += rect.size.height + 8;
+    return cellHeight;
+}
 @end

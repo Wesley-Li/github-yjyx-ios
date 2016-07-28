@@ -13,6 +13,7 @@
 @interface YjyxWorkResultView()
 @property (weak, nonatomic) UIButton *submitBtn;
 
+@property (weak, nonatomic) UIView *bgView;
 @end
 @implementation YjyxWorkResultView
 
@@ -24,7 +25,7 @@
         
         UIView *bgView = [[UIView alloc] init];
         bgView.backgroundColor = [UIColor whiteColor];
-        
+        self.bgView = bgView;
         [self addSubview:bgView];
         
         UIButton *submitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -41,7 +42,7 @@
         
         [bgView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self).with.offset(0);
-            make.top.equalTo(self).with.offset(0);
+            make.top.equalTo(self).with.offset(64);
             make.right.equalTo(self).with.offset(0);
             make.bottom.equalTo(self.submitBtn).with.offset(50);
         }];
@@ -89,7 +90,7 @@
                 btn.layer.cornerRadius = btn.height / 2;
             }
         }
-        [self addSubview:btn];
+        [self.bgView addSubview:btn];
     }
     
      self.submitBtn.y = (margin + 45) * ( 1 + (arr.count - 1) / 6) + 65;
@@ -106,6 +107,13 @@
 {
     if([self.delegate respondsToSelector:@selector(workResultView:sumbitBtnClick:)]){
         [self.delegate workResultView:self sumbitBtnClick:btn];
+    }
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self removeFromSuperview];
+    if([self.delegate respondsToSelector:@selector(workResultView:)]){
+        [self.delegate workResultView:self];
     }
 }
 @end

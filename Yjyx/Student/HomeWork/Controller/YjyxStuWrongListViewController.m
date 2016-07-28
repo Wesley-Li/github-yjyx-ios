@@ -9,7 +9,13 @@
 #import "YjyxStuWrongListViewController.h"
 #import "YjyxStuWrongListModel.h"
 #import "YjyxStuWrongListCell.h"
+
 #import "MJRefresh.h"
+
+
+#import "ChildrenVideoViewController.h"
+#import "YjyxMemberDetailViewController.h"
+#import "ProductEntity.h"
 
 #define ID @"YjyxStuWrongListCell"
 @interface YjyxStuWrongListViewController ()
@@ -22,6 +28,8 @@
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSMutableDictionary *heightDic;
 @property (nonatomic, strong) NSMutableDictionary *blankfillExpandDic;
+
+@property (strong, nonatomic) ProductEntity *entity;
 
 @end
 
@@ -85,7 +93,13 @@
     [self.tableView footerEndRefreshing];
 }
 
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = NO;
+    if(_openMember == 1){
+        [self getDataFromNet];
+    }
+}
 - (void)refreshTableviewCellHeight:(NSNotification *)sender {
 
     YjyxStuWrongListCell *cell = [sender object];
@@ -108,7 +122,7 @@
     NSLog(@"%@", param);
     [manager GET:[BaseURL stringByAppendingString:STUDENT_GET_WRONG_LIST_GET] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
-        
+        [self.dataSource removeAllObjects];
         if ([responseObject[@"retcode"] isEqual:@0]) {
             
             for (NSDictionary *dic in responseObject[@"data"]) {
@@ -117,6 +131,7 @@
                 [model initModelWithDic:dic];
                 [self.dataSource addObject:model];
             }
+
             
             num = self.dataSource.count;
             if (self.dataSource.count < 20) {
@@ -127,6 +142,19 @@
             }
             
             [self.tableView reloadData];
+
+             [self.tableView reloadData];
+            for (int i = 0; i < self.dataSource.count;) {
+                YjyxStuWrongListModel *model = self.dataSource[i];
+                if (model.videoUrl == nil && model.explanation == nil) {
+                    [self getMemberInfo];
+                    break;
+                }else{
+                    break;
+                }
+            }
+           
+
             
         }else {
         
@@ -229,7 +257,7 @@
 
     YjyxStuWrongListCell *cell = (YjyxStuWrongListCell *)sender.superview.superview.superview;
     YjyxStuWrongListModel *model = self.dataSource[cell.tag];
-    
+    NSLog(@"%@,%@", model.videoUrl, model.explanation);
     if (model.videoUrl == nil && model.explanation == nil) {
         // 非会员
         UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"查看解题方法需要会员权限，是否前往试用或成为会员?" preferredStyle:UIAlertControllerStyleAlert];
@@ -238,7 +266,10 @@
         UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             // 跳转至会员页面
-            
+            YjyxMemberDetailViewController *vc = [[YjyxMemberDetailViewController alloc] init];
+            vc.productEntity = self.entity;
+            vc.jumpType = 1;
+            [self.navigationController pushViewController:vc animated:YES];
             
         }];
         
@@ -249,12 +280,32 @@
         
         
     }else {
-    
+        ChildrenVideoViewController *vc = [[ChildrenVideoViewController alloc] init];
+        vc.URLString = model.videoUrl;
+        vc.explantionStr = model.explanation;
+        vc.title = @"详解";
+        [self.navigationController pushViewController:vc animated:YES];
         
     }
 }
-
-
+// 获取会员信息
+- (void)getMemberInfo
+{
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"action"] = @"getonememproductinfo";
+    param[@"subjectid"] = self.subjectid;
+    [mgr GET:[BaseURL stringByAppendingString:@"/api/student/mobile/m_product/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        if ([responseObject[@"retcode"] integerValue] == 0) {
+            ProductEntity *entity = [ProductEntity wrapProductEntityWithDic:responseObject];
+            self.entity = entity;
+        }else{
+            [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
+    }];
+}
 
 - (void)dealloc {
     // 移除通知
@@ -262,49 +313,5 @@
 }
 
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

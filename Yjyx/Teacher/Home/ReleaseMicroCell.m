@@ -33,7 +33,7 @@
         self.playBtn.hidden = YES;
         self.backBTN.hidden = YES;
     }else{
-        
+        self.playBtn.hidden = NO;
         self.backBTN.hidden = NO;
     }
 }

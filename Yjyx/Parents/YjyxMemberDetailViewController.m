@@ -36,7 +36,7 @@
     openChildAry = [[NSMutableArray alloc] init];
     payBtn.hidden = YES;
     
-
+    self.navigationItem.title = [_productEntity.subject_name stringByAppendingString:@"会员"];
     titleLb.text = [NSString stringWithFormat:@"%@会员特权",self.productEntity.subject_name];
     
     NSString *content = [self.productEntity.content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
@@ -164,12 +164,12 @@
 #pragma mark -MyEvent
 - (IBAction)probationClicked:(id)sender //试用按钮
 {
-    if(_jumpType == 2){// 家长端
+    if(_jumpType == 0){// 家长端
     if (trailChildAry.count== 0) {
         [self.view makeToast:@"暂无可试用小孩" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
-    chooseView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+    chooseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
     chooseView.backgroundColor = RGBACOLOR(0, 0, 0, 0.5);
     [self.view addSubview:chooseView];
     CGFloat height = trailChildAry.count*50+70;
@@ -260,7 +260,7 @@
 {
     YjyxPayDetailViewController *vc =[[YjyxPayDetailViewController alloc] init];
     vc.productEntity = self.productEntity;
-    vc.title = self.title;
+    vc.title = self.navigationItem.title;
     vc.jumpType = self.jumpType;
     [self.navigationController pushViewController:vc animated:YES];
     return;

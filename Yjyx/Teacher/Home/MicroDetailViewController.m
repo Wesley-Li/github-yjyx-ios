@@ -29,6 +29,7 @@
 }
 @property (strong, nonatomic) MicroDetailModel *microDetailM;
 @property (strong, nonatomic) NSMutableDictionary *cellHeightDic;
+@property (strong, nonatomic) NSMutableDictionary *knowCellHeightDic;
 // 所有的题目数组
 @property (strong, nonatomic) NSMutableArray *allSubjectArr;
 // 多少组
@@ -40,7 +41,7 @@
 // 填空题个数
 @property (assign, nonatomic) NSInteger blankcount;
 
-@property (assign, nonatomic) NSInteger flag;
+@property (assign, nonatomic) NSInteger flag; // 是否处于编辑状态
 
 @property (strong, nonatomic) NSString *videoURL;
 @end
@@ -90,9 +91,10 @@ static NSString *VideoNumID = @"VideoNum";
     self.tableView.sectionHeaderHeight = 0;
     self.tableView.sectionFooterHeight = 0;
     self.cellHeightDic = [NSMutableDictionary dictionary];
+    self.knowCellHeightDic = [NSMutableDictionary dictionary];
     //注册播放完成通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    //注册播放完成通知
+    //注册全屏播放通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
     // 返回按钮被点击
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backBtnClicked) name:@"BackButtonClicked" object:nil];
@@ -108,6 +110,7 @@ static NSString *VideoNumID = @"VideoNum";
      ];
     // web高度通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webviewHeight:) name:@"webviewHeight" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(knowLegeWebViewHeight:) name:@"KnowlegewebviewHeight" object:nil];
     
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -370,7 +373,7 @@ static NSString *VideoNumID = @"VideoNum";
     [self.allSubjectArr removeAllObjects];
     [self.allSubjectArr addObjectsFromArray:choiceArr];
     [self.allSubjectArr addObjectsFromArray:blankfillArr];
-    NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:3];
+    NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:4];
     [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
 }
 #pragma mark - wmPlayer的方法
@@ -778,7 +781,15 @@ static NSString *VideoNumID = @"VideoNum";
 
 
 }
-
+- (void)knowLegeWebViewHeight:(NSNotification *)noti
+{
+    MicroKnowledgeCell *cell = [noti object];
+    if (![self.knowCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.knowCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height) {
+        
+        [self.knowCellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.tag]];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:3]] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
@@ -793,8 +804,11 @@ static NSString *VideoNumID = @"VideoNum";
         }
     }else if (indexPath.section == 3){
      
-        return 70;
-       
+        CGFloat height = [[self.knowCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
+     
+        return height == 0 ? 100 : height;
+    
+    
     }else if(indexPath.section == 4){
         if (indexPath.row == 0) {
             return 40;
@@ -825,7 +839,7 @@ static NSString *VideoNumID = @"VideoNum";
         if (_microDetailM.videoUrlArr.count == 1) {
             return 0;
         }else{
-            return 15;
+            return 1;
         }
     }else{
         return 15;

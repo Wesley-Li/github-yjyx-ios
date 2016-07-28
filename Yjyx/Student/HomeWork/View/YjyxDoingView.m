@@ -29,6 +29,7 @@
     self.fourBtn.layer.borderWidth = 1;
  
     self.scrollView.bounces = NO;
+//    self.scrollView.backgroundColor = [UIColor whiteColor];
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
 }
@@ -58,6 +59,13 @@
         blankAnswer.backgroundColor = [UIColor whiteColor];
         blankAnswer.placeholder = @" 请填写答案";
         blankAnswer.frame = CGRectMake(0, 40 * i , SCREEN_WIDTH - 70, 40 -1);
+        [self.scrollView addSubview:blankAnswer];
+    }
+    if(count == 1){
+        UITextField *blankAnswer = [[UITextField alloc] init];
+        blankAnswer.backgroundColor = [UIColor whiteColor];
+        blankAnswer.userInteractionEnabled = NO;
+        blankAnswer.frame = CGRectMake(0, 40 , SCREEN_WIDTH - 70, 40 -1);
         [self.scrollView addSubview:blankAnswer];
     }
 }

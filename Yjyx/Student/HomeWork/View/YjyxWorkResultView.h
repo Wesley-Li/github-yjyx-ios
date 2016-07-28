@@ -13,6 +13,7 @@
 
 - (void)workResultView:(YjyxWorkResultView *)view workNumBtnClick:(UIButton *)btn;
 - (void)workResultView:(YjyxWorkResultView *)view sumbitBtnClick:(UIButton *)btn;
+- (void)workResultView:(YjyxWorkResultView *)view ;
 @end
 @interface YjyxWorkResultView : UIView
 
