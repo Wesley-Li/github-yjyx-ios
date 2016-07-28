@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YjyxDoingWorkController">
             <connections>
                 <outlet property="answerWorkCardBtn" destination="GZF-lg-Ghx" id="WDm-XB-Uvs"/>
+                <outlet property="bgView" destination="npi-hj-PX9" id="je6-Ju-X5j"/>
                 <outlet property="bottomConstrait" destination="ilf-lr-0qd" id="fRM-9F-t3c"/>
                 <outlet property="consumeTimeLabel" destination="fue-Wm-Pud" id="YMA-3y-5le"/>
                 <outlet property="scrollView" destination="cU6-MX-Few" id="7tw-fa-tIJ"/>

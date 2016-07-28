@@ -108,14 +108,17 @@
         [cell.textLabel setText:[sounds  objectAtIndex:indexPath.row]];
         [cell.textLabel setFont:[UIFont systemFontOfSize:17]];
     }
+    NSLog(@"%ld, %ld", [[[NSUserDefaults standardUserDefaults] objectForKey:@"T_SOUNDS"] integerValue], [[[NSUserDefaults standardUserDefaults] objectForKey:@"SOUNDS"] integerValue]);
     
-    if (indexPath.row == [[[NSUserDefaults standardUserDefaults] objectForKey:@"T_SOUNDS"] integerValue]) {
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-        defaultIndex = indexPath;
-    }
+//    if (indexPath.row == [[[NSUserDefaults standardUserDefaults] objectForKey:@"T_SOUNDS"] integerValue]) {
+//        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+//        defaultIndex = indexPath;
+//    }
     
     if([_audio isEqualToString:[sounds objectAtIndex:indexPath.row]]){
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
+        UITableViewCell *cell1 = [tableView cellForRowAtIndexPath:defaultIndex];
+        cell1.accessoryType = UITableViewCellAccessoryNone;
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
         defaultIndex = indexPath;
     }
     return cell;

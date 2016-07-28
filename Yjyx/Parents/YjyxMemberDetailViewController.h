@@ -23,6 +23,7 @@
 @property (strong,nonatomic) ProductEntity *productEntity; // 产品类型
 @property (assign, nonatomic) NSInteger jumpType; //  从上个界面跳转类型
 @property (weak,nonatomic) IBOutlet UIView *detailView;
+@property (strong, nonatomic) NSNumber *subjectid;
 
 
 @end

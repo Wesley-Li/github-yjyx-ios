@@ -49,7 +49,7 @@
     
     [self readDataFromNetWork];
     
-    
+   self.navigationItem.title = @"知识点出题";
     
 }
 

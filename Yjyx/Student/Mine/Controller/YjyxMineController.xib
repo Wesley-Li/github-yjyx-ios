@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -114,12 +113,11 @@
                             </variation>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hjB-vh-imk">
-                            <rect key="frame" x="275" y="28" width="35" height="35"/>
+                            <rect key="frame" x="285" y="28" width="25" height="25"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="35" id="CnC-9O-UK8"/>
-                                <constraint firstAttribute="height" constant="35" id="Zl8-Do-nPO"/>
+                                <constraint firstAttribute="width" constant="25" id="CnC-9O-UK8"/>
+                                <constraint firstAttribute="height" constant="25" id="Zl8-Do-nPO"/>
                             </constraints>
-                            <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                             <state key="normal" image="student_home_setting"/>
                             <connections>
                                 <action selector="setterBtnClick:" destination="-1" eventType="touchUpInside" id="s9u-25-olD"/>

@@ -29,6 +29,7 @@
 }
 
 @property (nonatomic, copy) NSString *videoURL;
+@property (nonatomic, copy) NSMutableArray *videoURLArr;
 @property (nonatomic, copy) NSString *microName;
 @property (nonatomic, copy) NSString *knowledgeName;
 
@@ -39,6 +40,9 @@
 @property (strong, nonatomic) UIButton *backBtn;
 
 @property (strong, nonatomic) NSMutableArray *doWorkArr;
+
+@property (strong, nonatomic) UIButton *preBtn; //   视频被选中的按钮
+@property (weak, nonatomic) UIView *bgView; // 保存视频个数的背景view
 @end
 
 @implementation YjyxMicroClassViewController
@@ -81,7 +85,8 @@
     if (self) {
         //注册播放完成通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:@"fullScreenBtnClickNotice" object:nil];
-        
+        //注册播放完成通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     }
     return self;
 }
@@ -106,7 +111,12 @@
     self.navigationController.navigationBarHidden = NO;
     }
 }
-
+-(void)videoDidFinished:(NSNotification *)notice{
+    videoImage.hidden = NO;
+//    currentCell.playBtn.hidden = NO;
+    [self releaseWMPlayer];
+    [self setNeedsStatusBarAppearanceUpdate];
+}
 
 
 -(void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation{
@@ -321,11 +331,12 @@
     [[YjxService sharedInstance] getChildrenPreviewResult:dic withBlock:^(id result,NSError *error){
         [self.view hideToastActivity];
         if (result != nil) {
-            
+            NSLog(@"%@", result);
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 
                 // 视频和表头信息
                 self.videoURL = [[[[result[@"lessonobj"] objectForKey:@"videoobjlist"] JSONValue] firstObject] objectForKey:@"url"];
+                self.videoURLArr = [[result[@"lessonobj"] objectForKey:@"videoobjlist"] JSONValue];
                 self.microName = [result[@"lessonobj"] objectForKey:@"name"];
                 self.knowledgeName = [result[@"lessonobj"] objectForKey:@"knowledgedesc"];
                 // 配置视频
@@ -557,13 +568,37 @@
     web.delegate = self;
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", content];
     [web loadHTMLString:jsString baseURL:nil];
-    
-    
+   
     [headerView addSubview:web];
     
+//    UIView *videoNumView = [[UIView alloc] initWithFrame:CGRectMake(0, kowLabel.origin.y + 50, SCREEN_WIDTH, 80)];
+//    [headerView addSubview:videoNumView];
+//    videoNumView.backgroundColor = [UIColor whiteColor];
+//    self.bgView = videoNumView;
+  
     headerView.frame = CGRectMake(0, playerFrame.size.height + 64, SCREEN_WIDTH, web.origin.y + web.height + 5);
     
     self.subjectTable.tableHeaderView = headerView;
+    
+//    CGFloat margin = 15;
+//    CGFloat btnWH = (SCREEN_WIDTH - 6 * margin) / 5;
+//    for (int i = 0; i < self.videoURLArr.count; i++) {
+//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [btn setTitle:[NSString stringWithFormat:@"%d", i + 1] forState:UIControlStateNormal];
+//        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        btn.frame = CGRectMake(margin + (margin + btnWH) * i, 40 - btnWH / 2, btnWH, btnWH);
+//        btn.layer.cornerRadius = btnWH / 2;
+//        btn.layer.borderWidth = 1;
+//        btn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//        btn.tag = i;
+//        if (btn.tag == 0) {
+//            self.preBtn = btn;
+//            btn.backgroundColor = [UIColor lightGrayColor];
+//            btn.layer.borderWidth = 0;
+//        }
+//        [btn addTarget:self action:@selector(videoNumBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//        [videoNumView addSubview:btn];
+//    }
     
 }
 
@@ -592,7 +627,19 @@
 
     self.subjectTable.tableHeaderView = headerView;
 }
-
+// 多视频按钮的点击
+- (void)videoNumBtnClick:(UIButton *)btn
+{
+    self.preBtn.backgroundColor = [UIColor whiteColor];
+    self.preBtn.layer.borderWidth = 1;
+    btn.backgroundColor = [UIColor lightGrayColor];
+    btn.layer.borderWidth = 0;
+    self.preBtn.selected = NO;
+    btn.selected = YES;
+    self.preBtn = btn;
+    self.videoURL = self.videoURLArr[btn.tag];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+}
 
 #pragma mark -UITableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -722,6 +769,7 @@
     [wmPlayer.player play];
 //    [self.view.subviews[sender.view.tag -1] removeFromSuperview];
     [videoImage removeFromSuperview];
+//    videoImage.hidden = YES;
     videoImage = nil;
 }
 

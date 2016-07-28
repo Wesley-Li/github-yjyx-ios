@@ -204,7 +204,7 @@
             // 修改提示音
             SoundChangeViewController *soundVC = [[SoundChangeViewController alloc] init];
 //            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-            
+            [soundVC setAudio:cell.detailTextLabel.text];
             [self.navigationController pushViewController:soundVC animated:YES];
             /*
             YjyxSoundViewController *soundVC = [[YjyxSoundViewController alloc] init];
@@ -234,7 +234,7 @@
 
 - (void)soundIsOn:(UISwitch *)sender {
 
-    [YjyxOverallData sharedInstance].parentInfo.notify_with_sound = sender.isOn?@"1":@"0";
+    [YjyxOverallData sharedInstance].teacherInfo.notify_with_sound = sender.isOn?@"1":@"0";
 
 }
 
@@ -272,14 +272,20 @@
                 [SYS_CACHE removeObjectForKey:@"getDate"];
                 [[QuestionDataBase shareDataBase] deleteQuestionTable];
                 
-                // 定时器挂起
-//                dispatch_suspend(((AppDelegate*)SYS_DELEGATE).timer);
+                // 上报消息设置
+                NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"notify_setting",@"action",[YjyxOverallData sharedInstance].teacherInfo.receive_notify,@"receive_notify",[YjyxOverallData sharedInstance].teacherInfo.notify_with_sound,@"with_sound",[YjyxOverallData sharedInstance].teacherInfo.notify_sound,@"sound",[YjyxOverallData sharedInstance].teacherInfo.notify_shake,@"vibrate", nil];
                 
-//                LoginViewController *loginVC = [[LoginViewController alloc] init];
-//                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
-//                AppDelegate *mydelegate = (AppDelegate*)SYS_DELEGATE;
-//                nav.navigationBarHidden = YES;
-//                [mydelegate.window setRootViewController:nav];
+                AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                
+                
+                [manager POST:[BaseURL stringByAppendingString:TEACHER_UPLOAD_SOUND_SETTING_CONNECT_POST] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                    
+                    //        NSLog(@"%@", responseObject);
+                } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+                    
+                    //        NSLog(@"%@", error);
+                }];
+
             }
         }else {
             NSLog(@"%@", error.userInfo[NSLocalizedDescriptionKey]);

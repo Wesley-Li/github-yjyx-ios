@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *coinLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *descLabel;
-@property (weak, nonatomic) IBOutlet UILabel *cordNumLabel;
+
 @end
 @implementation YjyxExchangeRecordCell
 
@@ -31,6 +31,7 @@
     self.productNameLabel.text = recordModel.goods_type_name;
     self.coinLabel.text = [recordModel.exchange_coins stringValue];
     
+    self.descLabel.text = recordModel.specific_info;
     
 }
 

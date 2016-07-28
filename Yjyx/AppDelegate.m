@@ -205,6 +205,7 @@
             
         }
     }
+    completionHandler(UIBackgroundFetchResultNewData);
 }
 
 
@@ -233,7 +234,22 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     NSLog(@"-----------");
+    if([self.role isEqualToString:@"teacher"]){
+        // 上报消息设置
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"notify_setting",@"action",[YjyxOverallData sharedInstance].teacherInfo.receive_notify,@"receive_notify",[YjyxOverallData sharedInstance].teacherInfo.notify_with_sound,@"with_sound",[YjyxOverallData sharedInstance].teacherInfo.notify_sound,@"sound",[YjyxOverallData sharedInstance].teacherInfo.notify_shake,@"vibrate", nil];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        
+        [manager POST:[BaseURL stringByAppendingString:TEACHER_UPLOAD_SOUND_SETTING_CONNECT_POST] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+            
+            //        NSLog(@"%@", responseObject);
+        } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+            
+            //        NSLog(@"%@", error);
+        }];
 
+    }else if([self.role isEqualToString:@"student"]){
     // 上报消息设置
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"notify_setting",@"action",[YjyxOverallData sharedInstance].studentInfo.receive_notify,@"receive_notify",[YjyxOverallData sharedInstance].studentInfo.notify_with_sound,@"with_sound",[YjyxOverallData sharedInstance].studentInfo.notify_sound, @"sound",[YjyxOverallData sharedInstance].studentInfo.notify_shake,@"vibrate", nil];
     
@@ -246,6 +262,7 @@
        
         //        NSLog(@"%@", error);
     }];
+    }
 }
 
 - (BOOL)application:(UIApplication *)application

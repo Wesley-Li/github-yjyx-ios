@@ -82,7 +82,10 @@ static NSString *ID = @"CELL";
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = NO;
-    [self.tableView reloadData];
+    if(_isFinished == 1){
+        [self loadNewData];
+    }
+    
 }
 - (void)viewWillDisappear:(BOOL)animated
 {

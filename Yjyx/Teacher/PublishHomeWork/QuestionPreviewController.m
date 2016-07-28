@@ -43,7 +43,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"预览作业";
+    self.navigationItem.title = @"预览作业";
     NSLog(@"%@", self.selectArr);
     [self loadBackBtn];
     self.configurePublishBtn.backgroundColor = RGBACOLOR(3, 138, 228, 1);

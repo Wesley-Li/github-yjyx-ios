@@ -99,13 +99,13 @@
         [cell.textLabel setFont:[UIFont systemFontOfSize:17]];
     }
     
-    if (indexPath.row == [[[NSUserDefaults standardUserDefaults] objectForKey:@"T_SOUNDS"] integerValue]) {
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-        defaultIndex = indexPath;
-    }
+//    if (indexPath.row == [[[NSUserDefaults standardUserDefaults] objectForKey:@"T_SOUNDS"] integerValue]) {
+//        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+//        defaultIndex = indexPath;
+//    }
     
     if([_audio isEqualToString:[sounds objectAtIndex:indexPath.row]]){
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
         defaultIndex = indexPath;
     }
     return cell;
@@ -143,13 +143,13 @@
         _audio = @"default";
         [YjyxOverallData sharedInstance].studentInfo.notify_sound = _audio;
         number = [NSNumber numberWithInteger:indexPath.row];
-        [[NSUserDefaults standardUserDefaults] setObject:number forKey:@"T_SOUNDS"];
+        [[NSUserDefaults standardUserDefaults] setObject:number forKey:@"S_SOUNDS"];
         
     }else{
         _audio = [NSString stringWithFormat:@"push%ld.caf",(long)indexPath.row];
         [YjyxOverallData sharedInstance].studentInfo.notify_sound = _audio;
         number = [NSNumber numberWithInteger:indexPath.row];
-        [[NSUserDefaults standardUserDefaults] setObject:number forKey:@"T_SOUNDS"];
+        [[NSUserDefaults standardUserDefaults] setObject:number forKey:@"S_SOUNDS"];
         
     }
     

@@ -8,7 +8,7 @@
 
 #import "ChildrenVideoViewController.h"
 #import "WMPlayer.h"
-
+#import "YjyxCommonNavController.h"
 @interface ChildrenVideoViewController ()<UIWebViewDelegate>
 {
     WMPlayer *wmPlayer;
@@ -16,7 +16,7 @@
     UIImageView *videoImage;
     UIButton *backBtn;
 }
-
+@property (assign, nonatomic) NSInteger flag;  // 1代表学生端
 @end
 
 @implementation ChildrenVideoViewController
@@ -28,7 +28,7 @@
         //注册播放完成通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:@"fullScreenBtnClickNotice" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goBack) name:@"goBackBtnClickNotice" object:nil];
-        
+//         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     }
     return self;
 }
@@ -187,7 +187,6 @@
        [self.view addSubview:web];
        
       
-       
        backBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 44, 44)];
        [backBtn setImage:[UIImage imageNamed:@"Parent_VideoBack"] forState:UIControlStateNormal];
        [backBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
@@ -220,13 +219,19 @@
        [self.view addSubview:web];
    }
   //    [self toFullScreenWithInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
-
+    if([self.navigationController isKindOfClass:[YjyxCommonNavController class]]){
+        _flag = 1;
+    }
+    
 }
 
 
 - (BOOL)prefersStatusBarHidden {
-
-    return YES;
+    if(self.URLString.length > 0){
+        return YES;
+    }else{
+    return NO;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -244,12 +249,13 @@
     if (_URLString.length > 0) {
         self.navigationController.navigationBarHidden = YES;
     }else{
+        if(_flag == 0){
         [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
         [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
-        
+        }
         self.navigationController.navigationBarHidden = NO;
     }
-
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

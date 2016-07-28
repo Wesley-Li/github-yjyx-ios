@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) NSMutableArray *productRecordArr;
 @property (strong, nonatomic) NSNumber *lastid;
+
+@property (strong, nonatomic) NSMutableArray *tempArr;
 @end
 
 @implementation YjyxExchangeRecordViewController
@@ -29,14 +31,16 @@ static NSString *ID = @"cell";
     [super viewDidLoad];
     [self loadBackBtn];
     self.navigationItem.title = @"兑换记录";
-    self.tableView.rowHeight = 120;
+//    self.tableView.rowHeight = 130;
     self.lastid = @0;
     [self loadData];
-    
+//    self.tableView.rowHeight = UITableViewAutomaticDimension;
+//    self.tableView.estimatedRowHeight = 44;
     self.tableView.tableFooterView = [[UIView alloc] init];
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxExchangeRecordCell class]) bundle:nil] forCellReuseIdentifier:ID];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 64 , 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49 , 0);
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, -49, 0);
     [self setupRefresh];
 }
 -(void)viewDidDisappear:(BOOL)animated
@@ -65,11 +69,13 @@ static NSString *ID = @"cell";
     param[@"action"] = @"m_list_exchange_history";
     param[@"lastid"] = self.lastid;
     [mgr GET:[BaseURL stringByAppendingString:@"/api/teacher/exchange_withdraw/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] integerValue] == 0){
             NSMutableArray *tempArr = [NSMutableArray array];
             for (NSDictionary *dict in responseObject[@"retlist"]) {
                 [tempArr addObject:[YjyxExchangeRecordModel exchangeRecordModelWithDict:dict]];
             }
+            self.tempArr = tempArr;
             if([self.lastid isEqual:@0]){
                 self.productRecordArr = tempArr;
             }else{
@@ -81,8 +87,10 @@ static NSString *ID = @"cell";
         if(self.productRecordArr.count == 0){
             [SVProgressHUD showInfoWithStatus:@"暂没有兑换记录"];
         }
+        [self.tableView  reloadData];
         [self.tableView footerEndRefreshing];
         [self.tableView headerEndRefreshing];
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
         [self.tableView footerEndRefreshing];
@@ -99,6 +107,11 @@ static NSString *ID = @"cell";
 }
 - (void)loadMoreData
 {
+    if(self.tempArr.count == 0){
+        self.tableView.footerRefreshingText = @"没有更多了";
+        [self.tableView footerEndRefreshing];
+        return;
+    }
     self.lastid = [self.productRecordArr.lastObject p_id];
     [self loadData];
 }
@@ -117,7 +130,10 @@ static NSString *ID = @"cell";
     return cell;
 }
 
-
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    YjyxExchangeRecordModel *model = self.productRecordArr[indexPath.row];
+    return model.cellHeight;
+}
 
 @end

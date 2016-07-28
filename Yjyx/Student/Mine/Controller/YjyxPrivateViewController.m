@@ -193,7 +193,8 @@
         if (indexPath.row == 2) {
             // 修改提示音
             YjyxChangeSoundViewController *soundVC = [[YjyxChangeSoundViewController alloc] init];
-            
+            [soundVC setAudio:cell.detailTextLabel.text];
+    
             [self.navigationController pushViewController:soundVC animated:YES];
     
             

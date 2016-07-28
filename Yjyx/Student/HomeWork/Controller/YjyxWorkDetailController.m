@@ -78,7 +78,7 @@ static NSString *KnowID = @"KnowID";
     
     //注册播放完成通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    //注册播放完成通知
+    //注册全屏播放通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
     // 返回按钮被点击
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backBtnClicked) name:@"BackButtonClicked" object:nil];
@@ -97,6 +97,8 @@ static NSString *KnowID = @"KnowID";
 - (void)viewWillAppear:(BOOL)animated
 {
     [self setNeedsStatusBarAppearanceUpdate];
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
+    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
     //旋转屏幕通知
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onDeviceOrientationChange)
@@ -127,7 +129,9 @@ static NSString *KnowID = @"KnowID";
 }
 - (void)dealloc
 {
+    NSLog(@"-------");
     [self releaseWMPlayer];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (BOOL)prefersStatusBarHidden
 {
@@ -144,7 +148,9 @@ static NSString *KnowID = @"KnowID";
     NSInteger flag = 0;
     for (UIViewController *vc in self.navigationController.childViewControllers) {
         if([vc isKindOfClass:[YjyxOneSubjectViewController class]]){
+            ((YjyxOneSubjectViewController *)vc).isFinished = 1;
             [self.navigationController popToViewController:vc animated:YES];
+            
             flag = 1;
             break;
         }
@@ -190,10 +196,9 @@ static NSString *KnowID = @"KnowID";
     param[@"action"] = @"m_viewresult";
     NSLog(@"%@", self.t_id);
     param[@"tasktrackid"] = self.t_id;
-    
-    NSLog(@"----%@", param);
+    NSLog(@"%@", param);
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/tasks/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-//        NSLog(@"%@", responseObject);
+        NSLog(@"%@", responseObject);
 //        NSLog(@"%@",responseObject[@"data"][@"result"][@"choice"]);
         YjyxMicroWorkModel *model = [YjyxMicroWorkModel microWorkModelWithDict:responseObject[@"data"][@"lessonobj"]];
         _model = model;

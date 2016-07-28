@@ -8,11 +8,16 @@
 
 #import "UnSubmitCell.h"
 
+@interface UnSubmitCell()
+
+@property (weak, nonatomic) IBOutlet UIButton *speedSubmitBtn;
+
+@end
 @implementation UnSubmitCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
+    self.speedSubmitBtn.layer.cornerRadius = 5;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -21,4 +26,9 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)speedSubmitBtnClick:(UIButton *)sender {
+    if([self.delegate respondsToSelector:@selector(UnSubmitCell:speedSubmitBtnIsClicked:)]){
+        [self.delegate UnSubmitCell:self speedSubmitBtnIsClicked:sender];
+    }
+}
 @end

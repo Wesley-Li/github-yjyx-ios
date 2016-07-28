@@ -36,20 +36,38 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QXL-9L-MsD">
-                                <rect key="frame" x="0.0" y="25" width="444" height="107"/>
+                                <rect key="frame" x="0.0" y="30" width="444" height="102"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rIB-ce-uFz">
+                                <rect key="frame" x="361" y="0.0" width="68" height="25"/>
+                                <color key="backgroundColor" red="0.058823529409999999" green="0.44705882349999998" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68" id="sMq-EN-7so"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="催交">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="speedSubmitBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="p03-WU-H0Y"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="JT8-hy-ova" firstAttribute="top" secondItem="66f-M0-6ms" secondAttribute="top" constant="5" id="5dA-hF-siY"/>
-                            <constraint firstItem="QXL-9L-MsD" firstAttribute="top" secondItem="JT8-hy-ova" secondAttribute="bottom" id="EdB-tj-6ft"/>
+                            <constraint firstItem="QXL-9L-MsD" firstAttribute="top" secondItem="JT8-hy-ova" secondAttribute="bottom" constant="5" id="EdB-tj-6ft"/>
+                            <constraint firstItem="rIB-ce-uFz" firstAttribute="trailing" secondItem="QXL-9L-MsD" secondAttribute="trailing" constant="-15" id="PrE-7V-K5F"/>
                             <constraint firstItem="JT8-hy-ova" firstAttribute="leading" secondItem="66f-M0-6ms" secondAttribute="leading" constant="20" id="QGP-OA-jrn"/>
                             <constraint firstAttribute="bottom" secondItem="R3Q-t7-7l0" secondAttribute="bottom" constant="5" id="RYX-Jt-NpT"/>
                             <constraint firstAttribute="trailing" secondItem="QXL-9L-MsD" secondAttribute="trailing" id="Rlc-YD-tLq"/>
                             <constraint firstItem="R3Q-t7-7l0" firstAttribute="centerX" secondItem="66f-M0-6ms" secondAttribute="centerX" id="hIq-ln-VER"/>
+                            <constraint firstItem="rIB-ce-uFz" firstAttribute="top" secondItem="66f-M0-6ms" secondAttribute="top" id="i98-AX-BaI"/>
                             <constraint firstItem="QXL-9L-MsD" firstAttribute="leading" secondItem="66f-M0-6ms" secondAttribute="leading" id="kvi-Z2-LWZ"/>
                             <constraint firstItem="R3Q-t7-7l0" firstAttribute="top" secondItem="QXL-9L-MsD" secondAttribute="bottom" id="sPu-fH-SLp"/>
+                            <constraint firstItem="QXL-9L-MsD" firstAttribute="top" secondItem="rIB-ce-uFz" secondAttribute="bottom" constant="5" id="u0U-Ex-gIu"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -66,9 +84,10 @@
                 <outlet property="BGVIEW" destination="QXL-9L-MsD" id="ezi-m8-BTY"/>
                 <outlet property="bg_view" destination="66f-M0-6ms" id="dhK-Ub-r94"/>
                 <outlet property="showMoreBtn" destination="R3Q-t7-7l0" id="eLM-Iw-szr"/>
+                <outlet property="speedSubmitBtn" destination="rIB-ce-uFz" id="XCy-IE-c0f"/>
                 <outlet property="submitLabel" destination="JT8-hy-ova" id="7Sp-hk-smS"/>
             </connections>
-            <point key="canvasLocation" x="335" y="359"/>
+            <point key="canvasLocation" x="167" y="345"/>
         </tableViewCell>
     </objects>
     <resources>
