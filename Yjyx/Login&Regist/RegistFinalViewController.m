@@ -87,7 +87,7 @@
             if([responseObject[@"retcode"] isEqual: @0]){
                 if ([responseObject[@"exist"] isEqual: @1]) {
                     [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
-                }else{
+              
                     _flag = 1;
                 }
             }else{
@@ -125,8 +125,9 @@
 #pragma mark - 获取验证码
 -(IBAction)getRegisterCode:(UIButton *)sender
 {
-    [self textFieldDidEndEditing:phoneText];
-    if(_flag == 0){
+//    [self textFieldDidEndEditing:phoneText];
+    if(_flag == 1){
+         [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
     if (phoneText.text.length != 11) {

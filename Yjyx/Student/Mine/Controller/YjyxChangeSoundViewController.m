@@ -52,8 +52,8 @@
 - (void)goSure
 {
     // 存储
-    [[NSUserDefaults standardUserDefaults]setValue:[YjyxOverallData sharedInstance].studentInfo.notify_sound forKey:@"T_SOUND"];
-    
+//    [[NSUserDefaults standardUserDefaults]setValue:[YjyxOverallData sharedInstance].studentInfo.notify_sound forKey:@"S_SOUND"];
+     [YjyxOverallData sharedInstance].studentInfo.notify_sound = _audio;
     // 上报消息设置
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"notify_setting",@"action",[YjyxOverallData sharedInstance].studentInfo.receive_notify,@"receive_notify",[YjyxOverallData sharedInstance].studentInfo.notify_with_sound,@"with_sound",_audio,@"sound",[YjyxOverallData sharedInstance].studentInfo.notify_shake,@"vibrate", nil];
     
@@ -141,13 +141,13 @@
     }
     if (indexPath.row == 0) {
         _audio = @"default";
-        [YjyxOverallData sharedInstance].studentInfo.notify_sound = _audio;
+//        [YjyxOverallData sharedInstance].studentInfo.notify_sound = _audio;
         number = [NSNumber numberWithInteger:indexPath.row];
         [[NSUserDefaults standardUserDefaults] setObject:number forKey:@"S_SOUNDS"];
         
     }else{
         _audio = [NSString stringWithFormat:@"push%ld.caf",(long)indexPath.row];
-        [YjyxOverallData sharedInstance].studentInfo.notify_sound = _audio;
+//        [YjyxOverallData sharedInstance].studentInfo.notify_sound = _audio;
         number = [NSNumber numberWithInteger:indexPath.row];
         [[NSUserDefaults standardUserDefaults] setObject:number forKey:@"S_SOUNDS"];
         

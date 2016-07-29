@@ -76,13 +76,11 @@
         [manager POST:[BaseURL stringByAppendingString:STUDENT_NAME_AND_PHONE_CONNECT_POST] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             
             if ([responseObject[@"retcode"] integerValue] == 0) {
-                
-                [self.view makeToast:@"修改成功" duration:0.5 position:SHOW_CENTER complete:^{
+                [YjyxOverallData sharedInstance].studentInfo.realname = _nameTextField.text;
+                [self.view makeToast:@"修改成功" duration:0.5 position:SHOW_CENTER complete:nil];
                     // 更新
-                    [YjyxOverallData sharedInstance].studentInfo.realname = _nameTextField.text;
-                    
-                    [self.navigationController popViewControllerAnimated:YES];
-                }];
+                [self.navigationController popViewControllerAnimated:YES];
+              
             }else {
                 
                 [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];

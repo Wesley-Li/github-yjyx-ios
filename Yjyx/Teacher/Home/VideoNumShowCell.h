@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class MicroDetailModel, VideoNumShowCell;
+@class MicroDetailModel, VideoNumShowCell, YjyxMicroWorkModel;
 @protocol VideoNumShowCellDelegate <NSObject>
 
 - (void)videoNumShowCell:(VideoNumShowCell *)cell videoNumBtnClick:(UIButton *)btn;
@@ -17,5 +17,6 @@
 
 @property (strong, nonatomic) MicroDetailModel *model;
 
+@property (strong, nonatomic) YjyxMicroWorkModel *workModel;
 @property (weak, nonatomic) id<VideoNumShowCellDelegate> delegate;
 @end

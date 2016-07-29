@@ -14,6 +14,8 @@
 @property (nonatomic, strong) NSNumber *gid;
 @property (nonatomic, copy) NSString *name;
 
+@property (assign, nonatomic) BOOL isExpanded;
+@property (assign, nonatomic, readwrite) BOOL isSelect;
 - (void)initStuGroupWithDic:(NSDictionary *)dic;
 
 @end

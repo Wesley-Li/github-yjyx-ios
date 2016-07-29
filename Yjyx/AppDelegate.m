@@ -596,9 +596,9 @@
     //1.注册APNS推送通知
     if (SYS_VERSION >= 8.0) {
         [[UIApplication sharedApplication] registerForRemoteNotifications];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert categories:nil]];
+//        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert categories:nil]];
     }else{
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert];
+//        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert];
     }
     [UMessage startWithAppkey:@"56c2e28167e58ef1b1002dad" launchOptions:launchOptions];
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
@@ -637,10 +637,10 @@
      |UIRemoteNotificationTypeAlert];
 #endif
     [UMessage setLogEnabled:YES];
-    [MobClick setLogEnabled:YES];
+//    [MobClick setLogEnabled:YES];
     UMConfigInstance.appKey = @"56c2e28167e58ef1b1002dad";
     UMConfigInstance.secret = @"lfs5co6sanr4atqymxthof271dross34";
-    [MobClick startWithConfigure:UMConfigInstance];
+//    [MobClick startWithConfigure:UMConfigInstance];
 }
 
 #pragma mark - 获取所有学生列表

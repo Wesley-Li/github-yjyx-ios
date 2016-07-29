@@ -128,8 +128,10 @@ static StuDataBase *singleton = nil;
 - (void)insertStuGroup:(StuGroupEntity *)stuGroup {
     
     [self.db open];
-    NSData *dataMemberList = [NSKeyedArchiver archivedDataWithRootObject:stuGroup.memberlist];
-    BOOL isSuccess = [self.db executeUpdate:@"insert into SG(memberlist, gid, name) values(?,?,?)", dataMemberList, stuGroup.gid, stuGroup.name];
+//    NSData *dataMemberList = [NSKeyedArchiver archivedDataWithRootObject:stuGroup.memberlist];
+     NSData *dataMemberList = [NSJSONSerialization dataWithJSONObject:stuGroup.memberlist options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *dataListString = [[NSString alloc] initWithData:dataMemberList encoding:NSUTF8StringEncoding];
+    BOOL isSuccess = [self.db executeUpdate:@"insert into SG(memberlist, gid, name) values(?,?,?)", dataListString, stuGroup.gid, stuGroup.name];
     NSLog(@"%@", isSuccess ? @"插入群组数据成功" : @"插入群组数据失败");
     [self.db close];
 }

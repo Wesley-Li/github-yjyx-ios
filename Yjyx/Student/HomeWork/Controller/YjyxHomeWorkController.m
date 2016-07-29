@@ -302,7 +302,9 @@ static NSString *DETAILID = @"detailID";
 
     }else{// 点击了错题榜
         YjyxHomeWrongModel *model = self.wrongArr[indexPath.row];
-        
+        if(model.failedquestions.count == 0){
+            return;
+        }
         YjyxStuWrongListViewController *vc = [[YjyxStuWrongListViewController alloc] init];
         vc.navigationItem.title = model.subjectname;
         vc.subjectid  = model.subjectid;

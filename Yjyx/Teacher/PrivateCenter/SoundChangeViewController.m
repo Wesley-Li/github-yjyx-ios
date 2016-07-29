@@ -63,7 +63,7 @@
 {
     // 存储
     [[NSUserDefaults standardUserDefaults]setValue:[YjyxOverallData sharedInstance].teacherInfo.notify_sound forKey:@"T_SOUND"];
-    
+      [YjyxOverallData sharedInstance].teacherInfo.notify_sound = _audio;
     // 上报消息设置
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"notify_setting",@"action",[YjyxOverallData sharedInstance].teacherInfo.receive_notify,@"receive_notify",[YjyxOverallData sharedInstance].teacherInfo.notify_with_sound,@"with_sound",_audio,@"sound",[YjyxOverallData sharedInstance].teacherInfo.notify_shake,@"vibrate", nil];
     
@@ -71,7 +71,7 @@
 
     
     [manager POST:[BaseURL stringByAppendingString:TEACHER_UPLOAD_SOUND_SETTING_CONNECT_POST] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
+       
 //        NSLog(@"%@", responseObject);
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -154,13 +154,13 @@
     }
     if (indexPath.row == 0) {
         _audio = @"default";
-        [YjyxOverallData sharedInstance].teacherInfo.notify_sound = _audio;
+//        [YjyxOverallData sharedInstance].teacherInfo.notify_sound = _audio;
         number = [NSNumber numberWithInteger:indexPath.row];
         [[NSUserDefaults standardUserDefaults] setObject:number forKey:@"T_SOUNDS"];
         
     }else{
         _audio = [NSString stringWithFormat:@"push%ld.caf",(long)indexPath.row];
-        [YjyxOverallData sharedInstance].teacherInfo.notify_sound = _audio;
+//        [YjyxOverallData sharedInstance].teacherInfo.notify_sound = _audio;
         number = [NSNumber numberWithInteger:indexPath.row];
         [[NSUserDefaults standardUserDefaults] setObject:number forKey:@"T_SOUNDS"];
 

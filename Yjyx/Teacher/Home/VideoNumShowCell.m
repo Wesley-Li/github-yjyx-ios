@@ -8,7 +8,7 @@
 
 #import "VideoNumShowCell.h"
 #import "MicroDetailModel.h"
-
+#import "YjyxMicroWorkModel.h"
 @interface VideoNumShowCell()
 
 @property (strong, nonatomic) UIButton *preBtn;
@@ -30,7 +30,7 @@
         [view removeFromSuperview];
     }
     NSLog(@"%ld+++++++", model.videoUrlArr.count);
-    if (model.videoUrlArr.count == 1) {
+    if (model.videoUrlArr.count <= 1) {
         return;
     }
     CGFloat margin = 15;
@@ -53,6 +53,7 @@
         [self.contentView addSubview:btn];
     }
 }
+
 - (void)videoNumBtnClick:(UIButton *)btn
 {
     self.preBtn.backgroundColor = [UIColor whiteColor];
@@ -65,6 +66,39 @@
     
     if([self.delegate respondsToSelector:@selector(videoNumShowCell:videoNumBtnClick:)]){
         [self.delegate videoNumShowCell:self videoNumBtnClick:btn];
+    }
+}
+- (void)setWorkModel:(YjyxMicroWorkModel *)workModel
+{
+    _workModel = workModel;
+    for (UIView *view in self.contentView.subviews) {
+        if (view != nil) {
+            return;
+        }
+        [view removeFromSuperview];
+    }
+    NSLog(@"%ld+++++++", _workModel.videoobjlist.count);
+    if (_workModel.videoobjlist.count <= 1) {
+        return;
+    }
+    CGFloat margin = 15;
+    CGFloat btnWH = (SCREEN_WIDTH - 6 * margin) / 5;
+    for (int i = 0; i < _workModel.videoobjlist.count; i++) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setTitle:[NSString stringWithFormat:@"%d", i + 1] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        btn.frame = CGRectMake(margin + (margin + btnWH) * i, 40 - btnWH / 2, btnWH, btnWH);
+        btn.layer.cornerRadius = btnWH / 2;
+        btn.layer.borderWidth = 1;
+        btn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        btn.tag = i;
+        if (btn.tag == 0) {
+            self.preBtn = btn;
+            btn.backgroundColor = [UIColor lightGrayColor];
+            btn.layer.borderWidth = 0;
+        }
+        [btn addTarget:self action:@selector(videoNumBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:btn];
     }
 }
 @end

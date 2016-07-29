@@ -84,7 +84,7 @@ static NSString *VideoNumID = @"VideoNum";
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([MicroKnowledgeCell class]) bundle:nil] forCellReuseIdentifier:KnowledgeID];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([VideoNumShowCell class]) bundle:nil] forCellReuseIdentifier:VideoNumID];
     // tableview的属性
-    self.tableView.contentInset = UIEdgeInsetsMake(- 15, 0, -49, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(-5, 0, -49, 0);
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, -49, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = COMMONCOLOR;
@@ -744,6 +744,7 @@ static NSString *VideoNumID = @"VideoNum";
         return cell;
     }else if(indexPath.section == 3){
         MicroKnowledgeCell *cell = [tableView dequeueReusableCellWithIdentifier:KnowledgeID];
+        cell.tag = indexPath.row;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.model = _microDetailM;
         return cell;
@@ -842,7 +843,7 @@ static NSString *VideoNumID = @"VideoNum";
             return 1;
         }
     }else{
-        return 15;
+        return 5;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

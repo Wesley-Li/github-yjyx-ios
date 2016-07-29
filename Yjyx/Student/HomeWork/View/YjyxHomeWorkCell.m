@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *subjectNameLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *doneCountLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *expandImageView;
 @end
 @implementation YjyxHomeWorkCell
 
@@ -49,6 +50,11 @@
     [self.subjectImageView setImageWithURL:[NSURL URLWithString:homeWrongModel.icon] ];
     }
     self.subjectNameLabel.text = homeWrongModel.subjectname;
-    self.doneCountLabel.text = [NSString stringWithFormat:@"共做错%ld题", homeWrongModel.failedquestions.count];
+    self.doneCountLabel.text = [NSString stringWithFormat:@"共做错%ld题", (unsigned long)homeWrongModel.failedquestions.count];
+    if(homeWrongModel.failedquestions.count == 0){
+        self.expandImageView.hidden = YES;
+    }else{
+        self.expandImageView.hidden = NO;
+    }
 }
 @end
