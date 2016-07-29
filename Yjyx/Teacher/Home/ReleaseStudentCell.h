@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class StuClassEntity, StudentEntity, ReleaseStudentCell;
+@class StuClassEntity, StudentEntity, ReleaseStudentCell, StuGroupEntity;
 
 @protocol ReleaseStudentCellDelegate <NSObject>
 
@@ -23,4 +23,6 @@
 @property (weak, nonatomic) id<ReleaseStudentCellDelegate> delegate;
 
 @property (strong, nonatomic) StudentEntity *stuEntity;
+
+@property (strong, nonatomic) StuGroupEntity *groupEntity;
 @end

@@ -119,13 +119,11 @@
     [manager POST:[BaseURL stringByAppendingString:STUDENT_NAME_AND_PHONE_CONNECT_POST] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if ([responseObject[@"retcode"] integerValue] == 0) {
-            
-            [self.view makeToast:@"修改成功" duration:0.5 position:SHOW_CENTER complete:^{
-                // 刷新列表
-                [YjyxOverallData sharedInstance].studentInfo.phonenumber = _phoneTextfield.text;
-                
-                [self.navigationController popViewControllerAnimated:YES];
-            }];
+            // 刷新列表
+            [YjyxOverallData sharedInstance].studentInfo.phonenumber = _phoneTextfield.text;
+            [self.view makeToast:@"修改成功" duration:0.5 position:SHOW_CENTER complete:nil];
+            [self.navigationController popViewControllerAnimated:YES];
+         
         }else {
             
             [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];

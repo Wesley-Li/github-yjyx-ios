@@ -9,6 +9,7 @@
 #import "ReleaseStudentCell.h"
 #import "StuClassEntity.h"
 #import "StudentEntity.h"
+#import "StuGroupEntity.h"
 @interface ReleaseStudentCell()
 
 @property (weak, nonatomic) IBOutlet UILabel *classOrStudentLabel;
@@ -67,6 +68,24 @@
     self.classOrStudentLabel.text = stuEntity.realname;
     self.isShowBtn.userInteractionEnabled = YES;
 }
+
+
+- (void)setGroupEntity:(StuGroupEntity *)groupEntity
+{
+    _groupEntity = groupEntity;
+   
+    self.selectBtn.hidden = NO;
+    self.leadConstant.constant = 0;
+    self.selectBtn.selected = groupEntity.isSelect ? YES : NO;
+    NSLog(@"%d", groupEntity.isExpanded);
+    self.isShowBtn.selected = groupEntity.isExpanded ? YES : NO;
+    [self.isShowBtn setImage:[UIImage imageNamed:@"list_icon_2"] forState:UIControlStateNormal];
+    [self.isShowBtn setImage:[UIImage imageNamed:@"list_icon_2_expand"] forState:UIControlStateSelected];
+    self.isShowBtn.userInteractionEnabled = NO;
+    self.classOrStudentLabel.text = groupEntity.name;
+    
+    
+}
 - (IBAction)showBtnClick:(UIButton *)sender {
     sender.selected = !sender.selected;
     _stuEntity.isSelect = sender.selected;
@@ -75,9 +94,13 @@
         
     }
 }
+- (void)dealloc
+{
+    NSLog(@"-----------");
+}
 - (IBAction)selectAllBtnClick:(UIButton *)sender {
     sender.selected = !sender.selected;
-    _classEntity.isSelect = sender.selected;
+   
     if([self.delegate respondsToSelector:@selector(releaseStudentCell:allBtnSelectedClicked:)]){
         [self.delegate releaseStudentCell:self allBtnSelectedClicked:sender];
     }

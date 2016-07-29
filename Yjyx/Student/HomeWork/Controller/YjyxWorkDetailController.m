@@ -19,7 +19,8 @@
 #import "WMPlayer.h"
 #import "YjyxOneSubjectViewController.h"
 #import "YjyxAnonatationController.h"
-@interface YjyxWorkDetailController ()<UITableViewDelegate, UITableViewDataSource>
+#import "VideoNumShowCell.h"
+@interface YjyxWorkDetailController ()<UITableViewDelegate, UITableViewDataSource, VideoNumShowCellDelegate>
 {
     WMPlayer *wmPlayer;
     NSIndexPath *currentIndexPath;
@@ -35,8 +36,9 @@
 
 @property (nonatomic, strong) NSMutableDictionary *choiceCellHeightDic;
 @property (nonatomic, strong) NSMutableDictionary *blankfillHeightDic;
+@property (strong, nonatomic) NSMutableDictionary *knowCellHeightDic; // 知识清单高度字典
 @property (nonatomic, strong) NSMutableDictionary *blankfillExpandDic;
-
+@property (nonatomic, strong) NSString *videoURL; // 播放视频的url
 @property (strong, nonatomic) ReleaseMicroCell *videoCell;
 @end
 
@@ -46,6 +48,7 @@ static NSString *ID = @"CELL";
 static NSString *NorID = @"cell";
 static NSString *MicroID = @"MicroID";
 static NSString *KnowID = @"KnowID";
+static NSString *videoNumID = @"VIDEONumID";
 #pragma mark - 懒加载
 
 #pragma mark - view的生命周期
@@ -57,6 +60,7 @@ static NSString *KnowID = @"KnowID";
     [backBtn setImage:[UIImage imageNamed:@"comm_back"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.leftBarButtonItem = leftBtnItem;
+    self.knowCellHeightDic = [NSMutableDictionary dictionary];
     
     [self loadData];
     self.choiceCellHeightDic = [[NSMutableDictionary alloc] init];
@@ -73,9 +77,10 @@ static NSString *KnowID = @"KnowID";
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NorID];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ReleaseMicroCell class]) bundle:nil] forCellReuseIdentifier:MicroID];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([MicroKnowledgeCell class]) bundle:nil] forCellReuseIdentifier:KnowID];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([VideoNumShowCell class]) bundle:nil] forCellReuseIdentifier:videoNumID];
     // 注册加载完成高度的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTableviewCellHeight:) name:@"WEBVIEW_HEIGHT" object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(knowLegeWebViewHeight:) name:@"KnowlegewebviewHeight" object:nil];
     
     //注册播放完成通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
@@ -189,7 +194,16 @@ static NSString *KnowID = @"KnowID";
     }
     
 }
-
+- (void)knowLegeWebViewHeight:(NSNotification *)noti
+{
+    MicroKnowledgeCell *cell = [noti object];
+    NSLog(@"%ld", cell.tag);
+    if (![self.knowCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.knowCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height) {
+        NSLog(@"%f-----%@", cell.height, [self.knowCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]);
+        [self.knowCellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.tag]];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:2]] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
 - (void)loadData
 {
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
@@ -203,6 +217,7 @@ static NSString *KnowID = @"KnowID";
 //        NSLog(@"%@",responseObject[@"data"][@"result"][@"choice"]);
         YjyxMicroWorkModel *model = [YjyxMicroWorkModel microWorkModelWithDict:responseObject[@"data"][@"lessonobj"]];
         _model = model;
+        self.videoURL = model.videoobjlist[0][@"url"];
         NSMutableArray *tempArr1 = [NSMutableArray array];
         NSMutableArray *tempArr2 = [NSMutableArray array];
         for (NSArray *arr in responseObject[@"data"][@"result"][@"choice"]) {
@@ -448,11 +463,11 @@ static NSString *KnowID = @"KnowID";
         wmPlayer.backBtn.hidden = YES;
         wmPlayer.closeBtn.hidden = YES;
         [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
-        [wmPlayer setVideoURLStr:_model.videoobjlist.firstObject[@"url"]];
+        [wmPlayer setVideoURLStr:self.videoURL];
         [wmPlayer.player play];
     }else{
         
-        wmPlayer = [[WMPlayer alloc]initWithFrame:self.videoCell.backgroundIV.bounds videoURLStr:_model.videoobjlist.firstObject[@"url"]];
+        wmPlayer = [[WMPlayer alloc]initWithFrame:self.videoCell.backgroundIV.bounds videoURLStr:self.videoURL];
         wmPlayer.backBtn.hidden = YES;
         wmPlayer.closeBtn.hidden = YES;
         
@@ -538,7 +553,7 @@ static NSString *KnowID = @"KnowID";
     NSString *videoUrl;
     NSString *explantionStr;
     
-    if (cell.indexPath.section == 3) {//选择题
+    if (cell.indexPath.section == 4) {//选择题
         if (self.stuChoiceAnswerArr.count > 0) {
             YjyxWorkDetailModel *rmodel = self.stuChoiceContentArr[cell.indexPath.row - 1];
             //        ChildrenResultModel *model = [self.choiceModelDic objectForKey:[NSString stringWithFormat:@"%@", rmodel.q_id]];
@@ -553,7 +568,7 @@ static NSString *KnowID = @"KnowID";
             explantionStr = rmodel.explanation;
         }
     
-    }else if(cell.indexPath.section == 4){//填空题
+    }else if(cell.indexPath.section == 5){//填空题
         YjyxWorkDetailModel *rmodel = self.stuBlankContentArr[cell.indexPath.row -1];
 //        ChildrenResultModel *model = [self.blankfillModelDic objectForKey:[NSString stringWithFormat:@"%@", rmodel.q_id]];
         
@@ -597,21 +612,21 @@ static NSString *KnowID = @"KnowID";
         return 0;
     }
     if (self.stuBlankAnswerArr.count != 0 && self.stuChoiceAnswerArr.count != 0) {
-        return 2 + 3;
+        return 2 + 3 + 1;
     }else{
-        return 1 + 3;
+        return 1 + 3 + 1;
     }
     
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 3) {
+    if (section == 4) {
         if (self.stuChoiceAnswerArr.count != 0) {
             return self.stuChoiceAnswerArr.count + 1;
         }else{
            return  self.stuBlankAnswerArr.count + 1;
         }
-    }else if(section == 4){
+    }else if(section == 5){
         return self.stuBlankAnswerArr.count + 1;
     }else{
         return 1;
@@ -677,11 +692,17 @@ static NSString *KnowID = @"KnowID";
         cell.textLabel.text = self.model.name;
         return cell;
     }else if(indexPath.section == 2){
+        VideoNumShowCell *cell = [tableView dequeueReusableCellWithIdentifier:videoNumID];
+        cell.delegate = self;
+        cell.workModel = _model;
+        return cell;
+    }else if(indexPath.section == 3){
         MicroKnowledgeCell *cell = [tableView dequeueReusableCellWithIdentifier:KnowID];
+        cell.tag = indexPath.row;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.workModel = self.model;
         return cell;
-    }else if (indexPath.section == 3){
+    }else if (indexPath.section == 4){
         if (self.stuChoiceAnswerArr.count != 0) {
             if (indexPath.row == 0) {
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NorID];
@@ -782,9 +803,22 @@ static NSString *KnowID = @"KnowID";
         if ([self.taskType isEqual:@1]) {
             return 0;
         }else{
-            return  70;
+        if(_model.videoobjlist.count == 1){
+            return 0;
+        }else{
+            return 80;
         }
-    }else if (indexPath.section == 3) {
+        }
+    }else if(indexPath.section == 3){
+        if ([self.taskType isEqual:@1]) {
+            return 0;
+        }else{
+            
+            CGFloat height = [[self.knowCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
+            NSLog(@"%ld, %f", indexPath.row, height);
+            return height == 0 ? 100 : height;
+        }
+    }else if (indexPath.section == 4) {
         if (self.stuChoiceAnswerArr.count != 0) {
             if(indexPath.row == 0){
                 return 40;
@@ -815,17 +849,34 @@ static NSString *KnowID = @"KnowID";
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     
-    if (section == 1 || section == 2) {
+    if (section == 1 || section == 3 ) {
         if ([self.taskType isEqual:@1]) {
             return 0;
         }else{
-        return 15;
+            
+        return 5;
+        
+        }
+    }else if(section == 2){
+        if ([self.taskType isEqual:@1]){
+            return 0;
+        }else{
+        if(_model.videoobjlist.count == 1){
+            return 0;
+        }else{
+            return 1;
+        }
         }
     }else{
         return 0;
     }
 }
-
+#pragma mark - VideoNumShowCellDelegate代理方法
+- (void)videoNumShowCell:(VideoNumShowCell *)cell videoNumBtnClick:(UIButton *)btn
+{
+    self.videoURL = _model.videoobjlist[btn.tag][@"url"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+}
 #pragma mark - 点击批注跳转
 - (void)getTheAnotation:(UIButton *)sender {
     

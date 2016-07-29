@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *recvCodeBtn;
 
+@property (assign, nonatomic) NSInteger flag;
 @property (strong, nonatomic) NSTimer *timer;
 @property (assign, nonatomic) NSInteger second;
 @end
@@ -56,6 +57,7 @@
     [_phoneTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     _conFirmpswTextField.delegate = self;
     _pswTextField.delegate = self;
+    _phoneTextField.delegate = self;
 }
 -  (void)viewWillAppear:(BOOL)animated
 {
@@ -115,6 +117,11 @@
 -(IBAction)getRegisterCode:(UIButton *)sender
 {
     [self.view endEditing:YES];
+    [self textFieldDidEndEditing:_phoneTextField];
+    if(_flag == 1){
+        [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
+        return;
+    }
     if (_phoneTextField.text.length == 0 || _phoneTextField.text.length < 11) {
         [self.view makeToast:@"请输入正确的手机号码" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
@@ -302,6 +309,26 @@
 
     if(![self.pswTextField.text isEqualToString:self.conFirmpswTextField.text]){
         [self.view makeToast:@"两次密码输入不一样" duration:0.5 position:SHOW_CENTER complete:nil];
+    }
+    if([textField isEqual:_phoneTextField]){
+        AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+        NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
+        pamar[@"action"] = @"checkuserexist";
+        pamar[@"username"] = textField.text;
+        [mgr GET:[BaseURL stringByAppendingString:USERNAME_ISEXIST_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+            if([responseObject[@"retcode"] isEqual: @0]){
+                if ([responseObject[@"exist"] isEqual: @1]) {
+                    [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
+                
+                    _flag = 1;
+                }
+            }else{
+                [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
+        }];
     }
 }
 

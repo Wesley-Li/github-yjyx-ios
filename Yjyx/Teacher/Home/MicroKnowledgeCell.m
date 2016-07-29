@@ -49,9 +49,12 @@
     self.knowLedgeLabel.text = workModel.knowledgedesc;
     if (workModel.knowledgedesc == nil) {
         self.knowLabel.hidden = YES;
+        return;
     }else{
         self.knowLabel.hidden = NO;
     }
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", workModel.knowledgedesc];
+    [_web loadHTMLString:jsString baseURL:nil];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {

@@ -43,6 +43,7 @@
 
 @property (strong, nonatomic) NSMutableArray *doWorkArr;
 
+
 @property (weak, nonatomic) UIView *bgView; // 保存视频个数的背景view
 @end
 
