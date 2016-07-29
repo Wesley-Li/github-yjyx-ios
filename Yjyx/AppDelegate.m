@@ -38,7 +38,7 @@
 #import "YjyxYiTeachController.h"
 #import "YjyxHomeWorkController.h"
 #import "YjyxCommonNavController.h"
-#import "YjyxCommonTabController.h"
+
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define _IPHONE80_ 80000
 
@@ -63,6 +63,7 @@
     //是否推送跳转到指定页面标记
     NSDictionary *remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (remoteNotification != nil) {
+        // 家长端
         if ([remoteNotification[@"type"] isEqualToString:@"childactivity"]) {
             if ([remoteNotification[@"finished"] integerValue] == 0 ) {
                 if ([remoteNotification[@"tasktype"] integerValue] ==1) {
@@ -76,10 +77,27 @@
                 }else{
                     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_RESULTMICRO;
                 }
-         }
-       }
+            }
+        }
         [YjyxOverallData sharedInstance].historyId = remoteNotification[@"id"];
         [YjyxOverallData sharedInstance].previewRid = remoteNotification[@"rid"];
+
+        
+        // 学生端
+        if ([remoteNotification[@"type"] isEqualToString:@"hastentask"]) {// 老师催作业
+            
+            if ([remoteNotification[@"tasktype"] integerValue] ==1) {
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
+            }else{
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
+            }
+            
+            [YjyxOverallData sharedInstance].previewRid = remoteNotification[@"rid"];
+            
+            
+        }
+
+                
     }
     
     // 自动登录,从本地取值
@@ -135,6 +153,7 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler
 {
     if (application.applicationState == UIApplicationStateActive) {
+        
         if ([userInfo[@"type"] isEqualToString:@"childstats"]) {//统计数据更新处理
             NSString *cachePath = [USER_IMGCACHE stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[userInfo objectForKey:@"cid"]]];
 
@@ -147,7 +166,7 @@
             }
         }
         
-        if ([userInfo[@"type"] isEqualToString:@"childactivity"]) {
+        if ([userInfo[@"type"] isEqualToString:@"childactivity"]) {// 孩子新动态
             
             if ([userInfo[@"finished"] integerValue] == 0 ) {
                 if ([userInfo[@"tasktype"] integerValue] ==1) {
@@ -168,9 +187,23 @@
             NSString *contentStr = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:contentStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看详情",nil];
             [alertView show];
-        }else if ([userInfo[@"type"] isEqualToString:@"childstats"]){
+        }
+        
+        if ([userInfo[@"type"] isEqualToString:@"hastentask"]) {// 老师催作业
             
-        }else{
+            if ([userInfo[@"tasktype"] integerValue] ==1) {
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
+            }else{
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
+            }
+            
+            [YjyxOverallData sharedInstance].previewRid = userInfo[@"rid"];
+
+            NSString *contentStr = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:contentStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看详情",nil];
+            [alertView show];
+
             
         }
     }else{
@@ -385,16 +418,16 @@
         YjyxCommonNavController *navVc4 = [[YjyxCommonNavController alloc] initWithRootViewController:mineVc];
         navVc4.tabBarItem = [UITabBarItem itemWithTitle:@"我的" image:[UIImage imageNamed:@"我的"] selectedImage:[UIImage imageNamed:@"我的点击"]];
      
-        YjyxCommonTabController *tabBarVc = [[YjyxCommonTabController alloc] init];
+        _tabBarVc = [[YjyxCommonTabController alloc] init];
         
 //        tabBarVc.tabBarItem.imageInsets = UIEdgeInsetsMake(20, 0, 20, 0);
-        [tabBarVc addChildViewController:navVc1];
-        [tabBarVc addChildViewController:navVc2];
-        [tabBarVc addChildViewController:navVc3];
-        [tabBarVc addChildViewController:navVc4];
+        [_tabBarVc addChildViewController:navVc1];
+        [_tabBarVc addChildViewController:navVc2];
+        [_tabBarVc addChildViewController:navVc3];
+        [_tabBarVc addChildViewController:navVc4];
         
         
-        self.window.rootViewController = tabBarVc;
+        self.window.rootViewController = _tabBarVc;
         // 判断版本更新并获取学生列表
         [self judgeAndUpdate];
     }
@@ -684,58 +717,102 @@
 #pragma mark -UIAlertView
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
-        if (_tabBar != nil) {
+        if (_tabBar != nil && [((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {// 家长端
             [self pushSwitch:_tabBar.selectedIndex];
+        }
+        
+        if (_tabBarVc != nil && [((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"student"]) {// 学生端
+            [self pushSwitch:_tabBarVc.selectedIndex];
         }
     }
 }
 
 -(void)pushSwitch:(NSInteger)index
 {
-    UINavigationController * vc = [_tabBar.viewControllers objectAtIndex:index];
-    switch ([YjyxOverallData sharedInstance].pushType) {
-        case 1:{
-            YjyxWorkPreviewViewController *result = [[YjyxWorkPreviewViewController alloc] init];
-            result.previewRid = [YjyxOverallData sharedInstance].previewRid;
-            result.title = @"作业预览";
-            [result setHidesBottomBarWhenPushed:YES];
-            [vc pushViewController:result animated:YES];
-            [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+    // 家长端
+    if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {
+        
+        UINavigationController * vc = [_tabBar.viewControllers objectAtIndex:index];
+        switch ([YjyxOverallData sharedInstance].pushType) {
+            case 1:{
+                YjyxWorkPreviewViewController *result = [[YjyxWorkPreviewViewController alloc] init];
+                result.previewRid = [YjyxOverallData sharedInstance].previewRid;
+                result.title = @"作业预览";
+                [result setHidesBottomBarWhenPushed:YES];
+                [vc pushViewController:result animated:YES];
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+            }
+                break;
+            case 2:{
+                YjyxMicroClassViewController *result = [[YjyxMicroClassViewController alloc] init];
+                result.previewRid = [YjyxOverallData sharedInstance].previewRid;
+                result.title = @"微课预览";
+                [result setHidesBottomBarWhenPushed:YES];
+                [vc pushViewController:result animated:YES];
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+            }
+                break;
+            case 3:{
+                ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
+                result.taskResultId = [YjyxOverallData sharedInstance].historyId;
+                result.title = @"结果详情";
+                [result setHidesBottomBarWhenPushed:YES];
+                [vc pushViewController:result animated:YES];
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+                break;
+                
+            }
+                break;
+            case 4:{
+                ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
+                result.taskResultId = [YjyxOverallData sharedInstance].historyId;
+                [result setHidesBottomBarWhenPushed:YES];
+                result.title = @"结果详情";
+                [vc pushViewController:result animated:YES];
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+                break;
+            }
+                break;
+            default:
+                break;
         }
-            break;
-        case 2:{
-            YjyxMicroClassViewController *result = [[YjyxMicroClassViewController alloc] init];
-            result.previewRid = [YjyxOverallData sharedInstance].previewRid;
-            result.title = @"微课预览";
-            [result setHidesBottomBarWhenPushed:YES];
-            [vc pushViewController:result animated:YES];
-            [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
-        }
-            break;
-        case 3:{
-            ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
-            result.taskResultId = [YjyxOverallData sharedInstance].historyId;
-            result.title = @"结果详情";
-            [result setHidesBottomBarWhenPushed:YES];
-            [vc pushViewController:result animated:YES];
-            [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
-            break;
-            
-        }
-            break;
-        case 4:{
-            ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
-            result.taskResultId = [YjyxOverallData sharedInstance].historyId;
-            [result setHidesBottomBarWhenPushed:YES];
-            result.title = @"结果详情";
-            [vc pushViewController:result animated:YES];
-            [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
-            break;
-        }
-            break;
-        default:
-            break;
+
+        
     }
+    
+    // 学生端
+    if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"student"]) {
+        
+        UINavigationController *vc = [_tabBarVc.viewControllers objectAtIndex:index];
+        switch ([YjyxOverallData sharedInstance].pushType) {
+            case 1:{
+                YjyxWorkPreviewViewController *result = [[YjyxWorkPreviewViewController alloc] init];
+                result.previewRid = [YjyxOverallData sharedInstance].previewRid;
+                [result setHidesBottomBarWhenPushed:YES];
+                [vc pushViewController:result animated:YES];
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+            }
+
+                break;
+                
+            case 2:{
+                YjyxMicroClassViewController *result = [[YjyxMicroClassViewController alloc] init];
+                result.previewRid = [YjyxOverallData sharedInstance].previewRid;
+                [result setHidesBottomBarWhenPushed:YES];
+                [vc pushViewController:result animated:YES];
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+            }
+                break;
+
+                
+            default:
+                break;
+        }
+        
+        
+        
+    }
+    
     
 }
 

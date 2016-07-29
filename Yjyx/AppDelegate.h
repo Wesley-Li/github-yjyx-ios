@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Login&Regist/LoginViewController.h"
 #import "CustomTabBarViewController.h"
+#import "YjyxCommonTabController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UIAlertViewDelegate>
 
@@ -18,9 +19,11 @@
 
 @property (strong, nonatomic) NavRootViewController *navigation;
 
-@property (strong, nonatomic) UITabBarController *tabBar;
+@property (strong, nonatomic) UITabBarController *tabBar;// 家长端底部标签控制器
 
-@property (strong, nonatomic) CustomTabBarViewController *cusTBViewController;
+@property (strong, nonatomic) CustomTabBarViewController *cusTBViewController;// 老师端底部标签控制器
+
+@property (strong, nonatomic) YjyxCommonTabController *tabBarVc;
 
 @property (strong, nonatomic) NSString *role;// 用户身份
 
