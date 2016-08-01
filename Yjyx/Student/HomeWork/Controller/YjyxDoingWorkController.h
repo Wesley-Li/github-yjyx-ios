@@ -17,4 +17,5 @@
 @property (strong, nonatomic) NSNumber *type;
 
 @property (strong, nonatomic) NSMutableArray *jumpDoworkArr;
+@property (strong, nonatomic) NSNumber *subject_id;
 @end

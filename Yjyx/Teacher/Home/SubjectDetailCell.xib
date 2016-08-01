@@ -79,6 +79,9 @@
                                                     <constraint firstAttribute="width" constant="25" id="ICd-tL-EUZ"/>
                                                 </constraints>
                                                 <state key="normal" backgroundImage="list_icon_delete"/>
+                                                <connections>
+                                                    <action selector="deletedBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Cmg-dD-Uvi"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLx-kf-iIZ">
                                                 <rect key="frame" x="0.0" y="8" width="60" height="30"/>
@@ -233,7 +236,7 @@
                 <outlet property="upDownView" destination="RQM-tF-xuL" id="JQf-rv-ZdU"/>
                 <outlet property="webBgview" destination="zpc-Rk-BQZ" id="kV6-1g-kPY"/>
             </connections>
-            <point key="canvasLocation" x="459.5" y="268"/>
+            <point key="canvasLocation" x="487.5" y="260"/>
         </tableViewCell>
     </objects>
     <resources>

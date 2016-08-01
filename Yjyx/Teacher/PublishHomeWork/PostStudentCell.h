@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 @class PostHomeWorkModel;
 @class StudentEntity;
-@class StuClassEntity;
+@class StuClassEntity, StuGroupEntity;
 @interface PostStudentCell : UITableViewCell
 
 
 @property (strong, nonatomic) StudentEntity *studentModel;
 @property (strong, nonatomic) StuClassEntity *stuClassModel;
-
+@property (strong, nonatomic) StuGroupEntity *stuGroupModel;
 
 @end

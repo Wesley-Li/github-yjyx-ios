@@ -8,8 +8,11 @@
 
 #import "YjyxWorkDetailCell.h"
 #import "YjyxTodayWorkModel.h"
+#import "YjyxHomeDataModel.h"
 #import "YjyxDoingWorkController.h"
 #import "YjyxWorkDetailController.h"
+#import "YjyxOneSubjectViewController.h"
+#import "YjyxHomeWorkController.h"
 @interface YjyxWorkDetailCell()
 @property (weak, nonatomic) IBOutlet UIImageView *workImageView;
 @property (weak, nonatomic) IBOutlet UILabel *workDescLabel;
@@ -79,6 +82,9 @@
 }
 - (IBAction)doingBtnClick:(UIButton *)sender {
     if([[sender titleForState:UIControlStateNormal] isEqualToString:@"做作业"]){
+        if ([self.delegate respondsToSelector:@selector(workDetailCell:doingBtnClicked:)]) {
+            [self.delegate workDetailCell:self doingBtnClicked:sender];
+        }
         YjyxDoingWorkController *vc = [[YjyxDoingWorkController alloc] init];
         NSLog(@"%@", _todayWorkModel);
         vc.type = _todayWorkModel == nil ? _OneSubjectModel.tasktype : _todayWorkModel.tasktype;
@@ -94,6 +100,12 @@
         vc.t_id = t_id;
         vc.taskType = type;
         vc.title = desc;
+        if ([((UINavigationController *)[UIApplication  sharedApplication].keyWindow.rootViewController.childViewControllers[0]).topViewController isKindOfClass:[YjyxHomeWorkController class]]) {
+           YjyxHomeDataModel *model = ((YjyxHomeWorkController *)((UINavigationController *)[UIApplication  sharedApplication].keyWindow.rootViewController.childViewControllers[0]).topViewController).subjectTypeArr[self.tag];
+            vc.subject_id = model.s_id;
+        }else{
+        vc.subject_id = ((YjyxOneSubjectViewController *)((UINavigationController *)[UIApplication  sharedApplication].keyWindow.rootViewController.childViewControllers[0]).topViewController).subjectid;
+        }
         [((UINavigationController *)([UIApplication  sharedApplication].keyWindow.rootViewController.childViewControllers[0])) pushViewController:vc animated:YES];
         
     }

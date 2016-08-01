@@ -14,4 +14,8 @@
 @property (strong, nonatomic) NSNumber *subjectid;
 
 @property (assign, nonatomic) NSInteger isFinished; // 1代表昨晚作业回来
+
+@property (assign, nonatomic) NSInteger jumpType; // 1代表昨晚作业
+
+
 @end

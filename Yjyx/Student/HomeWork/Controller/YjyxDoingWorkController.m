@@ -68,6 +68,8 @@
 @property (strong, nonatomic) NSMutableArray *countTimeArr; // 每道题计时数组
 @property (assign, nonatomic) NSInteger preTime;
 @property (assign, nonatomic) NSInteger preIndex;
+
+
 @end
 
 @implementation YjyxDoingWorkController
@@ -261,7 +263,7 @@
         _timer = timer;
         NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] integerValue] == 0) {
-            
+            self.subject_id = responseObject[@"retobj"][@"examobj"][@"subjectid"];
             for (NSDictionary *dict in responseObject[@"retobj"][@"questions"][@"choice"][@"questionlist"]) {
                 YjyxDoingWorkModel *model = [YjyxDoingWorkModel doingWorkModelWithDict:dict];
                 model.questiontype = 1;
@@ -345,6 +347,7 @@
         [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
         _timer = timer;
         if ([responseObject[@"retcode"] integerValue] == 0) {
+            self.subject_id = responseObject[@"retobj"][@"lessonobj"][@"subjectid"];
             for (NSDictionary *dict in responseObject[@"retobj"][@"questions"][@"choice"][@"questionlist"]) {
 //                [responseObject[@"retobj"][@"lessonobj"][@"quizcontent"] JSONValue][@"questionList"]
                 YjyxDoingWorkModel *model = [YjyxDoingWorkModel doingWorkModelWithDict:dict];
@@ -738,11 +741,13 @@
             
             //  自己答案与正确答案比较
             if ([[model.answer JSONValue] isEqualToArray:self.answerArr[i]]) {
+                bool bool_true = true;
                 corretIndex++;
-                [oneBlankArr addObject:@1];
+                [oneBlankArr addObject:@(bool_true)];
             }else{
+                bool bool_false = false;
                 wrongIndex++;
-                [oneBlankArr addObject:@0];
+                [oneBlankArr addObject:@(bool_false)];
             }
             
             [oneBlankArr addObject:self.countTimeArr[i]];
@@ -778,12 +783,14 @@
     [summary setObject:@(wrongIndex) forKey:@"wrong"];
     
     param[@"summary"] = [summary JSONString];
+    NSLog(@"%@", param);
     [SVProgressHUD showWithStatus:@"正在提交,请稍等..."];
     if([self.type isEqual:@1]){ // 普通作业
         param[@"examresult"] = examresult;
         param[@"examid"] = self.examid;
         param[@"action"] = @"task_exam_save_result";
         NSLog(@"%@", param);
+        NSLog(@"%@", self.subject_id);
         [mgr POST:[BaseURL stringByAppendingString:STUDENT_UPLOAD_WORK_POST] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
             NSLog(@"%@", responseObject);
             if ([responseObject[@"retcode"] integerValue] == 0) {
@@ -794,6 +801,7 @@
                     vc.t_id = responseObject[@"tasktrackid"];
                     vc.title = self.desc;
                     vc.taskType = self.type;
+                    vc.subject_id = self.subject_id;
                     NSLog(@"%@,%@,%@", self.desc, self.type, responseObject[@"tasktrackid"]);
                     [self.navigationController pushViewController:vc animated:YES];
                 }];
@@ -824,6 +832,7 @@
                     vc.t_id = responseObject[@"tasktrackid"];
                     vc.title = self.desc;
                     vc.taskType = self.type;
+                    vc.subject_id = self.subject_id;
                     [self.navigationController pushViewController:vc animated:YES];
                 }];
                 

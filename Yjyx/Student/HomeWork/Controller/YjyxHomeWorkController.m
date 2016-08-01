@@ -30,7 +30,7 @@
 @property (weak, nonatomic) UITableView *wrongWorkTableV;
 @property (weak, nonatomic) IBOutlet UIView *btnView;
 
-@property (strong, nonatomic) NSMutableArray *subjectTypeArr; // 科目类型数组
+
 
 @property (strong, nonatomic) NSMutableArray *wrongArr; //  错题榜数据
 @end
@@ -234,7 +234,7 @@ static NSString *DETAILID = @"detailID";
         }else{
             YjyxWorkDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:DETAILID];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-         
+            cell.tag = indexPath.section;
             YjyxHomeDataModel *homeDataM = self.subjectTypeArr[indexPath.section];
             YjyxTodayWorkModel *model = homeDataM.todaytasks[indexPath.row - 1];
             cell.todayWorkModel = model;
@@ -289,6 +289,8 @@ static NSString *DETAILID = @"detailID";
             microVc.title = model.task_description;
             
             if ([model.finished isEqual:@1]) {
+                YjyxHomeDataModel *model = self.subjectTypeArr[indexPath.section];
+                workDetailVc.subject_id = model.s_id;
                 [self.navigationController pushViewController:workDetailVc animated:YES];
             }else{
                 if ([model.tasktype integerValue] == 1) {

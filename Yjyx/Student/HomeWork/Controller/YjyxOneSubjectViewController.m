@@ -15,7 +15,7 @@
 #import "YjyxWorkPreviewViewController.h"
 #import "YjyxMicroClassViewController.h"
 
-@interface YjyxOneSubjectViewController ()<SearchViewDelegate>
+@interface YjyxOneSubjectViewController ()<SearchViewDelegate, WorkDetailCellDelegate>
 
 @property (strong, nonatomic) NSMutableArray *allWorkArray;
 
@@ -30,6 +30,8 @@
 @property (strong, nonatomic) NSNumber *workType;
 
 @property (strong, nonatomic) NSNumber *hasmore;
+
+@property (strong, nonatomic) NSIndexPath *selIndexPath;
 @end
 
 @implementation YjyxOneSubjectViewController
@@ -82,8 +84,12 @@ static NSString *ID = @"CELL";
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = NO;
-    if(_isFinished == 1){
-        [self loadNewData];
+    if(_jumpType == 1){
+        NSLog(@"%ld", _selIndexPath.row);
+        YjyxTodayWorkModel *model = self.allWorkArray[_selIndexPath.row];
+        model.finished = @1;
+        _jumpType = 0;
+        [self.tableView reloadRowsAtIndexPaths:@[_selIndexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
     
 }
@@ -119,14 +125,19 @@ static NSString *ID = @"CELL";
             for (NSDictionary *dict in responseObject[@"retlist"]) {
                 [tempArr addObject:[YjyxTodayWorkModel todayWorkModelWithDict:dict]];
             }
-            if ([self.lastid isEqual:@0]) {
-                self.allWorkArray = tempArr;
-            }else{
-                [self.allWorkArray addObjectsFromArray:tempArr];
-            }
-            if(self.allWorkArray.count == 0){
-                [SVProgressHUD showInfoWithStatus:@"暂无作业..."];
-            }
+           
+                if ([self.lastid isEqual:@0]) {
+                    self.allWorkArray = tempArr;
+                }else{
+                    [self.allWorkArray addObjectsFromArray:tempArr];
+                    
+                }
+                if(self.allWorkArray.count == 0){
+                    [SVProgressHUD showInfoWithStatus:@"暂无作业..."];
+                }
+           
+          
+          
             [self.tableView reloadData];
         }else{
             [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
@@ -194,7 +205,9 @@ static NSString *ID = @"CELL";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     YjyxWorkDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    cell.delegate = self;
     cell.OneSubjectModel = self.allWorkArray[indexPath.row];
+    cell.tag = indexPath.row;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -204,6 +217,8 @@ static NSString *ID = @"CELL";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    NSLog(@"%ld", _selIndexPath.row);
     // 已完成
     YjyxTodayWorkModel *model = self.allWorkArray[indexPath.row];
     YjyxWorkDetailController *workDetailVc = [[YjyxWorkDetailController alloc] init];
@@ -222,8 +237,11 @@ static NSString *ID = @"CELL";
     microVc.title = model.task_description;
     
     if ([model.finished isEqual:@1]) {
+        NSLog(@"%@", self.subjectid);
+        workDetailVc.subject_id = self.subjectid;
          [self.navigationController pushViewController:workDetailVc animated:YES];
     }else{
+        self.selIndexPath = indexPath;
         if ([model.tasktype integerValue] == 1) {
             [self.navigationController pushViewController:doingVc animated:YES];
         }else{
@@ -231,6 +249,12 @@ static NSString *ID = @"CELL";
         }
         
     }
+}
+#pragma mark - WorkDetailCellDelegate代理方法
+- (void)workDetailCell:(YjyxWorkDetailCell *)cell doingBtnClicked:(UIButton *)btn
+{
+    self.selIndexPath = [NSIndexPath indexPathForRow:cell.tag inSection:0];
+    NSLog(@"%ld", self.selIndexPath.row);
 }
 #pragma mark - SearchViewDelegate代理方法
 - (void)searchView:(YjyxSearchView *)view searchBtnIsClickAndBeginTime:(NSNumber *)beginT endTime:(NSNumber *)endT andWorkType:(NSNumber *)workType

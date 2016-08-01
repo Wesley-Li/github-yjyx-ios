@@ -45,6 +45,7 @@
 
 
 @property (weak, nonatomic) UIView *bgView; // 保存视频个数的背景view
+@property (strong, nonatomic) NSNumber *subject_id; // 科目id
 @end
 
 @implementation YjyxMicroClassViewController
@@ -395,6 +396,7 @@
         [self.view hideToastActivity];
             
             if ([[responseObject objectForKey:@"retcode"] integerValue] == 0) {
+                self.subject_id = responseObject[@"retobj"][@"lessonobj"][@"subjectid"];
                 for (NSDictionary *dict in responseObject[@"retobj"][@"questions"][@"choice"][@"questionlist"]) {
                     //                [responseObject[@"retobj"][@"lessonobj"][@"quizcontent"] JSONValue][@"questionList"]
                     YjyxDoingWorkModel *model = [YjyxDoingWorkModel doingWorkModelWithDict:dict];
@@ -485,6 +487,7 @@
     vc.jumpDoworkArr = self.doWorkArr;
     vc.taskid = self.taskid;
     vc.examid =  self.lessonid;
+    vc.subject_id = self.subject_id;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

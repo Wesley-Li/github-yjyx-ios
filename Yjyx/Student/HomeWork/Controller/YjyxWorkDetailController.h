@@ -14,5 +14,7 @@
 @property (strong, nonatomic) NSNumber *t_id;
 @property (strong, nonatomic) NSNumber *taskType;
 
+
+@property (strong, nonatomic) NSNumber *subject_id;
 @property (assign, nonatomic) NSInteger isFinished;
 @end

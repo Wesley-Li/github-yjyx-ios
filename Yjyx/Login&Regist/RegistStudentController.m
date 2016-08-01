@@ -58,6 +58,7 @@
     _conFirmpswTextField.delegate = self;
     _pswTextField.delegate = self;
     _phoneTextField.delegate = self;
+    _loginNameTextField.delegate = self;
 }
 -  (void)viewWillAppear:(BOOL)animated
 {
@@ -76,41 +77,55 @@
 // 限制输入的长度
 - (void)textFieldDidChange:(UITextField *)textField
 {
-    if([textField.text containsString:@" "]){
-        [self.view makeToast:@"密码不能含有空格,请重新输入" duration:1.0 position:SHOW_CENTER complete:nil];
-        textField.text = [textField.text substringToIndex:textField.text.length - 1];
-    }else if ([textField isEqual:_phoneTextField]) {
-        
-        if (textField.text.length > 11) {
-            textField.text = [textField.text substringToIndex:11];
-        }
-        
-    }else if ([textField isEqual:_realNameTextField] ) {
-        NSString *toBeString = textField.text;
-        NSString *lang = [[UITextInputMode currentInputMode] primaryLanguage]; // 键盘输入模式
-        if ([lang isEqualToString:@"zh-Hans"]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写
-            UITextRange *selectedRange = [textField markedTextRange];
-            //获取高亮部分
-            UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
-            // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
-            if (!position) {
-                if (toBeString.length > 10) {
-                    textField.text = [toBeString substringToIndex:10];
-                }
-                
-            }
-            
-        }else{
-            textField.text = [textField.text substringToIndex:10];
-            [self.view makeToast:@"输入的长度不能大于10位" duration:1.0 position:SHOW_CENTER complete:nil];
-        }
-    }else if ([textField isEqual:_pswTextField]){
+       if ([textField isEqual:_loginNameTextField]){
+    
+           if (textField.text.length > 15) {
+                textField.text = [textField.text substringToIndex:15];
+               [self.view makeToast:@"登录名最多只能15位" duration:1.0 position:SHOW_CENTER complete:nil];
+          }
+     }
+    if ([textField isEqual:_pswTextField]){
         if (textField.text.length > 20){
             textField.text = [textField.text substringToIndex:20];
             [self.view makeToast:@"密码的长度不能大于20位" duration:1.0 position:SHOW_CENTER complete:nil];
         }
     }
-    
+
+    if([textField isEqual:_pswTextField] || [textField isEqual:_conFirmpswTextField] || [textField isEqual:_loginNameTextField] || [textField isEqual:_realNameTextField]){
+        if([textField.text containsString:@" "]){
+        [self.view makeToast:@"不能含有空格,请重新输入" duration:1.0 position:SHOW_CENTER complete:nil];
+        textField.text = [textField.text substringToIndex:textField.text.length - 1];
+        }
+        if ([textField isEqual:_realNameTextField] ) {
+            NSString *toBeString = textField.text;
+            NSString *lang = [[UITextInputMode currentInputMode] primaryLanguage]; // 键盘输入模式
+            if ([lang isEqualToString:@"zh-Hans"]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写
+                UITextRange *selectedRange = [textField markedTextRange];
+                //获取高亮部分
+                UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+                // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+                if (!position) {
+                    if (toBeString.length > 10) {
+                        textField.text = [toBeString substringToIndex:10];
+                    }
+                    
+                }
+                [self.view makeToast:@"真实姓名的长度不能大于10位" duration:1.0 position:SHOW_CENTER complete:nil];
+            }else{
+                textField.text = [textField.text substringToIndex:10];
+                [self.view makeToast:@"真实姓名的长度不能大于10位" duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+        }
+
+    }else if ([textField isEqual:_phoneTextField]) {
+        
+        if (textField.text.length > 11) {
+            textField.text = [textField.text substringToIndex:11];
+            
+        }
+            
+        
+    }
 }
 
 // 获取验证码
@@ -126,7 +141,10 @@
         [self.view makeToast:@"请输入正确的手机号码" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
-
+    if(_loginNameTextField.text.length < 2){
+        [self.view makeToast:@"登录名太短" duration:0.5 position:SHOW_CENTER complete:nil];
+        return;
+    }
     NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",_phoneTextField.text];
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneTextField.text,@"target",[sign md5],@"sign",@"MREGISTER",@"stype",nil];
     [[YjxService sharedInstance] getSMSsendcode:dic withBlock:^(id result, NSError *error){//验证验证码
@@ -298,6 +316,41 @@
 #pragma mark - UITextField的代理
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    if([textField isEqual:_loginNameTextField]){
+        if (textField.text.length < 2) {
+            [self.view makeToast:@"登录名过短" duration:0.5 position:SHOW_CENTER complete:nil];
+        }
+        return;
+    }
+    if([textField isEqual:_phoneTextField]){
+        if (textField.text.length < 11) {
+            [self.view makeToast:@"请输入正确的手机号" duration:0.5 position:SHOW_CENTER complete:nil];
+            return;
+        }
+        AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+        NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
+        pamar[@"action"] = @"checkuserexist";
+        pamar[@"username"] = textField.text;
+        [mgr GET:[BaseURL stringByAppendingString:USERNAME_ISEXIST_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+            if([responseObject[@"retcode"] isEqual: @0]){
+                if ([responseObject[@"exist"] isEqual: @1]) {
+                    [self.view makeToast:@"此手机号码已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
+                    
+                    _flag = 1;
+                }
+            }else{
+                if ([responseObject[@"msg"] isEqualToString:@"ratelimitted"]) {
+                    [self.view makeToast:@"操作过快" duration:1.0 position:SHOW_CENTER complete:nil];
+                }else{
+                [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                }
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
+        }];
+    }else{
+
     if(textField.text.length < 6){
         
         [self.view makeToast:@"密码长度不能小于6位" duration:0.5 position:SHOW_CENTER complete:nil];
@@ -310,25 +363,6 @@
     if(![self.pswTextField.text isEqualToString:self.conFirmpswTextField.text]){
         [self.view makeToast:@"两次密码输入不一样" duration:0.5 position:SHOW_CENTER complete:nil];
     }
-    if([textField isEqual:_phoneTextField]){
-        AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-        NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
-        pamar[@"action"] = @"checkuserexist";
-        pamar[@"username"] = textField.text;
-        [mgr GET:[BaseURL stringByAppendingString:USERNAME_ISEXIST_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-            if([responseObject[@"retcode"] isEqual: @0]){
-                if ([responseObject[@"exist"] isEqual: @1]) {
-                    [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
-                
-                    _flag = 1;
-                }
-            }else{
-                [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
-            }
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
-        }];
     }
 }
 
