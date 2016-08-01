@@ -37,7 +37,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.navigationItem.title = @"积分商城";
+    self.navigationItem.title = @"金币商城";
   
 }
 - (void)viewDidAppear:(BOOL)animated
@@ -105,7 +105,7 @@
 }
 // 弹框提示是否确定兑换
 - (IBAction)gosureExchangeBtnClick:(UIButton *)sender {
-    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:@"是否确定兑换" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:@"是否确定兑换?" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {

@@ -15,6 +15,7 @@
 #import "StuTaskTableViewController.h"
 #import "YjyxWrongSubModel.h"
 #import "StudentEntity.h"
+#import "StuGroupEntity.h"
 @interface ReleaseHomeWorkController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextField *homeWorkNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
@@ -26,10 +27,14 @@
 
 // 获取班级信息
 @property (strong, nonatomic) NSMutableArray *classArr;
+// 获取群组信息
+@property (strong, nonatomic) NSMutableArray *groupArr;
 // 保存所有学生信息
 @property (strong, nonatomic) NSMutableArray *stuArr;
 // 保存班级里的学生信息
 @property (strong, nonatomic) NSMutableArray *classStuArr;
+// 保存群组里的学生信息
+@property (strong, nonatomic) NSMutableArray *groupStuArr;
 @end
 
 @implementation ReleaseHomeWorkController
@@ -43,7 +48,13 @@ static NSString *ID = @"CELL";
     }
     return _classArr;
 }
-
+- (NSMutableArray *)groupStuArr
+{
+    if (_groupStuArr == nil) {
+        _groupStuArr = [NSMutableArray array];
+    }
+    return _groupStuArr;
+}
 - (NSMutableArray *)stuArr
 {
     if (_stuArr == nil) {
@@ -65,6 +76,7 @@ static NSString *ID = @"CELL";
     [super viewDidLoad];
     
     self.classArr = [[StuDataBase shareStuDataBase] selectAllClass];
+    self.groupArr = [[StuDataBase shareStuDataBase] selectAllGroup];
     self.navigationItem.title = @"发布作业";
     NSLog(@"%@", self.classArr);
     for (StuClassEntity *stuClassModel in self.classArr) {
@@ -76,7 +88,15 @@ static NSString *ID = @"CELL";
         }
         [self.classStuArr addObject:tempArr];
     }
-   
+    for (StuGroupEntity *stuGroupModel in self.groupArr) {
+        NSMutableArray *tempArr = [NSMutableArray array];
+        for (NSNumber *num in stuGroupModel.memberlist) {
+            StudentEntity *stuModel = [[StuDataBase shareStuDataBase] selectStuById:num];
+            [self.stuArr addObject:stuModel];
+            [tempArr addObject:stuModel];
+        }
+        [self.groupStuArr addObject:tempArr];
+    }
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([PostStudentCell class]) bundle:nil] forCellReuseIdentifier:ID];
     
@@ -111,11 +131,40 @@ static NSString *ID = @"CELL";
     UIButton *sender = noti.userInfo[@"BtnIsSelect"];
     NSIndexPath *indexpath = noti.userInfo[@"ClickIsSection"];
     NSLog(@"%zd, %zd", indexpath.section, indexpath.row);
-    NSMutableArray *tempArr = self.classStuArr[indexpath.section];
-    for (NSInteger i = 0; i < tempArr.count; i++) {
-            StudentEntity *stuModel = tempArr[i];
-            stuModel.isSelect = sender.isSelected;
+    if (indexpath.section < _classArr.count) {
+        StuClassEntity *classEntity = _classArr[indexpath.section];
+        if (indexpath.row == 0) {
+            classEntity.isSelect = !classEntity.isSelect;
+            NSMutableArray *tempArr = self.classStuArr[indexpath.section];
+            for (NSInteger i = 0; i < tempArr.count; i++) {
+                StudentEntity *stuModel = tempArr[i];
+                stuModel.isSelect = sender.isSelected;
+            }
+        }else{
+           StudentEntity *studentModel = _classStuArr[indexpath.section][indexpath.row - 1];
+            studentModel.isSelect = !studentModel.isSelect;
+            if (sender.selected == NO) {
+                classEntity.isSelect = NO;
+            }
+        }
+    }else{
+        StuGroupEntity *groupEntity = _groupArr[indexpath.section - _classArr.count];
+        if (indexpath.row == 0) {
+            groupEntity.isSelect = !groupEntity.isSelect;
+            NSMutableArray *tempArr = self.groupStuArr[indexpath.section - _classArr.count];
+            for (NSInteger i = 0; i < tempArr.count; i++) {
+                StudentEntity *stuModel = tempArr[i];
+                stuModel.isSelect = sender.isSelected;
+            }
+        }else{
+            StudentEntity *studentModel = _groupStuArr[indexpath.section - _classArr.count][indexpath.row - 1];
+            studentModel.isSelect = !studentModel.isSelect;
+            if (sender.selected == NO) {
+                groupEntity.isSelect = NO;
+            }
+        }
     }
+  
         
   
     [self.tableView reloadData];
@@ -151,16 +200,26 @@ static NSString *ID = @"CELL";
 #pragma mark - UITableView的代理方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.classStuArr.count;
+    return self.classStuArr.count + self.groupStuArr.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    StuClassEntity *stuClassModel = self.classArr[section];
-    if (stuClassModel.isExpanded) {
-        return [self.classArr[section] memberlist].count + 1;
+    
+    if (section < self.classArr.count) {
+        StuClassEntity *stuClassModel = self.classArr[section];
+        if (stuClassModel.isExpanded) {
+            return [self.classArr[section] memberlist].count + 1;
+        }else{
+            return 1;
+        }
     }else{
-    return 1;
+        StuGroupEntity *stuGroupModel = self.groupArr[section - _classArr.count];
+        if (stuGroupModel.isExpanded) {
+            return [self.groupArr[section - _classArr.count] memberlist].count + 1;
+        }else{
+            return 1;
+        }
     }
 }
 
@@ -169,15 +228,30 @@ static NSString *ID = @"CELL";
     
     PostStudentCell  *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    StuClassEntity *stuClassModel = self.classArr[indexPath.section];
-    if (indexPath.row == 0) {
-        cell.stuClassModel = stuClassModel;
-    }else{
-        NSMutableArray *arr =  self.classStuArr[indexPath.section];
-        StudentEntity *stuModel =  arr[indexPath.row - 1];
-        NSLog(@"%@,%zd",stuModel, stuModel.isSelect);
-        cell.studentModel = stuModel;
+
+    if (indexPath.section < _classArr.count) {
+        if (indexPath.row == 0) {
+            StuClassEntity *stuClassModel = self.classArr[indexPath.section];
+            cell.stuClassModel = stuClassModel;
+        }else{
+            NSMutableArray *arr =  self.classStuArr[indexPath.section];
+            StudentEntity *stuModel =  arr[indexPath.row - 1];
+            NSLog(@"%@,%zd",stuModel, stuModel.isSelect);
+            cell.studentModel = stuModel;
+            
+        }
        
+    }else {
+        if (indexPath.row == 0) {
+            StuGroupEntity *stuGroupModel = self.groupArr[indexPath.section - _classArr.count];
+            cell.stuGroupModel = stuGroupModel;
+        }else{
+            NSMutableArray *arr =  self.groupStuArr[indexPath.section - _classArr.count];
+            StudentEntity *stuModel =  arr[indexPath.row - 1];
+            NSLog(@"%@,%zd",stuModel, stuModel.isSelect);
+            cell.studentModel = stuModel;
+        }
+        
     }
     cell.backgroundColor = COMMONCOLOR;
     return cell;
@@ -185,29 +259,52 @@ static NSString *ID = @"CELL";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    StuClassEntity *stuClassModel = self.classArr[indexPath.section];
-    if (indexPath.row == 0) {
-         stuClassModel.isExpanded = !stuClassModel.isExpanded;
-        
-        NSMutableArray *indexPathArray = [NSMutableArray array];
-        for (NSInteger i = 0;i < stuClassModel.memberlist.count ; i++) {
-            [indexPathArray addObject:[NSIndexPath indexPathForRow:i+1 inSection:indexPath.section]];
+    if (indexPath.section < self.classArr.count) {
+        StuClassEntity *stuClassModel = self.classArr[indexPath.section];
+        if (indexPath.row == 0) {
+            stuClassModel.isExpanded = !stuClassModel.isExpanded;
+            
+            NSMutableArray *indexPathArray = [NSMutableArray array];
+            for (NSInteger i = 0;i < stuClassModel.memberlist.count ; i++) {
+                [indexPathArray addObject:[NSIndexPath indexPathForRow:i+1 inSection:indexPath.section]];
+            }
+            if (stuClassModel.isExpanded) {
+                
+                [self.tableView insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+            }else{
+                [self.tableView deleteRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+            }
         }
-        if (stuClassModel.isExpanded) {
-          
-            [self.tableView insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
-        }else{
-            [self.tableView deleteRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+
+    }else{
+        StuGroupEntity *stuGroupModel = self.groupArr[indexPath.section - _classArr.count];
+        if (indexPath.row == 0) {
+            stuGroupModel.isExpanded = !stuGroupModel.isExpanded;
+            
+            NSMutableArray *indexPathArray = [NSMutableArray array];
+            for (NSInteger i = 0;i < stuGroupModel.memberlist.count ; i++) {
+                [indexPathArray addObject:[NSIndexPath indexPathForRow:i+1 inSection:indexPath.section]];
+            }
+            if (stuGroupModel.isExpanded) {
+                
+                [self.tableView insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+            }else{
+                [self.tableView deleteRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+            }
         }
     }
 }
 
 - (IBAction)goSure:(UIButton *)sender {
     NSMutableArray *tempArr = [NSMutableArray array];
+    NSMutableArray *IDArr = [NSMutableArray array];
     for (StudentEntity *stuModel in self.stuArr) {
         if(stuModel.isSelect == YES){
+            if(![IDArr containsObject:stuModel.user_id]){
             [tempArr addObject:stuModel];
+            [IDArr addObject:stuModel.user_id];
             NSLog(@"%@", stuModel.realname);
+            }
         }
     }
     NSString *nameStr = [self.homeWorkNameTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];

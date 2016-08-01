@@ -10,4 +10,5 @@
 
 @interface YjyxHomeWorkController : UIViewController
 
+@property (strong, nonatomic) NSMutableArray *subjectTypeArr; // 科目类型数组
 @end

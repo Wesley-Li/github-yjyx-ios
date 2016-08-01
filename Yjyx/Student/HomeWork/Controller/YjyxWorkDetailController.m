@@ -20,7 +20,10 @@
 #import "YjyxOneSubjectViewController.h"
 #import "YjyxAnonatationController.h"
 #import "VideoNumShowCell.h"
-@interface YjyxWorkDetailController ()<UITableViewDelegate, UITableViewDataSource, VideoNumShowCellDelegate>
+#import "YjyxDoingWorkController.h"
+#import "ProductEntity.h"
+#import "YjyxMemberDetailViewController.h"
+@interface YjyxWorkDetailController ()<UITableViewDelegate, UITableViewDataSource, VideoNumShowCellDelegate, UIAlertViewDelegate>
 {
     WMPlayer *wmPlayer;
     NSIndexPath *currentIndexPath;
@@ -40,6 +43,11 @@
 @property (nonatomic, strong) NSMutableDictionary *blankfillExpandDic;
 @property (nonatomic, strong) NSString *videoURL; // 播放视频的url
 @property (strong, nonatomic) ReleaseMicroCell *videoCell;
+
+
+@property (assign, nonatomic) NSInteger jumpType; // 1代表从做作业那跳过来的
+
+@property (strong, nonatomic) ProductEntity *entity; // 会员产品
 @end
 
 @implementation YjyxWorkDetailController
@@ -60,12 +68,15 @@ static NSString *videoNumID = @"VIDEONumID";
     [backBtn setImage:[UIImage imageNamed:@"comm_back"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.leftBarButtonItem = leftBtnItem;
-    self.knowCellHeightDic = [NSMutableDictionary dictionary];
+    
     
     [self loadData];
+    // 高度字典初始化
+    self.knowCellHeightDic = [NSMutableDictionary dictionary];
     self.choiceCellHeightDic = [[NSMutableDictionary alloc] init];
     self.blankfillHeightDic = [[NSMutableDictionary alloc] init];
     self.blankfillExpandDic = [[NSMutableDictionary alloc] init];
+    
     self.tableView.sectionFooterHeight = 10;
     self.tableView.sectionHeaderHeight = 20;
     self.tableView.backgroundColor = COMMONCOLOR;
@@ -154,15 +165,28 @@ static NSString *videoNumID = @"VIDEONumID";
     NSInteger flag = 0;
     for (UIViewController *vc in self.navigationController.childViewControllers) {
         if([vc isKindOfClass:[YjyxOneSubjectViewController class]]){
-            ((YjyxOneSubjectViewController *)vc).isFinished = 1;
-            [self.navigationController popToViewController:vc animated:YES];
             
             flag = 1;
-            break;
+    
         }
+        if ([vc isKindOfClass:[YjyxDoingWorkController class]]) {
+
+            _jumpType = 1;
+        }
+       
     }
     if(flag == 0){
+      
         [self.navigationController popToRootViewControllerAnimated:YES];
+    }else{
+        for (UIViewController *vc in self.navigationController.childViewControllers) {
+            if([vc isKindOfClass:[YjyxOneSubjectViewController class]]){
+                [self.navigationController popToViewController:vc animated:YES];
+                ((YjyxOneSubjectViewController *)vc).jumpType = self.jumpType;
+                
+            }
+        }
+
     }
 }
 // 通知方法
@@ -171,15 +195,15 @@ static NSString *videoNumID = @"VIDEONumID";
    YjyxWorkContentCell *cell = [sender object];
     NSLog(@"%ld-%ld", cell.indexPath.section, cell.indexPath.row);
     // 保存高度
-    if (cell.indexPath.section == 3) {
+    if (cell.indexPath.section == 4) {
         
         if (![self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height)
         {
             [self.choiceCellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld",cell.tag]];
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:3 ]] withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:4 ]] withRowAnimation:UITableViewRowAnimationNone];
         }
         
-    }else if(cell.indexPath.section == 4){
+    }else if(cell.indexPath.section == 5){
         if (![self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height)
         {
             
@@ -187,7 +211,7 @@ static NSString *videoNumID = @"VIDEONumID";
             NSLog(@"%.f", cell.height);
             
             [self.blankfillHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld",cell.tag]];
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:4 ]] withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:5 ]] withRowAnimation:UITableViewRowAnimationNone];
             
         }
         
@@ -579,6 +603,7 @@ static NSString *videoNumID = @"VIDEONumID";
     //判断是否有权限查看视频解析
     
     if (videoUrl.length == 0 &&explantionStr.length == 0) {
+        [self getMemberInfo];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"查看解题方法需要会员权限，是否前往试用或成为会员" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
         [alertView show];
     }else{
@@ -589,6 +614,38 @@ static NSString *videoNumID = @"VIDEONumID";
         [self.navigationController pushViewController:vc animated:YES];
         
     }
+}
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"%ld", buttonIndex);
+    if(buttonIndex == 1){
+        // 跳转至会员页面
+        YjyxMemberDetailViewController *vc = [[YjyxMemberDetailViewController alloc] init];
+        vc.productEntity = self.entity;
+        vc.jumpType = 1;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+// 获取会员信息
+- (void)getMemberInfo
+{
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"action"] = @"getonememproductinfo";
+    param[@"subjectid"] = self.subject_id;
+    [mgr GET:[BaseURL stringByAppendingString:@"/api/student/mobile/m_product/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        if ([responseObject[@"retcode"] integerValue] == 0) {
+            ProductEntity *entity = [ProductEntity wrapProductEntityWithDic:responseObject];
+            self.entity = entity;
+        }else{
+            NSLog(@"%@", responseObject[@"reason"]);
+            [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
+    }];
 }
 - (void)studentChangeCellHeight:(UIButton *)sender {
     

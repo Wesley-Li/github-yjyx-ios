@@ -37,10 +37,11 @@ static NSString *ID = @"cell";
 //    self.tableView.rowHeight = UITableViewAutomaticDimension;
 //    self.tableView.estimatedRowHeight = 44;
     self.tableView.tableFooterView = [[UIView alloc] init];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxExchangeRecordCell class]) bundle:nil] forCellReuseIdentifier:ID];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49 , 0);
-    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, -49, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0 , 0);
+    
     [self setupRefresh];
 }
 -(void)viewDidDisappear:(BOOL)animated

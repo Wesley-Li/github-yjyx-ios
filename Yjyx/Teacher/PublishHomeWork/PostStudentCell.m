@@ -10,6 +10,7 @@
 
 #import "StudentEntity.h"
 #import "StuClassEntity.h"
+#import "StuGroupEntity.h"
 @interface PostStudentCell()
 @property (weak, nonatomic) IBOutlet UILabel *classOrStudentLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageV;
@@ -30,17 +31,17 @@
     sender.selected = !sender.selected;
     
     
-    if (path.row == 0) {
-        self.stuClassModel.isSelect = !self.stuClassModel.isSelect;
+//    if (path.row == 0) {
+//        self.stuClassModel.isSelect = !self.stuClassModel.isSelect;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"FirstCellClicked" object:nil userInfo:@{@"BtnIsSelect" : sender, @"ClickIsSection": path}];
-    }else{
-        self.studentModel.isSelect = !self.studentModel.isSelect;
-        if(self.studentModel.isSelect == NO){
-          PostStudentCell *cell1 =[((UITableView *)self.superview.superview) cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:path.section]];
-            cell1.stuClassModel.isSelect = NO;
-            [((UITableView *)self.superview.superview) reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:path.section]] withRowAnimation:UITableViewRowAnimationNone];
-        }
-    }
+//    }else{
+//        self.studentModel.isSelect = !self.studentModel.isSelect;
+//        if(self.studentModel.isSelect == NO){
+//          PostStudentCell *cell1 =[((UITableView *)self.superview.superview) cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:path.section]];
+//            cell1.stuClassModel.isSelect = NO;
+//            [((UITableView *)self.superview.superview) reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:path.section]] withRowAnimation:UITableViewRowAnimationNone];
+//        }
+//    }
     
 }
 
@@ -62,15 +63,24 @@
 {
     _stuClassModel = stuClassModel;
     self.iconLeadConstrait.constant = 15;
-    NSString *gradeClassStr = @"七年级";
-    if([stuClassModel.gradeid isEqual:@2]){
-        gradeClassStr = @"八年级";
-    }else if ([stuClassModel.gradeid isEqual:@3]){
-        gradeClassStr = @"九年级";
-    }
+
     self.classOrStudentLabel.text = [NSString stringWithFormat:@"%@",  stuClassModel.name];
     self.iconImageV.image  = [UIImage imageNamed:@"tab_home"];
     if (stuClassModel.isSelect == YES) {
+        self.isSelectBtn.selected = YES;
+    }else{
+        self.isSelectBtn.selected = NO;
+    }
+}
+
+- (void)setStuGroupModel:(StuGroupEntity *)stuGroupModel
+{
+    _stuGroupModel = stuGroupModel;
+    self.iconLeadConstrait.constant = 15;
+    
+    self.classOrStudentLabel.text = [NSString stringWithFormat:@"%@",  stuGroupModel.name];
+    self.iconImageV.image  = [UIImage imageNamed:@"tab_home"];
+    if (stuGroupModel.isSelect == YES) {
         self.isSelectBtn.selected = YES;
     }else{
         self.isSelectBtn.selected = NO;

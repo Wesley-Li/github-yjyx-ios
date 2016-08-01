@@ -30,8 +30,11 @@
     self.exchangeTimeLabel.text = recordModel.exec_datetime;
     self.productNameLabel.text = recordModel.goods_type_name;
     self.coinLabel.text = [recordModel.exchange_coins stringValue];
-    
+    if(![recordModel.specific_info isEqual:[NSNull null]]){
     self.descLabel.text = recordModel.specific_info;
+    }else{
+        self.descLabel.hidden = YES;
+    }
     
 }
 

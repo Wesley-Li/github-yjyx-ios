@@ -118,7 +118,17 @@
 - (void)getDataFromNet {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:@"getonesubjectfailedquestion", @"action", self.subjectid, @"subjectid", self.targetlist, @"targetlist", nil];
+    [self.targetlist JSONValue];
+    NSMutableArray *arr = [self.targetlist JSONValue];
+    NSMutableArray *tempArr = [NSMutableArray array];
+    for (NSDictionary *dict in arr) {
+        NSLog(@"%@", dict[@"i"]);
+        if([dict[@"i"] isEqual:@28] || [dict[@"i"] isEqual:@22] || [dict[@"i"] isEqual:@21] || [dict[@"i"] isEqual:@20] || [dict[@"i"] isEqual:@19] || [dict[@"i"] isEqual:@8] || [dict[@"i"] isEqual:@3]){
+            [tempArr addObject:dict];
+        }
+    }
+    [arr removeObjectsInArray:tempArr];
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:@"getonesubjectfailedquestion", @"action", self.subjectid, @"subjectid", [arr JSONString], @"targetlist", nil];
     NSLog(@"%@", param);
     [manager GET:[BaseURL stringByAppendingString:STUDENT_GET_WRONG_LIST_GET] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
@@ -143,16 +153,16 @@
             
             [self.tableView reloadData];
 
-             [self.tableView reloadData];
-            for (int i = 0; i < self.dataSource.count;) {
-                YjyxStuWrongListModel *model = self.dataSource[i];
-                if (model.videoUrl == nil && model.explanation == nil) {
-                    [self getMemberInfo];
-                    break;
-                }else{
-                    break;
-                }
-            }
+            
+//            for (int i = 0; i < self.dataSource.count;) {
+//                YjyxStuWrongListModel *model = self.dataSource[i];
+//                if (model.videoUrl == nil && model.explanation == nil) {
+//                    [self getMemberInfo];
+//                    break;
+//                }else{
+//                    break;
+//                }
+//            }
            
 
             
@@ -167,7 +177,7 @@
         
         NSLog(@"%@", error);
 
-//        NSLog(@"%@", error.localizedDescription);
+        NSLog(@"%@", error.localizedDescription);
 
         [self.view makeToast:@"数据请求失败,请检查您的网络" duration:1.0 position:SHOW_CENTER complete:nil];
     }];
@@ -259,6 +269,7 @@
     YjyxStuWrongListModel *model = self.dataSource[cell.tag];
     NSLog(@"%@,%@", model.videoUrl, model.explanation);
     if (model.videoUrl == nil && model.explanation == nil) {
+        [self getMemberInfo];
         // 非会员
         UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"查看解题方法需要会员权限，是否前往试用或成为会员?" preferredStyle:UIAlertControllerStyleAlert];
         

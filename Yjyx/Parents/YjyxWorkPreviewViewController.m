@@ -23,6 +23,8 @@
 @property (assign, nonatomic) NSInteger jumpType;
 
 @property (strong, nonatomic) NSMutableArray *doWorkArr;
+
+@property (strong, nonatomic) NSNumber *subject_id; // 科目id
 @end
 
 @implementation YjyxWorkPreviewViewController
@@ -150,6 +152,7 @@
         [self.view hideToastActivity];
         NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] isEqual:@0]) {
+            self.subject_id = responseObject[@"retobj"][@"examobj"][@"subjectid"];
             _choices = responseObject[@"retobj"][@"questions"][@"choice"][@"questionlist"];
             _blankfills = responseObject[@"retobj"][@"questions"][@"blankfill"][@"questionlist"];
             [_previewTable reloadData];
@@ -213,6 +216,7 @@
     vc.jumpDoworkArr = self.doWorkArr;
     vc.examid = self.examid;
     vc.taskid = self.taskid;
+    vc.subject_id = self.subject_id;
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark -UITableViewDelegate

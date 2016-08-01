@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-@class YjyxTodayWorkModel;
+@class YjyxTodayWorkModel, YjyxWorkDetailCell;
+@protocol WorkDetailCellDelegate <NSObject>
+
+- (void)workDetailCell:(YjyxWorkDetailCell *)cell doingBtnClicked:(UIButton *)btn;
+
+@end
 @interface YjyxWorkDetailCell : UITableViewCell
+
+@property (weak, nonatomic) id<WorkDetailCellDelegate> delegate;
 
 @property (strong, nonatomic) YjyxTodayWorkModel *todayWorkModel;
 
