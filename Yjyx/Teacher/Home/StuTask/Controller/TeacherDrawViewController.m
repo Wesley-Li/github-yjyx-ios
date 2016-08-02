@@ -137,15 +137,7 @@
             UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:nil];
             UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 // 清空audio文件
-                NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-                NSString *filePath = [directory stringByAppendingPathComponent:@"audio"];
-                NSError *error = nil;
-                if([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error]) {
-                    NSLog(@"清除音频文件成功");
-                } else {
-                    NSLog(@"error=%@", error);
-                }
-                
+                [self cleanAllStudioFile];
                 // 清空画图
                 [[YjyxDrawLine defaultLine] cleanAllDrawBySelf];
                 
@@ -158,25 +150,39 @@
             
             [self presentViewController:alertVC animated:YES completion:nil];
             
+        }else {
+            [self cleanAllStudioFile];
+            // 清空画图
+            [[YjyxDrawLine defaultLine] cleanAllDrawBySelf];
+            [self.navigationController popViewControllerAnimated:YES];
+            
         }
  
     }else {
     
         // 清空audio文件
-        NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-        NSString *filePath = [directory stringByAppendingPathComponent:@"audio"];
-        NSError *error = nil;
-        if([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error]) {
-            NSLog(@"清除音频文件成功");
-        } else {
-            NSLog(@"error=%@", error);
-        }
-        
+        [self cleanAllStudioFile];
         [self.navigationController popViewControllerAnimated:YES];
 
         
     }
     
+    
+}
+
+
+// 清空音频文件
+- (void)cleanAllStudioFile {
+
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *filePath = [directory stringByAppendingPathComponent:@"audio"];
+    NSError *error = nil;
+    if([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error]) {
+        NSLog(@"清除音频文件成功");
+    } else {
+        NSLog(@"error=%@", error);
+    }
+
     
 }
 

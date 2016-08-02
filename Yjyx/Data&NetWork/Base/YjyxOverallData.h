@@ -28,8 +28,13 @@ typedef enum PUSH_TYPE{
 @property(strong, nonatomic) OneStudentEntity *studentInfo;
 
 @property(assign, nonatomic) PUSH_TYPE pushType;
+// 家长端
 @property(strong, nonatomic) NSString *historyId;
 @property(strong, nonatomic) NSString *previewRid;
+// 学生端
+@property(strong, nonatomic) NSNumber *taskid;
+@property(strong, nonatomic) NSNumber *examid;
+
 //获取实例
 + (instancetype)sharedInstance;
 

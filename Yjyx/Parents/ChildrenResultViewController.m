@@ -435,6 +435,7 @@
     
     if (cell.indexPath.section == 0) {//选择题
         ResultModel *rmodel = self.resultchoices[cell.indexPath.row];
+//        NSLog(@"%@", rmodel.q_id);
         ChildrenResultModel *model = [self.choiceModelDic objectForKey:[NSString stringWithFormat:@"%@", rmodel.q_id]];
         
         videoUrl = model.videourl;

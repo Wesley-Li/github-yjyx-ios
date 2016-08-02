@@ -225,8 +225,6 @@
 }
 
 //饼状图代理
-
-
 -(void)userClickedOnPieIndexItem:(NSInteger)pieIndex
 {
     

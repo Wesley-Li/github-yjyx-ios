@@ -148,65 +148,109 @@
 {
 
     [UMessage didReceiveRemoteNotification:userInfo];
+    
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler
 {
-    if (application.applicationState == UIApplicationStateActive) {
-        
-        if ([userInfo[@"type"] isEqualToString:@"childstats"]) {//统计数据更新处理
-            NSString *cachePath = [USER_IMGCACHE stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[userInfo objectForKey:@"cid"]]];
-
-            NSFileManager *fileManager = [NSFileManager defaultManager];
-            NSArray *contents = [fileManager contentsOfDirectoryAtPath:cachePath error:nil];
-            NSEnumerator *e = [contents objectEnumerator];
-            NSString *fileName;
-            while (fileName = [e nextObject]) {
-                [fileManager removeItemAtPath:[cachePath stringByAppendingPathComponent:fileName] error:NULL];
-            }
-        }
-        
-        if ([userInfo[@"type"] isEqualToString:@"childactivity"]) {// 孩子新动态
+    if (application.applicationState == UIApplicationStateActive) {// 程序处于激活状态
+    
+        // 家长端
+        if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {
             
-            if ([userInfo[@"finished"] integerValue] == 0 ) {
+            if ([userInfo[@"type"] isEqualToString:@"childstats"]) {//统计数据更新处理
+                NSString *cachePath = [USER_IMGCACHE stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[userInfo objectForKey:@"cid"]]];
+                
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSArray *contents = [fileManager contentsOfDirectoryAtPath:cachePath error:nil];
+                NSEnumerator *e = [contents objectEnumerator];
+                NSString *fileName;
+                while (fileName = [e nextObject]) {
+                    [fileManager removeItemAtPath:[cachePath stringByAppendingPathComponent:fileName] error:NULL];
+                }
+            }else if ([userInfo[@"type"] isEqualToString:@"childactivity"]) {// 孩子新动态
+                
+                if ([userInfo[@"finished"] integerValue] == 0 ) {
+                    if ([userInfo[@"tasktype"] integerValue] ==1) {
+                        [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
+                    }else{
+                        [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
+                    }
+                }else{
+                    if ([userInfo[@"tasktype"] integerValue] ==1) {
+                        [YjyxOverallData sharedInstance].pushType = PUSHTYPE_RESULTHOMEWORK;
+                    }else{
+                        [YjyxOverallData sharedInstance].pushType = PUSHTYPE_RESULTMICRO;
+                    }
+                }
+                [YjyxOverallData sharedInstance].historyId = userInfo[@"id"];
+                [YjyxOverallData sharedInstance].previewRid = userInfo[@"rid"];
+                
+                NSString *contentStr = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:contentStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看详情",nil];
+                [alertView show];
+            }else if ([userInfo[@"type"] isEqualToString:@"hastentask"]) {// 老师催作业
+                
                 if ([userInfo[@"tasktype"] integerValue] ==1) {
                     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
                 }else{
                     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
                 }
-            }else{
-                if ([userInfo[@"tasktype"] integerValue] ==1) {
-                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_RESULTHOMEWORK;
-                }else{
-                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_RESULTMICRO;
-                }
+                
+                [YjyxOverallData sharedInstance].previewRid = userInfo[@"rid"];
+                
+                NSString *contentStr = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:contentStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看详情",nil];
+                [alertView show];
+                
+                
             }
-            [YjyxOverallData sharedInstance].historyId = userInfo[@"id"];
-            [YjyxOverallData sharedInstance].previewRid = userInfo[@"rid"];
+
             
-            NSString *contentStr = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:contentStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看详情",nil];
-            [alertView show];
+            
+        }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"student"]) {
+        
+            if ([userInfo[@"type"] isEqualToString:@"newtask"]) {// 新作业
+                
+                if ([userInfo[@"tasktype"] integerValue] ==1) {
+                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
+                }else{
+                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
+                }
+                [YjyxOverallData sharedInstance].taskid = userInfo[@"taskid"];
+                [YjyxOverallData sharedInstance].examid = userInfo[@"rid"];
+                
+                NSString *contentStr = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:contentStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看详情",nil];
+                [alertView show];
+                
+                
+            }else if ([userInfo[@"type"] isEqualToString:@"hastentask"]) {
+            
+                if ([userInfo[@"tasktype"] integerValue] ==1) {
+                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
+                }else{
+                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
+                }
+                [YjyxOverallData sharedInstance].taskid = userInfo[@"taskid"];
+                [YjyxOverallData sharedInstance].examid = userInfo[@"rid"];
+                
+                NSString *contentStr = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:contentStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看详情",nil];
+                [alertView show];
+
+                
+            }
+
+            
+            
         }
         
-        if ([userInfo[@"type"] isEqualToString:@"hastentask"]) {// 老师催作业
-            
-            if ([userInfo[@"tasktype"] integerValue] ==1) {
-                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
-            }else{
-                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
-            }
-            
-            [YjyxOverallData sharedInstance].previewRid = userInfo[@"rid"];
-
-            NSString *contentStr = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-            
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:contentStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:@"查看详情",nil];
-            [alertView show];
-
-            
-        }
-    }else{
+        
+    }else{// 程序处于后台
         if ([userInfo[@"type"] isEqualToString:@"childactivity"]) {
             if ([userInfo[@"finished"] integerValue] == 0 ) {
                 if ([userInfo[@"tasktype"] integerValue] ==1) {
@@ -230,8 +274,10 @@
             
         }
     }
-    completionHandler(UIBackgroundFetchResultNewData);
+//    completionHandler(UIBackgroundFetchResultNewData);
 }
+
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -787,7 +833,9 @@
         switch ([YjyxOverallData sharedInstance].pushType) {
             case 1:{
                 YjyxWorkPreviewViewController *result = [[YjyxWorkPreviewViewController alloc] init];
-                result.previewRid = [YjyxOverallData sharedInstance].previewRid;
+                result.taskid = [YjyxOverallData sharedInstance].taskid;
+                result.examid = [YjyxOverallData sharedInstance].examid;
+                result.navigationItem.title = @"预览作业";
                 [result setHidesBottomBarWhenPushed:YES];
                 [vc pushViewController:result animated:YES];
                 [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
@@ -797,7 +845,9 @@
                 
             case 2:{
                 YjyxMicroClassViewController *result = [[YjyxMicroClassViewController alloc] init];
-                result.previewRid = [YjyxOverallData sharedInstance].previewRid;
+                result.taskid = [YjyxOverallData sharedInstance].taskid;
+                result.lessonid = [YjyxOverallData sharedInstance].examid;
+                result.navigationItem.title = @"预览作业";
                 [result setHidesBottomBarWhenPushed:YES];
                 [vc pushViewController:result animated:YES];
                 [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;

@@ -25,7 +25,8 @@
 -(void)initView
 {
     UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    [web loadHTMLString:_explantionStr baseURL:nil];
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", _explantionStr];
+    [web loadHTMLString:jsString baseURL:nil];
     [self.view addSubview:web];
 }
 
