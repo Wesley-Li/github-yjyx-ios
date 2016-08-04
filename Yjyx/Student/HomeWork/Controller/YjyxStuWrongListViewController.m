@@ -174,9 +174,6 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 
-        
-        NSLog(@"%@", error);
-
         NSLog(@"%@", error.localizedDescription);
 
         [self.view makeToast:@"数据请求失败,请检查您的网络" duration:1.0 position:SHOW_CENTER complete:nil];

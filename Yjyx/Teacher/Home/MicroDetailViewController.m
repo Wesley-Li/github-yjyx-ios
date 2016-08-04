@@ -32,6 +32,8 @@
 @property (strong, nonatomic) NSMutableDictionary *knowCellHeightDic;
 // 所有的题目数组
 @property (strong, nonatomic) NSMutableArray *allSubjectArr;
+// 保存所有题目的数组,以防用户将题目删除时,恢复
+@property (strong, nonatomic) NSMutableArray *saveSubjectArr;
 // 多少组
 @property (assign, nonatomic) NSInteger count;
 @property (strong, nonatomic) ReleaseMicroCell *videoCell;
@@ -75,6 +77,7 @@ static NSString *VideoNumID = @"VideoNum";
     [super viewDidLoad];
     self.view.backgroundColor = COMMONCOLOR;
     [SVProgressHUD showWithStatus:@"正在加载数据..."];
+    self.saveSubjectArr = [NSMutableArray array];
     [self loadData];
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ReleaseMicroCell class]) bundle:nil] forCellReuseIdentifier:videoID];
@@ -142,7 +145,6 @@ static NSString *VideoNumID = @"VideoNum";
 }
 - (void)dealloc
 {
-    [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 #pragma mark - 私有方法
@@ -214,6 +216,8 @@ static NSString *VideoNumID = @"VideoNum";
         [footerView addSubview:releaseBtn];
         self.tableView.tableFooterView = footerView;
         self.videoURL = _microDetailM.videoUrlArr[0];
+        [self.saveSubjectArr addObjectsFromArray:self.allSubjectArr];
+        NSLog(@"%@", self.saveSubjectArr);
         // 刷新底部view
         [self.tableView reloadData];
         [SVProgressHUD dismiss];
@@ -328,9 +332,34 @@ static NSString *VideoNumID = @"VideoNum";
 - (void)releaseBtnClicked
 {
     [self closeTheVideo:nil];
+    [self toCell];
+    
+    if(_microDetailM.isSelected == YES){
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:4]
+                                    animated:YES
+                              scrollPosition:UITableViewScrollPositionTop];
+        [SVProgressHUD showInfoWithStatus:@"请先确认发布的题目,并按下确定键"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            SubjectTitleCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:4]];
+
+            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"opacity"];//必须写opacity才行。
+            animation.fromValue = [NSNumber numberWithFloat:1.0f];
+            animation.toValue = [NSNumber numberWithFloat:0.0f];
+            
+             animation.autoreverses = YES;
+            animation.repeatCount = MAXFLOAT;
+            animation.repeatDuration = 1.5;
+            animation.removedOnCompletion = NO;
+            animation.fillMode = kCAFillModeForwards;
+            animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+            [cell.editBtn.layer addAnimation:animation forKey:@"anmi"];
+        });
+     
+    }else{
     ReleaseMicroController *vc = [[ReleaseMicroController alloc] init];
     vc.w_id = self.m_id;
     [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 - (void )addBtnClick
 {
@@ -603,6 +632,7 @@ static NSString *VideoNumID = @"VideoNum";
  *  释放WMPlayer
  */
 -(void)releaseWMPlayer{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
     [wmPlayer.player.currentItem cancelPendingSeeks];
     [wmPlayer.player.currentItem.asset cancelLoading];
     [wmPlayer.player pause];
@@ -610,8 +640,8 @@ static NSString *VideoNumID = @"VideoNum";
     //移除观察者
     [wmPlayer.currentItem removeObserver:wmPlayer forKeyPath:@"status"];
     
-    [wmPlayer removeFromSuperview];
-    [wmPlayer.playerLayer removeFromSuperlayer];
+//    [wmPlayer removeFromSuperview];
+//    [wmPlayer.playerLayer removeFromSuperlayer];
     [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
     wmPlayer.player = nil;
     wmPlayer.currentItem = nil;
@@ -626,6 +656,7 @@ static NSString *VideoNumID = @"VideoNum";
     wmPlayer.playOrPauseBtn = nil;
     wmPlayer.playerLayer = nil;
     wmPlayer = nil;
+    });
 }
 #pragma mark scrollView delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -860,7 +891,17 @@ static NSString *VideoNumID = @"VideoNum";
         }
         _flag = 1;
     }else{
-        
+        if(self.allSubjectArr.count == 0){
+            [SVProgressHUD showErrorWithStatus:@"题目不能为空,编辑失败"];
+            NSLog(@"%@", self.saveSubjectArr);
+            self.allSubjectArr = self.saveSubjectArr;
+            NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:4];
+            [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+            for (MicroSubjectModel *model in _allSubjectArr) {
+                model.btnIsShow = NO;
+            }
+            return;
+        }
         [self modifiContentData];
         for (MicroSubjectModel *model in _allSubjectArr) {
             model.btnIsShow = NO;
@@ -900,6 +941,7 @@ static NSString *VideoNumID = @"VideoNum";
         self.blankcount--;
     }
     [self.allSubjectArr removeObjectAtIndex:(indexPath.row - 1)];
+    NSLog(@"%@", self.saveSubjectArr);
     NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:indexPath.section];
     [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
     

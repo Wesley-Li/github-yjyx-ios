@@ -103,12 +103,14 @@ static BookViewController *_instance;
     NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
     pamar[@"action"] = @"list";
     [mgr GET:[BaseURL stringByAppendingString:@"/api/teacher/vgsv/"] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        
+        NSLog(@"%@", responseObject);
         self.gradeArr = responseObject[@"grade_list"];
         self.versionArr = responseObject[@"version_list"];
         self.volArr = responseObject[@"vol_list"];
+        
+        NSLog(@"%@, %@, %@", self.gradeArr, self.versionArr, self.volArr);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"$$$$$$$$$$$");
+        [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
     }];
 }
 // 确定按钮的点击
@@ -233,9 +235,14 @@ static BookViewController *_instance;
                 self.selectMatieral.materialArr = _materialArr;
             }else{
                 NSArray *arr = self.gradeArr;
+                NSArray *curArr = self.volArr;
                 for (NSInteger i = 0; i < arr.count; i++) {
-                    [self.bookArr addObject:[arr[i][1] stringByAppendingString:@"上册"]];
-                    [self.bookArr addObject:[arr[i][1] stringByAppendingString:@"下册"]];
+                    for (NSArray *tempArr in curArr) {
+                        [self.bookArr addObject:[arr[i][1] stringByAppendingString:tempArr[1]]];
+                    }
+//                    [self.bookArr addObject:[arr[i][1] stringByAppendingString:@"上册"]];
+//                    [self.bookArr addObject:[arr[i][1] stringByAppendingString:@"下册"]];
+                    
                 }
                 self.selectMatieral.materialArr = _bookArr;
             }

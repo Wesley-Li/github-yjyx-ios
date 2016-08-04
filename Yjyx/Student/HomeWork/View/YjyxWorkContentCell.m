@@ -49,7 +49,7 @@
 - (void)setFinishModel:(YjyxWorkDetailModel *)finishModel
 {
     _finishModel = finishModel;
-    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", finishModel.content];
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", finishModel.content];
     
     [_web loadHTMLString:jsString baseURL:nil];
 }

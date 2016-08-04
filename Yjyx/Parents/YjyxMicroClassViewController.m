@@ -300,12 +300,13 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)releaseWMPlayer{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
     [wmPlayer.player.currentItem cancelPendingSeeks];
     [wmPlayer.player.currentItem.asset cancelLoading];
     
     [wmPlayer.player pause];
-    [wmPlayer removeFromSuperview];
-    [wmPlayer.playerLayer removeFromSuperlayer];
+//    [wmPlayer removeFromSuperview];
+//    [wmPlayer.playerLayer removeFromSuperlayer];
     [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
     wmPlayer = nil;
     wmPlayer.player = nil;
@@ -313,6 +314,7 @@
     
     wmPlayer.playOrPauseBtn = nil;
     wmPlayer.playerLayer = nil;
+    });
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
@@ -616,7 +618,7 @@
     web.scrollView.scrollEnabled = NO;
     web.scrollView.showsHorizontalScrollIndicator = NO;
     web.delegate = self;
-    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", content];
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", content];
     [web loadHTMLString:jsString baseURL:nil];
    
     [headerView addSubview:web];

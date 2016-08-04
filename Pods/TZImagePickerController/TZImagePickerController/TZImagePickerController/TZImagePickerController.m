@@ -212,6 +212,7 @@
     } else if (_timeout > 60) {
         _timeout = 60;
     }
+    
 }
 
 - (void)setSelectedAssets:(NSMutableArray *)selectedAssets {

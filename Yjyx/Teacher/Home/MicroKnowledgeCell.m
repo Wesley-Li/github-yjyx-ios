@@ -37,7 +37,7 @@
 {
     _model = model;
     self.knowLedgeLabel.text = model.knowledgedesc;
-    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.knowledgedesc];
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", model.knowledgedesc];
     [_web loadHTMLString:jsString baseURL:nil];
     NSLog(@"--%@", NSStringFromCGSize(_web.scrollView.contentSize));
     
@@ -53,7 +53,7 @@
     }else{
         self.knowLabel.hidden = NO;
     }
-    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", workModel.knowledgedesc];
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", workModel.knowledgedesc];
     [_web loadHTMLString:jsString baseURL:nil];
 }
 
