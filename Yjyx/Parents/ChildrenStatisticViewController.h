@@ -12,6 +12,7 @@
 @interface ChildrenStatisticViewController : BaseViewController
 {
     NSInteger type;//区分目前选中哪个模块
+    NSInteger childrenIndex;// 区分选中小孩
     //底部三个按钮
     IBOutlet UIButton *subjectBtn;
     IBOutlet UIButton *taskBtn;

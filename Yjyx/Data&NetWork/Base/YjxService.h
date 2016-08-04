@@ -21,7 +21,7 @@
 /**
  * QA环境地址
  * **/
-//#define BaseURL @"http://120.26.111.106"
+//#define BaseURL @"http://192.168.1.231"
 //#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
 
 

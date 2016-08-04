@@ -607,13 +607,13 @@
             if (model.questiontype == 2) {
                 for (UIView *subview in view.subviews) {
                     if ([subview isKindOfClass:[UIScrollView class]]) {
-                        for (UIView *finalSubview in subview.subviews){
+                        for (UIView *finalSubview in subview.subviews) {
+                            
                             NSString *answerStr =[((UITextField *)finalSubview).text stringByReplacingOccurrencesOfString:@" " withString:@""
                                                   ];
-                            if([answerStr isEqualToString:@""]){
-                                continue;
-                            }
-                            [arr addObject: ((UITextField *)finalSubview).text];
+
+                            [arr addObject:answerStr];
+//                            [arr addObject: ((UITextField *)finalSubview).text];
                         }
                     }
                 }
