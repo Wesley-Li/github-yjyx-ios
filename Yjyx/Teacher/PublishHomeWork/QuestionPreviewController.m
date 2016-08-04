@@ -15,12 +15,12 @@
 #import "ChaperContentItem.h"
 #import "OneSubjectController.h"
 #define kIndentifier @"fhdsjfhdskjhf"
-@interface QuestionPreviewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface QuestionPreviewController ()<UITableViewDelegate, UITableViewDataSource, QuestionPreviewCellDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *configurePublishBtn;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableDictionary *cellHeightDic;
 
-
+@property (strong, nonatomic) UIButton *reuqireBtn;
 @end
 
 @implementation QuestionPreviewController
@@ -59,6 +59,7 @@
     UIView *view = [[UIView alloc] init];
     view.height = 35;
     UIButton *requireProBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.reuqireBtn = requireProBtn;
     [requireProBtn setTitle:@"全部需要过程" forState:UIControlStateNormal];
     [requireProBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [requireProBtn setTitleColor:RGBACOLOR(58, 158, 232, 1) forState:UIControlStateSelected];
@@ -101,6 +102,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     QuestionPreviewCell *cell = [tableView dequeueReusableCellWithIdentifier:kIndentifier forIndexPath:indexPath];
+    cell.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.tag = indexPath.row;
     if ([self.selectArr[indexPath.row] isKindOfClass:[ChaperContentItem class]]) {
@@ -109,6 +111,7 @@
         [cell setValueWithModel:item];
     }else{
         YjyxWrongSubModel *model = self.selectArr[indexPath.row];
+        cell.wrongModel = model;
         [cell setWrongWithModel:model];
         
     }
@@ -235,12 +238,14 @@
     
 }
 
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma QuestionPreviewCellDelegate代理方法
+- (void)questionPreviewCell:(QuestionPreviewCell *)cell isRequireProBtnClicked:(UIButton *)btn
+{
+    if(btn.selected == NO){
+        self.reuqireBtn.selected = NO;
+    }
 }
+
 
 /*
 #pragma mark - Navigation

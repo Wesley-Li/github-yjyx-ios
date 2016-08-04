@@ -448,6 +448,7 @@
 		3CD7E4641D2BD33D00769FDE /* YjyxSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD7E4631D2BD33D00769FDE /* YjyxSearchView.m */; };
 		3CD7E4661D2BD39200769FDE /* YjyxSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CD7E4651D2BD39200769FDE /* YjyxSearchView.xib */; };
 		3CD90A531D2E266200088742 /* YjyxMicroWorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD90A521D2E266200088742 /* YjyxMicroWorkModel.m */; };
+		3CDE86DC1D4F2A6C00740A47 /* YjyxHomeWorkButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDE86DB1D4F2A6C00740A47 /* YjyxHomeWorkButton.m */; };
 		3CE098991D122F660054C42B /* ReleaseHomeWorkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE098971D122F660054C42B /* ReleaseHomeWorkController.m */; };
 		3CE0989A1D122F660054C42B /* ReleaseHomeWorkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE098981D122F660054C42B /* ReleaseHomeWorkController.xib */; };
 		3CE0989E1D123EF10054C42B /* PostStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0989C1D123EF10054C42B /* PostStudentCell.m */; };
@@ -1248,6 +1249,8 @@
 		3CD7E4651D2BD39200769FDE /* YjyxSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxSearchView.xib; sourceTree = "<group>"; };
 		3CD90A511D2E266200088742 /* YjyxMicroWorkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxMicroWorkModel.h; sourceTree = "<group>"; };
 		3CD90A521D2E266200088742 /* YjyxMicroWorkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxMicroWorkModel.m; sourceTree = "<group>"; };
+		3CDE86DA1D4F2A6C00740A47 /* YjyxHomeWorkButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxHomeWorkButton.h; sourceTree = "<group>"; };
+		3CDE86DB1D4F2A6C00740A47 /* YjyxHomeWorkButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxHomeWorkButton.m; sourceTree = "<group>"; };
 		3CE098961D122F660054C42B /* ReleaseHomeWorkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseHomeWorkController.h; sourceTree = "<group>"; };
 		3CE098971D122F660054C42B /* ReleaseHomeWorkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseHomeWorkController.m; sourceTree = "<group>"; };
 		3CE098981D122F660054C42B /* ReleaseHomeWorkController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseHomeWorkController.xib; sourceTree = "<group>"; };
@@ -2696,6 +2699,8 @@
 				3C3D93CF1D26119500AA22AE /* YjyxCommonTabController.m */,
 				3C3D93E91D26442000AA22AE /* YjyxButton.h */,
 				3C3D93EA1D26442000AA22AE /* YjyxButton.m */,
+				3CDE86DA1D4F2A6C00740A47 /* YjyxHomeWorkButton.h */,
+				3CDE86DB1D4F2A6C00740A47 /* YjyxHomeWorkButton.m */,
 				3CFF2C971D3E0E6200F5EB63 /* YjyxTeacherButton.h */,
 				3CFF2C981D3E0E6200F5EB63 /* YjyxTeacherButton.m */,
 			);
@@ -3793,6 +3798,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A905D141C7F3587005AB12F /* YjyxSoundViewController.m in Sources */,
+				3CDE86DC1D4F2A6C00740A47 /* YjyxHomeWorkButton.m in Sources */,
 				80FEB6A41D235C48009EB126 /* PPreviewCell.m in Sources */,
 				3CF01B501D0E543E001C4251 /* siftButton.m in Sources */,
 				3CD90A531D2E266200088742 /* YjyxMicroWorkModel.m in Sources */,
@@ -4189,8 +4195,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -4229,7 +4235,7 @@
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "92e9b2c4-8833-4ab2-bf04-b311a25d4413";
+				PROVISIONING_PROFILE = "8738e8ea-9b10-4c1a-9734-06599c5639a1";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -4242,8 +4248,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -4281,7 +4287,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "92e9b2c4-8833-4ab2-bf04-b311a25d4413";
+				PROVISIONING_PROFILE = "8738e8ea-9b10-4c1a-9734-06599c5639a1";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

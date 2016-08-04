@@ -10,7 +10,7 @@
 #import "MicroDetailModel.h"
 @interface SubjectTitleCell()
 
-@property (weak, nonatomic) IBOutlet UIButton *editBtn;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *trailingConstant;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 // 包含添加题目及需要过程的按钮

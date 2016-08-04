@@ -374,6 +374,7 @@ static NSString *VideoID = @"VIDEOCELL";
  *  释放WMPlayer
  */
 -(void)releaseWMPlayer{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
     [wmPlayer.player.currentItem cancelPendingSeeks];
     [wmPlayer.player.currentItem.asset cancelLoading];
     [wmPlayer.player pause];
@@ -381,8 +382,8 @@ static NSString *VideoID = @"VIDEOCELL";
     //移除观察者
     [wmPlayer.currentItem removeObserver:wmPlayer forKeyPath:@"status"];
     
-    [wmPlayer removeFromSuperview];
-    [wmPlayer.playerLayer removeFromSuperlayer];
+//    [wmPlayer removeFromSuperview];
+//    [wmPlayer.playerLayer removeFromSuperlayer];
     [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
     wmPlayer.player = nil;
     wmPlayer.currentItem = nil;
@@ -397,6 +398,7 @@ static NSString *VideoID = @"VIDEOCELL";
     wmPlayer.playOrPauseBtn = nil;
     wmPlayer.playerLayer = nil;
     wmPlayer = nil;
+    });
 }
 #pragma mark - 私有方法
 - (void)loadData

@@ -234,7 +234,7 @@ static QuestionDataBase *singleton = nil;
         NSString *answer = [set1 stringForColumn:@"answer"];
         NSString *total_wrong_num = [set1 stringForColumn:@"total_wrong_num"];
         NSString *jumpType = [set1 stringForColumn:@"jumpType"];
-        NSString *isRequireProcess = [set stringForColumn:@"isRequirePro"];
+        NSString *isRequireProcess = [set1 stringForColumn:@"isRequirePro"];
         if(![jumpType isEqualToString:jumpT]){
             break;
         }
@@ -330,7 +330,7 @@ static QuestionDataBase *singleton = nil;
         NSString *answer = [set1 stringForColumn:@"answer"];
         NSString *total_wrong_num = [set1 stringForColumn:@"total_wrong_num"];
         NSString *jumpType = [set1 stringForColumn:@"jumpType"];
-        NSString *requirePro = [set stringForColumn:@"isRequirePro"];
+        NSString *requirePro = [set1 stringForColumn:@"isRequirePro"];
         if(![jumpType isEqualToString:jumpT]){
             break;
         }
@@ -425,7 +425,7 @@ static QuestionDataBase *singleton = nil;
         NSString *answer = [set1 stringForColumn:@"answer"];
         NSString *jumpType = [set1 stringForColumn:@"jumpType"];
         NSString *total_wrong_num = [set1 stringForColumn:@"total_wrong_num"];
-        NSString *requirePro = [set stringForColumn:@"isRequirePro"];
+        NSString *requirePro = [set1 stringForColumn:@"isRequirePro"];
         if(![jumpType isEqualToString:jumpT]){
             break;
         }

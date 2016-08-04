@@ -17,4 +17,6 @@
 
 @property (strong, nonatomic) MicroDetailModel *model;
 @property (assign, nonatomic) id<SubjectTitleCellDelegate> delegate;
+
+@property (weak, nonatomic) IBOutlet UIButton *editBtn;
 @end

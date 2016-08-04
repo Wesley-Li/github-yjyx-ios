@@ -38,14 +38,14 @@
     self.navigationController.navigationBarHidden = YES;
     // 初始化
     self.nameLabel.text = [YjyxOverallData sharedInstance].studentInfo.realname;
-    NSString *str1 = [YjyxOverallData sharedInstance].studentInfo.schoolprovincename ? [YjyxOverallData sharedInstance].studentInfo.schoolprovincename : @"";
-    
-    NSString *str2 = [YjyxOverallData sharedInstance].studentInfo.schoolcityname ? [YjyxOverallData sharedInstance].studentInfo.schoolcityname : @"";
+//    NSString *str1 = [YjyxOverallData sharedInstance].studentInfo.schoolprovincename ? [YjyxOverallData sharedInstance].studentInfo.schoolprovincename : @"";
+//    
+//    NSString *str2 = [YjyxOverallData sharedInstance].studentInfo.schoolcityname ? [YjyxOverallData sharedInstance].studentInfo.schoolcityname : @"";
     NSString *str3 = [YjyxOverallData sharedInstance].studentInfo.schoolname ? [YjyxOverallData sharedInstance].studentInfo.schoolname : @"";
     NSString *str4 = [YjyxOverallData sharedInstance].studentInfo.gradename ? [YjyxOverallData sharedInstance].studentInfo.gradename : @"";
     NSString *str5 = [YjyxOverallData sharedInstance].studentInfo.classname ? [YjyxOverallData sharedInstance].studentInfo.classname : @"";
     
-    self.gradeLabel.text = [NSString stringWithFormat:@"%@%@%@%@%@", str1, str2, str3, str4, str5];
+    self.gradeLabel.text = [NSString stringWithFormat:@"%@%@%@",str3, str4, str5];
     self.coinLabel.text = [[YjyxOverallData sharedInstance].studentInfo.coins stringValue];
     self.codeLabel.text = [NSString stringWithFormat:@"家长邀请码: %@" ,[YjyxOverallData sharedInstance].studentInfo.invitecode ];
     // 头像

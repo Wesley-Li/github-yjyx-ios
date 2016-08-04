@@ -38,7 +38,7 @@
     web.scrollView.bounces = NO;
     web.userInteractionEnabled = NO;
 
-    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", model.content];
     [web loadHTMLString:jsString baseURL:nil];
     [self.bgview addSubview:web];
 

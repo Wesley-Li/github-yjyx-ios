@@ -35,7 +35,6 @@
     for (UIView *view in [self.BGVIEW subviews]) {
         [view removeFromSuperview];
     }
-
     self.questionNumberLabel.layer.cornerRadius = 5;
     self.questionNumberLabel.layer.masksToBounds = YES;
     self.questionNumberLabel.backgroundColor = RGBACOLOR(3, 138, 228, 1);
@@ -76,7 +75,7 @@
     web.scrollView.bounces = NO;
     web.scrollView.showsHorizontalScrollIndicator = NO;
     
-    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content_text];
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", model.content_text];
     
     [web loadHTMLString:jsString baseURL:nil];
     
@@ -112,9 +111,15 @@
 }
 
 - (IBAction)requireProcessBtnClick:(UIButton *)sender {
+    
     sender.selected = !sender.selected;
+    
+    if ([self.delegate respondsToSelector:@selector(questionPreviewCell:isRequireProBtnClicked:)]) {
+        [self.delegate questionPreviewCell:self isRequireProBtnClicked:sender];
+    }
     if(sender.selected == YES){
         if(_chaperItem == nil){
+            NSLog(@"%@", _wrongModel);
             _wrongModel.isRequireProcess = YES;
         }else{
             _chaperItem.isRequireProcess = YES;
@@ -135,6 +140,9 @@
     for (UIView *view in [self.BGVIEW subviews]) {
         [view removeFromSuperview];
     }
+    
+    NSLog(@"%@, %d", model, model.isRequireProcess);
+    self.requireProBtn.selected = model.isRequireProcess;
     
     self.questionNumberLabel.layer.cornerRadius = 5;
     self.questionNumberLabel.layer.masksToBounds = YES;
@@ -175,10 +183,10 @@
     web.scrollView.bounces = NO;
     web.scrollView.showsHorizontalScrollIndicator = NO;
     
-    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", model.content];
     
     [web loadHTMLString:jsString baseURL:nil];
-    self.requireProBtn.selected = model.isRequireProcess;
+  
     [self.BGVIEW addSubview:web];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -67,7 +67,7 @@
     web.userInteractionEnabled = NO;
     [self.webBgview addSubview:web];
 
-    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", wrongSubModel.content];
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", wrongSubModel.content];
     [web loadHTMLString:jsString baseURL:nil];
     
   

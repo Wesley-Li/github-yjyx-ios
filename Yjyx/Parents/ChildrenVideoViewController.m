@@ -172,7 +172,7 @@
        
        NSLog(@"%@", NSStringFromRange(range));
        if(range.length == 0 && range.location > 5000000){
-           NSString *str2 = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", _explantionStr];
+           NSString *str2 = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", _explantionStr];
            [web loadHTMLString:str2 baseURL:nil];
        }else if(range.length != 1){
            [web loadHTMLString:_explantionStr baseURL:nil];
@@ -204,7 +204,7 @@
 
        NSLog(@"%@", NSStringFromRange(range));
        if(range.length == 0 && range.location > 5000000){
-           NSString *str2 = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", _explantionStr];
+           NSString *str2 = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", _explantionStr];
            [web loadHTMLString:str2 baseURL:nil];
        }else if(range.length != 1){
              [web loadHTMLString:_explantionStr baseURL:nil];
@@ -263,7 +263,10 @@
     self.navigationController.navigationBarHidden = YES;
     [super viewWillDisappear:YES];
 }
-
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self releaseWMPlayer];
+}
 -(void)goBack
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -282,23 +285,38 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)releaseWMPlayer{
-    [wmPlayer.player.currentItem cancelPendingSeeks];
-    [wmPlayer.player.currentItem.asset cancelLoading];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [wmPlayer.player.currentItem cancelPendingSeeks];
+        [wmPlayer.player.currentItem.asset cancelLoading];
+        [wmPlayer.player pause];
+        
+        //移除观察者
+        [wmPlayer.currentItem removeObserver:wmPlayer forKeyPath:@"status"];
+        
+        //        [wmPlayer removeFromSuperview];
+        //        [wmPlayer.playerLayer removeFromSuperlayer];
+        [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
+        wmPlayer.player = nil;
+        wmPlayer.currentItem = nil;
+        
+        //释放定时器，否侧不会调用WMPlayer中的dealloc方法
+        [wmPlayer.autoDismissTimer invalidate];
+        wmPlayer.autoDismissTimer = nil;
+        [wmPlayer.durationTimer invalidate];
+        wmPlayer.durationTimer = nil;
+        
+        
+        wmPlayer.playOrPauseBtn = nil;
+        wmPlayer.playerLayer = nil;
+        wmPlayer = nil;
+        
+    });
     
-    [wmPlayer.player pause];
-    [wmPlayer removeFromSuperview];
-    [wmPlayer.playerLayer removeFromSuperlayer];
-    [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
-    wmPlayer = nil;
-    wmPlayer.player = nil;
-    wmPlayer.currentItem = nil;
     
-    wmPlayer.playOrPauseBtn = nil;
-    wmPlayer.playerLayer = nil;
 }
 
 -(void)dealloc{
-    [self releaseWMPlayer];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"player deallco");
 }

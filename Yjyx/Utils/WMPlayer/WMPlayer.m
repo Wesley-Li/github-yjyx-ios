@@ -463,31 +463,33 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     __weak typeof(self) weakSelf = self;
     
     [weakSelf.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(interval, NSEC_PER_SEC)  queue:NULL /* If you pass NULL, the main queue is used. */ usingBlock:^(CMTime time){
-        [self syncScrubber];
+        [weakSelf syncScrubber];
     }];
     
 }
 - (void)syncScrubber{
-    CMTime playerDuration = [self playerItemDuration];
+     __weak typeof(self) weakSelf = self;
+    CMTime playerDuration = [weakSelf playerItemDuration];
     if (CMTIME_IS_INVALID(playerDuration)){
-        self.progressSlider.minimumValue = 0.0;
+        weakSelf.progressSlider.minimumValue = 0.0;
         return;
     }
     
     double duration = CMTimeGetSeconds(playerDuration);
     if (isfinite(duration)){
-        float minValue = [self.progressSlider minimumValue];
-        float maxValue = [self.progressSlider maximumValue];
-        double time = CMTimeGetSeconds([self.player currentTime]);
-        _timeLabel.text = [NSString stringWithFormat:@"%@/%@",[self convertTime:time],[self convertTime:duration]];
+        float minValue = [weakSelf.progressSlider minimumValue];
+        float maxValue = [weakSelf.progressSlider maximumValue];
+        double time = CMTimeGetSeconds([weakSelf.player currentTime]);
+        _timeLabel.text = [NSString stringWithFormat:@"%@/%@",[weakSelf convertTime:time],[weakSelf convertTime:duration]];
         
 //        NSLog(@"时间 :: %f",(maxValue - minValue) * time / duration + minValue);
-        [self.progressSlider setValue:(maxValue - minValue) * time / duration + minValue];
+        [weakSelf.progressSlider setValue:(maxValue - minValue) * time / duration + minValue];
     }
 }
 
 - (CMTime)playerItemDuration{
-    AVPlayerItem *playerItem = [self.player currentItem];
+    __weak typeof(self) weakSelf = self;
+    AVPlayerItem *playerItem = [weakSelf.player currentItem];
 //    NSLog(@"%ld",playerItem.status);
     if (playerItem.status == AVPlayerItemStatusReadyToPlay){
         return([playerItem duration]);
@@ -536,11 +538,13 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     self.firstPoint = self.secondPoint = CGPointZero;
 }
 -(void)dealloc{
+    NSLog(@"wmplayer delloc");
     [self.player pause];
     self.autoDismissTimer = nil;
     self.durationTimer = nil;
     self.player = nil;
     [self.currentItem removeObserver:self forKeyPath:@"status"];
+   
 }
 @end
 // 版权属于原作者

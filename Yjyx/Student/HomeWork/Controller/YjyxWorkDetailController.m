@@ -130,6 +130,7 @@ static NSString *videoNumID = @"VIDEONumID";
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
+
     [SVProgressHUD dismiss];
     
 }
@@ -144,10 +145,14 @@ static NSString *videoNumID = @"VIDEONumID";
         
     }
 }
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self releaseWMPlayer];
+}
 - (void)dealloc
 {
-    NSLog(@"-------");
-    [self releaseWMPlayer];
+    NSLog(@"workdetail-------");
+   
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (BOOL)prefersStatusBarHidden
@@ -236,8 +241,10 @@ static NSString *videoNumID = @"VIDEONumID";
     NSLog(@"%@", self.t_id);
     param[@"tasktrackid"] = self.t_id;
     NSLog(@"%@", param);
+    [self.view makeToastActivity:SHOW_CENTER];
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/tasks/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         NSLog(@"%@", responseObject);
+        [self.view hideToastActivity];
 //        NSLog(@"%@",responseObject[@"data"][@"result"][@"choice"]);
         YjyxMicroWorkModel *model = [YjyxMicroWorkModel microWorkModelWithDict:responseObject[@"data"][@"lessonobj"]];
         _model = model;
@@ -510,29 +517,34 @@ static NSString *videoNumID = @"VIDEONumID";
  *  释放WMPlayer
  */
 -(void)releaseWMPlayer{
-    [wmPlayer.player.currentItem cancelPendingSeeks];
-    [wmPlayer.player.currentItem.asset cancelLoading];
-    [wmPlayer.player pause];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [wmPlayer.player.currentItem cancelPendingSeeks];
+        [wmPlayer.player.currentItem.asset cancelLoading];
+        [wmPlayer.player pause];
+  
+        //移除观察者
+        [wmPlayer.currentItem removeObserver:wmPlayer forKeyPath:@"status"];
+        
+//        [wmPlayer removeFromSuperview];
+//        [wmPlayer.playerLayer removeFromSuperlayer];
+        [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
+        wmPlayer.player = nil;
+        wmPlayer.currentItem = nil;
+        
+        //释放定时器，否侧不会调用WMPlayer中的dealloc方法
+        [wmPlayer.autoDismissTimer invalidate];
+        wmPlayer.autoDismissTimer = nil;
+        [wmPlayer.durationTimer invalidate];
+        wmPlayer.durationTimer = nil;
+        
+        
+        wmPlayer.playOrPauseBtn = nil;
+        wmPlayer.playerLayer = nil;
+        wmPlayer = nil;
     
-    //移除观察者
-    [wmPlayer.currentItem removeObserver:wmPlayer forKeyPath:@"status"];
+  });
+
     
-    [wmPlayer removeFromSuperview];
-    [wmPlayer.playerLayer removeFromSuperlayer];
-    [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
-    wmPlayer.player = nil;
-    wmPlayer.currentItem = nil;
-    
-    //释放定时器，否侧不会调用WMPlayer中的dealloc方法
-    [wmPlayer.autoDismissTimer invalidate];
-    wmPlayer.autoDismissTimer = nil;
-    [wmPlayer.durationTimer invalidate];
-    wmPlayer.durationTimer = nil;
-    
-    
-    wmPlayer.playOrPauseBtn = nil;
-    wmPlayer.playerLayer = nil;
-    wmPlayer = nil;
 }
 
 #pragma mark scrollView delegate

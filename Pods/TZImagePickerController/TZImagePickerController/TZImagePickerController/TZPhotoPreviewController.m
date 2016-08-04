@@ -29,6 +29,10 @@
     UILabel *_numberLable;
     UIButton *_originalPhotoButton;
     UILabel *_originalPhotoLable;
+    
+    NSArray *_preserveAssets; // 新增保存原来的asset数组
+    
+   
 }
 @end
 
@@ -46,6 +50,7 @@
     [self configCollectionView];
     [self configCustomNaviBar];
     [self configBottomToolBar];
+  
 }
 
 - (void)setPhotos:(NSMutableArray *)photos {
@@ -189,6 +194,7 @@
         }
     } else {
         NSArray *selectedModels = [NSArray arrayWithArray:_tzImagePickerVc.selectedModels];
+        _preserveAssets = selectedModels;
         for (TZAssetModel *model_item in selectedModels) {
             if ([model.asset isEqual:model_item.asset]) {
                 [_tzImagePickerVc.selectedModels removeObject:model_item];
@@ -209,6 +215,12 @@
 
 - (void)back {
     if (self.navigationController.childViewControllers.count < 2) {
+        TZImagePickerController *_tzImagePickerVc = (TZImagePickerController *)self.navigationController;
+        NSLog(@"%@,%@, %@",_preserveAssets,  _assetsTemp, _photosTemp);
+        _tzImagePickerVc.selectedModels = _preserveAssets;
+        _tzImagePickerVc.selectedAssets = _assetsTemp;
+        self.photos = _photosTemp;
+        [self okButtonClick];
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         return;
     }
@@ -240,6 +252,7 @@
         [self showPhotoBytes];
         if (!_selectButton.isSelected) [self select:_selectButton];
     }
+    
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -248,6 +261,7 @@
     CGPoint offSet = scrollView.contentOffset;
     _currentIndex = (offSet.x + (self.view.tz_width * 0.5)) / self.view.tz_width;
     [self refreshNaviBarAndBottomBarState];
+    
 }
 
 #pragma mark - UICollectionViewDataSource && Delegate

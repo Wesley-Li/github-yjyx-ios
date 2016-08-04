@@ -63,7 +63,7 @@
     web.scrollView.bounces = NO;
     web.scrollView.showsHorizontalScrollIndicator = NO;
     
-    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", model.content];
     
     [web loadHTMLString:jsString baseURL:nil];
     
@@ -83,7 +83,7 @@
             NSString *myanswer = [NSString stringWithFormat:@""];
             for (int i = 0; i < model.stuAnswer.count; i++) {
                 NSInteger num = [model.stuAnswer[i] integerValue];
-                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@" %@",[letterAry objectAtIndex:num]]];
+                myanswer = [myanswer stringByAppendingString:[NSString stringWithFormat:@"%@",[letterAry objectAtIndex:num]]];
             }
 
             self.stuAnswerLabel.text = myanswer;
@@ -116,7 +116,7 @@
             
         }
         
-        self.rightAnswerLabel.text = [NSString stringWithFormat:@"  %@", tureAnswer];
+        self.rightAnswerLabel.text = [NSString stringWithFormat:@"%@", tureAnswer];
 
         
         

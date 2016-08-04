@@ -496,7 +496,7 @@
         [self.scrollView addSubview:webView];
         webView.tag = i + 1;
         webView.scrollView.bounces = NO;
-        NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
+        NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", model.content];
         [webView loadHTMLString:jsString baseURL:nil];
         
         // 添加答案控件
@@ -921,11 +921,11 @@
     if (indexPath.row == _selectedPhotos.count) {
         [self pickPhotoButtonClick:nil];
     } else { // preview photos / 预览照片
-     
+     NSLog(@"%@, %@", _selectedAssets, _selectedPhotos);
         TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithSelectedAssets:_selectedAssets selectedPhotos:_selectedPhotos index:indexPath.row];
         imagePickerVc.isSelectOriginalPhoto = _isSelectOriginalPhoto;
         // imagePickerVc.allowPickingOriginalPhoto = NO;
-       
+        NSLog(@"%@, %@", _selectedAssets, _selectedPhotos);
         [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray<PHAsset *> *assets, BOOL isSelectOriginalPhoto) {
 //            _selectedPhotos = [NSMutableArray arrayWithArray:photos];
 //            _selectedAssets = [NSMutableArray arrayWithArray:assets];
@@ -1030,11 +1030,12 @@
 /// User click cancel button
 /// 用户点击了取消
 - (void)imagePickerControllerDidCancel:(TZImagePickerController *)picker {
-    // NSLog(@"cancel");
+     NSLog(@"cancel");
 }
 
 /// User finish picking photo，if assets are not empty, user picking original photo.
-/// 用户选择好了图片，如果assets非空，则用户选择了原图。
+
+/// 用户选择好了图片，如果assets非空，则用户选择了原图。 
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto {
 //    _selectedPhotos = [NSMutableArray arrayWithArray:photos];
 //    _selectedAssets = [NSMutableArray arrayWithArray:assets];
