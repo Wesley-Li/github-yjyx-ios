@@ -32,10 +32,11 @@
     billionView.hidden = YES;
     
     type = 1;
+    childrenIndex = 0;
     self.navigationItem.title = @"数据统计";
     [self loadBackBtn];
     if ([[[YjyxOverallData sharedInstance] parentInfo].childrens count] != 0) {
-        childrenEntity = [[[YjyxOverallData sharedInstance] parentInfo].childrens objectAtIndex:0];
+        childrenEntity = [[[YjyxOverallData sharedInstance] parentInfo].childrens objectAtIndex:childrenIndex];
         achievementAry = [[NSMutableArray alloc] init];//单个小孩所有科目的数据
         taskDataAry = [[NSMutableArray alloc] init];
         [self getChildrenAchievement:childrenEntity.cid];
@@ -142,9 +143,9 @@
         segmentedControl2.hidden = YES;
         segmentedControl3.hidden = YES;
     }else{
-        segmentedControl1.selectedSegmentIndex = 0;
-        segmentedControl2.selectedSegmentIndex = 0;
-        segmentedControl3.selectedSegmentIndex = 0;
+        segmentedControl1.selectedSegmentIndex = childrenIndex;
+        segmentedControl2.selectedSegmentIndex = childrenIndex;
+        segmentedControl3.selectedSegmentIndex = childrenIndex;
 
         [subjectView addSubview:segmentedControl1];
         [taskView addSubview:segmentedControl2];
@@ -240,7 +241,7 @@
         NSInteger num;
         num = ceil([[linechartDic objectForKey:@"items"] count] / 30.0);
         [lineScroll removeFromSuperview];
-        lineScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 290, SCREEN_WIDTH, SCREEN_HEIGHT-94-320)];
+        lineScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 300, SCREEN_WIDTH, SCREEN_HEIGHT-94-320)];
         lineScroll.contentSize = CGSizeMake(SCREEN_WIDTH * num, lineScroll.frame.size.height);
         lineScroll.backgroundColor = [UIColor clearColor];
         lineScroll.showsHorizontalScrollIndicator = NO;
@@ -302,6 +303,7 @@
     
 }
 
+/*
 -(IBAction)selectChildren:(id)sender //切换不同小孩
 {
     if (type == 1) {
@@ -386,11 +388,14 @@
     }
    
 }
+ 
+ */
 
 -(void)chooseChildren:(UISegmentedControl *)segmentedControl
 {
+    childrenIndex = segmentedControl.selectedSegmentIndex;
+    childrenEntity = [[[YjyxOverallData sharedInstance] parentInfo].childrens objectAtIndex:childrenIndex];
     
-    childrenEntity = [[[YjyxOverallData sharedInstance] parentInfo].childrens objectAtIndex:segmentedControl.selectedSegmentIndex];
     if (segmentedControl == segmentedControl1) {
         [pieLineChart removeFromSuperview];
         childrensubView.hidden = YES;
@@ -419,7 +424,7 @@
 }
 
 
-//任务
+#pragma mark - 任务
 -(void)getchildrenTaskWithCid:(NSString *)cid
 {
     [self.view makeToastActivity:SHOW_CENTER];
@@ -463,7 +468,7 @@
     [taskView addSubview:taskPieChart];
 }
 
-//亿教课
+#pragma mark - 亿教课
 -(void)getchildrenbillionWithCid:(NSString *)cid
 {
     [self.view makeToastActivity:SHOW_CENTER];
@@ -509,6 +514,7 @@
     switch (btn.tag) {
         case 1:
             type = 1;
+            segmentedControl1.selectedSegmentIndex = childrenIndex;
             [self getChildrenAchievement:childrenEntity.cid];
             subjectView.hidden = NO;
             taskView.hidden = YES;
@@ -519,6 +525,7 @@
             break;
         case 2:
             type = 2;
+            segmentedControl2.selectedSegmentIndex = childrenIndex;
             [self getchildrenTaskWithCid:childrenEntity.cid];
             subjectView.hidden = YES;
             taskView.hidden = NO;
@@ -529,6 +536,7 @@
             break;
         case 3:
             type = 3;
+            segmentedControl3.selectedSegmentIndex = childrenIndex;
             [self getchildrenbillionWithCid:childrenEntity.cid];
             subjectView.hidden = YES;
             taskView.hidden = YES;

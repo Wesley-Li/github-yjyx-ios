@@ -37,6 +37,8 @@
 
 @property (assign, nonatomic) NSInteger flag;
 
+@property (nonatomic, strong) subjectContentCell *cell;
+
 
 @end
 
@@ -323,35 +325,35 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    subjectContentCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.flag = _flag;
-    cell.tag = indexPath.row;
+    _cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
+    _cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    _cell.flag = _flag;
+    _cell.tag = indexPath.row;
     
-    cell.item = self.dataSoruce[indexPath.row];
+    _cell.item = self.dataSoruce[indexPath.row];
 //    [cell setSubviewsWithModel:item];
-    if (cell.item != nil) {
+    if (_cell.item != nil) {
         NSMutableArray *arr = [NSMutableArray array];
         if (_flag == 1) {
-            arr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", cell.item.t_id] andQuestionType:cell.item.subject_type andJumpType:@"2"];
+            arr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", _cell.item.t_id] andQuestionType:_cell.item.subject_type andJumpType:@"2"];
         }else{
-           arr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", cell.item.t_id] andQuestionType:cell.item.subject_type andJumpType:@"1"];
+           arr = [[QuestionDataBase shareDataBase] selectQuestionByid:[NSString stringWithFormat:@"%ld", _cell.item.t_id] andQuestionType:_cell.item.subject_type andJumpType:@"1"];
         }
         if (arr.count != 0) {
-            cell.addBtn.selected = YES;
+            _cell.addBtn.selected = YES;
         }else {
             
-            cell.addBtn.selected = NO;
+            _cell.addBtn.selected = NO;
         }
 
     }
     
 
-    cell.addBtn.tag = indexPath.row + 200;
-    [cell.addBtn addTarget:self action:@selector(addBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    _cell.addBtn.tag = indexPath.row + 200;
+    [_cell.addBtn addTarget:self action:@selector(addBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    cell.subjectNumLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row + 1];
-    return cell;
+    _cell.subjectNumLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row + 1];
+    return _cell;
 }
 
 - (void)cellHeightChage:(NSNotification *)sender {
@@ -372,8 +374,11 @@
     CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
     if (height == 0) {
         return 300;
+    }else {
+    
+        return height;
     }
-    return height;
+    
 }
 
 // 点击加号,选题

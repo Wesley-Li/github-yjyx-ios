@@ -9,6 +9,7 @@
 #import "subjectContentCell.h"
 #import "ChaperContentItem.h"
 #import "QuestionDataBase.h"
+#import "DTCoreText.h"
 @interface subjectContentCell()<UIWebViewDelegate>
 
 
@@ -18,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *subjectLevelLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
+
+
 
 @end
 
@@ -118,6 +121,8 @@
     }
     
 }
+
+
 
 - (void)layoutSubviews
 {

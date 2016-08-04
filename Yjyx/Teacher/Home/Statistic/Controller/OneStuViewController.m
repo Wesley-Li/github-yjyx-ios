@@ -43,6 +43,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIButton *goBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    goBackBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
+    [goBackBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [goBackBtn setImage:[UIImage imageNamed:@"nav_btn_back"] forState:UIControlStateNormal];
+    [goBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:goBackBtn];
+    self.navigationItem.leftBarButtonItem = leftBtnItem;
+
+    
     self.lineArr = [NSMutableArray array];
     self.edgesForExtendedLayout = UIRectEdgeBottom;
     [self readDataFromNet];
@@ -72,11 +81,14 @@
         if ([responseObject[@"retcode"] isEqual:@0]) {
             // 任务和题目数据的显示
             NSDictionary *dic = responseObject[@"taskandquestioncount"];
-            self.finishLabel.text = [NSString stringWithFormat:@"%@", dic[@"tasks_num"]];
-            self.unfinishLabel.text = [NSString stringWithFormat:@"%ld", [dic[@"recv_num"] integerValue] - [dic[@"tasks_num"] integerValue]];
-            self.questionFinishLabel.text = [NSString stringWithFormat:@"%@", dic[@"questiontotal"]];
-            self.questionRightLabel.text = [NSString stringWithFormat:@"%@", dic[@"questioncorrect"]];
-            self.questionWrongLabel.text = [NSString stringWithFormat:@"%@", dic[@"questionwrong"]];
+            self.finishLabel.text = [dic[@"tasks_num"] isEqual:[NSNull null]] ? [NSString stringWithFormat:@"%d", 0] : [NSString stringWithFormat:@"%@", dic[@"tasks_num"]];
+            NSInteger rec_num = [dic[@"recv_num"] isEqual:[NSNull null]] ? 0 : [dic[@"recv_num"] integerValue];
+            NSInteger tasks_num = [dic[@"tasks_num"] isEqual:[NSNull null]] ? 0 : [dic[@"tasks_num"] integerValue];
+            self.unfinishLabel.text = [NSString stringWithFormat:@"%ld", rec_num - tasks_num];
+            NSLog(@"%@", [dic allKeys]);
+            self.questionFinishLabel.text = [[dic allKeys] containsObject:@"questiontotal"] ? [NSString stringWithFormat:@"%@", dic[@"questiontotal"]] : [NSString stringWithFormat:@"%d", 0];
+            self.questionRightLabel.text = [[dic allKeys] containsObject:@"questioncorrect"] ? [NSString stringWithFormat:@"%@", dic[@"questioncorrect"]] : [NSString stringWithFormat:@"%d", 0];
+            self.questionWrongLabel.text = [[dic allKeys] containsObject:@"questionwrong"] ? [NSString stringWithFormat:@"%@", dic[@"questionwrong"]] : [NSString stringWithFormat:@"%d", 0];
             
             // 折线图显示
             self.lineArr = responseObject[@"chartdata"];

@@ -953,11 +953,11 @@ static NSString *videoNumID = @"VIDEONumID";
     
     YjyxAnonatationController *anonatationVC = [[YjyxAnonatationController alloc] init];
 
-    if (cell.indexPath.section == 3) {//选择题
+    if (cell.indexPath.section == 4) {//选择题
         YjyxStuAnswerModel *rmodel = self.stuChoiceAnswerArr[cell.indexPath.row - 1];
         anonatationVC.processArr = [rmodel.writeprocess mutableCopy];
         
-    }else if (cell.indexPath.section == 4) {//填空题
+    }else if (cell.indexPath.section == 5) {//填空题
         YjyxStuAnswerModel *rmodel = self.stuBlankAnswerArr[cell.indexPath.row - 1];
         anonatationVC.processArr = [rmodel.writeprocess mutableCopy];
         

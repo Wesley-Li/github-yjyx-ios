@@ -18,6 +18,9 @@
 @property (assign, nonatomic) NSInteger flag;
 @property (strong, nonatomic) ChaperContentItem *item;
 
+
 - (void)setSubviewsWithModel:(ChaperContentItem *)model;
+
+
 
 @end
