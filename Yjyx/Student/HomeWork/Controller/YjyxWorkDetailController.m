@@ -291,10 +291,14 @@ static NSString *videoNumID = @"VIDEONumID";
 }
 #pragma mark - wmPlayer的方法
 -(void)videoDidFinished:(NSNotification *)notice{
+    if(wmPlayer.isFullscreen == YES){
+        [self toCell];
+    }
     ReleaseMicroCell *currentCell = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     isPlay = NO;
     currentCell.playBtn.hidden = NO;
     [self releaseWMPlayer];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 //    [self setNeedsStatusBarAppearanceUpdate];
 }
 -(void)closeTheVideo:(NSNotification *)obj{
@@ -302,6 +306,7 @@ static NSString *videoNumID = @"VIDEONumID";
     ReleaseMicroCell *currentCell = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     currentCell.playBtn.hidden = NO;
     isPlay = NO;
+    [self toCell];
     [self releaseWMPlayer];
 //    [self setNeedsStatusBarAppearanceUpdate];
 }
@@ -517,6 +522,9 @@ static NSString *videoNumID = @"VIDEONumID";
  *  释放WMPlayer
  */
 -(void)releaseWMPlayer{
+    if(wmPlayer == nil){
+        return;
+    }
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [wmPlayer.player.currentItem cancelPendingSeeks];
         [wmPlayer.player.currentItem.asset cancelLoading];
@@ -551,6 +559,12 @@ static NSString *videoNumID = @"VIDEONumID";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if(scrollView ==self.tableView){
+        CGFloat sectionHeaderHeight = 5;
+        if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+            scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+        } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+            scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+        }
         if (wmPlayer==nil) {
             return;
         }
@@ -575,7 +589,7 @@ static NSString *videoNumID = @"VIDEONumID";
                 }
             }
         }
-        
+     
     }
 }
 
@@ -915,10 +929,10 @@ static NSString *videoNumID = @"VIDEONumID";
     }
     
 }
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     
-    if (section == 1 || section == 3 ) {
+    if (section == 2 || section == 4 ) {
         if ([self.taskType isEqual:@1]) {
             return 0;
         }else{
@@ -926,7 +940,7 @@ static NSString *videoNumID = @"VIDEONumID";
         return 5;
         
         }
-    }else if(section == 2){
+    }else if(section == 3){
         if ([self.taskType isEqual:@1]){
             return 0;
         }else{
@@ -939,6 +953,7 @@ static NSString *videoNumID = @"VIDEONumID";
     }else{
         return 0;
     }
+  
 }
 #pragma mark - VideoNumShowCellDelegate代理方法
 - (void)videoNumShowCell:(VideoNumShowCell *)cell videoNumBtnClick:(UIButton *)btn

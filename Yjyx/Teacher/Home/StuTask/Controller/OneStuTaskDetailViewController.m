@@ -79,16 +79,21 @@
 
 
 -(void)videoDidFinished:(NSNotification *)notice{
+    if(wmPlayer.isFullscreen == YES){
+        [self toCell];
+    }
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
     currentCell.playBtn.hidden = NO;
     isPlay = NO;
     [self releaseWMPlayer];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     [self setNeedsStatusBarAppearanceUpdate];
 }
 -(void)closeTheVideo:(NSNotification *)obj{
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
     currentCell.playBtn.hidden = NO;
     isPlay = NO;
+    [self toCell];
     [self releaseWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
 }
@@ -672,6 +677,9 @@
  *  释放WMPlayer
  */
 -(void)releaseWMPlayer{
+    if(wmPlayer == nil){
+        return;
+    }
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
     [wmPlayer.player.currentItem cancelPendingSeeks];
     [wmPlayer.player.currentItem.asset cancelLoading];
