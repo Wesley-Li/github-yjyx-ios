@@ -331,7 +331,7 @@
     _cell.tag = indexPath.row;
     
     _cell.item = self.dataSoruce[indexPath.row];
-//    [cell setSubviewsWithModel:item];
+//    [_cell setSubviewsWithModel:_cell.item];
     if (_cell.item != nil) {
         NSMutableArray *arr = [NSMutableArray array];
         if (_flag == 1) {
@@ -378,6 +378,8 @@
     
         return height;
     }
+    
+    
     
 }
 

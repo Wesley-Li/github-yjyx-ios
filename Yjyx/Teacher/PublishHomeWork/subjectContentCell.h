@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class ChaperContentItem;
 
 
@@ -19,7 +20,9 @@
 @property (strong, nonatomic) ChaperContentItem *item;
 
 
-- (void)setSubviewsWithModel:(ChaperContentItem *)model;
+
+
+//- (void)setSubviewsWithModel:(ChaperContentItem *)model;
 
 
 

@@ -20,17 +20,6 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - DTCoreText (1.6.17):
-    - DTFoundation/Core (~> 1.7.5)
-    - DTFoundation/DTAnimatedGIF (~> 1.7.5)
-    - DTFoundation/DTHTMLParser (~> 1.7.5)
-    - DTFoundation/UIKit (~> 1.7.5)
-  - DTFoundation/Core (1.7.10)
-  - DTFoundation/DTAnimatedGIF (1.7.10)
-  - DTFoundation/DTHTMLParser (1.7.10):
-    - DTFoundation/Core
-  - DTFoundation/UIKit (1.7.10):
-    - DTFoundation/Core
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
@@ -42,7 +31,6 @@ PODS:
   - TZImagePickerController (1.3.6)
 
 DEPENDENCIES:
-  - DTCoreText
   - FMDB (~> 2.6.2)
   - Qiniu (~> 7.0)
   - SVProgressHUD (~> 2.0.3)
@@ -50,14 +38,12 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  DTCoreText: 3ea8bba23dd2141ba18adb227a7dd33a822df1c4
-  DTFoundation: 3b6b1b817d2a7fb02e7eaf2596c922a68145bd43
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   HappyDNS: 86ab4be498cc5cc884002b248979cd130cfbe10e
   Qiniu: 7a9c2a2bbdec02ae84b92051637e1e9ea3d182fb
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   TZImagePickerController: e4cfaa17eae1d93a5e8d010cc2ea3a6ef3ee720a
 
-PODFILE CHECKSUM: fc6dcc0709bb9b767713447f2844d627363d5f8b
+PODFILE CHECKSUM: 1b2da97235d0ffc5e478a758fcee34c7adbadb23
 
 COCOAPODS: 1.0.0

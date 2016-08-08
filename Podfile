@@ -10,6 +10,5 @@ pod 'TZImagePickerController', '~> 1.3.5'
 
 pod 'SVProgressHUD', '~> 2.0.3'
 
-pod 'DTCoreText'
 
 end
