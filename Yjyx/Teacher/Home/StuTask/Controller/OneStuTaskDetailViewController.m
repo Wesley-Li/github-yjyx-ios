@@ -319,8 +319,6 @@
         [self closeTheVideo:nil];
     }
     
-    [self releaseWMPlayer];
-    [wmPlayer removeFromSuperview];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -672,6 +670,11 @@
  *  释放WMPlayer
  */
 -(void)releaseWMPlayer{
+    
+    if (!wmPlayer) {
+        return;
+    }
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
     [wmPlayer.player.currentItem cancelPendingSeeks];
     [wmPlayer.player.currentItem.asset cancelLoading];
@@ -692,11 +695,11 @@
     [wmPlayer.durationTimer invalidate];
     wmPlayer.durationTimer = nil;
     
-    
     wmPlayer.playOrPauseBtn = nil;
     wmPlayer.playerLayer = nil;
     wmPlayer = nil;
     });
+    
 }
 
 #pragma mark - YourAnswerCellDelegate

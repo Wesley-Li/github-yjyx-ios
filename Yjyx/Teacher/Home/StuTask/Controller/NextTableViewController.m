@@ -96,6 +96,7 @@
     isPlay = NO;
     currentCell.playBtn.hidden = NO;
     [self releaseWMPlayer];
+    
     [self setNeedsStatusBarAppearanceUpdate];
 }
 -(void)closeTheVideo:(NSNotification *)obj{
@@ -384,10 +385,9 @@
     if (isPlay) {
         [self closeTheVideo:nil];
     }
-    [self releaseWMPlayer];
-    [wmPlayer removeFromSuperview];
+ 
     [SVProgressHUD dismiss];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+   
 }
 - (void)goBack {
     
@@ -668,6 +668,9 @@
  *  释放WMPlayer
  */
 -(void)releaseWMPlayer{
+    if (!wmPlayer) {
+        return;
+    }
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
     [wmPlayer.player.currentItem cancelPendingSeeks];
     [wmPlayer.player.currentItem.asset cancelLoading];
