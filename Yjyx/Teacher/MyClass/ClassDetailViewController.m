@@ -64,7 +64,9 @@
     
     self.model = classArray[self.currentIndex];
     
-    [self viewDidLoad];
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    self.invitecodeLabel.text = [NSString stringWithFormat:@"班级邀请码:%@" ,[numberFormatter stringFromNumber:self.model.invitecode]];
+    self.stuCountLabel.text = [NSString stringWithFormat:@"%ld人", (unsigned long)self.model.memberlist.count];
     
     [self.stuListTableView reloadData];
     
