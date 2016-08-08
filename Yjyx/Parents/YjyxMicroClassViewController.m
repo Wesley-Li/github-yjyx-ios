@@ -115,6 +115,7 @@
     }
 }
 -(void)videoDidFinished:(NSNotification *)notice{
+
     videoImage.hidden = NO;
 //    currentCell.playBtn.hidden = NO;
     [self releaseWMPlayer];
@@ -323,7 +324,7 @@
     }
 }
 -(void)dealloc{
-    [self releaseWMPlayer];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"player deallco");
 }

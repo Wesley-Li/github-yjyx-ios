@@ -153,10 +153,14 @@ static NSString *VideoID = @"VIDEOCELL";
 }
 #pragma mark - wmPlayer的方法
 -(void)videoDidFinished:(NSNotification *)notice{
+    if(wmPlayer.isFullscreen == YES){
+        [self toCell];
+    }
     ReleaseVideoCell *currentCell = (ReleaseVideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
     isPlay = NO;
     currentCell.playBtn.hidden = NO;
     [self releaseWMPlayer];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     [self setNeedsStatusBarAppearanceUpdate];
 }
 -(void)closeTheVideo:(NSNotification *)obj{
@@ -164,7 +168,9 @@ static NSString *VideoID = @"VIDEOCELL";
     ReleaseVideoCell *currentCell = (ReleaseVideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
     currentCell.playBtn.hidden = NO;
     isPlay = NO;
+    [self toCell];
     [self releaseWMPlayer];
+    
     [self setNeedsStatusBarAppearanceUpdate];
 }
 -(void)fullScreenBtnClick:(NSNotification *)notice{
@@ -374,6 +380,9 @@ static NSString *VideoID = @"VIDEOCELL";
  *  释放WMPlayer
  */
 -(void)releaseWMPlayer{
+    if(wmPlayer == nil){
+        return;
+    }
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
     [wmPlayer.player.currentItem cancelPendingSeeks];
     [wmPlayer.player.currentItem.asset cancelLoading];
