@@ -100,7 +100,7 @@
     currentCell.playBtn.hidden = NO;
     [self releaseWMPlayer];
 
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:4 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 
     [self setNeedsStatusBarAppearanceUpdate];
 }

@@ -82,17 +82,17 @@
     }
     }
 }
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        //注册播放完成通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:@"fullScreenBtnClickNotice" object:nil];
-        //注册播放完成通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    }
-    return self;
-}
+//- (instancetype)init
+//{
+//    self = [super init];
+//    if (self) {
+//        //注册播放完成通知
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:@"fullScreenBtnClickNotice" object:nil];
+//        //注册播放完成通知
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+//    }
+//    return self;
+//}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self setNeedsStatusBarAppearanceUpdate];
@@ -116,9 +116,25 @@
 }
 -(void)videoDidFinished:(NSNotification *)notice{
 
-    videoImage.hidden = NO;
+    if(wmPlayer.isFullscreen == YES){
+        [self toNormal];
+    }
+
 //    currentCell.playBtn.hidden = NO;
-    [self releaseWMPlayer];
+    [wmPlayer.player pause];
+    [wmPlayer removeFromSuperview];
+    [videoImage removeFromSuperview];
+    [self configureWMPlayer];
+    [self setNeedsStatusBarAppearanceUpdate];
+}
+
+-(void)closeTheVideo:(NSNotification *)obj{
+   
+    wmPlayer.closeBtn.hidden = YES;
+    [wmPlayer.player pause];
+    [wmPlayer removeFromSuperview];
+    [videoImage removeFromSuperview];
+    [self configureWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
@@ -173,7 +189,7 @@
             make.bottom.equalTo(wmPlayer).with.offset(0);
         }];
         [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(wmPlayer).with.offset(5);
+            make.right.equalTo(wmPlayer).with.offset(-10);
             make.height.mas_equalTo(30);
             make.width.mas_equalTo(30);
             make.top.equalTo(wmPlayer).with.offset(5);
@@ -256,6 +272,19 @@
     
     _doWorkArr = [NSMutableArray array];
     
+    //注册播放完成通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    //注册全屏播放通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
+    
+    //关闭通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(closeTheVideo:)
+                                                 name:WMPlayerClosedNotification
+                                               object:nil
+     ];
+
+    
     // 注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCellHeight:) name:@"cellHeighChange" object:nil];
     
@@ -301,30 +330,40 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)releaseWMPlayer{
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    
     [wmPlayer.player.currentItem cancelPendingSeeks];
     [wmPlayer.player.currentItem.asset cancelLoading];
-    
     [wmPlayer.player pause];
+    
+    //移除观察者
+    [wmPlayer.currentItem removeObserver:wmPlayer forKeyPath:@"status"];
+    
 //    [wmPlayer removeFromSuperview];
 //    [wmPlayer.playerLayer removeFromSuperlayer];
     [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
-    wmPlayer = nil;
     wmPlayer.player = nil;
     wmPlayer.currentItem = nil;
     
+    //释放定时器，否侧不会调用WMPlayer中的dealloc方法
+    [wmPlayer.autoDismissTimer invalidate];
+    wmPlayer.autoDismissTimer = nil;
+    [wmPlayer.durationTimer invalidate];
+    wmPlayer.durationTimer = nil;
+    
+    
     wmPlayer.playOrPauseBtn = nil;
     wmPlayer.playerLayer = nil;
-    });
-}
-- (void)viewDidDisappear:(BOOL)animated
-{
-    if(_jumpType == 1){
-    [self releaseWMPlayer];
-    }
-}
--(void)dealloc{
+    wmPlayer = nil;
     
+}
+//- (void)viewDidDisappear:(BOOL)animated
+//{
+//    if(_jumpType == 1){
+//    [self releaseWMPlayer];
+//    }
+//}
+-(void)dealloc{
+    [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"player deallco");
 }
@@ -503,6 +542,12 @@
             playerFrame.origin.y = 0;
         }
         wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.videoURL];
+        [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(wmPlayer).with.offset(-10);
+            make.height.mas_equalTo(30);
+            make.width.mas_equalTo(30);
+            make.top.equalTo(wmPlayer).with.offset(5);
+        }];
         wmPlayer.closeBtn.hidden = YES;
         wmPlayer.layer.masksToBounds = YES;
         [self.view addSubview:wmPlayer];
@@ -515,7 +560,7 @@
         }
         videoImage.layer.masksToBounds = YES;
         videoImage.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playVideo)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
         [videoImage addGestureRecognizer:tap];
         [self.view addSubview:videoImage];
 
@@ -663,6 +708,7 @@
     [videoImage removeFromSuperview];
     [self configureWMPlayer];
     [wmPlayer.player play];
+    wmPlayer.closeBtn.hidden = NO;
     [self.view sendSubviewToBack:videoImage];
     
     self.preBtn.backgroundColor = [UIColor whiteColor];
@@ -832,17 +878,18 @@
 
 
 #pragma mark -event
--(void)playVideo
+-(void)playvideo
 {
 //    NSString *videoUrl = [[[lessDic objectForKey:@"videoobjlist"] JSONValue][(sender.view.tag - 2)/ 2] objectForKey:@"url"];
 //    NSLog(@"%@, %ld", self.view.subviews, sender.view.tag);
 ////    wmPlayer = self.view.subviews[sender.view.tag - 2];
 //    wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:videoUrl];
-    [wmPlayer.player play];
 //    [self.view.subviews[sender.view.tag -1] removeFromSuperview];
     [videoImage removeFromSuperview];
-//    videoImage.hidden = YES;
     videoImage = nil;
+    [wmPlayer.player play];
+    wmPlayer.closeBtn.hidden = NO;
+
 }
 
 /*

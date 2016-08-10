@@ -19,7 +19,9 @@
 @interface AnswerSituationCell ()
 
 @property (weak, nonatomic) IBOutlet UIView *bg_view;
-
+@property (nonatomic, strong) NSMutableArray *CStuArr;
+@property (nonatomic, strong) NSMutableArray *WStuArr;
+@property (nonatomic, strong) NSMutableArray *stuArr;
 
 @end
 
@@ -27,8 +29,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    
+    self.CStuArr = [NSMutableArray array];
+    self.WStuArr = [NSMutableArray array];
 }
 
 
@@ -37,6 +39,26 @@
     // 移除该视图上的所有子视图,不然走一次就会加一层
     for (UIView *view in [self.bg_view subviews]) {
         [view removeFromSuperview];
+    }
+    
+    for (NSNumber *num in correctArray) {
+        StudentEntity *studentEntity = [[StuDataBase shareStuDataBase] selectStuById:num];
+        if ([studentEntity.realname isEqual:[NSNull null]]) {
+            [self getStuNameAndImageFromNetByids:correctArray];
+            [self.CStuArr addObjectsFromArray:self.stuArr];
+            break;
+        }
+        [self.CStuArr addObject:studentEntity];
+    }
+    
+    for (NSNumber *num in wrongArray) {
+        StudentEntity *studentEntity = [[StuDataBase shareStuDataBase] selectStuById:num];
+        if ([studentEntity.realname isEqual:[NSNull null]]) {
+            [self getStuNameAndImageFromNetByids:wrongArray];
+            [self.WStuArr addObjectsFromArray:self.stuArr];
+            break;
+        }
+        [self.WStuArr addObject:studentEntity];
     }
 
     NSInteger totalCount = correctArray.count + wrongArray.count;
@@ -124,7 +146,7 @@
             imageBtn.layer.cornerRadius = tWidth / 2;
             imageBtn.layer.masksToBounds = YES;
             imageBtn.tag = 200 + i;
-            StudentEntity *studentEntity = [[StuDataBase shareStuDataBase] selectStuById:correctArray[i]];
+            StudentEntity *studentEntity = self.CStuArr[i];
             
             if ([studentEntity.avatar_url isEqual:[NSNull null]]) {
                 
@@ -233,7 +255,7 @@
             imageBtn.layer.cornerRadius = tWidth2 / 2;
             imageBtn.layer.masksToBounds = YES;
             imageBtn.tag = 200 + i;
-            StudentEntity *studentEntity = [[StuDataBase shareStuDataBase] selectStuById:wrongArray[i]];
+            StudentEntity *studentEntity = self.WStuArr[i];
             
             if ([studentEntity.avatar_url isEqual:[NSNull null]]) {
                 
@@ -268,6 +290,35 @@
     self.height = _wrongView.origin.y + _wrongView.height + 30;
     
     
+
+}
+
+// 根据学生id列表获取学生的头像和姓名
+- (void)getStuNameAndImageFromNetByids:(NSArray *)idArr {
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"studentdisattr", @"action", [idArr JSONString], @"ids", nil];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/teacher/mobile/yj_teachers/"] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        if ([responseObject[@"retcode"] isEqual:@0]) {
+            for (NSDictionary *dic in responseObject[@"students"]) {
+               
+                StudentEntity *entity = [[StudentEntity alloc] init];
+                [entity initStudentWithDic:dic];
+                [self.stuArr addObject:entity];
+                
+            }
+            
+        }else {
+        
+            [self.contentView makeToast:responseObject[@"msg"] duration:1 position:SHOW_CENTER complete:nil];
+        }
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+        [self.contentView makeToast:@"网络出错" duration:1 position:SHOW_CENTER complete:nil];
+        
+    }];
 
 }
 
