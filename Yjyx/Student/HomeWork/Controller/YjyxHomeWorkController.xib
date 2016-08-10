@@ -8,8 +8,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YjyxHomeWorkController">
             <connections>
+                <outlet property="AdNumPageControl" destination="91Y-gE-2Ab" id="Ibz-qg-6Q5"/>
                 <outlet property="btnView" destination="WZ2-e8-r6r" id="73F-lu-t0E"/>
                 <outlet property="clickBtn" destination="Kff-Yf-pj7" id="qXL-9r-AAS"/>
+                <outlet property="collectView" destination="kce-oQ-0Ee" id="FMI-3A-9s0"/>
                 <outlet property="homeWorkBtn" destination="0zD-Gd-7Rj" id="Xbm-N3-JDT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -19,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BANNER" translatesAutoresizingMaskIntoConstraints="NO" id="lBF-c3-cei">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BANNER" translatesAutoresizingMaskIntoConstraints="NO" id="lBF-c3-cei">
                     <rect key="frame" x="0.0" y="64" width="320" height="160"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="160" id="a3P-68-G2f"/>
@@ -91,18 +93,42 @@
                         </mask>
                     </variation>
                 </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="kce-oQ-0Ee">
+                    <rect key="frame" x="0.0" y="64" width="320" height="159"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Qmd-8D-ZaZ">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="uAL-l0-5W1"/>
+                        <outlet property="delegate" destination="-1" id="nAt-CQ-O5g"/>
+                    </connections>
+                </collectionView>
+                <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="1" translatesAutoresizingMaskIntoConstraints="NO" id="91Y-gE-2Ab">
+                    <rect key="frame" x="141" y="187" width="39" height="37"/>
+                    <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </pageControl>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.86666666670000003" green="0.87450980389999999" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="WZ2-e8-r6r" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Cra-Ax-fo7"/>
                 <constraint firstItem="lBF-c3-cei" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Qnn-hz-cFK"/>
+                <constraint firstItem="kce-oQ-0Ee" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="Qrc-J2-u7Z"/>
+                <constraint firstItem="WZ2-e8-r6r" firstAttribute="top" secondItem="kce-oQ-0Ee" secondAttribute="bottom" constant="1" id="VOT-3I-vbb"/>
+                <constraint firstItem="kce-oQ-0Ee" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="c7G-og-3hJ"/>
                 <constraint firstItem="WZ2-e8-r6r" firstAttribute="top" secondItem="lBF-c3-cei" secondAttribute="bottom" id="gH4-Hd-DMv"/>
+                <constraint firstAttribute="trailing" secondItem="kce-oQ-0Ee" secondAttribute="trailing" id="h49-eQ-LZ7"/>
                 <constraint firstItem="lBF-c3-cei" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="keg-qI-Ra9"/>
                 <constraint firstAttribute="trailing" secondItem="lBF-c3-cei" secondAttribute="trailing" id="ndd-Du-lDS"/>
+                <constraint firstItem="91Y-gE-2Ab" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="pdZ-Qs-Wid"/>
+                <constraint firstItem="WZ2-e8-r6r" firstAttribute="top" secondItem="91Y-gE-2Ab" secondAttribute="bottom" id="rEO-sD-174"/>
                 <constraint firstAttribute="trailing" secondItem="WZ2-e8-r6r" secondAttribute="trailing" id="s1j-ap-Bgt"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="618" y="119"/>
+            <point key="canvasLocation" x="497" y="99"/>
         </view>
     </objects>
     <resources>

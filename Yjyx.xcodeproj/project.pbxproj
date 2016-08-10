@@ -462,6 +462,7 @@
 		3CE18E9F1D2121EE007E0874 /* ReleaseFinishTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE18E9D1D2121EE007E0874 /* ReleaseFinishTimeCell.xib */; };
 		3CE18EA31D2122ED007E0874 /* ReleaseStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE18EA11D2122ED007E0874 /* ReleaseStudentCell.m */; };
 		3CE18EA41D2122ED007E0874 /* ReleaseStudentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE18EA21D2122ED007E0874 /* ReleaseStudentCell.xib */; };
+		3CE22BB31D5AB7A600536082 /* YjyxHomeAdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE22BB21D5AB7A600536082 /* YjyxHomeAdController.m */; };
 		3CEA95A21D30973500F4773D /* YjyxDoingWorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA95A11D30973500F4773D /* YjyxDoingWorkModel.m */; };
 		3CEA95A51D30F18E00F4773D /* YjyxWorkResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA95A41D30F18E00F4773D /* YjyxWorkResultView.m */; };
 		3CECA4AB1D2C99310039DCB6 /* YjyxTimeField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CECA4AA1D2C99310039DCB6 /* YjyxTimeField.m */; };
@@ -477,6 +478,9 @@
 		3CF0D1771D24B0B7002EE9BF /* RegistStudentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0D1751D24B0B7002EE9BF /* RegistStudentController.m */; };
 		3CF0D1781D24B0B7002EE9BF /* RegistStudentController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF0D1761D24B0B7002EE9BF /* RegistStudentController.xib */; };
 		3CF0D1821D2542B2002EE9BF /* OneStudentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0D1811D2542B2002EE9BF /* OneStudentEntity.m */; };
+		3CF28DA71D59B0AC007FED5A /* YjyxHomeAdModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF28DA61D59B0AC007FED5A /* YjyxHomeAdModel.m */; };
+		3CF28DAB1D59B998007FED5A /* YjyxHomeAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF28DA91D59B998007FED5A /* YjyxHomeAdCell.m */; };
+		3CF28DAC1D59B998007FED5A /* YjyxHomeAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF28DAA1D59B998007FED5A /* YjyxHomeAdCell.xib */; };
 		3CF541CF1D1CD160000EBAB5 /* MyMicroMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF541CD1D1CD160000EBAB5 /* MyMicroMainController.m */; };
 		3CF541D01D1CD160000EBAB5 /* MyMicroMainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF541CE1D1CD160000EBAB5 /* MyMicroMainController.xib */; };
 		3CF541D41D1CD990000EBAB5 /* MyMicroCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF541D21D1CD990000EBAB5 /* MyMicroCell.m */; };
@@ -1266,6 +1270,8 @@
 		3CE18EA01D2122ED007E0874 /* ReleaseStudentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseStudentCell.h; sourceTree = "<group>"; };
 		3CE18EA11D2122ED007E0874 /* ReleaseStudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseStudentCell.m; sourceTree = "<group>"; };
 		3CE18EA21D2122ED007E0874 /* ReleaseStudentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseStudentCell.xib; sourceTree = "<group>"; };
+		3CE22BB11D5AB7A600536082 /* YjyxHomeAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxHomeAdController.h; sourceTree = "<group>"; };
+		3CE22BB21D5AB7A600536082 /* YjyxHomeAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxHomeAdController.m; sourceTree = "<group>"; };
 		3CEA95A01D30973500F4773D /* YjyxDoingWorkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxDoingWorkModel.h; sourceTree = "<group>"; };
 		3CEA95A11D30973500F4773D /* YjyxDoingWorkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxDoingWorkModel.m; sourceTree = "<group>"; };
 		3CEA95A31D30F18E00F4773D /* YjyxWorkResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxWorkResultView.h; sourceTree = "<group>"; };
@@ -1292,6 +1298,11 @@
 		3CF0D1761D24B0B7002EE9BF /* RegistStudentController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistStudentController.xib; sourceTree = "<group>"; };
 		3CF0D1801D2542B2002EE9BF /* OneStudentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneStudentEntity.h; sourceTree = "<group>"; };
 		3CF0D1811D2542B2002EE9BF /* OneStudentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneStudentEntity.m; sourceTree = "<group>"; };
+		3CF28DA51D59B0AC007FED5A /* YjyxHomeAdModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxHomeAdModel.h; sourceTree = "<group>"; };
+		3CF28DA61D59B0AC007FED5A /* YjyxHomeAdModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxHomeAdModel.m; sourceTree = "<group>"; };
+		3CF28DA81D59B998007FED5A /* YjyxHomeAdCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxHomeAdCell.h; sourceTree = "<group>"; };
+		3CF28DA91D59B998007FED5A /* YjyxHomeAdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxHomeAdCell.m; sourceTree = "<group>"; };
+		3CF28DAA1D59B998007FED5A /* YjyxHomeAdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxHomeAdCell.xib; sourceTree = "<group>"; };
 		3CF541CC1D1CD160000EBAB5 /* MyMicroMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMicroMainController.h; sourceTree = "<group>"; };
 		3CF541CD1D1CD160000EBAB5 /* MyMicroMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMicroMainController.m; sourceTree = "<group>"; };
 		3CF541CE1D1CD160000EBAB5 /* MyMicroMainController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyMicroMainController.xib; sourceTree = "<group>"; };
@@ -2626,6 +2637,8 @@
 				3C3D93C61D26119500AA22AE /* YjyxHomeWorkController.h */,
 				3C3D93C71D26119500AA22AE /* YjyxHomeWorkController.m */,
 				3C3D93C81D26119500AA22AE /* YjyxHomeWorkController.xib */,
+				3CE22BB11D5AB7A600536082 /* YjyxHomeAdController.h */,
+				3CE22BB21D5AB7A600536082 /* YjyxHomeAdController.m */,
 				3CD7E45F1D2B962500769FDE /* YjyxOneSubjectViewController.h */,
 				3CD7E4601D2B962500769FDE /* YjyxOneSubjectViewController.m */,
 				80D978FB1D2CA753000BD95E /* YjyxStuWrongListViewController.h */,
@@ -2659,6 +2672,8 @@
 				3CD90A521D2E266200088742 /* YjyxMicroWorkModel.m */,
 				3CEA95A01D30973500F4773D /* YjyxDoingWorkModel.h */,
 				3CEA95A11D30973500F4773D /* YjyxDoingWorkModel.m */,
+				3CF28DA51D59B0AC007FED5A /* YjyxHomeAdModel.h */,
+				3CF28DA61D59B0AC007FED5A /* YjyxHomeAdModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2669,6 +2684,9 @@
 				3C4274BD1D2A4E4D008A30FA /* YjyxHomeWorkCell.h */,
 				3C4274BE1D2A4E4D008A30FA /* YjyxHomeWorkCell.m */,
 				3C4274BF1D2A4E4D008A30FA /* YjyxHomeWorkCell.xib */,
+				3CF28DA81D59B998007FED5A /* YjyxHomeAdCell.h */,
+				3CF28DA91D59B998007FED5A /* YjyxHomeAdCell.m */,
+				3CF28DAA1D59B998007FED5A /* YjyxHomeAdCell.xib */,
 				3C4274C81D2A7736008A30FA /* YjyxWorkDetailCell.h */,
 				3C4274C91D2A7736008A30FA /* YjyxWorkDetailCell.m */,
 				3C4274CA1D2A7736008A30FA /* YjyxWorkDetailCell.xib */,
@@ -3709,6 +3727,7 @@
 				3B4864501CCF10C200D2DE3C /* privatecenter_click@3x.png in Resources */,
 				3AF11DDA1CB211D600F98A03 /* YjyxMemberDetailViewController.xib in Resources */,
 				3C9C92291D2F801800B0159D /* ReleaseMicroController.xib in Resources */,
+				3CF28DAC1D59B998007FED5A /* YjyxHomeAdCell.xib in Resources */,
 				3C9C92361D2FA7F400B0159D /* YjyxDoingView.xib in Resources */,
 				80D979051D2CD048000BD95E /* YjyxStuWrongListCell.xib in Resources */,
 				3B4864521CCF10C200D2DE3C /* publishhw_click@3x.png in Resources */,
@@ -3820,6 +3839,7 @@
 				3BE01BD41CDD7DBE00781B86 /* BlankFillModel.m in Sources */,
 				3A91F49A1C760CF4001568AA /* PNRadarChart.m in Sources */,
 				3CECA4BF1D2D03F60039DCB6 /* YjyxWorkContentCell.m in Sources */,
+				3CF28DAB1D59B998007FED5A /* YjyxHomeAdCell.m in Sources */,
 				3CD1BC1D1D1E33BA009ED261 /* MicroKnowledgeCell.m in Sources */,
 				3AF339461C770FDC00586A37 /* AutoLoginViewController.m in Sources */,
 				3CF0D1771D24B0B7002EE9BF /* RegistStudentController.m in Sources */,
@@ -3993,6 +4013,7 @@
 				3CAC45521D40EEDF00ACBDA9 /* YjyxExchangeRecordModel.m in Sources */,
 				3BE01BD71CDD7DD700781B86 /* ChoiceModel.m in Sources */,
 				3C3D93E11D26119500AA22AE /* YjyxCommonNavController.m in Sources */,
+				3CE22BB31D5AB7A600536082 /* YjyxHomeAdController.m in Sources */,
 				80D979001D2CC928000BD95E /* YjyxStuWrongListModel.m in Sources */,
 				3A88277C1C6EE1820008367F /* ParentPersonalViewController.m in Sources */,
 				3CECA4B81D2CF4E20039DCB6 /* YjyxStuAnswerModel.m in Sources */,
@@ -4000,6 +4021,7 @@
 				3CD2F1741D27A3C70031AF2E /* YjyxChangeSoundViewController.m in Sources */,
 				3CEA95A21D30973500F4773D /* YjyxDoingWorkModel.m in Sources */,
 				3A04A5D11C93E6290040D913 /* NSArray+MASAdditions.m in Sources */,
+				3CF28DA71D59B0AC007FED5A /* YjyxHomeAdModel.m in Sources */,
 				3BCF194C1CDCC2B500E2EA1A /* TaskModel.m in Sources */,
 				3CF541CF1D1CD160000EBAB5 /* MyMicroMainController.m in Sources */,
 				3BFE3B871CDA0D4A00502769 /* StuClassEntity.m in Sources */,

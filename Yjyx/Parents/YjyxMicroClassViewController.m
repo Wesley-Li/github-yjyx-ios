@@ -444,7 +444,9 @@
                 }
 
                 // 视频和表头信息
+                self.microArr = [[responseObject[@"retobj"][@"lessonobj"][@"videoobjlist"] JSONValue] mutableCopy];
                 self.videoURL = [[responseObject[@"retobj"][@"lessonobj"][@"videoobjlist"] JSONValue] firstObject][@"url"];
+                self.videoURLArr = [responseObject[@"retobj"][@"lessonobj"][@"videoobjlist"] JSONValue];
                 self.microName = responseObject[@"retobj"][@"lessonobj"][@"name"];
                 self.knowledgeName = responseObject[@"retobj"][@"lessonobj"][@"knowledgedesc"];
                 // 配置视频
@@ -592,7 +594,7 @@
                 button.tintColor = [UIColor whiteColor];
                 
             }
-            [button setTitle:[NSString stringWithFormat:@"%d", i] forState:UIControlStateNormal];
+            [button setTitle:[NSString stringWithFormat:@"%d", i + 1] forState:UIControlStateNormal];
             button.layer.cornerRadius = tWidth / 2;
             button.layer.masksToBounds = YES;
             button.layer.borderWidth = 1;

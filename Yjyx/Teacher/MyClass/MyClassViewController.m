@@ -12,6 +12,7 @@
 #import "StuClassEntity.h"
 #import "MJRefresh.h"
 #import "YjyxOverallData.h"
+#import "StuGroupEntity.h"
 
 
 @interface MyClassViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -20,6 +21,8 @@
 @property (nonatomic, strong) NSMutableArray *gradeArr;
 @property (nonatomic, strong) NSMutableArray *titleArr;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSMutableArray *groupArr;
 
 @end
 
@@ -59,6 +62,7 @@
     
     self.dataSource = [[[StuDataBase shareStuDataBase] selectAllClass] mutableCopy];
     
+    
     if (self.dataSource.count == 0) {
         [self.view makeToast:@"您暂时没有班级" duration:1.0 position:SHOW_CENTER complete:nil];
     }
@@ -78,13 +82,14 @@
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:3/255.0 green:136/255.0 blue:227/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-
+    self.groupArr = [[StuDataBase shareStuDataBase] selectAllGroup];
+    
     self.navigationItem.title = @"我的班级";
 
     [self refreshAll];
 //    [self.classListTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"1"];
     
-   
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 // 刷新
 - (void)refreshAll {
@@ -96,6 +101,7 @@
 - (void)headerRefresh
 {
     self.dataSource = [[[StuDataBase shareStuDataBase]selectAllClass] mutableCopy];
+    self.groupArr = [[StuDataBase shareStuDataBase] selectAllGroup];
     self.gradeArr = [[[YjyxOverallData sharedInstance].teacherInfo.school_classes JSONValue] mutableCopy];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -110,8 +116,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSLog(@"%ld", self.groupArr.count);
 
-    return self.dataSource.count;
+    return self.dataSource.count + self.groupArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -124,39 +131,46 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    StuClassEntity *model = self.dataSource[indexPath.row];
-    
-    
-    if ([model.name containsString:@"年级"]) {
+    if (indexPath.row < self.dataSource.count) {
+        StuClassEntity *model = self.dataSource[indexPath.row];
         
-        cell.textLabel.text = model.name;
-        [self.titleArr addObject:model.name];
-    }else {
-        
-        for (NSArray *arr in _gradeArr) {
-            if ([model.gradeid isEqual:arr[2]]) {
-                NSString *titleString = [NSString stringWithFormat:@"%@%@", arr[3], arr[1]];
-                [self.titleArr addObject:titleString];
+        if ([model.name containsString:@"年级"]) {
+            
+            cell.textLabel.text = model.name;
+            [self.titleArr addObject:model.name];
+        }else {
+            
+            for (NSArray *arr in _gradeArr) {
+                if ([model.gradeid isEqual:arr[2]]) {
+                    NSString *titleString = [NSString stringWithFormat:@"%@%@", arr[3], arr[1]];
+                    [self.titleArr addObject:titleString];
+                    
+                }
                 
             }
-
+            
         }
-    
+        
+        
+        cell.textLabel.text = self.titleArr[indexPath.row];
+        
+        
+        //    cell.textLabel.text = model.name;
+        if(!(cell.textLabel.text == nil)){
+            [self.titleArr addObject:cell.textLabel.text];
+        }
+        
+        
+        NSNumberFormatter *numberF = [[NSNumberFormatter alloc] init];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"邀请码:%@", [numberF stringFromNumber: model.invitecode]];
+        cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+
+           }else{
+        NSLog(@"%ld, %ld", indexPath.row, self.dataSource.count);
+        StuGroupEntity *model = self.groupArr[indexPath.row - self.dataSource.count];
+        cell.textLabel.text = model.name;
     }
-    
-
-    cell.textLabel.text = self.titleArr[indexPath.row];
-    
-
-//    cell.textLabel.text = model.name;
-    if(!(cell.textLabel.text == nil)){
-        [self.titleArr addObject:cell.textLabel.text];
-    }
-    
-
-    NSNumberFormatter *numberF = [[NSNumberFormatter alloc] init];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"邀请码:%@", [numberF stringFromNumber: model.invitecode]];
-    cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+   
     
     
     return cell;
@@ -167,9 +181,15 @@
     if (self.dataSource.count != 0) {
         
         ClassDetailViewController *detailVC = [[ClassDetailViewController alloc] initWithNibName:@"ClassDetailViewController" bundle:nil];
-        detailVC.model = self.dataSource[indexPath.row];
+        if (indexPath.row < self.dataSource.count) {
+           detailVC.model = self.dataSource[indexPath.row];
+           detailVC.navigationItem.title = self.titleArr[indexPath.row];
+        }else{
+            detailVC.groupModel = self.groupArr[indexPath.row - self.dataSource.count];
+        }
+        
         detailVC.currentIndex = indexPath.row;
-        detailVC.navigationItem.title = self.titleArr[indexPath.row];
+        
         [self.navigationController pushViewController:detailVC animated:YES];
 
     }

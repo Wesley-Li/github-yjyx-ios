@@ -12,11 +12,12 @@
 #import "StudentEntity.h"
 #import "StuDataBase.h"
 #import "MJRefresh.h"
-
+#import "StuGroupEntity.h"
 @interface ClassDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *invitecodeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *stuCountLabel;
 @property (weak, nonatomic) IBOutlet UITableView *stuListTableView;
+@property (weak, nonatomic) IBOutlet UILabel *memblistLabel;
 
 @end
 
@@ -44,12 +45,19 @@
 
     
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-
+    if(self.groupModel != nil){
+        self.invitecodeLabel.hidden = YES;
+        self.memblistLabel.text = @"群组成员";
+        self.navigationItem.title = self.groupModel.name;
+    }
     self.invitecodeLabel.text = [NSString stringWithFormat:@"班级邀请码:%@" ,[numberFormatter stringFromNumber:self.model.invitecode]];
-    self.stuCountLabel.text = [NSString stringWithFormat:@"%ld人", (unsigned long)self.model.memberlist.count];
+    NSInteger totalNum = self.groupModel == nil ? self.model.memberlist.count : self.groupModel.memberlist.count;
+    self.stuCountLabel.text = [NSString stringWithFormat:@"%ld人", totalNum];
     
     // 注册
     [self.stuListTableView registerNib:[UINib nibWithNibName:@"ClassCustomTableViewCell" bundle:nil] forCellReuseIdentifier:@"CC"];
+    
+    self.stuListTableView.tableFooterView = [[UIView alloc] init];
     
 }
 
@@ -62,8 +70,22 @@
     
     NSMutableArray *classArray = [[StuDataBase shareStuDataBase] selectAllClass];
     
-    self.model = classArray[self.currentIndex];
+    NSMutableArray *groupArray = [[StuDataBase shareStuDataBase] selectAllGroup];
     
+//    self.model = classArray[self.currentIndex];
+    if(self.groupModel != nil){
+    for (StuGroupEntity *currGroupModel in groupArray) {
+        if([currGroupModel.gid isEqual:self.groupModel.gid]){
+            self.groupModel = currGroupModel;
+        }
+    }
+    }else{
+        for (StuClassEntity *currClassModel in classArray) {
+            if([currClassModel.gradeid isEqual:self.model.gradeid] && [currClassModel.cid isEqual:self.model.cid]){
+                self.model = currClassModel;
+            }
+        }
+    }
     [self viewDidLoad];
     
     [self.stuListTableView reloadData];
@@ -84,14 +106,15 @@
 #pragma mark - delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.model.memberlist.count;
+    return self.groupModel == nil ? self.model.memberlist.count : self.groupModel.memberlist.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     ClassCustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CC" forIndexPath:indexPath];
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    NSString *stuID = [numberFormatter stringFromNumber: self.model.memberlist[indexPath.row]];
+    NSNumber *num = self.groupModel == nil ? self.model.memberlist[indexPath.row] : self.groupModel.memberlist[indexPath.row];
+    NSString *stuID = [numberFormatter stringFromNumber: num];
 //    NSLog(@"____%@", stuID);
     
     StudentEntity *model = [[StuDataBase shareStuDataBase] selectStuById:stuID];

@@ -19,7 +19,11 @@
 #import "YjyxWorkDetailController.h"
 #import "YjyxWorkPreviewViewController.h"
 #import "YjyxMicroClassViewController.h"
-@interface YjyxHomeWorkController ()<UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource>
+
+#import "YjyxHomeAdModel.h"
+#import "YjyxHomeAdCell.h"
+#import "YjyxHomeAdController.h"
+@interface YjyxHomeWorkController ()<UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *clickBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *homeWorkBtn;
@@ -30,6 +34,11 @@
 @property (weak, nonatomic) UITableView *wrongWorkTableV;
 @property (weak, nonatomic) IBOutlet UIView *btnView;
 
+// 公告
+@property (weak, nonatomic) IBOutlet UICollectionView *collectView;
+@property (strong, nonatomic) NSMutableArray *homeAdArray;
+@property (weak, nonatomic) IBOutlet UIPageControl *AdNumPageControl;
+@property (weak, nonatomic) NSTimer *timer;
 
 
 @property (strong, nonatomic) NSMutableArray *wrongArr; //  错题榜数据
@@ -38,6 +47,7 @@
 @implementation YjyxHomeWorkController
 static NSString *WORKID = @"workID";
 static NSString *DETAILID = @"detailID";
+static NSString *HomeADID = @"HomeADID";
 #pragma mark - 懒加载
 
 - (NSMutableArray *)subjectTypeArr
@@ -54,6 +64,13 @@ static NSString *DETAILID = @"detailID";
     }
     return _wrongArr;
 }
+- (NSMutableArray *)homeAdArray
+{
+    if (_homeAdArray == nil) {
+        _homeAdArray = [NSMutableArray array];
+    }
+    return _homeAdArray;
+}
 #pragma mark - view的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,6 +79,8 @@ static NSString *DETAILID = @"detailID";
     self.view.backgroundColor = COMMONCOLOR;
     [self addSubviews];
     [self workData];
+    [self loadAdData];
+    [self setupCollectionView];
     [self wrongWorkData];
     [self loadRefresh];
     // 注册cell
@@ -69,6 +88,9 @@ static NSString *DETAILID = @"detailID";
     [self.workTableV registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxWorkDetailCell class]) bundle:nil] forCellReuseIdentifier:DETAILID];
     [self.wrongWorkTableV registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxHomeWorkCell class]) bundle:nil] forCellReuseIdentifier:WORKID];
     
+    // 注册公告cell
+    [self.collectView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxHomeAdCell class]) bundle:nil] forCellWithReuseIdentifier:HomeADID];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.workTableV.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
 
 
@@ -78,24 +100,83 @@ static NSString *DETAILID = @"detailID";
     [super viewDidLayoutSubviews];
     self.workTableV.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.scrollV.height);
     self.wrongWorkTableV.frame  = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, self.scrollV.height);
+    
 }
 - (void)viewWillAppear:(BOOL)animated
 {
     // 自动刷新
     [self.workTableV headerBeginRefreshing];
     self.navigationController.navigationBarHidden = NO;
-//    [self.workTableV reloadData];
-//    [self.wrongWorkTableV reloadData];
+//    self.workTableV.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.collectView.contentOffset = CGPointMake(50 * self.homeAdArray.count * SCREEN_WIDTH, 0);
+    
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 #pragma mark - 私有方法
+// 加载刷新控件
 - (void)loadRefresh
 {
     [self.workTableV addHeaderWithTarget:self action:@selector(workData)];
     [self.wrongWorkTableV addHeaderWithTarget:self action:@selector(wrongWorkData)];
+    
+}
+// 请求公告数据
+- (void)loadAdData
+{
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"action"] = @"get_my_notice";
+    [mgr GET:[BaseURL stringByAppendingString:@"/api/student/yj_notice/" ] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject[@"retcode"] integerValue] == 0) {
+            for (NSDictionary *dict in responseObject[@"retlist"]) {
+                YjyxHomeAdModel *model = [YjyxHomeAdModel homeAdModelWithDict:dict];
+                [self.homeAdArray addObject:model];
+            }
+            [self.collectView reloadData];
+            self.AdNumPageControl.numberOfPages = self.homeAdArray.count;
+            self.AdNumPageControl.currentPage = 0;
+            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(autoScroll) userInfo:nil repeats:YES];
+            self.timer = timer;
+            [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+            self.collectView.contentOffset = CGPointMake(50 * SCREEN_WIDTH, 0);
+        }else{
+            [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
+    }];
+}
+//  自动滚动
+- (void)autoScroll
+{
+    NSInteger index = self.collectView.contentOffset.x / SCREEN_WIDTH;
+    NSLog(@"%ld", index);
+    
+    if(index > self.homeAdArray.count * 99){
+        index = -1;
+    }
+    [self.collectView setContentOffset:CGPointMake((index + 1) * SCREEN_WIDTH, 0) animated:YES];
+    self.AdNumPageControl.currentPage = ((index + 1) % self.homeAdArray.count);
+    
+}
+// 初始化collectionView
+- (void)setupCollectionView
+{
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    layout.minimumInteritemSpacing = 0;
+    layout.minimumLineSpacing = 0;
+    layout.itemSize = CGSizeMake(SCREEN_WIDTH, 160);
+    self.collectView.collectionViewLayout = layout;
+    self.collectView.pagingEnabled = YES;
+    self.collectView.showsHorizontalScrollIndicator = NO;
+    self.collectView.backgroundColor = [UIColor grayColor];
     
 }
 - (void)addSubviews
@@ -319,6 +400,13 @@ static NSString *DETAILID = @"detailID";
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if (![scrollView isEqual:self.scrollV]) {
+        if([scrollView isEqual:self.collectView]){
+            NSLog(@"%f", scrollView.contentOffset.x);
+            
+            NSInteger index = (scrollView.contentOffset.x ) / SCREEN_WIDTH;
+            NSLog(@"%ld", index);
+            self.AdNumPageControl.currentPage = index % 2;
+        }
         return;
     }
     CGPoint offsetP = scrollView.contentOffset;
@@ -330,6 +418,36 @@ static NSString *DETAILID = @"detailID";
             break;
         }
     }
+   
 }
-
+//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+//{
+//    if([scrollView isEqual:self.collectView]){
+//        NSLog(@"%f", scrollView.contentOffset.x);
+//        
+//       NSInteger index = (scrollView.contentOffset.x + SCREEN_WIDTH / 2) / SCREEN_WIDTH;
+//        NSLog(@"%ld", index);
+//        self.AdNumPageControl.currentPage = index % 2;
+//    }
+//}
+#pragma mark - collectionView数据源方法
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.homeAdArray.count * 100;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    YjyxHomeAdCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HomeADID forIndexPath:indexPath];
+    cell.model = self.homeAdArray[indexPath.row % 2];
+    return cell;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    YjyxHomeAdModel *model = self.homeAdArray[indexPath.row % 2];
+    if (![model.detail_page isEqual:[NSNull null]]) {
+        YjyxHomeAdController *vc = [[YjyxHomeAdController alloc] init];
+        vc.page_detail = model.detail_page;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
 @end

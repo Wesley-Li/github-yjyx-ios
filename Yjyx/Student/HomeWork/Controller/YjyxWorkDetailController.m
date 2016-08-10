@@ -123,7 +123,9 @@ static NSString *videoNumID = @"VIDEONumID";
                                                object:nil
      ];
     if ([self.taskType isEqual:@1]) {
+    
         self.navigationController.navigationBarHidden = NO;
+     ;
     }else{
         self.navigationController.navigationBarHidden = YES;
     }
@@ -558,13 +560,16 @@ static NSString *videoNumID = @"VIDEONumID";
 #pragma mark scrollView delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if(scrollView ==self.tableView){
-        CGFloat sectionHeaderHeight = 5;
-        if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
-            scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
-        } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
-            scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
-        }
+    if ([self.taskType integerValue] != 1) {
+        if(scrollView ==self.tableView){
+            CGFloat sectionHeaderHeight = 5;
+            if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+                scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+            } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+                scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+            }
+    }
+    
         if (wmPlayer==nil) {
             return;
         }

@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ClassDetailViewController">
             <connections>
                 <outlet property="invitecodeLabel" destination="1yk-1A-nif" id="kxC-hl-GEO"/>
+                <outlet property="memblistLabel" destination="POW-Gb-u2X" id="jGG-Ex-CMK"/>
                 <outlet property="stuCountLabel" destination="BuT-sx-BjJ" id="gjR-Ml-kNJ"/>
                 <outlet property="stuListTableView" destination="a3A-ox-nbj" id="aOQ-4X-dj2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

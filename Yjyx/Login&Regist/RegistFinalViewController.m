@@ -11,6 +11,7 @@
 @interface RegistFinalViewController ()
 
 @property (assign, nonatomic) NSInteger flag;
+@property (strong, nonatomic) NSString *phoneNumStr;
 @end
 
 @implementation RegistFinalViewController
@@ -18,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _second = 60;
-    
+    _flag = 1000;
     titleLb.text = [NSString stringWithFormat:@"%@%@的邀请码",_school,_childrenEntity.name];
     parentNameText.placeholder = @"家长真实姓名";
     parentPasswordText.placeholder = @"登录密码";
@@ -39,7 +40,7 @@
 - (void)textFieldDidChange:(UITextField *)textField
 {
     if([textField.text containsString:@" "]){
-        [self.view makeToast:@"密码不能含有空格,请重新输入" duration:1.0 position:SHOW_CENTER complete:nil];
+        [self.view makeToast:@"不能含有空格,请重新输入" duration:1.0 position:SHOW_CENTER complete:nil];
         textField.text = nil;
     }else if ([textField isEqual:phoneText]) {
 
@@ -58,13 +59,16 @@
             if (!position) {
                 if (toBeString.length > 10) {
                     textField.text = [toBeString substringToIndex:10];
+                    [self.view makeToast:@"输入的长度不能大于10位" duration:1.0 position:SHOW_CENTER complete:nil];
                 }
                 
             }
             
         }else{
+            if(textField.text.length > 10){
             textField.text = [textField.text substringToIndex:10];
             [self.view makeToast:@"输入的长度不能大于10位" duration:1.0 position:SHOW_CENTER complete:nil];
+            }
         }
 
     }else if ([textField isEqual:parentPasswordText] || [textField isEqual:confirmpwdField]){
@@ -78,26 +82,41 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if([textField isEqual:phoneText]){
-    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-    NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
-    pamar[@"action"] = @"checkuserexist";
-    pamar[@"username"] = textField.text;
+        if([textField.text isEqualToString:self.phoneNumStr]){
+            return;
+        }
+        self.phoneNumStr = textField.text;
+       AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+       NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
+       pamar[@"action"] = @"checkuserexist";
+       pamar[@"username"] = textField.text;
         
         [mgr GET:[BaseURL stringByAppendingString:USERNAME_ISEXIST_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
             if([responseObject[@"retcode"] isEqual: @0]){
                 if ([responseObject[@"exist"] isEqual: @1]) {
                     [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
-              
                     _flag = 1;
                 }
+            }else if([responseObject[@"exist"] isEqual: @0]){
+                _flag = 0;
             }else{
-                [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                if ([responseObject[@"msg"] isEqualToString:@"ratelimitted"]) {
+                [self.view makeToast:@"操作过快" duration:0.5 position:SHOW_CENTER complete:nil];
+            }else {
+                
+                [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
+                
             }
-            
+            }
+         
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
+
         }];
     }else{
+        if(parentPasswordText.text.length == 0 && confirmpwdField.text.length == 0){
+            return;
+        }
         if(textField.text.length < 6){
             
             [self.view makeToast:@"密码长度不能小于6位" duration:0.5 position:SHOW_CENTER complete:nil];
@@ -106,7 +125,6 @@
         if(parentPasswordText.text.length == 0 || confirmpwdField.text.length == 0){
             return;
         }
-        
         if(![parentPasswordText.text isEqualToString:confirmpwdField.text]){
             [self.view makeToast:@"两次密码输入不一样" duration:0.5 position:SHOW_CENTER complete:nil];
         }
@@ -126,53 +144,107 @@
 -(IBAction)getRegisterCode:(UIButton *)sender
 {
 //    [self textFieldDidEndEditing:phoneText];
-    if(_flag == 1){
-         [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
-        return;
-    }
-    if (phoneText.text.length != 11) {
-        [self.view makeToast:@"请输入正确的手机号" duration:1.0 position:SHOW_CENTER complete:nil];
-        return;
-    }
-    if (parentPasswordText.text.length < 6){
-        [self.view makeToast:@"密码长度不能小于6位" duration:1.0 position:SHOW_CENTER complete:nil];
-        return;
-    }
-    if ([parentPasswordText.text containsString:@" "]){
-        [self.view makeToast:@"密码不能包含空格" duration:1.0 position:SHOW_CENTER complete:nil];
-        return;
-    }
-    if (![parentPasswordText.text isEqualToString:confirmpwdField.text]) {
-        [self.view makeToast:@"两次输入的密码不一致,请重新输入" duration:0.5 position:SHOW_CENTER complete:nil];
-        return;
-    }
-    NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",phoneText.text];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",[sign md5],@"sign",@"MREGISTER",@"stype",nil];
-    [[YjxService sharedInstance] getSMSsendcode:dic withBlock:^(id result, NSError *error){//验证验证码
-        [self.view hideToastActivity];
-        if (result) {
-            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
-                timeLb.backgroundColor = RGBACOLOR(229.0, 230.0, 231.0, 1);
-                
-                _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
-                [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-                //发送注册码按钮失效，防止频繁请求
-                [verifyBtn setEnabled:false];
-            }else{
-                NSLog(@"%@", result);
-                if ([result[@"msg"] isEqualToString:@"ratelimitted"]) {
-                    [self.view makeToast:@"操作过快" duration:1.0 position:SHOW_CENTER complete:nil];
-                }else {
-                
-                    [self.view makeToast:@"此号码不存在" duration:1.0 position:SHOW_CENTER complete:nil];
-                
-                }
-                
-            }
-        }else{
-            [self.view makeToast:@"电话号码不存在" duration:1.0 position:SHOW_CENTER complete:nil];
+    if(_flag == 1000){
+        if (phoneText.text.length != 11) {
+            [self.view makeToast:@"请输入正确的手机号" duration:1.0 position:SHOW_CENTER complete:nil];
+            return;
         }
-    }];
+        AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+        NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
+        pamar[@"action"] = @"checkuserexist";
+        pamar[@"username"] = phoneText.text;
+        
+        [mgr GET:[BaseURL stringByAppendingString:USERNAME_ISEXIST_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+            NSLog(@"%@", responseObject);
+            if([responseObject[@"retcode"] isEqual: @0]){
+                if ([responseObject[@"exist"] isEqual: @1]) {
+                    [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
+                    
+                    _flag = 1000;
+                    return;
+                }else if([responseObject[@"exist"] isEqual: @0]){
+                    NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",phoneText.text];
+                    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",[sign md5],@"sign",@"MREGISTER",@"stype",nil];
+                    [[YjxService sharedInstance] getSMSsendcode:dic withBlock:^(id result, NSError *error){//验证验证码
+                        [self.view hideToastActivity];
+                        if (result) {
+                            if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                                timeLb.backgroundColor = RGBACOLOR(229.0, 230.0, 231.0, 1);
+                                
+                                _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
+                                [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+                                //发送注册码按钮失效，防止频繁请求
+                                [verifyBtn setEnabled:false];
+                            }else{
+                                NSLog(@"%@", result);
+                                if ([result[@"msg"] isEqualToString:@"ratelimitted"]) {
+                                    [self.view makeToast:@"操作过快" duration:1.0 position:SHOW_CENTER complete:nil];
+                                }else {
+                                    
+                                    [self.view makeToast:@"此号码不存在" duration:1.0 position:SHOW_CENTER complete:nil];
+                                    
+                                }
+                                
+                            }
+                        }else{
+                            [self.view makeToast:@"电话号码不存在" duration:1.0 position:SHOW_CENTER complete:nil];
+                        }
+                    }];
+
+                }
+            }else{
+                if ([responseObject[@"msg"] isEqualToString:@"ratelimitted"]) {
+                    [self.view makeToast:@"操作过快" duration:1.0 position:SHOW_CENTER complete:nil];
+                }else{
+                [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                }
+            }
+           
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
+           
+        }];
+
+    }else{
+    
+        if (phoneText.text.length != 11) {
+            [self.view makeToast:@"请输入正确的手机号" duration:1.0 position:SHOW_CENTER complete:nil];
+            return;
+        }
+        if(_flag == 1){
+            [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
+            _flag = 1000;
+            return;
+        }
+        NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",phoneText.text];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",[sign md5],@"sign",@"MREGISTER",@"stype",nil];
+        [[YjxService sharedInstance] getSMSsendcode:dic withBlock:^(id result, NSError *error){//验证验证码
+            [self.view hideToastActivity];
+            if (result) {
+                if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                    timeLb.backgroundColor = RGBACOLOR(229.0, 230.0, 231.0, 1);
+                    
+                    _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
+                    [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+                    //发送注册码按钮失效，防止频繁请求
+                    [verifyBtn setEnabled:false];
+                }else{
+                    NSLog(@"%@", result);
+                    if ([result[@"msg"] isEqualToString:@"ratelimitted"]) {
+                        [self.view makeToast:@"操作过快" duration:1.0 position:SHOW_CENTER complete:nil];
+                    }else {
+                        
+                        [self.view makeToast:@"此号码不存在" duration:1.0 position:SHOW_CENTER complete:nil];
+                        
+                    }
+                    
+                }
+            }else{
+                [self.view makeToast:@"电话号码不存在" duration:1.0 position:SHOW_CENTER complete:nil];
+            }
+        }];
+
+    }
 }
 
 #pragma mark - 倒计时走完
@@ -201,12 +273,12 @@
 -(IBAction)gosure:(id)sender
 {
     
-    if (parentNameText.text.length == 0||parentPasswordText.text.length == 0||relationText.text.length == 0||phoneText.text.length == 0||codeText.text.length == 0) {
+    if (parentNameText.text.length == 0||parentPasswordText.text.length == 0||relationText.text.length == 0||phoneText.text.length == 0||codeText.text.length == 0 || confirmpwdField.text.length == 0) {
         [self.view makeToast:@"请输入完整信息" duration:1.0 position:SHOW_CENTER complete:nil];
-    }else if([parentPasswordText.text containsString:@" "] || [parentNameText.text containsString:@" "]){
-        [self.view makeToast:@"用户名或密码不能含有空格" duration:1.0 position:SHOW_CENTER complete:nil];
-    }else if(parentPasswordText.text.length < 6 || parentPasswordText.text.length > 20){
+    }else if(parentPasswordText.text.length < 6 || parentPasswordText.text.length > 20 || confirmpwdField.text.length < 6 || confirmpwdField.text.length > 20){
         [self.view makeToast:@"密码长度不能小于6位或大于20位" duration:1.0 position:SHOW_CENTER complete:nil];
+    }else if(phoneText.text.length != 11){
+        [self.view makeToast:@"电话号码输入有误" duration:1.0 position:SHOW_CENTER complete:nil];
     }else{
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",codeText.text,@"code",@"MREGISTER",@"stype",nil];
         [[YjxService sharedInstance] checkOutVerfirycode:dic withBlock:^(id result, NSError *error){//验证验证码
