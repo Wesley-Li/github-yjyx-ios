@@ -24,6 +24,10 @@
     [confrimPassWord addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
    
 }
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [SVProgressHUD dismiss];
+}
 - (void)textFieldDidChange:(UITextField *)textField
 {
     NSLog(@"%@", textField.text);
@@ -127,6 +131,7 @@
         [self.view hideToastActivity];
         if (result) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                [SVProgressHUD showSuccessWithStatus:@"修改成功"];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];

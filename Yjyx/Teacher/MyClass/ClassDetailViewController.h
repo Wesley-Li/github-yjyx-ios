@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class StuClassEntity;
+@class StuClassEntity, StuGroupEntity;
 @interface ClassDetailViewController : UIViewController
 
 @property (nonatomic, strong) StuClassEntity *model;
+
+@property (strong, nonatomic) StuGroupEntity *groupModel;
+
 @property (nonatomic, assign) NSInteger currentIndex;
 
 @end

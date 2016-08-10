@@ -30,24 +30,24 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6XS-nW-T5p">
-                    <rect key="frame" x="232" y="134" width="63" height="63"/>
-                    <state key="normal" backgroundImage="home_img_testPaper.png"/>
+                    <rect key="frame" x="207" y="134" width="63" height="63"/>
+                    <state key="normal" backgroundImage="home_img_knowledge.png"/>
                     <connections>
                         <action selector="handleTestBtn:" destination="-1" eventType="touchUpInside" id="vAy-CP-i3B"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YdH-Li-heR">
-                    <rect key="frame" x="25" y="134" width="63" height="63"/>
+                    <rect key="frame" x="50" y="134" width="63" height="63"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="YdH-Li-heR" secondAttribute="height" multiplier="1:1" id="Bek-dt-xMT"/>
                     </constraints>
-                    <state key="normal" backgroundImage="home_img_smart.png"/>
+                    <state key="normal" backgroundImage="home_img_book.png"/>
                     <connections>
                         <action selector="handleSmartBtn:" destination="-1" eventType="touchUpInside" id="ul7-24-0Ad"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="智能出题" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HX1-PV-oF8">
-                    <rect key="frame" x="25" y="197" width="63" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教材同步" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HX1-PV-oF8">
+                    <rect key="frame" x="50" y="197" width="63" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="MOU-ws-M9t"/>
                     </constraints>
@@ -55,7 +55,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教材同步" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6t-X4-hr9">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教材同步" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6t-X4-hr9">
                     <rect key="frame" x="128" y="197" width="64" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="aNE-KI-Xk9"/>
@@ -64,26 +64,17 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="套卷出题" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaR-jS-1qE">
-                    <rect key="frame" x="231" y="197" width="64" height="20"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="20" id="dcg-Wb-MhJ"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fBk-6J-1u1">
-                    <rect key="frame" x="25" y="247" width="63" height="64"/>
+                    <rect key="frame" x="50" y="247" width="63" height="64"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="fBk-6J-1u1" secondAttribute="height" multiplier="1:1" id="fSD-MN-i1k"/>
                     </constraints>
-                    <state key="normal" backgroundImage="home_img_knowledge.png"/>
+                    <state key="normal" backgroundImage="home_img_wrong.png"/>
                     <connections>
                         <action selector="knowledgeBtn:" destination="-1" eventType="touchUpInside" id="jaE-fc-ecS"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="naa-sK-YwW">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="naa-sK-YwW">
                     <rect key="frame" x="128" y="247" width="64" height="64"/>
                     <state key="normal" backgroundImage="home_img_wrong.png"/>
                     <connections>
@@ -91,14 +82,14 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1a-Fr-WNZ">
-                    <rect key="frame" x="232" y="247" width="63" height="64"/>
+                    <rect key="frame" x="207" y="247" width="63" height="64"/>
                     <state key="normal" backgroundImage="home_img_private.png"/>
                     <connections>
                         <action selector="handlePrivateBtn:" destination="-1" eventType="touchUpInside" id="hpu-tm-1WU"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="知识点出题" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jp3-vN-rHI">
-                    <rect key="frame" x="25" y="311" width="63" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="错题榜" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jp3-vN-rHI">
+                    <rect key="frame" x="50" y="311" width="63" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="jyZ-Na-vPd"/>
                     </constraints>
@@ -106,19 +97,19 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="错题榜" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xl-QZ-SzA">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="错题榜" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xl-QZ-SzA">
                     <rect key="frame" x="128" y="311" width="64" height="20"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="私有题库" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J0C-sp-G5k">
-                    <rect key="frame" x="231" y="311" width="64" height="20"/>
+                    <rect key="frame" x="207" y="311" width="63" height="20"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKJ-4x-cXJ">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKJ-4x-cXJ">
                     <rect key="frame" x="128" y="134" width="64" height="63"/>
                     <state key="normal" backgroundImage="home_img_book.png"/>
                     <connections>
@@ -168,14 +159,23 @@
                         <constraint firstItem="uak-xU-KLJ" firstAttribute="centerX" secondItem="nkz-3Q-pU7" secondAttribute="centerX" constant="3" id="syp-rX-Tpc"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="知识点出题" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaR-jS-1qE">
+                    <rect key="frame" x="207" y="197" width="63" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="dcg-Wb-MhJ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="4qj-Py-Tt9" secondAttribute="bottom" constant="80" id="2FZ-sP-nHm"/>
-                <constraint firstItem="fBk-6J-1u1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="4YP-w6-8Go"/>
+                <constraint firstItem="fBk-6J-1u1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="4YP-w6-8Go"/>
                 <constraint firstItem="naa-sK-YwW" firstAttribute="top" secondItem="X6t-X4-hr9" secondAttribute="bottom" constant="30" id="4xa-BJ-Me4"/>
                 <constraint firstItem="cp9-12-2mI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="6EQ-0Z-bqg"/>
-                <constraint firstItem="F1a-Fr-WNZ" firstAttribute="leading" secondItem="naa-sK-YwW" secondAttribute="trailing" constant="40" id="6mN-zG-RfE"/>
+                <constraint firstItem="F1a-Fr-WNZ" firstAttribute="leading" secondItem="naa-sK-YwW" secondAttribute="trailing" constant="15" id="6mN-zG-RfE"/>
                 <constraint firstItem="jp3-vN-rHI" firstAttribute="centerX" secondItem="fBk-6J-1u1" secondAttribute="centerX" id="7Lc-oJ-nEJ"/>
                 <constraint firstItem="XaR-jS-1qE" firstAttribute="width" secondItem="6XS-nW-T5p" secondAttribute="width" id="9sD-0B-wSW"/>
                 <constraint firstItem="jp3-vN-rHI" firstAttribute="top" secondItem="fBk-6J-1u1" secondAttribute="bottom" id="AB6-m9-QUw"/>
@@ -191,10 +191,10 @@
                 <constraint firstItem="HX1-PV-oF8" firstAttribute="top" secondItem="YdH-Li-heR" secondAttribute="bottom" id="MLo-im-5Fr"/>
                 <constraint firstItem="X6t-X4-hr9" firstAttribute="width" secondItem="XKJ-4x-cXJ" secondAttribute="width" id="Mkf-Ll-fbl"/>
                 <constraint firstItem="4xl-QZ-SzA" firstAttribute="centerX" secondItem="naa-sK-YwW" secondAttribute="centerX" id="N7y-NJ-0DB"/>
-                <constraint firstItem="6XS-nW-T5p" firstAttribute="leading" secondItem="XKJ-4x-cXJ" secondAttribute="trailing" constant="40" id="O3e-uH-cYO"/>
+                <constraint firstItem="6XS-nW-T5p" firstAttribute="leading" secondItem="XKJ-4x-cXJ" secondAttribute="trailing" constant="15" id="O3e-uH-cYO"/>
                 <constraint firstItem="J0C-sp-G5k" firstAttribute="centerX" secondItem="F1a-Fr-WNZ" secondAttribute="centerX" id="P1E-td-yFG"/>
                 <constraint firstItem="XKJ-4x-cXJ" firstAttribute="width" secondItem="YdH-Li-heR" secondAttribute="width" id="PNr-3S-lDb"/>
-                <constraint firstItem="XKJ-4x-cXJ" firstAttribute="leading" secondItem="YdH-Li-heR" secondAttribute="trailing" constant="40" id="R5R-fO-K73"/>
+                <constraint firstItem="XKJ-4x-cXJ" firstAttribute="leading" secondItem="YdH-Li-heR" secondAttribute="trailing" constant="15" id="R5R-fO-K73"/>
                 <constraint firstItem="J0C-sp-G5k" firstAttribute="height" secondItem="jp3-vN-rHI" secondAttribute="height" id="RXb-TR-x8c"/>
                 <constraint firstItem="XKJ-4x-cXJ" firstAttribute="top" secondItem="cp9-12-2mI" secondAttribute="bottom" constant="40" id="UHC-gH-oF8"/>
                 <constraint firstItem="4qj-Py-Tt9" firstAttribute="height" secondItem="F1a-Fr-WNZ" secondAttribute="height" id="VtG-mi-qXQ"/>
@@ -206,10 +206,10 @@
                 <constraint firstItem="X6t-X4-hr9" firstAttribute="top" secondItem="XKJ-4x-cXJ" secondAttribute="bottom" id="eRM-7k-scZ"/>
                 <constraint firstItem="4xl-QZ-SzA" firstAttribute="width" secondItem="jp3-vN-rHI" secondAttribute="width" id="egB-T8-FKu"/>
                 <constraint firstItem="F1a-Fr-WNZ" firstAttribute="height" secondItem="fBk-6J-1u1" secondAttribute="height" id="fP5-5f-gte"/>
-                <constraint firstAttribute="trailing" secondItem="6XS-nW-T5p" secondAttribute="trailing" constant="25" id="hXJ-3n-ruG"/>
-                <constraint firstItem="YdH-Li-heR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="ixO-nu-kfq"/>
-                <constraint firstAttribute="trailing" secondItem="F1a-Fr-WNZ" secondAttribute="trailing" constant="25" id="j8I-2H-t4a"/>
-                <constraint firstItem="naa-sK-YwW" firstAttribute="leading" secondItem="fBk-6J-1u1" secondAttribute="trailing" constant="40" id="ky3-cM-0di"/>
+                <constraint firstAttribute="trailing" secondItem="6XS-nW-T5p" secondAttribute="trailing" constant="50" id="hXJ-3n-ruG"/>
+                <constraint firstItem="YdH-Li-heR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="ixO-nu-kfq"/>
+                <constraint firstAttribute="trailing" secondItem="F1a-Fr-WNZ" secondAttribute="trailing" constant="50" id="j8I-2H-t4a"/>
+                <constraint firstItem="naa-sK-YwW" firstAttribute="leading" secondItem="fBk-6J-1u1" secondAttribute="trailing" constant="15" id="ky3-cM-0di"/>
                 <constraint firstItem="naa-sK-YwW" firstAttribute="width" secondItem="fBk-6J-1u1" secondAttribute="width" id="leT-Ax-EaP"/>
                 <constraint firstItem="XaR-jS-1qE" firstAttribute="top" secondItem="6XS-nW-T5p" secondAttribute="bottom" id="mHF-al-JAh"/>
                 <constraint firstItem="naa-sK-YwW" firstAttribute="height" secondItem="fBk-6J-1u1" secondAttribute="height" id="mpO-ly-Ay5"/>
@@ -228,8 +228,6 @@
         <image name="home_img_book.png" width="146" height="146"/>
         <image name="home_img_knowledge.png" width="146" height="146"/>
         <image name="home_img_private.png" width="146" height="146"/>
-        <image name="home_img_smart.png" width="146" height="146"/>
-        <image name="home_img_testPaper.png" width="146" height="146"/>
         <image name="home_img_wrong.png" width="146" height="146"/>
         <image name="预览选题" width="124" height="124"/>
     </resources>

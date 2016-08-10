@@ -8,7 +8,7 @@
 
 #import "YjyxDoingView.h"
 
-@interface YjyxDoingView()
+@interface YjyxDoingView()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *oneBtn;
 @property (weak, nonatomic) IBOutlet UIButton *twoBtn;
@@ -49,6 +49,8 @@
 {
     for (int i = 0; i < count; i++) {
         UITextField *blankAnswer = [[UITextField alloc] init];
+        blankAnswer.tag = i + 200;
+        blankAnswer.delegate = self;
 //        blankAnswer1.borderStyle = UITextBorderStyleLine;
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 15, 39)];
         label.text = [NSString stringWithFormat:@"%d", i + 1];
@@ -62,7 +64,7 @@
         [self.scrollView addSubview:blankAnswer];
     }
     if(count == 1){
-        UITextField *blankAnswer = [[UITextField alloc] init];
+        UIView *blankAnswer = [[UIView alloc] init];
         blankAnswer.backgroundColor = [UIColor whiteColor];
         blankAnswer.userInteractionEnabled = NO;
         blankAnswer.frame = CGRectMake(0, 40 , SCREEN_WIDTH - 70, 40 -1);
@@ -74,5 +76,12 @@
         [self.delegate doingView:self nextWorkBtnIsClick:sender];
     }
 }
-
+#pragma mark -UITextFieldDelegate代理
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    UITextField *newField = [self viewWithTag:textField.tag + 1];
+    [newField becomeFirstResponder];
+    return YES;
+}
 @end

@@ -9,7 +9,7 @@
 #import "YjyxAnonatationController.h"
 #import "VoiceListCell.h"
 #import "VoiceConverter.h"
-
+#import "YjyxCommonNavController.h"
 
 @import AVFoundation;
 @import AudioToolbox;
@@ -38,6 +38,9 @@
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
     self.navigationController.navigationBarHidden = NO;
+    if ([self.navigationController isKindOfClass:[YjyxCommonNavController class]]) {
+        [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(0, 229.0, 199.0, 1)];
+    }
 }
 
 - (void)viewDidLoad {
@@ -101,6 +104,10 @@
         numLabel.backgroundColor = [UIColor redColor];
         numLabel.textColor = [UIColor whiteColor];
         numLabel.text = [NSString stringWithFormat:@"%ld", [[self.processArr[i] objectForKey:@"teachervoice"] count]];
+        if ([[self.processArr[i] objectForKey:@"teachervoice"] count] == 0) {
+            voiceBtn.hidden = YES;
+            numLabel.hidden = YES;
+        }
         numLabel.textAlignment = NSTextAlignmentCenter;
         numLabel.layer.cornerRadius = 7.5;
         numLabel.layer.masksToBounds = YES;

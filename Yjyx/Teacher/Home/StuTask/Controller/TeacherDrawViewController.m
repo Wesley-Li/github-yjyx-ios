@@ -11,7 +11,7 @@
 #import "VoiceListCell.h"
 #import "VoiceConverter.h"
 #import "OneStuTaskDetailViewController.h"
-
+#import "YjyxCommonNavController.h"
 
 @import AVFoundation;
 @import AudioToolbox;
@@ -233,7 +233,12 @@
     
 
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    if([self.navigationController isKindOfClass:[YjyxCommonNavController class]]){
+        self.navigationController.navigationBar.barTintColor = RGBACOLOR(0, 229.0, 199.0, 1);
+    }
+}
 - (void)viewDidAppear:(BOOL)animated {
 
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;

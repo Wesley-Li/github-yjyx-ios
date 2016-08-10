@@ -63,7 +63,8 @@
 
 @property (assign, nonatomic) NSInteger flag;
 @property (weak, nonatomic) YjyxDraftView *draftV;
-
+@property (assign, nonatomic) NSInteger prekeyIndex; // 记录键盘前一次在的界面索引
+@property (assign, nonatomic) CGSize preSize; // 记录webview的contentsize
 
 @property (strong, nonatomic) NSMutableArray *countTimeArr; // 每道题计时数组
 @property (assign, nonatomic) NSInteger preTime;
@@ -96,6 +97,7 @@
 #pragma mark - view生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.prekeyIndex = 1000;
     _doWorkArr = [NSMutableArray array];
     _answerArr = [NSMutableArray array];
 
@@ -233,16 +235,69 @@
     CGRect keyboardRect = [aValue CGRectValue];
     int height = keyboardRect.size.height;
     [UIView animateWithDuration:[aNotification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
-        self.view.centerY = SCREEN_HEIGHT / 2 - height;
+        self.view.centerY = SCREEN_HEIGHT / 2 - 104;
     }];
+    
+    NSInteger index = self.scrollView.contentOffset.x / SCREEN_WIDTH;
+ 
+    self.prekeyIndex = index;
+    if(index != self.prekeyIndex){
+        self.preSize = CGSizeZero;
+    }
+//    NSLog(@"%@", self.scrollView.subviews);
+    for (UIView *view in self.scrollView.subviews) {
+        if([view isKindOfClass:[UIWebView class]]){
+            if(view.tag == index + 1){
+               CGSize size =  ((UIWebView *)view).scrollView.contentSize;
+                if(CGSizeEqualToSize(self.preSize, CGSizeZero)){
+                self.preSize = size;
+                }
+                NSLog(@"%@, %d", NSStringFromCGSize(size), height);
+                size.height = self.preSize.height + height - 104;
+                ((UIWebView *)view).scrollView.contentSize = size;
+                NSLog(@"%@", NSStringFromCGSize(size));
+            }
+        }else if ([view isKindOfClass:[YjyxDoingView class]]){
+            if(view.tag == index + 1){
+            view.y = self.scrollView.frame.size.height - height - view.height + 104;
+            }
+        }
+
+    }
+    
 }
 
 //当键退出时调用
 - (void)keyboardWillHide:(NSNotification *)aNotification
 {
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    int height = keyboardRect.size.height;
     [UIView animateWithDuration:[aNotification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
         self.view.centerY = SCREEN_HEIGHT / 2;
     }];
+    
+//    NSInteger index = self.scrollView.contentOffset.x / SCREEN_WIDTH;
+    
+    NSInteger index = self.prekeyIndex;
+//    NSLog(@"%@", self.scrollView.subviews);
+    for (UIView *view in self.scrollView.subviews) {
+        if([view isKindOfClass:[UIWebView class]]){
+            if(view.tag == index + 1){
+//                CGSize size =  ((UIWebView *)view).scrollView.contentSize;
+//                NSLog(@"%@, %d", NSStringFromCGSize(size), height);
+//                size.height -= height - 104;
+                ((UIWebView *)view).scrollView.contentSize = self.preSize;
+          
+            }
+        }else if ([view isKindOfClass:[YjyxDoingView class]]){
+            if(view.tag == index + 1){
+                view.y = self.scrollView.frame.size.height - view.height;
+            }
+        }
+        
+    }
 }
 
 #pragma mark - 私有方法
@@ -487,6 +542,7 @@
         }
         // 添加webview
         UIWebView *webView = [[UIWebView alloc] init];
+        webView.scrollView.showsHorizontalScrollIndicator = NO;
         webView.frame =  CGRectMake(i * SCREEN_WIDTH, 0, SCREEN_WIDTH, self.scrollView.height - 81);
         if([model.requireprocess integerValue] == 1){
         webView.y = CGRectGetMaxY(label.frame)+ _itemWH + 11;
@@ -501,7 +557,7 @@
         
         // 添加答案控件
         YjyxDoingView *answerView = [YjyxDoingView doingView];
-        answerView.frame =  CGRectMake(i * SCREEN_WIDTH, self.scrollView.height - 79, SCREEN_WIDTH, 80);
+        answerView.frame =  CGRectMake(i * SCREEN_WIDTH, self.scrollView.height - 80, SCREEN_WIDTH, 80);
         answerView.delegate = self;
         answerView.tag = i + 1;
         [self.scrollView addSubview:answerView];
@@ -604,20 +660,28 @@
             NSMutableArray *arr = self.answerArr[index];
             [arr removeAllObjects];
             YjyxDoingWorkModel *model = self.doWorkArr[view.tag - 1];
-            if (model.questiontype == 2) {
+            if (model.questiontype == 2) { // 填空题
                 for (UIView *subview in view.subviews) {
                     if ([subview isKindOfClass:[UIScrollView class]]) {
                         for (UIView *finalSubview in subview.subviews) {
                             
-                            NSString *answerStr =[((UITextField *)finalSubview).text stringByReplacingOccurrencesOfString:@" " withString:@""
-                                                  ];
-
-                            [arr addObject:answerStr];
-//                            [arr addObject: ((UITextField *)finalSubview).text];
+//                            NSString *answerStr =[((UITextField *)finalSubview).text stringByReplacingOccurrencesOfString:@" " withString:@""
+//                                                  ];
+//                            if(!(answerStr.length == 0)){
+//                            [arr addObject:answerStr];
+//                            }
+                            if([finalSubview isKindOfClass:[UITextField class]]){
+                            [arr addObject: ((UITextField *)finalSubview).text];
+                            }
                         }
                     }
                 }
-            }else{
+                NSString *str = [arr componentsJoinedByString:@""];
+                str = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
+                if(![str isEqualToString:@""]){
+                    _stuDoWorkNum++;
+                }
+            }else{ // 选择题
                 for (UIView *subview in view.subviews) {
                     if ([subview isKindOfClass:[UIView class]]) {
                         for (UIView *finalSubview in subview.subviews) {
@@ -631,11 +695,11 @@
                         }
                     }
                 }
-               
+                if (arr.count > 0) {
+                    _stuDoWorkNum++;
+                }
             }
-            if (arr.count > 0) {
-                _stuDoWorkNum++;
-            }
+            
         }
     }
 
@@ -1101,8 +1165,9 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
+    [self.view endEditing:YES];
     if (decelerate == YES) {
-        NSLog(@"-----");
+     
     }else{
     NSLog(@"没有减速");
     }
@@ -1112,7 +1177,7 @@
 //    NSLog(@"%@", self.viewDict);
     NSInteger index = scrollView.contentOffset.x / SCREEN_WIDTH;
     self.titlenumberLabel.text = [NSString stringWithFormat:@"%ld", index + 1];
-
+    
     NSNumber *num = self.countTimeArr[_preIndex - 1];
     NSInteger conTime = self.consumeTime - self.preTime;
     NSInteger numInt = [num integerValue];
@@ -1122,15 +1187,16 @@
     self.countTimeArr[_preIndex - 1] = num;
     self.preTime = self.consumeTime;
     self.preIndex = index + 1;
+  
 
 }
 #pragma mark - DoingViewDelegate
 - (void)doingView:(YjyxDoingView *)view nextWorkBtnIsClick:(UIButton *)btn
 {
     if ([[btn titleForState:UIControlStateNormal] isEqualToString:@"下一题"]) {
-        
+        [self.view endEditing:YES];
         [self.scrollView setContentOffset:CGPointMake(view.tag  * SCREEN_WIDTH, 0) animated:YES];
-       self.titlenumberLabel.text = [NSString stringWithFormat:@"%ld", view.tag + 1];
+        self.titlenumberLabel.text = [NSString stringWithFormat:@"%ld", view.tag + 1];
         NSNumber *num = self.countTimeArr[_preIndex - 1];
         NSInteger conTime = self.consumeTime - self.preTime;
         NSInteger numInt = [num integerValue];

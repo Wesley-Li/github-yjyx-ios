@@ -142,7 +142,7 @@
                 [self.dataSource addObject:model];
             }
 
-            
+            self.dataSource = (NSMutableArray *)[[self.dataSource reverseObjectEnumerator] allObjects];
             num = self.dataSource.count;
             if (self.dataSource.count < 20) {
                 count = self.dataSource.count;

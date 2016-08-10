@@ -114,57 +114,82 @@
 // 点击智能出题
 - (IBAction)handleSmartBtn:(UIButton *)sender {
     
-    SmartViewController *smartVC = [[SmartViewController alloc] initWithNibName:@"SmartViewController" bundle:nil];
-    smartVC.navigationItem.title = @"智能出题";
-    [self.navigationController pushViewController:smartVC animated:YES];
-    
-}
-
-// 点击教材同步
-- (IBAction)handleBookBtn:(UIButton *)sender {
+//    SmartViewController *smartVC = [[SmartViewController alloc] initWithNibName:@"SmartViewController" bundle:nil];
+//    smartVC.navigationItem.title = @"智能出题";
+//    [self.navigationController pushViewController:smartVC animated:YES];
+#warning 智能出题功能暂没开发,此处用教材同步  左边的约束从25->50 右边的约束从40->15
     
     NSString *chapterTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"TeacherPostTitle"];
     NSArray  *arr = [[NSUserDefaults standardUserDefaults] objectForKey:@"ChaperContentPamar"];
     if(chapterTitle != nil){
         
         ChapterViewController *chapterVc = [[ChapterViewController alloc] init];
-       
+        
         chapterVc.title1 = chapterTitle;
         chapterVc.gradeid = [arr[1] integerValue];
         chapterVc.verid = [arr[2] integerValue];
         chapterVc.volid = [arr[0] integerValue];
         [self.navigationController pushViewController:chapterVc animated:YES];
     }else{
-    BookViewController *bookVC = [[BookViewController alloc] initWithNibName:@"BookViewController" bundle:nil];
-
-    [self.navigationController pushViewController:bookVC animated:YES];
+        BookViewController *bookVC = [[BookViewController alloc] initWithNibName:@"BookViewController" bundle:nil];
+        
+        [self.navigationController pushViewController:bookVC animated:YES];
     }
+}
+
+// 点击教材同步
+- (IBAction)handleBookBtn:(UIButton *)sender {
+    
+//    NSString *chapterTitle = [[NSUserDefaults standardUserDefaults] objectForKey:@"TeacherPostTitle"];
+//    NSArray  *arr = [[NSUserDefaults standardUserDefaults] objectForKey:@"ChaperContentPamar"];
+//    if(chapterTitle != nil){
+//        
+//        ChapterViewController *chapterVc = [[ChapterViewController alloc] init];
+//       
+//        chapterVc.title1 = chapterTitle;
+//        chapterVc.gradeid = [arr[1] integerValue];
+//        chapterVc.verid = [arr[2] integerValue];
+//        chapterVc.volid = [arr[0] integerValue];
+//        [self.navigationController pushViewController:chapterVc animated:YES];
+//    }else{
+//    BookViewController *bookVC = [[BookViewController alloc] initWithNibName:@"BookViewController" bundle:nil];
+//
+//    [self.navigationController pushViewController:bookVC animated:YES];
+//    }
 }
 
 // 点击套卷出题
 - (IBAction)handleTestBtn:(UIButton *)sender {
     
-    TestViewController *testVC = [[TestViewController alloc] initWithNibName:@"TestViewController" bundle:nil];
-    testVC.navigationItem.title = @"套卷出题";
-    [self.navigationController pushViewController:testVC animated:YES];
-
+//    TestViewController *testVC = [[TestViewController alloc] initWithNibName:@"TestViewController" bundle:nil];
+//    testVC.navigationItem.title = @"套卷出题";
+//    [self.navigationController pushViewController:testVC animated:YES];
+    
+#warning 套卷出题功能暂没开发,此处用知识点出题
+    KnowledgeViewController *knowledgeVC = [[KnowledgeViewController alloc] initWithNibName:@"KnowledgeViewController" bundle:nil];
+    
+    [self.navigationController pushViewController:knowledgeVC animated:YES];
 }
 
 // 知识点出题
 - (IBAction)knowledgeBtn:(UIButton *)sender {
     
-    KnowledgeViewController *knowledgeVC = [[KnowledgeViewController alloc] initWithNibName:@"KnowledgeViewController" bundle:nil];
-
-    [self.navigationController pushViewController:knowledgeVC animated:YES];
+//    KnowledgeViewController *knowledgeVC = [[KnowledgeViewController alloc] initWithNibName:@"KnowledgeViewController" bundle:nil];
+//
+//    [self.navigationController pushViewController:knowledgeVC animated:YES];
     
+#warning 此处用错题库出题
+        WrongSubjectController *wrongVC = [[WrongSubjectController alloc] initWithNibName:@"WrongSubjectController" bundle:nil];
+    
+        [self.navigationController pushViewController:wrongVC animated:YES];
 }
 
 // 错题库
 - (IBAction)wrongBtn:(UIButton *)sender {
     
-    WrongSubjectController *wrongVC = [[WrongSubjectController alloc] initWithNibName:@"WrongSubjectController" bundle:nil];
-    
-    [self.navigationController pushViewController:wrongVC animated:YES];
+//    WrongSubjectController *wrongVC = [[WrongSubjectController alloc] initWithNibName:@"WrongSubjectController" bundle:nil];
+//    
+//    [self.navigationController pushViewController:wrongVC animated:YES];
     
 }
 

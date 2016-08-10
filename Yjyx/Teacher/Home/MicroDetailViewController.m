@@ -407,9 +407,7 @@ static NSString *VideoNumID = @"VideoNum";
 }
 #pragma mark - wmPlayer的方法
 -(void)videoDidFinished:(NSNotification *)notice{
-    if(wmPlayer.isFullscreen == YES){
-        [self toCell];
-    }
+    [self toCell];
     ReleaseMicroCell *currentCell = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     isPlay = NO;
     currentCell.playBtn.hidden = NO;
