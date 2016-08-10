@@ -13,6 +13,8 @@
                 <outlet property="nameLabel" destination="M4O-em-cz1" id="mJB-WK-Lnd"/>
                 <outlet property="picImage" destination="Lcp-0J-T4V" id="NyL-cj-3gI"/>
                 <outlet property="scoreLabel" destination="iYz-d1-kSe" id="TXH-l0-1Mt"/>
+                <outlet property="signButton" destination="zga-Cy-2H5" id="ykW-KN-S8a"/>
+                <outlet property="signLabel" destination="7nc-3i-Bzg" id="01L-D0-mLp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

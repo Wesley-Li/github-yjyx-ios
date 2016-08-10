@@ -297,6 +297,7 @@
             self.rightAnswerLabel.text = tempString1;
             
             // 学生答案的展示
+            NSLog(@"%ld", resultModel.stuAnswerArr.count);
             NSString *tempString2 = @"";
             for (int i = 0; i < resultModel.stuAnswerArr.count; i++) {
                 tempString2 = [tempString2 stringByAppendingString:[NSString stringWithFormat:@"%@%@\n", cornerAry[i], resultModel.stuAnswerArr[i]]];

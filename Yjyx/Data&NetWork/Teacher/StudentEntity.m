@@ -15,9 +15,16 @@
 - (void)initStudentWithDic:(NSDictionary *)dic {
     
     self.avatar_url = dic[@"avatar_url"];
-    self.user_id = dic[@"user_id"];
     self.realname = dic[@"realname"];
-    self.isyjmember = dic[@"isyjmember"];
+    
+    if ([[dic allKeys] containsObject:@"user_id"]) {
+        self.user_id = dic[@"user_id"];
+    }
+    
+    if ([[dic allKeys] containsObject:@"isyjmember"]) {
+        self.isyjmember = dic[@"isyjmember"];
+    }
+    
 }
 
 @end

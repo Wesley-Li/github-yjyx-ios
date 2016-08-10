@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSNumber *user_id;// 学生ID
 @property (nonatomic, copy) NSString *realname;// 学生真实姓名
 
-@property (nonatomic, strong) NSNumber *isyjmember;// 学生真实姓名
+@property (nonatomic, strong) NSNumber *isyjmember;// 是否是会员
 
 @property (assign, nonatomic) BOOL isSelect;
 - (void)initStudentWithDic:(NSDictionary *)dic;

@@ -18,6 +18,8 @@
 #import "YjyxShopDisplayController.h"
 @interface TeacherHomeViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *signLabel;
+@property (weak, nonatomic) IBOutlet UIButton *signButton;
 
 
 
@@ -27,7 +29,7 @@
 @implementation TeacherHomeViewController
 
 - (void)viewWillAppear:(BOOL)animated {
-
+    [self judgeTimeIsOneDay];
      _nameLabel.text = [YjyxOverallData sharedInstance].teacherInfo.name;
     self.navigationController.navigationBarHidden = YES;
     // 积分
@@ -36,6 +38,28 @@
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = NO;
+}
+
+- (void)judgeTimeIsOneDay {
+    if (![SYS_CACHE objectForKey:@"signDate"]) {
+        _signButton.userInteractionEnabled = YES;
+        _signLabel.text = @"签到有奖";
+    }else {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyyMMdd"];
+        NSString *strDateNow = [formatter stringFromDate:[NSDate date]];
+        NSString *strDateOld = [formatter stringFromDate:[SYS_CACHE objectForKey:@"signDate"]];
+        if ([strDateNow isEqualToString:strDateOld]) {
+            _signButton.userInteractionEnabled = NO;
+            _signLabel.text = @"已签到";
+        }else {
+        
+            _signButton.userInteractionEnabled = YES;
+            _signLabel.text = @"签到有奖";
+        }
+    }
+    
 }
 
 
@@ -94,14 +118,30 @@
 #pragma mark - 点击积分按钮
 - (IBAction)handleScoreBtn:(id)sender {
   
-    
+    // 积分按钮暂时不可点击
     
 }
 
 #pragma mark - 点击签到按钮
-- (IBAction)handleReport:(id)sender {
+- (IBAction)handleReport:(UIButton *)sender {
     
-    [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/checkin/"] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([responseObject[@"retcode"] isEqual:@0]) {
+            _signLabel.text = @"已签到";
+            sender.userInteractionEnabled = NO;
+            NSDate *signDate = [NSDate date];
+            [SYS_CACHE setObject:signDate forKey:@"signDate"];
+            
+        }else {
+        
+            [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        [self.view makeToast:@"貌似网络出了点问题" duration:1.0 position:SHOW_CENTER complete:nil];
+    }];
+
 }
 
 #pragma mark - 点击更换头像
