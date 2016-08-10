@@ -27,6 +27,15 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    self.upButton.layer.cornerRadius = 5;
+    self.upButton.layer.masksToBounds = YES;
+    self.upButton.layer.borderWidth = 1;
+    self.upButton.layer.borderColor = RGBACOLOR(3, 138, 228, 1).CGColor;
+    
+    self.downButton.layer.cornerRadius = 5;
+    self.downButton.layer.masksToBounds = YES;
+    self.downButton.layer.borderWidth = 1;
+    self.downButton.layer.borderColor = RGBACOLOR(3, 138, 228, 1).CGColor;
     
 }
 
@@ -105,7 +114,7 @@
     
     frame.size.height = webView.scrollView.contentSize.height;
     webView.frame = frame;
-    self.height = frame.size.height + 50;
+    self.height = frame.size.height + 50 + 40;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"QuestionPreviewCellHeight" object:self userInfo:nil];
 
 }

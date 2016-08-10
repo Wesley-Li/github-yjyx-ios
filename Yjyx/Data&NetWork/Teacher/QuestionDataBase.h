@@ -18,12 +18,18 @@
 // 删除数据库
 - (void)deleteQuestionTable;
 - (void)deleteMicroTable;
+- (void)deleteTemptable;
+
 // 添加题目
 - (void)insertQuestion:(ChaperContentItem *)model;
 // 添加错题
 - (void)insertWrong:(YjyxWrongSubModel *)model;
 // 添加微课
 - (void)insertMirco:(MicroSubjectModel *)model;
+// 向临时表添加题目
+- (void)insertTemp:(id)model;
+// 查询临时表所有题目
+- (NSMutableArray *)selectAllTempQuestion;
 
 // 删除题目
 - (void)deleteQuestionByid:(NSString *)qid andQuestionType:(NSString *)subject_type andJumpType:(NSString *)jumpT;

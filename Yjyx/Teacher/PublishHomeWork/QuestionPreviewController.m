@@ -41,9 +41,68 @@
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
 }
 
+// 选择和填空分开
+- (void)seperatePart {
+
+    NSMutableArray *tempChoiceArr = [NSMutableArray array];
+    NSMutableArray *tempBlankfillArr = [NSMutableArray array];
+    
+    for (int i = 0; i < _selectArr.count; i++) {
+        if ([self.selectArr[i] isKindOfClass:[ChaperContentItem class]]) {
+            ChaperContentItem *item = self.selectArr[i];
+            if ([item.subject_type isEqualToString:@"1"]) {
+                [tempChoiceArr addObject:item];
+            }else if ([item.subject_type isEqualToString:@"2"]) {
+                [tempBlankfillArr addObject:item];
+            }
+            
+            
+        }else{
+            YjyxWrongSubModel *model = self.selectArr[i];
+            if (model.questiontype == 1) {
+                [tempChoiceArr addObject:model];
+            }else if (model.questiontype == 2) {
+            
+                [tempBlankfillArr addObject:model];
+            }
+            
+        }
+
+    }
+    
+    [self.selectArr removeAllObjects];
+    [self.selectArr addObjectsFromArray:tempChoiceArr];
+    [self.selectArr addObjectsFromArray:tempBlankfillArr];
+    
+    
+}
+
+// 插入数据库
+- (void)saveDataToTemp {
+
+    [[QuestionDataBase shareDataBase] deleteTemptable];
+    for (int i = 0; i < self.selectArr.count; i++) {
+        if ([self.selectArr[i] isKindOfClass:[ChaperContentItem class]]) {
+            ChaperContentItem *item = self.selectArr[i];
+            [[QuestionDataBase shareDataBase] insertTemp:item];
+        }else if ([self.selectArr[i] isKindOfClass:[YjyxWrongSubModel class]]) {
+            YjyxWrongSubModel *item = self.selectArr[i];
+            [[QuestionDataBase shareDataBase] insertTemp:item];
+            
+        }
+    }
+}
+
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"预览作业";
+    [self seperatePart];
+    [self saveDataToTemp];
+    self.selectArr = [[QuestionDataBase shareDataBase] selectAllTempQuestion];
+    
     NSLog(@"%@", self.selectArr);
     [self loadBackBtn];
     self.configurePublishBtn.backgroundColor = RGBACOLOR(3, 138, 228, 1);
@@ -71,6 +130,7 @@
     self.tableView.tableHeaderView = view;
     
 }
+
 - (void)viewDidDisappear:(BOOL)animated
 {
     [[QuestionDataBase shareDataBase] deleteQuestionTable];
@@ -105,22 +165,32 @@
     cell.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.tag = indexPath.row;
-    if ([self.selectArr[indexPath.row] isKindOfClass:[ChaperContentItem class]]) {
-        ChaperContentItem *item = self.selectArr[indexPath.row];
-        cell.chaperItem = item;
-        [cell setValueWithModel:item];
-    }else{
-        YjyxWrongSubModel *model = self.selectArr[indexPath.row];
-        cell.wrongModel = model;
-        [cell setWrongWithModel:model];
-        
-    }
+    
+    ChaperContentItem *item = self.selectArr[indexPath.row];
+    cell.chaperItem = item;
+    [cell setValueWithModel:item];
+
+    
+//    if ([self.selectArr[indexPath.row] isKindOfClass:[ChaperContentItem class]]) {
+//        ChaperContentItem *item = self.selectArr[indexPath.row];
+//        cell.chaperItem = item;
+//        [cell setValueWithModel:item];
+//    }else{
+//        YjyxWrongSubModel *model = self.selectArr[indexPath.row];
+//        cell.wrongModel = model;
+//        [cell setWrongWithModel:model];
+//        
+//    }
     
     
     cell.questionNumberLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row + 1];
     cell.deleteBtn.tag = indexPath.row + 200;
-    [cell.deleteBtn addTarget:self action:@selector(deleteBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    cell.upButton.tag = indexPath.row + 400;
+    cell.downButton.tag = indexPath.row + 600;
     
+    [cell.deleteBtn addTarget:self action:@selector(deleteBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.upButton addTarget:self action:@selector(upButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.downButton addTarget:self action:@selector(downButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
 }
@@ -200,6 +270,8 @@
 //    [self.tableView reloadData];
     
 }
+
+#pragma mark - 需要过程
 // 全部需要解题步骤按钮的点击
 - (void)requireProcessBtnClick:(UIButton *)btn{
     btn.selected = !btn.selected;
@@ -229,11 +301,71 @@
     [self.tableView reloadData];
     
 }
+
+#pragma mark - 上移
+- (void)upButtonClick:(UIButton *)sender {
+
+    if (sender.tag - 400 != 0) {
+        ChaperContentItem *item1 = self.selectArr[sender.tag - 400];
+        ChaperContentItem *item2 = self.selectArr[sender.tag - 400 - 1];
+        if (![item1.subject_type isEqualToString:item2.subject_type]) {
+            [self.view makeToast:@"单选题要和填空题分开哦!" duration:1.0 position:SHOW_CENTER complete:nil];
+        }else {
+            NSUInteger index1 = sender.tag - 400;
+            NSUInteger index2 = sender.tag - 400 - 1;
+            [self.selectArr exchangeObjectAtIndex:index1 withObjectAtIndex:index2];
+            [[QuestionDataBase shareDataBase] deleteTemptable];
+            for (ChaperContentItem *item in self.selectArr) {
+                [[QuestionDataBase shareDataBase] insertTemp:item];
+            }
+            NSIndexPath *indexpath1 = [NSIndexPath indexPathForRow:index1 inSection:0];
+            NSIndexPath *indexpath2 = [NSIndexPath indexPathForRow:index2 inSection:0];
+            [self.tableView reloadRowsAtIndexPaths:@[indexpath1, indexpath2] withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+        }
+
+    }else {
+    
+        [self.view makeToast:@"已经排在最前面了" duration:1 position:SHOW_CENTER complete:nil];
+    }
+    
+}
+#pragma mark - 下移
+- (void)downButtonClick:(UIButton *)sender {
+
+    if (sender.tag - 600 != self.selectArr.count - 1) {
+        ChaperContentItem *item1 = self.selectArr[sender.tag - 600];
+        ChaperContentItem *item2 = self.selectArr[sender.tag - 600 + 1];
+        if (![item1.subject_type isEqualToString:item2.subject_type]) {
+            [self.view makeToast:@"单选题要和填空题分开哦!" duration:1.0 position:SHOW_CENTER complete:nil];
+        }else {
+            NSUInteger index1 = sender.tag - 600;
+            NSUInteger index2 = sender.tag - 600 + 1;
+            [self.selectArr exchangeObjectAtIndex:index1 withObjectAtIndex:index2];
+            [[QuestionDataBase shareDataBase] deleteTemptable];
+            
+            for (ChaperContentItem *item in self.selectArr) {
+                [[QuestionDataBase shareDataBase] insertTemp:item];
+            }
+            NSIndexPath *indexpath1 = [NSIndexPath indexPathForRow:index1 inSection:0];
+            NSIndexPath *indexpath2 = [NSIndexPath indexPathForRow:index2 inSection:0];
+            [self.tableView reloadRowsAtIndexPaths:@[indexpath1, indexpath2] withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+        }
+        
+    }else {
+    
+        [self.view makeToast:@"已经排在最后面了" duration:1 position:SHOW_CENTER complete:nil];
+        
+    }
+    
+}
+
 #pragma mark - push
 - (IBAction)configureBtnClick:(UIButton *)sender {
     
     ReleaseHomeWorkController *releaseVC = [[ReleaseHomeWorkController alloc] init];
-    
+    releaseVC.selectArr = self.selectArr;
     [self.navigationController pushViewController:releaseVC animated:YES];
     
 }

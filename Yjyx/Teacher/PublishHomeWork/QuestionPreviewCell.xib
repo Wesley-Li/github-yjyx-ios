@@ -63,8 +63,7 @@
                                 <state key="normal" backgroundImage="list_icon_delete"/>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQ9-3m-HU5">
-                                <rect key="frame" x="0.0" y="41" width="300" height="167"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="41" width="300" height="137"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oO7-0g-Yhp">
                                 <rect key="frame" x="185" y="5" width="60" height="30"/>
@@ -80,6 +79,24 @@
                                     <action selector="requireProcessBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="C7e-OP-xZ4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p3w-yW-d4P">
+                                <rect key="frame" x="250" y="183" width="40" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Xj8-fe-u7u"/>
+                                    <constraint firstAttribute="width" constant="40" id="dkj-uu-PaV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="下移"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fe3-CJ-dFH">
+                                <rect key="frame" x="205" y="183" width="40" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="HOU-7p-IkV"/>
+                                    <constraint firstAttribute="height" constant="20" id="O61-SK-fJx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="上移"/>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="KDL-99-gI9" firstAttribute="leading" secondItem="XcR-ks-uxz" secondAttribute="trailing" constant="2" id="CiJ-gG-26n"/>
@@ -89,9 +106,11 @@
                             <constraint firstItem="UMB-13-axW" firstAttribute="top" secondItem="XcR-ks-uxz" secondAttribute="bottom" constant="10" id="IWG-g4-5Eh"/>
                             <constraint firstItem="oO7-0g-Yhp" firstAttribute="centerY" secondItem="d7a-8E-Yvz" secondAttribute="centerY" id="M7y-eW-lFc"/>
                             <constraint firstItem="Qbn-u8-OuK" firstAttribute="top" secondItem="78T-8b-kMI" secondAttribute="top" constant="10" id="MxN-yj-Tsz"/>
+                            <constraint firstAttribute="bottom" secondItem="fe3-CJ-dFH" secondAttribute="bottom" constant="5" id="Rx9-w8-lKC"/>
+                            <constraint firstAttribute="bottom" secondItem="p3w-yW-d4P" secondAttribute="bottom" constant="5" id="SNJ-cE-41m"/>
                             <constraint firstItem="fQ9-3m-HU5" firstAttribute="top" secondItem="UMB-13-axW" secondAttribute="bottom" id="Ykj-i7-mK3"/>
                             <constraint firstItem="KDL-99-gI9" firstAttribute="top" secondItem="78T-8b-kMI" secondAttribute="top" constant="10" id="c7F-AI-L1X"/>
-                            <constraint firstAttribute="bottom" secondItem="fQ9-3m-HU5" secondAttribute="bottom" id="cDX-Lu-awY"/>
+                            <constraint firstAttribute="bottom" secondItem="fQ9-3m-HU5" secondAttribute="bottom" constant="30" id="cDX-Lu-awY"/>
                             <constraint firstItem="fQ9-3m-HU5" firstAttribute="leading" secondItem="78T-8b-kMI" secondAttribute="leading" id="cjo-H1-fOd"/>
                             <constraint firstItem="XcR-ks-uxz" firstAttribute="top" secondItem="78T-8b-kMI" secondAttribute="top" constant="10" id="dhs-ae-3Mx"/>
                             <constraint firstItem="UMB-13-axW" firstAttribute="top" secondItem="Qbn-u8-OuK" secondAttribute="bottom" constant="10" id="egT-hR-OW8"/>
@@ -100,10 +119,12 @@
                             <constraint firstItem="UMB-13-axW" firstAttribute="leading" secondItem="78T-8b-kMI" secondAttribute="leading" constant="5" id="hgy-0x-1H5"/>
                             <constraint firstItem="UMB-13-axW" firstAttribute="top" secondItem="xVc-iE-0eF" secondAttribute="bottom" constant="10" id="hx7-1g-uhY"/>
                             <constraint firstItem="UMB-13-axW" firstAttribute="top" secondItem="KDL-99-gI9" secondAttribute="bottom" constant="10" id="kBa-YB-DNw"/>
+                            <constraint firstAttribute="trailing" secondItem="p3w-yW-d4P" secondAttribute="trailing" constant="10" id="oA9-6Y-VX2"/>
                             <constraint firstItem="d7a-8E-Yvz" firstAttribute="top" secondItem="78T-8b-kMI" secondAttribute="top" constant="2" id="oH6-fR-iu4"/>
                             <constraint firstItem="d7a-8E-Yvz" firstAttribute="leading" secondItem="oO7-0g-Yhp" secondAttribute="trailing" constant="10" id="s79-RQ-CPu"/>
                             <constraint firstItem="XcR-ks-uxz" firstAttribute="leading" secondItem="78T-8b-kMI" secondAttribute="leading" constant="5" id="wuk-7R-qtM"/>
                             <constraint firstItem="UMB-13-axW" firstAttribute="top" secondItem="78T-8b-kMI" secondAttribute="top" constant="40" id="xJX-YP-ObY"/>
+                            <constraint firstItem="p3w-yW-d4P" firstAttribute="leading" secondItem="fe3-CJ-dFH" secondAttribute="trailing" constant="5" id="xQf-R8-YRc"/>
                             <constraint firstItem="xVc-iE-0eF" firstAttribute="leading" secondItem="Qbn-u8-OuK" secondAttribute="trailing" constant="5" id="xlS-2p-x9Z"/>
                         </constraints>
                     </view>
@@ -119,11 +140,13 @@
                 <outlet property="BGVIEW" destination="fQ9-3m-HU5" id="0QR-ut-M44"/>
                 <outlet property="bg_view" destination="78T-8b-kMI" id="SXb-hF-zi1"/>
                 <outlet property="deleteBtn" destination="d7a-8E-Yvz" id="HFe-kw-k67"/>
+                <outlet property="downButton" destination="p3w-yW-d4P" id="8B3-lj-OT7"/>
                 <outlet property="levelLabel" destination="xVc-iE-0eF" id="Bjx-Ok-y4K"/>
                 <outlet property="lineView" destination="UMB-13-axW" id="5Gn-OA-FNG"/>
                 <outlet property="questionNumberLabel" destination="XcR-ks-uxz" id="eFQ-0i-Uqe"/>
                 <outlet property="requireProBtn" destination="oO7-0g-Yhp" id="nvL-Po-DBa"/>
                 <outlet property="subject_typeLabel" destination="KDL-99-gI9" id="CWB-i7-KpL"/>
+                <outlet property="upButton" destination="fe3-CJ-dFH" id="K4n-f7-br6"/>
             </connections>
             <point key="canvasLocation" x="198" y="449.5"/>
         </tableViewCell>

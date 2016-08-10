@@ -324,7 +324,20 @@ static NSString *ID = @"CELL";
     pamar[@"action"] = @"asign_exam_task";
     
     // 题目列表
-    
+    NSMutableArray *choiceArr = [NSMutableArray array];
+    NSMutableArray *blankfillArr = [NSMutableArray array];
+    for (ChaperContentItem *model in self.selectArr) {
+        if ([model.subject_type isEqualToString:@"1"]) {
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:model.t_id], @"id", [NSNumber numberWithInteger:model.level], @"level", model.isRequireProcess == YES ? @1 : @0, @"requireprocess", nil];
+            [choiceArr addObject:dic];
+        }else if ([model.subject_type isEqualToString:@"2"]) {
+        
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:model.t_id], @"id", [NSNumber numberWithInteger:model.level], @"level", model.isRequireProcess == YES ? @1 : @0, @"requireprocess", nil];
+            [blankfillArr addObject:dic];
+
+        }
+    }
+    /*
     NSMutableArray *choiceArr = [NSMutableArray array];
     for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"1" andJumpType:@"1"]) {
         if ([model isKindOfClass:[ChaperContentItem class]]) {
@@ -352,7 +365,7 @@ static NSString *ID = @"CELL";
             [blankfillArr addObject:dic];
         }
     }
-    
+    */
     // 没有对应的类型就不传
     if (choiceArr.count == 0 && blankfillArr.count != 0) {
         NSMutableArray *arr = [NSMutableArray arrayWithObjects:@"blankfill", blankfillArr, nil];

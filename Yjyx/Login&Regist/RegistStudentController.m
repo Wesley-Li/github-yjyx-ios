@@ -107,13 +107,18 @@
                 if (!position) {
                     if (toBeString.length > 10) {
                         textField.text = [toBeString substringToIndex:10];
+                        [self.view makeToast:@"真实姓名的长度不能大于10位" duration:1.0 position:SHOW_CENTER complete:nil];
+
                     }
                     
                 }
-                [self.view makeToast:@"真实姓名的长度不能大于10位" duration:1.0 position:SHOW_CENTER complete:nil];
             }else{
-                textField.text = [textField.text substringToIndex:10];
-                [self.view makeToast:@"真实姓名的长度不能大于10位" duration:1.0 position:SHOW_CENTER complete:nil];
+                if (textField.text.length > 10) {
+                    
+                    textField.text = [textField.text substringToIndex:10];
+                    [self.view makeToast:@"真实姓名的长度不能大于10位" duration:1.0 position:SHOW_CENTER complete:nil];
+                }
+                
             }
         }
 

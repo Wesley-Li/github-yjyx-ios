@@ -10,6 +10,7 @@
 
 @interface QuestionPreviewController : UIViewController
 
-@property (nonatomic, strong) NSMutableArray *selectArr;
+@property (nonatomic, strong) NSMutableArray *selectArr;// 选中题目
+
 
 @end

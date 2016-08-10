@@ -23,6 +23,11 @@
 @property (nonatomic, strong) ChaperContentItem *chaperItem; //  知识点出题
 @property (nonatomic, strong) YjyxWrongSubModel *wrongModel; // 错题题目
 
+@property (weak, nonatomic) IBOutlet UIButton *upButton;
+@property (weak, nonatomic) IBOutlet UIButton *downButton;
+
+
+
 - (void)setValueWithModel:(ChaperContentItem *)model;
 
 - (void)setWrongWithModel:(YjyxWrongSubModel *)model;

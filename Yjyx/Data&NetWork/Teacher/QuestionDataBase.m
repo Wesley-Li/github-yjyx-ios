@@ -69,6 +69,7 @@ static QuestionDataBase *singleton = nil;
     BOOL isSuccess = [self.question_db executeUpdate:@"create table if not exists Question(id integer PRIMARY KEY AUTOINCREMENT, t_id text, content_text, person_type, p_id, level, subject_type, cellHeight, jumpType, isRequirePro text)"];
     [self.question_db executeUpdate:@"create table if not exists Wrong(id integer PRIMARY KEY AUTOINCREMENT, w_id text, answer, content, total_wrong_num, questionid, level, questiontype, cellHeight, jumpType, isRequirePro text)"];
     [self.question_db executeUpdate:@"create table if not exists Micro(id integer PRIMARY KEY AUTOINCREMENT, s_id text, content, level, questiontype,  jumpType)"];
+    [self.question_db executeUpdate:@"create table if not exists Temptable(id integer PRIMARY KEY AUTOINCREMENT, t_id, subject_type, level, content_text, isRequirePro)"];
     NSLog(@"%@", isSuccess ? @"试题表建立成功" : @"试题表建立失败");
 }
 
@@ -94,6 +95,8 @@ static QuestionDataBase *singleton = nil;
     NSLog(@"%@", isSuccess ? @"删除成功" : @"删除失败");
     [self.question_db executeUpdate:@"drop table if exists Wrong"];
     [self.question_db executeUpdate:@"drop table if exists Micro"];
+    [self.question_db executeUpdate:@"drop table if exists Temptable"];
+    
     // 重新建表
     [self creatQuestionTable];
 
@@ -123,6 +126,58 @@ static QuestionDataBase *singleton = nil;
     // 重新建表
     [self creatQuestionTable];
     
+}
+
+// 删除临时表
+- (void)deleteTemptable {
+
+    NSString *filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    // 判断文件是否存在
+    if (![fileManager fileExistsAtPath:filePath]) {
+        [fileManager createDirectoryAtPath:filePath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
+    NSString *path = [filePath stringByAppendingPathComponent:@"q_db.sqlite"];
+    self.question_db = [FMDatabase databaseWithPath:path];
+    BOOL isOpen = [self.question_db open];
+    if (!isOpen) {
+        NSLog(@"试题数据库打开出错");
+    }
+    
+    BOOL isSuccess = [self.question_db executeUpdate:@"drop table if exists Temptable"];
+    NSLog(@"%@", isSuccess ? @"删除成功" : @"删除失败");
+    
+    ;
+    // 重新建表
+    [self creatQuestionTable];
+
+    
+}
+
+- (void)insertTemp:(id)model {
+
+    if ([model isKindOfClass:[ChaperContentItem class]]) {
+        ChaperContentItem *item = model;
+        NSString *t_id = [NSString stringWithFormat:@"%ld", item.t_id];
+        NSString *level = [NSString stringWithFormat:@"%ld", (long)item.level];
+        NSString *isRequirePro = item.isRequireProcess == YES ? @"YES": @"NO";
+        
+        BOOL isSuccess = [self.question_db executeUpdate:@"insert into Temptable(t_id, subject_type, level, content_text, isRequirePro) values(?,?,?,?,?)", t_id, item.subject_type, level, item.content_text, isRequirePro];
+        NSLog(@"%@", isSuccess ? @"临时添加试题成功" : @"临时添加试题失败");
+        
+    }else if ([model isKindOfClass:[YjyxWrongSubModel class]]) {
+        YjyxWrongSubModel *item = model;
+        NSString *w_id = [NSString stringWithFormat:@"%ld", (long)item.t_id];
+        NSString *questiontype = [NSString stringWithFormat:@"%ld", (long)item.questiontype];
+        NSString *level = [NSString stringWithFormat:@"%ld", (long)item.level];
+        NSString *isRequirePro = item.isRequireProcess == YES ? @"YES" : @"NO";
+        
+        BOOL isSuccess = [self.question_db executeUpdate:@"insert into Temptable(t_id, subject_type, level, content_text, isRequirePro) values(?,?,?,?,?)", w_id, questiontype, level, item.content, isRequirePro];
+        NSLog(@"%@", isSuccess ? @"临时添加试题成功" : @"临时添加试题失败");
+        
+    }
 }
 // 添加题目
 - (void)insertQuestion:(ChaperContentItem *)model {
@@ -185,6 +240,30 @@ static QuestionDataBase *singleton = nil;
     
     
     
+}
+
+// 查询临时表所有题目
+- (NSMutableArray *)selectAllTempQuestion {
+
+    NSMutableArray *group = [NSMutableArray array];
+    FMResultSet *set = [self.question_db executeQuery:@"select * from Temptable"];
+    while ([set next]) {
+        NSString *t_id = [set stringForColumn:@"t_id"];
+        NSString *subject_type = [set stringForColumn:@"subject_type"];
+        NSString *level = [set stringForColumn:@"level"];
+        NSString *content = [set stringForColumn:@"content_text"];
+        NSString *isRequirePro = [set stringForColumn:@"isRequirePro"];
+        
+        ChaperContentItem *item = [[ChaperContentItem alloc] init];
+        item.t_id = [t_id integerValue];
+        item.subject_type = subject_type;
+        item.level = [level integerValue];
+        item.content_text = content;
+        item.isRequireProcess = [isRequirePro boolValue];
+        [group addObject:item];
+    }
+    
+    return group;
 }
 
 // 查询所有题目
@@ -279,7 +358,7 @@ static QuestionDataBase *singleton = nil;
         [group addObject:model];
         
     }
-
+    
     return group;
 
 
