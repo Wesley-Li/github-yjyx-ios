@@ -35,6 +35,10 @@
 
     [super viewWillAppear:YES];
     
+    notify_sound = [YjyxOverallData sharedInstance].teacherInfo.notify_sound;
+    notify_with_sound = [YjyxOverallData sharedInstance].teacherInfo.notify_with_sound;
+    receive_notify = [YjyxOverallData sharedInstance].teacherInfo.receive_notify;
+    
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = NO;
@@ -58,20 +62,25 @@
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
-    // 上报消息设置
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"notify_setting",@"action",[YjyxOverallData sharedInstance].teacherInfo.receive_notify,@"receive_notify",[YjyxOverallData sharedInstance].teacherInfo.notify_with_sound,@"with_sound",[YjyxOverallData sharedInstance].teacherInfo.notify_sound,@"sound",[YjyxOverallData sharedInstance].teacherInfo.notify_shake,@"vibrate", nil];
-    NSLog(@"%@", dic);
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    
-    [manager POST:[BaseURL stringByAppendingString:TEACHER_UPLOAD_SOUND_SETTING_CONNECT_POST] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"%@", responseObject);
-                NSLog(@"%@", responseObject);
-        NSLog(@"%@", responseObject[@"msg"]);
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    // 值改变了才上报消息设置
+    if (![notify_sound isEqualToString:[YjyxOverallData sharedInstance].teacherInfo.notify_sound] || ![notify_with_sound isEqualToString:[YjyxOverallData sharedInstance].teacherInfo.notify_with_sound] || ![receive_notify isEqualToString:[YjyxOverallData sharedInstance].teacherInfo.receive_notify]) {
         
-        //        NSLog(@"%@", error);
-    }];
+        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"notify_setting",@"action",[YjyxOverallData sharedInstance].teacherInfo.receive_notify,@"receive_notify",[YjyxOverallData sharedInstance].teacherInfo.notify_with_sound,@"with_sound",[YjyxOverallData sharedInstance].teacherInfo.notify_sound,@"sound",[YjyxOverallData sharedInstance].teacherInfo.notify_shake,@"vibrate", nil];
+        NSLog(@"%@", dic);
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        
+        [manager POST:[BaseURL stringByAppendingString:TEACHER_UPLOAD_SOUND_SETTING_CONNECT_POST] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+            NSLog(@"%@", responseObject);
+            NSLog(@"%@", responseObject);
+            NSLog(@"%@", responseObject[@"msg"]);
+        } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+            
+            //        NSLog(@"%@", error);
+        }];
+
+    }
+    
 }
 
 #pragma mark - delegate
@@ -150,7 +159,6 @@
             
             cell.accessoryView = switchView;
         }else if (indexPath.row == 2){
-            cell.textLabel.text = @"消息提示音";
             
             cell.textLabel.text = @"消息提示音";
             if ([[YjyxOverallData sharedInstance].teacherInfo.notify_sound isEqualToString:@"default"]) {
