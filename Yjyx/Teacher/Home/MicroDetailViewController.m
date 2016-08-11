@@ -132,6 +132,7 @@ static NSString *VideoNumID = @"VideoNum";
 - (void)viewDidDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
+    [wmPlayer removeFromSuperview];
     [self releaseWMPlayer];
     isPlay = NO;
 }

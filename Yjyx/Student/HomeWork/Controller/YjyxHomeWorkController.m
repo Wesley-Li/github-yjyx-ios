@@ -108,10 +108,31 @@ static NSString *HomeADID = @"HomeADID";
     [self.workTableV headerBeginRefreshing];
     self.navigationController.navigationBarHidden = NO;
 //    self.workTableV.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.collectView.contentOffset = CGPointMake(50 * self.homeAdArray.count * SCREEN_WIDTH, 0);
+//    self.collectView.contentOffset = CGPointMake(50 * self.homeAdArray.count * SCREEN_WIDTH, 0);
+    if(self.homeAdArray.count != 0){
+        self.timer = nil;
+        self.AdNumPageControl.currentPage = 0;
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(autoScroll) userInfo:nil repeats:YES];
+        self.timer = timer;
+        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+        self.collectView.contentOffset = CGPointMake(50 * self.homeAdArray.count * SCREEN_WIDTH, 0);
+    }
     
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    NSLog(@"------------------------");
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self.timer invalidate];
+    self.timer = nil;
+}
+- (void)dealloc
+{
+    
+    NSLog(@"timer delloc");
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -140,10 +161,10 @@ static NSString *HomeADID = @"HomeADID";
             [self.collectView reloadData];
             self.AdNumPageControl.numberOfPages = self.homeAdArray.count;
             self.AdNumPageControl.currentPage = 0;
-            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(autoScroll) userInfo:nil repeats:YES];
+            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(autoScroll) userInfo:nil repeats:YES];
             self.timer = timer;
             [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-            self.collectView.contentOffset = CGPointMake(50 * SCREEN_WIDTH, 0);
+            self.collectView.contentOffset = CGPointMake(50 * self.homeAdArray.count * SCREEN_WIDTH, 0);
         }else{
             [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
         }

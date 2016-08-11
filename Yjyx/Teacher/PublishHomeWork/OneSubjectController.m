@@ -134,6 +134,7 @@ static NSString *VideoID = @"VIDEOCELL";
     [SVProgressHUD dismiss];
 }
 -(void)dealloc{
+    [wmPlayer removeFromSuperview];
     [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     

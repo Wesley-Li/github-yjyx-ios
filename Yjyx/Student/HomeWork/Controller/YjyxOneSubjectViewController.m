@@ -95,6 +95,7 @@ static NSString *ID = @"CELL";
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [SVProgressHUD dismiss];
     self.wds.height = 0;
     [self.searchV removeFromSuperview];
 }
@@ -106,7 +107,8 @@ static NSString *ID = @"CELL";
 // 请求数据
 - (void)loadData
 {
-    [self.view  makeToastActivity:SHOW_CENTER];
+//    [self.view  makeToastActivity:SHOW_CENTER];
+    [SVProgressHUD show];
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"action"] = @"list_tasks_to_me";
@@ -144,10 +146,12 @@ static NSString *ID = @"CELL";
         }
         [self.tableView footerEndRefreshing];
         [self.tableView headerEndRefreshing];
+        [SVProgressHUD dismiss];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
         [self.tableView footerEndRefreshing];
         [self.tableView headerEndRefreshing];
+        [SVProgressHUD dismiss];
     }];
 }
 - (void)loadRightNavItem

@@ -29,6 +29,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:YES];
+    NSString *reciNoti = [YjyxOverallData sharedInstance].studentInfo.receive_notify;
+    NSString *soundNoti = [YjyxOverallData sharedInstance].studentInfo.notify_with_sound;
+    NSMutableArray *arr = [NSMutableArray arrayWithObjects:reciNoti, soundNoti, nil];
+    [[NSUserDefaults standardUserDefaults] setObject:arr forKey:@"StudentVoice"];
      self.navigationController.navigationBarHidden = NO;
     [self.tableView reloadData];
 }
@@ -46,6 +50,12 @@
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
+    NSMutableArray *arr = [[NSUserDefaults standardUserDefaults] objectForKey:@"StudentVoice"];
+    NSString *reciNoti = [YjyxOverallData sharedInstance].studentInfo.receive_notify;
+    NSString *soundNoti = [YjyxOverallData sharedInstance].studentInfo.notify_with_sound;
+    if ([reciNoti isEqualToString:arr[0]] && [soundNoti isEqualToString:arr[1]]) {
+        return;
+    }
     // 上报消息设置
     NSDictionary *dic1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"notify_setting",@"action",[YjyxOverallData sharedInstance].studentInfo.receive_notify,@"receive_notify",[YjyxOverallData sharedInstance].studentInfo.notify_with_sound,@"with_sound",[YjyxOverallData sharedInstance].studentInfo.notify_sound, @"sound",[YjyxOverallData sharedInstance].studentInfo.notify_shake,@"vibrate", nil];
     

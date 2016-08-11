@@ -112,7 +112,10 @@
 }
 
 
-
+- (void)dealloc
+{
+    NSLog(@"teahcer delooc");
+}
 
 
 #pragma mark - 点击积分按钮

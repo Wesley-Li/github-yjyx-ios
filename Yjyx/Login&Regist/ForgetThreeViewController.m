@@ -122,7 +122,7 @@
         [self.view makeToast:@"密码不能含有空格" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
-    if (newPassWord.text.length < 6){
+    if (newPassWord.text.length < 6 || confrimPassWord.text.length < 6){
         [self.view makeToast:@"密码长度不能小于6位" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }

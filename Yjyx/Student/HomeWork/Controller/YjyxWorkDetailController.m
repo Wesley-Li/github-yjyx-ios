@@ -149,6 +149,7 @@ static NSString *videoNumID = @"VIDEONumID";
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
+    [wmPlayer removeFromSuperview];
     [self releaseWMPlayer];
 }
 - (void)dealloc
@@ -782,6 +783,7 @@ static NSString *videoNumID = @"VIDEONumID";
         return cell;
     }else if(indexPath.section == 2){
         VideoNumShowCell *cell = [tableView dequeueReusableCellWithIdentifier:videoNumID];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
         cell.workModel = _model;
         return cell;

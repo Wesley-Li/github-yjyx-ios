@@ -736,6 +736,7 @@
 
 
 -(void)dealloc{
+    [wmPlayer removeFromSuperview];
     [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"player dealloc");

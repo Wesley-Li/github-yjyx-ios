@@ -346,6 +346,12 @@
         }];
 
     }else if([self.role isEqualToString:@"student"]){
+        NSMutableArray *arr = [[NSUserDefaults standardUserDefaults] objectForKey:@"StudentVoice"];
+        NSString *reciNoti = [YjyxOverallData sharedInstance].studentInfo.receive_notify;
+        NSString *soundNoti = [YjyxOverallData sharedInstance].studentInfo.notify_with_sound;
+        if ([reciNoti isEqualToString:arr[0]] && [soundNoti isEqualToString:arr[1]]) {
+            return;
+        }
     // 上报消息设置
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"notify_setting",@"action",[YjyxOverallData sharedInstance].studentInfo.receive_notify,@"receive_notify",[YjyxOverallData sharedInstance].studentInfo.notify_with_sound,@"with_sound",[YjyxOverallData sharedInstance].studentInfo.notify_sound, @"sound",[YjyxOverallData sharedInstance].studentInfo.notify_shake,@"vibrate", nil];
     
