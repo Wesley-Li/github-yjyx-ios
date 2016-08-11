@@ -293,6 +293,7 @@ static NSString *videoNumID = @"VIDEONumID";
 }
 #pragma mark - wmPlayer的方法
 -(void)videoDidFinished:(NSNotification *)notice{
+    [wmPlayer removeFromSuperview];
     if(wmPlayer.isFullscreen == YES){
         [self toCell];
     }
