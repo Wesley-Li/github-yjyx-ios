@@ -490,7 +490,7 @@
         navVc4.tabBarItem = [UITabBarItem itemWithTitle:@"我的" image:[UIImage imageNamed:@"我的"] selectedImage:[UIImage imageNamed:@"我的点击"]];
      
         _tabBarVc = [[YjyxCommonTabController alloc] init];
-        
+        _tabBarVc.tabBar.tintColor = [UIColor blackColor];
 //        tabBarVc.tabBarItem.imageInsets = UIEdgeInsetsMake(20, 0, 20, 0);
         [_tabBarVc addChildViewController:navVc1];
         [_tabBarVc addChildViewController:navVc2];

@@ -130,12 +130,15 @@ static NSString *VideoID = @"VIDEOCELL";
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
-    
+    if (isPlay) {
+        [self closeTheVideo:nil];
+    }
     [SVProgressHUD dismiss];
 }
 -(void)dealloc{
     [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSLog(@"player dealloc");
     
 }
 - (BOOL)prefersStatusBarHidden
@@ -152,9 +155,9 @@ static NSString *VideoID = @"VIDEOCELL";
 }
 #pragma mark - wmPlayer的方法
 -(void)videoDidFinished:(NSNotification *)notice{
-    if(wmPlayer.isFullscreen == YES){
-        [self toCell];
-    }
+    
+    [self toCell];
+   
     ReleaseVideoCell *currentCell = (ReleaseVideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
     isPlay = NO;
     currentCell.playBtn.hidden = NO;
@@ -385,29 +388,29 @@ static NSString *VideoID = @"VIDEOCELL";
         return;
     }
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-    [wmPlayer.player.currentItem cancelPendingSeeks];
-    [wmPlayer.player.currentItem.asset cancelLoading];
-    [wmPlayer.player pause];
-    
-    //移除观察者
-    [wmPlayer.currentItem removeObserver:wmPlayer forKeyPath:@"status"];
-    
-//    [wmPlayer removeFromSuperview];
-//    [wmPlayer.playerLayer removeFromSuperlayer];
-    [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
-    wmPlayer.player = nil;
-    wmPlayer.currentItem = nil;
-    
-    //释放定时器，否侧不会调用WMPlayer中的dealloc方法
-    [wmPlayer.autoDismissTimer invalidate];
-    wmPlayer.autoDismissTimer = nil;
-    [wmPlayer.durationTimer invalidate];
-    wmPlayer.durationTimer = nil;
-    
-    
-    wmPlayer.playOrPauseBtn = nil;
-    wmPlayer.playerLayer = nil;
-    wmPlayer = nil;
+        [wmPlayer.player.currentItem cancelPendingSeeks];
+        [wmPlayer.player.currentItem.asset cancelLoading];
+        [wmPlayer.player pause];
+        
+        //移除观察者
+        [wmPlayer.currentItem removeObserver:wmPlayer forKeyPath:@"status"];
+        
+//        [wmPlayer removeFromSuperview];
+//        [wmPlayer.playerLayer removeFromSuperlayer];
+        [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
+        wmPlayer.player = nil;
+        wmPlayer.currentItem = nil;
+        
+        //释放定时器，否侧不会调用WMPlayer中的dealloc方法
+        [wmPlayer.autoDismissTimer invalidate];
+        wmPlayer.autoDismissTimer = nil;
+        [wmPlayer.durationTimer invalidate];
+        wmPlayer.durationTimer = nil;
+        
+        
+        wmPlayer.playOrPauseBtn = nil;
+        wmPlayer.playerLayer = nil;
+        wmPlayer = nil;
     });
 }
 #pragma mark - 私有方法

@@ -114,6 +114,8 @@
     self.navigationController.navigationBarHidden = NO;
     }
 }
+
+
 -(void)videoDidFinished:(NSNotification *)notice{
 
     if(wmPlayer.isFullscreen == YES){
@@ -331,29 +333,30 @@
 }
 -(void)releaseWMPlayer{
     
-    [wmPlayer.player.currentItem cancelPendingSeeks];
-    [wmPlayer.player.currentItem.asset cancelLoading];
-    [wmPlayer.player pause];
-    
-    //移除观察者
-    [wmPlayer.currentItem removeObserver:wmPlayer forKeyPath:@"status"];
-    
-//    [wmPlayer removeFromSuperview];
-//    [wmPlayer.playerLayer removeFromSuperlayer];
-    [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
-    wmPlayer.player = nil;
-    wmPlayer.currentItem = nil;
-    
-    //释放定时器，否侧不会调用WMPlayer中的dealloc方法
-    [wmPlayer.autoDismissTimer invalidate];
-    wmPlayer.autoDismissTimer = nil;
-    [wmPlayer.durationTimer invalidate];
-    wmPlayer.durationTimer = nil;
-    
-    
-    wmPlayer.playOrPauseBtn = nil;
-    wmPlayer.playerLayer = nil;
-    wmPlayer = nil;
+        [wmPlayer.player.currentItem cancelPendingSeeks];
+        [wmPlayer.player.currentItem.asset cancelLoading];
+        [wmPlayer.player pause];
+        
+        //移除观察者
+        [wmPlayer.currentItem removeObserver:wmPlayer forKeyPath:@"status"];
+        
+    //    [wmPlayer removeFromSuperview];
+    //    [wmPlayer.playerLayer removeFromSuperlayer];
+        [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
+        wmPlayer.player = nil;
+        wmPlayer.currentItem = nil;
+        
+        //释放定时器，否侧不会调用WMPlayer中的dealloc方法
+        [wmPlayer.autoDismissTimer invalidate];
+        wmPlayer.autoDismissTimer = nil;
+        [wmPlayer.durationTimer invalidate];
+        wmPlayer.durationTimer = nil;
+        
+        
+        wmPlayer.playOrPauseBtn = nil;
+        wmPlayer.playerLayer = nil;
+        wmPlayer = nil;
+  
     
 }
 //- (void)viewDidDisappear:(BOOL)animated
