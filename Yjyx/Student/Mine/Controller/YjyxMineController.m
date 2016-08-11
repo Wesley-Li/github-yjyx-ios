@@ -11,6 +11,8 @@
 #import "YjyxPMemberCenterViewController.h"
 @interface YjyxMineController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *signLabel;
+@property (weak, nonatomic) IBOutlet UIButton *signButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *gradeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *codeLabel;
@@ -36,6 +38,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = YES;
+    [self judgeTimeIsOneDay];
     // 初始化
     self.nameLabel.text = [YjyxOverallData sharedInstance].studentInfo.realname;
 //    NSString *str1 = [YjyxOverallData sharedInstance].studentInfo.schoolprovincename ? [YjyxOverallData sharedInstance].studentInfo.schoolprovincename : @"";
@@ -189,12 +192,51 @@
 
 // 点击金币
 - (IBAction)coinBtnClick:(id)sender {
-    [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
+    // 金币暂时不能点击
 }
+
+- (void)judgeTimeIsOneDay {
+    if (![SYS_CACHE objectForKey:@"stuSignDate"]) {
+        _signButton.userInteractionEnabled = YES;
+        _signLabel.text = @"签到有奖";
+    }else {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyyMMdd"];
+        NSString *strDateNow = [formatter stringFromDate:[NSDate date]];
+        NSString *strDateOld = [formatter stringFromDate:[SYS_CACHE objectForKey:@"stuSignDate"]];
+        if ([strDateNow isEqualToString:strDateOld]) {
+            _signButton.userInteractionEnabled = NO;
+            _signLabel.text = @"已签到";
+        }else {
+            
+            _signButton.userInteractionEnabled = YES;
+            _signLabel.text = @"签到有奖";
+        }
+    }
+    
+}
+
 
 // 点击签到
 - (IBAction)signBtnClick:(UIButton *)sender {
-    [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/checkin/"] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([responseObject[@"retcode"] isEqual:@0]) {
+            _signLabel.text = @"已签到";
+            sender.userInteractionEnabled = NO;
+            NSDate *signDate = [NSDate date];
+            [SYS_CACHE setObject:signDate forKey:@"stuSignDate"];
+            
+        }else {
+            
+            [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        [self.view makeToast:@"貌似网络出了点问题" duration:1.0 position:SHOW_CENTER complete:nil];
+    }];
+
 }
 
 // 点击我的统计

@@ -15,6 +15,8 @@
                 <outlet property="gradeLabel" destination="Dfs-TZ-Oj8" id="jFi-Mz-7cY"/>
                 <outlet property="iconImageView" destination="RR8-Il-ycT" id="CgR-5V-hlG"/>
                 <outlet property="nameLabel" destination="9H3-Yx-4kx" id="yll-Zz-qvf"/>
+                <outlet property="signButton" destination="sBe-Vw-QQO" id="vYs-TH-hcy"/>
+                <outlet property="signLabel" destination="8MX-r4-h9J" id="c7D-W1-eZC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -67,7 +69,7 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JNW-VP-Pdd">
+                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JNW-VP-Pdd">
                                     <rect key="frame" x="44" y="15" width="35" height="35"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="35" id="PQv-pv-hK9"/>

@@ -92,9 +92,9 @@
 
 
 -(void)videoDidFinished:(NSNotification *)notice{
-    if(wmPlayer.isFullscreen == YES){
-        [self toCell];
-    }
+    
+    [self toCell];
+    
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
     isPlay = NO;
     currentCell.playBtn.hidden = NO;
