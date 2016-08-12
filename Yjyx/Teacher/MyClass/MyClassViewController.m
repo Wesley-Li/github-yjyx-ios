@@ -69,7 +69,8 @@
     
     self.gradeArr = [[[YjyxOverallData sharedInstance].teacherInfo.school_classes JSONValue] mutableCopy];
     
-    
+    self.groupArr = [[StuDataBase shareStuDataBase] selectAllGroup];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad {
@@ -82,7 +83,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:3/255.0 green:136/255.0 blue:227/255.0 alpha:1.0];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-    self.groupArr = [[StuDataBase shareStuDataBase] selectAllGroup];
+    
     
     self.navigationItem.title = @"我的班级";
 
@@ -103,7 +104,7 @@
     self.dataSource = [[[StuDataBase shareStuDataBase]selectAllClass] mutableCopy];
     self.groupArr = [[StuDataBase shareStuDataBase] selectAllGroup];
     self.gradeArr = [[[YjyxOverallData sharedInstance].teacherInfo.school_classes JSONValue] mutableCopy];
-    
+    [self.tableView reloadData];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.tableView headerEndRefreshing];
     });

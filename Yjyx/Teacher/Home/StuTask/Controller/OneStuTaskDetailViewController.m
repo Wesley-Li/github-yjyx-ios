@@ -163,6 +163,7 @@
 
 
 -(void)toCell{
+    NSLog(@"row = %ld",(long)currentIndexPath.row);
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
     [wmPlayer removeFromSuperview];
     NSLog(@"row = %ld",(long)currentIndexPath.row);

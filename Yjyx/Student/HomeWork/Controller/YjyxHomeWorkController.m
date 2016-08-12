@@ -112,7 +112,7 @@ static NSString *HomeADID = @"HomeADID";
     [self.workTableV headerBeginRefreshing];
     self.navigationController.navigationBarHidden = NO;
     NSLog(@"will%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
-    if(self.homeAdArray.count != 0){
+    if(self.homeAdArray.count != 1 && self.homeAdArray.count != 0){
         self.timer = nil;
         self.AdNumPageControl.currentPage = 0;
         NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(autoScroll) userInfo:nil repeats:YES];
@@ -161,9 +161,11 @@ static NSString *HomeADID = @"HomeADID";
             [self.collectView reloadData];
             self.AdNumPageControl.numberOfPages = self.homeAdArray.count;
             self.AdNumPageControl.currentPage = 0;
+            if(self.homeAdArray.count != 1 && self.homeAdArray.count != 0){
             NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(autoScroll) userInfo:nil repeats:YES];
             self.timer = timer;
             [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+            }
             self.collectView.contentOffset = CGPointMake(50 * self.homeAdArray.count * SCREEN_WIDTH, 0);
         }else{
             [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
@@ -179,7 +181,7 @@ static NSString *HomeADID = @"HomeADID";
     NSInteger index = self.collectView.contentOffset.x / SCREEN_WIDTH;
 //    NSLog(@"%ld", index);
     
-    if(index > self.homeAdArray.count * 99){
+    if(index > self.homeAdArray.count * 99 - 1){
         index = -1;
     }
     [self.collectView setContentOffset:CGPointMake((index + 1) * SCREEN_WIDTH, 0) animated:YES];

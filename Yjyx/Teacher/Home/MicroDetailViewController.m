@@ -639,6 +639,8 @@ static NSString *VideoNumID = @"VideoNum";
     if(wmPlayer == nil){
         return;
     }
+    [wmPlayer removeFromSuperview];
+    [wmPlayer.playerLayer removeFromSuperlayer];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
     [wmPlayer.player.currentItem cancelPendingSeeks];
     [wmPlayer.player.currentItem.asset cancelLoading];
@@ -933,8 +935,12 @@ static NSString *VideoNumID = @"VideoNum";
 #pragma mark - VideoNumShowCellDelegate代理方法
 - (void)videoNumShowCell:(VideoNumShowCell *)cell videoNumBtnClick:(UIButton *)btn
 {
+//    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     self.videoURL = _microDetailM.videoUrlArr[btn.tag];
-    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    
+    ReleaseMicroCell *cell2 = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [self startPlayVideo:cell2.playBtn];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
 #pragma mark - SubjectDetailCell代理方法
 - (void)subjectDetailCell:(SubjectDetailCell *)cell deletedBtnClick:(UIButton *)btn

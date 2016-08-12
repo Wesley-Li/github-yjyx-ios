@@ -530,6 +530,8 @@ static NSString *videoNumID = @"VIDEONumID";
     if(wmPlayer == nil){
         return;
     }
+    [wmPlayer removeFromSuperview];
+    [wmPlayer.playerLayer removeFromSuperlayer];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [wmPlayer.player.currentItem cancelPendingSeeks];
         [wmPlayer.player.currentItem.asset cancelLoading];
@@ -968,7 +970,10 @@ static NSString *videoNumID = @"VIDEONumID";
 - (void)videoNumShowCell:(VideoNumShowCell *)cell videoNumBtnClick:(UIButton *)btn
 {
     self.videoURL = _model.videoobjlist[btn.tag][@"url"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    
+    ReleaseMicroCell *cell2 = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [self startPlayVideo:cell2.playBtn];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
 #pragma mark - 点击批注跳转
 - (void)getTheAnotation:(UIButton *)sender {

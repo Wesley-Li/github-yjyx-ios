@@ -21,14 +21,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="561" height="166"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NPC-8f-3g9">
-                                <rect key="frame" x="10" y="176" width="541" height="1"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="LAN-3j-HRw"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mF8-iM-OcW">
-                                <rect key="frame" x="491" y="187" width="60" height="20"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mF8-iM-OcW">
+                                <rect key="frame" x="491" y="168" width="60" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="4FV-3w-dUh"/>
                                     <constraint firstAttribute="height" constant="20" id="cwQ-wf-w2V"/>
@@ -36,6 +30,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="解题方法"/>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NPC-8f-3g9">
+                                <rect key="frame" x="10" y="176" width="541" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="LAN-3j-HRw"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="正确答案" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V61-uo-gs1">
                                 <rect key="frame" x="10" y="187" width="60" height="20"/>
                                 <constraints>
@@ -71,7 +71,7 @@
                                 <state key="selected" backgroundImage="homework_close.png"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqn-85-csk">
-                                <rect key="frame" x="311" y="187" width="150" height="17"/>
+                                <rect key="frame" x="308" y="187" width="150" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -79,7 +79,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="mF8-iM-OcW" secondAttribute="trailing" constant="10" id="1aw-Uw-Jdg"/>
                             <constraint firstItem="NPC-8f-3g9" firstAttribute="top" secondItem="0ND-lm-sVM" secondAttribute="bottom" constant="10" id="347-9s-Dis"/>
                             <constraint firstItem="bqn-85-csk" firstAttribute="top" secondItem="NPC-8f-3g9" secondAttribute="bottom" constant="10" id="4Je-9c-FSD"/>
                             <constraint firstItem="dag-gZ-dRH" firstAttribute="leading" secondItem="QAO-B4-l9E" secondAttribute="trailing" constant="5" id="76V-A3-1R7"/>
@@ -87,21 +86,30 @@
                             <constraint firstItem="QAO-B4-l9E" firstAttribute="leading" secondItem="V61-uo-gs1" secondAttribute="trailing" id="C8Z-ce-PDe"/>
                             <constraint firstAttribute="bottom" secondItem="bqn-85-csk" secondAttribute="bottom" constant="10" id="Ccl-VL-mKh"/>
                             <constraint firstItem="V61-uo-gs1" firstAttribute="leading" secondItem="dQX-Pe-id4" secondAttribute="leading" constant="10" id="Fz1-Z5-0Md"/>
+                            <constraint firstItem="mF8-iM-OcW" firstAttribute="trailing" secondItem="NPC-8f-3g9" secondAttribute="trailing" id="GaJ-ea-e2K"/>
                             <constraint firstItem="xlw-oF-hXk" firstAttribute="leading" secondItem="bqn-85-csk" secondAttribute="trailing" constant="5" id="JOa-sd-KLR"/>
-                            <constraint firstItem="mF8-iM-OcW" firstAttribute="top" secondItem="NPC-8f-3g9" secondAttribute="bottom" constant="10" id="PFM-OZ-3cq"/>
                             <constraint firstAttribute="trailing" secondItem="NPC-8f-3g9" secondAttribute="trailing" constant="10" id="QIM-MW-xAX"/>
                             <constraint firstItem="QAO-B4-l9E" firstAttribute="top" secondItem="NPC-8f-3g9" secondAttribute="bottom" constant="10" id="Qwa-86-2r1"/>
                             <constraint firstItem="xlw-oF-hXk" firstAttribute="top" secondItem="NPC-8f-3g9" secondAttribute="bottom" constant="10" id="Rb4-8F-X9M"/>
+                            <constraint firstItem="NPC-8f-3g9" firstAttribute="top" secondItem="mF8-iM-OcW" secondAttribute="bottom" constant="5" id="Vq6-x1-Rda"/>
                             <constraint firstItem="NPC-8f-3g9" firstAttribute="leading" secondItem="dQX-Pe-id4" secondAttribute="leading" constant="10" id="W9x-wS-UXM"/>
                             <constraint firstItem="dag-gZ-dRH" firstAttribute="centerX" secondItem="dQX-Pe-id4" secondAttribute="centerX" id="ZmC-Wg-PGZ"/>
+                            <constraint firstItem="NPC-8f-3g9" firstAttribute="leading" secondItem="mF8-iM-OcW" secondAttribute="trailing" id="anH-cT-jWZ"/>
+                            <constraint firstItem="mF8-iM-OcW" firstAttribute="trailing" secondItem="NPC-8f-3g9" secondAttribute="trailing" id="csp-RN-XJl"/>
                             <constraint firstAttribute="bottom" secondItem="QAO-B4-l9E" secondAttribute="bottom" constant="10" id="lKt-ef-esk"/>
                             <constraint firstItem="dag-gZ-dRH" firstAttribute="top" secondItem="NPC-8f-3g9" secondAttribute="bottom" constant="10" id="qyR-zn-Ceo"/>
-                            <constraint firstItem="mF8-iM-OcW" firstAttribute="leading" secondItem="xlw-oF-hXk" secondAttribute="trailing" constant="5" id="s6b-UU-rb8"/>
                             <constraint firstItem="0ND-lm-sVM" firstAttribute="top" secondItem="dQX-Pe-id4" secondAttribute="top" id="sJo-Qr-gne"/>
+                            <constraint firstAttribute="trailing" secondItem="xlw-oF-hXk" secondAttribute="trailing" constant="5" id="txS-sq-SdQ"/>
                             <constraint firstItem="bqn-85-csk" firstAttribute="leading" secondItem="dag-gZ-dRH" secondAttribute="trailing" id="u1D-Z0-Quw"/>
                             <constraint firstItem="V61-uo-gs1" firstAttribute="top" secondItem="NPC-8f-3g9" secondAttribute="bottom" constant="10" id="v3T-e2-XxY"/>
                             <constraint firstItem="0ND-lm-sVM" firstAttribute="leading" secondItem="dQX-Pe-id4" secondAttribute="leading" id="xUL-Uq-M2E"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="anH-cT-jWZ"/>
+                                <exclude reference="GaJ-ea-e2K"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <constraints>
