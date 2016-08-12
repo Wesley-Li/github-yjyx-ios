@@ -157,7 +157,7 @@
     web.scrollView.showsHorizontalScrollIndicator = NO;
     web.scrollView.bounces = NO;
 
-    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", _item.content_text];
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", _item.content_text];
     
     [web loadHTMLString:jsString baseURL:nil];
     [self.webBgView addSubview:web];

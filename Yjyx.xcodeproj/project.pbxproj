@@ -260,8 +260,6 @@
 		3B4864531CCF10C200D2DE3C /* report.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B48643F1CCF10C200D2DE3C /* report.png */; };
 		3B4864551CCF10C200D2DE3C /* stu_hw.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864411CCF10C200D2DE3C /* stu_hw.png */; };
 		3B4864561CCF10C200D2DE3C /* tab_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864421CCF10C200D2DE3C /* tab_bg@2x.png */; };
-		3B4864571CCF10C200D2DE3C /* tab_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864431CCF10C200D2DE3C /* tab_home@3x.png */; };
-		3B4864581CCF10C200D2DE3C /* tab_home_click@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864441CCF10C200D2DE3C /* tab_home_click@3x.png */; };
 		3B4864591CCF10C200D2DE3C /* top_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4864451CCF10C200D2DE3C /* top_bg.png */; };
 		3B48646E1CCF117300D2DE3C /* TeacherHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B48645C1CCF117300D2DE3C /* TeacherHomeViewController.m */; };
 		3B48646F1CCF117300D2DE3C /* TeacherHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B48645D1CCF117300D2DE3C /* TeacherHomeViewController.xib */; };
@@ -500,6 +498,27 @@
 		3F4CA6281CE17FC000F4B791 /* FinshedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4CA6271CE17FC000F4B791 /* FinshedModel.m */; };
 		3FF740601CE308DD00D3C0F7 /* list_btn_shutdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */; };
 		3FF740621CE3090500D3C0F7 /* list_btn_shutdown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF740611CE3090500D3C0F7 /* list_btn_shutdown@3x.png */; };
+		8010A8F91D5D94E60091F6EA /* tab_home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8E91D5D94E60091F6EA /* tab_home@2x.png */; };
+		8010A8FA1D5D94E60091F6EA /* tab_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8EA1D5D94E60091F6EA /* tab_home@3x.png */; };
+		8010A8FB1D5D94E60091F6EA /* tab_home_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8EB1D5D94E60091F6EA /* tab_home_select@2x.png */; };
+		8010A8FC1D5D94E60091F6EA /* tab_home_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8EC1D5D94E60091F6EA /* tab_home_select@3x.png */; };
+		8010A8FD1D5D94E60091F6EA /* tab_homework@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8ED1D5D94E60091F6EA /* tab_homework@2x.png */; };
+		8010A8FE1D5D94E60091F6EA /* tab_homework@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8EE1D5D94E60091F6EA /* tab_homework@3x.png */; };
+		8010A8FF1D5D94E60091F6EA /* tab_homework_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8EF1D5D94E60091F6EA /* tab_homework_select@2x.png */; };
+		8010A9001D5D94E60091F6EA /* tab_homework_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8F01D5D94E60091F6EA /* tab_homework_select@3x.png */; };
+		8010A9011D5D94E60091F6EA /* tab_mine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8F11D5D94E60091F6EA /* tab_mine@2x.png */; };
+		8010A9021D5D94E60091F6EA /* tab_mine@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8F21D5D94E60091F6EA /* tab_mine@3x.png */; };
+		8010A9031D5D94E60091F6EA /* tab_mine_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8F31D5D94E60091F6EA /* tab_mine_select@2x.png */; };
+		8010A9041D5D94E60091F6EA /* tab_mine_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8F41D5D94E60091F6EA /* tab_mine_select@3x.png */; };
+		8010A9051D5D94E60091F6EA /* tab_myclass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8F51D5D94E60091F6EA /* tab_myclass@2x.png */; };
+		8010A9061D5D94E60091F6EA /* tab_myclass@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8F61D5D94E60091F6EA /* tab_myclass@3x.png */; };
+		8010A9071D5D94E60091F6EA /* tab_myclass_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8F71D5D94E60091F6EA /* tab_myclass_select@2x.png */; };
+		8010A9081D5D94E60091F6EA /* tab_myclass_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A8F81D5D94E60091F6EA /* tab_myclass_select@3x.png */; };
+		8010A9101D5DA3510091F6EA /* isbuilding.png in Resources */ = {isa = PBXBuildFile; fileRef = 8010A90F1D5DA3510091F6EA /* isbuilding.png */; };
+		8010A9141D5DA49F0091F6EA /* ToolsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8010A9121D5DA49F0091F6EA /* ToolsViewController.m */; };
+		8010A9151D5DA49F0091F6EA /* ToolsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8010A9131D5DA49F0091F6EA /* ToolsViewController.xib */; };
+		8010A9191D5DA4DA0091F6EA /* StudentStasticController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8010A9171D5DA4DA0091F6EA /* StudentStasticController.m */; };
+		8010A91A1D5DA4DA0091F6EA /* StudentStasticController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8010A9181D5DA4DA0091F6EA /* StudentStasticController.xib */; };
 		8013D32F1CF4495300F82301 /* SpendTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8013D32D1CF4495300F82301 /* SpendTimeCell.m */; };
 		8013D3301CF4495300F82301 /* SpendTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8013D32E1CF4495300F82301 /* SpendTimeCell.xib */; };
 		8013D3391CF4521100F82301 /* CardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8013D3371CF4521100F82301 /* CardCell.m */; };
@@ -960,8 +979,6 @@
 		3B48643F1CCF10C200D2DE3C /* report.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = report.png; sourceTree = "<group>"; };
 		3B4864411CCF10C200D2DE3C /* stu_hw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stu_hw.png; sourceTree = "<group>"; };
 		3B4864421CCF10C200D2DE3C /* tab_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_bg@2x.png"; sourceTree = "<group>"; };
-		3B4864431CCF10C200D2DE3C /* tab_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_home@3x.png"; sourceTree = "<group>"; };
-		3B4864441CCF10C200D2DE3C /* tab_home_click@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_home_click@3x.png"; sourceTree = "<group>"; };
 		3B4864451CCF10C200D2DE3C /* top_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_bg.png; sourceTree = "<group>"; };
 		3B48645B1CCF117300D2DE3C /* TeacherHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherHomeViewController.h; sourceTree = "<group>"; };
 		3B48645C1CCF117300D2DE3C /* TeacherHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherHomeViewController.m; sourceTree = "<group>"; };
@@ -1334,6 +1351,29 @@
 		3F4CA6271CE17FC000F4B791 /* FinshedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinshedModel.m; sourceTree = "<group>"; };
 		3FF7405F1CE308DD00D3C0F7 /* list_btn_shutdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list_btn_shutdown.png; sourceTree = "<group>"; };
 		3FF740611CE3090500D3C0F7 /* list_btn_shutdown@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_btn_shutdown@3x.png"; sourceTree = "<group>"; };
+		8010A8E91D5D94E60091F6EA /* tab_home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_home@2x.png"; sourceTree = "<group>"; };
+		8010A8EA1D5D94E60091F6EA /* tab_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_home@3x.png"; sourceTree = "<group>"; };
+		8010A8EB1D5D94E60091F6EA /* tab_home_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_home_select@2x.png"; sourceTree = "<group>"; };
+		8010A8EC1D5D94E60091F6EA /* tab_home_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_home_select@3x.png"; sourceTree = "<group>"; };
+		8010A8ED1D5D94E60091F6EA /* tab_homework@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_homework@2x.png"; sourceTree = "<group>"; };
+		8010A8EE1D5D94E60091F6EA /* tab_homework@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_homework@3x.png"; sourceTree = "<group>"; };
+		8010A8EF1D5D94E60091F6EA /* tab_homework_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_homework_select@2x.png"; sourceTree = "<group>"; };
+		8010A8F01D5D94E60091F6EA /* tab_homework_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_homework_select@3x.png"; sourceTree = "<group>"; };
+		8010A8F11D5D94E60091F6EA /* tab_mine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_mine@2x.png"; sourceTree = "<group>"; };
+		8010A8F21D5D94E60091F6EA /* tab_mine@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_mine@3x.png"; sourceTree = "<group>"; };
+		8010A8F31D5D94E60091F6EA /* tab_mine_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_mine_select@2x.png"; sourceTree = "<group>"; };
+		8010A8F41D5D94E60091F6EA /* tab_mine_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_mine_select@3x.png"; sourceTree = "<group>"; };
+		8010A8F51D5D94E60091F6EA /* tab_myclass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_myclass@2x.png"; sourceTree = "<group>"; };
+		8010A8F61D5D94E60091F6EA /* tab_myclass@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_myclass@3x.png"; sourceTree = "<group>"; };
+		8010A8F71D5D94E60091F6EA /* tab_myclass_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_myclass_select@2x.png"; sourceTree = "<group>"; };
+		8010A8F81D5D94E60091F6EA /* tab_myclass_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_myclass_select@3x.png"; sourceTree = "<group>"; };
+		8010A90F1D5DA3510091F6EA /* isbuilding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = isbuilding.png; sourceTree = "<group>"; };
+		8010A9111D5DA49F0091F6EA /* ToolsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolsViewController.h; sourceTree = "<group>"; };
+		8010A9121D5DA49F0091F6EA /* ToolsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolsViewController.m; sourceTree = "<group>"; };
+		8010A9131D5DA49F0091F6EA /* ToolsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToolsViewController.xib; sourceTree = "<group>"; };
+		8010A9161D5DA4DA0091F6EA /* StudentStasticController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentStasticController.h; sourceTree = "<group>"; };
+		8010A9171D5DA4DA0091F6EA /* StudentStasticController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentStasticController.m; sourceTree = "<group>"; };
+		8010A9181D5DA4DA0091F6EA /* StudentStasticController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StudentStasticController.xib; sourceTree = "<group>"; };
 		8013D32C1CF4495300F82301 /* SpendTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpendTimeCell.h; sourceTree = "<group>"; };
 		8013D32D1CF4495300F82301 /* SpendTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpendTimeCell.m; sourceTree = "<group>"; };
 		8013D32E1CF4495300F82301 /* SpendTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpendTimeCell.xib; sourceTree = "<group>"; };
@@ -2033,7 +2073,7 @@
 		3AE893FB1C6C268500E8BA97 /* Files */ = {
 			isa = PBXGroup;
 			children = (
-				3B48642E1CCF10C200D2DE3C /* StudentFiles */,
+				8010A90D1D5DA2EF0091F6EA /* StudentFiles */,
 				3B4864301CCF10C200D2DE3C /* TeacherFiles */,
 				3A26EE581C71A62F009C3242 /* ParentFiles */,
 			);
@@ -2215,21 +2255,6 @@
 			name = memberCenter;
 			sourceTree = "<group>";
 		};
-		3B48642E1CCF10C200D2DE3C /* StudentFiles */ = {
-			isa = PBXGroup;
-			children = (
-				3B48642F1CCF10C200D2DE3C /* StudentHome */,
-			);
-			path = StudentFiles;
-			sourceTree = "<group>";
-		};
-		3B48642F1CCF10C200D2DE3C /* StudentHome */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = StudentHome;
-			sourceTree = "<group>";
-		};
 		3B4864301CCF10C200D2DE3C /* TeacherFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -2243,6 +2268,7 @@
 		3B4864311CCF10C200D2DE3C /* TeacherHome */ = {
 			isa = PBXGroup;
 			children = (
+				8010A8E81D5D94E60091F6EA /* tab */,
 				3BCF18FF1CDC66E600E2EA1A /* StuTask */,
 				3B4864321CCF10C200D2DE3C /* hw_stats.png */,
 				3B4864331CCF10C200D2DE3C /* mall.png */,
@@ -2262,8 +2288,6 @@
 				3B4864411CCF10C200D2DE3C /* stu_hw.png */,
 				3B35DB861CE02559000B7F83 /* tab_bg@3x.png */,
 				3B4864421CCF10C200D2DE3C /* tab_bg@2x.png */,
-				3B4864431CCF10C200D2DE3C /* tab_home@3x.png */,
-				3B4864441CCF10C200D2DE3C /* tab_home_click@3x.png */,
 				3B4864451CCF10C200D2DE3C /* top_bg.png */,
 			);
 			path = TeacherHome;
@@ -2751,6 +2775,12 @@
 				3C3D93D21D26119500AA22AE /* YjyxMineController.h */,
 				3C3D93D31D26119500AA22AE /* YjyxMineController.m */,
 				3C3D93D41D26119500AA22AE /* YjyxMineController.xib */,
+				8010A9111D5DA49F0091F6EA /* ToolsViewController.h */,
+				8010A9121D5DA49F0091F6EA /* ToolsViewController.m */,
+				8010A9131D5DA49F0091F6EA /* ToolsViewController.xib */,
+				8010A9161D5DA4DA0091F6EA /* StudentStasticController.h */,
+				8010A9171D5DA4DA0091F6EA /* StudentStasticController.m */,
+				8010A9181D5DA4DA0091F6EA /* StudentStasticController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3116,6 +3146,45 @@
 				BC57426ED66AD6400092A077 /* libPods-Yjyx.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8010A8E81D5D94E60091F6EA /* tab */ = {
+			isa = PBXGroup;
+			children = (
+				8010A8E91D5D94E60091F6EA /* tab_home@2x.png */,
+				8010A8EA1D5D94E60091F6EA /* tab_home@3x.png */,
+				8010A8EB1D5D94E60091F6EA /* tab_home_select@2x.png */,
+				8010A8EC1D5D94E60091F6EA /* tab_home_select@3x.png */,
+				8010A8ED1D5D94E60091F6EA /* tab_homework@2x.png */,
+				8010A8EE1D5D94E60091F6EA /* tab_homework@3x.png */,
+				8010A8EF1D5D94E60091F6EA /* tab_homework_select@2x.png */,
+				8010A8F01D5D94E60091F6EA /* tab_homework_select@3x.png */,
+				8010A8F11D5D94E60091F6EA /* tab_mine@2x.png */,
+				8010A8F21D5D94E60091F6EA /* tab_mine@3x.png */,
+				8010A8F31D5D94E60091F6EA /* tab_mine_select@2x.png */,
+				8010A8F41D5D94E60091F6EA /* tab_mine_select@3x.png */,
+				8010A8F51D5D94E60091F6EA /* tab_myclass@2x.png */,
+				8010A8F61D5D94E60091F6EA /* tab_myclass@3x.png */,
+				8010A8F71D5D94E60091F6EA /* tab_myclass_select@2x.png */,
+				8010A8F81D5D94E60091F6EA /* tab_myclass_select@3x.png */,
+			);
+			path = tab;
+			sourceTree = "<group>";
+		};
+		8010A90D1D5DA2EF0091F6EA /* StudentFiles */ = {
+			isa = PBXGroup;
+			children = (
+				8010A90E1D5DA3460091F6EA /* StudentHome */,
+			);
+			path = StudentFiles;
+			sourceTree = "<group>";
+		};
+		8010A90E1D5DA3460091F6EA /* StudentHome */ = {
+			isa = PBXGroup;
+			children = (
+				8010A90F1D5DA3510091F6EA /* isbuilding.png */,
+			);
+			path = StudentHome;
 			sourceTree = "<group>";
 		};
 		801F443F1CDF164800B7E7E1 /* Alipay */ = {
@@ -3498,6 +3567,7 @@
 				3A905D211C7F3A51005AB12F /* push5.caf in Resources */,
 				8013D33A1CF4521100F82301 /* CardCell.xib in Resources */,
 				3A905D221C7F3A51005AB12F /* push6.caf in Resources */,
+				8010A9081D5D94E60091F6EA /* tab_myclass_select@3x.png in Resources */,
 				3C9C922E1D2F8F1600B0159D /* YjyxDoingWorkController.xib in Resources */,
 				3CF541DD1D1D1A41000EBAB5 /* MicroDetailViewController.xib in Resources */,
 				3B4864771CCF117300D2DE3C /* PublishHomeworkViewController.xib in Resources */,
@@ -3515,11 +3585,11 @@
 				3FF740621CE3090500D3C0F7 /* list_btn_shutdown@3x.png in Resources */,
 				3BB773A41CD8781400A24485 /* SmartViewController.xib in Resources */,
 				3BCF19181CDC66E600E2EA1A /* list_btn_nor.png in Resources */,
+				8010A8FE1D5D94E60091F6EA /* tab_homework@3x.png in Resources */,
 				3A26EE611C71A81B009C3242 /* Parent_default@3x.png in Resources */,
 				3A6CA5A31CE32F7C00F6A7C0 /* deletbutton.png in Resources */,
 				3CF541E81D1D47D2000EBAB5 /* SubjectDetailCell.xib in Resources */,
 				3AC1D1EC1CCDE7EE006291D0 /* regist_student_logo@3x.png in Resources */,
-				3B4864571CCF10C200D2DE3C /* tab_home@3x.png in Resources */,
 				3CD2F1711D27909E0031AF2E /* YjyxChangePhoneController.xib in Resources */,
 				3B37D1D01CEABBFA00416C9C /* score.png in Resources */,
 				3AC1D1EA1CCDE7EE006291D0 /* regist_login_btn@3x.png in Resources */,
@@ -3532,14 +3602,17 @@
 				3A4057081CCF6FAF00258784 /* ForgetOneViewController.xib in Resources */,
 				3A26EE631C71A81B009C3242 /* Parent_home_up@3x.png in Resources */,
 				3AFE02C71CA29D540097CC83 /* member_yuwen@3x.png in Resources */,
+				8010A8FD1D5D94E60091F6EA /* tab_homework@2x.png in Resources */,
 				3A87B7B61CF32FD300C3D991 /* YjyxPayDetailViewController.xib in Resources */,
 				3BB7739E1CD86B3A00A24485 /* home_img_testPaper.png in Resources */,
+				8010A91A1D5DA4DA0091F6EA /* StudentStasticController.xib in Resources */,
 				3AE894031C6C28C300E8BA97 /* login_password_icon@3x.png in Resources */,
 				3BB773941CD86B3A00A24485 /* home_img_book.png in Resources */,
 				3A8CAEC21C70B3C200BDEB6B /* ParentChildrensViewController.xib in Resources */,
 				3CAC453F1D40A4C000ACBDA9 /* YjyxShopDetailCell.xib in Resources */,
 				3C1566A11D0D7042006670D6 /* ChapterChoiceController.xib in Resources */,
 				3A2E1EC71CE9E3B5002F775E /* Parent_VideoBack@3x.png in Resources */,
+				8010A9101D5DA3510091F6EA /* isbuilding.png in Resources */,
 				3AF11DDF1CB2691A00F98A03 /* subject_logo@3x.png in Resources */,
 				3BCF19161CDC66E600E2EA1A /* list_btn_More.png in Resources */,
 				3B4864711CCF117300D2DE3C /* MessageViewController.xib in Resources */,
@@ -3552,6 +3625,7 @@
 				3A8CAE9F1C70AD9200BDEB6B /* comm_sure@2x.png in Resources */,
 				3A4057121CCF859B00258784 /* ForgetThreeViewController.xib in Resources */,
 				3AD1FD9F1C72CE5000E362B9 /* CommonWebViewController.xib in Resources */,
+				8010A8FA1D5D94E60091F6EA /* tab_home@3x.png in Resources */,
 				3AC1D1EB1CCDE7EE006291D0 /* regist_parent_logo@3x.png in Resources */,
 				3A8B7FA81C75C3A900E990F2 /* LaunchScreen.storyboard in Resources */,
 				8013D3421CF45A3E00F82301 /* SubTimeCell.xib in Resources */,
@@ -3607,10 +3681,13 @@
 				3A26EE651C71A81B009C3242 /* Parent_message@3x.png in Resources */,
 				3C3D93E01D26119500AA22AE /* YjyxHomeWorkController.xib in Resources */,
 				3A88278A1C6EE5730008367F /* tab_personals@3x.png in Resources */,
+				8010A8FC1D5D94E60091F6EA /* tab_home_select@3x.png in Resources */,
 				3BCF191B1CDC66E600E2EA1A /* list_btn_right@3x.png in Resources */,
 				3A26EE621C71A81B009C3242 /* Parent_Exchange_goods@3x.png in Resources */,
+				8010A9071D5D94E60091F6EA /* tab_myclass_select@2x.png in Resources */,
 				3CD2F16C1D2790640031AF2E /* YjyxChangeNameController.xib in Resources */,
 				3BCF191E1CDC66E600E2EA1A /* list_def.png in Resources */,
+				8010A9061D5D94E60091F6EA /* tab_myclass@3x.png in Resources */,
 				8013D34F1CF4815300F82301 /* BlankfillCell.xib in Resources */,
 				3AFE02C21CA29D540097CC83 /* member_kexue@3x.png in Resources */,
 				3B91A6F31CE5B8BB0082A92C /* video_pic.png in Resources */,
@@ -3623,6 +3700,7 @@
 				3AE8940C1C6C335D00E8BA97 /* login_logo@3x.png in Resources */,
 				3A26EE661C71A81B009C3242 /* Parent_statistics@3x.png in Resources */,
 				3C4274CC1D2A7736008A30FA /* YjyxWorkDetailCell.xib in Resources */,
+				8010A8FF1D5D94E60091F6EA /* tab_homework_select@2x.png in Resources */,
 				3B4864551CCF10C200D2DE3C /* stu_hw.png in Resources */,
 				3AF339421C770D5600586A37 /* defaultImage@3x.png in Resources */,
 				3B35DB991CE07049000B7F83 /* CorectCell.xib in Resources */,
@@ -3637,6 +3715,7 @@
 				3A8827851C6EE5730008367F /* tab_community@3x.png in Resources */,
 				3CA896401D06DF540092D292 /* ParentChapterCell.xib in Resources */,
 				3CF0D1781D24B0B7002EE9BF /* RegistStudentController.xib in Resources */,
+				8010A9001D5D94E60091F6EA /* tab_homework_select@3x.png in Resources */,
 				80F718C31CF28961007C0B75 /* SubmitCell.xib in Resources */,
 				3AE894101C6C47C400E8BA97 /* login_right_line@3x.png in Resources */,
 				3CA04D061D180EEC0054A05D /* ReleaseVideoCell.xib in Resources */,
@@ -3659,8 +3738,11 @@
 				3BC7DBE01CDB27ED00E5E12F /* ClassCustomTableViewCell.xib in Resources */,
 				3B91A6F81CE6010D0082A92C /* YourAnswerCell.xib in Resources */,
 				80D979111D36352B000BD95E /* TeacherDrawViewController.xib in Resources */,
+				8010A9021D5D94E60091F6EA /* tab_mine@3x.png in Resources */,
+				8010A9011D5D94E60091F6EA /* tab_mine@2x.png in Resources */,
 				3AF339471C770FDC00586A37 /* AutoLoginViewController.xib in Resources */,
 				80D978ED1D27A71D000BD95E /* OneStuViewController.xib in Resources */,
+				8010A9041D5D94E60091F6EA /* tab_mine_select@3x.png in Resources */,
 				3BCF19241CDC66E600E2EA1A /* nav_btn_back@3x.png in Resources */,
 				3B4864751CCF117300D2DE3C /* PrivateCenterViewController.xib in Resources */,
 				3AD1FD991C72CBC200E362B9 /* children_downline@3x.png in Resources */,
@@ -3670,9 +3752,9 @@
 				3A442B931CE07E370037906A /* feedBack_add@3x.png in Resources */,
 				3AD1FDA61C73149200E362B9 /* nav_operate@2x.png in Resources */,
 				3A44A1ED1CC0C76200B93F6A /* memberCenter_bg3@3x.png in Resources */,
+				8010A9151D5DA49F0091F6EA /* ToolsViewController.xib in Resources */,
 				3B35DB941CE06FE7000B7F83 /* AnswerSituationCell.xib in Resources */,
 				3A4166791CEAE014005D2032 /* YjyxShopMallViewController.xib in Resources */,
-				3B4864581CCF10C200D2DE3C /* tab_home_click@3x.png in Resources */,
 				3A66A8041C931BBA005E2D43 /* ChildrenExplantionViewController.xib in Resources */,
 				3AE894041C6C28C300E8BA97 /* login_textView_bg@3x.png in Resources */,
 				3CD2F1611D275FD70031AF2E /* YjyxPrivateViewController.xib in Resources */,
@@ -3683,6 +3765,7 @@
 				3CECA4C01D2D03F60039DCB6 /* YjyxWorkContentCell.xib in Resources */,
 				3AFE02C81CA29D540097CC83 /* memberCenter_bg1@3x.png in Resources */,
 				3BCF191C1CDC66E600E2EA1A /* list_btn_wrong.png in Resources */,
+				8010A8FB1D5D94E60091F6EA /* tab_home_select@2x.png in Resources */,
 				3BC7DBDA1CDB264800E5E12F /* clssPic.png in Resources */,
 				801F44A51CDF164800B7E7E1 /* AlipaySDK.bundle in Resources */,
 				3AA165691C91BCD6006B8756 /* homework_4@3x.png in Resources */,
@@ -3719,6 +3802,7 @@
 				3CA04CFC1D180E8B0054A05D /* AnswerCell.xib in Resources */,
 				80F718C11CF28961007C0B75 /* StuConditionCell.xib in Resources */,
 				3B35DB851CE016BE000B7F83 /* corect_pic.png in Resources */,
+				8010A9031D5D94E60091F6EA /* tab_mine_select@2x.png in Resources */,
 				3B4864731CCF117300D2DE3C /* MyClassViewController.xib in Resources */,
 				3B48644A1CCF10C200D2DE3C /* myclass@3x.png in Resources */,
 				3CAC45471D40BFC900ACBDA9 /* YjyxOneShopDetailController.xib in Resources */,
@@ -3746,6 +3830,7 @@
 				3BC68D8A1CEC572300FF7854 /* FeedBackViewController.xib in Resources */,
 				80590BF31D0CF9AA00867D9B /* KnowledgeViewController.xib in Resources */,
 				3B4864531CCF10C200D2DE3C /* report.png in Resources */,
+				8010A9051D5D94E60091F6EA /* tab_myclass@2x.png in Resources */,
 				3A26EE6B1C71CCDB009C3242 /* MyChildrenViewController.xib in Resources */,
 				3AA165681C91BCD6006B8756 /* homework_3@3x.png in Resources */,
 				3BB773C21CD883C700A24485 /* NameChageViewController.xib in Resources */,
@@ -3757,6 +3842,7 @@
 				80FEB68B1D1BB545009EB126 /* TaskStatisticViewController.xib in Resources */,
 				3A88278F1C6EE9BD0008367F /* RegistViewController.xib in Resources */,
 				3A8827891C6EE5730008367F /* tab_personal@3x.png in Resources */,
+				8010A8F91D5D94E60091F6EA /* tab_home@2x.png in Resources */,
 				3A188FA01CE5D60B00F055DD /* YjyxOrderViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3843,6 +3929,7 @@
 				3CD1BC1D1D1E33BA009ED261 /* MicroKnowledgeCell.m in Sources */,
 				3AF339461C770FDC00586A37 /* AutoLoginViewController.m in Sources */,
 				3CF0D1771D24B0B7002EE9BF /* RegistStudentController.m in Sources */,
+				8010A9141D5DA49F0091F6EA /* ToolsViewController.m in Sources */,
 				3CA8963B1D06B8A80092D292 /* TreeTableView.m in Sources */,
 				3CD7E4571D2B593800769FDE /* MJRefreshFooterView.m in Sources */,
 				3AC1D1E11CCDE70E006291D0 /* RegistFinalViewController.m in Sources */,
@@ -3874,6 +3961,7 @@
 				3CD7E45E1D2B819600769FDE /* YjyxHomeWrongModel.m in Sources */,
 				3BCF19511CDCC2B500E2EA1A /* TaskListTableViewCell.m in Sources */,
 				3A04A5CE1C93E6290040D913 /* MASLayoutConstraint.m in Sources */,
+				8010A9191D5DA4DA0091F6EA /* StudentStasticController.m in Sources */,
 				3BFE3B7B1CD9816D00502769 /* ChildrenEntity.m in Sources */,
 				3A91F4961C760CF4001568AA /* PNLineChartData.m in Sources */,
 				3CD1BC221D1E34C3009ED261 /* MicroNameCell.m in Sources */,

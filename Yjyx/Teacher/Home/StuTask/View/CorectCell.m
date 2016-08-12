@@ -70,7 +70,7 @@
     self.height = answerLabel.frame.size.height + 20 + 10;
     
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeightChange" object:self userInfo:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeightChange" object:self userInfo:nil];
 
     
     
@@ -121,7 +121,7 @@
     
     self.height = height + 15 + 30;
     // 用通知发送加载完成后的高度
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeightChange" object:self userInfo:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeightChange" object:self userInfo:nil];
     
 
     

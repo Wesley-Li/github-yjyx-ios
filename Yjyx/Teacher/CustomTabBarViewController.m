@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view.
     
     
-    [self configure];
+//    [self configure];
 }
 
 #pragma mark - setting
@@ -86,12 +86,14 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    if (self.selectedIndex == 2) {
-        _customButton.selected=YES;
-    }else
-    {
-        _customButton.selected=NO;
-    }
+    
+//    if (self.selectedIndex == 2) {
+//        _customButton.selected=YES;
+//    }else
+//    {
+//        _customButton.selected=NO;
+//    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
