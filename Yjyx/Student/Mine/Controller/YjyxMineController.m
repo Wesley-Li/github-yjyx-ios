@@ -9,6 +9,8 @@
 #import "YjyxMineController.h"
 #import "YjyxPrivateViewController.h"
 #import "YjyxPMemberCenterViewController.h"
+#import "StudentStasticController.h"
+#import "ToolsViewController.h"
 @interface YjyxMineController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *signLabel;
@@ -38,7 +40,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = YES;
-    [self judgeTimeIsOneDay];
+//    [self judgeTimeIsOneDay];
     // 初始化
     self.nameLabel.text = [YjyxOverallData sharedInstance].studentInfo.realname;
 //    NSString *str1 = [YjyxOverallData sharedInstance].studentInfo.schoolprovincename ? [YjyxOverallData sharedInstance].studentInfo.schoolprovincename : @"";
@@ -147,7 +149,8 @@
 // 上传头像
 -(void)upfiletoQiniu:(NSString *)token image:(UIImage*)image
 {
-    NSData *data = UIImageJPEGRepresentation(image, 0.3);
+    UIImage *newImage = [self imageCompressForWidth:image targetWidth:self.iconImageView.width];
+    NSData *data = UIImageJPEGRepresentation(newImage, 0.3);
     QNUploadManager *upManager = [[QNUploadManager alloc] init];
     [upManager putData:data key:nil token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resq){
         if (info.error == nil) {
@@ -159,6 +162,19 @@
         }
     } option:nil];
     
+}
+// 图片尺寸压缩
+-(UIImage *) imageCompressForWidth:(UIImage *)sourceImage targetWidth:(CGFloat)defineWidth {
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    CGFloat targetWidth = defineWidth;
+    CGFloat targetHeight = (targetWidth / width) * height;
+    UIGraphicsBeginImageContext(CGSizeMake(targetWidth, targetHeight));
+    [sourceImage drawInRect:CGRectMake(0,0,targetWidth, targetHeight)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 -(void)uploadPortrait:(NSString *)url image:(UIImage *)image
@@ -241,12 +257,15 @@
 
 // 点击我的统计
 - (IBAction)myCountBtnClick:(UIButton *)sender {
-    [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
+    StudentStasticController *staVC = [[StudentStasticController alloc] init];
+    [self.navigationController pushViewController:staVC animated:YES];
 }
 
 // 点击常用工具
 - (IBAction)commonToolBtnClick:(UIButton *)sender {
-    [self.view makeToast:@"敬请期待" duration:1.0 position:SHOW_CENTER complete:nil];
+
+    ToolsViewController *toolVC = [[ToolsViewController alloc] init];
+    [self.navigationController pushViewController:toolVC animated:YES];
 }
 
 // 点击课程表

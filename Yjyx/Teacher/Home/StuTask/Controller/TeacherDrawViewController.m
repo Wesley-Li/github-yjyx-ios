@@ -447,8 +447,8 @@
 
 // 图片上传七牛云
 - (void)uploadImageToQiniu:(NSString *)token image:(UIImage *)image {
-    
-    NSData *data = UIImageJPEGRepresentation(image, 0.4);
+    UIImage *newImage = [self imageCompressForWidth:image targetWidth:SCREEN_WIDTH];
+    NSData *data = UIImageJPEGRepresentation(newImage, 0.5);
     QNUploadManager *upManager = [[QNUploadManager alloc] init];
     [upManager putData:data key:nil token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resq){
         if (info.error == nil) {
@@ -463,6 +463,20 @@
     } option:nil];
 
     
+}
+
+// 图片尺寸压缩
+-(UIImage *) imageCompressForWidth:(UIImage *)sourceImage targetWidth:(CGFloat)defineWidth {
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    CGFloat targetWidth = defineWidth;
+    CGFloat targetHeight = (targetWidth / width) * height;
+    UIGraphicsBeginImageContext(CGSizeMake(targetWidth, targetHeight));
+    [sourceImage drawInRect:CGRectMake(0,0,targetWidth, targetHeight)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 // 将批注信息上传服务器

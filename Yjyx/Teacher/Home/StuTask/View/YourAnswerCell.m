@@ -46,7 +46,7 @@
     
     CGFloat myAnswerHeight = [self.yourAnswerLable.text boundingRectWithSize:CGSizeMake(self.yourAnswerLable.width, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.yourAnswerLable.font, NSFontAttributeName, nil] context:nil].size.height;
 
-    
+    NSLog(@"----%.f", myAnswerHeight);
     
     // 如果有作业过程
     CGFloat imageBGHeight;
@@ -75,7 +75,7 @@
             imageview.tag = 200 + i;
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
             [imageview addGestureRecognizer:tap];
-            [self.imageBGView addSubview:imageview];
+           
             
             // 声音图标
             
@@ -84,7 +84,7 @@
                 UIImageView *voiceView = [[UIImageView alloc] init];
                 voiceView.width = imageview.width / 2;
                 voiceView.height = voiceView.width;
-                voiceView.center = imageview.center;
+                voiceView.frame = CGRectMake(imageview.width/2 - voiceView.width/2, imageview.height/2 - voiceView.height/2, voiceView.width, voiceView.height);
                 voiceView.image = [UIImage imageNamed:@"voice_icon"];
                 [imageview addSubview:voiceView];
                 // 角标
@@ -99,6 +99,7 @@
 
             }
             
+            [self.imageBGView addSubview:imageview];
             if (self.imageBGView.width - size.width <= 0) {
                 // 换行
                 size.width = 0;
@@ -143,7 +144,7 @@
     
     CGFloat myAnswerHeight = [self.yourAnswerLable.text boundingRectWithSize:CGSizeMake(self.yourAnswerLable.width, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.yourAnswerLable.font, NSFontAttributeName, nil] context:nil].size.height;
     
-    
+     NSLog(@"----%.f", myAnswerHeight);
     
     // 如果有作业过程
     CGFloat imageBGHeight;

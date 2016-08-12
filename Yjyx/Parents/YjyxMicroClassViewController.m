@@ -675,7 +675,7 @@
     web.scrollView.scrollEnabled = NO;
     web.scrollView.showsHorizontalScrollIndicator = NO;
     web.delegate = self;
-    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", content];
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", content];
     [web loadHTMLString:jsString baseURL:nil];
    
     [headerView addSubview:web];

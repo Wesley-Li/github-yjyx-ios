@@ -85,7 +85,7 @@
     currentCell.playBtn.hidden = NO;
     isPlay = NO;
     [self releaseWMPlayer];
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:4 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     [self setNeedsStatusBarAppearanceUpdate];
 }
 -(void)closeTheVideo:(NSNotification *)obj{
@@ -166,7 +166,7 @@
     NSLog(@"row = %ld",(long)currentIndexPath.row);
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndexPath.row inSection:0]];
     [wmPlayer removeFromSuperview];
-    NSLog(@"row = %ld",(long)currentIndexPath.row);
+    
     [UIView animateWithDuration:0.5f animations:^{
         wmPlayer.transform = CGAffineTransformIdentity;
         wmPlayer.frame = currentCell.backgroundIV.bounds;
@@ -340,27 +340,6 @@
         }
         
         
-    }else if ([[sender object] isMemberOfClass:[YourAnswerCell class]]) {
-    
-        YourAnswerCell *cell = [sender object];
-        
-        if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] || [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] floatValue] != cell.height) {
-            [self.cellHeightDic setObject:[NSString stringWithFormat:@"%.f", cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]];
-            
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-        }
-
-        
-        
-    }else if ([[sender object] isMemberOfClass:[CorectCell class]]) {
-        CorectCell *cell = [sender object];
-        if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] || [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] floatValue] != cell.height) {
-            [self.cellHeightDic setObject:[NSString stringWithFormat:@"%.f", cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]];
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-        }
-        
-        
-        
     }else if ([[sender object] isMemberOfClass:[SolutionCell class]]) {
         SolutionCell *cell = [sender object];
         if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] || [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] floatValue] != cell.height) {
@@ -466,9 +445,9 @@
         return self.yourAnswerCell.height;
         
     }else if (indexPath.row == 2) {
-        CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
+//        CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
     
-        return height;
+        return self.corectCell.height;
         
     }else if (indexPath.row == 3) {
         CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
@@ -560,21 +539,23 @@
             [_videoCell.playBtn.superview bringSubviewToFront:_videoCell.playBtn];
         }
 
-        
         if (wmPlayer&&wmPlayer.superview) {
             if (indexPath.row == currentIndexPath.row) {
                 [_videoCell.backgroundIV.superview sendSubviewToBack:_videoCell.backgroundIV];
             }else{
-                [_videoCell.backgroundIV.superview bringSubviewToFront:_videoCell.backgroundIV];
+                //                [_videoCell.backgroundIV.superview bringSubviewToFront:_videoCell.backgroundIV];
+                
             }
+            
             NSArray *indexpaths = [tableView indexPathsForVisibleRows];
+            
             if (![indexpaths containsObject:currentIndexPath]&&currentIndexPath!=nil) {//复用
                 
                 if ([[UIApplication sharedApplication].keyWindow.subviews containsObject:wmPlayer]) {
                     wmPlayer.hidden = NO;
                 }else{
                     wmPlayer.hidden = YES;
-                    [_videoCell.backgroundIV.superview bringSubviewToFront:_videoCell.backgroundIV];
+                    
                 }
             }else{
                 if ([_videoCell.backgroundIV.subviews containsObject:wmPlayer]) {

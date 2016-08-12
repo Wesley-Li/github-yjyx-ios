@@ -279,14 +279,24 @@
 // 获取amr音频并转码
 - (void)changeAMRtoWAVbyUrl:(NSURL *)url {
     
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
+//    NSError *pError = nil;
+//    NSURLResponse *pRespond = nil;
+//    NSData *audioData = [NSURLConnection sendSynchronousRequest:request returningResponse:&pRespond error:&pError];
     NSData *audioData = [NSData dataWithContentsOfURL:url];
     NSString *amrPath = [YjyxAnonatationController getPathByFilename:[YjyxAnonatationController getCurrentTimeString] ofType:@"amr"];
     [audioData writeToFile:amrPath atomically:YES];
     self.playFilePath = [YjyxAnonatationController getPathByFilename:[YjyxAnonatationController getCurrentTimeString] ofType:@"wav"];
     int result = [VoiceConverter ConvertAmrToWav:amrPath wavSavePath:_playFilePath];
     NSLog(@"%@", result == 1 ? @"格式转换成功" : @"格式转换失败");
+
+    
+    
     
 }
+
+
+
 
 #pragma mark - voice recording
 

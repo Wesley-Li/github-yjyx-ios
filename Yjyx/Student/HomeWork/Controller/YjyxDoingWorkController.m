@@ -552,7 +552,7 @@
         [self.scrollView addSubview:webView];
         webView.tag = i + 1;
         webView.scrollView.bounces = NO;
-        NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", model.content];
+        NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
         [webView loadHTMLString:jsString baseURL:nil];
         
         // 添加答案控件

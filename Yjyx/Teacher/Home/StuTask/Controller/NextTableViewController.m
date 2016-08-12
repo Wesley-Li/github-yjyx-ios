@@ -419,15 +419,6 @@
         }
 
         
-    }else if ([[sender object] isMemberOfClass:[CorectCell class]]) {
-        CorectCell *cell = [sender object];
-        if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] || [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] floatValue] != cell.height) {
-            [self.cellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]];
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-        }
-
-        
-    
     }else if ([[sender object] isMemberOfClass:[SolutionCell class]]) {
         SolutionCell *cell = [sender object];
         if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] || [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.indexPath.row]] floatValue] != cell.height) {
@@ -468,8 +459,8 @@
         return _AnswerSituationCell.height;
         
     }else if (indexPath.row == 2) {
-        CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
-        return height;
+//        CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
+        return _correctCell.height;
         
 
     }else if (indexPath.row == 3) {
