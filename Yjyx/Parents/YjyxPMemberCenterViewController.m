@@ -67,7 +67,7 @@
                 for (int i = 0; i<[[result objectForKey:@"products"] count]; i++) {
                     ProductEntity *entity = [ProductEntity wrapProductEntityWithDic:[[result objectForKey:@"products"] objectAtIndex:i]];
                     
-                    if ([entity.status isEqual:@1]) {
+                    if ([entity.status isEqual:@1] || [entity.status isEqual:@3]) {
                         // status 为1的代表正常的,为2代表下架的
                         [productAry addObject:entity];
                     }
@@ -100,7 +100,7 @@
                 for (int i = 0; i<[[result objectForKey:@"products"] count]; i++) {
                     ProductEntity *entity = [ProductEntity wrapProductEntityWithDic:[[result objectForKey:@"products"] objectAtIndex:i]];
                     
-                    if ([entity.status isEqual:@1]) {
+                    if ([entity.status isEqual:@1] || [entity.status isEqual:@3]) {
                         // status 为1的代表正常的,为2代表下架的
                         [productAry addObject:entity];
                     }
@@ -138,11 +138,23 @@
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake( margin +(margin+ height)*(i % 3) , margin + (margin + (height + 25)) * (i / 3), height, height + 25)];
         [image setImageWithURL:[NSURL URLWithString:entity.img] placeholderImage:[UIImage imageNamed:@"member_kexue"]];
         image.tag = i;
+        if([entity.status isEqual:@3]){
+            UILabel *label = [[UILabel alloc] init];
+            label.backgroundColor = [UIColor lightGrayColor];
+            label.frame = CGRectMake(0, 0, image.width, 20);
+            label.text = @"敬请期待";
+            label.textColor = [UIColor blackColor];
+            [image addSubview:label];
+            label.textAlignment = NSTextAlignmentCenter;
+        }
         [scrollV addSubview:image];
+       
         NSLog(@"%@", NSStringFromCGRect(image.frame));
+        if(![entity.status isEqual:@3]){
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(subjectSelect:)];
         image.userInteractionEnabled = YES;
         [image addGestureRecognizer:tap];
+        }
     }
 }
 

@@ -24,6 +24,7 @@
 - (void)setupWebView
 {
     WKWebView *webView = [[WKWebView alloc] init];
+    
     self.webView = webView;
     [self.view addSubview:webView];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.page_detail]];

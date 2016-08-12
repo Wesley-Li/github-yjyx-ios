@@ -879,6 +879,7 @@
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
+            [coverView removeFromSuperview];
         }];
     }else{ // 微课作业
         param[@"action"] = @"task_lesson_save_result";

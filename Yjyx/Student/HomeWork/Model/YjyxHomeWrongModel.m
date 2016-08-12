@@ -16,7 +16,7 @@
     model.yj_member = [dict[@"avatar"] JSONValue][@"yj_member"];
     model.icon = [dict[@"avatar"] JSONValue][@"icon"];
     model.failedquestions = [dict[@"failedquestions"] JSONValue];
-    NSLog(@"%@", model.failedquestions);
+//    NSLog(@"%@", model.failedquestions);
     model.subjectid = dict[@"subjectid"];
     model.subjectname = dict[@"subjectname"];
     

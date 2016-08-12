@@ -114,6 +114,12 @@
     self.navigationController.navigationBarHidden = NO;
     }
 }
+- (void)viewDidDisappear:(BOOL)animated
+{
+
+    [wmPlayer removeFromSuperview];
+    [self releaseWMPlayer];
+}
 -(void)videoDidFinished:(NSNotification *)notice{
 
     if(wmPlayer.isFullscreen == YES){
@@ -363,8 +369,7 @@
 //    }
 //}
 -(void)dealloc{
-    [wmPlayer removeFromSuperview];
-    [self releaseWMPlayer];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"player deallco");
 }

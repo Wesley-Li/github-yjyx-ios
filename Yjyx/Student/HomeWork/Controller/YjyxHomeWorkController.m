@@ -74,15 +74,17 @@ static NSString *HomeADID = @"HomeADID";
 #pragma mark - view的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"作业";
     self.preBtn = _homeWorkBtn;
     self.view.backgroundColor = COMMONCOLOR;
+    [self setupCollectionView];
     [self addSubviews];
     [self workData];
     [self loadAdData];
-    [self setupCollectionView];
+  
     [self wrongWorkData];
-    [self loadRefresh];
+
     // 注册cell
     [self.workTableV registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxHomeWorkCell class]) bundle:nil] forCellReuseIdentifier:WORKID];
     [self.workTableV registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxWorkDetailCell class]) bundle:nil] forCellReuseIdentifier:DETAILID];
@@ -90,16 +92,18 @@ static NSString *HomeADID = @"HomeADID";
     
     // 注册公告cell
     [self.collectView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxHomeAdCell class]) bundle:nil] forCellWithReuseIdentifier:HomeADID];
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.workTableV.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    
+//    self.workTableV.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
 
 
 }
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    NSLog(@"subview1%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
     self.workTableV.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.scrollV.height);
     self.wrongWorkTableV.frame  = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, self.scrollV.height);
+    NSLog(@"subview2%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
     
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -107,8 +111,7 @@ static NSString *HomeADID = @"HomeADID";
     // 自动刷新
     [self.workTableV headerBeginRefreshing];
     self.navigationController.navigationBarHidden = NO;
-//    self.workTableV.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-//    self.collectView.contentOffset = CGPointMake(50 * self.homeAdArray.count * SCREEN_WIDTH, 0);
+    NSLog(@"will%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
     if(self.homeAdArray.count != 0){
         self.timer = nil;
         self.AdNumPageControl.currentPage = 0;
@@ -119,20 +122,17 @@ static NSString *HomeADID = @"HomeADID";
     }
     
 }
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    NSLog(@"------------------------");
+    NSLog(@"did%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
+    
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
     [self.timer invalidate];
     self.timer = nil;
 }
-- (void)dealloc
-{
-    
-    NSLog(@"timer delloc");
-}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -152,7 +152,7 @@ static NSString *HomeADID = @"HomeADID";
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"action"] = @"get_my_notice";
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/yj_notice/" ] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] integerValue] == 0) {
             for (NSDictionary *dict in responseObject[@"retlist"]) {
                 YjyxHomeAdModel *model = [YjyxHomeAdModel homeAdModelWithDict:dict];
@@ -177,7 +177,7 @@ static NSString *HomeADID = @"HomeADID";
 - (void)autoScroll
 {
     NSInteger index = self.collectView.contentOffset.x / SCREEN_WIDTH;
-    NSLog(@"%ld", index);
+//    NSLog(@"%ld", index);
     
     if(index > self.homeAdArray.count * 99){
         index = -1;
@@ -190,11 +190,13 @@ static NSString *HomeADID = @"HomeADID";
 - (void)setupCollectionView
 {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    self.collectView.collectionViewLayout = layout;
+    
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumInteritemSpacing = 0;
     layout.minimumLineSpacing = 0;
     layout.itemSize = CGSizeMake(SCREEN_WIDTH, 160);
-    self.collectView.collectionViewLayout = layout;
+   
     self.collectView.pagingEnabled = YES;
     self.collectView.showsHorizontalScrollIndicator = NO;
     self.collectView.backgroundColor = [UIColor grayColor];
@@ -204,6 +206,7 @@ static NSString *HomeADID = @"HomeADID";
 {
     // 添加scrollView
     UIScrollView *scrollV = [[UIScrollView alloc] init];
+    scrollV.autoresizingMask = 0;
     self.scrollV = scrollV;
     [self.view addSubview:scrollV];
     [scrollV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -245,7 +248,7 @@ static NSString *HomeADID = @"HomeADID";
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"action"] = @"m_gettaskhomepagedata";
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/tasks/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject);
 //        NSLog(@"%@", responseObject[@"retlist"][0][@"name"]);
         if([responseObject[@"retcode"] isEqual:@0]){
         NSMutableArray *tempArr = [NSMutableArray array];
@@ -254,6 +257,7 @@ static NSString *HomeADID = @"HomeADID";
             [tempArr addObject:model];
 
         }
+        [self loadRefresh];
         self.subjectTypeArr = tempArr;
         [self.workTableV reloadData];
         }else{
@@ -422,11 +426,11 @@ static NSString *HomeADID = @"HomeADID";
 {
     if (![scrollView isEqual:self.scrollV]) {
         if([scrollView isEqual:self.collectView]){
-            NSLog(@"%f", scrollView.contentOffset.x);
+//            NSLog(@"%f", scrollView.contentOffset.x);
             
             NSInteger index = (scrollView.contentOffset.x ) / SCREEN_WIDTH;
-            NSLog(@"%ld", index);
-            self.AdNumPageControl.currentPage = index % 2;
+//            NSLog(@"%ld", index);
+            self.AdNumPageControl.currentPage = index % self.homeAdArray.count;
         }
         return;
     }
@@ -459,12 +463,12 @@ static NSString *HomeADID = @"HomeADID";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     YjyxHomeAdCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:HomeADID forIndexPath:indexPath];
-    cell.model = self.homeAdArray[indexPath.row % 2];
+    cell.model = self.homeAdArray[indexPath.row % self.homeAdArray.count];
     return cell;
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    YjyxHomeAdModel *model = self.homeAdArray[indexPath.row % 2];
+    YjyxHomeAdModel *model = self.homeAdArray[indexPath.row % self.homeAdArray.count];
     if (![model.detail_page isEqual:[NSNull null]]) {
         YjyxHomeAdController *vc = [[YjyxHomeAdController alloc] init];
         vc.page_detail = model.detail_page;

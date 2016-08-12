@@ -149,6 +149,7 @@ static NSString *videoNumID = @"VIDEONumID";
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
+    isPlay = NO;
     [wmPlayer removeFromSuperview];
     [self releaseWMPlayer];
 }
