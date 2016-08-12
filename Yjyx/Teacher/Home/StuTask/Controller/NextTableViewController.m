@@ -723,6 +723,7 @@
     [self.navigationController pushViewController:oneTaskVC animated:YES];
 }
 -(void)dealloc{
+    isPlay = NO;
     [wmPlayer removeFromSuperview];
     [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];

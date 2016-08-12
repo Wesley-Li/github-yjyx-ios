@@ -115,6 +115,12 @@
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+
+    [wmPlayer removeFromSuperview];
+    [self releaseWMPlayer];
+}
 
 -(void)videoDidFinished:(NSNotification *)notice{
 
@@ -366,8 +372,7 @@
 //    }
 //}
 -(void)dealloc{
-    [wmPlayer removeFromSuperview];
-    [self releaseWMPlayer];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"player deallco");
 }

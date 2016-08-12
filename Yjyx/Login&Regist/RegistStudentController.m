@@ -264,7 +264,7 @@
                     [self regist];//注册
                 }else{
                     [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
-                    [self resetTimer];
+//                    [self resetTimer];
                 }
             }else{
                 if (error.code == -1009) {
@@ -273,7 +273,7 @@
                 }
                 [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:3.0 position:SHOW_CENTER complete:nil];
             }
-            [self resetTimer];
+//            [self resetTimer];
         }];
         
     }

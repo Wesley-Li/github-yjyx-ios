@@ -191,6 +191,10 @@ static NSString *StudentID = @"StudentCell";
     param[@"desc"] = [descTempStr isEqualToString:@""] ? descStr : self.descripStr;
 //    param[@"suggestspendtime"] = [self.timeStr isEqualToString:@""] ? @"30" : self.timeStr;
     NSLog(@"%@", param);
+    UIView *coverView = [[UIView alloc] init];
+    coverView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    coverView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.4];
+    [self.view addSubview:coverView];
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
 
     [mgr POST:[BaseURL stringByAppendingString:@"/api/teacher/mobile/general_task/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
@@ -204,13 +208,13 @@ static NSString *StudentID = @"StudentCell";
         }else{
             [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
         }
-        
+        [coverView removeFromSuperview];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [SVProgressHUD showSuccessWithStatus:@"发布失败"];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
         });
-   
+        [coverView removeFromSuperview];
     }];
 }
 #pragma mark - UITableView数据源方法

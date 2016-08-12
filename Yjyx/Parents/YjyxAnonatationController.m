@@ -147,7 +147,7 @@
 
     int page = scrollView.contentOffset.x / SCREEN_WIDTH;
     self.pageControll.currentPage = page;
-    self.navigationItem.title = [NSString stringWithFormat:@"%d/%ld", page, num];
+    self.navigationItem.title = [NSString stringWithFormat:@"%d/%ld", page + 1, num];
     self.voiceArr = [[self.processArr[page] objectForKey:@"teachervoice"] mutableCopy];
     [_voiceList reloadData];
     

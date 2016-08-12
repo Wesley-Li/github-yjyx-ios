@@ -411,6 +411,11 @@ static NSString *ID = @"CELL";
     pamar[@"questionlist"] = [self.questionList JSONString];
 
     NSLog(@"%@", pamar);
+    
+    UIView *coverView = [[UIView alloc] init];
+    coverView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    coverView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.4];
+    [self.view addSubview:coverView];
     [mgr POST:[BaseURL stringByAppendingString:TEACHER_RELEASE_CONNECT_POST] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         NSLog(@"%@", responseObject[@"msg"] );
         if([responseObject[@"retcode"] isEqual:@0]){
@@ -428,12 +433,14 @@ static NSString *ID = @"CELL";
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
         });
+        [coverView removeFromSuperview];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [SVProgressHUD showWithStatus:@"发布失败"];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
         });
+        [coverView removeFromSuperview];
     }];
 }
 

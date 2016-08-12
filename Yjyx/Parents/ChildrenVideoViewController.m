@@ -265,6 +265,7 @@
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
+  
     [self releaseWMPlayer];
 }
 -(void)goBack
