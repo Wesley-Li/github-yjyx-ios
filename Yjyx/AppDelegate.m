@@ -788,9 +788,52 @@
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
     }];
-    
-}
 
+}
+- (void)getStuListComplete:(void(^)(void))compeletion
+{
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"getstudents", @"action", nil];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:[BaseURL stringByAppendingString:TEACHER_GETALLSTULIST_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        NSLog(@"%@", responseObject);
+        // 创建数据表
+        [[StuDataBase shareStuDataBase] deleteStuTable];
+        
+        if ([responseObject[@"retcode"] integerValue] == 0) {
+            
+            for (NSDictionary *dic in responseObject[@"allstudents"]) {
+                StudentEntity *model = [[StudentEntity alloc] init];
+                [model initStudentWithDic:dic];
+                [((AppDelegate*)SYS_DELEGATE).stuListArr addObject:model];
+                // 插入学生数据
+                [[StuDataBase shareStuDataBase] insertStudent:model];
+            }
+            
+            for (NSDictionary *dic in responseObject[@"classes"]) {
+                StuClassEntity *model = [[StuClassEntity alloc] init];
+                [model initStuClassWithDic:dic];
+                [[StuDataBase shareStuDataBase] insertStuClass:model];
+            }
+            
+            for (NSDictionary *dic in responseObject[@"groups"]) {
+                StuGroupEntity *model = [[StuGroupEntity alloc] init];
+                [model initStuGroupWithDic:dic];
+                [[StuDataBase shareStuDataBase] insertStuGroup:model];
+            }
+            
+            [SYS_CACHE setObject:[NSDate date] forKey:@"getDate"];
+            compeletion();
+            
+        }else {
+            
+            NSLog(@"%@", responseObject[@"msg"]);
+        }
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+    }];
+}
 #pragma mark -UIAlertView
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {

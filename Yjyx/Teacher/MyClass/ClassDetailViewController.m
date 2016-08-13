@@ -66,38 +66,71 @@
     
     
     // 刷新数据库
-    [(AppDelegate *)SYS_DELEGATE getStuList];
+//    [(AppDelegate *)SYS_DELEGATE getStuList];
     
-    NSMutableArray *classArray = [[StuDataBase shareStuDataBase] selectAllClass];
-    
-
-    NSMutableArray *groupArray = [[StuDataBase shareStuDataBase] selectAllGroup];
-    
-//    self.model = classArray[self.currentIndex];
-    if(self.groupModel != nil){
-    for (StuGroupEntity *currGroupModel in groupArray) {
-        if([currGroupModel.gid isEqual:self.groupModel.gid]){
-            self.groupModel = currGroupModel;
-        }
-    }
-    }else{
-        for (StuClassEntity *currClassModel in classArray) {
-            if([currClassModel.gradeid isEqual:self.model.gradeid] && [currClassModel.cid isEqual:self.model.cid]){
-                self.model = currClassModel;
+    [(AppDelegate *)SYS_DELEGATE getStuListComplete:^{
+        NSMutableArray *classArray = [[StuDataBase shareStuDataBase] selectAllClass];
+        
+        
+        NSMutableArray *groupArray = [[StuDataBase shareStuDataBase] selectAllGroup];
+        
+        //    self.model = classArray[self.currentIndex];
+        if(self.groupModel != nil){
+            for (StuGroupEntity *currGroupModel in groupArray) {
+                if([currGroupModel.gid isEqual:self.groupModel.gid]){
+                    self.groupModel = currGroupModel;
+                }
+            }
+        }else{
+            for (StuClassEntity *currClassModel in classArray) {
+                if([currClassModel.gradeid isEqual:self.model.gradeid] && [currClassModel.cid isEqual:self.model.cid]){
+                    NSLog(@"%@", currClassModel.name);
+                    self.model = currClassModel;
+                }
             }
         }
-    }
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    self.invitecodeLabel.text = [NSString stringWithFormat:@"班级邀请码:%@" ,[numberFormatter stringFromNumber:self.model.invitecode]];
-    self.stuCountLabel.text = [NSString stringWithFormat:@"%ld人", (unsigned long)self.model.memberlist.count];
-    [self viewDidLoad];
-
-    
-    [self.stuListTableView reloadData];
-    
-    [SVProgressHUD showWithStatus:@"正在刷新"];
-    [self performSelector:@selector(dismiss) withObject:nil afterDelay:2.0];
-    
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        self.invitecodeLabel.text = [NSString stringWithFormat:@"班级邀请码:%@" ,[numberFormatter stringFromNumber:self.model.invitecode]];
+        self.stuCountLabel.text = [NSString stringWithFormat:@"%ld人", (unsigned long)self.model.memberlist.count];
+        [self viewDidLoad];
+        
+        
+        [self.stuListTableView reloadData];
+        
+        [SVProgressHUD showWithStatus:@"正在刷新"];
+        [self performSelector:@selector(dismiss) withObject:nil afterDelay:2.0];
+    }];
+//    NSMutableArray *classArray = [[StuDataBase shareStuDataBase] selectAllClass];
+//    
+//
+//    NSMutableArray *groupArray = [[StuDataBase shareStuDataBase] selectAllGroup];
+//    
+////    self.model = classArray[self.currentIndex];
+//    if(self.groupModel != nil){
+//    for (StuGroupEntity *currGroupModel in groupArray) {
+//        if([currGroupModel.gid isEqual:self.groupModel.gid]){
+//            self.groupModel = currGroupModel;
+//        }
+//    }
+//    }else{
+//        for (StuClassEntity *currClassModel in classArray) {
+//            if([currClassModel.gradeid isEqual:self.model.gradeid] && [currClassModel.cid isEqual:self.model.cid]){
+//                NSLog(@"%@", currClassModel.name);
+//                self.model = currClassModel;
+//            }
+//        }
+//    }
+//    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+//    self.invitecodeLabel.text = [NSString stringWithFormat:@"班级邀请码:%@" ,[numberFormatter stringFromNumber:self.model.invitecode]];
+//    self.stuCountLabel.text = [NSString stringWithFormat:@"%ld人", (unsigned long)self.model.memberlist.count];
+//    [self viewDidLoad];
+//
+//    
+//    [self.stuListTableView reloadData];
+//    
+//    [SVProgressHUD showWithStatus:@"正在刷新"];
+//    [self performSelector:@selector(dismiss) withObject:nil afterDelay:2.0];
+//    
 
     
 }
@@ -110,6 +143,7 @@
 
 #pragma mark - delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSLog(@"%ld", self.groupModel == nil ? self.model.memberlist.count : self.groupModel.memberlist.count);
 
     return self.groupModel == nil ? self.model.memberlist.count : self.groupModel.memberlist.count;
 }

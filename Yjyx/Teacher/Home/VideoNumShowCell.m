@@ -56,17 +56,21 @@
 
 - (void)videoNumBtnClick:(UIButton *)btn
 {
-    self.preBtn.backgroundColor = [UIColor whiteColor];
-    self.preBtn.layer.borderWidth = 1;
-    btn.backgroundColor = [UIColor lightGrayColor];
-    btn.layer.borderWidth = 0;
-    self.preBtn.selected = NO;
-    btn.selected = YES;
-    self.preBtn = btn;
-    
     if([self.delegate respondsToSelector:@selector(videoNumShowCell:videoNumBtnClick:)]){
         [self.delegate videoNumShowCell:self videoNumBtnClick:btn];
     }
+    
+        self.preBtn.backgroundColor = [UIColor whiteColor];
+        self.preBtn.layer.borderWidth = 1;
+        btn.backgroundColor = [UIColor lightGrayColor];
+        btn.layer.borderWidth = 0;
+        self.preBtn.selected = NO;
+        btn.selected = YES;
+        self.preBtn = btn;
+    
+   
+    
+  
 }
 - (void)setWorkModel:(YjyxMicroWorkModel *)workModel
 {
