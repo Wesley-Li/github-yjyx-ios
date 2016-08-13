@@ -29,7 +29,7 @@
     }
     
     
-    
+    self.taskType = dic[@"tasktype"];
     self.taskid = dic[@"taskid"];
     
     

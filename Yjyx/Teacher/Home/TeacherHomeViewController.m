@@ -224,8 +224,9 @@
 // 上传头像
 -(void)upfiletoQiniu:(NSString *)token image:(UIImage*)image
 {
-    UIImage *imageNew = [self imageCompressForWidth:image targetWidth:self.picImage.width];
+    UIImage *imageNew = [self imageCompressForWidth:image targetWidth:SCREEN_WIDTH];
     NSData *data = UIImageJPEGRepresentation(imageNew, 0.3);
+    
     QNUploadManager *upManager = [[QNUploadManager alloc] init];
     [upManager putData:data key:nil token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resq){
         if (info.error == nil) {

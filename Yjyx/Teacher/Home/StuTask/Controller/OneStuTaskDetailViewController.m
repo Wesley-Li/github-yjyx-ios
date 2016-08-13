@@ -708,7 +708,8 @@
         drawVC.qtype = @"blankfill";
         
     }
-    drawVC.stuName = self.title;
+    
+    drawVC.stuName = [self.title containsString:@"("] ? self.stuName : self.title;
     
     [self.navigationController pushViewController:drawVC animated:YES];
     

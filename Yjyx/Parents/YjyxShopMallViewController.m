@@ -18,6 +18,12 @@
     [super viewDidLoad];
     [self loadBackBtn];
     self.title = @"商城";
+    
+    UIImage *image = [UIImage imageNamed:@"isbuilding"];
+    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, image.size.height*SCREEN_WIDTH/image.size.width)];
+    imageV.image = image;
+    [self.view addSubview:imageV];
+    
     // Do any additional setup after loading the view from its nib.
 }
 

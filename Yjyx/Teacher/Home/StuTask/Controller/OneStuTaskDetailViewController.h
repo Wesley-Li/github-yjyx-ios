@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSNumber *suid;// 学生的user id
 @property (nonatomic, strong) NSNumber *qtype; // 题目类型
 @property (nonatomic, strong) NSNumber *qid; // 题目id
+@property (nonatomic, copy) NSString *stuName;
 
 @property (nonatomic, copy) NSString *right;// 对错
 

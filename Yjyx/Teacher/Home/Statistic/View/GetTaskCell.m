@@ -37,6 +37,7 @@
         self.indicatorImage.hidden = YES;
     }
     
+    self.imageView.image = [model.taskType isEqual:@1] ? [UIImage imageNamed:@"Parent_homework"] : [UIImage imageNamed:@"Parent_weike"];
     
 }
 

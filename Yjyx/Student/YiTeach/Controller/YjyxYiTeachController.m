@@ -17,12 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"亿教";
-    UILabel *label = [[UILabel alloc] init];
-    label.text = @"敬请期待...";
-    [label sizeToFit ];
-    label.center = self.view.center;
-    label.textColor = [UIColor blackColor];
-    [self.view addSubview:label];
+    UIImage *image = [UIImage imageNamed:@"isbuilding"];
+    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, image.size.height*SCREEN_WIDTH/image.size.width)];
+    imageV.image = image;
+    [self.view addSubview:imageV];
+
+
 }
 
 - (void)didReceiveMemoryWarning {

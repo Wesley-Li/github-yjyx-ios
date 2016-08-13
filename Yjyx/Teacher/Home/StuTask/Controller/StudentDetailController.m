@@ -347,6 +347,7 @@
     oneTaskVC.suid = self.studentID;
     TaskConditonModel *model = _choiceArray[sender.tag - 200];
     oneTaskVC.qid = model.t_id;
+    oneTaskVC.stuName = self.titleName;
     oneTaskVC.title = [NSString stringWithFormat:@"%@(%ld/%ld)", self.titleName, sender.tag - 199, _choiceArray.count];
     if ([model.rightOrWrong isEqual:@1]) {
         oneTaskVC.right = @"YES";
@@ -445,6 +446,7 @@
     oneTaskVC.suid = self.studentID;
     TaskConditonModel *model = _blankfillArray[sender.tag - 200];
     oneTaskVC.qid = model.t_id;
+    oneTaskVC.stuName = self.titleName;
     oneTaskVC.title = [NSString stringWithFormat:@"%@(%ld/%ld)", self.titleName, sender.tag - 199, _blankfillArray.count];
     if ([model.rightOrWrong isEqual:@1]) {
         oneTaskVC.right = @"YES";
