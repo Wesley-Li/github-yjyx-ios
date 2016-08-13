@@ -613,8 +613,11 @@ static NSString *VideoNumID = @"VideoNum";
         [wmPlayer removeFromSuperview];
         wmPlayer.backBtn.hidden = YES;
         wmPlayer.closeBtn.hidden = YES;
-        [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
+         [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
+        
+        
         [wmPlayer setVideoURLStr:self.videoURL];
+      
         [wmPlayer.player play];
     }else{
         wmPlayer = [[WMPlayer alloc]initWithFrame:self.videoCell.backgroundIV.bounds videoURLStr:self.videoURL];
@@ -937,9 +940,13 @@ static NSString *VideoNumID = @"VideoNum";
 {
 //    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     self.videoURL = _microDetailM.videoUrlArr[btn.tag];
-    
+    [wmPlayer.player pause];
+    [wmPlayer removeFromSuperview];
+    wmPlayer = nil;
     ReleaseMicroCell *cell2 = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [self startPlayVideo:cell2.playBtn];
+
+   
 //    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
 #pragma mark - SubjectDetailCell代理方法

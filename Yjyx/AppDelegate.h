@@ -34,6 +34,6 @@
 
 - (void)fillViews;
 - (void)getStuList;
-
+- (void)getStuListComplete:(void(^)(void))compeletion;
 @end
 

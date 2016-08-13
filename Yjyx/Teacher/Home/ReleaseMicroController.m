@@ -196,7 +196,7 @@ static NSString *StudentID = @"StudentCell";
     coverView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.4];
     [self.view addSubview:coverView];
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
-
+    [SVProgressHUD showWithStatus:@"正在发布..."];
     [mgr POST:[BaseURL stringByAppendingString:@"/api/teacher/mobile/general_task/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         NSLog(@"%@", responseObject[@"reason"]);
         if([responseObject[@"retcode"] isEqual:@0]){
