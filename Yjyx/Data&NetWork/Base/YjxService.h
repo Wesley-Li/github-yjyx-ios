@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 
 //开发环境
-//#define BaseURL @"http://139.196.14.118"
-//#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
+#define BaseURL @"http://139.196.14.118"
+#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
+//#define BaseURL @"https://ssl.zgyjyx.com"
+
 
 
 //生产环境
@@ -21,9 +23,8 @@
 /**
  * QA环境地址
  * **/
-#define BaseURL @"http://192.168.1.231"
-#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
-
+//#define BaseURL @"http://192.168.1.231"
+//#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
 
 
 // QA2环境地址
