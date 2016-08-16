@@ -537,6 +537,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     self.firstPoint = self.secondPoint = CGPointZero;
 }
+
 -(void)dealloc{
     NSLog(@"wmplayer delloc");
     [self.player pause];

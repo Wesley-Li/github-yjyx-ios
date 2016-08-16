@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *resourcenameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *statusImage;
 
+@property (weak, nonatomic) IBOutlet UILabel *rateLabel;
 
 @end
 
@@ -40,7 +41,8 @@
     self.timeLabel.text = timeString;
     
     self.descriptionLabel.text = model.resourcename;
-    
+    self.rateLabel.textColor = [UIColor colorWithHexString:@"#d30013"];
+    self.rateLabel.text = [NSString stringWithFormat:@"%@%%", model.rateNum];
     
     if([model.t_description isEqualToString:@""]){
         self.resourcenameLabel.hidden = YES;
