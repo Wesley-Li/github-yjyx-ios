@@ -40,7 +40,7 @@
     NSString *htmlString = [dic[@"question"] objectForKey:@"explanation"];
     NSLog(@"%@", htmlString);
     if (htmlString != nil && htmlString.length != 0) {
-        NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", htmlString];
+        NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", htmlString];
         UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH - 20, 50)];
         web.scrollView.showsHorizontalScrollIndicator = NO;
         web.scrollView.scrollEnabled = NO;

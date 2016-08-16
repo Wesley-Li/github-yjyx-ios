@@ -77,6 +77,7 @@
                     navigation.navigationBar.hidden = YES;
                     [(AppDelegate *)SYS_DELEGATE window].rootViewController =navigation;
                     [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                    NSLog(@"未登录------");
                     
                 }
             }else {
@@ -86,6 +87,7 @@
                 navigation.navigationBar.hidden = YES;
                 [(AppDelegate *)SYS_DELEGATE window].rootViewController =navigation;
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                NSLog(@"未登录+++++++++++");
             
             }
         }];

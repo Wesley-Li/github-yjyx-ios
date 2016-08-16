@@ -338,7 +338,13 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)releaseWMPlayer{
-    
+    if(wmPlayer == nil){
+        
+        return;
+    }
+    [wmPlayer removeFromSuperview];
+    [wmPlayer.playerLayer removeFromSuperlayer];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [wmPlayer.player.currentItem cancelPendingSeeks];
         [wmPlayer.player.currentItem.asset cancelLoading];
         [wmPlayer.player pause];
@@ -362,7 +368,7 @@
         wmPlayer.playOrPauseBtn = nil;
         wmPlayer.playerLayer = nil;
         wmPlayer = nil;
-  
+    });
     
 }
 //- (void)viewDidDisappear:(BOOL)animated
