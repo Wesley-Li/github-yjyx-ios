@@ -970,7 +970,9 @@ static NSString *videoNumID = @"VIDEONumID";
 - (void)videoNumShowCell:(VideoNumShowCell *)cell videoNumBtnClick:(UIButton *)btn
 {
     self.videoURL = _model.videoobjlist[btn.tag][@"url"];
-    
+    [wmPlayer.player pause];
+    [wmPlayer removeFromSuperview];
+    wmPlayer = nil;
     ReleaseMicroCell *cell2 = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [self startPlayVideo:cell2.playBtn];
 //    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
@@ -983,8 +985,14 @@ static NSString *videoNumID = @"VIDEONumID";
     YjyxAnonatationController *anonatationVC = [[YjyxAnonatationController alloc] init];
 
     if (cell.indexPath.section == 4) {//选择题
-        YjyxStuAnswerModel *rmodel = self.stuChoiceAnswerArr[cell.indexPath.row - 1];
-        anonatationVC.processArr = [rmodel.writeprocess mutableCopy];
+        if(self.stuChoiceAnswerArr.count != 0){
+            YjyxStuAnswerModel *rmodel = self.stuChoiceAnswerArr[cell.indexPath.row - 1];
+            anonatationVC.processArr = [rmodel.writeprocess mutableCopy];
+        }else{
+            YjyxStuAnswerModel *rmodel = self.stuBlankAnswerArr[cell.indexPath.row - 1];
+            anonatationVC.processArr = [rmodel.writeprocess mutableCopy];
+        }
+      
         
     }else if (cell.indexPath.section == 5) {//填空题
         YjyxStuAnswerModel *rmodel = self.stuBlankAnswerArr[cell.indexPath.row - 1];

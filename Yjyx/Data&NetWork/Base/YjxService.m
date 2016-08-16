@@ -548,7 +548,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     if (autoLogin) {
-        NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"TSessionID"];
+        NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"SSessionID"];
         if([cookiesdata length]) {
             NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
             NSHTTPCookie *cookie;
@@ -563,7 +563,7 @@
                 NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:[BaseURL stringByAppendingString:STUDENT_LOGIN_CONNET_POST]]];
                 NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                [defaults setObject:data forKey:@"TSessionID"];
+                [defaults setObject:data forKey:@"SSessionID"];
                 [defaults synchronize];
             }
             

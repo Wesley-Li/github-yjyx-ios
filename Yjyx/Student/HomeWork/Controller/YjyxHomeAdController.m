@@ -9,7 +9,7 @@
 #import "YjyxHomeAdController.h"
 #import <WebKit/WebKit.h>
 
-@interface YjyxHomeAdController ()
+@interface YjyxHomeAdController ()<WKNavigationDelegate>
 
 @property (strong, nonatomic) WKWebView *webView;
 @end
@@ -21,10 +21,14 @@
     // 初始化webview
     [self setupWebView];
 }
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [SVProgressHUD dismiss];
+}
 - (void)setupWebView
 {
     WKWebView *webView = [[WKWebView alloc] init];
-    
+    webView.navigationDelegate = self;
     self.webView = webView;
     [self.view addSubview:webView];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.page_detail]];
@@ -39,7 +43,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
+{
+    [SVProgressHUD showWithStatus:@"正在加载..."];
+}
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+{
+    [SVProgressHUD dismiss];
+}
 @end

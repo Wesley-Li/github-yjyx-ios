@@ -71,7 +71,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yGL-J6-Shn">
                     <rect key="frame" x="0.0" y="65" width="320" height="44"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9J3-La-NsM">
+                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9J3-La-NsM" customClass="YjyxHomeWorkButton">
                             <rect key="frame" x="0.0" y="0.0" width="107" height="44"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="老师">
@@ -84,7 +84,7 @@
                                 <action selector="teacherBtnClick:" destination="-1" eventType="touchUpInside" id="Bji-oN-DVj"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WaA-qw-Iyz">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WaA-qw-Iyz" customClass="YjyxHomeWorkButton">
                             <rect key="frame" x="213" y="0.0" width="107" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="107" id="UzA-UC-LOS"/>
@@ -112,7 +112,7 @@
                                 <constraint firstAttribute="height" constant="2" id="kJ7-xf-AOb"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a4b-j4-aze">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a4b-j4-aze" customClass="YjyxHomeWorkButton">
                             <rect key="frame" x="107" y="0.0" width="106" height="44"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="家长">
@@ -192,7 +192,7 @@
                 <constraint firstItem="GYC-q6-b7x" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wU2-5t-2Y7"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="620" y="190"/>
+            <point key="canvasLocation" x="-102" y="128"/>
         </view>
     </objects>
     <resources>
