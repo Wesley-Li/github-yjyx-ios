@@ -112,6 +112,25 @@
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="平均正确率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdq-1g-Qye">
+                                <rect key="frame" x="373" y="8" width="70" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="eFb-IO-WsJ"/>
+                                    <constraint firstAttribute="width" constant="70" id="gEu-ew-wwK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDA-nX-nGc">
+                                <rect key="frame" x="323" y="7" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="CGb-DB-DSX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -123,6 +142,10 @@
                             <constraint firstItem="FC0-rQ-B4u" firstAttribute="leading" secondItem="rxZ-HC-ll5" secondAttribute="leading" constant="20" id="PqR-jD-h4f"/>
                             <constraint firstItem="Xei-DA-9wM" firstAttribute="centerY" secondItem="rxZ-HC-ll5" secondAttribute="centerY" constant="-5" id="TK6-Cl-1Sl"/>
                             <constraint firstAttribute="trailing" secondItem="Xei-DA-9wM" secondAttribute="trailing" constant="20" id="UKu-0t-Mm2"/>
+                            <constraint firstItem="fT9-UE-OQD" firstAttribute="top" secondItem="gDA-nX-nGc" secondAttribute="bottom" constant="2" id="Uxh-VC-XMC"/>
+                            <constraint firstAttribute="trailing" secondItem="hdq-1g-Qye" secondAttribute="trailing" constant="10" id="ZrH-8b-E03"/>
+                            <constraint firstItem="fT9-UE-OQD" firstAttribute="top" secondItem="hdq-1g-Qye" secondAttribute="bottom" constant="2" id="eoU-4O-zqL"/>
+                            <constraint firstItem="hdq-1g-Qye" firstAttribute="leading" secondItem="gDA-nX-nGc" secondAttribute="trailing" id="lmw-Dt-GQl"/>
                             <constraint firstItem="fT9-UE-OQD" firstAttribute="top" secondItem="bnR-ss-Vv2" secondAttribute="bottom" constant="2" id="n1V-H0-7vp"/>
                             <constraint firstItem="Xei-DA-9wM" firstAttribute="leading" secondItem="cM1-tp-vxw" secondAttribute="trailing" constant="10" id="n2t-YZ-h0S"/>
                             <constraint firstItem="bnR-ss-Vv2" firstAttribute="leading" secondItem="rxZ-HC-ll5" secondAttribute="leading" constant="10" id="nFQ-Gp-VBI"/>
@@ -146,6 +169,7 @@
                 <outlet property="deadlineLabel" destination="5Yd-Xe-jdI" id="xGb-O1-2ia"/>
                 <outlet property="descriptionLabel" destination="cM1-tp-vxw" id="3bI-9f-Qg1"/>
                 <outlet property="finishedLabel" destination="Ci2-XO-POW" id="e6b-Tt-zhb"/>
+                <outlet property="rateLabel" destination="gDA-nX-nGc" id="bo6-Xw-SZ9"/>
                 <outlet property="resourcenameLabel" destination="xka-7J-Xrz" id="2VW-bZ-mH0"/>
                 <outlet property="statusImage" destination="Xei-DA-9wM" id="Ocq-fW-Rwi"/>
                 <outlet property="timeLabel" destination="bnR-ss-Vv2" id="Mbc-84-gWL"/>

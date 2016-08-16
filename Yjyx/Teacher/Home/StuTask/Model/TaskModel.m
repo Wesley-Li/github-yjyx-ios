@@ -21,6 +21,7 @@
     self.t_id = dic[@"id"];
     self.relatedresourceid = dic[@"relatedresourceid"];
     self.resourcename = dic[@"resourcename"];
+    self.rateNum = dic[@"rate"];
 
 }
 

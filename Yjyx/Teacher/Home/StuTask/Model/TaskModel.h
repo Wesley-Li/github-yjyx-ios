@@ -19,7 +19,7 @@
 @property (nonatomic, strong) NSNumber *tasktype;// 作业类型
 @property (nonatomic, strong) NSNumber *t_id;// 任务id号
 @property (nonatomic, strong) NSNumber *relatedresourceid;// 相关资源数id
-
+@property (nonatomic, strong) NSNumber *rateNum;// 平均正确率
 @property (nonatomic, assign) CGFloat height;
 
 

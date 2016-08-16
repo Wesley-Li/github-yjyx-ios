@@ -556,6 +556,7 @@
 		8094E4BE1D123E9700EF221A /* QuestionDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8094E4BD1D123E9700EF221A /* QuestionDataBase.m */; };
 		8094E4C21D129DB800EF221A /* QuestionPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8094E4C01D129DB800EF221A /* QuestionPreviewCell.m */; };
 		8094E4C31D129DB800EF221A /* QuestionPreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8094E4C11D129DB800EF221A /* QuestionPreviewCell.xib */; };
+		80A0E8BC1D61A64D00ED68A1 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A0E8BB1D61A64D00ED68A1 /* UIColor+Hex.m */; };
 		80CCF43F1CF2F0EC000C93D9 /* UnSubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80CCF43D1CF2F0EC000C93D9 /* UnSubmitCell.m */; };
 		80CCF4401CF2F0EC000C93D9 /* UnSubmitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CCF43E1CF2F0EC000C93D9 /* UnSubmitCell.xib */; };
 		80D978E61D265B80000BD95E /* CustomSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D978E51D265B80000BD95E /* CustomSectionView.m */; };
@@ -1509,6 +1510,8 @@
 		8094E4BF1D129DB800EF221A /* QuestionPreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionPreviewCell.h; sourceTree = "<group>"; };
 		8094E4C01D129DB800EF221A /* QuestionPreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionPreviewCell.m; sourceTree = "<group>"; };
 		8094E4C11D129DB800EF221A /* QuestionPreviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionPreviewCell.xib; sourceTree = "<group>"; };
+		80A0E8BA1D61A64D00ED68A1 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		80A0E8BB1D61A64D00ED68A1 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		80CCF43C1CF2F0EC000C93D9 /* UnSubmitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnSubmitCell.h; sourceTree = "<group>"; };
 		80CCF43D1CF2F0EC000C93D9 /* UnSubmitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnSubmitCell.m; sourceTree = "<group>"; };
 		80CCF43E1CF2F0EC000C93D9 /* UnSubmitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnSubmitCell.xib; sourceTree = "<group>"; };
@@ -2137,6 +2140,7 @@
 		3AEF26DB1C61F08A0028BE09 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				80A0E8B91D61A5E200ED68A1 /* UIcolorForHex */,
 				80D9791E1D3F0A32000BD95E /* VoiceConvert */,
 				80D979121D388212000BD95E /* ImageDrawing */,
 				80D979091D2E21A5000BD95E /* iCarousel */,
@@ -3316,6 +3320,15 @@
 			path = openssl;
 			sourceTree = "<group>";
 		};
+		80A0E8B91D61A5E200ED68A1 /* UIcolorForHex */ = {
+			isa = PBXGroup;
+			children = (
+				80A0E8BA1D61A64D00ED68A1 /* UIColor+Hex.h */,
+				80A0E8BB1D61A64D00ED68A1 /* UIColor+Hex.m */,
+			);
+			path = UIcolorForHex;
+			sourceTree = "<group>";
+		};
 		80D979091D2E21A5000BD95E /* iCarousel */ = {
 			isa = PBXGroup;
 			children = (
@@ -4039,6 +4052,7 @@
 				3B35DB8A1CE0560F000B7F83 /* NextTableViewController.m in Sources */,
 				3CD1BC181D1E325E009ED261 /* SubjectTitleCell.m in Sources */,
 				3A91F4931C760CF4001568AA /* PNColor.m in Sources */,
+				80A0E8BC1D61A64D00ED68A1 /* UIColor+Hex.m in Sources */,
 				3CAC454A1D40EA5B00ACBDA9 /* YjyxExchangeRecordViewController.m in Sources */,
 				3AD1FD9E1C72CE5000E362B9 /* CommonWebViewController.m in Sources */,
 				80D9790C1D2E21A5000BD95E /* iCarousel.m in Sources */,

@@ -19,6 +19,7 @@
 #import "JSON.h"
 #import "NSObject+category.h"
 #import "UIView+category.h"
+#import "UIColor+Hex.h"
 #import <AFNetworking.h>
 #import "AppDelegate.h"
 #import "UIImageView+WebCache.h"
