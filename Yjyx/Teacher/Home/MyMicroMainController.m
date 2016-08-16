@@ -187,12 +187,31 @@ static NSString *ID = @"CELL";
     [self.seacherArr removeAllObjects];
     if ([searchText isEqualToString:@""]) {
         self.seacherArr = nil;
+        self.tableView.tableHeaderView = [[UIView alloc] init];
+        [self.tableView reloadData];
+        return;
     }
     
     for (MyMicroModel *tempModel in self.myMicroArr) {
         if([tempModel.name containsString:searchText]){
             [self.seacherArr addObject:tempModel];
         }
+    }
+    if (self.seacherArr.count == 0) {
+        UIView *view = [[UIView alloc] init];
+        view.height = 100;
+        UILabel *label = [[UILabel alloc] init];
+        label.text = @"无搜索结果";
+        [label sizeToFit];
+
+        label.centerX = self.view.centerX;
+        label.centerY = view.centerY;
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor lightGrayColor];
+        [view addSubview:label];
+        self.tableView.tableHeaderView = view;
+    }else{
+        self.tableView.tableHeaderView = [[UIView alloc] init];
     }
     [self.tableView reloadData];
   

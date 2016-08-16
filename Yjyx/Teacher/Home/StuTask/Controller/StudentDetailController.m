@@ -1,3 +1,4 @@
+
 //
 //  StudentDetailController.m
 //  Yjyx
@@ -60,7 +61,7 @@
     
 //    self.automaticallyAdjustsScrollViewInsets = NO;
     
-    
+    [SVProgressHUD showWithStatus:@"正在加载..."];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:24/255.0 green:138/255.0 blue:224/255.0 alpha:1.0]];
     self.navigationItem.title = self.titleName;
     
@@ -85,7 +86,10 @@
     
     
 }
-
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [SVProgressHUD dismiss];
+}
 - (void)readDataFromNetWork {
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"gettaskonestudentdetail", @"action",self.taskID,@"taskid",self.studentID, @"suid",  nil];
@@ -140,9 +144,13 @@
         }
         
         [self.tableView reloadData];
+        [SVProgressHUD dismiss];
         
     }failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
+        NSLog(@"%@, %@", error.localizedDescription, error.userInfo[NSLocalizedDescriptionKey]);
+        
+        [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
+        [SVProgressHUD dismiss];
     }];
     
 }
@@ -167,7 +175,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return 5;
+    return self.choiceArray.count + self.blankfillArray.count == 0 ? 0 : 5;
 }
 
 

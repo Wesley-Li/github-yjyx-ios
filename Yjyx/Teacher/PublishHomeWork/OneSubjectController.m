@@ -388,6 +388,8 @@ static NSString *VideoID = @"VIDEOCELL";
 
         return;
     }
+        [wmPlayer removeFromSuperview];
+        [wmPlayer.playerLayer removeFromSuperlayer];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [wmPlayer.player.currentItem cancelPendingSeeks];
         [wmPlayer.player.currentItem.asset cancelLoading];

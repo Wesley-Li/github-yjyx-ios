@@ -89,16 +89,17 @@
        AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
        NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
        pamar[@"action"] = @"checkuserexist";
-       pamar[@"username"] = textField.text;
+       pamar[@"username"] = [NSString stringWithFormat:@"4*#*_%@", textField.text];
         
         [mgr GET:[BaseURL stringByAppendingString:USERNAME_ISEXIST_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
             if([responseObject[@"retcode"] isEqual: @0]){
+                NSLog(@"%@", responseObject);
                 if ([responseObject[@"exist"] isEqual: @1]) {
                     [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
                     _flag = 1;
-                }
-            }else if([responseObject[@"exist"] isEqual: @0]){
+                }else if([responseObject[@"exist"] isEqual: @0]){
                 _flag = 0;
+            }
             }else{
                 if ([responseObject[@"msg"] isEqualToString:@"ratelimitted"]) {
                 [self.view makeToast:@"操作过快" duration:0.5 position:SHOW_CENTER complete:nil];
@@ -152,7 +153,7 @@
         AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
         NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
         pamar[@"action"] = @"checkuserexist";
-        pamar[@"username"] = phoneText.text;
+        pamar[@"username"] =  phoneText.text;
         
         [mgr GET:[BaseURL stringByAppendingString:USERNAME_ISEXIST_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
             NSLog(@"%@", responseObject);
