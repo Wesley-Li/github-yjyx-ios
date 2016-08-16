@@ -88,13 +88,13 @@
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil
      ];
+    
 }
 
 
--(void)videoDidFinished:(NSNotification *)notice{
+-(void)VideoDidFinished:(NSNotification *)notice{
     
     [self toCell];
-    
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
     isPlay = NO;
     currentCell.playBtn.hidden = NO;
@@ -110,6 +110,7 @@
     isPlay = NO;
     [self toCell];
     [self releaseWMPlayer];
+    
     [self setNeedsStatusBarAppearanceUpdate];
 }
 -(void)fullScreenBtnClick:(NSNotification *)notice{
@@ -316,7 +317,7 @@
     
     
     //注册播放完成通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(VideoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     //注册播放完成通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
     
@@ -393,7 +394,7 @@
     }
  
     [SVProgressHUD dismiss];
-   
+   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)goBack {
     
@@ -670,7 +671,7 @@
 
         return;
     }
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    
     [wmPlayer.player.currentItem cancelPendingSeeks];
     [wmPlayer.player.currentItem.asset cancelLoading];
     [wmPlayer.player pause];
@@ -694,7 +695,7 @@
     wmPlayer.playOrPauseBtn = nil;
     wmPlayer.playerLayer = nil;
     wmPlayer = nil;
-    });
+   
 }
 
 

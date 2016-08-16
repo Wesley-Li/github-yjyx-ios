@@ -24,7 +24,10 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"常用工具";
     UIImage *image = [UIImage imageNamed:@"isbuilding"];
-    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, image.size.height*SCREEN_WIDTH/image.size.width)];
+    CGFloat width = SCREEN_WIDTH - 80;
+    CGFloat height = image.size.height *width/image.size.width ;
+    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(40, 120, width, height)];
+
     imageV.image = image;
     [self.view addSubview:imageV];
 }
