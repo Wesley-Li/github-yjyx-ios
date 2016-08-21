@@ -21,6 +21,9 @@
 @property (strong, nonatomic) NSNumber *tasktype; // 作业类型
 @property (strong, nonatomic) NSString *task_description; // 任务描述
 @property (strong, nonatomic) NSNumber *t_id; // 获取老数据使用
+@property (strong, nonatomic) NSNumber *totalCorrect;
+@property (strong, nonatomic) NSNumber *totalWrong;
+@property (assign, nonatomic) CGFloat height;
 
 + (instancetype)todayWorkModelWithDict:(NSDictionary *)dict;
 @end

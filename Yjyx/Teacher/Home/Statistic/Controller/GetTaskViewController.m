@@ -43,7 +43,7 @@
     [goBackBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:goBackBtn];
     self.navigationItem.leftBarButtonItem = leftBtnItem;
-
+    self.navigationItem.title = self.tip == 0 ? @"完成任务" : @"未完成任务";
     
     
     self.edgesForExtendedLayout = UIRectEdgeBottom;
@@ -98,6 +98,7 @@
     
     if (self.tip == 0) {
         trailString = @"finishedonly";
+        
     }else {
     
         trailString = @"unfinishedonly";

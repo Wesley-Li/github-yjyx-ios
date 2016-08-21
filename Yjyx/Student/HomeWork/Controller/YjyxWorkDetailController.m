@@ -9,6 +9,7 @@
 #import "YjyxWorkDetailController.h"
 #import "YjyxStuAnswerModel.h"
 #import "YjyxWorkDetailModel.h"
+#import "YjyxStuSummaryModel.h"
 #import "YjyxWorkContentCell.h"
 #import "YjyxMicroWorkModel.h"
 #import "ReleaseMicroCell.h"
@@ -34,6 +35,8 @@
 @property (strong, nonatomic) NSArray *stuBlankAnswerArr;
 @property (strong, nonatomic) NSArray *stuChoiceContentArr;
 @property (strong, nonatomic) NSArray *stuBlankContentArr;
+@property (nonatomic, strong) NSMutableDictionary *summaryChoiceModelDic;
+@property (nonatomic, strong) NSMutableDictionary *summaryBlankModelDic;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) YjyxMicroWorkModel *model;
 
@@ -76,6 +79,8 @@ static NSString *videoNumID = @"VIDEONumID";
     self.choiceCellHeightDic = [[NSMutableDictionary alloc] init];
     self.blankfillHeightDic = [[NSMutableDictionary alloc] init];
     self.blankfillExpandDic = [[NSMutableDictionary alloc] init];
+    self.summaryChoiceModelDic = [[NSMutableDictionary alloc] init];
+    self.summaryBlankModelDic = [[NSMutableDictionary alloc] init];
     
     self.tableView.sectionFooterHeight = 10;
     self.tableView.sectionHeaderHeight = 20;
@@ -253,6 +258,24 @@ static NSString *videoNumID = @"VIDEONumID";
         YjyxMicroWorkModel *model = [YjyxMicroWorkModel microWorkModelWithDict:responseObject[@"data"][@"lessonobj"]];
         _model = model;
         self.videoURL = model.videoobjlist[0][@"url"];
+        
+        // 选择题每题答题概要信息
+        NSDictionary *summaryChoiceDic = [[[responseObject objectForKey:@"data"] objectForKey:@"summary_perquestion"] objectForKey:@"choice"];
+        for (NSString *key in [summaryChoiceDic allKeys]) {
+            YjyxStuSummaryModel *model = [[YjyxStuSummaryModel alloc] init];
+            [model initModelWithDic:[summaryChoiceDic objectForKey:key]];
+            [self.summaryChoiceModelDic setObject:model forKey:key];
+        }
+        
+        // 填空题每题答题概要信息
+        NSDictionary *summaryBlankfillDic = [[[responseObject objectForKey:@"data"] objectForKey:@"summary_perquestion"] objectForKey:@"blankfill"];
+        for (NSString *key in [summaryBlankfillDic allKeys]) {
+            YjyxStuSummaryModel *model = [[YjyxStuSummaryModel alloc] init];
+            [model initModelWithDic:[summaryBlankfillDic objectForKey:key]];
+            [self.summaryBlankModelDic setObject:model forKey:key];
+        }
+
+        
         NSMutableArray *tempArr1 = [NSMutableArray array];
         NSMutableArray *tempArr2 = [NSMutableArray array];
         for (NSArray *arr in responseObject[@"data"][@"result"][@"choice"]) {
@@ -809,7 +832,9 @@ static NSString *videoNumID = @"VIDEONumID";
                 [cell.annotationBtn addTarget:self action:@selector(getTheAnotation:) forControlEvents:UIControlEventTouchUpInside];
                 YjyxWorkDetailModel *model = self.stuChoiceContentArr[indexPath.row - 1];
                 YjyxStuAnswerModel *model1 = self.stuChoiceAnswerArr[indexPath.row - 1];
-                [cell setSubviewsWithWorkDetailModel:model andStuResultModel:model1];
+                YjyxStuSummaryModel *su_model = [self.summaryChoiceModelDic objectForKey:model1.t_id];
+                
+                [cell setSubviewsWithWorkDetailModel:model andStuResultModel:model1 andSummaryModel:su_model];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.indexPath = indexPath;
                 cell.tag = indexPath.row ;
@@ -827,6 +852,7 @@ static NSString *videoNumID = @"VIDEONumID";
                 [cell.annotationBtn addTarget:self action:@selector(getTheAnotation:) forControlEvents:UIControlEventTouchUpInside];
                 YjyxWorkDetailModel *model = self.stuBlankContentArr[indexPath.row - 1];
                 YjyxStuAnswerModel *model1 = self.stuBlankAnswerArr[indexPath.row - 1];
+                YjyxStuSummaryModel *su_model = [self.summaryBlankModelDic objectForKey:model1.t_id];
                 
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
              
@@ -842,7 +868,7 @@ static NSString *videoNumID = @"VIDEONumID";
                 }else {
                     cell.expandBtn.selected = [expand boolValue];
                 }
-                [cell setSubviewsWithWorkDetailModel:model andStuResultModel:model1];
+                [cell setSubviewsWithWorkDetailModel:model andStuResultModel:model1 andSummaryModel:su_model];
                 return cell;
             }
         }
@@ -858,7 +884,8 @@ static NSString *videoNumID = @"VIDEONumID";
             [cell.annotationBtn addTarget:self action:@selector(getTheAnotation:) forControlEvents:UIControlEventTouchUpInside];
             YjyxWorkDetailModel *model = self.stuBlankContentArr[indexPath.row - 1];
             YjyxStuAnswerModel *model1 = self.stuBlankAnswerArr[indexPath.row - 1];
-            [cell setSubviewsWithWorkDetailModel:model andStuResultModel:model1];
+            YjyxStuSummaryModel *su_model = [self.summaryBlankModelDic objectForKey:model1.t_id];
+            
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.indexPath = indexPath;
             cell.tag = indexPath.row;
@@ -872,7 +899,7 @@ static NSString *videoNumID = @"VIDEONumID";
             }else {
                 cell.expandBtn.selected = [expand boolValue];
             }
-            [cell setSubviewsWithWorkDetailModel:model andStuResultModel:model1];
+            [cell setSubviewsWithWorkDetailModel:model andStuResultModel:model1 andSummaryModel:su_model];
             return cell;
         }
     }

@@ -20,4 +20,7 @@
 @property (strong, nonatomic) YjyxTodayWorkModel *todayWorkModel;
 
 @property (strong, nonatomic) YjyxTodayWorkModel *OneSubjectModel;
+
+
+
 @end

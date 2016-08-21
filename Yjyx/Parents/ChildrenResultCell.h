@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class ChildrenResultModel;
-@class ResultModel, YjyxStuAnswerModel, YjyxWorkDetailModel;
+@class ResultModel, YjyxStuAnswerModel, YjyxWorkDetailModel, SummaryResultModel, YjyxStuSummaryModel;
 @interface ChildrenResultCell : UITableViewCell
 
 
@@ -26,9 +26,9 @@
 
 
 // 题目内容赋值
-- (void)setSubviewsWithChildrenResultModel:(ChildrenResultModel *)model andResultModel:(ResultModel *)resultModel;
+- (void)setSubviewsWithChildrenResultModel:(ChildrenResultModel *)model andResultModel:(ResultModel *)resultModel andSummaryResultModel:(SummaryResultModel *)summarymodel;
 
 // 学生端
-- (void)setSubviewsWithWorkDetailModel:(YjyxWorkDetailModel *)model andStuResultModel:(YjyxStuAnswerModel *)resultModel;
+- (void)setSubviewsWithWorkDetailModel:(YjyxWorkDetailModel *)model andStuResultModel:(YjyxStuAnswerModel *)resultModel andSummaryModel:(YjyxStuSummaryModel *)summaryModel;
 
 @end

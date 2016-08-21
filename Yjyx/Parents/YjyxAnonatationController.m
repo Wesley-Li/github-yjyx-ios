@@ -39,7 +39,7 @@
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
     self.navigationController.navigationBarHidden = NO;
     if ([self.navigationController isKindOfClass:[YjyxCommonNavController class]]) {
-        [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(0, 229.0, 199.0, 1)];
+        [self.navigationController.navigationBar setBarTintColor:STUDENTCOLOR];
     }
 }
 

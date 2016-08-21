@@ -236,7 +236,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     if([self.navigationController isKindOfClass:[YjyxCommonNavController class]]){
-        self.navigationController.navigationBar.barTintColor = RGBACOLOR(0, 229.0, 199.0, 1);
+        self.navigationController.navigationBar.barTintColor = STUDENTCOLOR;
     }
 }
 - (void)viewDidAppear:(BOOL)animated {

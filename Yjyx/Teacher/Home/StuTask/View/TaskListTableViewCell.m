@@ -42,7 +42,8 @@
     
     self.descriptionLabel.text = model.resourcename;
     self.rateLabel.textColor = [UIColor colorWithHexString:@"#d30013"];
-    self.rateLabel.text = [NSString stringWithFormat:@"%@%%", model.rateNum];
+    NSInteger totalNum = [model.total_correct integerValue] + [model.total_wrong integerValue];
+    self.rateLabel.text = totalNum == 0 ? @"0%" : [NSString stringWithFormat:@"%.f%%", [model.total_correct floatValue] * 100 / ([model.total_correct floatValue] + [model.total_wrong floatValue])];
     
     if([model.t_description isEqualToString:@""]){
         self.resourcenameLabel.hidden = YES;

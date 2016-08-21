@@ -16,7 +16,7 @@
 + (void)initialize
 {
     UINavigationBar *navBar = [UINavigationBar appearance];
-    [navBar setBarTintColor:RGBACOLOR(0, 229.0, 199.0, 1)];
+    [navBar setBarTintColor:STUDENTCOLOR];
     [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     [navBar setTintColor:[UIColor whiteColor]];
 }

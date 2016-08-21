@@ -477,7 +477,7 @@
         // 统计
         YjyxStatistController *statistVc = [[YjyxStatistController alloc] init];
         YjyxCommonNavController *navVc2 = [[YjyxCommonNavController alloc] initWithRootViewController:statistVc];
-        navVc2.tabBarItem = [UITabBarItem itemWithTitle:@"统计" image:[UIImage imageNamed:@"student_sta"] selectedImage:[UIImage imageNamed:@"student_sta_tap"]];
+        navVc2.tabBarItem = [UITabBarItem itemWithTitle:@"统计" image:[UIImage imageNamed:@"stu_stastic"] selectedImage:[UIImage imageNamed:@"stu_stastic_click"]];
 //        navVc2.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 5, 5, 5);
         // 亿教
         YjyxYiTeachController *yiTeachVc = [[YjyxYiTeachController alloc] init];

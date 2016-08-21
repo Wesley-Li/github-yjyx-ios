@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="hkJ-dW-0qa" customClass="YiTeachCustomView">
+            <rect key="frame" x="0.0" y="0.0" width="156" height="126"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nzi-vG-QNg">
+                    <rect key="frame" x="58" y="5" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="F68-0x-a4n"/>
+                        <constraint firstAttribute="height" constant="40" id="xCb-mj-70W"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBn-BT-QqL">
+                    <rect key="frame" x="5" y="50" width="141" height="74"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="owC-Qp-X1p">
+                    <rect key="frame" x="146" y="82" width="10" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="10" id="61w-JC-NN1"/>
+                        <constraint firstAttribute="height" constant="10" id="aS1-dI-zXj"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Nzi-vG-QNg" firstAttribute="centerX" secondItem="hkJ-dW-0qa" secondAttribute="centerX" id="2Fj-UZ-nmc"/>
+                <constraint firstItem="wBn-BT-QqL" firstAttribute="leading" secondItem="hkJ-dW-0qa" secondAttribute="leading" constant="5" id="9Xm-dt-ZMK"/>
+                <constraint firstAttribute="trailing" secondItem="owC-Qp-X1p" secondAttribute="trailing" id="Faf-5m-wjV"/>
+                <constraint firstAttribute="bottom" secondItem="wBn-BT-QqL" secondAttribute="bottom" constant="2" id="XQ8-UA-nMo"/>
+                <constraint firstItem="owC-Qp-X1p" firstAttribute="centerY" secondItem="wBn-BT-QqL" secondAttribute="centerY" id="Zi4-v9-326"/>
+                <constraint firstItem="wBn-BT-QqL" firstAttribute="top" secondItem="Nzi-vG-QNg" secondAttribute="bottom" constant="5" id="baD-a9-4BP"/>
+                <constraint firstAttribute="trailing" secondItem="wBn-BT-QqL" secondAttribute="trailing" constant="10" id="xU8-NW-54W"/>
+                <constraint firstItem="Nzi-vG-QNg" firstAttribute="top" secondItem="hkJ-dW-0qa" secondAttribute="top" constant="5" id="zZg-PW-ttX"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imageview" destination="Nzi-vG-QNg" id="IZO-tQ-Fg9"/>
+                <outlet property="indicatorImageview" destination="owC-Qp-X1p" id="gD0-zN-QuI"/>
+                <outlet property="titleLable" destination="wBn-BT-QqL" id="DpX-M4-qRj"/>
+            </connections>
+            <point key="canvasLocation" x="287" y="223"/>
+        </view>
+    </objects>
+</document>

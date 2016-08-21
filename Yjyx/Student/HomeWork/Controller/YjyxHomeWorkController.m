@@ -346,6 +346,7 @@ static NSString *HomeADID = @"HomeADID";
             YjyxHomeDataModel *homeDataM = self.subjectTypeArr[indexPath.section];
             YjyxTodayWorkModel *model = homeDataM.todaytasks[indexPath.row - 1];
             cell.todayWorkModel = model;
+//            [cell setContentWithModel:model];
             return cell;
         }
     }else{
@@ -359,11 +360,13 @@ static NSString *HomeADID = @"HomeADID";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if([tableView isEqual:self.workTableV]){
-    if(indexPath.row == 0){
-        return 90;
-    }else{
-        return 65;
-    }
+        if(indexPath.row == 0){
+            return 90;
+        }else{
+            YjyxHomeDataModel *homeDataM = self.subjectTypeArr[indexPath.section];
+            YjyxTodayWorkModel *model = homeDataM.todaytasks[indexPath.row - 1];
+            return model.height;
+        }
     }else{
         return 80;
     }

@@ -24,6 +24,8 @@
     model.tasktype = dict[@"tasktype"];
     model.task_description = dict[@"task__description"];
     model.t_id = dict[@"id"];
+    model.totalCorrect = dict[@"task__total_correct"];
+    model.totalWrong = dict[@"task__total_wrong"];
     return model;
 }
 - (NSString *)task_delivertime

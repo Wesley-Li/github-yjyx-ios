@@ -557,6 +557,15 @@
 		8094E4C21D129DB800EF221A /* QuestionPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8094E4C01D129DB800EF221A /* QuestionPreviewCell.m */; };
 		8094E4C31D129DB800EF221A /* QuestionPreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8094E4C11D129DB800EF221A /* QuestionPreviewCell.xib */; };
 		80A0E8BC1D61A64D00ED68A1 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A0E8BB1D61A64D00ED68A1 /* UIColor+Hex.m */; };
+		80A0E8BF1D66908200ED68A1 /* SummaryResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A0E8BE1D66908200ED68A1 /* SummaryResultModel.m */; };
+		80A0E8C21D66D9C700ED68A1 /* YjyxStuSummaryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A0E8C11D66D9C700ED68A1 /* YjyxStuSummaryModel.m */; };
+		80A0E8C41D682FD300ED68A1 /* YjyxYiTeachController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80A0E8C31D682FD300ED68A1 /* YjyxYiTeachController.xib */; };
+		80A0E8C71D684FCE00ED68A1 /* YiTeachCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A0E8C61D684FCE00ED68A1 /* YiTeachCustomView.m */; };
+		80A0E8CB1D694D5D00ED68A1 /* YiTeachChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A0E8C91D694D5D00ED68A1 /* YiTeachChooseCell.m */; };
+		80A0E8CC1D694D5D00ED68A1 /* YiTeachChooseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80A0E8CA1D694D5D00ED68A1 /* YiTeachChooseCell.xib */; };
+		80A0E8CF1D694F4A00ED68A1 /* YiTeachContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A0E8CE1D694F4A00ED68A1 /* YiTeachContentModel.m */; };
+		80A0E8D11D6979A500ED68A1 /* YiTeachCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80A0E8D01D6979A500ED68A1 /* YiTeachCustomView.xib */; };
+		80A0E8D41D69AD7500ED68A1 /* YiTeachChapterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A0E8D31D69AD7500ED68A1 /* YiTeachChapterViewController.m */; };
 		80CCF43F1CF2F0EC000C93D9 /* UnSubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80CCF43D1CF2F0EC000C93D9 /* UnSubmitCell.m */; };
 		80CCF4401CF2F0EC000C93D9 /* UnSubmitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CCF43E1CF2F0EC000C93D9 /* UnSubmitCell.xib */; };
 		80D978E61D265B80000BD95E /* CustomSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D978E51D265B80000BD95E /* CustomSectionView.m */; };
@@ -1512,6 +1521,21 @@
 		8094E4C11D129DB800EF221A /* QuestionPreviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionPreviewCell.xib; sourceTree = "<group>"; };
 		80A0E8BA1D61A64D00ED68A1 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		80A0E8BB1D61A64D00ED68A1 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
+		80A0E8BD1D66908200ED68A1 /* SummaryResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryResultModel.h; sourceTree = "<group>"; };
+		80A0E8BE1D66908200ED68A1 /* SummaryResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryResultModel.m; sourceTree = "<group>"; };
+		80A0E8C01D66D9C700ED68A1 /* YjyxStuSummaryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxStuSummaryModel.h; sourceTree = "<group>"; };
+		80A0E8C11D66D9C700ED68A1 /* YjyxStuSummaryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxStuSummaryModel.m; sourceTree = "<group>"; };
+		80A0E8C31D682FD300ED68A1 /* YjyxYiTeachController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxYiTeachController.xib; sourceTree = "<group>"; };
+		80A0E8C51D684FCE00ED68A1 /* YiTeachCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YiTeachCustomView.h; path = Yjyx/Student/YiTeach/Controller/YiTeachCustomView.h; sourceTree = SOURCE_ROOT; };
+		80A0E8C61D684FCE00ED68A1 /* YiTeachCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YiTeachCustomView.m; path = Yjyx/Student/YiTeach/Controller/YiTeachCustomView.m; sourceTree = SOURCE_ROOT; };
+		80A0E8C81D694D5D00ED68A1 /* YiTeachChooseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YiTeachChooseCell.h; path = Yjyx/Student/YiTeach/Controller/YiTeachChooseCell.h; sourceTree = SOURCE_ROOT; };
+		80A0E8C91D694D5D00ED68A1 /* YiTeachChooseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YiTeachChooseCell.m; path = Yjyx/Student/YiTeach/Controller/YiTeachChooseCell.m; sourceTree = SOURCE_ROOT; };
+		80A0E8CA1D694D5D00ED68A1 /* YiTeachChooseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = YiTeachChooseCell.xib; path = Yjyx/Student/YiTeach/Controller/YiTeachChooseCell.xib; sourceTree = SOURCE_ROOT; };
+		80A0E8CD1D694F4A00ED68A1 /* YiTeachContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YiTeachContentModel.h; path = Yjyx/Student/YiTeach/Controller/YiTeachContentModel.h; sourceTree = SOURCE_ROOT; };
+		80A0E8CE1D694F4A00ED68A1 /* YiTeachContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YiTeachContentModel.m; path = Yjyx/Student/YiTeach/Controller/YiTeachContentModel.m; sourceTree = SOURCE_ROOT; };
+		80A0E8D01D6979A500ED68A1 /* YiTeachCustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = YiTeachCustomView.xib; path = Yjyx/Student/YiTeach/Controller/YiTeachCustomView.xib; sourceTree = SOURCE_ROOT; };
+		80A0E8D21D69AD7500ED68A1 /* YiTeachChapterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YiTeachChapterViewController.h; sourceTree = "<group>"; };
+		80A0E8D31D69AD7500ED68A1 /* YiTeachChapterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YiTeachChapterViewController.m; sourceTree = "<group>"; };
 		80CCF43C1CF2F0EC000C93D9 /* UnSubmitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnSubmitCell.h; sourceTree = "<group>"; };
 		80CCF43D1CF2F0EC000C93D9 /* UnSubmitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnSubmitCell.m; sourceTree = "<group>"; };
 		80CCF43E1CF2F0EC000C93D9 /* UnSubmitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnSubmitCell.xib; sourceTree = "<group>"; };
@@ -1983,6 +2007,8 @@
 				80FEB6991D1CFA8E009EB126 /* ChildrenResultModel.m */,
 				80FEB69B1D2202DA009EB126 /* ResultModel.h */,
 				80FEB69C1D2202DA009EB126 /* ResultModel.m */,
+				80A0E8BD1D66908200ED68A1 /* SummaryResultModel.h */,
+				80A0E8BE1D66908200ED68A1 /* SummaryResultModel.m */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -2694,6 +2720,8 @@
 				80D978FF1D2CC928000BD95E /* YjyxStuWrongListModel.m */,
 				3CECA4B61D2CF4E20039DCB6 /* YjyxStuAnswerModel.h */,
 				3CECA4B71D2CF4E20039DCB6 /* YjyxStuAnswerModel.m */,
+				80A0E8C01D66D9C700ED68A1 /* YjyxStuSummaryModel.h */,
+				80A0E8C11D66D9C700ED68A1 /* YjyxStuSummaryModel.m */,
 				3CECA4B91D2CF50B0039DCB6 /* YjyxWorkDetailModel.h */,
 				3CECA4BA1D2CF50B0039DCB6 /* YjyxWorkDetailModel.m */,
 				3CD90A511D2E266200088742 /* YjyxMicroWorkModel.h */,
@@ -2818,6 +2846,9 @@
 			children = (
 				3C3D93D91D26119500AA22AE /* YjyxYiTeachController.h */,
 				3C3D93DA1D26119500AA22AE /* YjyxYiTeachController.m */,
+				80A0E8C31D682FD300ED68A1 /* YjyxYiTeachController.xib */,
+				80A0E8D21D69AD7500ED68A1 /* YiTeachChapterViewController.h */,
+				80A0E8D31D69AD7500ED68A1 /* YiTeachChapterViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2825,6 +2856,8 @@
 		3C3D93DB1D26119500AA22AE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				80A0E8CD1D694F4A00ED68A1 /* YiTeachContentModel.h */,
+				80A0E8CE1D694F4A00ED68A1 /* YiTeachContentModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2832,6 +2865,12 @@
 		3C3D93DC1D26119500AA22AE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				80A0E8C51D684FCE00ED68A1 /* YiTeachCustomView.h */,
+				80A0E8C61D684FCE00ED68A1 /* YiTeachCustomView.m */,
+				80A0E8D01D6979A500ED68A1 /* YiTeachCustomView.xib */,
+				80A0E8C81D694D5D00ED68A1 /* YiTeachChooseCell.h */,
+				80A0E8C91D694D5D00ED68A1 /* YiTeachChooseCell.m */,
+				80A0E8CA1D694D5D00ED68A1 /* YiTeachChooseCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3771,6 +3810,7 @@
 				3A66A8041C931BBA005E2D43 /* ChildrenExplantionViewController.xib in Resources */,
 				3AE894041C6C28C300E8BA97 /* login_textView_bg@3x.png in Resources */,
 				3CD2F1611D275FD70031AF2E /* YjyxPrivateViewController.xib in Resources */,
+				80A0E8C41D682FD300ED68A1 /* YjyxYiTeachController.xib in Resources */,
 				3B4864471CCF10C200D2DE3C /* mall.png in Resources */,
 				3A8CAE921C70A11800BDEB6B /* ParentMoifyNameViewController.xib in Resources */,
 				3B48644F1CCF10C200D2DE3C /* privatecenter@3x.png in Resources */,
@@ -3782,6 +3822,7 @@
 				3BC7DBDA1CDB264800E5E12F /* clssPic.png in Resources */,
 				801F44A51CDF164800B7E7E1 /* AlipaySDK.bundle in Resources */,
 				3AA165691C91BCD6006B8756 /* homework_4@3x.png in Resources */,
+				80A0E8CC1D694D5D00ED68A1 /* YiTeachChooseCell.xib in Resources */,
 				3BB773C71CD883EA00A24485 /* PhoneChangeViewController.xib in Resources */,
 				3A616F5A1CBB9C6B007255BB /* member_arrow@3x.png in Resources */,
 				3C15669F1D0D615D006670D6 /* subjectContentCell.xib in Resources */,
@@ -3843,6 +3884,7 @@
 				3BC68D8A1CEC572300FF7854 /* FeedBackViewController.xib in Resources */,
 				80590BF31D0CF9AA00867D9B /* KnowledgeViewController.xib in Resources */,
 				3B4864531CCF10C200D2DE3C /* report.png in Resources */,
+				80A0E8D11D6979A500ED68A1 /* YiTeachCustomView.xib in Resources */,
 				8010A9051D5D94E60091F6EA /* tab_myclass@2x.png in Resources */,
 				3A26EE6B1C71CCDB009C3242 /* MyChildrenViewController.xib in Resources */,
 				3AA165681C91BCD6006B8756 /* homework_3@3x.png in Resources */,
@@ -3916,6 +3958,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A905D141C7F3587005AB12F /* YjyxSoundViewController.m in Sources */,
+				80A0E8CF1D694F4A00ED68A1 /* YiTeachContentModel.m in Sources */,
 				3CDE86DC1D4F2A6C00740A47 /* YjyxHomeWorkButton.m in Sources */,
 				80FEB6A41D235C48009EB126 /* PPreviewCell.m in Sources */,
 				3CF01B501D0E543E001C4251 /* siftButton.m in Sources */,
@@ -3956,6 +3999,7 @@
 				3B48647F1CCF3FBA00D2DE3C /* CustomTabBarViewController.m in Sources */,
 				3B35DB9D1CE0709A000B7F83 /* SolutionCell.m in Sources */,
 				3A04A5D21C93E6290040D913 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				80A0E8C21D66D9C700ED68A1 /* YjyxStuSummaryModel.m in Sources */,
 				3A04A5CC1C93E6290040D913 /* MASConstraint.m in Sources */,
 				3A04A5D91C93E6590040D913 /* ChildrenVideoViewController.m in Sources */,
 				3CF541D41D1CD990000EBAB5 /* MyMicroCell.m in Sources */,
@@ -3969,6 +4013,7 @@
 				3C4274C01D2A4E4D008A30FA /* YjyxHomeWorkCell.m in Sources */,
 				3CFF2C991D3E0E6200F5EB63 /* YjyxTeacherButton.m in Sources */,
 				3CAC45461D40BFC900ACBDA9 /* YjyxOneShopDetailController.m in Sources */,
+				80A0E8D41D69AD7500ED68A1 /* YiTeachChapterViewController.m in Sources */,
 				801F44AE1CDF164800B7E7E1 /* RSADataVerifier.m in Sources */,
 				801F44AC1CDF164800B7E7E1 /* openssl_wrapper.m in Sources */,
 				3CD7E45E1D2B819600769FDE /* YjyxHomeWrongModel.m in Sources */,
@@ -4138,6 +4183,7 @@
 				3CA896381D06B3890092D292 /* TreeNode.m in Sources */,
 				3A8CAEC11C70B3C200BDEB6B /* ParentChildrensViewController.m in Sources */,
 				3A91F49E1C760CF4001568AA /* PNScatterChartDataItem.m in Sources */,
+				80A0E8BF1D66908200ED68A1 /* SummaryResultModel.m in Sources */,
 				3CAC453E1D40A4C000ACBDA9 /* YjyxShopDetailCell.m in Sources */,
 				3B91A6F71CE6010D0082A92C /* YourAnswerCell.m in Sources */,
 				3CAC45391D409C3400ACBDA9 /* YjyxShopDisplayController.m in Sources */,
@@ -4160,6 +4206,7 @@
 				3A91F4991C760CF4001568AA /* PNPieChartDataItem.m in Sources */,
 				3AEF272A1C61F08A0028BE09 /* ViewRender.m in Sources */,
 				3A8CAEB71C70B36200BDEB6B /* SDImageCache.m in Sources */,
+				80A0E8C71D684FCE00ED68A1 /* YiTeachCustomView.m in Sources */,
 				3F4CA6281CE17FC000F4B791 /* FinshedModel.m in Sources */,
 				3B48646E1CCF117300D2DE3C /* TeacherHomeViewController.m in Sources */,
 				3A04A5D01C93E6290040D913 /* MASViewConstraint.m in Sources */,
@@ -4180,6 +4227,7 @@
 				3CA04D051D180EEC0054A05D /* ReleaseVideoCell.m in Sources */,
 				3AA1655C1C91AB40006B8756 /* RCLabel.m in Sources */,
 				3C3D93DD1D26119500AA22AE /* YjyxStatistController.m in Sources */,
+				80A0E8CB1D694D5D00ED68A1 /* YiTeachChooseCell.m in Sources */,
 				3A40570C1CCF732800258784 /* ForgetTwoViewController.m in Sources */,
 				80D979181D3882AE000BD95E /* YjyxDrawLine.m in Sources */,
 				8013D32F1CF4495300F82301 /* SpendTimeCell.m in Sources */,

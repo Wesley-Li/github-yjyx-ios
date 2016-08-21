@@ -11,6 +11,7 @@
 #import "ChildrenVideoViewController.h"
 #import "KWFormViewQuickBuilder.h"
 #import "YjyxMemberDetailViewController.h"
+#import "SummaryResultModel.h"
 #import "ChildrenResultModel.h"
 #import "ChildrenResultCell.h"
 #import "ResultModel.h"
@@ -23,14 +24,22 @@
     NSArray *letterAry;
     NSString *subjectID;//科目ID，会员跳转时需要
     NSMutableDictionary *selectDic;//判断cell是否展开
+    NSNumber *total_right;
+    NSNumber *total_wrong;
+    NSNumber *questionRight;
+    NSNumber *questionWrong;
+    
 
 }
 
 @property (nonatomic,strong) NSMutableArray *resultblankfills;//填充题答案
 @property (nonatomic,strong) NSMutableArray *resultchoices;//选择题答案
+@property (weak, nonatomic) IBOutlet UILabel *summaryLabel;
 
 @property (nonatomic, strong) NSMutableDictionary *choiceModelDic;
 @property (nonatomic, strong) NSMutableDictionary *blankfillModelDic;
+@property (nonatomic, strong) NSMutableDictionary *summaryChoiceModelDic;
+@property (nonatomic, strong) NSMutableDictionary *summaryBlankModelDic;
 
 @property (nonatomic, strong) UIWebView *webview;
 
@@ -77,6 +86,8 @@
     
     self.choiceModelDic = [[NSMutableDictionary alloc] init];
     self.blankfillModelDic = [[NSMutableDictionary alloc] init];
+    self.summaryChoiceModelDic = [[NSMutableDictionary alloc] init];
+    self.summaryBlankModelDic = [[NSMutableDictionary alloc] init];
     
     self.choiceCellHeightDic = [[NSMutableDictionary alloc] init];
     self.blankfillHeightDic = [[NSMutableDictionary alloc] init];
@@ -160,11 +171,52 @@
         if (result != nil) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 
-                
+                NSLog(@"%@", result);
                 [self.resultchoices removeAllObjects];
                 [self.resultblankfills removeAllObjects];
                 
                 subjectID = [[result objectForKey:@"data"] objectForKey:@"subjectid"];
+                total_right = [result[@"data"][@"task__total_correct"] isEqual:[NSNull null]] ? @0 : result[@"data"][@"task__total_correct"];
+                total_wrong = [result[@"data"][@"task__total_wrong"] isEqual:[NSNull null]] ? @0 : result[@"data"][@"task__total_wrong"];
+                questionRight = [result[@"data"][@"summary"][@"correct"] isEqual:[NSNull null]] ? @0 : result[@"data"][@"summary"][@"correct"];
+                questionWrong = [result[@"data"][@"summary"][@"wrong"] isEqual:[NSNull null]] ? @0 : result[@"data"][@"summary"][@"wrong"];
+                
+                NSString *questionRate = [questionRight floatValue] + [questionWrong floatValue] == 0 ? @"0%" : [NSString stringWithFormat:@"%.f%%", [questionRight floatValue] * 100 / ([questionRight floatValue] + [questionWrong floatValue])];
+                NSString *taskRate = [total_right floatValue] + [total_wrong floatValue] == 0 ? @"0%" : [NSString stringWithFormat:@"%.f%%", [total_right floatValue] * 100 / ([total_right floatValue] + [total_wrong floatValue])];
+                NSString *summaryString = [NSString stringWithFormat:@"对%@题  错%@题  |  任务正确率%@  |  作业平均正确率%@", questionRight, questionWrong, questionRate, taskRate];
+                NSMutableAttributedString *summaryAttributString = [[NSMutableAttributedString alloc] initWithString:summaryString];
+                
+                // 正则匹配
+                NSString *reg = @"[0-9]+|%";
+                NSError *error = nil;
+                NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:reg options:NSRegularExpressionCaseInsensitive error:&error];
+                NSArray *array = [regex matchesInString:summaryString options:0 range:NSMakeRange(0, summaryString.length)];
+                if (array.count) {
+                    for (int i = 0; i < array.count; i++) {
+                        NSTextCheckingResult *result = array[i];
+                        NSRange range = result.range;
+                        [summaryAttributString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#e71419"] range:range];
+                    }
+
+                }
+                
+                self.summaryLabel.attributedText = summaryAttributString;
+                
+                // 选择题每题答题概要信息
+                NSDictionary *summaryChoiceDic = [[[result objectForKey:@"data"] objectForKey:@"summary_perquestion"] objectForKey:@"choice"];
+                for (NSString *key in [summaryChoiceDic allKeys]) {
+                    SummaryResultModel *model = [[SummaryResultModel alloc] init];
+                    [model initModelWithDic:[summaryChoiceDic objectForKey:key]];
+                    [self.summaryChoiceModelDic setObject:model forKey:key];
+                }
+                
+                // 填空题每题答题概要信息
+                NSDictionary *summaryBlankfillDic = [[[result objectForKey:@"data"] objectForKey:@"summary_perquestion"] objectForKey:@"blankfill"];
+                for (NSString *key in [summaryBlankfillDic allKeys]) {
+                    SummaryResultModel *model = [[SummaryResultModel alloc] init];
+                    [model initModelWithDic:[summaryBlankfillDic objectForKey:key]];
+                    [self.summaryBlankModelDic setObject:model forKey:key];
+                }
                 
                 // 选择题内容
                 NSDictionary *choiceDic = [[result objectForKey:@"data"] objectForKey:@"choices"];
@@ -350,11 +402,13 @@
         ResultModel *resultModel = self.resultchoices[indexPath.row];
         // 选择题
         ChildrenResultModel *model = [self.choiceModelDic objectForKey:[NSString stringWithFormat:@"%@", resultModel.q_id]];
-        
+        SummaryResultModel *su_model = [self.summaryChoiceModelDic objectForKey:[NSString stringWithFormat:@"%@", resultModel.q_id]];
         model.questionType = @"choice";
         resultModel.questionType = @"choice";
         
-        [cell setSubviewsWithChildrenResultModel:model andResultModel:resultModel];
+        [cell setSubviewsWithChildrenResultModel:model andResultModel:resultModel andSummaryResultModel:su_model];
+        
+//        [cell setSubviewsWithChildrenResultModel:model andResultModel:resultModel];
         
         cell.tag = indexPath.row;
     
@@ -365,6 +419,7 @@
         ResultModel *resultModel = self.resultblankfills[indexPath.row];
         NSLog(@"^^^^^^^^%@", resultModel.q_id);
         ChildrenResultModel *model = [self.blankfillModelDic objectForKey:[NSString stringWithFormat:@"%@", resultModel.q_id]];
+        SummaryResultModel *su_model = [self.summaryBlankModelDic objectForKey:[NSString stringWithFormat:@"%@", resultModel.q_id]];
         model.questionType = @"blankfill";
         resultModel.questionType = @"blankfill";
         [cell.expandBtn addTarget:self action:@selector(changeCellHeight:) forControlEvents:UIControlEventTouchUpInside];
@@ -378,8 +433,8 @@
             cell.expandBtn.selected = [expand boolValue];
         }
         
-        
-        [cell setSubviewsWithChildrenResultModel:model andResultModel:resultModel];
+        [cell setSubviewsWithChildrenResultModel:model andResultModel:resultModel andSummaryResultModel:su_model];
+//        [cell setSubviewsWithChildrenResultModel:model andResultModel:resultModel];
         
         cell.tag = indexPath.row;
         
@@ -451,7 +506,7 @@
     //判断是否有权限查看视频解析
     
     if (videoUrl.length == 0 &&explantionStr.length == 0) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"查看解题方法需要会员权限，是否前往试用或成为会员" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"查看解题方法需要会员权限，是否前往试用或成为会员?" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
         [alertView show];
     }else{
         ChildrenVideoViewController *vc = [[ChildrenVideoViewController alloc] init];

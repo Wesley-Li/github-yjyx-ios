@@ -251,7 +251,7 @@
         ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
         result.childrenCid = children.cid;
         result.taskResultId = children.activityID;
-        result.navigationItem.title = children.title;
+        result.navigationItem.title = [[children.title componentsSeparatedByString:@"|"] objectAtIndex:0];
         [self.navigationController pushViewController:result animated:YES];
     }
     

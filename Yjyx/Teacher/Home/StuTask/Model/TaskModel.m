@@ -21,7 +21,8 @@
     self.t_id = dic[@"id"];
     self.relatedresourceid = dic[@"relatedresourceid"];
     self.resourcename = dic[@"resourcename"];
-    self.rateNum = dic[@"rate"];
+    self.total_correct = dic[@"total_correct"];
+    self.total_wrong = dic[@"total_wrong"];
 
 }
 

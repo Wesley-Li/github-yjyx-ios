@@ -11,6 +11,8 @@
 #import "ResultModel.h"
 #import "YjyxStuAnswerModel.h"
 #import "YjyxWorkDetailModel.h"
+#import "SummaryResultModel.h"
+#import "YjyxStuSummaryModel.h"
 @interface ChildrenResultCell ()<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *BGVIEW;// 大背景
@@ -19,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *rightAnswerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *myAnswerLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *RWimageView;
+@property (weak, nonatomic) IBOutlet UILabel *summaryLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *correctLabel;
 @property (weak, nonatomic) IBOutlet UIButton *stuAnswer;
@@ -42,7 +45,7 @@
     
     self.BGVIEW.layer.borderWidth = 1;
     self.BGVIEW.layer.borderColor = RGBACOLOR(140.0, 140.0, 140.0, 1).CGColor;
-    self.lineView.backgroundColor = RGBACOLOR(140.0, 140.0, 140.0, 1);
+//    self.lineView.backgroundColor = RGBACOLOR(140.0, 140.0, 140.0, 1);
     self.rightAnswerLabel.textColor = RGBACOLOR(100, 174, 99, 1);
     
     self.solutionBtn.layer.cornerRadius = 5;
@@ -62,7 +65,7 @@
 }
 
 
-- (void)setSubviewsWithChildrenResultModel:(ChildrenResultModel *)model andResultModel:(ResultModel *)resultModel {
+- (void)setSubviewsWithChildrenResultModel:(ChildrenResultModel *)model andResultModel:(ResultModel *)resultModel andSummaryResultModel:(SummaryResultModel *)summarymodel {
     
     
     for (UIView *view in [self.bg_view subviews]) {
@@ -81,6 +84,21 @@
     [web loadHTMLString:jsString baseURL:nil];
     
     self.leadconstant.constant = self.annotationBtn.hidden ? -60 : 10;
+    
+    // 答对答错人数赋值
+    NSString *summaryString = [NSString stringWithFormat:@"做对%@人  做错%@人", summarymodel.c_num, summarymodel.w_num];
+    NSMutableAttributedString *su_attributedString = [[NSMutableAttributedString alloc] initWithString:summaryString];
+    NSString *reg = @"[0-9]+";
+    NSError *error = nil;
+    NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:reg options:NSRegularExpressionCaseInsensitive error:&error];
+    NSArray *array = [regex matchesInString:summaryString options:0 range:NSMakeRange(0, summaryString.length)];
+    for (int i = 0; i < array.count; i++) {
+        NSTextCheckingResult *result = array[i];
+        NSRange range = result.range;
+        [su_attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#e71419"] range:range];
+    }
+    self.summaryLabel.attributedText = su_attributedString;
+    
     // 正确答案赋值
     // 选择题还是填空题,选择题是否多选
     if ([model.questionType isEqualToString:@"choice"] && [resultModel.questionType isEqualToString:@"choice"]) {
@@ -201,7 +219,7 @@
     [self.bg_view addSubview:web];
 
 }
-- (void)setSubviewsWithWorkDetailModel:(YjyxWorkDetailModel *)model andStuResultModel:(YjyxStuAnswerModel *)resultModel {
+- (void)setSubviewsWithWorkDetailModel:(YjyxWorkDetailModel *)model andStuResultModel:(YjyxStuAnswerModel *)resultModel andSummaryModel:(YjyxStuSummaryModel *)summaryModel {
     
     for (UIView *view in [self.bg_view subviews]) {
         [view removeFromSuperview];
@@ -210,6 +228,22 @@
     [self.solutionBtn setTitleColor:STUDENTCOLOR forState:UIControlStateNormal];
     self.annotationBtn.layer.borderColor = STUDENTCOLOR.CGColor;
     [self.annotationBtn setTitleColor:STUDENTCOLOR forState:UIControlStateNormal];
+    
+    // 答对答错人数赋值
+    NSString *summaryString = [NSString stringWithFormat:@"做对%@人  做错%@人", summaryModel.c_num, summaryModel.w_num];
+    NSMutableAttributedString *su_attributedString = [[NSMutableAttributedString alloc] initWithString:summaryString];
+    NSString *reg = @"[0-9]+";
+    NSError *error = nil;
+    NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:reg options:NSRegularExpressionCaseInsensitive error:&error];
+    NSArray *array = [regex matchesInString:summaryString options:0 range:NSMakeRange(0, summaryString.length)];
+    for (int i = 0; i < array.count; i++) {
+        NSTextCheckingResult *result = array[i];
+        NSRange range = result.range;
+        [su_attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#e71419"] range:range];
+    }
+    self.summaryLabel.attributedText = su_attributedString;
+    
+
     // 题目内容赋值
     UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 50)];
     web.delegate = self;
@@ -388,7 +422,7 @@
     }
     
     
-    self.height = frame.size.height + 10 + 25 + 10 + 10 + customHeight + 30;
+    self.height = frame.size.height + 10 + 25 + 10 + 10 + customHeight + 30 + 40;
     
     // 用通知发送加载完成后的高度
     [[NSNotificationCenter defaultCenter] postNotificationName:@"WEBVIEW_HEIGHT" object:self userInfo:nil];

@@ -31,8 +31,9 @@
                     <rect key="frame" x="0.0" y="224" width="320" height="40"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="点击" translatesAutoresizingMaskIntoConstraints="NO" id="Kff-Yf-pj7">
-                            <rect key="frame" x="13" y="2" width="135" height="40"/>
+                            <rect key="frame" x="13" y="40" width="135" height="2"/>
                             <constraints>
+                                <constraint firstAttribute="height" constant="2" id="Kfq-8S-qWy"/>
                                 <constraint firstAttribute="height" constant="1" id="uIN-mu-QjS"/>
                             </constraints>
                             <variation key="default">
@@ -49,7 +50,7 @@
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <state key="selected">
-                                <color key="titleColor" red="0.0" green="0.8980392157" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="workBtnClick:" destination="-1" eventType="touchUpInside" id="KZk-5V-Oix"/>
@@ -63,7 +64,7 @@
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <state key="selected">
-                                <color key="titleColor" red="0.0" green="0.8980392157" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="workBtnClick:" destination="-1" eventType="touchUpInside" id="39D-JB-ToP"/>
@@ -90,6 +91,7 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="7iI-xa-tXf"/>
+                            <exclude reference="HM3-8W-h57"/>
                         </mask>
                     </variation>
                 </view>
@@ -107,7 +109,7 @@
                     </connections>
                 </collectionView>
                 <pageControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="1" translatesAutoresizingMaskIntoConstraints="NO" id="91Y-gE-2Ab">
-                    <rect key="frame" x="141" y="187" width="39" height="37"/>
+                    <rect key="frame" x="141" y="187" width="39" height="0.0"/>
                     <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </pageControl>
@@ -133,6 +135,6 @@
     </objects>
     <resources>
         <image name="BANNER" width="750" height="320"/>
-        <image name="点击" width="316" height="80"/>
+        <image name="点击" width="87" height="2"/>
     </resources>
 </document>

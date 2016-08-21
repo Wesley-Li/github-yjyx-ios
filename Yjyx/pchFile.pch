@@ -32,6 +32,7 @@
 #import <CoreText/CoreText.h>
 #import "ChildrenEntity.h"
 #import "SVProgressHUD.h"
+#import "Masonry.h"
 #import <UMMobClick/MobClick.h>
 //系统版本
 // 家长sessionid
@@ -62,7 +63,7 @@
 // 老师端统一色
 #define TEACHERCOLOR RGBACOLOR(3, 136, 227, 1)
 // 学生端统一色
-#define STUDENTCOLOR RGBACOLOR(0, 229.0, 199.0, 1)
+#define STUDENTCOLOR [UIColor colorWithHexString:@"#5bc4ed"]
 //随机颜色
 #define RANDOMCOLOR [UIColor colorWithRed:(arc4random() % 256)/255.0 green:(arc4random() % 256)/255.0 blue:(arc4random() % 256)/255.0 alpha:1.0]
 //屏幕大小

@@ -24,7 +24,7 @@
     _nameTextField.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _nameTextField.layer.borderWidth = 1;
     _doneBtn.layer.cornerRadius = 20;
-    _doneBtn.backgroundColor = RGBACOLOR(0, 229.0, 199.0, 1);
+    _doneBtn.backgroundColor = STUDENTCOLOR;
     _doneBtn.tintColor = [UIColor whiteColor];
     
     [_nameTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
