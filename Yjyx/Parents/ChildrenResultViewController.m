@@ -172,15 +172,16 @@
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 
                 NSLog(@"%@", result);
+                NSLog(@"%@", result[@"data"][@"summary"][@"correct"]);
                 [self.resultchoices removeAllObjects];
                 [self.resultblankfills removeAllObjects];
-                
+//                NSNumber *num = result[@"data"][@"summary"][@"correct"];
                 subjectID = [[result objectForKey:@"data"] objectForKey:@"subjectid"];
                 total_right = [result[@"data"][@"task__total_correct"] isEqual:[NSNull null]] ? @0 : result[@"data"][@"task__total_correct"];
                 total_wrong = [result[@"data"][@"task__total_wrong"] isEqual:[NSNull null]] ? @0 : result[@"data"][@"task__total_wrong"];
-                questionRight = [result[@"data"][@"summary"][@"correct"] isEqual:[NSNull null]] ? @0 : result[@"data"][@"summary"][@"correct"];
-                questionWrong = [result[@"data"][@"summary"][@"wrong"] isEqual:[NSNull null]] ? @0 : result[@"data"][@"summary"][@"wrong"];
-                
+                questionRight = result[@"data"][@"summary"][@"correct"] == nil ? @0 : result[@"data"][@"summary"][@"correct"];
+                questionWrong = result[@"data"][@"summary"][@"wrong"] == nil ? @0 : result[@"data"][@"summary"][@"wrong"];
+                NSLog(@"%@, %@", questionRight, questionWrong);
                 NSString *questionRate = [questionRight floatValue] + [questionWrong floatValue] == 0 ? @"0%" : [NSString stringWithFormat:@"%.f%%", [questionRight floatValue] * 100 / ([questionRight floatValue] + [questionWrong floatValue])];
                 NSString *taskRate = [total_right floatValue] + [total_wrong floatValue] == 0 ? @"0%" : [NSString stringWithFormat:@"%.f%%", [total_right floatValue] * 100 / ([total_right floatValue] + [total_wrong floatValue])];
                 NSString *summaryString = [NSString stringWithFormat:@"对%@题  错%@题  |  任务正确率%@  |  作业平均正确率%@", questionRight, questionWrong, questionRate, taskRate];
@@ -220,7 +221,11 @@
                 
                 // 选择题内容
                 NSDictionary *choiceDic = [[result objectForKey:@"data"] objectForKey:@"choices"];
+                NSMutableArray *c_subjectNumArr = [NSMutableArray array];
+                NSMutableArray *b_subjectNumArr = [NSMutableArray array];
+                
                 for (NSString *key in [choiceDic allKeys]) {
+                    [c_subjectNumArr addObject:[NSNumber numberWithInteger:[key integerValue]]];
                     ChildrenResultModel *model = [[ChildrenResultModel alloc] init];
                     [model initModelWithDic:[choiceDic objectForKey:key]];
                     model.answerCount = [choiceDic objectForKey:key][@"choicecount"];
@@ -231,6 +236,8 @@
                 // 填空题内容
                 NSDictionary *blankfillDic = [[result objectForKey:@"data"] objectForKey:@"blankfills"];
                 for (NSString *key in [blankfillDic allKeys]) {
+                
+                    [b_subjectNumArr addObject:[NSNumber numberWithInteger:[key integerValue]]];
                     ChildrenResultModel *model = [[ChildrenResultModel alloc] init];
                     [model initModelWithDic:[blankfillDic objectForKey:key]];
                     model.answerCount = [blankfillDic objectForKey:key][@"blankcount"];
@@ -240,18 +247,26 @@
                 // 选择题学生答题结果
                 NSArray *resultChoiceArr = [[[result objectForKey:@"data"] objectForKey:@"result"] objectForKey:@"choice"];
                 for (NSArray *arr in resultChoiceArr) {
-                    ResultModel *model = [[ResultModel alloc] init];
-                    [model initModelWithArray:arr];
-                    [self.resultchoices addObject:model];
+                    NSLog(@"%@, %@", c_subjectNumArr, arr[0]);
+                    if([c_subjectNumArr containsObject:arr[0]]){
+                        ResultModel *model = [[ResultModel alloc] init];
+                        [model initModelWithArray:arr];
+                        [self.resultchoices addObject:model];
+                    }
+                 
                 }
                 
                 
                 // 填空题学生答题结果
                 NSArray *resultBlankfillArr = [[[result objectForKey:@"data"] objectForKey:@"result"] objectForKey:@"blankfill"];
                 for (NSArray *arr in resultBlankfillArr) {
-                    ResultModel *model = [[ResultModel alloc] init];
-                    [model initModelWithArray:arr];
-                    [self.resultblankfills addObject:model];
+                       NSLog(@"%@, %@", b_subjectNumArr, arr[0]);
+                    if([b_subjectNumArr containsObject:arr[0]]){
+                        ResultModel *model = [[ResultModel alloc] init];
+                        [model initModelWithArray:arr];
+                        [self.resultblankfills addObject:model];
+                    }
+                    
                 }
                 
         

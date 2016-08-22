@@ -359,6 +359,11 @@
 		3C15669E1D0D615D006670D6 /* subjectContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C15669C1D0D615D006670D6 /* subjectContentCell.m */; };
 		3C15669F1D0D615D006670D6 /* subjectContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C15669D1D0D615D006670D6 /* subjectContentCell.xib */; };
 		3C1566A11D0D7042006670D6 /* ChapterChoiceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1566A01D0D7042006670D6 /* ChapterChoiceController.xib */; };
+		3C19D84F1D6AC63300CA7393 /* YjyxThreeStageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C19D84D1D6AC63300CA7393 /* YjyxThreeStageController.m */; };
+		3C19D8501D6AC63300CA7393 /* YjyxThreeStageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C19D84E1D6AC63300CA7393 /* YjyxThreeStageController.xib */; };
+		3C19D8541D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C19D8521D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.m */; };
+		3C19D8551D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C19D8531D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.xib */; };
+		3C19D8581D6AD3B400CA7393 /* YjyxThreeStageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C19D8571D6AD3B400CA7393 /* YjyxThreeStageModel.m */; };
 		3C3D93DD1D26119500AA22AE /* YjyxStatistController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D93C01D26119500AA22AE /* YjyxStatistController.m */; };
 		3C3D93DE1D26119500AA22AE /* YjyxStatistController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C3D93C11D26119500AA22AE /* YjyxStatistController.xib */; };
 		3C3D93DF1D26119500AA22AE /* YjyxHomeWorkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3D93C71D26119500AA22AE /* YjyxHomeWorkController.m */; };
@@ -1131,6 +1136,14 @@
 		3C15669C1D0D615D006670D6 /* subjectContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = subjectContentCell.m; sourceTree = "<group>"; };
 		3C15669D1D0D615D006670D6 /* subjectContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = subjectContentCell.xib; sourceTree = "<group>"; };
 		3C1566A01D0D7042006670D6 /* ChapterChoiceController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChapterChoiceController.xib; sourceTree = "<group>"; };
+		3C19D84C1D6AC63300CA7393 /* YjyxThreeStageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxThreeStageController.h; sourceTree = "<group>"; };
+		3C19D84D1D6AC63300CA7393 /* YjyxThreeStageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxThreeStageController.m; sourceTree = "<group>"; };
+		3C19D84E1D6AC63300CA7393 /* YjyxThreeStageController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxThreeStageController.xib; sourceTree = "<group>"; };
+		3C19D8511D6ACBD600CA7393 /* YjyxThreeStageSubjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxThreeStageSubjectCell.h; sourceTree = "<group>"; };
+		3C19D8521D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxThreeStageSubjectCell.m; sourceTree = "<group>"; };
+		3C19D8531D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxThreeStageSubjectCell.xib; sourceTree = "<group>"; };
+		3C19D8561D6AD3B400CA7393 /* YjyxThreeStageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxThreeStageModel.h; sourceTree = "<group>"; };
+		3C19D8571D6AD3B400CA7393 /* YjyxThreeStageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxThreeStageModel.m; sourceTree = "<group>"; };
 		3C3D93BF1D26119500AA22AE /* YjyxStatistController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxStatistController.h; sourceTree = "<group>"; };
 		3C3D93C01D26119500AA22AE /* YjyxStatistController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxStatistController.m; sourceTree = "<group>"; };
 		3C3D93C11D26119500AA22AE /* YjyxStatistController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxStatistController.xib; sourceTree = "<group>"; };
@@ -2849,6 +2862,9 @@
 				80A0E8C31D682FD300ED68A1 /* YjyxYiTeachController.xib */,
 				80A0E8D21D69AD7500ED68A1 /* YiTeachChapterViewController.h */,
 				80A0E8D31D69AD7500ED68A1 /* YiTeachChapterViewController.m */,
+				3C19D84C1D6AC63300CA7393 /* YjyxThreeStageController.h */,
+				3C19D84D1D6AC63300CA7393 /* YjyxThreeStageController.m */,
+				3C19D84E1D6AC63300CA7393 /* YjyxThreeStageController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2858,6 +2874,8 @@
 			children = (
 				80A0E8CD1D694F4A00ED68A1 /* YiTeachContentModel.h */,
 				80A0E8CE1D694F4A00ED68A1 /* YiTeachContentModel.m */,
+				3C19D8561D6AD3B400CA7393 /* YjyxThreeStageModel.h */,
+				3C19D8571D6AD3B400CA7393 /* YjyxThreeStageModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2871,6 +2889,9 @@
 				80A0E8C81D694D5D00ED68A1 /* YiTeachChooseCell.h */,
 				80A0E8C91D694D5D00ED68A1 /* YiTeachChooseCell.m */,
 				80A0E8CA1D694D5D00ED68A1 /* YiTeachChooseCell.xib */,
+				3C19D8511D6ACBD600CA7393 /* YjyxThreeStageSubjectCell.h */,
+				3C19D8521D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.m */,
+				3C19D8531D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3719,6 +3740,7 @@
 				3CC4738F1D05130A009FAC16 /* ChooseMaterialCell.xib in Resources */,
 				3A8CAE971C70A12E00BDEB6B /* ParentModifyPhoneViewController.xib in Resources */,
 				3A8827861C6EE5730008367F /* tab_communitys@3x.png in Resources */,
+				3C19D8551D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.xib in Resources */,
 				CB40048A1C609BCD00556AA7 /* Assets.xcassets in Resources */,
 				3AE893FD1C6C26A400E8BA97 /* login_bg@3x.png in Resources */,
 				3AFE02B61CA28C2B0097CC83 /* tab_memberCenter@3x.png in Resources */,
@@ -3830,6 +3852,7 @@
 				3B4864491CCF10C200D2DE3C /* message_click@3x.png in Resources */,
 				3A88277D1C6EE1820008367F /* ParentPersonalViewController.xib in Resources */,
 				3AA165661C91BCD6006B8756 /* homework_1@3x.png in Resources */,
+				3C19D8501D6AC63300CA7393 /* YjyxThreeStageController.xib in Resources */,
 				80590BEC1D0CF5D500867D9B /* home_img_wrong@3x.png in Resources */,
 				3A26EE641C71A81B009C3242 /* Parent_hone_down@3x.png in Resources */,
 				3BC7DBDB1CDB264800E5E12F /* hpic_placeholder.png in Resources */,
@@ -4028,9 +4051,11 @@
 				3A91F49C1C760CF4001568AA /* PNScatterChart.m in Sources */,
 				3A91F4951C760CF4001568AA /* PNLineChart.m in Sources */,
 				3CD7E4641D2BD33D00769FDE /* YjyxSearchView.m in Sources */,
+				3C19D8541D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.m in Sources */,
 				3CECA4AE1D2CDAEB0039DCB6 /* YjyxWorkDetailController.m in Sources */,
 				3CD2F1701D27909E0031AF2E /* YjyxChangePhoneController.m in Sources */,
 				8094E4C21D129DB800EF221A /* QuestionPreviewCell.m in Sources */,
+				3C19D8581D6AD3B400CA7393 /* YjyxThreeStageModel.m in Sources */,
 				3BB773BC1CD878B900A24485 /* PrivateViewController.m in Sources */,
 				3CE098991D122F660054C42B /* ReleaseHomeWorkController.m in Sources */,
 				80FEB69A1D1CFA8E009EB126 /* ChildrenResultModel.m in Sources */,
@@ -4110,6 +4135,7 @@
 				80FEB68A1D1BB545009EB126 /* TaskStatisticViewController.m in Sources */,
 				3AAE42281CE8A1B1007B2C64 /* OrderNewEntity.m in Sources */,
 				3A66A8031C931BBA005E2D43 /* ChildrenExplantionViewController.m in Sources */,
+				3C19D84F1D6AC63300CA7393 /* YjyxThreeStageController.m in Sources */,
 				3A91F4921C760CF4001568AA /* PNCircleChart.m in Sources */,
 				3AF27E371C73239400698673 /* AddChildrenViewController.m in Sources */,
 				3B84D5851CEC6E9D003F659B /* TZTestCell.m in Sources */,

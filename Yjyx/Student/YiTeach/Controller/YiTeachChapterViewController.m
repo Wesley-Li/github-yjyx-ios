@@ -10,7 +10,7 @@
 #import "GradeContentItem.h"
 #import "TreeNode.h"
 #import "TreeTableView.h"
-
+#import "YjyxThreeStageController.h"
 
 
 @interface YiTeachChapterViewController ()<TreeTableCellDelegate>
@@ -106,8 +106,9 @@
 #pragma mark - TreeTableCellDelegate
 // cell的点击方法
 -(void)cellClick:(TreeNode *)item1{
-    
-    
+
+    YjyxThreeStageController *threeStageVc = [[YjyxThreeStageController alloc] init];
+    [self.navigationController pushViewController:threeStageVc animated:YES];
     
 }
 

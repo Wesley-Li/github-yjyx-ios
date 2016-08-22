@@ -42,8 +42,8 @@
     self.solutionBtn.layer.cornerRadius = 5;
     self.solutionBtn.layer.borderWidth = 1;
     self.solutionBtn.layer.masksToBounds = YES;
-    self.solutionBtn.layer.borderColor = RGBACOLOR(38, 228, 200, 1).CGColor;
-    [self.solutionBtn setTitleColor:RGBACOLOR(38, 228, 200, 1) forState:UIControlStateNormal];
+    self.solutionBtn.layer.borderColor = STUDENTCOLOR.CGColor;
+    [self.solutionBtn setTitleColor:STUDENTCOLOR forState:UIControlStateNormal];
 
     
     

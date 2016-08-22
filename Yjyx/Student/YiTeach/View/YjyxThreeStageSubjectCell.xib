@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="247" id="KGk-i7-Jjw" customClass="YjyxThreeStageSubjectCell">
+            <rect key="frame" x="0.0" y="0.0" width="430" height="247"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="430" height="246"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2T-sk-fXX">
+                        <rect key="frame" x="12" y="15" width="406" height="231"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CXc-CA-BVV">
+                                <rect key="frame" x="10" y="10" width="386" height="150"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abq-Oi-0kr">
+                                <rect key="frame" x="10" y="170" width="386" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="4XJ-Wb-UsN"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j81-xJ-CZc">
+                                <rect key="frame" x="0.0" y="171" width="406" height="60"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="j81-xJ-CZc" firstAttribute="top" secondItem="abq-Oi-0kr" secondAttribute="bottom" id="5tm-87-VTS"/>
+                            <constraint firstAttribute="trailing" secondItem="CXc-CA-BVV" secondAttribute="trailing" constant="10" id="DAf-fs-5ZY"/>
+                            <constraint firstItem="CXc-CA-BVV" firstAttribute="top" secondItem="Y2T-sk-fXX" secondAttribute="top" constant="10" id="DgH-ch-cSB"/>
+                            <constraint firstAttribute="bottom" secondItem="j81-xJ-CZc" secondAttribute="bottom" id="GbV-ax-xGQ"/>
+                            <constraint firstAttribute="trailing" secondItem="j81-xJ-CZc" secondAttribute="trailing" id="N9s-UF-BPc"/>
+                            <constraint firstItem="abq-Oi-0kr" firstAttribute="top" secondItem="CXc-CA-BVV" secondAttribute="bottom" constant="10" id="Qf2-gx-27J"/>
+                            <constraint firstItem="CXc-CA-BVV" firstAttribute="leading" secondItem="Y2T-sk-fXX" secondAttribute="leading" constant="10" id="b2E-fE-Zug"/>
+                            <constraint firstItem="abq-Oi-0kr" firstAttribute="leading" secondItem="Y2T-sk-fXX" secondAttribute="leading" constant="10" id="hOI-ui-lvB"/>
+                            <constraint firstAttribute="bottom" secondItem="abq-Oi-0kr" secondAttribute="bottom" constant="60" id="joH-Hw-rZN"/>
+                            <constraint firstItem="j81-xJ-CZc" firstAttribute="leading" secondItem="Y2T-sk-fXX" secondAttribute="leading" id="nJE-ko-7GF"/>
+                            <constraint firstAttribute="trailing" secondItem="abq-Oi-0kr" secondAttribute="trailing" constant="10" id="oQU-6M-1ZP"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Y2T-sk-fXX" secondAttribute="trailing" constant="12" id="FXO-Me-LOF"/>
+                    <constraint firstItem="Y2T-sk-fXX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="SPi-Kl-Fo9"/>
+                    <constraint firstItem="Y2T-sk-fXX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="bG8-x2-1OI"/>
+                    <constraint firstAttribute="bottom" secondItem="Y2T-sk-fXX" secondAttribute="bottom" id="h9u-qv-vLO"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="answerView" destination="j81-xJ-CZc" id="fXS-J1-fen"/>
+                <outlet property="bgViiew" destination="Y2T-sk-fXX" id="IFK-Nc-ptx"/>
+                <outlet property="bottomConstraint" destination="joH-Hw-rZN" id="OEA-e6-SXY"/>
+                <outlet property="webView" destination="CXc-CA-BVV" id="Qwt-W1-eCw"/>
+            </connections>
+            <point key="canvasLocation" x="490" y="304.5"/>
+        </tableViewCell>
+    </objects>
+</document>

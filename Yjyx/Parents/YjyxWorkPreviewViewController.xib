@@ -28,7 +28,7 @@
                 </tableView>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ns-I7-7nk">
                     <rect key="frame" x="0.0" y="511" width="320" height="49"/>
-                    <color key="backgroundColor" red="0.0" green="0.8980392157" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.35686274509803922" green="0.76862745098039209" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="49" id="R9A-E9-9Kp"/>
                     </constraints>

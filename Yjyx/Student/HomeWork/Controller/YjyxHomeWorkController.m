@@ -201,7 +201,7 @@ static NSString *HomeADID = @"HomeADID";
    
     self.collectView.pagingEnabled = YES;
     self.collectView.showsHorizontalScrollIndicator = NO;
-    self.collectView.backgroundColor = [UIColor grayColor];
+    self.collectView.backgroundColor = COMMONCOLOR;
     
 }
 - (void)addSubviews

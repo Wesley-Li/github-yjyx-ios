@@ -312,6 +312,9 @@
     sender.selected = !sender.selected;
     self.finishExpand = sender.selected ? YES : NO;
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    if (self.finishExpand == NO) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 }
 
 - (void)unfinishShowMore:(UIButton *)sender {
@@ -319,6 +322,9 @@
     sender.selected = !sender.selected;
     self.unfinishExpand = sender.selected ? YES : NO;
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:4 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    if (self.unfinishExpand == NO) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 }
 
 

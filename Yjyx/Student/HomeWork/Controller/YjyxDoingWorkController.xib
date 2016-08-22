@@ -129,7 +129,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" red="0.0" green="0.8980392157" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.35686274509803922" green="0.76862745098039209" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="bGS-zI-iGl" firstAttribute="centerY" secondItem="npi-hj-PX9" secondAttribute="centerY" id="Ej9-0h-piA"/>
                                 <constraint firstItem="GZF-lg-Ghx" firstAttribute="leading" secondItem="fue-Wm-Pud" secondAttribute="trailing" constant="5" id="Gaf-mt-lTV"/>
@@ -155,7 +155,7 @@
                             </variation>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.8980392157" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.35686274509803922" green="0.76862745098039209" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="npi-hj-PX9" firstAttribute="top" secondItem="bEv-fi-Zth" secondAttribute="top" constant="20" id="MOu-Q9-lEf"/>
                         <constraint firstItem="npi-hj-PX9" firstAttribute="leading" secondItem="bEv-fi-Zth" secondAttribute="leading" id="Mid-gw-2zX"/>
