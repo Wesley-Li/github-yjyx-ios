@@ -85,21 +85,48 @@
     CGFloat width = (SCREEN_WIDTH - 24) / count;
     CGFloat height = 78;
     
-    for (int i = 0; i < count; i++) {
-        YiTeachCustomView *customView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([YiTeachCustomView class]) owner:self options:nil] objectAtIndex:0];
-        customView.tag = 200 + i;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(makeTheChoose:)];
-        [customView addGestureRecognizer:tap];
-        [self.BGView addSubview:customView];
-        customView.frame = CGRectMake(size.width, size.height, width, height);
-        size.width += width;
+    // 判断本地是否已保存
+    if ([SYS_CACHE objectForKey:@"YiTeachBookInformation"]) {
         
-        customView.imageview.image = [UIImage imageNamed:defaultImageArr[i]];
-        customView.titleLable.text = defaultTitleArr[i];
-        customView.indicatorImageview.image = [UIImage imageNamed:defaultIndicatorArr[0]];
-        customView.isSelected = NO;
+        for (int i = 0; i < count; i++) {
+            YiTeachCustomView *customView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([YiTeachCustomView class]) owner:self options:nil] objectAtIndex:0];
+            customView.tag = 200 + i;
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(makeTheChoose:)];
+            [customView addGestureRecognizer:tap];
+            [self.BGView addSubview:customView];
+            customView.frame = CGRectMake(size.width, size.height, width, height);
+            size.width += width;
+            
+            customView.imageview.image = [UIImage imageNamed:selectedImageArr[i]];
+            customView.titleLable.text = [SYS_CACHE objectForKey:@"YiTeachBookInformation"][i];
+            customView.indicatorImageview.image = [UIImage imageNamed:selectedIndicatorArr[0]];
+            customView.isSelected = YES;
+            
+        }
+
+        
+    }else {
+    
+        for (int i = 0; i < count; i++) {
+            YiTeachCustomView *customView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([YiTeachCustomView class]) owner:self options:nil] objectAtIndex:0];
+            customView.tag = 200 + i;
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(makeTheChoose:)];
+            [customView addGestureRecognizer:tap];
+            [self.BGView addSubview:customView];
+            customView.frame = CGRectMake(size.width, size.height, width, height);
+            size.width += width;
+            
+            customView.imageview.image = [UIImage imageNamed:defaultImageArr[i]];
+            customView.titleLable.text = defaultTitleArr[i];
+            customView.indicatorImageview.image = [UIImage imageNamed:defaultIndicatorArr[0]];
+            customView.isSelected = NO;
+            
+        }
+
         
     }
+
+    
     
     
     

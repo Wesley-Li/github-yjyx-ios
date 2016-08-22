@@ -30,7 +30,10 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *numBtnBgView;
 @property (strong, nonatomic) UIButton *preBtn;
 @property (nonatomic, strong) NSMutableArray *microArr;// 视频列表，
-@property (nonatomic, strong) NSMutableArray *questionList;// 题目数组
+
+@property (nonatomic, strong) NSMutableArray *baseQuestionIDList;// 基础题列表
+@property (nonatomic, strong) NSMutableArray *consolidateIDList;// 巩固题列表
+@property (nonatomic, strong) NSMutableArray *improveIDList;// 提高题列表
 @property (nonatomic, strong) NSNumber *showview;// 有无亿教课视频,1有,0没有
 @property (nonatomic, strong) NSDictionary *responseObject;// 判断是否需要开通会员,注意，如果学生不是该科目会员，那么这个videoobjlist key不存在，前端判断如果这个key不存在，表示需要会员身份
 @property (strong, nonatomic) ProductEntity *entity;
@@ -41,6 +44,30 @@
 @end
 
 @implementation YiTeachMicroController
+
+- (NSMutableArray *)baseQuestionIDList {
+
+    if (!_baseQuestionIDList) {
+        self.baseQuestionIDList = [NSMutableArray array];
+    }
+    return _baseQuestionIDList;
+}
+
+- (NSMutableArray *)consolidateIDList {
+
+    if (!_consolidateIDList) {
+        self.consolidateIDList = [NSMutableArray array];
+    }
+    return _consolidateIDList;
+}
+
+- (NSMutableArray *)improveIDList {
+
+    if (!_improveIDList) {
+        self.improveIDList = [NSMutableArray array];
+    }
+    return _improveIDList;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -239,7 +266,20 @@
             self.microName = responseObject[@"name"];
             self.knowledgedesc = responseObject[@"knowledgedesc"];
             self.microNameLabel.text = _microName;
-            self.questionList = [responseObject[@"quizcontent"] JSONValue][@"questionList"];
+            NSArray *array = [responseObject[@"quizcontent"] JSONValue][@"questionList"][0][1];
+            NSLog(@"-------%@", array);
+            // id列表
+            for (NSDictionary *dic in array) {
+                if ([dic[@"level"] isEqual:@1]) {
+                    [self.baseQuestionIDList addObject:dic[@"id"]];
+                }else if ([dic[@"level"] isEqual:@2]) {
+                    [self.consolidateIDList addObject:dic[@"id"]];
+                }else {
+                    
+                    [self.improveIDList addObject:dic[@"id"]];
+                }
+            }
+            
             if ([[responseObject allKeys] containsObject:@"videoobjlist"]) {
                 self.microArr = [responseObject[@"videoobjlist"] JSONValue];
                 self.videoURL = _microArr[0][@"url"];
@@ -285,7 +325,7 @@
         videoImage.userInteractionEnabled = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
         [videoImage addGestureRecognizer:tap];
-//        [self.view addSubview:videoImage];
+        [self.view addSubview:videoImage];
         
     }
     
@@ -396,7 +436,8 @@
 - (IBAction)baseBtnClick:(UIButton *)sender {
     
     YjyxThreeStageController *threeStageVC = [[YjyxThreeStageController alloc] init];
-    threeStageVC.qidlist = self.questionList;
+    NSLog(@"%@", self.baseQuestionIDList);
+    threeStageVC.qidlist = self.baseQuestionIDList;
     threeStageVC.subjectid = self.subject_id;
     threeStageVC.knowledge = self.knowledgedesc;
     [self.navigationController pushViewController:threeStageVC animated:YES];
@@ -407,7 +448,7 @@
 - (IBAction)consolidateBtnClick:(UIButton *)sender {
     
     YjyxThreeStageController *threeStageVC = [[YjyxThreeStageController alloc] init];
-    threeStageVC.qidlist = self.questionList;
+    threeStageVC.qidlist = self.consolidateIDList;
     threeStageVC.subjectid = self.subject_id;
     threeStageVC.knowledge = self.knowledgedesc;
     [self.navigationController pushViewController:threeStageVC animated:YES];
@@ -419,7 +460,7 @@
 - (IBAction)improveBtnClick:(UIButton *)sender {
     
     YjyxThreeStageController *threeStageVC = [[YjyxThreeStageController alloc] init];
-    threeStageVC.qidlist = self.questionList;
+    threeStageVC.qidlist = self.improveIDList;
     threeStageVC.subjectid = self.subject_id;
     threeStageVC.knowledge = self.knowledgedesc;
     [self.navigationController pushViewController:threeStageVC animated:YES];
