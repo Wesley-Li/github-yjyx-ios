@@ -10,6 +10,7 @@
 #import "WMPlayer.h"
 #import "YjyxMemberDetailViewController.h"
 #import "ProductEntity.h"
+#import "YjyxThreeStageController.h"
 
 @interface YiTeachMicroController ()
 
@@ -85,8 +86,8 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     
-    [wmPlayer removeFromSuperview];
-    [self releaseWMPlayer];
+//    [wmPlayer removeFromSuperview];
+//    [self releaseWMPlayer];
 }
 
 #pragma mark - videoEvent
@@ -394,19 +395,35 @@
 #pragma mark - 基础
 - (IBAction)baseBtnClick:(UIButton *)sender {
     
-    
+    YjyxThreeStageController *threeStageVC = [[YjyxThreeStageController alloc] init];
+    threeStageVC.qidlist = self.questionList;
+    threeStageVC.subjectid = self.subject_id;
+    threeStageVC.knowledge = self.knowledgedesc;
+    [self.navigationController pushViewController:threeStageVC animated:YES];
     
 }
 
 #pragma mark - 巩固
 - (IBAction)consolidateBtnClick:(UIButton *)sender {
     
+    YjyxThreeStageController *threeStageVC = [[YjyxThreeStageController alloc] init];
+    threeStageVC.qidlist = self.questionList;
+    threeStageVC.subjectid = self.subject_id;
+    threeStageVC.knowledge = self.knowledgedesc;
+    [self.navigationController pushViewController:threeStageVC animated:YES];
+
     
 }
 
 #pragma mark - 提高
 - (IBAction)improveBtnClick:(UIButton *)sender {
     
+    YjyxThreeStageController *threeStageVC = [[YjyxThreeStageController alloc] init];
+    threeStageVC.qidlist = self.questionList;
+    threeStageVC.subjectid = self.subject_id;
+    threeStageVC.knowledge = self.knowledgedesc;
+    [self.navigationController pushViewController:threeStageVC animated:YES];
+
     
 }
 

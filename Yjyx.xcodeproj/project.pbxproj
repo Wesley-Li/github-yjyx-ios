@@ -359,8 +359,6 @@
 		3C15669E1D0D615D006670D6 /* subjectContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C15669C1D0D615D006670D6 /* subjectContentCell.m */; };
 		3C15669F1D0D615D006670D6 /* subjectContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C15669D1D0D615D006670D6 /* subjectContentCell.xib */; };
 		3C1566A11D0D7042006670D6 /* ChapterChoiceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1566A01D0D7042006670D6 /* ChapterChoiceController.xib */; };
-		3C19D84F1D6AC63300CA7393 /* YjyxThreeStageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C19D84D1D6AC63300CA7393 /* YjyxThreeStageController.m */; };
-		3C19D8501D6AC63300CA7393 /* YjyxThreeStageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C19D84E1D6AC63300CA7393 /* YjyxThreeStageController.xib */; };
 		3C19D8541D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C19D8521D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.m */; };
 		3C19D8551D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C19D8531D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.xib */; };
 		3C19D8581D6AD3B400CA7393 /* YjyxThreeStageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C19D8571D6AD3B400CA7393 /* YjyxThreeStageModel.m */; };
@@ -552,6 +550,8 @@
 		80293AD01D117EF4004DE299 /* QuestionPreviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80293ACE1D117EF4004DE299 /* QuestionPreviewController.xib */; };
 		802BD4B91D6A9B2000DF6F92 /* YiTeachMicroController.m in Sources */ = {isa = PBXBuildFile; fileRef = 802BD4B71D6A9B2000DF6F92 /* YiTeachMicroController.m */; };
 		802BD4BA1D6A9B2000DF6F92 /* YiTeachMicroController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 802BD4B81D6A9B2000DF6F92 /* YiTeachMicroController.xib */; };
+		802BD4C51D6B09E100DF6F92 /* YjyxThreeStageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 802BD4C21D6B09E100DF6F92 /* YjyxThreeStageController.xib */; };
+		802BD4C61D6B09E100DF6F92 /* YjyxThreeStageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 802BD4C41D6B09E100DF6F92 /* YjyxThreeStageController.m */; };
 		80590BEB1D0CF5D500867D9B /* home_img_wrong.png in Resources */ = {isa = PBXBuildFile; fileRef = 80590BE71D0CF5D500867D9B /* home_img_wrong.png */; };
 		80590BEC1D0CF5D500867D9B /* home_img_wrong@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80590BE81D0CF5D500867D9B /* home_img_wrong@3x.png */; };
 		80590BED1D0CF5D500867D9B /* home_img_knowledge@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80590BE91D0CF5D500867D9B /* home_img_knowledge@3x.png */; };
@@ -1138,9 +1138,6 @@
 		3C15669C1D0D615D006670D6 /* subjectContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = subjectContentCell.m; sourceTree = "<group>"; };
 		3C15669D1D0D615D006670D6 /* subjectContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = subjectContentCell.xib; sourceTree = "<group>"; };
 		3C1566A01D0D7042006670D6 /* ChapterChoiceController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChapterChoiceController.xib; sourceTree = "<group>"; };
-		3C19D84C1D6AC63300CA7393 /* YjyxThreeStageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxThreeStageController.h; sourceTree = "<group>"; };
-		3C19D84D1D6AC63300CA7393 /* YjyxThreeStageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxThreeStageController.m; sourceTree = "<group>"; };
-		3C19D84E1D6AC63300CA7393 /* YjyxThreeStageController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxThreeStageController.xib; sourceTree = "<group>"; };
 		3C19D8511D6ACBD600CA7393 /* YjyxThreeStageSubjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxThreeStageSubjectCell.h; sourceTree = "<group>"; };
 		3C19D8521D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxThreeStageSubjectCell.m; sourceTree = "<group>"; };
 		3C19D8531D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxThreeStageSubjectCell.xib; sourceTree = "<group>"; };
@@ -1522,6 +1519,9 @@
 		802BD4B61D6A9B2000DF6F92 /* YiTeachMicroController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YiTeachMicroController.h; sourceTree = "<group>"; };
 		802BD4B71D6A9B2000DF6F92 /* YiTeachMicroController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YiTeachMicroController.m; sourceTree = "<group>"; };
 		802BD4B81D6A9B2000DF6F92 /* YiTeachMicroController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YiTeachMicroController.xib; sourceTree = "<group>"; };
+		802BD4C21D6B09E100DF6F92 /* YjyxThreeStageController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxThreeStageController.xib; sourceTree = "<group>"; };
+		802BD4C31D6B09E100DF6F92 /* YjyxThreeStageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxThreeStageController.h; sourceTree = "<group>"; };
+		802BD4C41D6B09E100DF6F92 /* YjyxThreeStageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxThreeStageController.m; sourceTree = "<group>"; };
 		80590BE71D0CF5D500867D9B /* home_img_wrong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_img_wrong.png; sourceTree = "<group>"; };
 		80590BE81D0CF5D500867D9B /* home_img_wrong@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_img_wrong@3x.png"; sourceTree = "<group>"; };
 		80590BE91D0CF5D500867D9B /* home_img_knowledge@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_img_knowledge@3x.png"; sourceTree = "<group>"; };
@@ -2870,7 +2870,9 @@
 				802BD4B61D6A9B2000DF6F92 /* YiTeachMicroController.h */,
 				802BD4B71D6A9B2000DF6F92 /* YiTeachMicroController.m */,
 				802BD4B81D6A9B2000DF6F92 /* YiTeachMicroController.xib */,
-
+				802BD4C31D6B09E100DF6F92 /* YjyxThreeStageController.h */,
+				802BD4C41D6B09E100DF6F92 /* YjyxThreeStageController.m */,
+				802BD4C21D6B09E100DF6F92 /* YjyxThreeStageController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3859,7 +3861,6 @@
 				3B4864491CCF10C200D2DE3C /* message_click@3x.png in Resources */,
 				3A88277D1C6EE1820008367F /* ParentPersonalViewController.xib in Resources */,
 				3AA165661C91BCD6006B8756 /* homework_1@3x.png in Resources */,
-				3C19D8501D6AC63300CA7393 /* YjyxThreeStageController.xib in Resources */,
 				80590BEC1D0CF5D500867D9B /* home_img_wrong@3x.png in Resources */,
 				3A26EE641C71A81B009C3242 /* Parent_hone_down@3x.png in Resources */,
 				3BC7DBDB1CDB264800E5E12F /* hpic_placeholder.png in Resources */,
@@ -3929,6 +3930,7 @@
 				3A8827891C6EE5730008367F /* tab_personal@3x.png in Resources */,
 				8010A8F91D5D94E60091F6EA /* tab_home@2x.png in Resources */,
 				3A188FA01CE5D60B00F055DD /* YjyxOrderViewController.xib in Resources */,
+				802BD4C51D6B09E100DF6F92 /* YjyxThreeStageController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4142,7 +4144,6 @@
 				80FEB68A1D1BB545009EB126 /* TaskStatisticViewController.m in Sources */,
 				3AAE42281CE8A1B1007B2C64 /* OrderNewEntity.m in Sources */,
 				3A66A8031C931BBA005E2D43 /* ChildrenExplantionViewController.m in Sources */,
-				3C19D84F1D6AC63300CA7393 /* YjyxThreeStageController.m in Sources */,
 				3A91F4921C760CF4001568AA /* PNCircleChart.m in Sources */,
 				3AF27E371C73239400698673 /* AddChildrenViewController.m in Sources */,
 				3B84D5851CEC6E9D003F659B /* TZTestCell.m in Sources */,
@@ -4249,6 +4250,7 @@
 				3CA04CF21D1807520054A05D /* OneSubjectModel.m in Sources */,
 				3A442B961CE07E780037906A /* DynamicScrollView.m in Sources */,
 				3AF11DD91CB211D600F98A03 /* YjyxMemberDetailViewController.m in Sources */,
+				802BD4C61D6B09E100DF6F92 /* YjyxThreeStageController.m in Sources */,
 				3A8827761C6EE1470008367F /* ParentCommunityViewController.m in Sources */,
 				3C3D93DF1D26119500AA22AE /* YjyxHomeWorkController.m in Sources */,
 				3CFE92711D337C2E004DE4A8 /* YjyxDraftView.m in Sources */,
