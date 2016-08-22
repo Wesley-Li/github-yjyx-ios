@@ -30,8 +30,9 @@
 - (void)setupAnswerView
 {
     NSArray *choiceAnswer = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L"];
-    CGFloat margin = 10;
-    CGFloat btnWH = (SCREEN_WIDTH - 24 - 7 * margin) / 6;
+    
+    CGFloat btnWH = 44;
+    CGFloat margin = ((SCREEN_WIDTH - 24) - 6 * btnWH) / 7;
     NSInteger choiceTotalNum = [_model.choicecount integerValue];
     CGFloat beginX = (5 - (choiceTotalNum - 1) % 6) * (margin + btnWH);
     for (int i = 0; i < choiceTotalNum; i++) {

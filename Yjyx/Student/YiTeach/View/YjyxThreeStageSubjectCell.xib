@@ -15,21 +15,21 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2T-sk-fXX">
-                        <rect key="frame" x="12" y="15" width="406" height="231"/>
+                        <rect key="frame" x="12" y="15" width="406" height="226"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CXc-CA-BVV">
-                                <rect key="frame" x="10" y="10" width="386" height="150"/>
+                                <rect key="frame" x="10" y="10" width="386" height="145"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                             </webView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abq-Oi-0kr">
-                                <rect key="frame" x="10" y="170" width="386" height="1"/>
+                                <rect key="frame" x="10" y="165" width="386" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="4XJ-Wb-UsN"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j81-xJ-CZc">
-                                <rect key="frame" x="0.0" y="171" width="406" height="60"/>
+                                <rect key="frame" x="0.0" y="166" width="406" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -53,7 +53,7 @@
                     <constraint firstAttribute="trailing" secondItem="Y2T-sk-fXX" secondAttribute="trailing" constant="12" id="FXO-Me-LOF"/>
                     <constraint firstItem="Y2T-sk-fXX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="SPi-Kl-Fo9"/>
                     <constraint firstItem="Y2T-sk-fXX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="bG8-x2-1OI"/>
-                    <constraint firstAttribute="bottom" secondItem="Y2T-sk-fXX" secondAttribute="bottom" id="h9u-qv-vLO"/>
+                    <constraint firstAttribute="bottom" secondItem="Y2T-sk-fXX" secondAttribute="bottom" constant="5" id="h9u-qv-vLO"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
