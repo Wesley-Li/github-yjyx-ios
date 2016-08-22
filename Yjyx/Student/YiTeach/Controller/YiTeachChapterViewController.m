@@ -10,7 +10,9 @@
 #import "GradeContentItem.h"
 #import "TreeNode.h"
 #import "TreeTableView.h"
-#import "YjyxThreeStageController.h"
+#import "YiTeachMicroController.h"
+
+
 
 
 @interface YiTeachChapterViewController ()<TreeTableCellDelegate>
@@ -95,6 +97,8 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
+        [SVProgressHUD dismissWithDelay:0.8];
+
         NSLog(@"%@", error);
         
     }];
@@ -107,8 +111,17 @@
 // cell的点击方法
 -(void)cellClick:(TreeNode *)item1{
 
-    YjyxThreeStageController *threeStageVc = [[YjyxThreeStageController alloc] init];
-    [self.navigationController pushViewController:threeStageVc animated:YES];
+    YiTeachMicroController *microVC = [[YiTeachMicroController alloc] init];
+    
+    microVC.version_id = self.version_id;
+    microVC.subject_id = self.subject_id;
+    microVC.classes_id = self.classes_id;
+    microVC.book_id = self.book_id;
+    microVC.textbookunitid = item1.nodeId;
+    
+    
+    [self.navigationController pushViewController:microVC animated:YES];
+
     
 }
 

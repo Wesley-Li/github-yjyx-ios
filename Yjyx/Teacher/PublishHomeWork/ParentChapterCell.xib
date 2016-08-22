@@ -28,9 +28,18 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list_icon_bookChoose" translatesAutoresizingMaskIntoConstraints="NO" id="Lsd-BP-wak">
+                        <rect key="frame" x="340" y="46" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="MHh-8q-d2Q"/>
+                            <constraint firstAttribute="height" constant="20" id="vJ6-Qj-RZ2"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="s4f-wV-dLC" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CH1-sC-Mhx"/>
+                    <constraint firstAttribute="trailing" secondItem="Lsd-BP-wak" secondAttribute="trailing" constant="5" id="Yyh-7T-jPs"/>
+                    <constraint firstItem="Lsd-BP-wak" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hH9-3i-Qsj"/>
                     <constraint firstItem="qOw-4i-OZi" firstAttribute="leading" secondItem="s4f-wV-dLC" secondAttribute="trailing" constant="8" id="jeZ-CC-dwX"/>
                     <constraint firstItem="s4f-wV-dLC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="jp2-V8-BcR"/>
                     <constraint firstItem="qOw-4i-OZi" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="yif-rH-KvW"/>
@@ -38,6 +47,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="chapterLabel" destination="qOw-4i-OZi" id="9Cl-Lf-JwM"/>
+                <outlet property="chooseIndicator" destination="Lsd-BP-wak" id="n2d-zr-ImZ"/>
                 <outlet property="heightConstant" destination="hWT-gj-2zk" id="Jai-mA-b1c"/>
                 <outlet property="imageV" destination="s4f-wV-dLC" id="qbr-tc-MZb"/>
                 <outlet property="imageVleadConstant" destination="jp2-V8-BcR" id="TYn-Iv-N8d"/>
@@ -46,4 +56,7 @@
             <point key="canvasLocation" x="333.5" y="278"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="list_icon_bookChoose" width="36" height="36"/>
+    </resources>
 </document>

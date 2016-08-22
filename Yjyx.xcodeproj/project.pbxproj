@@ -550,6 +550,8 @@
 		801F44B01CDF164800B7E7E1 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 801F44A41CDF164800B7E7E1 /* Order.m */; };
 		80293ACF1D117EF4004DE299 /* QuestionPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80293ACD1D117EF4004DE299 /* QuestionPreviewController.m */; };
 		80293AD01D117EF4004DE299 /* QuestionPreviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80293ACE1D117EF4004DE299 /* QuestionPreviewController.xib */; };
+		802BD4B91D6A9B2000DF6F92 /* YiTeachMicroController.m in Sources */ = {isa = PBXBuildFile; fileRef = 802BD4B71D6A9B2000DF6F92 /* YiTeachMicroController.m */; };
+		802BD4BA1D6A9B2000DF6F92 /* YiTeachMicroController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 802BD4B81D6A9B2000DF6F92 /* YiTeachMicroController.xib */; };
 		80590BEB1D0CF5D500867D9B /* home_img_wrong.png in Resources */ = {isa = PBXBuildFile; fileRef = 80590BE71D0CF5D500867D9B /* home_img_wrong.png */; };
 		80590BEC1D0CF5D500867D9B /* home_img_wrong@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80590BE81D0CF5D500867D9B /* home_img_wrong@3x.png */; };
 		80590BED1D0CF5D500867D9B /* home_img_knowledge@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80590BE91D0CF5D500867D9B /* home_img_knowledge@3x.png */; };
@@ -1517,6 +1519,9 @@
 		80293ACC1D117EF4004DE299 /* QuestionPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionPreviewController.h; sourceTree = "<group>"; };
 		80293ACD1D117EF4004DE299 /* QuestionPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionPreviewController.m; sourceTree = "<group>"; };
 		80293ACE1D117EF4004DE299 /* QuestionPreviewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionPreviewController.xib; sourceTree = "<group>"; };
+		802BD4B61D6A9B2000DF6F92 /* YiTeachMicroController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YiTeachMicroController.h; sourceTree = "<group>"; };
+		802BD4B71D6A9B2000DF6F92 /* YiTeachMicroController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YiTeachMicroController.m; sourceTree = "<group>"; };
+		802BD4B81D6A9B2000DF6F92 /* YiTeachMicroController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YiTeachMicroController.xib; sourceTree = "<group>"; };
 		80590BE71D0CF5D500867D9B /* home_img_wrong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_img_wrong.png; sourceTree = "<group>"; };
 		80590BE81D0CF5D500867D9B /* home_img_wrong@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_img_wrong@3x.png"; sourceTree = "<group>"; };
 		80590BE91D0CF5D500867D9B /* home_img_knowledge@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_img_knowledge@3x.png"; sourceTree = "<group>"; };
@@ -2862,9 +2867,10 @@
 				80A0E8C31D682FD300ED68A1 /* YjyxYiTeachController.xib */,
 				80A0E8D21D69AD7500ED68A1 /* YiTeachChapterViewController.h */,
 				80A0E8D31D69AD7500ED68A1 /* YiTeachChapterViewController.m */,
-				3C19D84C1D6AC63300CA7393 /* YjyxThreeStageController.h */,
-				3C19D84D1D6AC63300CA7393 /* YjyxThreeStageController.m */,
-				3C19D84E1D6AC63300CA7393 /* YjyxThreeStageController.xib */,
+				802BD4B61D6A9B2000DF6F92 /* YiTeachMicroController.h */,
+				802BD4B71D6A9B2000DF6F92 /* YiTeachMicroController.m */,
+				802BD4B81D6A9B2000DF6F92 /* YiTeachMicroController.xib */,
+
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3757,6 +3763,7 @@
 				3A88278A1C6EE5730008367F /* tab_personals@3x.png in Resources */,
 				8010A8FC1D5D94E60091F6EA /* tab_home_select@3x.png in Resources */,
 				3BCF191B1CDC66E600E2EA1A /* list_btn_right@3x.png in Resources */,
+				802BD4BA1D6A9B2000DF6F92 /* YiTeachMicroController.xib in Resources */,
 				3A26EE621C71A81B009C3242 /* Parent_Exchange_goods@3x.png in Resources */,
 				8010A9071D5D94E60091F6EA /* tab_myclass_select@2x.png in Resources */,
 				3CD2F16C1D2790640031AF2E /* YjyxChangeNameController.xib in Resources */,
@@ -4215,6 +4222,7 @@
 				3CAC45391D409C3400ACBDA9 /* YjyxShopDisplayController.m in Sources */,
 				3BE01BDF1CDDC3A400781B86 /* TCustomView.m in Sources */,
 				3BFE3B7D1CD9816D00502769 /* ProductEntity.m in Sources */,
+				802BD4B91D6A9B2000DF6F92 /* YiTeachMicroController.m in Sources */,
 				3BB773C61CD883EA00A24485 /* PhoneChangeViewController.m in Sources */,
 				3B35DB8E1CE066F5000B7F83 /* TaskCell.m in Sources */,
 				3A91F4911C760CF4001568AA /* PNChartLabel.m in Sources */,

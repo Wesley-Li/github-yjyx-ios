@@ -66,11 +66,12 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
     static NSString *NODE_CELL_ID = @"node_cell_id";
     
     ParentChapterCell *cell = [tableView dequeueReusableCellWithIdentifier:NODE_CELL_ID];
-
+    cell.chooseIndicator.hidden = YES;
     TreeNode *node = [_tempData objectAtIndex:indexPath.row];
 
     cell.node = node;
-
+    
+    
     if (node.depth == 1) {
         if (node.expand == YES) {
             cell.imageV.image = [UIImage imageNamed:@"list_icon_1_expand"];
@@ -89,8 +90,12 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
                     cell.imageV.image = [UIImage imageNamed:@"list_icon_2"];
                 }
                 break;
+                
             }else{
                 cell.imageV.image = [UIImage imageNamed:@"list_icon_3"];
+//                cell.chooseIndicator.hidden = NO;
+//                cell.widthConstant.constant = 10;
+//                cell.heightConstant.constant = 10;
             }
         }
     }
