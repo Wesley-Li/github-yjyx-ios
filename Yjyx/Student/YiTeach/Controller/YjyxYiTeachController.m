@@ -244,6 +244,7 @@
             
             if (i== 3) {
                 self.startLearnBtn.hidden = NO;
+                
             }
             
             continue;

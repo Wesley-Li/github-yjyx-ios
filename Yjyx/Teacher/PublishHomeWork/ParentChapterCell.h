@@ -10,6 +10,7 @@
 @class TreeNode;
 @interface ParentChapterCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageV;
+@property (weak, nonatomic) IBOutlet UIImageView *chooseIndicator;
 
 @property (weak, nonatomic) IBOutlet UILabel *chapterLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstant;
