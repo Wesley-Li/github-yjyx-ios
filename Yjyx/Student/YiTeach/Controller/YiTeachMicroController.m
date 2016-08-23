@@ -113,8 +113,8 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     
-//    [wmPlayer removeFromSuperview];
-//    [self releaseWMPlayer];
+    [self closeTheVideo:nil];
+    [self releaseWMPlayer];
 }
 
 #pragma mark - videoEvent
@@ -262,7 +262,7 @@
         
         NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] isEqual:@0]) {
-            
+            self.responseObject = responseObject;
             self.microName = responseObject[@"name"];
             self.knowledgedesc = responseObject[@"knowledgedesc"];
             self.microNameLabel.text = _microName;
@@ -472,6 +472,7 @@
 #pragma mark - 点击视频开始按钮
 -(void)playvideo
 {
+    NSLog(@"%@", _responseObject);
     // 是否需要会员
     if (![[self.responseObject allKeys] containsObject:@"videoobjlist"]) {
         
