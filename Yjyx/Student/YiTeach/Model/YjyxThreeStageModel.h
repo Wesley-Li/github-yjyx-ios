@@ -10,6 +10,7 @@
 
 @interface YjyxThreeStageModel : NSObject
 
+@property (strong, nonatomic) NSNumber *canview; //  是否是会员
 @property (strong, nonatomic) NSString *videourl; // 视频解析
 @property (strong, nonatomic) NSString *explanation; // 文字解析
 @property (strong, nonatomic) NSNumber *subjectid; // 科目id

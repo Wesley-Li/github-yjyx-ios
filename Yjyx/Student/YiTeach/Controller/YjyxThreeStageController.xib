@@ -33,6 +33,9 @@
                     <state key="normal" title="提交作业">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="submitWorkBtnClick:" destination="-1" eventType="touchUpInside" id="AdJ-yn-6YF"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

@@ -9,11 +9,21 @@
 #import "YjyxThreeStageController.h"
 #import "YjyxThreeStageSubjectCell.h"
 #import "YjyxThreeStageModel.h"
+#import "YjyxKnowledgeCardView.h"
+#import "YjyxThreeStageAnswerController.h"
 @interface YjyxThreeStageController ()<UITableViewDelegate, UITableViewDataSource, ThreeStageSubjectCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSMutableArray *threeStageArr;
+
+@property (strong, nonatomic) NSMutableArray *randomFiveArr;
+
+@property (strong, nonatomic) NSMutableDictionary *heightDict;
+
+@property (weak, nonatomic) YjyxKnowledgeCardView *knowledgeView;
+
+@property (assign, nonatomic) CGFloat height;
 @end
 
 @implementation YjyxThreeStageController
@@ -26,6 +36,30 @@ static NSString *ID = @"CELL";
     }
     return _threeStageArr;
 }
+- (NSMutableArray *)randomFiveArr
+{
+    if (_randomFiveArr == nil) {
+        _randomFiveArr = [NSMutableArray array];
+    }
+    return _randomFiveArr;
+}
+- (NSMutableDictionary *)heightDict
+{
+    if(_heightDict == nil){
+        _heightDict = [NSMutableDictionary dictionary];
+    }
+    return _heightDict;
+}
+- (YjyxKnowledgeCardView *)knowledgeView
+{
+    if (_knowledgeView == nil) {
+        YjyxKnowledgeCardView  *knowledgeView = [YjyxKnowledgeCardView knowledgeCardView];
+        self.knowledgeView = knowledgeView;
+        [_knowledgeView setKnowledgeContent:self.knowledge andHeight:self.height];
+        _knowledgeView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+    }
+    return _knowledgeView;
+}
 #pragma mark - view的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,45 +67,119 @@ static NSString *ID = @"CELL";
     self.navigationItem.title = @"亿教课堂";
     [self setupRightNavItem];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    NSDictionary *dict1 = @{@"choicecount": @4};
-     NSDictionary *dict2 = @{ @"choicecount": @6};
-     NSDictionary *dict3 = @{ @"choicecount": @8 };
-     NSDictionary *dict4 = @{@"choicecount": @12};
-    NSArray *arr = @[dict1, dict2, dict3, dict4];
-    for (NSDictionary *dict in arr) {
-        YjyxThreeStageModel *model = [YjyxThreeStageModel threeStageModelWithDict:dict];
-        [self.threeStageArr addObject:model];
-    }
-    
-    [self loadData];
+   
+
+    NSLog(@"%@", self.qidlist);
+
+    // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxThreeStageSubjectCell class]) bundle:nil] forCellReuseIdentifier:ID];
+    // 注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHeight:) name:@"WEBVIEW_HEIGHT" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadView:) name:@"WEBVIEW_HEIGHT3" object:nil];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+     NSMutableArray *tempArr = [NSMutableArray array];
+    [self.randomFiveArr removeAllObjects];
+    // 随机难度的5道题目
+    if (self.qidlist.count <= 5) {
+        [self.randomFiveArr addObjectsFromArray:self.qidlist];
+    }else{
+        while (self.randomFiveArr.count < 5) {
+            int r = arc4random() % self.qidlist.count;
+            if ([tempArr containsObject:@(r)]) {
+                continue;
+            }
+            [tempArr addObject:@(r)];
+            NSLog(@"%@", tempArr);
+            [self.randomFiveArr addObject:self.qidlist[r]];
+        }
+    }
+  
+    [self.tableView setContentOffset:CGPointZero animated:YES];
+    // 加载网络数据
+    [self loadData];
 }
 #pragma mark -私有方法
+// 网络数据请求
 - (void)loadData
 {
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"action"] = @"m_getmany";
     param[@"subjectid"] = self.subjectid;
-    param[@"qidlist"] = [self.qidlist JSONString];
+    param[@"qidlist"] = [self.randomFiveArr JSONString];
     NSLog(@"%@", param);
+    [self.view makeToastActivity:SHOW_CENTER];
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/yj_questions/choice/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        NSLog(@"%@", responseObject);
+        [self.view hideToastActivity];
+//        NSLog(@"%@", responseObject);
+        [self.threeStageArr removeAllObjects];
+        if ([responseObject[@"retcode"] integerValue] == 0) {
+            for (NSDictionary *dict in responseObject[@"questionlist"]) {
+                YjyxThreeStageModel *model = [YjyxThreeStageModel threeStageModelWithDict:dict];
+                model.canview = responseObject[@"canview"];
+                [self.threeStageArr addObject:model];
+                
+            }
+            [self.tableView reloadData];
+        }else{
+            if (self.qidlist.count == 0) {
+                [self.view makeToast:@"暂没有添加题目,敬请期待..." duration:0.5 position:SHOW_CENTER complete:nil];
+            }else{
+                NSString *str = responseObject[@"msg"] == nil ? responseObject[@"reason"] : responseObject[@"msg"];
+                [self.view makeToast:str duration:0.5 position:SHOW_CENTER complete:nil];
+            }
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view hideToastActivity];
+        [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
         NSLog(@"%@", error.localizedDescription);
     }];
 }
+// 设置右按钮
 - (void)setupRightNavItem
 {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"知识卡" style:UIBarButtonItemStylePlain target:self action:@selector(knowLedgeBtnClick)];
 }
+// 知识卡点击
 - (void)knowLedgeBtnClick
 {
     NSLog(@"dianjile");
+    if ([self.view.subviews containsObject:self.knowledgeView]) {
+        [self.knowledgeView removeFromSuperview];
+    }else{
+        [self.view addSubview:self.knowledgeView];
+    }
+    
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+// 刷新高度
+- (void)refreshHeight:(NSNotification *)noti
+{
+    YjyxThreeStageSubjectCell *cell = [noti object];
+    
+    if (fabs([[self.heightDict objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] - cell.height) > 2)
+    {
+        [self.heightDict setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld",cell.tag]];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:0 ]] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+- (void)reloadView:(NSNotification *)noti
+{
+    CGFloat height = [noti.userInfo[@"hight"] floatValue];
+    self.height  = height;
+    [self.knowledgeView removeFromSuperview];
+    self.knowledgeView = nil;
+    [self.view addSubview:self.knowledgeView];
+    
+}
+// 提交作业
+- (IBAction)submitWorkBtnClick:(UIButton *)sender {
+    YjyxThreeStageAnswerController *vc = [[YjyxThreeStageAnswerController alloc] init];
+    vc.threeStageSubjectArr = self.threeStageArr;
+    vc.subjectid  = self.subjectid;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 #pragma mark -UITableViewDataSource数据源方法
@@ -90,7 +198,16 @@ static NSString *ID = @"CELL";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 200;
+    CGFloat height = [[self.heightDict objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] floatValue];
+    
+    if (height == 0) {
+        
+        return 300;
+        
+    }else {
+        
+        return height;
+    }
 }
 #pragma mark -ThreeStageSubjectCellDelegate代理方法
 - (void)threeStageSubjectCell:(YjyxThreeStageSubjectCell *)cell doingSubjectBtnClick:(UIButton *)btn
