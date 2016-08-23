@@ -9,7 +9,7 @@
 #import "YjyxThreeStageController.h"
 #import "YjyxThreeStageSubjectCell.h"
 #import "YjyxThreeStageModel.h"
-@interface YjyxThreeStageController ()<UITableViewDelegate, UITableViewDataSource>
+@interface YjyxThreeStageController ()<UITableViewDelegate, UITableViewDataSource, ThreeStageSubjectCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -43,10 +43,24 @@ static NSString *ID = @"CELL";
         [self.threeStageArr addObject:model];
     }
     
-
+    [self loadData];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxThreeStageSubjectCell class]) bundle:nil] forCellReuseIdentifier:ID];
 }
 #pragma mark -私有方法
+- (void)loadData
+{
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"action"] = @"m_getmany";
+    param[@"subjectid"] = self.subjectid;
+    param[@"qidlist"] = [self.qidlist JSONString];
+    NSLog(@"%@", param);
+    [mgr GET:[BaseURL stringByAppendingString:@"/api/student/yj_questions/choice/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        NSLog(@"%@", responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error.localizedDescription);
+    }];
+}
 - (void)setupRightNavItem
 {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"知识卡" style:UIBarButtonItemStylePlain target:self action:@selector(knowLedgeBtnClick)];
@@ -70,10 +84,34 @@ static NSString *ID = @"CELL";
     YjyxThreeStageSubjectCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.model = self.threeStageArr[indexPath.row];
+    cell.tag = indexPath.row;
+    cell.delegate = self;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 200;
+}
+#pragma mark -ThreeStageSubjectCellDelegate代理方法
+- (void)threeStageSubjectCell:(YjyxThreeStageSubjectCell *)cell doingSubjectBtnClick:(UIButton *)btn
+{
+    YjyxThreeStageModel *model = self.threeStageArr[cell.tag];
+    if(btn.selected == YES){
+        if(model.stuAnswer == nil){
+            model.stuAnswer = [NSString stringWithFormat:@"%ld", btn.tag - 200];
+        }else{
+            model.stuAnswer = [NSString stringWithFormat:@"%@|%ld", model.stuAnswer, btn.tag - 200];
+        }
+    }else{
+        NSMutableArray *arr = [NSMutableArray arrayWithArray: [model.stuAnswer componentsSeparatedByString:@"|"]];
+        if([arr containsObject:[NSString stringWithFormat:@"%ld", btn.tag - 200]]){
+            [arr removeObject:[NSString stringWithFormat:@"%ld", btn.tag - 200]];
+        }
+        
+        model.stuAnswer = [arr componentsJoinedByString:@"|"];
+        if(arr.count == 0){
+            model.stuAnswer = nil;
+        }
+    }
 }
 @end

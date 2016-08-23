@@ -19,5 +19,7 @@
 @property (strong, nonatomic) NSString *answer;  // 答案
 @property (strong, nonatomic) NSNumber *choicecount; // 选择项数目
 
+@property (strong, nonatomic) NSString *stuAnswer;
+
 + (instancetype)threeStageModelWithDict:(NSDictionary *)dict;
 @end
