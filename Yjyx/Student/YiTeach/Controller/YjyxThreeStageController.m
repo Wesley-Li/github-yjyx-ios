@@ -175,10 +175,20 @@ static NSString *ID = @"CELL";
 }
 // 提交作业
 - (IBAction)submitWorkBtnClick:(UIButton *)sender {
-    YjyxThreeStageAnswerController *vc = [[YjyxThreeStageAnswerController alloc] init];
-    vc.threeStageSubjectArr = self.threeStageArr;
-    vc.subjectid  = self.subjectid;
-    [self.navigationController pushViewController:vc animated:YES];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:@"确认提交作业?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        YjyxThreeStageAnswerController *vc = [[YjyxThreeStageAnswerController alloc] init];
+        vc.threeStageSubjectArr = self.threeStageArr;
+        vc.subjectid  = self.subjectid;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }];
+    
+    [alertVC addAction:action1];
+    [alertVC addAction:action2];
+    
+    [self presentViewController:alertVC animated:YES completion:nil];
     
 }
 
