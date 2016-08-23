@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class YjyxThreeStageModel;
+@class YjyxThreeStageModel, YjyxThreeStageSubjectCell;
+@protocol ThreeStageSubjectCellDelegate <NSObject>
+
+- (void)threeStageSubjectCell:(YjyxThreeStageSubjectCell *)cell doingSubjectBtnClick:(UIButton *)btn;
+
+@end
 @interface YjyxThreeStageSubjectCell : UITableViewCell
 
+@property (weak, nonatomic) id<ThreeStageSubjectCellDelegate> delegate;
 @property (strong, nonatomic) YjyxThreeStageModel *model;
 @end

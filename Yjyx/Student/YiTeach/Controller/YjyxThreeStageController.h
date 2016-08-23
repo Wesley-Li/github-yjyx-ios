@@ -12,5 +12,5 @@
 
 @property (strong, nonatomic) NSString *knowledge;
 @property (strong, nonatomic) NSNumber *subjectid;
-@property (strong, nonatomic) NSString *qidlist;
+@property (strong, nonatomic) NSMutableArray *qidlist;
 @end
