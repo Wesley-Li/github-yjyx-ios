@@ -93,13 +93,13 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9H3-Yx-4kx">
                             <rect key="frame" x="134" y="144" width="52" height="26"/>
                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMe-Ww-xXh">
                             <rect key="frame" x="137" y="201" width="47" height="23"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="report.png" translatesAutoresizingMaskIntoConstraints="NO" id="RR8-Il-ycT">
@@ -130,7 +130,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dfs-TZ-Oj8">
                             <rect key="frame" x="141" y="170" width="38" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -310,11 +310,11 @@
     <resources>
         <image name="p_money" width="49" height="49"/>
         <image name="report.png" width="59" height="59"/>
-        <image name="student_home_setting" width="51" height="51"/>
+        <image name="student_home_setting" width="25" height="25"/>
         <image name="student_member_icon" width="230" height="230"/>
         <image name="常用工具" width="230" height="230"/>
         <image name="我的统计" width="230" height="230"/>
-        <image name="背景" width="750" height="579"/>
+        <image name="背景" width="375" height="289"/>
         <image name="课程表" width="230" height="230"/>
     </resources>
 </document>

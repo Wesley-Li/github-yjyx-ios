@@ -21,6 +21,9 @@
     
 }
 
+@property (weak, nonatomic) IBOutlet UIButton *baseButton;
+@property (weak, nonatomic) IBOutlet UIButton *consolidateButton;
+@property (weak, nonatomic) IBOutlet UIButton *improveButton;
 
 @property (nonatomic, copy) NSString *videoURL;
 @property (nonatomic, copy) NSMutableArray *videoURLArr;
@@ -67,6 +70,26 @@
         self.improveIDList = [NSMutableArray array];
     }
     return _improveIDList;
+}
+
+- (void)viewDidLayoutSubviews {
+
+    [super viewDidLayoutSubviews];
+    [self configureTheThreeBtn];
+}
+
+- (void)configureTheThreeBtn {
+
+    self.baseButton.layer.cornerRadius = self.baseButton.width/2;
+    self.baseButton.layer.masksToBounds = YES;
+    self.baseButton.backgroundColor = [UIColor colorWithHexString:@"#3dd995"];
+    self.consolidateButton.layer.cornerRadius = self.consolidateButton.width/2;
+    self.consolidateButton.layer.masksToBounds = YES;
+    self.consolidateButton.backgroundColor = [UIColor colorWithHexString:@"#3ed9d0"];
+    self.improveButton.layer.cornerRadius = self.improveButton.width/2;
+    self.improveButton.layer.masksToBounds = YES;
+    self.improveButton.backgroundColor = [UIColor colorWithHexString:@"#3573d9"];
+    
 }
 
 - (void)viewDidLoad {

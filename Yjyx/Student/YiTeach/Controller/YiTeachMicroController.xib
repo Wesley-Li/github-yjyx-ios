@@ -8,6 +8,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YiTeachMicroController">
             <connections>
+                <outlet property="baseButton" destination="iYg-4Q-1yk" id="aPV-RC-IZs"/>
+                <outlet property="consolidateButton" destination="W9W-kb-fty" id="Wus-9G-HVv"/>
+                <outlet property="improveButton" destination="r8H-kE-uF2" id="DyM-0M-rUz"/>
                 <outlet property="microNameLabel" destination="q8D-6L-23x" id="hiS-Uf-D3b"/>
                 <outlet property="numBtnBgView" destination="pLX-WH-hJI" id="AdZ-Rm-9Jp"/>
                 <outlet property="topConstraint" destination="a8r-vn-wpK" id="AJt-fd-O7W"/>
@@ -44,61 +47,34 @@
                     </constraints>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3pe-Gx-SI0">
-                    <rect key="frame" x="0.0" y="324" width="320" height="120"/>
+                    <rect key="frame" x="0.0" y="324" width="320" height="71"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iYg-4Q-1yk">
-                            <rect key="frame" x="20" y="23" width="73" height="74"/>
+                            <rect key="frame" x="20" y="-1" width="73" height="73"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="iYg-4Q-1yk" secondAttribute="height" multiplier="1:1" id="2nm-56-j9Y"/>
                             </constraints>
-                            <state key="normal" backgroundImage="YiTeach_base"/>
+                            <state key="normal" title="基础"/>
                             <connections>
                                 <action selector="baseBtnClick:" destination="-1" eventType="touchUpInside" id="bpG-1g-OaS"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r8H-kE-uF2">
-                            <rect key="frame" x="227" y="23" width="73" height="74"/>
+                            <rect key="frame" x="227" y="-1" width="73" height="73"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="r8H-kE-uF2" secondAttribute="height" multiplier="1:1" id="GXN-Fh-Sub"/>
                             </constraints>
-                            <state key="normal" backgroundImage="YiTeach_improve"/>
+                            <state key="normal" title="提高"/>
                             <connections>
                                 <action selector="improveBtnClick:" destination="-1" eventType="touchUpInside" id="5RJ-iF-ieh"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="基础" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmS-9t-CUJ">
-                            <rect key="frame" x="20" y="97" width="73" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="dPP-GF-4MX"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="巩固" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZZ-oB-vk5">
-                            <rect key="frame" x="123" y="99" width="74" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="kfR-9l-xVS"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提高" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q52-rU-Lq9">
-                            <rect key="frame" x="226" y="97" width="74" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="oCO-Gi-7S7"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W9W-kb-fty">
-                            <rect key="frame" x="123" y="23" width="74" height="74"/>
+                            <rect key="frame" x="123" y="-1" width="74" height="73"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="W9W-kb-fty" secondAttribute="height" multiplier="1:1" id="Bt5-r8-60d"/>
                             </constraints>
-                            <state key="normal" backgroundImage="YiTeach_consolidate"/>
+                            <state key="normal" title="巩固"/>
                             <connections>
                                 <action selector="consolidateBtnClick:" destination="-1" eventType="touchUpInside" id="grb-B2-dIP"/>
                             </connections>
@@ -106,22 +82,13 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="q52-rU-Lq9" firstAttribute="width" secondItem="r8H-kE-uF2" secondAttribute="width" id="52g-Fq-h5t"/>
-                        <constraint firstItem="yZZ-oB-vk5" firstAttribute="centerX" secondItem="W9W-kb-fty" secondAttribute="centerX" id="5a7-ID-jUR"/>
-                        <constraint firstItem="yZZ-oB-vk5" firstAttribute="top" secondItem="W9W-kb-fty" secondAttribute="bottom" constant="2" id="8hw-XP-Ooj"/>
-                        <constraint firstItem="lmS-9t-CUJ" firstAttribute="width" secondItem="iYg-4Q-1yk" secondAttribute="width" id="8kE-g2-wga"/>
                         <constraint firstItem="iYg-4Q-1yk" firstAttribute="centerY" secondItem="3pe-Gx-SI0" secondAttribute="centerY" id="8un-C3-7Bh"/>
                         <constraint firstAttribute="trailing" secondItem="r8H-kE-uF2" secondAttribute="trailing" constant="20" id="Ex6-0w-aWq"/>
-                        <constraint firstItem="q52-rU-Lq9" firstAttribute="centerX" secondItem="r8H-kE-uF2" secondAttribute="centerX" id="HgF-MO-mOO"/>
-                        <constraint firstItem="lmS-9t-CUJ" firstAttribute="centerX" secondItem="iYg-4Q-1yk" secondAttribute="centerX" id="Hre-rw-CVd"/>
                         <constraint firstItem="r8H-kE-uF2" firstAttribute="width" secondItem="iYg-4Q-1yk" secondAttribute="width" id="Q7g-a4-lx6"/>
-                        <constraint firstItem="lmS-9t-CUJ" firstAttribute="top" secondItem="iYg-4Q-1yk" secondAttribute="bottom" id="Qha-Za-hx9"/>
                         <constraint firstItem="W9W-kb-fty" firstAttribute="width" secondItem="iYg-4Q-1yk" secondAttribute="width" id="TLU-Lp-V8C"/>
-                        <constraint firstItem="q52-rU-Lq9" firstAttribute="top" secondItem="r8H-kE-uF2" secondAttribute="bottom" id="UNw-Lx-6ZZ"/>
                         <constraint firstItem="r8H-kE-uF2" firstAttribute="centerY" secondItem="3pe-Gx-SI0" secondAttribute="centerY" id="e6U-HX-5gd"/>
                         <constraint firstItem="iYg-4Q-1yk" firstAttribute="leading" secondItem="3pe-Gx-SI0" secondAttribute="leading" constant="20" id="fJk-ok-KFG"/>
                         <constraint firstItem="W9W-kb-fty" firstAttribute="leading" secondItem="iYg-4Q-1yk" secondAttribute="trailing" constant="30" id="gy0-Yx-7SF"/>
-                        <constraint firstItem="yZZ-oB-vk5" firstAttribute="width" secondItem="W9W-kb-fty" secondAttribute="width" id="sdA-gd-siB"/>
                         <constraint firstItem="W9W-kb-fty" firstAttribute="centerY" secondItem="3pe-Gx-SI0" secondAttribute="centerY" id="w6M-PM-sun"/>
                         <constraint firstItem="r8H-kE-uF2" firstAttribute="leading" secondItem="W9W-kb-fty" secondAttribute="trailing" constant="30" id="yNZ-1S-q27"/>
                     </constraints>
@@ -130,7 +97,7 @@
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="KW8-RJ-Xcr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5c5-HU-Qsm"/>
-                <constraint firstAttribute="bottom" secondItem="3pe-Gx-SI0" secondAttribute="bottom" constant="60" id="8Mr-Ua-bei"/>
+                <constraint firstAttribute="bottom" secondItem="3pe-Gx-SI0" secondAttribute="bottom" constant="109" id="8Mr-Ua-bei"/>
                 <constraint firstAttribute="trailing" secondItem="q8D-6L-23x" secondAttribute="trailing" id="H7Z-SF-eJ2"/>
                 <constraint firstAttribute="trailing" secondItem="3pe-Gx-SI0" secondAttribute="trailing" id="Pan-eA-MKa"/>
                 <constraint firstItem="3pe-Gx-SI0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QrI-pE-J4q"/>
@@ -147,9 +114,4 @@
             <point key="canvasLocation" x="392" y="330"/>
         </view>
     </objects>
-    <resources>
-        <image name="YiTeach_base" width="97" height="97"/>
-        <image name="YiTeach_consolidate" width="96" height="96"/>
-        <image name="YiTeach_improve" width="96" height="96"/>
-    </resources>
 </document>

@@ -49,19 +49,27 @@
     fmt.dateFormat = @"HH:mm";
     NSString *str1 = [fmt stringFromDate: date];
 
-    // 平均正确率
-    CGFloat total = [todayWorkModel.totalCorrect floatValue] + [todayWorkModel.totalWrong floatValue];
-    NSString *rateString = total == 0 ? @"0%" : [NSString stringWithFormat:@"%.f%%", [todayWorkModel.totalCorrect floatValue] * 100 / total];
-    NSString *summaryString = [NSString stringWithFormat:@"今天%@  由%@老师发布  |  平均正确率%@", str1, todayWorkModel.delivername, rateString];
-    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:summaryString];
-    [attString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#e71419"] range:NSRangeFromString(rateString)];
-    self.releaseTimeLabel.attributedText = attString;
-    todayWorkModel.height = [self.releaseTimeLabel.attributedText boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size.height + 50;
     
-    if ([todayWorkModel.finished isEqual:@1]) {
+    if ([todayWorkModel.finished isEqual:@1]) {// 已完成
         [self.progressBtn setTitle:@"已完成" forState:UIControlStateNormal];
         self.progressBtn.backgroundColor = STUDENTCOLOR;
+        // 平均正确率
+        CGFloat total = [todayWorkModel.totalCorrect floatValue] + [todayWorkModel.totalWrong floatValue];
+        CGFloat myTotal = [todayWorkModel.summary[@"correct"] floatValue] + [todayWorkModel.summary[@"wrong"] floatValue];
+        NSString *rateString = total == 0 ? @"0%" : [NSString stringWithFormat:@"%.f%%", [todayWorkModel.totalCorrect floatValue] * 100 / total];
+        NSString *myRate = [NSString stringWithFormat:@"%.f%%", [todayWorkModel.summary[@"correct"] floatValue] * 100 / myTotal];
+        NSString *raString = [NSString stringWithFormat:@"\n本次平均正确率%@  |  我的正确率%@", rateString, myRate];
+        NSString *summaryString = [NSString stringWithFormat:@"今天%@  由%@老师发布%@", str1, todayWorkModel.delivername, raString];
+        NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:summaryString];
+        [attString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#e71419"] range:NSMakeRange(summaryString.length - raString.length, raString.length)];
+        self.releaseTimeLabel.attributedText = attString;
+        todayWorkModel.height = [self.releaseTimeLabel.attributedText boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size.height + 55;
+
     }else{
+        NSString *summaryString = [NSString stringWithFormat:@"今天%@  由%@老师发布", str1, todayWorkModel.delivername];
+        self.releaseTimeLabel.text = summaryString;
+        todayWorkModel.height = [self.releaseTimeLabel.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height + 55;
+        
         [self.progressBtn setTitle:@"做作业" forState:UIControlStateNormal];
         self.progressBtn.backgroundColor = RGBACOLOR(10.0, 96.0, 254.0, 1);
     }
@@ -88,25 +96,36 @@
     fmt.dateFormat = @"MM-dd HH:mm";
     NSString *str1 = [fmt stringFromDate: date];
     
-    // 平均正确率
-    CGFloat total = [OneSubjectModel.totalCorrect floatValue] + [OneSubjectModel.totalWrong floatValue];
-    NSString *rateString = total == 0 ? @"0%" : [NSString stringWithFormat:@"%.f%%", [OneSubjectModel.totalCorrect floatValue] * 100 / total];
-    NSString *summaryString = [NSString stringWithFormat:@"%@  由%@老师发布  |  平均正确率%@", str1, OneSubjectModel.delivername, rateString];
-    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:summaryString];
-    [attString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#e71419"] range:NSMakeRange(summaryString.length - rateString.length, rateString.length)];
-    self.releaseTimeLabel.attributedText = attString;
-    OneSubjectModel.height = [self.releaseTimeLabel.attributedText boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size.height + 50;
-    
-//    self.teacherDescLabel.text = [NSString stringWithFormat:@"由%@老师发布", OneSubjectModel.delivername];
+    //    self.teacherDescLabel.text = [NSString stringWithFormat:@"由%@老师发布", OneSubjectModel.delivername];
     if ([OneSubjectModel.finished isEqual:@1]) {
         [self.progressBtn setTitle:@"已完成" forState:UIControlStateNormal];
         self.progressBtn.backgroundColor = STUDENTCOLOR;
+        // 平均正确率
+        CGFloat total = [OneSubjectModel.totalCorrect floatValue] + [OneSubjectModel.totalWrong floatValue];
+        CGFloat myTotal = [OneSubjectModel.summary[@"correct"] floatValue] + [OneSubjectModel.summary[@"wrong"] floatValue];
+        NSString *rateString = total == 0 ? @"0%" : [NSString stringWithFormat:@"%.f%%", [OneSubjectModel.totalCorrect floatValue] * 100 / total];
+        NSString *myRate = [NSString stringWithFormat:@"%.f%%", [OneSubjectModel.summary[@"correct"] floatValue] * 100 / myTotal];
+        NSString *raString = [NSString stringWithFormat:@"本次平均正确率%@  |  我的正确率%@", rateString, myRate];
+        NSString *summaryString = [NSString stringWithFormat:@"%@  由%@老师发布\n%@", str1, OneSubjectModel.delivername, raString];
+        NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:summaryString];
+        [attString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#e71419"] range:NSMakeRange(summaryString.length - raString.length, raString.length)];
+        self.releaseTimeLabel.attributedText = attString;
+        OneSubjectModel.height = [self.releaseTimeLabel.attributedText boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size.height + 55;
+
     }else{
+        
+        NSString *summaryString = [NSString stringWithFormat:@"%@  由%@老师发布", str1, OneSubjectModel.delivername];
+        self.releaseTimeLabel.text = summaryString;
+        OneSubjectModel.height = [self.releaseTimeLabel.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height + 55;
+
         [self.progressBtn setTitle:@"做作业" forState:UIControlStateNormal];
-         self.progressBtn.backgroundColor = RGBACOLOR(10.0, 96.0, 254.0, 1);
+        self.progressBtn.backgroundColor = [UIColor colorWithHexString:@"#d8261d"];
     }
     
 }
+
+
+
 - (IBAction)doingBtnClick:(UIButton *)sender {
     if([[sender titleForState:UIControlStateNormal] isEqualToString:@"做作业"]){
         if ([self.delegate respondsToSelector:@selector(workDetailCell:doingBtnClicked:)]) {

@@ -26,8 +26,8 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="top_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="pcg-X1-mQM">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="213"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lcp-0J-T4V">
-                    <rect key="frame" x="136" y="60" width="83" height="83"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lcp-0J-T4V">
+                    <rect key="frame" x="119" y="60" width="83" height="83"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Lcp-0J-T4V" secondAttribute="height" multiplier="1:1" id="2aP-SG-Dy5"/>
                     </constraints>
