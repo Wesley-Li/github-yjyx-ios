@@ -21,6 +21,8 @@
     NSArray *defaultTitleArr; // 默认文字
     NSArray *defaultIndicatorArr;// 未选择箭头
     NSArray *selectedIndicatorArr;// 选择箭头
+
+    NSMutableArray *dataSaveArr;// 保存数据
     BOOL isExpand;
     NSInteger num;
 }
@@ -32,6 +34,7 @@
 @property (strong, nonatomic) NSMutableArray *classesDataSource;// 年级数据源
 @property (strong, nonatomic) NSMutableArray *subjectDataSource;// 科目数据源
 @property (strong, nonatomic) NSMutableArray *bookDataSource;// 册号数据源
+@property (strong, nonatomic) NSMutableDictionary *dataSaveDic;// 保存数据
 @property (weak, nonatomic) IBOutlet UIButton *startLearnBtn;
 
 @property (strong, nonatomic) NSNumber *version_id;
@@ -43,7 +46,13 @@
 
 @implementation YjyxYiTeachController
 
+- (NSMutableDictionary *)dataSaveDic {
 
+    if (!_dataSaveDic) {
+        self.dataSaveDic = [NSMutableDictionary dictionary];
+    }
+    return _dataSaveDic;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,6 +71,35 @@
     self.classesDataSource = [NSMutableArray array];
     self.subjectDataSource = [NSMutableArray array];
     self.bookDataSource = [NSMutableArray array];
+    dataSaveArr = [NSMutableArray array];
+    
+    
+    if ([SYS_CACHE objectForKey:@"YiTeachBookInformation"] != NULL) {
+        _dataSaveDic = [NSMutableDictionary dictionaryWithDictionary:[SYS_CACHE objectForKey:@"YiTeachBookInformation"]];
+        if (_dataSaveDic && [_dataSaveDic allKeys].count == 4) {
+            
+            for (NSNumber *key in [_dataSaveDic allKeys]) {
+                
+                if ([key integerValue] == 0) {
+                    self.version_id = [_dataSaveDic objectForKey:key][0];
+                    
+                }else if ([key integerValue] == 1) {
+                    
+                    self.subject_id = [_dataSaveDic objectForKey:key][0];
+                }else if ([key integerValue] == 2) {
+                    
+                    self.classes_id = [_dataSaveDic objectForKey:key][0];
+                }else {
+                    
+                    self.book_id = [_dataSaveDic objectForKey:key][0];
+                    
+                }
+                
+            }
+        }
+
+    }
+    
     
     
     [self configureTheBookCanBeSelect];
@@ -86,8 +124,8 @@
     CGFloat height = 78;
     
     // 判断本地是否已保存
-    if ([SYS_CACHE objectForKey:@"YiTeachBookInformation"]) {
-        
+    if (_dataSaveDic && [_dataSaveDic allKeys].count == 4) {
+        self.startLearnBtn.hidden = NO;
         for (int i = 0; i < count; i++) {
             YiTeachCustomView *customView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([YiTeachCustomView class]) owner:self options:nil] objectAtIndex:0];
             customView.tag = 200 + i;
@@ -98,7 +136,8 @@
             size.width += width;
             
             customView.imageview.image = [UIImage imageNamed:selectedImageArr[i]];
-            customView.titleLable.text = [SYS_CACHE objectForKey:@"YiTeachBookInformation"][i];
+            customView.titleLable.text = [_dataSaveDic objectForKey:[NSString stringWithFormat:@"%d", i]][1];
+            customView.titleLable.textColor = STUDENTCOLOR;
             customView.indicatorImageview.image = [UIImage imageNamed:selectedIndicatorArr[0]];
             customView.isSelected = YES;
             
@@ -231,20 +270,48 @@
     switch (num) {
         case 0:
             self.version_id = model.ID;
+            [dataSaveArr removeAllObjects];
+            [dataSaveArr addObject:model.ID];
+            [dataSaveArr addObject:model.content];
+            [_dataSaveDic setObject:dataSaveArr forKey:[NSString stringWithFormat:@"%ld", num]];
+            [SYS_CACHE setObject:_dataSaveDic forKey:@"YiTeachBookInformation"];
             break;
         case 1:
             self.subject_id = model.ID;
+            [dataSaveArr removeAllObjects];
+            [dataSaveArr addObject:model.ID];
+            [dataSaveArr addObject:model.content];
+            [_dataSaveDic setObject:dataSaveArr forKey:[NSString stringWithFormat:@"%ld", num]];
+            [SYS_CACHE setObject:_dataSaveDic forKey:@"YiTeachBookInformation"];
+
+
             break;
         case 2:
             self.classes_id = model.ID;
+            [dataSaveArr removeAllObjects];
+            [dataSaveArr addObject:model.ID];
+            [dataSaveArr addObject:model.content];
+            [_dataSaveDic setObject:dataSaveArr forKey:[NSString stringWithFormat:@"%ld", num]];
+            [SYS_CACHE setObject:_dataSaveDic forKey:@"YiTeachBookInformation"];
+
+
             break;
         case 3:
             self.book_id = model.ID;
+            [dataSaveArr removeAllObjects];
+            [dataSaveArr addObject:model.ID];
+            [dataSaveArr addObject:model.content];
+            [_dataSaveDic setObject:dataSaveArr forKey:[NSString stringWithFormat:@"%ld", num]];
+            [SYS_CACHE setObject:_dataSaveDic forKey:@"YiTeachBookInformation"];
+
+
             break;
             
         default:
             break;
     }
+    
+    NSLog(@"######%@", _dataSaveDic);
     // 更新图标,文字,状态
     customView.titleLable.text = model.content;
     customView.titleLable.textColor = STUDENTCOLOR;
@@ -265,26 +332,36 @@
 #pragma mark - notification
 - (void)checkAllTheContent {
 
-    for (int i = 0; i < 4; i++) {
-        YiTeachCustomView *customView = [self.BGView viewWithTag:200 + i];
-        if (customView.isSelected) {
-            
-            if (i== 3) {
-                self.startLearnBtn.hidden = NO;
+    _dataSaveDic = [NSMutableDictionary dictionaryWithDictionary:[SYS_CACHE objectForKey:@"YiTeachBookInformation"]];
+    if (_dataSaveDic && [_dataSaveDic allKeys].count == 4) {
+        self.startLearnBtn.hidden = NO;
+    }else {
+    
+        for (int i = 0; i < 4; i++) {
+            YiTeachCustomView *customView = [self.BGView viewWithTag:200 + i];
+            if (customView.isSelected) {
                 
+                if (i== 3) {
+                    self.startLearnBtn.hidden = NO;
+                    
+                }
+                
+                continue;
+            }else {
+                
+                break;
             }
-            
-            continue;
-        }else {
-            
-            break;
         }
+
+    
     }
 }
 
 #pragma mark - Action
 - (IBAction)startLearn:(UIButton *)sender {
-    
+    [SYS_CACHE setObject:_dataSaveDic forKey:@"YiTeachBookInformation"];
+    NSLog(@"-------%@", _dataSaveDic);
+    NSLog(@"%@", [SYS_CACHE objectForKey:@"YiTeachBookInformation"]);
     YiTeachChapterViewController *chapterVC = [[YiTeachChapterViewController alloc] init];
     chapterVC.version_id = self.version_id;
     chapterVC.subject_id = self.subject_id;
