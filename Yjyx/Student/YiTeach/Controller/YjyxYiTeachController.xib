@@ -9,6 +9,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YjyxYiTeachController">
             <connections>
                 <outlet property="BGView" destination="QvO-xc-NkR" id="LA6-ta-lF0"/>
+                <outlet property="bottomview" destination="bvO-G6-qD5" id="fMZ-Sr-1d5"/>
+                <outlet property="bottomviewLeading" destination="Yxe-8y-pdI" id="JxB-zq-mVn"/>
+                <outlet property="bottomviewWidth" destination="bSk-s8-vBZ" id="dNz-yX-0pf"/>
                 <outlet property="startLearnBtn" destination="kMY-gW-6f4" id="gSz-36-1tc"/>
                 <outlet property="tableview" destination="gCZ-s4-l30" id="TSm-wk-lGo"/>
                 <outlet property="view" destination="qtv-Gr-5Z9" id="Fkf-gm-NXm"/>
@@ -27,9 +30,21 @@
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QvO-xc-NkR">
                     <rect key="frame" x="0.0" y="223" width="320" height="80"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bvO-G6-qD5">
+                            <rect key="frame" x="10" y="78" width="80" height="2"/>
+                            <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="2" id="7KK-Fx-Ee6"/>
+                                <constraint firstAttribute="width" constant="80" id="bSk-s8-vBZ"/>
+                            </constraints>
+                        </view>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="XlC-bB-Xw6"/>
+                        <constraint firstItem="bvO-G6-qD5" firstAttribute="leading" secondItem="QvO-xc-NkR" secondAttribute="leading" constant="10" id="Yxe-8y-pdI"/>
+                        <constraint firstAttribute="bottom" secondItem="bvO-G6-qD5" secondAttribute="bottom" id="vxd-iz-VZX"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gCZ-s4-l30">
@@ -41,11 +56,12 @@
                     </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kMY-gW-6f4">
-                    <rect key="frame" x="15" y="383" width="290" height="80"/>
+                    <rect key="frame" x="15" y="414" width="290" height="50"/>
                     <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="80" id="0Fg-VJ-tWd"/>
+                        <constraint firstAttribute="height" constant="50" id="0Fg-VJ-tWd"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="进入学习">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -61,8 +77,8 @@
                 <constraint firstAttribute="bottom" secondItem="gCZ-s4-l30" secondAttribute="bottom" id="5jt-hf-n3k"/>
                 <constraint firstAttribute="trailing" secondItem="kMY-gW-6f4" secondAttribute="trailing" constant="15" id="GlQ-3f-x6h"/>
                 <constraint firstItem="QvO-xc-NkR" firstAttribute="leading" secondItem="qtv-Gr-5Z9" secondAttribute="leading" id="Heq-o8-klH"/>
+                <constraint firstAttribute="bottom" secondItem="kMY-gW-6f4" secondAttribute="bottom" constant="40" id="Hpo-FL-IWR"/>
                 <constraint firstItem="QvO-xc-NkR" firstAttribute="top" secondItem="uzQ-Pz-yIY" secondAttribute="bottom" constant="10" id="WEB-rq-MIy"/>
-                <constraint firstItem="kMY-gW-6f4" firstAttribute="top" secondItem="QvO-xc-NkR" secondAttribute="bottom" constant="80" id="Zzx-FU-M5G"/>
                 <constraint firstItem="uzQ-Pz-yIY" firstAttribute="leading" secondItem="qtv-Gr-5Z9" secondAttribute="leading" id="cm7-BC-af7"/>
                 <constraint firstItem="gCZ-s4-l30" firstAttribute="leading" secondItem="qtv-Gr-5Z9" secondAttribute="leading" id="e34-WC-d86"/>
                 <constraint firstAttribute="trailing" secondItem="QvO-xc-NkR" secondAttribute="trailing" id="nM5-Jo-RnY"/>

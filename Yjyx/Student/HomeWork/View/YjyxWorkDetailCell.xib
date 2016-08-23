@@ -34,8 +34,8 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ab-0T-B13">
-                        <rect key="frame" x="294" y="20" width="55" height="25"/>
-                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <rect key="frame" x="294" y="13" width="55" height="25"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="A4b-Rd-1Ad"/>
                             <constraint firstAttribute="width" constant="55" id="mb1-A1-nPS"/>
@@ -50,6 +50,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="egt-On-JtX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="6fn-FU-dP6"/>
+                    <constraint firstItem="4ab-0T-B13" firstAttribute="centerY" secondItem="egt-On-JtX" secondAttribute="centerY" id="7S3-sl-9qP"/>
                     <constraint firstItem="qdY-Vu-h55" firstAttribute="leading" secondItem="egt-On-JtX" secondAttribute="trailing" constant="5" id="DZx-c3-AF3"/>
                     <constraint firstItem="0s0-fW-jbk" firstAttribute="top" secondItem="egt-On-JtX" secondAttribute="bottom" constant="3" id="IgH-Tl-dC5"/>
                     <constraint firstAttribute="trailing" secondItem="4ab-0T-B13" secondAttribute="trailing" constant="10" id="MOG-e4-kbe"/>
@@ -60,6 +61,11 @@
                     <constraint firstItem="4ab-0T-B13" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ue0-x7-wds"/>
                     <constraint firstItem="qdY-Vu-h55" firstAttribute="centerY" secondItem="egt-On-JtX" secondAttribute="centerY" id="ymi-Az-cup"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="ue0-x7-wds"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="leadConstant" destination="6fn-FU-dP6" id="GII-sL-hNb"/>

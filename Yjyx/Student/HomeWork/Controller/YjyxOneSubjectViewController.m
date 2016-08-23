@@ -217,7 +217,9 @@ static NSString *ID = @"CELL";
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 65;
+    YjyxTodayWorkModel *model = self.allWorkArray[indexPath.row];
+    
+    return model.height;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -29,6 +29,10 @@
 
 @property (weak, nonatomic) IBOutlet UIView *BGView;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (weak, nonatomic) IBOutlet UIView *bottomview;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomviewLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomviewWidth;
+
 @property (strong, nonatomic) NSMutableArray *tempArr;// 临时数组
 @property (strong, nonatomic) NSMutableArray *versionDataSource;// 版本数据源
 @property (strong, nonatomic) NSMutableArray *classesDataSource;// 年级数据源
@@ -59,6 +63,9 @@
     self.navigationItem.title = @"亿教课堂";
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.startLearnBtn.hidden = YES;
+    self.startLearnBtn.layer.cornerRadius = 8;
+    self.startLearnBtn.layer.masksToBounds = YES;
+    self.bottomview.hidden = YES;
     
     defaultImageArr = @[@"YiTeach_version", @"YiTeach_subject", @"YiTeach_classes", @"YiTeach_book"];
     selectedImageArr = @[@"YiTeach_version_select", @"YiTeach_subject_select", @"YiTeach_classes_select", @"YiTeach_book_select"];
@@ -78,7 +85,7 @@
         _dataSaveDic = [NSMutableDictionary dictionaryWithDictionary:[SYS_CACHE objectForKey:@"YiTeachBookInformation"]];
         if (_dataSaveDic && [_dataSaveDic allKeys].count == 4) {
             
-            for (NSNumber *key in [_dataSaveDic allKeys]) {
+            for (NSString *key in [_dataSaveDic allKeys]) {
                 
                 if ([key integerValue] == 0) {
                     self.version_id = [_dataSaveDic objectForKey:key][0];
@@ -226,7 +233,10 @@
 
     isExpand = YES;
     self.startLearnBtn.hidden = YES;
+    self.bottomview.hidden = NO;
     YiTeachCustomView *customView = (YiTeachCustomView *)sender.view;
+    self.bottomviewLeading.constant = customView.origin.x;
+    self.bottomviewWidth.constant = customView.width;
     num = customView.tag - 200;
     self.tempArr = [NSMutableArray arrayWithObjects:_versionDataSource, _subjectDataSource, _classesDataSource, _bookDataSource, nil];
     
@@ -335,6 +345,7 @@
     _dataSaveDic = [NSMutableDictionary dictionaryWithDictionary:[SYS_CACHE objectForKey:@"YiTeachBookInformation"]];
     if (_dataSaveDic && [_dataSaveDic allKeys].count == 4) {
         self.startLearnBtn.hidden = NO;
+        self.bottomview.hidden = YES;
     }else {
     
         for (int i = 0; i < 4; i++) {
@@ -343,7 +354,7 @@
                 
                 if (i== 3) {
                     self.startLearnBtn.hidden = NO;
-                    
+                    self.bottomview.hidden = YES;
                 }
                 
                 continue;

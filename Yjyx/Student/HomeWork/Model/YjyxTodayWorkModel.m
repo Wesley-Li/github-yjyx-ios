@@ -18,7 +18,7 @@
     model.task_subjectid = dict[@"task__subjectid"];
     model.task_id = dict[@"task_id"];
     model.task_relatedresourceid = dict[@"task__relatedresourceid"];
-    model.summary = dict[@"summary"];
+    model.summary = [YjyxTodayWorkModel dictionaryWithJsonString:dict[@"summary"]] ;
     model.finished  = dict[@"finished"];
     model.delivername  = dict[@"delivername"];
     model.tasktype = dict[@"tasktype"];
@@ -27,6 +27,23 @@
     model.totalCorrect = dict[@"task__total_correct"];
     model.totalWrong = dict[@"task__total_wrong"];
     return model;
+}
+
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
+    if ([jsonString isEqual: [NSNull null]]) {
+        return nil;
+    }
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
 }
 - (NSString *)task_delivertime
 {

@@ -404,7 +404,7 @@
         memberCenter.tabBarItem = [UITabBarItem itemWithTitle:@"会员中心" image:[UIImage imageNamed:@"tab_memberCenter"] selectedImage:[UIImage imageNamed:@"tab_memberCenters"]];
         
         [_tabBar setViewControllers:@[home,memberCenter,personal]];
-        
+        _tabBar.tabBar.tintColor = TEACHERCOLOR;
         [_tabBar setSelectedIndex:0];
         [self.window setRootViewController:_tabBar];
         
@@ -492,7 +492,7 @@
         navVc4.tabBarItem = [UITabBarItem itemWithTitle:@"我的" image:[UIImage imageNamed:@"我的"] selectedImage:[UIImage imageNamed:@"我的点击"]];
      
         _tabBarVc = [[YjyxCommonTabController alloc] init];
-        _tabBarVc.tabBar.tintColor = [UIColor blackColor];
+        _tabBarVc.tabBar.tintColor = STUDENTCOLOR;
 //        tabBarVc.tabBarItem.imageInsets = UIEdgeInsetsMake(20, 0, 20, 0);
         [_tabBarVc addChildViewController:navVc1];
         [_tabBarVc addChildViewController:navVc2];
