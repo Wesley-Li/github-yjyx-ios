@@ -18,4 +18,6 @@
 
 @property (weak, nonatomic) id<ThreeStageSubjectCellDelegate> delegate;
 @property (strong, nonatomic) YjyxThreeStageModel *model;
+@property (assign, nonatomic) CGFloat height;
+
 @end

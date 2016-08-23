@@ -479,6 +479,12 @@
 		3CF0D1771D24B0B7002EE9BF /* RegistStudentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0D1751D24B0B7002EE9BF /* RegistStudentController.m */; };
 		3CF0D1781D24B0B7002EE9BF /* RegistStudentController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF0D1761D24B0B7002EE9BF /* RegistStudentController.xib */; };
 		3CF0D1821D2542B2002EE9BF /* OneStudentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0D1811D2542B2002EE9BF /* OneStudentEntity.m */; };
+		3CF1AD4B1D6BF46C0070CAA9 /* YjyxKnowledgeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF1AD4A1D6BF46C0070CAA9 /* YjyxKnowledgeCardView.m */; };
+		3CF1AD4D1D6BF47D0070CAA9 /* YjyxKnowledgeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF1AD4C1D6BF47D0070CAA9 /* YjyxKnowledgeCardView.xib */; };
+		3CF1AD511D6C1E120070CAA9 /* YjyxThreeStageAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF1AD4F1D6C1E120070CAA9 /* YjyxThreeStageAnswerCell.m */; };
+		3CF1AD521D6C1E120070CAA9 /* YjyxThreeStageAnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF1AD501D6C1E120070CAA9 /* YjyxThreeStageAnswerCell.xib */; };
+		3CF1AD561D6C24570070CAA9 /* YjyxThreeStageAnswerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF1AD541D6C24570070CAA9 /* YjyxThreeStageAnswerController.m */; };
+		3CF1AD571D6C24570070CAA9 /* YjyxThreeStageAnswerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF1AD551D6C24570070CAA9 /* YjyxThreeStageAnswerController.xib */; };
 		3CF28DA71D59B0AC007FED5A /* YjyxHomeAdModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF28DA61D59B0AC007FED5A /* YjyxHomeAdModel.m */; };
 		3CF28DAB1D59B998007FED5A /* YjyxHomeAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF28DA91D59B998007FED5A /* YjyxHomeAdCell.m */; };
 		3CF28DAC1D59B998007FED5A /* YjyxHomeAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF28DAA1D59B998007FED5A /* YjyxHomeAdCell.xib */; };
@@ -1337,6 +1343,15 @@
 		3CF0D1761D24B0B7002EE9BF /* RegistStudentController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistStudentController.xib; sourceTree = "<group>"; };
 		3CF0D1801D2542B2002EE9BF /* OneStudentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneStudentEntity.h; sourceTree = "<group>"; };
 		3CF0D1811D2542B2002EE9BF /* OneStudentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneStudentEntity.m; sourceTree = "<group>"; };
+		3CF1AD491D6BF46C0070CAA9 /* YjyxKnowledgeCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxKnowledgeCardView.h; sourceTree = "<group>"; };
+		3CF1AD4A1D6BF46C0070CAA9 /* YjyxKnowledgeCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxKnowledgeCardView.m; sourceTree = "<group>"; };
+		3CF1AD4C1D6BF47D0070CAA9 /* YjyxKnowledgeCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxKnowledgeCardView.xib; sourceTree = "<group>"; };
+		3CF1AD4E1D6C1E120070CAA9 /* YjyxThreeStageAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxThreeStageAnswerCell.h; sourceTree = "<group>"; };
+		3CF1AD4F1D6C1E120070CAA9 /* YjyxThreeStageAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxThreeStageAnswerCell.m; sourceTree = "<group>"; };
+		3CF1AD501D6C1E120070CAA9 /* YjyxThreeStageAnswerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxThreeStageAnswerCell.xib; sourceTree = "<group>"; };
+		3CF1AD531D6C24570070CAA9 /* YjyxThreeStageAnswerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxThreeStageAnswerController.h; sourceTree = "<group>"; };
+		3CF1AD541D6C24570070CAA9 /* YjyxThreeStageAnswerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxThreeStageAnswerController.m; sourceTree = "<group>"; };
+		3CF1AD551D6C24570070CAA9 /* YjyxThreeStageAnswerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxThreeStageAnswerController.xib; sourceTree = "<group>"; };
 		3CF28DA51D59B0AC007FED5A /* YjyxHomeAdModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxHomeAdModel.h; sourceTree = "<group>"; };
 		3CF28DA61D59B0AC007FED5A /* YjyxHomeAdModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxHomeAdModel.m; sourceTree = "<group>"; };
 		3CF28DA81D59B998007FED5A /* YjyxHomeAdCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxHomeAdCell.h; sourceTree = "<group>"; };
@@ -2873,6 +2888,9 @@
 				802BD4C31D6B09E100DF6F92 /* YjyxThreeStageController.h */,
 				802BD4C41D6B09E100DF6F92 /* YjyxThreeStageController.m */,
 				802BD4C21D6B09E100DF6F92 /* YjyxThreeStageController.xib */,
+				3CF1AD531D6C24570070CAA9 /* YjyxThreeStageAnswerController.h */,
+				3CF1AD541D6C24570070CAA9 /* YjyxThreeStageAnswerController.m */,
+				3CF1AD551D6C24570070CAA9 /* YjyxThreeStageAnswerController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2900,6 +2918,12 @@
 				3C19D8511D6ACBD600CA7393 /* YjyxThreeStageSubjectCell.h */,
 				3C19D8521D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.m */,
 				3C19D8531D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.xib */,
+				3CF1AD491D6BF46C0070CAA9 /* YjyxKnowledgeCardView.h */,
+				3CF1AD4A1D6BF46C0070CAA9 /* YjyxKnowledgeCardView.m */,
+				3CF1AD4C1D6BF47D0070CAA9 /* YjyxKnowledgeCardView.xib */,
+				3CF1AD4E1D6C1E120070CAA9 /* YjyxThreeStageAnswerCell.h */,
+				3CF1AD4F1D6C1E120070CAA9 /* YjyxThreeStageAnswerCell.m */,
+				3CF1AD501D6C1E120070CAA9 /* YjyxThreeStageAnswerCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3665,6 +3689,7 @@
 				3CE18E9F1D2121EE007E0874 /* ReleaseFinishTimeCell.xib in Resources */,
 				3FF740621CE3090500D3C0F7 /* list_btn_shutdown@3x.png in Resources */,
 				3BB773A41CD8781400A24485 /* SmartViewController.xib in Resources */,
+				3CF1AD521D6C1E120070CAA9 /* YjyxThreeStageAnswerCell.xib in Resources */,
 				3BCF19181CDC66E600E2EA1A /* list_btn_nor.png in Resources */,
 				8010A8FE1D5D94E60091F6EA /* tab_homework@3x.png in Resources */,
 				3A26EE611C71A81B009C3242 /* Parent_default@3x.png in Resources */,
@@ -3800,6 +3825,7 @@
 				3CF0D1781D24B0B7002EE9BF /* RegistStudentController.xib in Resources */,
 				8010A9001D5D94E60091F6EA /* tab_homework_select@3x.png in Resources */,
 				80F718C31CF28961007C0B75 /* SubmitCell.xib in Resources */,
+				3CF1AD571D6C24570070CAA9 /* YjyxThreeStageAnswerController.xib in Resources */,
 				3AE894101C6C47C400E8BA97 /* login_right_line@3x.png in Resources */,
 				3CA04D061D180EEC0054A05D /* ReleaseVideoCell.xib in Resources */,
 				3CD1BC1E1D1E33BA009ED261 /* MicroKnowledgeCell.xib in Resources */,
@@ -3919,6 +3945,7 @@
 				8010A9051D5D94E60091F6EA /* tab_myclass@2x.png in Resources */,
 				3A26EE6B1C71CCDB009C3242 /* MyChildrenViewController.xib in Resources */,
 				3AA165681C91BCD6006B8756 /* homework_3@3x.png in Resources */,
+				3CF1AD4D1D6BF47D0070CAA9 /* YjyxKnowledgeCardView.xib in Resources */,
 				3BB773C21CD883C700A24485 /* NameChageViewController.xib in Resources */,
 				3B4864561CCF10C200D2DE3C /* tab_bg@2x.png in Resources */,
 				807959351CD217BC00C9B841 /* ClassDetailViewController.xib in Resources */,
@@ -4009,6 +4036,7 @@
 				3B4864701CCF117300D2DE3C /* MessageViewController.m in Sources */,
 				3AEF27221C61F08A0028BE09 /* PasswordStipulateCheckin.m in Sources */,
 				3CA8963F1D06DF540092D292 /* ParentChapterCell.m in Sources */,
+				3CF1AD561D6C24570070CAA9 /* YjyxThreeStageAnswerController.m in Sources */,
 				CB4004821C609BCD00556AA7 /* AppDelegate.m in Sources */,
 				3BE01BD41CDD7DBE00781B86 /* BlankFillModel.m in Sources */,
 				3A91F49A1C760CF4001568AA /* PNRadarChart.m in Sources */,
@@ -4124,6 +4152,7 @@
 				80FEB6961D1CD070009EB126 /* ChildrenResultCell.m in Sources */,
 				3BFE3B7A1CD9816D00502769 /* ChildrenActivity.m in Sources */,
 				3BD9C7F21CEEACC9008232D7 /* UploadImageTool.m in Sources */,
+				3CF1AD4B1D6BF46C0070CAA9 /* YjyxKnowledgeCardView.m in Sources */,
 				8094E4BE1D123E9700EF221A /* QuestionDataBase.m in Sources */,
 				3C4274C71D2A5301008A30FA /* YjyxTodayWorkModel.m in Sources */,
 				3A44A1E91CC0C63100B93F6A /* ZLScrolling.m in Sources */,
@@ -4165,6 +4194,7 @@
 				3CE18E9E1D2121EE007E0874 /* ReleaseFinishTimeCell.m in Sources */,
 				3AEF27201C61F08A0028BE09 /* RTSpinKitView.m in Sources */,
 				3BCF194B1CDCC2B500E2EA1A /* TaskDetailTableViewController.m in Sources */,
+				3CF1AD511D6C1E120070CAA9 /* YjyxThreeStageAnswerCell.m in Sources */,
 				3AB212B31CA2E11900DCC618 /* KWFormView.m in Sources */,
 				3CD7E4561D2B593800769FDE /* MJRefreshConst.m in Sources */,
 				8013D3461CF46B8700F82301 /* ChoiceCell.m in Sources */,
