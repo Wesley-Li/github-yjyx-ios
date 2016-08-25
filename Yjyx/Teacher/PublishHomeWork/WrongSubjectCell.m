@@ -152,34 +152,45 @@
 - (IBAction)collectBtnClick:(id)sender {
 }
 - (IBAction)addBtnClick:(UIButton *)sender {
-    sender.selected = !sender.selected;
-    self.wrongSubModel.isSelected = sender.selected;
-    MicroSubjectModel *model = [[MicroSubjectModel alloc] init];
-    model.s_id = [NSNumber numberWithInteger:_wrongSubModel.t_id];
-    model.type = _wrongSubModel.questiontype;
-    model.content = _wrongSubModel.content;
-    NSString *str = @"简单";
-    if(_wrongSubModel.level == 2){
-        str = @"中等";
-    }else{
-        str = @"较难";
-    }
-    model.level = str;
-    if(sender.selected){
-       
-        if (_flag == 1) {
-            [[QuestionDataBase shareDataBase] insertMirco:model];
+    
+    NSMutableArray *arr = [NSMutableArray array];
+    arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
+
+    if (arr.count >= 100) {
+        [self.contentView makeToast:@"添加失败，已达题目上限(100道题)！" duration:1.0 position:SHOW_CENTER complete:nil];
+    }else {
+        
+        sender.selected = !sender.selected;
+        self.wrongSubModel.isSelected = sender.selected;
+        MicroSubjectModel *model = [[MicroSubjectModel alloc] init];
+        model.s_id = [NSNumber numberWithInteger:_wrongSubModel.t_id];
+        model.type = _wrongSubModel.questiontype;
+        model.content = _wrongSubModel.content;
+        NSString *str = @"简单";
+        if(_wrongSubModel.level == 2){
+            str = @"中等";
         }else{
-        [[QuestionDataBase shareDataBase] insertWrong:_wrongSubModel];
+            str = @"较难";
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"BUTTON_IS_SELEND" object:nil];
-    }else{
-        if(_flag == 1){
-            [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", _wrongSubModel.questionid] andQuestionType: [NSString stringWithFormat:@"%ld", _wrongSubModel.questiontype] andJumpType:@"2"];
+        model.level = str;
+        if(sender.selected){
+            
+            if (_flag == 1) {
+                [[QuestionDataBase shareDataBase] insertMirco:model];
+            }else{
+                [[QuestionDataBase shareDataBase] insertWrong:_wrongSubModel];
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"BUTTON_IS_SELEND" object:nil];
         }else{
-        [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", _wrongSubModel.questionid] andQuestionType: [NSString stringWithFormat:@"%ld", _wrongSubModel.questiontype] andJumpType:@"1"];
+            if(_flag == 1){
+                [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", _wrongSubModel.questionid] andQuestionType: [NSString stringWithFormat:@"%ld", _wrongSubModel.questiontype] andJumpType:@"2"];
+            }else{
+                [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", _wrongSubModel.questionid] andQuestionType: [NSString stringWithFormat:@"%ld", _wrongSubModel.questiontype] andJumpType:@"1"];
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"BUTTON_NO_SELEND" object:nil];
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"BUTTON_NO_SELEND" object:nil];
+        
+
     }
     
 }
