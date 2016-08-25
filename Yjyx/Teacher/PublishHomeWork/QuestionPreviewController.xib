@@ -3,11 +3,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuestionPreviewController">
             <connections>
+                <outlet property="allRequireBtn" destination="9Cr-SD-V4k" id="7ka-0c-7y6"/>
                 <outlet property="configurePublishBtn" destination="Ghi-1d-1QU" id="Oap-aI-T0E"/>
+                <outlet property="rebackBtn" destination="Ozt-jX-Jmh" id="Leg-IZ-r8w"/>
                 <outlet property="tableView" destination="LYK-LE-76t" id="9Yb-OA-7rc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -17,14 +20,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LYK-LE-76t">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="P6l-GS-uXr"/>
-                        <outlet property="delegate" destination="-1" id="yfL-SH-FOi"/>
-                    </connections>
-                </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ghi-1d-1QU">
                     <rect key="frame" x="0.0" y="519" width="320" height="49"/>
                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -38,18 +33,81 @@
                         <action selector="configureBtnClick:" destination="-1" eventType="touchUpInside" id="8qQ-bB-7cZ"/>
                     </connections>
                 </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LYK-LE-76t">
+                    <rect key="frame" x="0.0" y="50" width="320" height="469"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="P6l-GS-uXr"/>
+                        <outlet property="delegate" destination="-1" id="yfL-SH-FOi"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9uV-kN-dZK">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fAg-RT-kTG">
+                            <rect key="frame" x="0.0" y="49" width="320" height="1"/>
+                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="s7w-5p-QlJ"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Cr-SD-V4k">
+                            <rect key="frame" x="10" y="10" width="100" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="2sy-y8-iQY"/>
+                            </constraints>
+                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="全部需要过程"/>
+                            <state key="selected">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="allRequireBtnClick:" destination="-1" eventType="touchUpInside" id="n6L-2e-Gkj"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ozt-jX-Jmh">
+                            <rect key="frame" x="280" y="10" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Ozt-jX-Jmh" secondAttribute="height" multiplier="1:1" id="OJc-4Y-YRx"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="reback_icon_de"/>
+                            <connections>
+                                <action selector="rebackBtnClick:" destination="-1" eventType="touchUpInside" id="ZAm-Q3-Jam"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="9Cr-SD-V4k" firstAttribute="leading" secondItem="9uV-kN-dZK" secondAttribute="leading" constant="10" id="3DY-V2-GEj"/>
+                        <constraint firstAttribute="trailing" secondItem="Ozt-jX-Jmh" secondAttribute="trailing" constant="10" id="AxB-6E-ZOv"/>
+                        <constraint firstItem="Ozt-jX-Jmh" firstAttribute="top" secondItem="9uV-kN-dZK" secondAttribute="top" constant="10" id="FgJ-Fn-59Q"/>
+                        <constraint firstItem="9Cr-SD-V4k" firstAttribute="centerY" secondItem="9uV-kN-dZK" secondAttribute="centerY" id="Gg1-R6-cQm"/>
+                        <constraint firstItem="Ozt-jX-Jmh" firstAttribute="centerY" secondItem="9uV-kN-dZK" secondAttribute="centerY" id="OrJ-mv-7N1"/>
+                        <constraint firstAttribute="bottom" secondItem="fAg-RT-kTG" secondAttribute="bottom" id="hJp-JG-Rvw"/>
+                        <constraint firstAttribute="trailing" secondItem="fAg-RT-kTG" secondAttribute="trailing" id="jdh-E9-ItB"/>
+                        <constraint firstItem="fAg-RT-kTG" firstAttribute="leading" secondItem="9uV-kN-dZK" secondAttribute="leading" id="oMy-Ja-2bQ"/>
+                        <constraint firstItem="9Cr-SD-V4k" firstAttribute="top" secondItem="9uV-kN-dZK" secondAttribute="top" constant="10" id="z3h-mF-tz2"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="9uV-kN-dZK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3qo-xg-aTc"/>
                 <constraint firstAttribute="trailing" secondItem="Ghi-1d-1QU" secondAttribute="trailing" id="B6u-5l-ikW"/>
                 <constraint firstItem="LYK-LE-76t" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="J3l-nr-2kf"/>
+                <constraint firstItem="9uV-kN-dZK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Sqa-hV-aZ2"/>
                 <constraint firstAttribute="bottom" secondItem="Ghi-1d-1QU" secondAttribute="bottom" id="VUZ-bV-uGo"/>
                 <constraint firstItem="Ghi-1d-1QU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ywt-ZH-PaT"/>
                 <constraint firstAttribute="trailing" secondItem="LYK-LE-76t" secondAttribute="trailing" id="ZJ3-oP-r0v"/>
                 <constraint firstItem="Ghi-1d-1QU" firstAttribute="top" secondItem="LYK-LE-76t" secondAttribute="bottom" id="Zft-sv-bMc"/>
-                <constraint firstItem="LYK-LE-76t" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zdI-lL-N2D"/>
+                <constraint firstItem="LYK-LE-76t" firstAttribute="top" secondItem="9uV-kN-dZK" secondAttribute="bottom" id="dsk-Me-5bA"/>
+                <constraint firstAttribute="trailing" secondItem="9uV-kN-dZK" secondAttribute="trailing" id="g5h-MR-rNA"/>
+                <constraint firstItem="LYK-LE-76t" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="zdI-lL-N2D"/>
             </constraints>
             <point key="canvasLocation" x="462" y="367"/>
         </view>
     </objects>
+    <resources>
+        <image name="reback_icon_de" width="30" height="30"/>
+    </resources>
 </document>

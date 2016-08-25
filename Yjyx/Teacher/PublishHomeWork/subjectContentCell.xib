@@ -42,8 +42,8 @@
                                     <constraint firstAttribute="width" constant="40" id="jYz-uc-O7t"/>
                                     <constraint firstAttribute="height" constant="40" id="yvM-XX-qAi"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="list_icon_add_nor"/>
-                                <state key="selected" backgroundImage="list_icon_add_sel"/>
+                                <state key="normal" backgroundImage="list_icon_add_nor_click"/>
+                                <state key="selected" backgroundImage="list_icon_add_nor_de"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="3Uh-89-gN3"/>
@@ -157,8 +157,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="list_icon_add_nor" width="46" height="46"/>
-        <image name="list_icon_add_sel" width="46" height="46"/>
+        <image name="list_icon_add_nor_click" width="36" height="36"/>
+        <image name="list_icon_add_nor_de" width="46" height="46"/>
         <image name="list_icon_collect_nor" width="46" height="46"/>
         <image name="list_icon_collect_sel" width="46" height="46"/>
     </resources>

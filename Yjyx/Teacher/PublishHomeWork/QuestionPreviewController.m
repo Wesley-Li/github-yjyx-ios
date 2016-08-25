@@ -19,8 +19,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *configurePublishBtn;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableDictionary *cellHeightDic;
-
+@property (strong, nonatomic) NSMutableArray *tempArray;// 删除题目时的临时数组
 @property (strong, nonatomic) UIButton *reuqireBtn;
+
+@property (weak, nonatomic) IBOutlet UIButton *allRequireBtn;
+@property (weak, nonatomic) IBOutlet UIButton *rebackBtn;
+
 @end
 
 @implementation QuestionPreviewController
@@ -33,12 +37,20 @@
     }
     return _selectArr;
 }
+- (NSMutableArray *)tempArray {
+
+    if (!_tempArray) {
+        self.tempArray = [NSMutableArray array];
+    }
+    return _tempArray;
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
+    
 }
 
 // 选择和填空分开
@@ -107,27 +119,31 @@
     [self loadBackBtn];
     self.configurePublishBtn.backgroundColor = RGBACOLOR(3, 138, 228, 1);
     self.cellHeightDic = [NSMutableDictionary dictionary];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
+    self.edgesForExtendedLayout = UIRectEdgeBottom;
     self.tableView.scrollIndicatorInsets =  UIEdgeInsetsMake(0, 0, -49, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:@"QuestionPreviewCell" bundle:nil] forCellReuseIdentifier:kIndentifier];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeightChange:) name:@"QuestionPreviewCellHeight" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkTheDeletequestionNum) name:@"checkTheNum" object:nil];
     
-    UIView *view = [[UIView alloc] init];
-    view.height = 35;
-    UIButton *requireProBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.reuqireBtn = requireProBtn;
-    [requireProBtn setTitle:@"全部需要过程" forState:UIControlStateNormal];
-    [requireProBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [requireProBtn setTitleColor:RGBACOLOR(58, 158, 232, 1) forState:UIControlStateSelected];
-    [requireProBtn addTarget:self action:@selector(requireProcessBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [requireProBtn sizeToFit];
-    requireProBtn.x = SCREEN_WIDTH - requireProBtn.width - 15;
-    requireProBtn.centerY = view.centerY;
-    [view addSubview:requireProBtn];
-    self.tableView.tableHeaderView = view;
+    self.allRequireBtn.layer.cornerRadius = 5;
+    self.allRequireBtn.layer.borderColor = TEACHERCOLOR.CGColor;
+    self.allRequireBtn.layer.borderWidth = 1;
+    self.allRequireBtn.layer.masksToBounds = YES;
+    
+//    if (self.tempArray.count == 0) {
+//        [self.rebackBtn setBackgroundImage:[UIImage imageNamed:@"reback_icon_de"] forState:UIControlStateNormal];
+//        self.rebackBtn.userInteractionEnabled = NO;
+//    }else {
+//        
+//        [self.rebackBtn setBackgroundImage:[UIImage imageNamed:@"reback_icon"] forState:UIControlStateNormal];
+//        self.rebackBtn.userInteractionEnabled = YES;
+//    }
+//
+    
+
     
 }
 
@@ -248,15 +264,26 @@
 }
 #pragma mark - delete
 - (void)deleteBtnClick:(UIButton *)sender {
-
+    
+    
     if ([self.selectArr[sender.tag - 200] isKindOfClass:[ChaperContentItem class]]) {
         ChaperContentItem *model = self.selectArr[sender.tag - 200];
+        model.tag = sender.tag;
         [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", (long)model.t_id] andQuestionType:model.subject_type andJumpType:@"1"];
         [self.selectArr removeObject:model];
+        [self.tempArray addObject:model];
+        // 发通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"checkTheNum" object:self];
+
     }else{
         YjyxWrongSubModel *model = self.selectArr[sender.tag - 200];
+        model.tag = sender.tag;
         [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", (long)model.t_id] andQuestionType:[NSString stringWithFormat:@"%ld", model.questiontype] andJumpType:@"1"];
         [self.selectArr removeObject:model];
+        [self.tempArray addObject:model];
+        // 发通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"checkTheNum" object:self];
+
     }
    
     
@@ -273,9 +300,10 @@
 
 #pragma mark - 需要过程
 // 全部需要解题步骤按钮的点击
-- (void)requireProcessBtnClick:(UIButton *)btn{
-    btn.selected = !btn.selected;
-    if (btn.selected == YES) {
+- (IBAction)allRequireBtnClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (sender.selected == YES) {
+        self.allRequireBtn.backgroundColor = TEACHERCOLOR;
         for (int i = 0; i < _selectArr.count; i++) {
             if ([self.selectArr[i] isKindOfClass:[ChaperContentItem class]]) {
                 ChaperContentItem *item = self.selectArr[i];
@@ -287,6 +315,7 @@
             }
         }
     }else{
+        self.allRequireBtn.backgroundColor = [UIColor whiteColor];
         for (int i = 0; i < _selectArr.count; i++) {
             if ([self.selectArr[i] isKindOfClass:[ChaperContentItem class]]) {
                 ChaperContentItem *item = self.selectArr[i];
@@ -299,6 +328,54 @@
         }
     }
     [self.tableView reloadData];
+
+    
+}
+
+// 恢复被删除的题目
+- (IBAction)rebackBtnClick:(UIButton *)sender {
+    if (self.tempArray.count != 0) {
+        if ([self.tempArray.lastObject isKindOfClass:[ChaperContentItem class]]) {
+            ChaperContentItem *model = self.tempArray.lastObject;
+            NSInteger row = model.tag - 200;
+            [self.selectArr insertObject:model atIndex:row];
+            [self.tempArray removeLastObject];
+            [[QuestionDataBase shareDataBase] insertQuestion:model];
+            NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+            [indexPaths addObject:indexPath];
+            
+            [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationRight];
+            
+            [self.tableView reloadData];
+            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            //        [self.tableView reloadData];
+        }else {
+            
+            YjyxWrongSubModel *model = self.tempArray.lastObject;
+            NSInteger row = model.tag - 200;
+            [self.selectArr insertObject:model atIndex:row];
+            [self.tempArray removeLastObject];
+            [[QuestionDataBase shareDataBase] insertWrong:model];
+            NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+            [indexPaths addObject:indexPath];
+            
+            [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationRight];
+            [self.tableView reloadData];
+            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            //        [self.tableView reloadData];
+            
+        }
+
+    }else {
+    
+        [self.rebackBtn setBackgroundImage:[UIImage imageNamed:@"reback_icon_de"] forState:UIControlStateNormal];
+        self.rebackBtn.userInteractionEnabled = NO;
+
+        
+    }
+    
     
 }
 
@@ -377,6 +454,20 @@
         self.reuqireBtn.selected = NO;
     }
 }
+
+- (void)checkTheDeletequestionNum {
+    NSLog(@"执行了");
+    if (self.tempArray.count != 0) {
+        [self.rebackBtn setBackgroundImage:[UIImage imageNamed:@"reback_icon"] forState:UIControlStateNormal];
+        self.rebackBtn.userInteractionEnabled = YES;
+    }else {
+        [self.rebackBtn setBackgroundImage:[UIImage imageNamed:@"reback_icon_de"] forState:UIControlStateNormal];
+        self.rebackBtn.userInteractionEnabled = NO;
+    }
+}
+
+
+
 
 
 /*

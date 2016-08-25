@@ -42,6 +42,7 @@
 @property (strong, nonatomic) ProductEntity *entity;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, copy) NSString *knowledgedesc;// 知识卡信息
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scroHeightConstraint;
 
 
 @end
@@ -386,7 +387,7 @@
             
         }
         self.topConstraint.constant = 80;
-        self.numBtnBgView.height = tHeight + 10;
+        self.scroHeightConstraint.constant = tHeight + 10;
         self.numBtnBgView.contentSize = CGSizeMake(size.width + padding, self.numBtnBgView.height);
         
     }else {

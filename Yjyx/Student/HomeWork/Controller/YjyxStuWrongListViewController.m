@@ -20,16 +20,15 @@
 #define ID @"YjyxStuWrongListCell"
 @interface YjyxStuWrongListViewController ()
 
-{
-    NSInteger num;// 判断还有没有数据
-    NSInteger count;// 返回cell个数
-}
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSMutableDictionary *heightDic;
 @property (nonatomic, strong) NSMutableDictionary *blankfillExpandDic;
-
+@property (nonatomic, strong) NSArray *tempArr;// 截取临时入参数组
 @property (strong, nonatomic) ProductEntity *entity;
+@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, assign) NSInteger count;
+
 
 @end
 
@@ -61,7 +60,6 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    [self getDataFromNet];
     
     // 注册加载完成高度的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTableviewCellHeight:) name:@"WEBVIEW_HEIGHT" object:nil];
@@ -76,30 +74,53 @@
 {
     [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
 }
+
 - (void)loadMoreData
 {
-    num -= 20;
-    if(num < 0){
-        self.tableView.footerRefreshingText = @"没有更多了!!!";
+    NSLog(@"********%ld", self.index);
+    if (self.index == [[self.targetlist JSONValue] count] - 1) {
+        self.tableView.footerRefreshingText = @"没有更多了";
         [self.tableView footerEndRefreshing];
-        return;
+    }else if([[self.targetlist JSONValue] count] - 1 - self.index < 20) {
+        self.count = [[self.targetlist JSONValue] count] - 1 - self.index;
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.index, self.count)];
+        self.tempArr = [[self.targetlist JSONValue] objectsAtIndexes:indexSet];
+        [self getDataFromNet];
+    }else {
+    
+        self.count = 20;
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.index, self.count)];
+        self.tempArr = [[self.targetlist JSONValue] objectsAtIndexes:indexSet];
+        [self getDataFromNet];
+
     }
-    if (num >= 20) {
-        count += 20;
-    }else{
-        count = num + count;
-    }
-    [self.tableView reloadData];
-    [self.tableView footerEndRefreshing];
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = NO;
+    self.index = 0;
+    self.count = 20;
+    if ([[self.targetlist JSONValue] count] - self.index < 20) {
+        self.count = [[self.targetlist JSONValue] count] - self.index;
+    }
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.index, self.count)];
+    self.tempArr = [[self.targetlist JSONValue] objectsAtIndexes:indexSet];
+
     if(_openMember == 1){
+        
+        [self getDataFromNet];
+        
+    }else {
+    
         [self getDataFromNet];
     }
+    
+    
 }
+
 - (void)refreshTableviewCellHeight:(NSNotification *)sender {
 
     YjyxStuWrongListCell *cell = [sender object];
@@ -117,23 +138,16 @@
 
 - (void)getDataFromNet {
     
+
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [self.targetlist JSONValue];
-    NSMutableArray *arr = [self.targetlist JSONValue];
-    NSMutableArray *tempArr = [NSMutableArray array];
-    for (NSDictionary *dict in arr) {
-        NSLog(@"%@", dict[@"i"]);
-        if([dict[@"i"] isEqual:@28] || [dict[@"i"] isEqual:@22] || [dict[@"i"] isEqual:@21] || [dict[@"i"] isEqual:@20] || [dict[@"i"] isEqual:@19] || [dict[@"i"] isEqual:@8] || [dict[@"i"] isEqual:@3]){
-            [tempArr addObject:dict];
-        }
-    }
-    [arr removeObjectsInArray:tempArr];
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:@"getonesubjectfailedquestion", @"action", self.subjectid, @"subjectid", [arr JSONString], @"targetlist", nil];
+    
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:@"getonesubjectfailedquestion", @"action", self.subjectid, @"subjectid", [self.tempArr JSONString], @"targetlist", nil];
     NSLog(@"%@", param);
     [manager GET:[BaseURL stringByAppendingString:STUDENT_GET_WRONG_LIST_GET] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
-        [self.dataSource removeAllObjects];
         if ([responseObject[@"retcode"] isEqual:@0]) {
+            
+            NSLog(@"======%ld", [responseObject[@"data"] count]);
             
             for (NSDictionary *dic in responseObject[@"data"]) {
                 
@@ -143,35 +157,20 @@
             }
 
             self.dataSource = (NSMutableArray *)[[self.dataSource reverseObjectEnumerator] allObjects];
-            num = self.dataSource.count;
-            if (self.dataSource.count < 20) {
-                count = self.dataSource.count;
-            }else {
-            
-                count = 20;
+            NSLog(@"----%@", self.dataSource);
+            self.index = self.dataSource.count - 1;
+            if (self.index == [[self.targetlist JSONValue] count] - 1) {
+                self.tableView.footerRefreshingText = @"没有更多了";
             }
             
-            [self.tableView reloadData];
 
-            
-//            for (int i = 0; i < self.dataSource.count;) {
-//                YjyxStuWrongListModel *model = self.dataSource[i];
-//                if (model.videoUrl == nil && model.explanation == nil) {
-//                    [self getMemberInfo];
-//                    break;
-//                }else{
-//                    break;
-//                }
-//            }
-           
-
-            
         }else {
         
             [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
         }
         
-        
+       [self.tableView reloadData];
+       [self.tableView footerEndRefreshing];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 
         NSLog(@"%@", error.localizedDescription);
@@ -198,7 +197,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return count;
+    return self.dataSource.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -237,10 +236,13 @@
     }else {
         cell.expandBtn.selected = [expand boolValue];
     }
-    
-    YjyxStuWrongListModel *model = self.dataSource[indexPath.row];
-    
-    [cell setSubviewsWithModel:model];
+    if (_dataSource.count) {
+        
+        YjyxStuWrongListModel *model = self.dataSource[indexPath.row];
+        
+        [cell setSubviewsWithModel:model];
+
+    }
     
     return cell;
 }

@@ -27,6 +27,7 @@
 
 @property (nonatomic, assign) BOOL add;// 添加标识
 @property (nonatomic, assign) BOOL isRequireProcess; // 是否需要过程
+@property (nonatomic, assign) NSInteger tag;// 标记被删除题目的位置
 
 + (instancetype)chaperContentItemWithArray:(NSArray *)array;
 

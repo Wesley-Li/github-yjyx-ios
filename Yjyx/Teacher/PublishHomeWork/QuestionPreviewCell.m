@@ -37,6 +37,11 @@
     self.downButton.layer.borderWidth = 1;
     self.downButton.layer.borderColor = RGBACOLOR(3, 138, 228, 1).CGColor;
     
+    self.requireProBtn.layer.cornerRadius = 5;
+    self.requireProBtn.layer.masksToBounds = YES;
+    self.requireProBtn.layer.borderWidth = 1;
+    self.requireProBtn.layer.borderColor = TEACHERCOLOR.CGColor;
+    
 }
 
 - (void)setValueWithModel:(ChaperContentItem *)model {
@@ -47,7 +52,6 @@
     self.questionNumberLabel.layer.cornerRadius = 5;
     self.questionNumberLabel.layer.masksToBounds = YES;
     self.questionNumberLabel.backgroundColor = RGBACOLOR(3, 138, 228, 1);
-    self.lineView.backgroundColor = RGBACOLOR(140.0, 140.0, 140.0, 1);
     self.levelLabel.textColor = RGBACOLOR(204, 204, 153, 1);
     
     self.subject_typeLabel.text = model.subject_type;
@@ -75,7 +79,9 @@
     }
     
     self.bg_view.layer.borderWidth = 1;
-    self.bg_view.layer.borderColor = RGBACOLOR(140.0, 140.0, 140.0, 1).CGColor;
+    self.bg_view.layer.cornerRadius = 8;
+    self.bg_view.layer.masksToBounds = YES;
+    self.bg_view.layer.borderColor = [UIColor colorWithHexString:@"#e4e4e6"].CGColor;
     
     UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 50)];
     web.userInteractionEnabled = NO;
@@ -91,6 +97,11 @@
     
     [self.BGVIEW addSubview:web];
     self.requireProBtn.selected = model.isRequireProcess;
+    if (self.requireProBtn.selected) {
+        self.requireProBtn.backgroundColor = TEACHERCOLOR;
+    }else {
+        self.requireProBtn.backgroundColor = [UIColor whiteColor];
+    }
     
 }
 
@@ -127,6 +138,7 @@
         [self.delegate questionPreviewCell:self isRequireProBtnClicked:sender];
     }
     if(sender.selected == YES){
+        self.requireProBtn.backgroundColor = TEACHERCOLOR;
         if(_chaperItem == nil){
             NSLog(@"%@", _wrongModel);
             _wrongModel.isRequireProcess = YES;
@@ -134,6 +146,7 @@
             _chaperItem.isRequireProcess = YES;
         }
     }else{
+        self.requireProBtn.backgroundColor = [UIColor whiteColor];
         if(_chaperItem == nil){
             _wrongModel.isRequireProcess = NO;
         }else{
@@ -156,7 +169,6 @@
     self.questionNumberLabel.layer.cornerRadius = 5;
     self.questionNumberLabel.layer.masksToBounds = YES;
     self.questionNumberLabel.backgroundColor = RGBACOLOR(3, 138, 228, 1);
-    self.lineView.backgroundColor = RGBACOLOR(140.0, 140.0, 140.0, 1);
     self.levelLabel.textColor = RGBACOLOR(204, 204, 153, 1);
     
 //    self.subject_typeLabel.text = [NSString stringWithFormat:@"%ld", model.questiontype ];

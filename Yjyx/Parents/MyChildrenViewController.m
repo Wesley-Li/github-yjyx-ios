@@ -22,6 +22,8 @@
     NSString *last_id;
 }
 
+@property (nonatomic, copy) NSString *childrenName;
+
 @end
 
 @implementation MyChildrenViewController
@@ -251,6 +253,7 @@
         ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
         result.childrenCid = children.cid;
         result.taskResultId = children.activityID;
+        result.childrenName = self.childrenName;
         result.navigationItem.title = [[children.title componentsSeparatedByString:@"|"] objectAtIndex:0];
         [self.navigationController pushViewController:result animated:YES];
     }
@@ -281,6 +284,7 @@
     
     NSMutableArray *cids = [[NSMutableArray alloc] init];
     ChildrenEntity *childrenEntity = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:segmentedIndex];
+    self.childrenName = childrenEntity.name;
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setObject:childrenEntity.cid forKey:@"id"];
     [dic setObject:@"0" forKey:@"last_id"];

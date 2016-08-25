@@ -119,7 +119,7 @@
         }else if (indexPath.row == 2){
             cell.textLabel.text = @"我的孩子";
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-        }else{
+        }else {
             cell.textLabel.text = @"我的订单";
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 

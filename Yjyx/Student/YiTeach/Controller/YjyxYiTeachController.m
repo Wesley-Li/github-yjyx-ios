@@ -231,6 +231,16 @@
 #pragma mark - 筛选
 - (void)makeTheChoose:(UITapGestureRecognizer *)sender {
 
+    _dataSaveDic = [NSMutableDictionary dictionaryWithDictionary:[SYS_CACHE objectForKey:@"YiTeachBookInformation"]];
+    for (int i = 0; i < 4; i++) {
+        YiTeachCustomView *customView = [self.BGView viewWithTag:200 + i];
+        if ([[_dataSaveDic allKeys] containsObject:[NSString stringWithFormat:@"%d", i]]) {
+            customView.imageview.image = [UIImage imageNamed:selectedImageArr[i]];
+            customView.titleLable.textColor = STUDENTCOLOR;
+            customView.indicatorImageview.image = [UIImage imageNamed:selectedIndicatorArr[0]];
+        }
+    }
+    
     isExpand = YES;
     self.startLearnBtn.hidden = YES;
     self.bottomview.hidden = NO;
@@ -240,10 +250,12 @@
     num = customView.tag - 200;
     self.tempArr = [NSMutableArray arrayWithObjects:_versionDataSource, _subjectDataSource, _classesDataSource, _bookDataSource, nil];
     
+    
     customView.indicatorImageview.image = [UIImage imageNamed:defaultIndicatorArr[1]];
     customView.imageview.image = [UIImage imageNamed:defaultImageArr[num]];
     customView.titleLable.textColor = [UIColor blackColor];
     customView.isSelected = NO;
+    
     
     [self.tempArr addObjectsFromArray:self.tempArr[num]];
     [self.tableview reloadData];
@@ -346,6 +358,7 @@
     if (_dataSaveDic && [_dataSaveDic allKeys].count == 4) {
         self.startLearnBtn.hidden = NO;
         self.bottomview.hidden = YES;
+        
     }else {
     
         for (int i = 0; i < 4; i++) {

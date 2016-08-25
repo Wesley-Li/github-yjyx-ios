@@ -404,7 +404,7 @@
         memberCenter.tabBarItem = [UITabBarItem itemWithTitle:@"会员中心" image:[UIImage imageNamed:@"tab_memberCenter"] selectedImage:[UIImage imageNamed:@"tab_memberCenters"]];
         
         [_tabBar setViewControllers:@[home,memberCenter,personal]];
-        _tabBar.tabBar.tintColor = TEACHERCOLOR;
+        _tabBar.tabBar.tintColor = PARENTCOLOR;
         [_tabBar setSelectedIndex:0];
         [self.window setRootViewController:_tabBar];
         

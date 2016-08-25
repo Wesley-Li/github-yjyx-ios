@@ -12,7 +12,7 @@
 @property (nonatomic,strong) IBOutlet UITableView *resultTable;
 @property (nonatomic,strong) NSString *childrenCid;
 @property (nonatomic,strong) NSString *taskResultId;
-
+@property (nonatomic,copy) NSString *childrenName;
 
 
 

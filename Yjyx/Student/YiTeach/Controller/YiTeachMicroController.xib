@@ -13,6 +13,7 @@
                 <outlet property="improveButton" destination="r8H-kE-uF2" id="DyM-0M-rUz"/>
                 <outlet property="microNameLabel" destination="q8D-6L-23x" id="hiS-Uf-D3b"/>
                 <outlet property="numBtnBgView" destination="pLX-WH-hJI" id="AdZ-Rm-9Jp"/>
+                <outlet property="scroHeightConstraint" destination="Gcr-Kd-Kzl" id="Ffv-PH-2fe"/>
                 <outlet property="topConstraint" destination="a8r-vn-wpK" id="AJt-fd-O7W"/>
                 <outlet property="videoBgView" destination="KW8-RJ-Xcr" id="QdZ-YP-x6j"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -30,8 +31,12 @@
                         <constraint firstAttribute="width" secondItem="KW8-RJ-Xcr" secondAttribute="height" multiplier="320:184" id="pVd-Wl-dS9"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8D-6L-23x">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hay-hO-DfN">
                     <rect key="frame" x="0.0" y="184" width="320" height="60"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8D-6L-23x">
+                    <rect key="frame" x="10" y="184" width="300" height="60"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="Dfm-WM-OgZ"/>
@@ -40,10 +45,11 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pLX-WH-hJI">
-                    <rect key="frame" x="0.0" y="244" width="320" height="60"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pLX-WH-hJI">
+                    <rect key="frame" x="0.0" y="244" width="320" height="70"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="Gcr-Kd-Kzl"/>
+                        <constraint firstAttribute="height" constant="70" id="Gcr-Kd-Kzl"/>
                     </constraints>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3pe-Gx-SI0">
@@ -96,9 +102,11 @@
             </subviews>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="Hay-hO-DfN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0MA-VL-8pU"/>
                 <constraint firstItem="KW8-RJ-Xcr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5c5-HU-Qsm"/>
                 <constraint firstAttribute="bottom" secondItem="3pe-Gx-SI0" secondAttribute="bottom" constant="109" id="8Mr-Ua-bei"/>
-                <constraint firstAttribute="trailing" secondItem="q8D-6L-23x" secondAttribute="trailing" id="H7Z-SF-eJ2"/>
+                <constraint firstAttribute="trailing" secondItem="Hay-hO-DfN" secondAttribute="trailing" id="D9f-jZ-6PY"/>
+                <constraint firstAttribute="trailing" secondItem="q8D-6L-23x" secondAttribute="trailing" constant="10" id="H7Z-SF-eJ2"/>
                 <constraint firstAttribute="trailing" secondItem="3pe-Gx-SI0" secondAttribute="trailing" id="Pan-eA-MKa"/>
                 <constraint firstItem="3pe-Gx-SI0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QrI-pE-J4q"/>
                 <constraint firstItem="q8D-6L-23x" firstAttribute="top" secondItem="KW8-RJ-Xcr" secondAttribute="bottom" id="UpS-Jv-6er"/>
@@ -107,8 +115,10 @@
                 <constraint firstItem="pLX-WH-hJI" firstAttribute="top" secondItem="q8D-6L-23x" secondAttribute="bottom" id="aPj-tB-jBV"/>
                 <constraint firstItem="KW8-RJ-Xcr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eeb-AY-ycD"/>
                 <constraint firstItem="pLX-WH-hJI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gGd-2h-U56"/>
+                <constraint firstItem="Hay-hO-DfN" firstAttribute="top" secondItem="KW8-RJ-Xcr" secondAttribute="bottom" id="glQ-Pi-Ckc"/>
+                <constraint firstItem="pLX-WH-hJI" firstAttribute="top" secondItem="Hay-hO-DfN" secondAttribute="bottom" id="lb6-gE-W3c"/>
                 <constraint firstAttribute="trailing" secondItem="pLX-WH-hJI" secondAttribute="trailing" id="nE3-jI-6vK"/>
-                <constraint firstItem="q8D-6L-23x" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rku-mt-1yq"/>
+                <constraint firstItem="q8D-6L-23x" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="rku-mt-1yq"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <point key="canvasLocation" x="392" y="330"/>
