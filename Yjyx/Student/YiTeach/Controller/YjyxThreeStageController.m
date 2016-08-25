@@ -24,6 +24,7 @@
 @property (weak, nonatomic) YjyxKnowledgeCardView *knowledgeView;
 
 @property (assign, nonatomic) CGFloat height;
+@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 @end
 
 @implementation YjyxThreeStageController
@@ -122,13 +123,15 @@ static NSString *ID = @"CELL";
                 [self.threeStageArr addObject:model];
                 
             }
+            self.submitBtn.enabled = YES;
             [self.tableView reloadData];
         }else{
             if (self.qidlist.count == 0) {
-                [self.view makeToast:@"暂没有添加题目,敬请期待..." duration:0.5 position:SHOW_CENTER complete:nil];
+                self.submitBtn.enabled = NO;
+                [self.view makeToast:@"暂没有添加题目,敬请期待..." duration:2.0 position:SHOW_CENTER complete:nil];
             }else{
                 NSString *str = responseObject[@"msg"] == nil ? responseObject[@"reason"] : responseObject[@"msg"];
-                [self.view makeToast:str duration:0.5 position:SHOW_CENTER complete:nil];
+                [self.view makeToast:str duration:2.0 position:SHOW_CENTER complete:nil];
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -145,7 +148,9 @@ static NSString *ID = @"CELL";
 // 知识卡点击
 - (void)knowLedgeBtnClick
 {
-    NSLog(@"dianjile");
+    if (self.qidlist.count == 0) {
+        return;
+    }
     if ([self.view.subviews containsObject:self.knowledgeView]) {
         [self.knowledgeView removeFromSuperview];
     }else{

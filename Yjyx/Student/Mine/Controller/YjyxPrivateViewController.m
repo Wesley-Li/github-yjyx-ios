@@ -12,6 +12,7 @@
 #import "YjyxChangePhoneController.h"
 #import "YjyxChangeSoundViewController.h"
 #import "FeedBackViewController.h"
+#import "YjyxParentModifyPwdController.h"
 @interface YjyxPrivateViewController ()
 
 {
@@ -80,7 +81,7 @@
     
     switch (section) {
         case 0:
-            return 2;
+            return 3;
             break;
         case 1:
             return 4;
@@ -113,12 +114,17 @@
     }
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            cell.textLabel.text = [NSString stringWithFormat:@"姓名:  %@", [YjyxOverallData sharedInstance].studentInfo.realname];
+            cell.textLabel.text = @"姓名: ";
+            cell.detailTextLabel.text = [YjyxOverallData sharedInstance].studentInfo.realname;
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             
         }else if (indexPath.row ==1)
         {
-            cell.textLabel.text = [NSString stringWithFormat:@"手机号码:  %@", [YjyxOverallData sharedInstance].studentInfo.phonenumber];
+            cell.textLabel.text = @"手机号码: ";
+            cell.detailTextLabel.text = [YjyxOverallData sharedInstance].studentInfo.phonenumber;
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        }else{
+            cell.textLabel.text = @"修改密码";
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         }
     }
@@ -211,6 +217,10 @@
             YjyxChangePhoneController *phoneVC = [[YjyxChangePhoneController alloc] init];
             phoneVC.title = @"修改手机号";
             [self.navigationController pushViewController:phoneVC animated:YES];
+        }else{
+            YjyxParentModifyPwdController *vc = [[YjyxParentModifyPwdController alloc] init];
+            vc.roleType = @3;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }else if (indexPath.section == 1) {
         

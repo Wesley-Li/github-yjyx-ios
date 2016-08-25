@@ -40,12 +40,14 @@
 #import "YjyxCommonNavController.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import "YjyxParentTabBarController.h"
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define _IPHONE80_ 80000
 
 @interface AppDelegate ()
 {
     AutoLoginViewController *autologin;
+    NSTimer *_timer;
 }
 
 @end
@@ -106,6 +108,7 @@
     
     // 自动登录,从本地取值
     NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
+    NSLog(@"%@", dic);
     if ([[dic objectForKey:@"username"] length] > 0) {
         autologin = [[AutoLoginViewController alloc] init];
         _navigation = [[NavRootViewController alloc] initWithRootViewController:autologin];
@@ -285,11 +288,12 @@
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
+    NSLog(@"willResignActive");
     [self.window endEditing:YES];
 }
-
+UIBackgroundTaskIdentifier taskId;
 - (void)applicationDidEnterBackground:(UIApplication *)application{
-    
+    NSLog(@"didenterBackground");
     UIApplication*   app = [UIApplication sharedApplication];
     __block    UIBackgroundTaskIdentifier bgTask;
     bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
@@ -308,10 +312,36 @@
             }
         });
     });
+    //开启一个后台任务
+    taskId = [application beginBackgroundTaskWithExpirationHandler:^{
+        
+        //结束指定的任务
+        [application endBackgroundTask:taskId];
+    }];
+    
+   NSTimer *timer =  [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
+    _timer = timer;
 }
-
+NSInteger count = 1;
+- (void)timerAction:(NSTimer *)timer {
+    count++;
+    
+    if (count % 500 == 0) {
+        UIApplication *application = [UIApplication sharedApplication];
+        //结束旧的后台任务
+        [application endBackgroundTask:taskId];
+        
+        //开启一个新的后台
+        taskId = [application beginBackgroundTaskWithExpirationHandler:NULL];
+    }
+    
+    NSLog(@"%ld",count);
+}
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [_timer invalidate];
+    _timer = nil;
+    count = 1;
 }
 
 // 进入激活状态
@@ -390,7 +420,7 @@
     if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {
        
         if (!_tabBar) {
-            _tabBar = [[UITabBarController alloc] init];
+            _tabBar = [[YjyxParentTabBarController alloc] init];
         }
         
         NavRootViewController *home = [[NavRootViewController alloc] initWithRootViewController:[[ParentHomeViewController alloc] initWithNibName:@"ParentHomeViewController" bundle:nil]];
@@ -403,8 +433,11 @@
         NavRootViewController *memberCenter = [[NavRootViewController alloc] initWithRootViewController:[[YjyxPMemberCenterViewController alloc] initWithNibName:@"YjyxPMemberCenterViewController" bundle:nil]];
         memberCenter.tabBarItem = [UITabBarItem itemWithTitle:@"会员中心" image:[UIImage imageNamed:@"tab_memberCenter"] selectedImage:[UIImage imageNamed:@"tab_memberCenters"]];
         
-        [_tabBar setViewControllers:@[home,memberCenter,personal]];
-        _tabBar.tabBar.tintColor = PARENTCOLOR;
+
+        [_tabBar setViewControllers:@[home,personal]];
+        _tabBar.tabBar.tintColor = [UIColor colorWithHexString:@"#039c78"];
+        
+
         [_tabBar setSelectedIndex:0];
         [self.window setRootViewController:_tabBar];
         
@@ -748,7 +781,8 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[BaseURL stringByAppendingString:TEACHER_GETALLSTULIST_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        NSLog(@"%@", responseObject);
+        NSLog(@"%@, %@, %@--getrstulist", responseObject, responseObject[@"msg"], responseObject[@"reason"]);
+        
         // 创建数据表
         [[StuDataBase shareStuDataBase] deleteStuTable];
         

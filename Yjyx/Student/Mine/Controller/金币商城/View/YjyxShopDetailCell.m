@@ -30,7 +30,7 @@
 {
     _productModel = productModel;
     self.shopName.text = productModel.name;
-    self.shopDescLabel.text = productModel.goods_info;
+    self.shopDescLabel.text = productModel.goods_info == nil || [productModel.goods_info isEqualToString:@"null"] ? @"" : productModel.goods_info;
     self.requireCoinNumLabel.text = [productModel.exchange_coins stringValue];
     [self.shopIconImageView setImageWithURL:[NSURL URLWithString:[productModel.goods_display JSONValue][@"small_img_url"]] placeholderImage:[UIImage imageNamed:@"conver_paper"]];
     if (productModel.p_id == nil) {

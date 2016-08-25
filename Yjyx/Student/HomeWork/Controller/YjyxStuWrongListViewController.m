@@ -140,8 +140,10 @@
     
 
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+
     
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:@"getonesubjectfailedquestion", @"action", self.subjectid, @"subjectid", [self.tempArr JSONString], @"targetlist", nil];
+
     NSLog(@"%@", param);
     [manager GET:[BaseURL stringByAppendingString:STUDENT_GET_WRONG_LIST_GET] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         

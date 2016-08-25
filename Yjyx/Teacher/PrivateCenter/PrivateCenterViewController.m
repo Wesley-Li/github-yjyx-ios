@@ -15,7 +15,7 @@
 #import "FeedBackViewController.h"
 #import "SoundChangeViewController.h"
 #import "QuestionDataBase.h"
-
+#import "YjyxParentModifyPwdController.h"
 @interface PrivateCenterViewController ()
 
 {
@@ -93,7 +93,7 @@
 
     switch (section) {
         case 0:
-            return 2;
+            return 3;
             break;
         case 1:
             return 4;
@@ -126,13 +126,19 @@
     }
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            cell.textLabel.text = [NSString stringWithFormat:@"姓名:  %@", [YjyxOverallData sharedInstance].teacherInfo.name];
+            cell.textLabel.text = @"姓名:  ";
+            cell.detailTextLabel.text = [YjyxOverallData sharedInstance].teacherInfo.name;
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             
         }else if (indexPath.row ==1)
         {
-            cell.textLabel.text = [NSString stringWithFormat:@"手机号码:  %@", [YjyxOverallData sharedInstance].teacherInfo.phone];
+            cell.textLabel.text = @"手机号码:  ";
+            cell.detailTextLabel.text = [YjyxOverallData sharedInstance].teacherInfo.phone;
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        }else{
+            cell.textLabel.text = @"修改密码";
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+
         }
     }
     else if (indexPath.section == 1)
@@ -223,6 +229,11 @@
             PhoneChangeViewController *phoneVC = [[PhoneChangeViewController alloc] initWithNibName:@"PhoneChangeViewController" bundle:nil];
             phoneVC.title = @"修改手机号";
             [self.navigationController pushViewController:phoneVC animated:YES];
+        }else{
+            YjyxParentModifyPwdController *vc = [[YjyxParentModifyPwdController alloc] init];
+            [vc setHidesBottomBarWhenPushed:YES];
+            vc.roleType = @2;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }else if (indexPath.section == 1) {
     

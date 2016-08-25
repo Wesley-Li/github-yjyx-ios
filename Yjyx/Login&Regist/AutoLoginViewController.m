@@ -35,12 +35,14 @@
         [[YjxService sharedInstance] parentsLogin:dic autoLogin:YES withBlock:^(id result,NSError *error){
             [self.view hideToastActivity];
             if (result != nil) {
+                NSLog(@"%@, %@, %@ - atuologin", result, result[@"msg"], result[@"reason"]);
                 if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                     [(AppDelegate *)SYS_DELEGATE fillViews];
                     [YjyxOverallData sharedInstance].parentInfo = [ParentEntity wrapParentWithdic:result];
                     [YjyxOverallData sharedInstance].parentInfo.phone = username;
                     [self asyncGetChildrenStatistic];
                 }else{
+                    NSLog(@"%@", result[@"msg"]);
                     LoginViewController *loginView = [[LoginViewController alloc] init];
                     UINavigationController* navigation = [[NavRootViewController alloc] initWithRootViewController:loginView];
                     navigation.navigationBar.hidden = YES;
@@ -63,6 +65,7 @@
         [[YjxService sharedInstance] teacherLogin:dic autoLogin:YES withBlock:^(id result, NSError *error) {
             [self.view hideToastActivity];
             if (result != nil) {
+                NSLog(@"%@, %@, %@- atuologin", result, result[@"msg"], result[@"reason"]);
                 if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                     [(AppDelegate *)SYS_DELEGATE fillViews];
                     
@@ -77,7 +80,7 @@
                     navigation.navigationBar.hidden = YES;
                     [(AppDelegate *)SYS_DELEGATE window].rootViewController =navigation;
                     [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
-                    NSLog(@"未登录------");
+                    NSLog(@"未登录------,%@", result[@"msg"]);
                     
                 }
             }else {
@@ -97,6 +100,7 @@
         [[YjxService sharedInstance] studentLogin:dic autoLogin:YES withBlock:^(id result, NSError *error) {
             [self.view hideToastActivity];
             if (result != nil) {
+                NSLog(@"%@, %@, %@- atuologin", result, result[@"msg"], result[@"reason"]);
                 if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                     [YjyxOverallData sharedInstance].studentInfo = [OneStudentEntity studentEntityWithDict:result];
                     [(AppDelegate *)SYS_DELEGATE fillViews];

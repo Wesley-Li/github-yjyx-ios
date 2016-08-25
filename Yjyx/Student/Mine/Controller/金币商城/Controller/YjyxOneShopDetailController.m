@@ -9,12 +9,15 @@
 #import "YjyxOneShopDetailController.h"
 #import "YjyxTeacherShopModel.h"
 #import "YjyxExchangeRecordViewController.h"
+#import "YjyxExchangeRecordModel.h"
+#import "YjyxConvertDetailController.h"
 @interface YjyxOneShopDetailController ()
 @property (weak, nonatomic) IBOutlet UILabel *paperNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *requireCoinLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *paperImageView;
 @property (weak, nonatomic) IBOutlet UILabel *buyNumLabel;
 
+@property (strong, nonatomic) NSMutableArray *convertGoodsArr;
 @property (weak, nonatomic) IBOutlet UIButton *exchangBtn;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 
@@ -22,6 +25,15 @@
 @end
 
 @implementation YjyxOneShopDetailController
+
+#pragma mark - 懒加载
+- (NSMutableArray *)convertGoodsArr
+{
+    if (_convertGoodsArr == nil) {
+        _convertGoodsArr = [NSMutableArray array];
+    }
+    return _convertGoodsArr;
+}
 #pragma mark - view的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -125,14 +137,23 @@
     param[@"gtype"] = self.oneShopModel.p_id;
     param[@"quantity"] = @([self.buyNumLabel.text integerValue]);
     [self.view makeToastActivity:SHOW_CENTER];
+   
     [mgr POST:[BaseURL stringByAppendingString:@"/api/teacher/mobile/exchange/" ] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         NSLog(@"%@", responseObject);
         [self.view hideToastActivity];
         if ([responseObject[@"retcode"] integerValue] == 0) {
-            UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"您的充值卡序列号: %@", responseObject[@"retlist"][0][@"specific_info"]] preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
-            [alertVc addAction:cancelAction];
-            [self presentViewController:alertVc animated:YES completion:nil];
+            [self.convertGoodsArr removeAllObjects];
+            for (NSDictionary *dict in responseObject[@"retlist"]) {
+                YjyxExchangeRecordModel *model = [YjyxExchangeRecordModel exchangeRecordModelWithDict:dict];
+                [self.convertGoodsArr addObject:model];
+            }
+            YjyxConvertDetailController *vc = [[YjyxConvertDetailController alloc] init];
+            vc.convertShopArr = self.convertGoodsArr;
+            [self.navigationController pushViewController:vc animated:YES];
+//            UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"您的充值卡序列号: %@", responseObject[@"retlist"][0][@"specific_info"]] preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+//            [alertVc addAction:cancelAction];
+//            [self presentViewController:alertVc animated:YES completion:nil];
             NSInteger coinNum = [[YjyxOverallData sharedInstance].teacherInfo.coins integerValue];
             NSInteger exchangeCoinNum = [self.requireCoinLabel.text integerValue];
             NSInteger coinsurNum = coinNum - exchangeCoinNum;

@@ -39,44 +39,71 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpF-q3-QLN">
-                        <rect key="frame" x="15" y="88" width="324" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpF-q3-QLN">
+                        <rect key="frame" x="15" y="88" width="241" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="兑换成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPE-MQ-7KX">
-                        <rect key="frame" x="77" y="37" width="60" height="18"/>
+                        <rect key="frame" x="281" y="61" width="60" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="1" green="0.35294117650000001" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNQ-NI-qoR">
+                        <rect key="frame" x="266" y="87" width="75" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="D4p-Mh-WAi"/>
+                            <constraint firstAttribute="width" constant="75" id="oUO-Ha-d48"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="复制序列号">
+                            <color key="titleColor" red="0.35686274509999999" green="0.76862745099999996" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="copyBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xnl-9I-hpb"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="KUB-9e-aSF" secondAttribute="trailing" id="0Ab-7o-iMx"/>
                     <constraint firstItem="IpF-q3-QLN" firstAttribute="top" secondItem="ZaI-gS-CGy" secondAttribute="bottom" constant="8" id="AYc-mi-3SL"/>
                     <constraint firstItem="1NS-ln-eeP" firstAttribute="leading" secondItem="ZaI-gS-CGy" secondAttribute="trailing" constant="3" id="CKE-zW-tHo"/>
+                    <constraint firstItem="bPE-MQ-7KX" firstAttribute="centerY" secondItem="ZaI-gS-CGy" secondAttribute="centerY" id="GVV-ij-8cC"/>
+                    <constraint firstItem="YNQ-NI-qoR" firstAttribute="leading" secondItem="IpF-q3-QLN" secondAttribute="trailing" constant="10" id="GxL-W4-U4R"/>
+                    <constraint firstAttribute="trailing" secondItem="YNQ-NI-qoR" secondAttribute="trailing" constant="8" id="H0o-y0-rZ2"/>
                     <constraint firstAttribute="trailing" secondItem="IpF-q3-QLN" secondAttribute="trailing" constant="10" id="Rcd-MW-oFz"/>
                     <constraint firstItem="Fpr-ab-pOd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="S9e-Ud-s1f"/>
+                    <constraint firstItem="YNQ-NI-qoR" firstAttribute="centerY" secondItem="IpF-q3-QLN" secondAttribute="centerY" id="Tdk-It-I3m"/>
                     <constraint firstItem="ZaI-gS-CGy" firstAttribute="leading" secondItem="Fpr-ab-pOd" secondAttribute="leading" id="UFn-oe-Q2y"/>
                     <constraint firstAttribute="trailingMargin" secondItem="IpF-q3-QLN" secondAttribute="trailing" constant="10" id="ZPu-Zn-XTZ"/>
                     <constraint firstItem="KUB-9e-aSF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="cIr-Jg-s9s"/>
                     <constraint firstItem="KUB-9e-aSF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="jPm-21-kmb"/>
+                    <constraint firstItem="YNQ-NI-qoR" firstAttribute="top" secondItem="bPE-MQ-7KX" secondAttribute="bottom" constant="10" id="kDX-3r-Eu1"/>
                     <constraint firstItem="bPE-MQ-7KX" firstAttribute="centerY" secondItem="Fpr-ab-pOd" secondAttribute="centerY" id="lna-5U-LzN"/>
                     <constraint firstItem="Fpr-ab-pOd" firstAttribute="top" secondItem="KUB-9e-aSF" secondAttribute="bottom" constant="2" id="mTg-bT-nbt"/>
                     <constraint firstItem="bPE-MQ-7KX" firstAttribute="leading" secondItem="Fpr-ab-pOd" secondAttribute="trailing" constant="20" id="qV5-ea-Bsc"/>
                     <constraint firstItem="ZaI-gS-CGy" firstAttribute="top" secondItem="Fpr-ab-pOd" secondAttribute="bottom" constant="3" id="rm6-FC-zRP"/>
+                    <constraint firstAttribute="bottom" secondItem="YNQ-NI-qoR" secondAttribute="bottom" constant="10" id="vWy-FL-J6D"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="bPE-MQ-7KX" secondAttribute="trailing" id="vqc-78-hpz"/>
                     <constraint firstItem="1NS-ln-eeP" firstAttribute="centerY" secondItem="ZaI-gS-CGy" secondAttribute="centerY" id="za6-sO-12e"/>
                     <constraint firstItem="IpF-q3-QLN" firstAttribute="leading" secondItem="ZaI-gS-CGy" secondAttribute="leading" id="zs1-gW-FOD"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="Rcd-MW-oFz"/>
                         <exclude reference="ZPu-Zn-XTZ"/>
+                        <exclude reference="Tdk-It-I3m"/>
+                        <exclude reference="kDX-3r-Eu1"/>
+                        <exclude reference="lna-5U-LzN"/>
+                        <exclude reference="qV5-ea-Bsc"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="coinLabel" destination="ZaI-gS-CGy" id="lO3-zm-pea"/>
+                <outlet property="copyedBtn" destination="YNQ-NI-qoR" id="Hke-6u-KWi"/>
                 <outlet property="descLabel" destination="IpF-q3-QLN" id="vDW-sB-g60"/>
                 <outlet property="exchangeTimeLabel" destination="KUB-9e-aSF" id="Jd5-5F-gxB"/>
                 <outlet property="productNameLabel" destination="Fpr-ab-pOd" id="mqw-cF-41W"/>

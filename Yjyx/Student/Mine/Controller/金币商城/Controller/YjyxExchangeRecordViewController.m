@@ -133,8 +133,9 @@ static NSString *ID = @"cell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    YjyxExchangeRecordModel *model = self.productRecordArr[indexPath.row];
-    return model.cellHeight;
+//    YjyxExchangeRecordModel *model = self.productRecordArr[indexPath.row];
+//    return model.cellHeight;
+    return 120;
 }
 
 @end

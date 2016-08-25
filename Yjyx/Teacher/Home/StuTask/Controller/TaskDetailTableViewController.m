@@ -769,12 +769,13 @@
     param[@"students"] = [stuArr JSONString];
     [mgr POST:[BaseURL stringByAppendingString:@"/api/teacher/mobile/task/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         if ([responseObject[@"retcode"] integerValue] == 0) {
-            [self.view makeToast:@"已下发催交通知" duration:0.5 position:SHOW_CENTER complete:nil];
+            [SVProgressHUD showSuccessWithStatus:@"已下发催交通知"];
+            
         }else{
-            [self.view makeToast:@"下发催交通知失败,请重试" duration:1.0 position:SHOW_CENTER complete:nil];
+            [SVProgressHUD showErrorWithStatus:@"下发催交通知失败,请重试"];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
 }
 

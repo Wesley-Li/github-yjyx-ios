@@ -40,6 +40,7 @@
 @property (weak, nonatomic) IBOutlet UIPageControl *AdNumPageControl;
 @property (weak, nonatomic) NSTimer *timer;
 
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 
 @property (strong, nonatomic) NSMutableArray *wrongArr; //  错题榜数据
 @end
@@ -157,6 +158,11 @@ static NSString *HomeADID = @"HomeADID";
             for (NSDictionary *dict in responseObject[@"retlist"]) {
                 YjyxHomeAdModel *model = [YjyxHomeAdModel homeAdModelWithDict:dict];
                 [self.homeAdArray addObject:model];
+            }
+            if (self.homeAdArray.count == 0) {
+                self.bgImageView.hidden = NO;
+            }else{
+                self.bgImageView.hidden = YES;
             }
             [self.collectView reloadData];
             self.AdNumPageControl.numberOfPages = self.homeAdArray.count;
