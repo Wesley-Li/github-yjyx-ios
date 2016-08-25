@@ -293,7 +293,7 @@
     pamar[@"passwordConfirm"] = self.conFirmpswTextField.text;
     pamar[@"smscode"] = self.codeTextField.text;
     pamar[@"ostype"] = @1;
-    pamar[@"devicetoken"] = @"123456734";
+    pamar[@"devicetoken"] = ((AppDelegate*)SYS_DELEGATE).deviceToken;
     pamar[@"description"] = [[UIDevice currentDevice] model];
     
     [mgr POST:[BaseURL stringByAppendingString:@"/api/student/mobile/register/"] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {

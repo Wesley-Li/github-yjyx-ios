@@ -185,19 +185,6 @@
     ChaperContentItem *item = self.selectArr[indexPath.row];
     cell.chaperItem = item;
     [cell setValueWithModel:item];
-
-    
-//    if ([self.selectArr[indexPath.row] isKindOfClass:[ChaperContentItem class]]) {
-//        ChaperContentItem *item = self.selectArr[indexPath.row];
-//        cell.chaperItem = item;
-//        [cell setValueWithModel:item];
-//    }else{
-//        YjyxWrongSubModel *model = self.selectArr[indexPath.row];
-//        cell.wrongModel = model;
-//        [cell setWrongWithModel:model];
-//        
-//    }
-    
     
     cell.questionNumberLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row + 1];
     cell.deleteBtn.tag = indexPath.row + 200;

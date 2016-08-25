@@ -286,31 +286,39 @@
         
         NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] isEqual:@0]) {
-            self.responseObject = responseObject;
-            self.microName = responseObject[@"name"];
-            self.knowledgedesc = responseObject[@"knowledgedesc"];
-            self.microNameLabel.text = _microName;
-            NSArray *array = [responseObject[@"quizcontent"] JSONValue][@"questionList"][0][1];
-            NSLog(@"-------%@", array);
-            // id列表
-            for (NSDictionary *dic in array) {
-                if ([dic[@"level"] isEqual:@1]) {
-                    [self.baseQuestionIDList addObject:dic[@"id"]];
-                }else if ([dic[@"level"] isEqual:@2]) {
-                    [self.consolidateIDList addObject:dic[@"id"]];
-                }else {
-                    
-                    [self.improveIDList addObject:dic[@"id"]];
+            
+            if ([responseObject[@"showview"] isEqual:@0]) {
+                [self.view makeToast:@"暂无亿教课程" duration:1.0 position:SHOW_CENTER complete:^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                }];
+            }else {
+            
+                self.responseObject = responseObject;
+                self.microName = responseObject[@"name"];
+                self.knowledgedesc = responseObject[@"knowledgedesc"];
+                self.microNameLabel.text = _microName;
+                NSArray *array = [responseObject[@"quizcontent"] JSONValue][@"questionList"][0][1];
+                NSLog(@"-------%@", array);
+                // id列表
+                for (NSDictionary *dic in array) {
+                    if ([dic[@"level"] isEqual:@1]) {
+                        [self.baseQuestionIDList addObject:dic[@"id"]];
+                    }else if ([dic[@"level"] isEqual:@2]) {
+                        [self.consolidateIDList addObject:dic[@"id"]];
+                    }else {
+                        
+                        [self.improveIDList addObject:dic[@"id"]];
+                    }
                 }
+                
+                if ([[responseObject allKeys] containsObject:@"videoobjlist"]) {
+                    self.microArr = [responseObject[@"videoobjlist"] JSONValue];
+                    self.videoURL = _microArr[0][@"url"];
+                    [self configureWMPlayer];
+                    [self configureTheNumBtn:_microArr];
+                }
+
             }
-            
-            if ([[responseObject allKeys] containsObject:@"videoobjlist"]) {
-                self.microArr = [responseObject[@"videoobjlist"] JSONValue];
-                self.videoURL = _microArr[0][@"url"];
-                [self configureWMPlayer];
-                [self configureTheNumBtn:_microArr];
-            }
-            
             
         }else {
         

@@ -168,22 +168,28 @@
        [self.view addSubview:videoImage];
         UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, playerFrame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - playerFrame.size.height)];
        NSLog(@"%@", _explantionStr);
-       NSRange range = [_explantionStr rangeOfString:@">" options:NSCaseInsensitiveSearch];
+       if ([_explantionStr isEqualToString:@""]) {
+           [web loadHTMLString:@"暂无解析" baseURL:nil];
+       }else {
        
-       NSLog(@"%@", NSStringFromRange(range));
-       if(range.length == 0 && range.location > 5000000){
-           NSString *str2 = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", _explantionStr];
-           [web loadHTMLString:str2 baseURL:nil];
-       }else if(range.length != 1){
-           [web loadHTMLString:_explantionStr baseURL:nil];
-       }else{
-           NSString *str1 =  [_explantionStr substringFromIndex:range.location];
-           NSString *str2 = [NSString stringWithFormat:@"<p%@%@",@" style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"", str1];
+           NSRange range = [_explantionStr rangeOfString:@">" options:NSCaseInsensitiveSearch];
            
-           NSLog(@"%@", str2);
-           [web loadHTMLString:str2 baseURL:nil];
+           NSLog(@"%@", NSStringFromRange(range));
+           if(range.length == 0 && range.location > 5000000){
+               NSString *str2 = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", _explantionStr];
+               [web loadHTMLString:str2 baseURL:nil];
+           }else if(range.length != 1){
+               [web loadHTMLString:_explantionStr baseURL:nil];
+           }else{
+               NSString *str1 =  [_explantionStr substringFromIndex:range.location];
+               NSString *str2 = [NSString stringWithFormat:@"<p%@%@",@" style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"", str1];
+               
+               NSLog(@"%@", str2);
+               [web loadHTMLString:str2 baseURL:nil];
+           }
+
        }
-      
+       
        [self.view addSubview:web];
        
       
@@ -198,22 +204,30 @@
        NSLog(@"%f,%f", SCREEN_WIDTH, SCREEN_HEIGHT);
 
        web.delegate = self;
-
        
-       NSRange range = [_explantionStr rangeOfString:@">" options:NSCaseInsensitiveSearch];
-
-       NSLog(@"%@", NSStringFromRange(range));
-       if(range.length == 0 && range.location > 5000000){
-           NSString *str2 = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", _explantionStr];
-           [web loadHTMLString:str2 baseURL:nil];
-       }else if(range.length != 1){
-             [web loadHTMLString:_explantionStr baseURL:nil];
-       }else{
-       NSString *str1 =  [_explantionStr substringFromIndex:range.location];
-       NSString *str2 = [NSString stringWithFormat:@"<p%@%@",@" style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"", str1];
+       if ([_explantionStr isEqualToString:@""]) {
+           [web loadHTMLString:@"暂无解析" baseURL:nil];
+       }else {
        
-       NSLog(@"%@", str2);
-       [web loadHTMLString:str2 baseURL:nil];
+           NSRange range = [_explantionStr rangeOfString:@">" options:NSCaseInsensitiveSearch];
+           
+           NSLog(@"%@", NSStringFromRange(range));
+           if(range.length == 0 && range.location > 5000000){
+               
+               NSString *str2 = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", _explantionStr];
+               [web loadHTMLString:str2 baseURL:nil];
+               
+           }else if(range.length != 1){
+               [web loadHTMLString:_explantionStr baseURL:nil];
+           }else{
+               NSString *str1 =  [_explantionStr substringFromIndex:range.location];
+               NSString *str2 = [NSString stringWithFormat:@"<p%@%@",@" style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"", str1];
+               
+               NSLog(@"%@", str2);
+               [web loadHTMLString:str2 baseURL:nil];
+           }
+           
+
        }
        
        [self.view addSubview:web];

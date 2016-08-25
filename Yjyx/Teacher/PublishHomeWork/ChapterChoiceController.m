@@ -31,13 +31,9 @@
 //@property (strong, nonatomic) NSMutableArray
 
 @property (nonatomic, strong) NSNumber *last_id;
-
 @property (nonatomic, copy) NSString *urlString;
-
 @property (nonatomic, strong) NSMutableDictionary *tagDic;// 标签字典
-
 @property (assign, nonatomic) NSInteger flag;
-
 @property (nonatomic, strong) subjectContentCell *cell;
 
 
@@ -402,33 +398,50 @@
     }
     m_model.level = str;
     NSLog(@"%@", m_model);
-    sender.selected = !sender.selected;
-    model.add = sender.selected;
-  
-    if (sender.selected) {
-        NSMutableArray *arr = [NSMutableArray array];
-        if(_flag == 0){
-        [[QuestionDataBase shareDataBase] insertQuestion:model];
-        arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
-        }else{
-            [[QuestionDataBase shareDataBase] insertMirco:m_model];
-            arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"];
-        }
-        NSNotification *notice = [NSNotification notificationWithName:@"bottomBtnNameChange" object:nil userInfo:@{@"key":arr}];
-        [[NSNotificationCenter defaultCenter] postNotification:notice];
-        
+    
+    
+    // 在此处判断添加的题目数
+    if (_flag == 0) {
+        _addArray = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
     }else {
-        NSMutableArray *arr = [NSMutableArray array];
-        if (_flag == 0) {
-            [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", model.t_id] andQuestionType:model.subject_type andJumpType:@"1"];
-            arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
-        }else{
-            [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%@", m_model.s_id] andQuestionType:[NSString stringWithFormat:@"%ld", m_model.type] andJumpType:@"2"];
-            arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"];
-        }
-        NSNotification *notice = [NSNotification notificationWithName:@"bottomBtnNameChange" object:nil userInfo:@{@"key":arr}];
-        [[NSNotificationCenter defaultCenter] postNotification:notice];
+        _addArray = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"];
+
+    }
+    
+    if (_addArray.count >= 100) {
+        [self.view makeToast:@"添加失败，已达题目上限(100道题)!" duration:1.0 position:SHOW_CENTER complete:nil];
+    }else {
+    
+        sender.selected = !sender.selected;
+        model.add = sender.selected;
         
+        if (sender.selected) {
+            //        NSMutableArray *arr = [NSMutableArray array];
+            if(_flag == 0){
+                [[QuestionDataBase shareDataBase] insertQuestion:model];
+                _addArray = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
+            }else{
+                [[QuestionDataBase shareDataBase] insertMirco:m_model];
+                _addArray = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"];
+            }
+            NSNotification *notice = [NSNotification notificationWithName:@"bottomBtnNameChange" object:nil userInfo:@{@"key":_addArray}];
+            [[NSNotificationCenter defaultCenter] postNotification:notice];
+            
+        }else {
+            //        NSMutableArray *arr = [NSMutableArray array];
+            if (_flag == 0) {
+                [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%ld", model.t_id] andQuestionType:model.subject_type andJumpType:@"1"];
+                _addArray = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
+            }else{
+                [[QuestionDataBase shareDataBase] deleteQuestionByid:[NSString stringWithFormat:@"%@", m_model.s_id] andQuestionType:[NSString stringWithFormat:@"%ld", m_model.type] andJumpType:@"2"];
+                _addArray = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"];
+            }
+            NSNotification *notice = [NSNotification notificationWithName:@"bottomBtnNameChange" object:nil userInfo:@{@"key":_addArray}];
+            [[NSNotificationCenter defaultCenter] postNotification:notice];
+            
+        }
+
+    
     }
     
 }
