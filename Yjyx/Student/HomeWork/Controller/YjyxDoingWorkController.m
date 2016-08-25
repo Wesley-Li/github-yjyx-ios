@@ -877,9 +877,11 @@
                  [coverView removeFromSuperview];
                 
             }
+            [SVProgressHUD dismiss];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
             [coverView removeFromSuperview];
+            [SVProgressHUD dismiss];
         }];
     }else{ // 微课作业
         param[@"action"] = @"task_lesson_save_result";
@@ -1219,10 +1221,7 @@
 {
     [self answerResultBtnClick:self.answerWorkCardBtn];
     [self.scrollView setContentOffset:CGPointMake((btn.tag - 1) * SCREEN_WIDTH, 0) animated:YES];
-    self.titlenumberLabel.text = [NSString stringWithFormat:@"%ld", btn.tag];
-
-    
-    
+    self.titlenumberLabel.text = [NSString stringWithFormat:@"%ld", btn.tag];   
 }
 // 提交按钮被点击
 - (void)workResultView:(YjyxWorkResultView *)view sumbitBtnClick:(UIButton *)btn

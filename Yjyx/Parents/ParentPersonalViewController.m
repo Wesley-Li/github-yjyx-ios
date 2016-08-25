@@ -14,7 +14,7 @@
 #import "YjyxSoundViewController.h"
 #import "YjyxFeedBackViewController.h"
 #import "YjyxOrderViewController.h"
-
+#import "YjyxParentModifyPwdController.h"
 @interface ParentPersonalViewController ()<soundSelectDelegate>
 {
     BOOL isNeednotifySet;
@@ -77,7 +77,7 @@
 {
     switch (section) {
         case 0:
-            return 4;
+            return 5;
             break;
         case 1:
             return 4;
@@ -119,10 +119,14 @@
         }else if (indexPath.row == 2){
             cell.textLabel.text = @"我的孩子";
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-        }else{
+        }else if (indexPath.row == 3){
             cell.textLabel.text = @"我的订单";
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 
+        }else{
+            cell.textLabel.text = @"修改密码";
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+            
         }
     }
     else if (indexPath.section == 1)
@@ -205,10 +209,15 @@
             ParentChildrensViewController *childrens = [[ParentChildrensViewController alloc] init];
             [childrens setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:childrens animated:YES];
-        }else{
+        }else if (indexPath.row == 3){
             YjyxOrderViewController *vc = [[YjyxOrderViewController alloc] init];
             [vc setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            YjyxParentModifyPwdController *modifyPwdVc = [[YjyxParentModifyPwdController alloc] init];
+            modifyPwdVc.roleType = @1;
+            [modifyPwdVc setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:modifyPwdVc animated:YES];
         }
     }else if (indexPath.section == 1){
         if (indexPath.row == 2) {

@@ -215,6 +215,7 @@
                 // 家长
                 [[YjxService sharedInstance] parentsLogin:dic autoLogin:NO withBlock:^(id result,NSError *error){
                     [self.view hideToastActivity];
+                    NSLog(@"%@, %@, %@--login", result, result[@"msg"], result[@"reason"]);
                     if (result != nil) {
                         if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                             [(AppDelegate *)SYS_DELEGATE fillViews];
@@ -255,8 +256,8 @@
                 
                 [[YjxService sharedInstance] teacherLogin:dic autoLogin:NO withBlock:^(id result, NSError *error) {
                     
-//                    NSLog(@"%@", result);
-                    
+
+                    NSLog(@"%@, %@, %@--login", result, result[@"msg"], result[@"reason"]);
                     [self.view hideToastActivity];
                     if (result != nil) {
                         
@@ -306,6 +307,7 @@
                
                 [[YjxService sharedInstance] studentLogin:dic autoLogin:NO withBlock:^(id result, NSError *error){
                      [self.view hideToastActivity];
+                    NSLog(@"%@, %@, %@--login", result, result[@"msg"], result[@"reason"]);
                     if (result != nil) {
                         
                         if ([result[@"retcode"] integerValue] == 0) {

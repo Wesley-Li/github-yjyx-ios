@@ -123,7 +123,7 @@
     NSMutableArray *tempArr = [NSMutableArray array];
     for (NSDictionary *dict in arr) {
         NSLog(@"%@", dict[@"i"]);
-        if([dict[@"i"] isEqual:@28] || [dict[@"i"] isEqual:@22] || [dict[@"i"] isEqual:@21] || [dict[@"i"] isEqual:@20] || [dict[@"i"] isEqual:@19] || [dict[@"i"] isEqual:@8] || [dict[@"i"] isEqual:@3]){
+        if([dict[@"i"] isEqual:@28] || [dict[@"i"] isEqual:@22] || [dict[@"i"] isEqual:@21] || [dict[@"i"] isEqual:@20] || [dict[@"i"] isEqual:@19] || [dict[@"i"] isEqual:@8] || [dict[@"i"] isEqual:@3] || [dict[@"i"] isEqual:@34]){
             [tempArr addObject:dict];
         }
     }

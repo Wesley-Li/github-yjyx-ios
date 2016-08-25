@@ -13,7 +13,7 @@
 #import "YjyxMicroClassViewController.h"
 #import "YjyxWorkPreviewViewController.h"
 #import "YjyxShopMallViewController.h"
-
+#import "YjyxPMemberCenterViewController.h"
 @interface ParentHomeViewController ()
 
 @end
@@ -105,6 +105,12 @@
             break;
     }
 
+}
+// 会员中心的点击
+- (IBAction)memberCenterClick:(UIButton *)sender {
+    YjyxPMemberCenterViewController *vc = [[YjyxPMemberCenterViewController alloc] init];
+    [vc setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(IBAction)btnClicked:(id)sender

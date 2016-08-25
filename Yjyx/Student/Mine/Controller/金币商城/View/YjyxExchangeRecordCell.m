@@ -16,12 +16,20 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *descLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *copyedBtn;
 @end
 @implementation YjyxExchangeRecordCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.copyedBtn.layer.cornerRadius = 5;
+    self.copyedBtn.layer.borderWidth = 1;
+    self.copyedBtn.layer.borderColor = STUDENTCOLOR.CGColor;
+}
+- (IBAction)copyBtnClick:(id)sender {
+    UIPasteboard *pab = [UIPasteboard generalPasteboard];
+    NSString *string = self.descLabel.text;
+    [pab setString:string];
 }
 
 - (void)setRecordModel:(YjyxExchangeRecordModel *)recordModel

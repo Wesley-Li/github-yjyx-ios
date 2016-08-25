@@ -9,6 +9,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YjyxHomeWorkController">
             <connections>
                 <outlet property="AdNumPageControl" destination="91Y-gE-2Ab" id="Ibz-qg-6Q5"/>
+                <outlet property="bgImageView" destination="lBF-c3-cei" id="Rjv-pG-2Jj"/>
                 <outlet property="btnView" destination="WZ2-e8-r6r" id="73F-lu-t0E"/>
                 <outlet property="clickBtn" destination="Kff-Yf-pj7" id="qXL-9r-AAS"/>
                 <outlet property="collectView" destination="kce-oQ-0Ee" id="FMI-3A-9s0"/>
@@ -21,12 +22,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BANNER" translatesAutoresizingMaskIntoConstraints="NO" id="lBF-c3-cei">
-                    <rect key="frame" x="0.0" y="64" width="320" height="160"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="160" id="a3P-68-G2f"/>
-                    </constraints>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WZ2-e8-r6r">
                     <rect key="frame" x="0.0" y="224" width="320" height="40"/>
                     <subviews>
@@ -42,20 +37,6 @@
                                 </mask>
                             </variation>
                         </imageView>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zD-Gd-7Rj" customClass="YjyxHomeWorkButton">
-                            <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="作业">
-                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="workBtnClick:" destination="-1" eventType="touchUpInside" id="KZk-5V-Oix"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uft-bA-DHC" customClass="YjyxHomeWorkButton">
                             <rect key="frame" x="160" y="0.0" width="160" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -68,6 +49,20 @@
                             </state>
                             <connections>
                                 <action selector="workBtnClick:" destination="-1" eventType="touchUpInside" id="39D-JB-ToP"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zD-Gd-7Rj" customClass="YjyxHomeWorkButton">
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" title="作业">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="workBtnClick:" destination="-1" eventType="touchUpInside" id="KZk-5V-Oix"/>
                             </connections>
                         </button>
                     </subviews>
@@ -113,6 +108,12 @@
                     <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </pageControl>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BANNER" translatesAutoresizingMaskIntoConstraints="NO" id="lBF-c3-cei">
+                    <rect key="frame" x="0.0" y="64" width="320" height="160"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="160" id="a3P-68-G2f"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.86666666670000003" green="0.87450980389999999" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -130,7 +131,7 @@
                 <constraint firstAttribute="trailing" secondItem="WZ2-e8-r6r" secondAttribute="trailing" id="s1j-ap-Bgt"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="497" y="99"/>
+            <point key="canvasLocation" x="38" y="61"/>
         </view>
     </objects>
     <resources>
