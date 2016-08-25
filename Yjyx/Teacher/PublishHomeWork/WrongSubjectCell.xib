@@ -30,8 +30,8 @@
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
-                                        <state key="normal" backgroundImage="list_icon_add_nor"/>
-                                        <state key="selected" backgroundImage="list_icon_add_sel"/>
+                                        <state key="normal" backgroundImage="list_icon_add_nor_click"/>
+                                        <state key="selected" backgroundImage="list_icon_add_nor_de"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="BR8-WJ-p0U"/>
@@ -213,8 +213,8 @@
     <resources>
         <image name="homework_close.png" width="21" height="21"/>
         <image name="homework_open.png" width="21" height="21"/>
-        <image name="list_icon_add_nor" width="46" height="46"/>
-        <image name="list_icon_add_sel" width="46" height="46"/>
+        <image name="list_icon_add_nor_click" width="36" height="36"/>
+        <image name="list_icon_add_nor_de" width="46" height="46"/>
         <image name="list_icon_collect_nor" width="46" height="46"/>
         <image name="list_icon_collect_sel" width="46" height="46"/>
     </resources>

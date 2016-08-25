@@ -11,6 +11,7 @@
 @implementation ChildrenActivity
 +(ChildrenActivity *)wrapChildrenActivityWithDic:(NSDictionary *)dic
 {
+    
     ChildrenActivity *childrenActivity = [[ChildrenActivity alloc] init];
     childrenActivity.cid = [dic objectForKey:@"cid"];
     childrenActivity.finished = [dic objectForKey:@"finished"];

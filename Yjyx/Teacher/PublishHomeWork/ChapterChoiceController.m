@@ -28,6 +28,7 @@
 @property (nonatomic, strong) NSMutableArray *dataSoruce;// 数据源
 @property (nonatomic, strong) NSMutableArray *addArray;// 已选题目
 @property (strong, nonatomic) NSMutableDictionary *cellHeightDic;
+//@property (strong, nonatomic) NSMutableArray
 
 @property (nonatomic, strong) NSNumber *last_id;
 
@@ -293,7 +294,6 @@
             if (self.dataSoruce.count == 0) {
                 
                 [SVProgressHUD showErrorWithStatus:@"暂时还没有响应题目,我们会尽快添加,敬请期待"];
-                [SVProgressHUD dismissWithDelay:2.0];
                 
             }else {
                 
@@ -438,8 +438,10 @@
 
     NSLog(@"%@",sender.userInfo[@"key"]);
     if(_flag == 1){
+        self.bottom_button.titleLabel.text = [NSString stringWithFormat:@"确定(已选%ld题)", [sender.userInfo[@"key"] count]];
         [self.bottom_button setTitle:[NSString stringWithFormat:@"确定(已选%ld题)", [sender.userInfo[@"key"] count]] forState:UIControlStateNormal];
     }else{
+        self.bottom_button.titleLabel.text = [NSString stringWithFormat:@"点击预览作业(已选%ld题)", [sender.userInfo[@"key"] count]];
        [self.bottom_button setTitle:[NSString stringWithFormat:@"点击预览作业(已选%ld题)", [sender.userInfo[@"key"] count]] forState:UIControlStateNormal];
     }
     
