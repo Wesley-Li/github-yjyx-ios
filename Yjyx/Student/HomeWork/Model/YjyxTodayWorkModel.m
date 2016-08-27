@@ -16,6 +16,7 @@
     model.finishtime = dict[@"finishtime"];
     model.task_delivertime = dict[@"task__delivertime"];
     model.task_subjectid = dict[@"task__subjectid"];
+    model.resourcename  = dict[@"resourcename"];
     model.task_id = dict[@"task_id"];
     model.task_relatedresourceid = dict[@"task__relatedresourceid"];
     model.summary = [YjyxTodayWorkModel dictionaryWithJsonString:dict[@"summary"]] ;

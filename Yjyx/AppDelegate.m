@@ -57,7 +57,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    ((AppDelegate*)SYS_DELEGATE).role = @"parents";
+//    ((AppDelegate*)SYS_DELEGATE).role = @"parents";
     ((AppDelegate*)SYS_DELEGATE).stuListArr = [NSMutableArray array];
     NSError *setCategoryErr = nil;
     NSError *activationErr  = nil;

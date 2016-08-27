@@ -14,7 +14,6 @@
                 <outlet property="microNameLabel" destination="q8D-6L-23x" id="hiS-Uf-D3b"/>
                 <outlet property="numBtnBgView" destination="pLX-WH-hJI" id="AdZ-Rm-9Jp"/>
                 <outlet property="scroHeightConstraint" destination="Gcr-Kd-Kzl" id="Ffv-PH-2fe"/>
-                <outlet property="topConstraint" destination="a8r-vn-wpK" id="AJt-fd-O7W"/>
                 <outlet property="videoBgView" destination="KW8-RJ-Xcr" id="QdZ-YP-x6j"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -111,10 +110,10 @@
                 <constraint firstItem="3pe-Gx-SI0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QrI-pE-J4q"/>
                 <constraint firstItem="q8D-6L-23x" firstAttribute="top" secondItem="KW8-RJ-Xcr" secondAttribute="bottom" id="UpS-Jv-6er"/>
                 <constraint firstAttribute="trailing" secondItem="KW8-RJ-Xcr" secondAttribute="trailing" id="WTQ-iV-Yff"/>
-                <constraint firstItem="3pe-Gx-SI0" firstAttribute="top" secondItem="q8D-6L-23x" secondAttribute="bottom" constant="80" id="a8r-vn-wpK"/>
                 <constraint firstItem="pLX-WH-hJI" firstAttribute="top" secondItem="q8D-6L-23x" secondAttribute="bottom" id="aPj-tB-jBV"/>
                 <constraint firstItem="KW8-RJ-Xcr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eeb-AY-ycD"/>
                 <constraint firstItem="pLX-WH-hJI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gGd-2h-U56"/>
+                <constraint firstItem="3pe-Gx-SI0" firstAttribute="top" secondItem="pLX-WH-hJI" secondAttribute="bottom" constant="10" id="gZs-go-tK3"/>
                 <constraint firstItem="Hay-hO-DfN" firstAttribute="top" secondItem="KW8-RJ-Xcr" secondAttribute="bottom" id="glQ-Pi-Ckc"/>
                 <constraint firstItem="pLX-WH-hJI" firstAttribute="top" secondItem="Hay-hO-DfN" secondAttribute="bottom" id="lb6-gE-W3c"/>
                 <constraint firstAttribute="trailing" secondItem="pLX-WH-hJI" secondAttribute="trailing" id="nE3-jI-6vK"/>

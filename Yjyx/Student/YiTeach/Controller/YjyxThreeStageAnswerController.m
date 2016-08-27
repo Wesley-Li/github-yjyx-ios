@@ -42,7 +42,10 @@ static NSString *ID = @"CELL";
     // 注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHeight:) name:@"WEBVIEW_HEIGHT2" object:nil];
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = NO;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -132,7 +135,10 @@ static NSString *ID = @"CELL";
         
         UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
+            if(self.entity == nil){
+                [self.view makeToast:@"您的网络缓慢,请稍候尝试" duration:1.0 position:SHOW_CENTER complete:nil];
+                return;
+            }
             // 跳转至会员页面
             YjyxMemberDetailViewController *vc = [[YjyxMemberDetailViewController alloc] init];
             vc.productEntity = self.entity;

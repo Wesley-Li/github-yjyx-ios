@@ -41,7 +41,7 @@
     }else{
         self.workImageView.image = [UIImage imageNamed:@"视频"];
     }
-    self.workDescLabel.text = todayWorkModel.task_description;
+    self.workDescLabel.text = todayWorkModel.resourcename;
     NSString *str = todayWorkModel.task_delivertime;
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
     fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss";
@@ -86,7 +86,7 @@
     }else{
         self.workImageView.image = [UIImage imageNamed:@"视频"];
     }
-    self.workDescLabel.text = OneSubjectModel.task_description;
+    self.workDescLabel.text = OneSubjectModel.resourcename;
     self.releaseTimeLabel.text = [NSString stringWithFormat:@"%@", OneSubjectModel.task_delivertime];
     
     NSString *str = OneSubjectModel.task_delivertime;

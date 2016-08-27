@@ -95,9 +95,9 @@
                 
                 // 赋值总数据信息
                 self.finishTaskNumLabel.text = [NSString stringWithFormat:@"%@", model.tasks_num];
-                self.finishQuestionNumLabel.text = [NSString stringWithFormat:@"%@", model.questiontotal];
-                self.correctQuestionNumLabel.text = [NSString stringWithFormat:@"%@", model.questioncorrect];
-                self.wrongQuestionNumLabel.text = [NSString stringWithFormat:@"%@", model.questionwrong];
+                self.finishQuestionNumLabel.text = [NSString stringWithFormat:@"%@", model.questiontotal == nil ? @0 : model.questiontotal];
+                self.correctQuestionNumLabel.text = [NSString stringWithFormat:@"%@", model.questioncorrect == nil ? @0 : model.questioncorrect];
+                self.wrongQuestionNumLabel.text = [NSString stringWithFormat:@"%@", model.questionwrong == nil ? @0 : model.questionwrong];
                 
                 // 赋值折线图信息
                 [self getPNLineChartDataWithSubjectid:model.subjectid];

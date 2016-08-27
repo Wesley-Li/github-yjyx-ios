@@ -59,7 +59,15 @@
     self.blankfillExpandDic = [NSMutableDictionary dictionary];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    self.navigationController.navigationBarHidden = NO;
+    self.index = 0;
+    self.count = 20;
+    if ([[self.targetlist JSONValue] count] - self.index < 20) {
+        self.count = [[self.targetlist JSONValue] count] - self.index;
+    }
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.index, self.count)];
+    self.tempArr = [[self.targetlist JSONValue] objectsAtIndexes:indexSet];
+    [self getDataFromNet];
     
     // 注册加载完成高度的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTableviewCellHeight:) name:@"WEBVIEW_HEIGHT" object:nil];
@@ -100,22 +108,12 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = NO;
-    self.index = 0;
-    self.count = 20;
-    if ([[self.targetlist JSONValue] count] - self.index < 20) {
-        self.count = [[self.targetlist JSONValue] count] - self.index;
-    }
-    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.index, self.count)];
-    self.tempArr = [[self.targetlist JSONValue] objectsAtIndexes:indexSet];
+   
 
     if(_openMember == 1){
         
         [self getDataFromNet];
         
-    }else {
-    
-        [self getDataFromNet];
     }
     
     
@@ -145,6 +143,7 @@
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:@"getonesubjectfailedquestion", @"action", self.subjectid, @"subjectid", [self.tempArr JSONString], @"targetlist", nil];
 
     NSLog(@"%@", param);
+    [self.dataSource removeAllObjects];
     [manager GET:[BaseURL stringByAppendingString:STUDENT_GET_WRONG_LIST_GET] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
         if ([responseObject[@"retcode"] isEqual:@0]) {
@@ -276,7 +275,10 @@
         
         UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
+            if(self.entity == nil){
+                [self.view makeToast:@"您的网络缓慢,请稍候尝试" duration:1.0 position:SHOW_CENTER complete:nil];
+                return;
+            }
             // 跳转至会员页面
             YjyxMemberDetailViewController *vc = [[YjyxMemberDetailViewController alloc] init];
             vc.productEntity = self.entity;

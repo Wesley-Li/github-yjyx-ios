@@ -897,11 +897,8 @@
 #pragma mark -event
 -(void)playvideo
 {
-//    NSString *videoUrl = [[[lessDic objectForKey:@"videoobjlist"] JSONValue][(sender.view.tag - 2)/ 2] objectForKey:@"url"];
-//    NSLog(@"%@, %ld", self.view.subviews, sender.view.tag);
-////    wmPlayer = self.view.subviews[sender.view.tag - 2];
-//    wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:videoUrl];
-//    [self.view.subviews[sender.view.tag -1] removeFromSuperview];
+    
+    
     [videoImage removeFromSuperview];
     videoImage = nil;
     [wmPlayer.player play];

@@ -43,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 
 @property (strong, nonatomic) NSMutableArray *wrongArr; //  错题榜数据
+@property (strong, nonatomic) AFHTTPSessionManager *mgr;
 @end
 
 @implementation YjyxHomeWorkController
@@ -81,7 +82,7 @@ static NSString *HomeADID = @"HomeADID";
     self.view.backgroundColor = COMMONCOLOR;
     [self setupCollectionView];
     [self addSubviews];
-    [self workData];
+//    [self workData];
     [self loadAdData];
   
     [self wrongWorkData];
@@ -110,7 +111,7 @@ static NSString *HomeADID = @"HomeADID";
 - (void)viewWillAppear:(BOOL)animated
 {
     // 自动刷新
-    [self.workTableV headerBeginRefreshing];
+    [self workData];
     self.navigationController.navigationBarHidden = NO;
     NSLog(@"will%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
     if(self.homeAdArray.count != 1 && self.homeAdArray.count != 0){
@@ -128,8 +129,14 @@ static NSString *HomeADID = @"HomeADID";
     NSLog(@"did%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
     
 }
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.mgr.tasks makeObjectsPerformSelector:@selector(cancel)];
+    [self.workTableV headerEndRefreshing];
+}
 - (void)viewDidDisappear:(BOOL)animated
 {
+    
     [self.timer invalidate];
     self.timer = nil;
 }
@@ -150,6 +157,7 @@ static NSString *HomeADID = @"HomeADID";
 - (void)loadAdData
 {
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    self.mgr = mgr;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"action"] = @"get_my_notice";
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/yj_notice/" ] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
@@ -256,7 +264,7 @@ static NSString *HomeADID = @"HomeADID";
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"action"] = @"m_gettaskhomepagedata";
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/tasks/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-//        NSLog(@"%@", responseObject);
+        NSLog(@"%@", responseObject);
 //        NSLog(@"%@", responseObject[@"retlist"][0][@"name"]);
         if([responseObject[@"retcode"] isEqual:@0]){
         NSMutableArray *tempArr = [NSMutableArray array];
