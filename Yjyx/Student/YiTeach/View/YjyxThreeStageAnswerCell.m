@@ -59,7 +59,7 @@ static CGFloat btnWH = 24;
             btn.centerY = 30;
         }else{
             btn.x = margin + beginX * (i / 6) + (i % 6) * (margin + btnWH);
-            btn.centerY = i / 6  * (30 + 30) + 30;
+            btn.centerY = i / 6  * (30 ) + 30;
         }
         [btn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateSelected];
@@ -95,7 +95,7 @@ static CGFloat btnWH = 24;
     [self.webView loadHTMLString:jsString baseURL:nil];
     
     if ([model.choicecount integerValue] > 6) {
-        self.bottomConst.constant = 120;
+        self.bottomConst.constant = 90;
     }else{
         self.bottomConst.constant = 60;
     }
@@ -145,7 +145,7 @@ static CGFloat btnWH = 24;
     //    webView.frame = frame;
     CGFloat bottomHeight = 60;
     if([_model.choicecount integerValue] > 6){
-        bottomHeight = 120;
+        bottomHeight = 90;
     }
    
     self.height = frame.size.height + bottomHeight + 60;

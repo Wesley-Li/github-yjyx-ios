@@ -281,7 +281,7 @@
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 
                 // 退出时关闭定时器,并清除用户名密码等信息
-                NSArray *array = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BaseURL,TEACHER_LOGIN_CONECT_POST]]];
+                NSArray *array = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BaseURL,STUDENT_LOGIN_CONNET_POST]]];
                 for (NSHTTPCookie *cookie in array)
                 {
                     [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];

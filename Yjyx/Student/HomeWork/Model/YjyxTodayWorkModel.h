@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSString *task_delivertime; // 发布时间
 @property (strong, nonatomic) NSNumber *task_subjectid; // 本次作业ID
 @property (strong, nonatomic) NSNumber *task_id;
+@property (strong, nonatomic) NSString *resourcename; // 资源名
 @property (strong, nonatomic) NSNumber *task_relatedresourceid; // 本任务的资源id
 @property (strong, nonatomic) NSDictionary *summary; // 总的错误与正确率
 @property (strong, nonatomic) NSNumber *finished; // 是否完成

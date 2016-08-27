@@ -434,11 +434,12 @@
     
 }
 
-#pragma QuestionPreviewCellDelegate代理方法
+#pragma mark - QuestionPreviewCellDelegate代理方法
 - (void)questionPreviewCell:(QuestionPreviewCell *)cell isRequireProBtnClicked:(UIButton *)btn
 {
     if(btn.selected == NO){
-        self.reuqireBtn.selected = NO;
+        self.allRequireBtn.selected = NO;
+        self.allRequireBtn.backgroundColor = [UIColor whiteColor];
     }
 }
 

@@ -279,14 +279,22 @@ static NSString *videoNumID = @"VIDEONumID";
         NSMutableArray *tempArr1 = [NSMutableArray array];
         NSMutableArray *tempArr2 = [NSMutableArray array];
         for (NSArray *arr in responseObject[@"data"][@"result"][@"choice"]) {
-            YjyxStuAnswerModel *model = [YjyxStuAnswerModel stuAnswerModelWithArr:arr];
-            model.subject_type = @1;
-            [tempArr1 addObject:model];
+            if ([[responseObject[@"data"][@"choices"] allKeys] containsObject:[arr[0] stringValue]]) {
+                YjyxStuAnswerModel *model = [YjyxStuAnswerModel stuAnswerModelWithArr:arr];
+                model.subject_type = @1;
+                [tempArr1 addObject:model];
+            }
+        
         }
         for (NSArray *arr in responseObject[@"data"][@"result"][@"blankfill"]) {
+            if ([[responseObject[@"data"][@"blankfills"] allKeys] containsObject:[arr[0] stringValue]]){
             YjyxStuAnswerModel *model = [YjyxStuAnswerModel stuAnswerModelWithArr:arr];
             model.subject_type = @2;
             [tempArr2 addObject:model];
+            }
+        }
+        if (tempArr1.count + tempArr2.count == 0) {
+            [self.view makeToast:@"题目已被老师移除" duration:2.0 position:SHOW_CENTER complete:nil];
         }
         self.stuChoiceAnswerArr = tempArr1;
         self.stuBlankAnswerArr = tempArr2;
@@ -663,7 +671,7 @@ static NSString *videoNumID = @"VIDEONumID";
     
     if (videoUrl.length == 0 &&explantionStr.length == 0) {
         [self getMemberInfo];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"查看解题方法需要会员权限，是否前往试用或成为会员" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"查看解题方法需要会员权限，是否前往试用或成为会员?" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
         [alertView show];
     }else{
         ChildrenVideoViewController *vc = [[ChildrenVideoViewController alloc] init];
@@ -679,6 +687,10 @@ static NSString *videoNumID = @"VIDEONumID";
 {
     NSLog(@"%ld", buttonIndex);
     if(buttonIndex == 1){
+        if(self.entity == nil){
+            [self.view makeToast:@"您的网络缓慢,请稍候尝试" duration:1.0 position:SHOW_CENTER complete:nil];
+            return;
+        }
         // 跳转至会员页面
         YjyxMemberDetailViewController *vc = [[YjyxMemberDetailViewController alloc] init];
         vc.productEntity = self.entity;

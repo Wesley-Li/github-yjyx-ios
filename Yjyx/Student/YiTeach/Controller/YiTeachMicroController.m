@@ -12,6 +12,7 @@
 #import "ProductEntity.h"
 #import "YjyxThreeStageController.h"
 
+
 @interface YiTeachMicroController ()
 
 {
@@ -138,9 +139,16 @@
 {
     
     [self closeTheVideo:nil];
-    [self releaseWMPlayer];
+    
 }
-
+- (BOOL)prefersStatusBarHidden
+{
+    if(wmPlayer.isFullscreen == YES){
+        return YES;
+    }else{
+        return NO;
+    }
+}
 #pragma mark - videoEvent
 -(void)videoDidFinished:(NSNotification *)notice{
     
@@ -160,14 +168,17 @@
     
     wmPlayer.closeBtn.hidden = YES;
     [wmPlayer.player pause];
-    [wmPlayer removeFromSuperview];
-    [videoImage removeFromSuperview];
+    [self releaseWMPlayer];
+//    [wmPlayer removeFromSuperview];
+////    wmPlayer = nil;
+//    [videoImage removeFromSuperview];
+   
     [self configureWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
 -(void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation{
-    [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
+   ;
     [wmPlayer removeFromSuperview];
     wmPlayer.transform = CGAffineTransformIdentity;
     if (interfaceOrientation==UIInterfaceOrientationLandscapeLeft) {
@@ -200,7 +211,8 @@
 }
 -(void)toNormal{
     [wmPlayer removeFromSuperview];
-    
+    wmPlayer.isFullscreen = NO;
+    [self setNeedsStatusBarAppearanceUpdate];
     [UIView animateWithDuration:0.5f animations:^{
         wmPlayer.transform = CGAffineTransformIdentity;
         wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
@@ -229,6 +241,7 @@
     if (fullScreenBtn.isSelected) {//全屏显示
         [self toFullScreenWithInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
     }else{
+        wmPlayer.isFullscreen = NO;
         [self toNormal];
     }
 }
@@ -281,17 +294,58 @@
 - (void)readDataFromNetwork {
 
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"m_getbootunit_lesson", @"action", self.version_id, @"textbookverid", self.subject_id, @"subjectid", self.classes_id, @"gradeid", self.book_id, @"textbookvolid", self.textbookunitid, @"textbookunitid", nil];
+    UIView *convertView = [[UIView alloc] init];
+    [self.view addSubview:convertView];
+    convertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+    convertView.backgroundColor = [UIColor lightGrayColor];
+    convertView.alpha = 0.1;
+    [convertView makeToastActivity:SHOW_CENTER];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:[BaseURL stringByAppendingString:@"/api/student/product_yjmemeber/"] parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        
+        [convertView removeFromSuperview];
+        [convertView hideToastActivity];
         NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] isEqual:@0]) {
+
             
             if ([responseObject[@"showview"] isEqual:@0]) {
                 [self.view makeToast:@"暂无亿教课程" duration:1.0 position:SHOW_CENTER complete:^{
                     [self.navigationController popViewControllerAnimated:YES];
                 }];
             }else {
+
+            self.responseObject = responseObject;
+            self.microName = responseObject[@"name"];
+            self.knowledgedesc = responseObject[@"knowledgedesc"];
+            self.microNameLabel.text = _microName;
+            NSArray *array = [responseObject[@"quizcontent"] JSONValue][@"questionList"][0][1];
+            NSLog(@"-------%@", array);
+            // id列表
+            for (NSDictionary *dic in array) {
+                if ([dic[@"level"] isEqual:@1]) {
+                    [self.baseQuestionIDList addObject:dic[@"id"]];
+                }else if ([dic[@"level"] isEqual:@2]) {
+                    [self.consolidateIDList addObject:dic[@"id"]];
+                }else {
+                    
+                    [self.improveIDList addObject:dic[@"id"]];
+                }
+            }
+            if([responseObject[@"showview"] integerValue] == 1 && ![[responseObject allKeys] containsObject:@"videoobjlist"]){
+                [self configureWMPlayer];
+                self.scroHeightConstraint.constant = 1;
+                
+            }
+            if([responseObject[@"showview"] integerValue] == 0){
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            if ([[responseObject allKeys] containsObject:@"videoobjlist"]) {
+                self.microArr = [responseObject[@"videoobjlist"] JSONValue];
+                self.videoURL = _microArr[0][@"url"];
+                [self configureWMPlayer];
+                [self configureTheNumBtn:_microArr];
+            }
+
             
                 self.responseObject = responseObject;
                 self.microName = responseObject[@"name"];
@@ -329,6 +383,8 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.view makeToast:@"网络出错了" duration:1 position:SHOW_CENTER complete:nil];
+        [convertView hideToastActivity];
+        [convertView removeFromSuperview];
     }];
 }
 
@@ -338,7 +394,8 @@
     
     if (self.videoURL != nil || self.videoURL.length != 0) {
         playerFrame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
-                wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.videoURL];
+        wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.videoURL];
+        NSLog(@"%@", wmPlayer);
         [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(wmPlayer).with.offset(-10);
             make.height.mas_equalTo(30);
@@ -359,8 +416,19 @@
         [videoImage addGestureRecognizer:tap];
         [self.view addSubview:videoImage];
         
+    }else{
+        videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
+        videoImage.image = [UIImage imageNamed:@"Common_video.png"];
+        
+        videoImage.layer.masksToBounds = YES;
+        videoImage.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
+        [videoImage addGestureRecognizer:tap];
+        [self.view addSubview:videoImage];
+        
+
     }
-    
+
     
 }
 
@@ -396,7 +464,7 @@
         }
         self.topConstraint.constant = 80;
         self.scroHeightConstraint.constant = tHeight + 10;
-        self.numBtnBgView.contentSize = CGSizeMake(size.width + padding, self.numBtnBgView.height);
+        self.numBtnBgView.contentSize = CGSizeMake(size.width + padding, self.numBtnBgView.height - 10);
         
     }else {
     
@@ -433,18 +501,21 @@
         
         return;
     }
-    [wmPlayer removeFromSuperview];
-    [wmPlayer.playerLayer removeFromSuperlayer];
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//    [wmPlayer removeFromSuperview];
+//    [wmPlayer.playerLayer removeFromSuperlayer];
+//    wmPlayer = nil;
+    NSLog(@"%@, %@", wmPlayer, [NSThread currentThread]);
+    
+    
         [wmPlayer.player.currentItem cancelPendingSeeks];
         [wmPlayer.player.currentItem.asset cancelLoading];
         [wmPlayer.player pause];
         
         //移除观察者
         [wmPlayer.currentItem removeObserver:wmPlayer forKeyPath:@"status"];
-        
-        //    [wmPlayer removeFromSuperview];
-        //    [wmPlayer.playerLayer removeFromSuperlayer];
+    
+        [wmPlayer removeFromSuperview];
+        [wmPlayer.playerLayer removeFromSuperlayer];
         [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
         wmPlayer.player = nil;
         wmPlayer.currentItem = nil;
@@ -455,11 +526,10 @@
         [wmPlayer.durationTimer invalidate];
         wmPlayer.durationTimer = nil;
         
-        
         wmPlayer.playOrPauseBtn = nil;
         wmPlayer.playerLayer = nil;
         wmPlayer = nil;
-    });
+//    });
     
 }
 
@@ -512,7 +582,10 @@
         UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"观看该视频需要会员权限,是否前往试用或成为会员" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
+            if(self.entity == nil){
+                [self.view makeToast:@"您的网络缓慢,请稍候尝试" duration:1.0 position:SHOW_CENTER complete:nil];
+                return;
+            }
             // 跳转至会员页面
             YjyxMemberDetailViewController *vc = [[YjyxMemberDetailViewController alloc] init];
             vc.productEntity = self.entity;
@@ -561,8 +634,9 @@
 
 
 -(void)dealloc{
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self releaseWMPlayer];
+    
     NSLog(@"player deallco");
 }
 
