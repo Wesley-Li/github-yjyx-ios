@@ -337,35 +337,6 @@ static NSString *ID = @"CELL";
 
         }
     }
-    /*
-    NSMutableArray *choiceArr = [NSMutableArray array];
-    for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"1" andJumpType:@"1"]) {
-        if ([model isKindOfClass:[ChaperContentItem class]]) {
-            ChaperContentItem *tempModel = (ChaperContentItem *)model;
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level",  tempModel.isRequireProcess == YES ? @1 : @0, @"requireprocess", nil];
-            [choiceArr addObject:dic];
-        }else{
-            YjyxWrongSubModel *tempModel = (YjyxWrongSubModel *)model;
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.questionid], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", tempModel.isRequireProcess == YES ? @1 : @0, @"requireprocess",nil];
-            [choiceArr addObject:dic];
-        }
-       
-    }
-    
-    
-    NSMutableArray *blankfillArr = [NSMutableArray array];
-    for (id model in [[QuestionDataBase shareDataBase] selectQuestionByQuestionType:@"2" andJumpType:@"1"]) {
-        if ([model isKindOfClass:[ChaperContentItem class]]) {
-            ChaperContentItem *tempModel = (ChaperContentItem *)model;
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.t_id], @"id", [NSNumber numberWithInteger: tempModel.level], @"level", tempModel.isRequireProcess == YES ? @1 : @0 ,@"requireprocess",nil];
-            [blankfillArr addObject:dic];
-        }else{
-            YjyxWrongSubModel *tempModel = (YjyxWrongSubModel *)model;
-            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger: tempModel.questionid], @"id", [NSNumber numberWithInteger: tempModel.level], @"level",tempModel.isRequireProcess == YES ? @1 : @0 ,@"requireprocess",nil];
-            [blankfillArr addObject:dic];
-        }
-    }
-    */
     // 没有对应的类型就不传
     if (choiceArr.count == 0 && blankfillArr.count != 0) {
         NSMutableArray *arr = [NSMutableArray arrayWithObjects:@"blankfill", blankfillArr, nil];
@@ -419,16 +390,18 @@ static NSString *ID = @"CELL";
     [mgr POST:[BaseURL stringByAppendingString:TEACHER_RELEASE_CONNECT_POST] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         NSLog(@"%@", responseObject[@"msg"] );
         if([responseObject[@"retcode"] isEqual:@0]){
-            [SVProgressHUD showWithStatus:@"发布成功"];
-            
+            [SVProgressHUD showSuccessWithStatus:@"发布成功"];
             [[QuestionDataBase shareDataBase] deleteQuestionTable];
+            [SVProgressHUD dismissWithDelay:1];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                // 跳转到学生作业列表
+                StuTaskTableViewController *stuTaskVC = [[StuTaskTableViewController alloc] init];
+                [self.navigationController pushViewController:stuTaskVC animated:YES];
+            });
             
-            // 跳转到学生作业列表
-            StuTaskTableViewController *stuTaskVC = [[StuTaskTableViewController alloc] init];
-            [self.navigationController pushViewController:stuTaskVC animated:YES];
             
         }else{
-            [SVProgressHUD showWithStatus:@"发布失败"];
+            [SVProgressHUD showErrorWithStatus:@"发布失败"];
         }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
@@ -436,7 +409,7 @@ static NSString *ID = @"CELL";
         [coverView removeFromSuperview];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [SVProgressHUD showWithStatus:@"发布失败"];
+        [SVProgressHUD showErrorWithStatus:@"发布失败"];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
         });

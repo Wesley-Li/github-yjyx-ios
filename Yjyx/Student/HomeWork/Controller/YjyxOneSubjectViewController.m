@@ -89,7 +89,9 @@ static NSString *ID = @"CELL";
         YjyxTodayWorkModel *model = self.allWorkArray[_selIndexPath.row];
         model.finished = @1;
         _jumpType = 0;
+        [self loadData];
         [self.tableView reloadRowsAtIndexPaths:@[_selIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+        
     }
     
 }

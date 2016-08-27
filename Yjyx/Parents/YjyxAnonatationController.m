@@ -144,7 +144,10 @@
 
 #pragma mark - 联动
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-
+    if (self.player) {
+        [_player pause];
+        _player = nil;
+    }
     int page = scrollView.contentOffset.x / SCREEN_WIDTH;
     self.pageControll.currentPage = page;
     self.navigationItem.title = [NSString stringWithFormat:@"%d/%ld", page + 1, num];
@@ -154,10 +157,13 @@
 }
 
 - (void)changePage:(id)sender {
-
+    if (self.player) {
+        [_player pause];
+        _player = nil;
+    }
     int page = _pageControll.currentPage;
     self.scrollview.contentOffset = CGPointMake(SCREEN_WIDTH * page, 0);
-    self.navigationItem.title = [NSString stringWithFormat:@"%d/%ld", page, num];
+    self.navigationItem.title = [NSString stringWithFormat:@"%d/%ld", page + 1, num];
     self.voiceArr = [[self.processArr[page] objectForKey:@"teachervoice"] mutableCopy];
     [_voiceList reloadData];
 }

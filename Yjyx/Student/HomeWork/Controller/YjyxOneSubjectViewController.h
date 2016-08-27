@@ -13,9 +13,9 @@
 @property (strong, nonatomic) NSString *navTitle;
 @property (strong, nonatomic) NSNumber *subjectid;
 
-@property (assign, nonatomic) NSInteger isFinished; // 1代表昨晚作业回来
+@property (assign, nonatomic) NSInteger isFinished; // 1代表做完作业回来
 
-@property (assign, nonatomic) NSInteger jumpType; // 1代表昨晚作业
+@property (assign, nonatomic) NSInteger jumpType; // 1代表做完作业
 
 
 @end
