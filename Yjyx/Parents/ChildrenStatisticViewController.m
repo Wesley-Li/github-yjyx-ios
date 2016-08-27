@@ -17,9 +17,19 @@
 
 }
 
+@property (nonatomic, strong) NSArray *reverseArr;
+
 @end
 
 @implementation ChildrenStatisticViewController
+
+- (NSArray *)reverseArr {
+
+    if (!_reverseArr) {
+        self.reverseArr = [NSArray array];
+    }
+    return _reverseArr;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -157,13 +167,14 @@
 -(void)getChildrenAchievement:(NSString *)cid
 {
     [self.view makeToastActivity:SHOW_CENTER];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"question",@"action",cid,@"cid",@"20",@"count",nil];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"question",@"action",cid,@"cid",nil];
     [[YjxService sharedInstance] getChildrenachievement:dic withBlock:^(id result, NSError *error){
         [self.view hideToastActivity];
         if (result) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 achievementAry = [result objectForKey:@"data"];
-                NSLog(@"%@", achievementAry);
+//                achievementAry = [[achievementAry reverseObjectEnumerator] allObjects];
+                NSLog(@"-----%@", achievementAry);
                 if ([achievementAry count] == 0) {
                     [self.view makeToast:@"该小孩暂无相关数据" duration:1.0 position:SHOW_CENTER complete:nil];
                 }
@@ -216,11 +227,11 @@
                         lineIndex:(NSInteger)lineIndex
                        pointIndex:(NSInteger)pointIndex
 {
-    NSString *questioncorrect = [[[linechartDic objectForKey:@"items"] objectAtIndex:pointIndex] objectForKey:@"correct"];
-    NSString *questionwrong = [[[linechartDic objectForKey:@"items"] objectAtIndex:pointIndex] objectForKey:@"wrong"];
-    NSString *dataStr = [[[linechartDic objectForKey:@"items"] objectAtIndex:pointIndex] objectForKey:@"date"];
+    NSString *questioncorrect = [[_reverseArr objectAtIndex:pointIndex] objectForKey:@"correct"];
+    NSString *questionwrong = [[_reverseArr objectAtIndex:pointIndex] objectForKey:@"wrong"];
+    NSString *dataStr = [[_reverseArr objectAtIndex:pointIndex] objectForKey:@"date"];
     label1.text = [NSString stringWithFormat:@"正确%@,错误%@",questioncorrect,questionwrong];
-    label2.text = [NSString stringWithFormat:@"正确率%.0f%%",[[[[linechartDic objectForKey:@"items"] objectAtIndex:pointIndex] objectForKey:@"ratio"] floatValue]* 100];
+    label2.text = [NSString stringWithFormat:@"正确率%.0f%%",[[[_reverseArr objectAtIndex:pointIndex] objectForKey:@"ratio"] floatValue]* 100];
     label3.text = [NSString stringWithFormat:@"%@",dataStr];
 
 }
@@ -228,18 +239,18 @@
 //饼状图代理
 -(void)userClickedOnPieIndexItem:(NSInteger)pieIndex
 {
-    
-    if (type == 1) {
+        if (type == 1) {;
         label1.text = @"";
         label2.text = @"";
         label3.text = @"";
         linechartDic = [achievementAry objectAtIndex:pieIndex];
+        _reverseArr = [[[linechartDic objectForKey:@"items"] reverseObjectEnumerator] allObjects];
         NSString *questioncorrect = [[linechartDic objectForKey:@"total"] objectForKey:@"questioncorrect"];
         NSString *questionwrong = [[linechartDic objectForKey:@"total"] objectForKey:@"questionwrong"];
         subjectLb.text = [linechartDic objectForKey:@"course"];
         detailLb.text = [NSString stringWithFormat:@"正确%@,错误%@",questioncorrect,questionwrong];
         NSInteger num;
-        num = ceil([[linechartDic objectForKey:@"items"] count] / 30.0);
+        num = ceil([_reverseArr count] / 30.0);
         [lineScroll removeFromSuperview];
         lineScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 300, SCREEN_WIDTH, SCREEN_HEIGHT-94-320)];
         lineScroll.contentSize = CGSizeMake(SCREEN_WIDTH * num, lineScroll.frame.size.height);
@@ -259,8 +270,8 @@
         [pieLineChart setYLabels:@[@"0",@"20%",@"40%",@"60%",@"80%",@"100%"]];
         pieLineChart.delegate = self;
         NSMutableArray *valueAry = [[NSMutableArray alloc] init];
-        for (int i = 0; i < [[linechartDic objectForKey:@"items"] count]; i++) {
-            float value = [[[[linechartDic objectForKey:@"items"] objectAtIndex:i] objectForKey:@"ratio"] floatValue]*100;
+        for (int i = 0; i < [_reverseArr count]; i++) {
+            float value = [[[_reverseArr objectAtIndex:i] objectForKey:@"ratio"] floatValue]*100;
             [valueAry addObject:[NSNumber numberWithFloat:value]];
         }
         

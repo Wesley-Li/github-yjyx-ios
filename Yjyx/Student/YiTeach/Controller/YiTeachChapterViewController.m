@@ -69,23 +69,37 @@
             
             self.root_id = responseObject[@"id"];
             
-            for (NSDictionary *dic in responseObject[@"content"]) {
-                GradeContentItem *item = [GradeContentItem gradeContentItem:dic];
-                [self.chapterArr addObject:item];
+            if ([responseObject[@"content"] count] == 0) {
                 
-                TreeNode *node = [TreeNode treeNodeWithDictionary:item];
-                [self.dataSource addObject:node];
+                UIImage *image = [UIImage imageNamed:@"isbuilding"];
+                UIImageView *imageV = [[UIImageView alloc] initWithImage:image];
+                imageV.width = SCREEN_WIDTH - 80;
+                imageV.height = image.size.height *imageV.width/image.size.width;
+                imageV.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+                
+                [self.view addSubview:imageV];
+
+                
+            }else {
+            
+                for (NSDictionary *dic in responseObject[@"content"]) {
+                    GradeContentItem *item = [GradeContentItem gradeContentItem:dic];
+                    [self.chapterArr addObject:item];
+                    
+                    TreeNode *node = [TreeNode treeNodeWithDictionary:item];
+                    [self.dataSource addObject:node];
+                }
+                
+                
+                self.automaticallyAdjustsScrollViewInsets = NO;
+                TreeTableView *tableview = [[TreeTableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH , SCREEN_HEIGHT - 64) withData:self.dataSource];
+                tableview.treeTableCellDelegate = self;
+                tableview.chapterArray = self.chapterArr;
+                tableview.bounces = NO;
+                [self.view addSubview:tableview];
+                
+                [SVProgressHUD dismissWithDelay:0.1];
             }
-            
-            
-            self.automaticallyAdjustsScrollViewInsets = NO;
-            TreeTableView *tableview = [[TreeTableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH , SCREEN_HEIGHT - 64) withData:self.dataSource];
-            tableview.treeTableCellDelegate = self;
-            tableview.chapterArray = self.chapterArr;
-            tableview.bounces = NO;
-            [self.view addSubview:tableview];
-            
-            [SVProgressHUD dismissWithDelay:0.1];
             
         }else {
             

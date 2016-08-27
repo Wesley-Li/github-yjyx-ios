@@ -134,6 +134,8 @@ static NSString *videoNumID = @"VIDEONumID";
     }else{
         self.navigationController.navigationBarHidden = YES;
     }
+    
+    
 }
 - (void)viewWillDisappear:(BOOL)animated
 {

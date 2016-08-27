@@ -71,7 +71,7 @@
         todayWorkModel.height = [self.releaseTimeLabel.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height + 55;
         
         [self.progressBtn setTitle:@"做作业" forState:UIControlStateNormal];
-        self.progressBtn.backgroundColor = RGBACOLOR(10.0, 96.0, 254.0, 1);
+        self.progressBtn.backgroundColor = [UIColor colorWithHexString:@"#d8261d"];
     }
 }
 
