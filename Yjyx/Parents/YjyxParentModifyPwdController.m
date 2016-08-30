@@ -86,21 +86,25 @@
         [mgr PUT:[BaseURL stringByAppendingString:appendUrl] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
             [view removeFromSuperview];
             if ([responseObject[@"retcode"] integerValue] == 0) {
-                [SVProgressHUD showSuccessWithStatus:@"修改成功"];
-                NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
-                 NSString *desPassWord = [_newlyPwdField.text des3:kCCEncrypt withPass:@"12345678asdf"];
-                NSDictionary *newDict = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", dic[@"username"],@"username",desPassWord,@"password", nil];
-                [SYS_CACHE setObject:newDict forKey:@"AutoLogoin"];
-                [SYS_CACHE synchronize];
-                 if([self.roleType integerValue] == 1){
-                     // 退出时关闭定时器,并清除用户名密码等信息
-                     NSArray *array = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BaseURL,TEACHER_LOGIN_CONECT_POST]]];
-                     for (NSHTTPCookie *cookie in array)
-                     {
-                         [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
-                     }
-                    [YjyxOverallData sharedInstance].teacherInfo = nil;
-                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+                [self.view makeToast:@"修改成功" duration:1.5 position:SHOW_CENTER complete:nil];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    
+               
+                    NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
+                     NSString *desPassWord = [_newlyPwdField.text des3:kCCEncrypt withPass:@"12345678asdf"];
+                    NSDictionary *newDict = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", dic[@"username"],@"username",desPassWord,@"password", nil];
+                    [SYS_CACHE setObject:newDict forKey:@"AutoLogoin"];
+                    [SYS_CACHE synchronize];
+                     if([self.roleType integerValue] == 1){
+                         // 退出时关闭定时器,并清除用户名密码等信息
+                         NSArray *array = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BaseURL,TEACHER_LOGIN_CONECT_POST]]];
+                         for (NSHTTPCookie *cookie in array)
+                         {
+                             [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+                         }
+                        [YjyxOverallData sharedInstance].teacherInfo = nil;
+                        [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+                     
                  }else if ([self.roleType integerValue] == 2){
                      // 退出时关闭定时器,并清除用户名密码等信息
                      NSArray *array = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BaseURL,STUDENT_LOGIN_CONNET_POST]]];
@@ -125,10 +129,12 @@
                 AppDelegate *mydelegate = (AppDelegate*)SYS_DELEGATE;
                 nav.navigationBarHidden = YES;
                 [mydelegate.window setRootViewController:nav];
-
+ });
             }else{
+                
                 [self.view makeToast:responseObject[@"reason"] duration:0.5 position:SHOW_TOP complete:nil];
             }
+        
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [view removeFromSuperview];
              [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_TOP complete:nil];

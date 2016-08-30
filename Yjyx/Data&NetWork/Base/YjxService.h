@@ -22,8 +22,8 @@
 /**
  * QA环境地址
  * **/
-//#define BaseURL @"https://qa.zgyjyx.net"
-//#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
+#define BaseURL @"https://qa.zgyjyx.net"
+#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
 
 
 

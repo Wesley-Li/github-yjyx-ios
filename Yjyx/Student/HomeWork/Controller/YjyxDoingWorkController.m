@@ -26,7 +26,9 @@
 
 #import "YjyxWorkDetailController.h"
 #import "YjyxOneSubjectViewController.h"
-@interface YjyxDoingWorkController ()<UIWebViewDelegate, UIScrollViewDelegate, DoingViewDelegate, WorkResultDelegate, UICollectionViewDataSource, UICollectionViewDelegate, TZImagePickerControllerDelegate>
+
+#import <WebKit/WebKit.h>
+@interface YjyxDoingWorkController ()<UIWebViewDelegate, UIScrollViewDelegate, DoingViewDelegate, WorkResultDelegate, UICollectionViewDataSource, UICollectionViewDelegate, TZImagePickerControllerDelegate, UIWebViewDelegate>
 {
     NSInteger count; // 题目的个数
     NSMutableArray *_selectedPhotos;
@@ -71,6 +73,8 @@
 @property (assign, nonatomic) NSInteger preIndex;
 
 @property (strong, nonatomic) NSDate *oldDate;
+
+@property (weak, nonatomic) UIScrollView *answerScrollV;
 @end
 
 @implementation YjyxDoingWorkController
@@ -189,6 +193,15 @@
  
     
 }
+- (void)viewWillDisappear:(BOOL)animated
+{
+    NSURLCache * cache = [NSURLCache sharedURLCache];
+    [cache removeAllCachedResponses];
+    [cache setDiskCapacity:0];
+    [cache setMemoryCapacity:0];
+    [self.scrollView removeFromSuperview];
+
+}
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -215,7 +228,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    
+   
     [SVProgressHUD dismiss];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
@@ -586,7 +599,7 @@
         webView.scrollView.bounces = NO;
         NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
         [webView loadHTMLString:jsString baseURL:nil];
-        
+
         // 添加答案控件
         YjyxDoingView *answerView = [YjyxDoingView doingView];
         answerView.frame =  CGRectMake(i * SCREEN_WIDTH, self.scrollView.height - 80, SCREEN_WIDTH, 80);
@@ -662,18 +675,28 @@
     if (sender.selected) {
 
         [self countStuAnswer];
-    
-        
+        CGFloat margin = (SCREEN_WIDTH - 45 * 6) / 7;
+        UIScrollView *scrollV = [[UIScrollView alloc] init];
+        scrollV.backgroundColor = RGBACOLOR(0, 0, 0, 0.4);
+        scrollV.bounces = NO;
+        self.answerScrollV = scrollV;
+        scrollV.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        scrollV.contentSize = CGSizeMake(SCREEN_WIDTH,  margin + ((self.answerArr.count - 1) / 6) * (margin + 45) + 205);
+        [self.view addSubview:scrollV];
         YjyxWorkResultView *workResultV = [[YjyxWorkResultView alloc] init];
+        NSLog(@"%@", NSStringFromCGRect(workResultV.frame));
         workResultV.delegate = self;
-        workResultV.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        workResultV.frame = CGRectMake(0, 0, SCREEN_WIDTH, 3*SCREEN_HEIGHT);
+        NSLog(@"%@", NSStringFromCGRect(workResultV.frame));
   
         [workResultV setWorkType:self.doWorkArr andArr:self.answerArr];
-        [self.view addSubview:workResultV];
+       
+        [scrollV addSubview:workResultV];
+       
     }else{
       
         for (UIView *view in self.view.subviews) {
-            if ([view isKindOfClass:[YjyxWorkResultView class]]) {
+            if ([view isEqual:self.answerScrollV]) {
                 [view removeFromSuperview];
                 break;
             }
@@ -1206,6 +1229,11 @@
     [webView stringByEvaluatingJavaScriptFromString:@"imgAutoFit()"];
 //    frame.size.height = webView.scrollView.contentSize.height;
     webView.frame = frame;
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"WebKitCacheModelPreferenceKey"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebKitDiskImageCacheEnabled"];//自己添加的，原文没有提到。
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebKitOfflineWebApplicationCacheEnabled"];//自己添加的，原文没有提到。
+    [[NSUserDefaults standardUserDefaults] synchronize];
+ 
 }
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
@@ -1274,6 +1302,10 @@
 // 点击答题卡空白处
 - (void)workResultView:(YjyxWorkResultView *)view
 {
+    NSLog(@"%@", view.superview);
+    [view.superview  removeFromSuperview];
     self.answerWorkCardBtn.selected = NO;
 }
+
+
 @end

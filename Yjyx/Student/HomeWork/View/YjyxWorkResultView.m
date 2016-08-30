@@ -14,6 +14,8 @@
 @property (weak, nonatomic) UIButton *submitBtn;
 
 @property (weak, nonatomic) UIView *bgView;
+
+//@property (weak, nonatomic) UIScrollView *bgView;
 @end
 @implementation YjyxWorkResultView
 
@@ -24,6 +26,9 @@
       
         
         UIView *bgView = [[UIView alloc] init];
+//        UIScrollView *bgView = [[UIScrollView alloc] init];
+       
+        
         bgView.backgroundColor = [UIColor whiteColor];
         self.bgView = bgView;
         [self addSubview:bgView];
@@ -92,7 +97,9 @@
         }
         [self.bgView addSubview:btn];
     }
-    
+//    if(self.bgView.frame.size.height > SCREEN_HEIGHT - 64){
+//        self.bgView.height = SCREEN_HEIGHT - 64;
+//    }
      self.submitBtn.y = (margin + 45) * ( 1 + (arr.count - 1) / 6) + 65;
 
 }
@@ -111,9 +118,10 @@
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self removeFromSuperview];
+//    [self removeFromSuperview];
     if([self.delegate respondsToSelector:@selector(workResultView:)]){
         [self.delegate workResultView:self];
     }
 }
+
 @end
