@@ -11,7 +11,12 @@
 #import "YjyxExchangeRecordViewController.h"
 #import "YjyxExchangeRecordModel.h"
 #import "YjyxConvertDetailController.h"
-@interface YjyxOneShopDetailController ()
+@interface YjyxOneShopDetailController ()<UIWebViewDelegate>
+
+{
+    NSInteger num;
+}
+
 @property (weak, nonatomic) IBOutlet UILabel *paperNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *requireCoinLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *paperImageView;
@@ -21,7 +26,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *exchangBtn;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 
+@property (weak, nonatomic) IBOutlet UIWebView *detail_webview;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *webviewHeight;
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
+
+
 @property (weak, nonatomic) UILabel *promptLabel;
+
 @end
 
 @implementation YjyxOneShopDetailController
@@ -38,13 +50,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadBackBtn];
-    
+    num = 1;
+    self.edgesForExtendedLayout = UIRectEdgeBottom;
     self.paperNameLabel.text = self.oneShopModel.name;
     self.requireCoinLabel.text = [self.oneShopModel.exchange_coins stringValue];
     NSInteger coinNum = [[YjyxOverallData sharedInstance].teacherInfo.coins integerValue];
     self.exchangBtn.enabled = [self.requireCoinLabel.text integerValue] > coinNum ? NO : YES;
     [self.paperImageView setImageWithURL:[NSURL URLWithString:[self.oneShopModel.goods_display JSONValue][@"small_img_url"]] placeholderImage:[UIImage imageNamed:@"conver_paper"]];
+    if (![[self.oneShopModel.goods_display JSONValue][@"detail_url"] isEqual:[NSNull null]]) {
+        NSURL *url = [NSURL URLWithString:[self.oneShopModel.goods_display JSONValue][@"detail_url"]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        self.detail_webview.scrollView.scrollEnabled = NO;
+        [self.detail_webview loadRequest:request];
+
+    }else {
     
+        self.webviewHeight.constant = SCREEN_HEIGHT - self.detail_webview.frame.origin.y - 64;
+        
+    }
+    //[self.oneShopModel.goods_display JSONValue][@"detail_url"]
     
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -170,6 +194,30 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
     }];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+
+    CGRect frame = webView.frame;
+    frame.size.height = webView.scrollView.contentSize.height;
+    webView.frame = frame;
+    self.webviewHeight.constant = frame.size.height;
+    self.scrollview.contentSize = CGSizeMake(SCREEN_WIDTH, self.webviewHeight.constant + self.detail_webview.frame.origin.y);
+    
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    
+    if (num == 1) {
+        num ++;
+        return YES;
+    }else {
+    
+        NSURL *url = request.URL;
+        [[UIApplication sharedApplication] openURL:url];
+        return NO;
+    }
+    
 }
 
 

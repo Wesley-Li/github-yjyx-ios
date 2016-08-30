@@ -57,6 +57,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    
 //    ((AppDelegate*)SYS_DELEGATE).role = @"parents";
     ((AppDelegate*)SYS_DELEGATE).stuListArr = [NSMutableArray array];
     NSError *setCategoryErr = nil;
@@ -66,9 +67,12 @@
 
     [self initUmeng:launchOptions];
     // Override point for customization after application launch.
-    //是否推送跳转到指定页面标记
+    
+    //点击推送是否跳转到指定页面标记
+    /*
     NSDictionary *remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (remoteNotification != nil) {
+        
         // 家长端
         if ([remoteNotification[@"type"] isEqualToString:@"childactivity"]) {
             if ([remoteNotification[@"finished"] integerValue] == 0 ) {
@@ -87,7 +91,7 @@
         }
         [YjyxOverallData sharedInstance].historyId = remoteNotification[@"id"];
         [YjyxOverallData sharedInstance].previewRid = remoteNotification[@"rid"];
-
+        
         
         // 学生端
         if ([remoteNotification[@"type"] isEqualToString:@"hastentask"]) {// 老师催作业
@@ -102,10 +106,12 @@
             
             
         }
-
-                
+        
+        
+        
     }
-    
+    */
+
     // 自动登录,从本地取值
     NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
     NSLog(@"%@", dic);
@@ -127,6 +133,8 @@
         self.window.rootViewController = _navigation;
         [self.window makeKeyAndVisible];
     }
+ 
+    
 
     return YES;
 }
@@ -144,6 +152,7 @@
         
         autologin = nil;
     }
+    
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
@@ -160,7 +169,9 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler
 {
-    if (application.applicationState == UIApplicationStateActive) {// 程序处于激活状态
+    completionHandler(UIBackgroundFetchResultNewData);
+    
+    if (application.applicationState == UIApplicationStateActive ) {// 程序处于激活状态,
     
         // 家长端
         if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {
@@ -257,31 +268,79 @@
         }
         
         
-    }else{// 程序处于后台
-        if ([userInfo[@"type"] isEqualToString:@"childactivity"]) {
-            if ([userInfo[@"finished"] integerValue] == 0 ) {
+    }else{// 后台,直接跳转
+        
+        // 家长端
+        if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {
+            
+            if ([userInfo[@"type"] isEqualToString:@"childactivity"]) {//
+                if ([userInfo[@"finished"] integerValue] == 0 ) {
+                    if ([userInfo[@"tasktype"] integerValue] ==1) {
+                        [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
+                    }else{
+                        [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
+                    }
+                }else{
+                    if ([userInfo[@"tasktype"] integerValue] ==1) {
+                        [YjyxOverallData sharedInstance].pushType = PUSHTYPE_RESULTHOMEWORK;
+                    }else{
+                        [YjyxOverallData sharedInstance].pushType = PUSHTYPE_RESULTMICRO;
+                    }
+                }
+                [YjyxOverallData sharedInstance].historyId = userInfo[@"id"];
+                [YjyxOverallData sharedInstance].previewRid = userInfo[@"rid"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
+                
+            }else if ([userInfo[@"type"] isEqualToString:@"hastentask"]){
+                
+                if ([userInfo[@"tasktype"] integerValue] == 1) {
+                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
+                }else{
+                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
+                }
+                
+                [YjyxOverallData sharedInstance].previewRid = userInfo[@"rid"];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
+            
+            }
+
+            
+        }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"student"]) {
+        
+            if ([userInfo[@"type"] isEqualToString:@"newtask"]) {// 新作业
+                
                 if ([userInfo[@"tasktype"] integerValue] ==1) {
                     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
                 }else{
                     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
                 }
-            }else{
+                [YjyxOverallData sharedInstance].taskid = userInfo[@"taskid"];
+                [YjyxOverallData sharedInstance].examid = userInfo[@"rid"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
+                
+            }else if ([userInfo[@"type"] isEqualToString:@"hastentask"]) {
+                
                 if ([userInfo[@"tasktype"] integerValue] ==1) {
-                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_RESULTHOMEWORK;
+                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
                 }else{
-                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_RESULTMICRO;
+                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
                 }
+                [YjyxOverallData sharedInstance].taskid = userInfo[@"taskid"];
+                [YjyxOverallData sharedInstance].examid = userInfo[@"rid"];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
+
+                
             }
-            [YjyxOverallData sharedInstance].historyId = userInfo[@"id"];
-            [YjyxOverallData sharedInstance].previewRid = userInfo[@"rid"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
-        }else if ([userInfo[@"type"] isEqualToString:@"childstats"]){
-            
-        }else{
+
             
         }
+        
+        
+        
     }
-//    completionHandler(UIBackgroundFetchResultNewData);
+    
 }
 
 

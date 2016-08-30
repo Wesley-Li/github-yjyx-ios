@@ -161,24 +161,48 @@
     if (textField4.text.length == 0) {
         [self.view makeToast:@"请输入完整信息" duration:1.0 position:SHOW_CENTER complete:nil];
     }else{
-        [self.view makeToastActivity:SHOW_CENTER];
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:textField4.text,@"relation",childrenCid,@"cid",@"submit",@"action",[YjyxOverallData sharedInstance].parentInfo.pid,@"pid",nil];
-        [[YjxService sharedInstance] parentsAboutChildrenSetting:dic withBlock:^(id result, NSError *error){
-            [self.view hideToastActivity];
-            if (result) {
-                if ([[result objectForKey:@"retcode"] integerValue] == 0) {
-                    childrenEntity.relation = textField4.text;
-                    childrenEntity.childavatar = @"";
-                    [[YjyxOverallData sharedInstance].parentInfo.childrens addObject:childrenEntity];
-                    [self.navigationController popViewControllerAnimated:YES];
+        
+        BOOL result = [self isContainSpace:textField4.text];
+        
+        if (result) {
+            [self.view makeToast:@"您输入的内容含有空格" duration:1 position:SHOW_CENTER complete:nil];
+        }else {
+        
+            [self.view makeToastActivity:SHOW_CENTER];
+            NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:textField4.text,@"relation",childrenCid,@"cid",@"submit",@"action",[YjyxOverallData sharedInstance].parentInfo.pid,@"pid",nil];
+            [[YjxService sharedInstance] parentsAboutChildrenSetting:dic withBlock:^(id result, NSError *error){
+                [self.view hideToastActivity];
+                if (result) {
+                    if ([[result objectForKey:@"retcode"] integerValue] == 0) {
+                        childrenEntity.relation = textField4.text;
+                        childrenEntity.childavatar = @"";
+                        [[YjyxOverallData sharedInstance].parentInfo.childrens addObject:childrenEntity];
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }else{
+                        [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                    }
                 }else{
-                    [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                    [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
                 }
-            }else{
-                [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
-            }
-        }];
+            }];
+
+        
+        }
+        
     }
+}
+
+// 身份匹配,判断是否包含空格
+- (BOOL)isContainSpace:(NSString *)text {
+    NSRange _range = [text rangeOfString:@" "];
+    if (_range.location != NSNotFound) {
+        //有空格
+        return YES;
+    }else {
+        //没有空格
+        return NO;
+    }
+    
 }
 
 

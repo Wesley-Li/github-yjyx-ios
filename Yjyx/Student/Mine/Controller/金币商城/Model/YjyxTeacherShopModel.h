@@ -17,5 +17,6 @@
 @property (strong, nonatomic) NSString *goods_info; // 商品描述
 @property (strong, nonatomic) NSNumber *p_id; // 商品类型id
 
+
 + (instancetype)teacherShopModelWithDict:(NSDictionary *)dict;
 @end

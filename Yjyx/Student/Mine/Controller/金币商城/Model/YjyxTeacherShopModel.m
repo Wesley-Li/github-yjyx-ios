@@ -19,6 +19,7 @@
     model.goods_display = dict[@"goods_display"];
     model.goods_info = dict[@"goods_info"];
     model.p_id = dict[@"id"];
+    
     return model;
 }
 

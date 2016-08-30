@@ -36,6 +36,7 @@
 //        self.edgesForExtendedLayout = UIRectEdgeNone;
 //    }
     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+    
     self.navigationController.navigationBarHidden = NO;
     [self loadBackBtn];
     _doWorkArr = [NSMutableArray array];

@@ -11,6 +11,9 @@
 #import "YjyxPMemberCenterViewController.h"
 #import "StudentStasticController.h"
 #import "ToolsViewController.h"
+#import "YjyxWorkPreviewViewController.h"
+#import "YjyxMicroClassViewController.h"
+
 @interface YjyxMineController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *signLabel;
@@ -30,6 +33,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.coinBtn.imageView.contentMode = UIViewContentModeScaleToFill;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(iconImageViewClick)];
     [self.iconImageView addGestureRecognizer:tap];
@@ -278,6 +282,10 @@
     YjyxPMemberCenterViewController *vc = [[YjyxPMemberCenterViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+
+
+
 
 
 

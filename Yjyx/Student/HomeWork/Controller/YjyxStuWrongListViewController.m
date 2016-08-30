@@ -28,6 +28,7 @@
 @property (strong, nonatomic) ProductEntity *entity;
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, assign) NSInteger count;
+@property (nonatomic, strong) NSMutableArray *targetListArr;
 
 
 @end
@@ -42,9 +43,17 @@
     return _dataSource;
 }
 
+- (NSArray *)targetListArr {
+
+    if (!_targetListArr) {
+        self.targetListArr = [NSMutableArray array];
+    }
+    return _targetListArr;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.targetListArr = [[[self.targetlist JSONValue] reverseObjectEnumerator] allObjects];
     UIButton *goBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     
     goBackBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
@@ -62,11 +71,13 @@
     self.navigationController.navigationBarHidden = NO;
     self.index = 0;
     self.count = 20;
-    if ([[self.targetlist JSONValue] count] - self.index < 20) {
-        self.count = [[self.targetlist JSONValue] count] - self.index;
+    if ([self.targetListArr count] - self.index < 20) {
+        self.count = [self.targetListArr count] - 1 - self.index;
     }
-    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.index, self.count)];
-    self.tempArr = [[self.targetlist JSONValue] objectsAtIndexes:indexSet];
+    
+    self.tempArr = [self.targetListArr subarrayWithRange:NSMakeRange(self.index, self.count)];
+    NSLog(@"-----%@", self.targetlist);
+    NSLog(@"=====%@", [self.tempArr JSONString]);
     [self getDataFromNet];
     
     // 注册加载完成高度的通知
@@ -86,19 +97,17 @@
 - (void)loadMoreData
 {
     NSLog(@"********%ld", self.index);
-    if (self.index == [[self.targetlist JSONValue] count] - 1) {
+    if (self.index == [self.targetListArr count]) {
         self.tableView.footerRefreshingText = @"没有更多了";
         [self.tableView footerEndRefreshing];
-    }else if([[self.targetlist JSONValue] count] - 1 - self.index < 20) {
-        self.count = [[self.targetlist JSONValue] count] - 1 - self.index;
-        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.index, self.count)];
-        self.tempArr = [[self.targetlist JSONValue] objectsAtIndexes:indexSet];
+    }else if([self.targetListArr count]  - 1 - self.index < 20) {
+        self.count = [self.targetListArr count] - self.index;
+        self.tempArr = [self.targetListArr subarrayWithRange:NSMakeRange(self.index, self.count)];
         [self getDataFromNet];
     }else {
     
         self.count = 20;
-        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.index, self.count)];
-        self.tempArr = [[self.targetlist JSONValue] objectsAtIndexes:indexSet];
+        self.tempArr = [self.targetListArr subarrayWithRange:NSMakeRange(self.index, self.count)];
         [self getDataFromNet];
 
     }
@@ -109,9 +118,16 @@
 - (void)viewWillAppear:(BOOL)animated
 {
    
-
+    self.targetListArr = [[[self.targetlist JSONValue] reverseObjectEnumerator] allObjects];
     if(_openMember == 1){
         
+        self.index = 0;
+        self.count = 20;
+        if ([self.targetListArr count] - self.index < 20) {
+            self.count = [self.targetListArr count] - 1 - self.index;
+        }
+        self.tempArr = [self.targetListArr subarrayWithRange:NSMakeRange(self.index, self.count)];
+
         [self getDataFromNet];
         
     }
@@ -143,7 +159,6 @@
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:@"getonesubjectfailedquestion", @"action", self.subjectid, @"subjectid", [self.tempArr JSONString], @"targetlist", nil];
 
     NSLog(@"%@", param);
-    [self.dataSource removeAllObjects];
     [manager GET:[BaseURL stringByAppendingString:STUDENT_GET_WRONG_LIST_GET] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
         if ([responseObject[@"retcode"] isEqual:@0]) {
@@ -156,11 +171,10 @@
                 [model initModelWithDic:dic];
                 [self.dataSource addObject:model];
             }
-
-            self.dataSource = (NSMutableArray *)[[self.dataSource reverseObjectEnumerator] allObjects];
-            NSLog(@"----%@", self.dataSource);
-            self.index = self.dataSource.count - 1;
-            if (self.index == [[self.targetlist JSONValue] count] - 1) {
+            
+            NSLog(@"----%ld", self.dataSource.count);
+            self.index = self.dataSource.count;
+            if (self.index == [[self.targetlist JSONValue] count]) {
                 self.tableView.footerRefreshingText = @"没有更多了";
             }
             
