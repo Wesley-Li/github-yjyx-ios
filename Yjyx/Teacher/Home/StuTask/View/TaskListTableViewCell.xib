@@ -71,13 +71,29 @@
                                         <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MKl-R6-E51">
+                                        <rect key="frame" x="318" y="-1" width="95" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="95" id="Aco-ia-pmH"/>
+                                            <constraint firstAttribute="height" constant="22" id="ZPI-uT-cID"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" title="发布相同作业">
+                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="realeaseBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jP4-dK-K3A"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="fD6-3C-uYL" firstAttribute="top" secondItem="FC0-rQ-B4u" secondAttribute="top" id="6S0-K5-hm2"/>
                                     <constraint firstItem="5Yd-Xe-jdI" firstAttribute="top" secondItem="FC0-rQ-B4u" secondAttribute="top" id="9vP-b2-bJ8"/>
                                     <constraint firstItem="5Yd-Xe-jdI" firstAttribute="leading" secondItem="lNs-ii-Qcl" secondAttribute="trailing" id="Czk-wT-st1"/>
+                                    <constraint firstItem="MKl-R6-E51" firstAttribute="centerY" secondItem="Ci2-XO-POW" secondAttribute="centerY" id="DAK-gF-Ihe"/>
                                     <constraint firstItem="lNs-ii-Qcl" firstAttribute="leading" secondItem="Ci2-XO-POW" secondAttribute="trailing" constant="30" id="DAO-A1-twZ"/>
                                     <constraint firstAttribute="height" constant="20" id="R0j-n3-hFW"/>
+                                    <constraint firstAttribute="trailing" secondItem="MKl-R6-E51" secondAttribute="trailing" id="T1q-3C-u7W"/>
                                     <constraint firstItem="Ci2-XO-POW" firstAttribute="top" secondItem="FC0-rQ-B4u" secondAttribute="top" id="Vr4-07-HHH"/>
                                     <constraint firstItem="Ci2-XO-POW" firstAttribute="leading" secondItem="fD6-3C-uYL" secondAttribute="trailing" id="XDw-jP-dNY"/>
                                     <constraint firstItem="lNs-ii-Qcl" firstAttribute="top" secondItem="FC0-rQ-B4u" secondAttribute="top" id="ogq-nr-3yQ"/>
@@ -170,11 +186,12 @@
                 <outlet property="descriptionLabel" destination="cM1-tp-vxw" id="3bI-9f-Qg1"/>
                 <outlet property="finishedLabel" destination="Ci2-XO-POW" id="e6b-Tt-zhb"/>
                 <outlet property="rateLabel" destination="gDA-nX-nGc" id="bo6-Xw-SZ9"/>
+                <outlet property="realeaseComWorkBtn" destination="MKl-R6-E51" id="67A-es-HcG"/>
                 <outlet property="resourcenameLabel" destination="xka-7J-Xrz" id="2VW-bZ-mH0"/>
                 <outlet property="statusImage" destination="Xei-DA-9wM" id="Ocq-fW-Rwi"/>
                 <outlet property="timeLabel" destination="bnR-ss-Vv2" id="Mbc-84-gWL"/>
             </connections>
-            <point key="canvasLocation" x="415.5" y="287"/>
+            <point key="canvasLocation" x="-82.5" y="244"/>
         </tableViewCell>
     </objects>
     <resources>

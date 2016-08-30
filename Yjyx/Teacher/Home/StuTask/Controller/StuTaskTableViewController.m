@@ -12,11 +12,11 @@
 #import "TaskDetailTableViewController.h"
 #import "MJRefresh.h"
 #import "TeacherHomeViewController.h"
-
+#import "ReleaseMicroController.h"
 
 
 #define kk @"Task"
-@interface StuTaskTableViewController ()
+@interface StuTaskTableViewController ()<TaskListTableViewCellDelegate>
 @property (nonatomic, strong) NSNumber *direction;//0,1
 @property (nonatomic, strong) NSNumber *last_id;
 @property (nonatomic, strong) NSNumber *hasmore;
@@ -199,7 +199,8 @@
     
     TaskListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kk forIndexPath:indexPath];
     TaskModel *model = self.dataSource[indexPath.row];
-    
+    cell.tag = indexPath.row;
+    cell.delegate = self;
 //    NSLog(@"%@", model);
     
     [cell setValueWithTaskModel:model];
@@ -233,39 +234,14 @@
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)taskListTableViewCell:(TaskListTableViewCell *)cell releaseWorkBtn:(UIButton *)btn
+{
+    TaskModel *model = self.dataSource[cell.tag];
+    ReleaseMicroController *vc = [[ReleaseMicroController alloc] init];
+    vc.examid = model.relatedresourceid;
+    vc.releaseType = 1;
+    [self.navigationController pushViewController:vc animated:YES];
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

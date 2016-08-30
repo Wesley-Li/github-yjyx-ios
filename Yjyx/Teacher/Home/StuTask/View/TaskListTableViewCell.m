@@ -22,13 +22,22 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *rateLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *realeaseComWorkBtn;
 @end
 
 @implementation TaskListTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.realeaseComWorkBtn.layer.cornerRadius = 4;
+    self.realeaseComWorkBtn.layer.borderColor = [UIColor colorWithHexString:@"#007aff"].CGColor;
+    self.realeaseComWorkBtn.layer.borderWidth = 1;
+}
+- (IBAction)realeaseBtnClick:(UIButton *)sender {
+    if([self.delegate respondsToSelector:@selector(taskListTableViewCell:releaseWorkBtn:)]){
+        [self.delegate taskListTableViewCell:self releaseWorkBtn:sender];
+    }
+    
 }
 
 - (void)setValueWithTaskModel:(TaskModel *)model {

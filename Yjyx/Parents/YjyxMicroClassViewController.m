@@ -43,6 +43,7 @@
 
 @property (strong, nonatomic) NSMutableArray *doWorkArr;
 
+@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 
 @property (weak, nonatomic) UIView *bgView; // 保存视频个数的背景view
 @property (strong, nonatomic) NSNumber *subject_id; // 科目id
@@ -104,6 +105,7 @@
      ];
     if(self.jumpType == 1){
         self.navigationController.navigationBar.barTintColor = STUDENTCOLOR;
+        self.submitBtn.hidden = NO;
     }else{
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
     }

@@ -108,7 +108,7 @@
                                     </constraints>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pH6-hN-aHy">
-                                    <rect key="frame" x="140" y="5" width="35" height="35"/>
+                                    <rect key="frame" x="95" y="5" width="35" height="35"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="35" id="SfG-dj-Rfz"/>
                                         <constraint firstAttribute="width" constant="35" id="mtf-Qi-RIg"/>
@@ -128,6 +128,12 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="草稿本" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bna-Me-Ea0">
+                                    <rect key="frame" x="135" y="14" width="42" height="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" red="0.35686274509803922" green="0.76862745098039209" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -135,7 +141,7 @@
                                 <constraint firstItem="GZF-lg-Ghx" firstAttribute="leading" secondItem="fue-Wm-Pud" secondAttribute="trailing" constant="5" id="Gaf-mt-lTV"/>
                                 <constraint firstItem="fue-Wm-Pud" firstAttribute="leading" secondItem="5h7-gw-3WQ" secondAttribute="trailing" id="H8G-Si-9UB"/>
                                 <constraint firstItem="pH6-hN-aHy" firstAttribute="centerY" secondItem="npi-hj-PX9" secondAttribute="centerY" id="Ild-9A-oEk"/>
-                                <constraint firstAttribute="trailing" secondItem="pH6-hN-aHy" secondAttribute="trailing" constant="145" id="LEh-da-ucm"/>
+                                <constraint firstAttribute="trailing" secondItem="pH6-hN-aHy" secondAttribute="trailing" constant="190" id="LEh-da-ucm"/>
                                 <constraint firstItem="bGS-zI-iGl" firstAttribute="leading" secondItem="npi-hj-PX9" secondAttribute="leading" constant="5" id="Lpe-J2-866"/>
                                 <constraint firstItem="bGS-zI-iGl" firstAttribute="top" secondItem="npi-hj-PX9" secondAttribute="top" id="QSG-TG-Gpy"/>
                                 <constraint firstItem="fue-Wm-Pud" firstAttribute="centerY" secondItem="npi-hj-PX9" secondAttribute="centerY" id="c8o-Oz-FPh"/>
@@ -143,8 +149,10 @@
                                 <constraint firstItem="5h7-gw-3WQ" firstAttribute="leading" secondItem="pH6-hN-aHy" secondAttribute="trailing" constant="10" id="ii7-9a-zcy"/>
                                 <constraint firstAttribute="bottom" secondItem="bGS-zI-iGl" secondAttribute="bottom" id="l5a-Bk-Kwu"/>
                                 <constraint firstAttribute="trailing" secondItem="GZF-lg-Ghx" secondAttribute="trailing" constant="10" id="lba-et-MJG"/>
+                                <constraint firstItem="bna-Me-Ea0" firstAttribute="leading" secondItem="pH6-hN-aHy" secondAttribute="trailing" constant="5" id="m6u-mA-UZd"/>
                                 <constraint firstItem="5h7-gw-3WQ" firstAttribute="centerY" secondItem="fue-Wm-Pud" secondAttribute="centerY" id="qbh-N3-R5O"/>
                                 <constraint firstItem="GZF-lg-Ghx" firstAttribute="centerY" secondItem="npi-hj-PX9" secondAttribute="centerY" id="wxC-az-NlU"/>
+                                <constraint firstItem="bna-Me-Ea0" firstAttribute="centerY" secondItem="pH6-hN-aHy" secondAttribute="centerY" id="zzY-ut-5l5"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">

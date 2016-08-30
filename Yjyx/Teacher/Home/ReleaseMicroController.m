@@ -126,6 +126,10 @@ static NSString *StudentID = @"StudentCell";
     self.tableView.tableFooterView = footerView;
     
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, -49, 0);
+    
+    //  键盘通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -173,8 +177,13 @@ static NSString *StudentID = @"StudentCell";
     param[@"action"] = @"add_task";
     NSLog(@"%@", [pamarArr JSONString]);
     param[@"recipients"] = [pamarArr JSONString];
-    param[@"tasktype"] = @"lesson";
-    param[@"lessonid"] = self.w_id;
+    if(self.releaseType == 1){
+        param[@"tasktype"] = @"exam";
+        param[@"examid"] = self.examid;
+    }else{
+        param[@"tasktype"] = @"lesson";
+        param[@"lessonid"] = self.w_id;
+    }
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
     fmt.dateFormat = @"yyyy-MM-dd";
     fmt.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
@@ -186,7 +195,13 @@ static NSString *StudentID = @"StudentCell";
     NSString *dateStr = [fmt stringFromDate:newDate];
     
     NSLog(@"%@--%@", [NSDate date], dateStr);
-    NSString *descStr = [NSString stringWithFormat:@"%@ 微课", dateStr];
+    ReleaseDescrpitionCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:self.classArr.count + self.groupArr.count]];
+   
+    self.descripStr = cell.descriptionTextField.text;
+     NSString *descStr = [NSString stringWithFormat:@"%@ 微课", dateStr];
+    if(self.releaseType == 1){
+       descStr = [NSString stringWithFormat:@"%@ 作业", dateStr];
+    }
     NSString *descTempStr = [self.descripStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     param[@"desc"] = [descTempStr isEqualToString:@""] ? descStr : self.descripStr;
 //    param[@"suggestspendtime"] = [self.timeStr isEqualToString:@""] ? @"30" : self.timeStr;
@@ -201,7 +216,7 @@ static NSString *StudentID = @"StudentCell";
         NSLog(@"%@", responseObject[@"reason"]);
         if([responseObject[@"retcode"] isEqual:@0]){
             [SVProgressHUD showSuccessWithStatus:@"发布成功"];
-            
+          
             // 跳转到学生作业列表
             StuTaskTableViewController *stuTaskVC = [[StuTaskTableViewController alloc] init];
             [self.navigationController pushViewController:stuTaskVC animated:YES];
@@ -264,6 +279,7 @@ static NSString *StudentID = @"StudentCell";
             NSMutableArray *arr =  self.classStuArr[indexPath.section];
             StudentEntity *stuModel =  arr[indexPath.row - 1];
             cell.stuEntity = stuModel;
+            
         }
  
         return cell;
@@ -369,4 +385,43 @@ static NSString *StudentID = @"StudentCell";
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+#pragma mark - 键盘处理
+#pragma mark 键盘即将显示
+- (void)keyBoardWillShow:(NSNotification *)note{
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:self.classArr.count + self.groupArr.count]];
+    NSLog(@"%@", NSStringFromCGRect(cell.frame));
+        CGRect rect = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
+        NSInteger padding = 0;
+        if(cell.frame.origin.y > SCREEN_HEIGHT - 64 - rect.size.height - cell.frame.size.height){
+            padding = cell.frame.origin.y - (SCREEN_HEIGHT - 64 - rect.size.height) + cell.frame.size.height;
+            if (cell.frame.origin.y > SCREEN_HEIGHT - 64) {
+                padding = rect.size.height;
+            }
+        }
+        NSLog(@"%ld", padding);
+        self.view.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT /2 - padding);
+    
+    }];
+   
+  
+    
+}
+#pragma mark 键盘即将退出
+- (void)keyBoardWillHide:(NSNotification *)note{
+//    
+    CGRect rect = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat ty = - rect.size.height;
+        [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
+           self.view.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT/ 2);
+        }];
+//
+  
+}
+         
 @end

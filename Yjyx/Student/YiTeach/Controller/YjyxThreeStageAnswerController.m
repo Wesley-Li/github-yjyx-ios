@@ -20,6 +20,8 @@
 @property (strong, nonatomic) NSMutableDictionary *heightDict;
 
 @property (strong, nonatomic) ProductEntity *entity;
+
+
 @end
 
 @implementation YjyxThreeStageAnswerController
@@ -45,11 +47,59 @@ static NSString *ID = @"CELL";
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = NO;
+    if(_openMember == 1){
+       [self loadData]; 
+    }
+    
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    if(_openMember == 1){
+        for (UIViewController *vc in self.navigationController.childViewControllers) {
+            if([vc isKindOfClass:[YiTeachMicroController class]]){
+                ((YiTeachMicroController *)vc).openMember = 1;
+            }
+        }
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)loadData
+{
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"action"] = @"m_getmany";
+    param[@"subjectid"] = self.subjectid;
+    param[@"qidlist"] = [self.randomFiveArr JSONString];
+    NSLog(@"%@", param);
+    [self.view makeToastActivity:SHOW_CENTER];
+    [mgr GET:[BaseURL stringByAppendingString:@"/api/student/yj_questions/choice/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        [self.view hideToastActivity];
+        //        NSLog(@"%@", responseObject);
+        [self.threeStageSubjectArr removeAllObjects];
+        if ([responseObject[@"retcode"] integerValue] == 0) {
+            for (NSDictionary *dict in responseObject[@"questionlist"]) {
+                YjyxThreeStageModel *model = [YjyxThreeStageModel threeStageModelWithDict:dict];
+                model.canview = responseObject[@"canview"];
+                [self.threeStageSubjectArr addObject:model];
+                
+            }
+            [self.tableView reloadData];
+        }else{
+            
+                NSString *str = responseObject[@"msg"] == nil ? responseObject[@"reason"] : responseObject[@"msg"];
+                [self.view makeToast:str duration:2.0 position:SHOW_CENTER complete:nil];
+           
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view hideToastActivity];
+        [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
+        NSLog(@"%@", error.localizedDescription);
+    }];
+}
+
 // 刷新高度
 - (void)refreshHeight:(NSNotification *)noti
 {

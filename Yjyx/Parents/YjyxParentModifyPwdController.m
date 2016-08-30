@@ -65,10 +65,10 @@
         NSInteger index = [self.roleType integerValue];
         NSString *appendUrl = @"/api/parents/setting/";
         switch (index) {
-            case 2:
+            case 1:
                 appendUrl = @"/api/teacher/mobile/yj_teachers/";
                 break;
-            case 3:
+            case 2:
                 appendUrl = @"/api/student/mobile/yj_students/";
                 break;
             default:
@@ -92,8 +92,40 @@
                 NSDictionary *newDict = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", dic[@"username"],@"username",desPassWord,@"password", nil];
                 [SYS_CACHE setObject:newDict forKey:@"AutoLogoin"];
                 [SYS_CACHE synchronize];
-                
-                [self.navigationController popViewControllerAnimated:YES];
+                 if([self.roleType integerValue] == 1){
+                     // 退出时关闭定时器,并清除用户名密码等信息
+                     NSArray *array = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BaseURL,TEACHER_LOGIN_CONECT_POST]]];
+                     for (NSHTTPCookie *cookie in array)
+                     {
+                         [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+                     }
+                    [YjyxOverallData sharedInstance].teacherInfo = nil;
+                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+                 }else if ([self.roleType integerValue] == 2){
+                     // 退出时关闭定时器,并清除用户名密码等信息
+                     NSArray *array = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BaseURL,STUDENT_LOGIN_CONNET_POST]]];
+                     for (NSHTTPCookie *cookie in array)
+                     {
+                         [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+                     }
+                    [YjyxOverallData sharedInstance].studentInfo = nil;
+                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+                 }else{
+                     NSArray *array = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BaseURL,@"/api/parents/login/"]]];
+                     for (NSHTTPCookie *cookie in array)
+                     {
+                         [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+                     }
+                     [YjyxOverallData sharedInstance].parentInfo = nil;
+                     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+                 }
+                LoginViewController *loginCtl = [[LoginViewController alloc] init];
+                loginCtl.roleType = [_roleType integerValue];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginCtl];
+                AppDelegate *mydelegate = (AppDelegate*)SYS_DELEGATE;
+                nav.navigationBarHidden = YES;
+                [mydelegate.window setRootViewController:nav];
+
             }else{
                 [self.view makeToast:responseObject[@"reason"] duration:0.5 position:SHOW_TOP complete:nil];
             }

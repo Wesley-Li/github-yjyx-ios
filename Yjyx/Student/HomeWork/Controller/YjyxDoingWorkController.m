@@ -70,7 +70,7 @@
 @property (assign, nonatomic) NSInteger preTime;
 @property (assign, nonatomic) NSInteger preIndex;
 
-
+@property (strong, nonatomic) NSDate *oldDate;
 @end
 
 @implementation YjyxDoingWorkController
@@ -174,7 +174,8 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackgroud) name:UIApplicationWillResignActiveNotification object:nil];
    
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -209,12 +210,14 @@
         }
     }
     }
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     
     [SVProgressHUD dismiss];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
 - (void)dealloc
@@ -224,6 +227,30 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
+}
+#pragma mark - 进入前后台
+// 创建定时器
+- (void)createTimer
+{
+    // 开启定时器
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countTime) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    _timer = timer;
+}
+- (void)appDidBecomeActive
+{
+    NSTimeInterval  timeCount = [[NSDate date] timeIntervalSinceDate:self.oldDate];
+    _consumeTime += timeCount;
+    self.consumeTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", _consumeTime / 60, _consumeTime % 60];
+    [self createTimer];
+    NSLog(@"++++++++++%f", timeCount);
+}
+- (void)appDidEnterBackgroud
+{
+    self.oldDate = [NSDate date];
+    [_timer invalidate];
+    _timer = nil;
+   
 }
 #pragma mark - 键盘的弹出和退下
 // 键盘弹出
@@ -247,10 +274,13 @@
 //    NSLog(@"%@", self.scrollView.subviews);
     for (UIView *view in self.scrollView.subviews) {
         if([view isKindOfClass:[UIWebView class]]){
+            NSLog(@"%ld, %ld", view.tag , index + 1); 
             if(view.tag == index + 1){
                CGSize size =  ((UIWebView *)view).scrollView.contentSize;
                 if(CGSizeEqualToSize(self.preSize, CGSizeZero)){
+                    NSLog(@"弹出键盘%@", NSStringFromCGSize(size));
                 self.preSize = size;
+                  
                 }
                 NSLog(@"%@, %d", NSStringFromCGSize(size), height);
                 size.height = self.preSize.height + height - 104;
@@ -288,7 +318,9 @@
 //                CGSize size =  ((UIWebView *)view).scrollView.contentSize;
 //                NSLog(@"%@, %d", NSStringFromCGSize(size), height);
 //                size.height -= height - 104;
+                NSLog(@"退下键盘%@", NSStringFromCGSize(self.preSize));
                 ((UIWebView *)view).scrollView.contentSize = self.preSize;
+                self.preSize = CGSizeZero;
           
             }
         }else if ([view isKindOfClass:[YjyxDoingView class]]){
@@ -567,6 +599,7 @@
         }
         if(model.questiontype == 1){
             answerView.scrollView.hidden = YES;
+            answerView.count = [model.choicecount integerValue];
         }else{
             answerView.choiceAnswerView.hidden = YES;
             NSInteger index =  [model.blankcount integerValue];
@@ -873,7 +906,11 @@
                 
             }else{
                 NSLog(@"%@", responseObject[@"reason"]);
-                [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
+                NSString *showStr = responseObject[@"msg"] == nil ? responseObject[@"reason"] : responseObject[@"msg"];
+                if([showStr containsString:@"撤销"]){
+                    showStr = @"提交失败,该作业不存在,或许老师已经撤销该任务!!";
+                }
+                [self.view makeToast:showStr duration:0.5 position:SHOW_CENTER complete:nil];
                  [coverView removeFromSuperview];
                 
             }
@@ -906,11 +943,16 @@
                
             }else{
                 NSLog(@"%@", responseObject[@"reason"]);
-                [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
-                 [coverView removeFromSuperview];
-                [SVProgressHUD dismiss];
+                NSString *showStr = responseObject[@"msg"] == nil ? responseObject[@"reason"] : responseObject[@"msg"];
+                if([showStr containsString:@"撤销"]){
+                    showStr = @"提交失败,该作业不存在,或许老师已经撤销该任务!!";
+                }
+                [self.view makeToast:showStr duration:0.5 position:SHOW_CENTER complete:nil];
+                [coverView removeFromSuperview];
+              
                 
             }
+              [SVProgressHUD dismiss];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
             [coverView removeFromSuperview];

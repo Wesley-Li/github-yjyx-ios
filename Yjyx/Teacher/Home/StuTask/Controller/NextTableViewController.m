@@ -46,6 +46,7 @@
 @property (nonatomic, strong) SolutionCell *solutionCell;
 @property (nonatomic, strong) VideoCell *videoCell;
 @property (nonatomic, strong) NSMutableDictionary *cellHeightDic;
+@property (assign, nonatomic) NSInteger flag;
 
 
 
@@ -330,6 +331,7 @@
     
     // cell高度通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCellHeight:) name:@"CellHeightChange" object:nil];
+
     
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -356,26 +358,18 @@
             self.dic = [NSDictionary dictionaryWithDictionary:responseObject];
             
             if ([responseObject[@"question"] allKeys].count == 0) {
-                
                 rows = 0;
-                
                 UIImageView *wrongImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wrong"]];
                 wrongImage.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
-                
                 self.tableView.tableFooterView = wrongImage;
                 self.tableView.scrollEnabled = NO;
-
-                
             }else {
-            
                 rows = 5;
             }
-            
             [self.tableView reloadData];
+
             [SVProgressHUD dismissWithDelay:0.1];
-           
         }else {
-            
             [self.tableView makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
         }
         
@@ -432,7 +426,13 @@
     
 }
 
-
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if(self.flag == 0){
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        _flag = 1;
+    }
+}
 
 #pragma mark - Table view data source
 
@@ -487,7 +487,7 @@
         self.taskCell = [tableView dequeueReusableCellWithIdentifier:KTaskCell forIndexPath:indexPath];
         self.taskCell.selectionStyle = UITableViewCellSelectionStyleNone;
         self.taskCell.indexPath = indexPath;
-        _taskCell.dic = [NSDictionary dictionaryWithDictionary:_dic];
+//        _taskCell.dic = [NSDictionary dictionaryWithDictionary:_dic];
         [_taskCell setValueWithDictionary:_dic];
         
         return _taskCell;

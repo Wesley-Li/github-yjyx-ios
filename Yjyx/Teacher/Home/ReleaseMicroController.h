@@ -11,4 +11,8 @@
 @interface ReleaseMicroController : UIViewController
 
 @property (strong, nonatomic) NSNumber *w_id;
+
+// 发布相同作业
+@property (strong, nonatomic) NSNumber *examid;
+@property (assign, nonatomic) NSInteger releaseType; // 发布作业类型 1代表相同作业
 @end

@@ -17,4 +17,6 @@
 
 @property (strong, nonatomic) NSNumber *subject_id;
 @property (assign, nonatomic) NSInteger isFinished;
+
+@property (assign, nonatomic) NSInteger openMember;// 1代表开通了会员
 @end

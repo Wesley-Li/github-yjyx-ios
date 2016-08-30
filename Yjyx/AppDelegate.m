@@ -47,7 +47,7 @@
 @interface AppDelegate ()
 {
     AutoLoginViewController *autologin;
-    NSTimer *_timer;
+  
 }
 
 @end
@@ -59,10 +59,7 @@
     
 //    ((AppDelegate*)SYS_DELEGATE).role = @"parents";
     ((AppDelegate*)SYS_DELEGATE).stuListArr = [NSMutableArray array];
-    NSError *setCategoryErr = nil;
-    NSError *activationErr  = nil;
-    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: &setCategoryErr];
-    [[AVAudioSession sharedInstance] setActive: YES error: &activationErr];
+ 
 
     [self initUmeng:launchOptions];
     // Override point for customization after application launch.
@@ -291,57 +288,14 @@
     NSLog(@"willResignActive");
     [self.window endEditing:YES];
 }
-UIBackgroundTaskIdentifier taskId;
+
 - (void)applicationDidEnterBackground:(UIApplication *)application{
-    NSLog(@"didenterBackground");
-    UIApplication*   app = [UIApplication sharedApplication];
-    __block    UIBackgroundTaskIdentifier bgTask;
-    bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (bgTask != UIBackgroundTaskInvalid)
-            {
-                bgTask = UIBackgroundTaskInvalid;
-            }
-        });
-    }];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (bgTask != UIBackgroundTaskInvalid)
-            {
-                bgTask = UIBackgroundTaskInvalid;
-            }
-        });
-    });
-    //开启一个后台任务
-    taskId = [application beginBackgroundTaskWithExpirationHandler:^{
-        
-        //结束指定的任务
-        [application endBackgroundTask:taskId];
-    }];
-    
-   NSTimer *timer =  [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
-    _timer = timer;
+
 }
-NSInteger count = 1;
-- (void)timerAction:(NSTimer *)timer {
-    count++;
-    
-    if (count % 500 == 0) {
-        UIApplication *application = [UIApplication sharedApplication];
-        //结束旧的后台任务
-        [application endBackgroundTask:taskId];
-        
-        //开启一个新的后台
-        taskId = [application beginBackgroundTaskWithExpirationHandler:NULL];
-    }
-    
-    NSLog(@"%ld",count);
-}
+
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    [_timer invalidate];
-    _timer = nil;
-    count = 1;
+   
 }
 
 // 进入激活状态

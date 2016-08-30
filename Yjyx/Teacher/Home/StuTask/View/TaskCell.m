@@ -31,12 +31,13 @@
 
 - (void)setValueWithDictionary:(NSDictionary *)dic {
     
+    _dic = dic;
     for (UIView *view in [self.webBGVIEW subviews]) {
         [view removeFromSuperview];
     }
     
     NSString *htmlString = [NSString stringWithFormat:@"%@", [dic[@"question"] objectForKey:@"content"]];
-    
+    NSLog(@"%@", htmlString);
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\"><meta name = \"format-detection\" content = \"telephone=no\">%@</p>", htmlString];
     UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH - 20, 50)];
     web.scrollView.showsHorizontalScrollIndicator = NO;
@@ -96,7 +97,7 @@
     webView.frame = frame;
     
     self.height = frame.size.height + 15 + 30;
-    
+    NSLog(@"%.f", self.height);
     // 发通知
     [[NSNotificationCenter defaultCenter] postNotificationName:@"CellHeightChange" object:self userInfo:nil];
     

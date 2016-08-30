@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-@class TaskModel;
+@class TaskModel, TaskListTableViewCell;
+
+@protocol TaskListTableViewCellDelegate <NSObject>
+
+- (void)taskListTableViewCell:(TaskListTableViewCell *)cell releaseWorkBtn:(UIButton *)btn;
+
+@end
 @interface TaskListTableViewCell : UITableViewCell
 
 @property (nonatomic, assign) CGFloat height;
 
+@property (strong, nonatomic) id<TaskListTableViewCellDelegate> delegate;
 - (void)setValueWithTaskModel:(TaskModel *)model;
 
 @end

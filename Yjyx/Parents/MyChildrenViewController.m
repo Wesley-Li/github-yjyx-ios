@@ -51,6 +51,7 @@
     }else{
         [self setChildrenViews];
         currentChildren = [[YjyxOverallData sharedInstance].parentInfo.childrens objectAtIndex:0];
+        self.childrenName = currentChildren.name;
     }
     // Do any additional setup after loading the view from its nib.
     
@@ -253,6 +254,7 @@
         ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
         result.childrenCid = children.cid;
         result.taskResultId = children.activityID;
+        NSLog(@"%@", self.childrenName);
         result.childrenName = self.childrenName;
         result.navigationItem.title = [[children.title componentsSeparatedByString:@"|"] objectAtIndex:0];
         [self.navigationController pushViewController:result animated:YES];

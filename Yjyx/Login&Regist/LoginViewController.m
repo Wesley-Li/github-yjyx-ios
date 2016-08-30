@@ -215,10 +215,10 @@
                 // 家长
                 [[YjxService sharedInstance] parentsLogin:dic autoLogin:NO withBlock:^(id result,NSError *error){
                     [self.view hideToastActivity];
-                    NSLog(@"%@, %@, %@--login", result, result[@"msg"], result[@"reason"]);
+                    NSLog(@"%@, %@, %@--login1", result, result[@"msg"], result[@"reason"]);
                     if (result != nil) {
                         if ([[result objectForKey:@"retcode"] integerValue] == 0) {
-                            [(AppDelegate *)SYS_DELEGATE fillViews];
+                           
                             [YjyxOverallData sharedInstance].parentInfo = [ParentEntity wrapParentWithdic:result];
                             [YjyxOverallData sharedInstance].parentInfo.phone = _uesrNameTF.text;
                             
@@ -230,6 +230,7 @@
                             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", _uesrNameTF.text,@"username",desPassWord,@"password", nil];
                             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
                             [SYS_CACHE synchronize];
+                             [(AppDelegate *)SYS_DELEGATE fillViews];
                         }else{
                             if ([result[@"msg"] length] > 20) {
                                 [self.view makeToast:@"您的网络可能不太好,请重试!" duration:1.0 position:SHOW_CENTER complete:nil];
@@ -257,12 +258,12 @@
                 [[YjxService sharedInstance] teacherLogin:dic autoLogin:NO withBlock:^(id result, NSError *error) {
                     
 
-                    NSLog(@"%@, %@, %@--login", result, result[@"msg"], result[@"reason"]);
+                    NSLog(@"%@, %@, %@--login2", result, result[@"msg"], result[@"reason"]);
                     [self.view hideToastActivity];
                     if (result != nil) {
                         
                         if ([result[@"retcode"] integerValue] == 0) {
-                            [(AppDelegate *)SYS_DELEGATE fillViews];
+                            
                             
                             [YjyxOverallData sharedInstance].teacherInfo = [TeacherEntity wrapTeacherWithDic:result];
                             
@@ -272,7 +273,7 @@
                             
                             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
                             [SYS_CACHE synchronize];
-                            
+                            [(AppDelegate *)SYS_DELEGATE fillViews];
                              // GCD写定时器启动
 //                            dispatch_resume(((AppDelegate*)SYS_DELEGATE).timer);
 //
@@ -307,11 +308,11 @@
                
                 [[YjxService sharedInstance] studentLogin:dic autoLogin:NO withBlock:^(id result, NSError *error){
                      [self.view hideToastActivity];
-                    NSLog(@"%@, %@, %@--login", result, result[@"msg"], result[@"reason"]);
+                    NSLog(@"%@, %@, %@--login3", result, result[@"msg"], result[@"reason"]);
                     if (result != nil) {
                         
                         if ([result[@"retcode"] integerValue] == 0) {
-                            [(AppDelegate *)SYS_DELEGATE fillViews];
+                           
                             
                             [YjyxOverallData sharedInstance].studentInfo = [OneStudentEntity studentEntityWithDict:result];
                             NSLog(@"%@--", [YjyxOverallData sharedInstance].studentInfo.avatar_url);
@@ -321,6 +322,7 @@
                             
                             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
                             [SYS_CACHE synchronize];
+                             [(AppDelegate *)SYS_DELEGATE fillViews];
                             
                             // GCD写定时器启动
                             //                            dispatch_resume(((AppDelegate*)SYS_DELEGATE).timer);

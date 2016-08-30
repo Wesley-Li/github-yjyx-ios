@@ -109,7 +109,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
    
-
+    self.navigationController.navigationBarHidden = NO;
     if(_openMember == 1){
         
         [self getDataFromNet];
