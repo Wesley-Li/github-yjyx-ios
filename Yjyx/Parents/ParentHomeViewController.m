@@ -66,45 +66,51 @@
 
 -(void)pushSwitch
 {
-    switch ([YjyxOverallData sharedInstance].pushType) {
-        case 1:{
-            YjyxWorkPreviewViewController *result = [[YjyxWorkPreviewViewController alloc] init];
-            result.previewRid = [YjyxOverallData sharedInstance].previewRid;
-            result.title = @"作业预览";
-            [result setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:result animated:YES];
-        }
-            break;
-        case 2:{
-            YjyxMicroClassViewController *result = [[YjyxMicroClassViewController alloc] init];
-            result.previewRid = [YjyxOverallData sharedInstance].previewRid;
-            result.title = @"微课预览";
-            [result setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:result animated:YES];
-        }
-            break;
-        case 3:{
-            ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
-            result.taskResultId = [YjyxOverallData sharedInstance].historyId;
-            result.title = @"结果详情";
-            [result setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:result animated:YES];
-            
-        }
-            break;
-        case 4:{
-            ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
-            result.taskResultId = [YjyxOverallData sharedInstance].historyId;
-            [result setHidesBottomBarWhenPushed:YES];
-            result.title = @"结果详情";
-            [self.navigationController pushViewController:result animated:YES];
-            
-        }
-            break;
-        default:
-            break;
-    }
+    
+    
+        
+        switch ([YjyxOverallData sharedInstance].pushType) {
+            case 1:{
+                YjyxWorkPreviewViewController *result = [[YjyxWorkPreviewViewController alloc] init];
+                result.previewRid = [YjyxOverallData sharedInstance].previewRid;
+                result.title = @"作业预览";
+                [result setHidesBottomBarWhenPushed:YES];
+                [((AppDelegate *)SYS_DELEGATE).tabBar.selectedViewController pushViewController:result animated:YES];
+            }
+                break;
+            case 2:{
+                YjyxMicroClassViewController *result = [[YjyxMicroClassViewController alloc] init];
+                result.previewRid = [YjyxOverallData sharedInstance].previewRid;
+                result.title = @"微课预览";
+                [result setHidesBottomBarWhenPushed:YES];
 
+                [((AppDelegate *)SYS_DELEGATE).tabBar.selectedViewController pushViewController:result animated:YES];
+            }
+                break;
+            case 3:{
+                ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
+                result.taskResultId = [YjyxOverallData sharedInstance].historyId;
+                result.title = @"结果详情";
+                [result setHidesBottomBarWhenPushed:YES];
+
+                [((AppDelegate *)SYS_DELEGATE).tabBar.selectedViewController pushViewController:result animated:YES];
+            }
+                break;
+            case 4:{
+                ChildrenResultViewController *result = [[ChildrenResultViewController alloc] init];
+                result.taskResultId = [YjyxOverallData sharedInstance].historyId;
+                [result setHidesBottomBarWhenPushed:YES];
+                result.title = @"结果详情";
+
+                [((AppDelegate *)SYS_DELEGATE).tabBar.selectedViewController pushViewController:result animated:YES];
+            }
+                break;
+            default:
+                break;
+        }
+
+    
+    
 }
 // 会员中心的点击
 - (IBAction)memberCenterClick:(UIButton *)sender {

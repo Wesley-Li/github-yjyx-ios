@@ -15,6 +15,9 @@
 #import "YjyxFeedBackViewController.h"
 #import "YjyxOrderViewController.h"
 #import "YjyxParentModifyPwdController.h"
+
+
+
 @interface ParentPersonalViewController ()<soundSelectDelegate>
 {
     BOOL isNeednotifySet;
@@ -31,13 +34,13 @@
     [super viewDidLoad];
     self.title = @"个人中心";
     notify_sound = [YjyxOverallData sharedInstance].parentInfo.notify_sound;
-    // Do any additional setup after loading the view from its nib.
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushSwitch) name:@"ChildActivityNotification" object:nil];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    
     
     notify_with_sound = [YjyxOverallData sharedInstance].parentInfo.notify_with_sound;
     receive_notify = [YjyxOverallData sharedInstance].parentInfo.receive_notify;
@@ -60,6 +63,8 @@
         }
     }
     [super viewWillDisappear:YES];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -298,6 +303,9 @@
     [YjyxOverallData sharedInstance].parentInfo.notify_sound = soundName;
     [_personalTab reloadData];
 }
+
+
+
 
 /*
 #pragma mark - Navigation

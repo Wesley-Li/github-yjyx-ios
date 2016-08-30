@@ -12,6 +12,8 @@
 #import "UIImageView+WebCache.h"
 #import "PNChart.h"
 
+
+
 @interface YjyxStatistController ()<iCarouselDataSource, iCarouselDelegate, PNChartDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *cycleBgview;
@@ -298,6 +300,9 @@
     
     
 }
+
+
+
 
 
 

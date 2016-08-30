@@ -13,6 +13,8 @@
 #import "YiTeachChapterViewController.h"
 
 
+
+
 @interface YjyxYiTeachController ()
 
 {
@@ -60,6 +62,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.navigationItem.title = @"亿教课堂";
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.startLearnBtn.hidden = YES;

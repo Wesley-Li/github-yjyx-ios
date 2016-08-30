@@ -76,6 +76,7 @@ static NSString *HomeADID = @"HomeADID";
 #pragma mark - view的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stuPushSwitch) name:@"ChildActivityNotification" object:nil];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"作业";
     self.preBtn = _homeWorkBtn;
@@ -494,4 +495,53 @@ static NSString *HomeADID = @"HomeADID";
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
+
+// 响应推送消息
+-(void)stuPushSwitch {
+
+        switch ([YjyxOverallData sharedInstance].pushType) {
+            case 1:{
+                YjyxWorkPreviewViewController *result = [[YjyxWorkPreviewViewController alloc] init];
+                result.taskid = [YjyxOverallData sharedInstance].taskid;
+                result.examid = [YjyxOverallData sharedInstance].examid;
+                result.navigationItem.title = @"预览作业";
+                [result setHidesBottomBarWhenPushed:YES];
+                [((AppDelegate *)SYS_DELEGATE).tabBarVc.selectedViewController pushViewController:result animated:YES];
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+            }
+                
+                break;
+                
+            case 2:{
+                YjyxMicroClassViewController *result = [[YjyxMicroClassViewController alloc] init];
+                result.taskid = [YjyxOverallData sharedInstance].taskid;
+                result.lessonid = [YjyxOverallData sharedInstance].examid;
+                result.navigationItem.title = @"预览作业";
+                [result setHidesBottomBarWhenPushed:YES];
+                [((AppDelegate *)SYS_DELEGATE).tabBarVc.selectedViewController pushViewController:result animated:YES];
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
+            }
+                break;
+                
+                
+            default:
+                break;
+        }
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 @end

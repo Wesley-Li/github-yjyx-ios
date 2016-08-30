@@ -311,7 +311,7 @@
     [self.animationImage startAnimating];
     startDate = [NSDate date];
     
-    
+
 #warning  录音开始
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
@@ -550,7 +550,7 @@
 
 #pragma mark - 删除单个音频
 - (void)deleteTheVoice:(UIButton *)sender {
-
+    isEdit = YES;
     [self.voiceArr removeObjectAtIndex:sender.tag - 400];
     if (self.voiceArr.count == 0) {
         // 移除通知
@@ -565,37 +565,60 @@
 
     VoiceListCell *cell = (VoiceListCell *)sender.view.superview.superview;
     NSURL *url = [NSURL URLWithString:[_voiceArr[sender.view.tag - 200] objectForKey:@"url"]];
-    [self changeAMRtoWAVbyUrl:url];
-    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:nil];
-    [[AVAudioSession sharedInstance] setActive:YES error:nil];
-
-    AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:self.playFilePath]];
-
-    NSLog(@"%@", self.voiceArr);
     
-    if (self.player) {
-        if (currentIndex == sender.view.tag - 200) {
-            [_player pause];
-            [cell.animationImage stopAnimating];
-            _player = nil;
-        }else {
-        
-            [_player pause];
-            currentIndex = sender.view.tag - 200;
-            UIImageView *imageview = (UIImageView *)[self.view viewWithTag:currentIndex + 300];
-            [imageview stopAnimating];
-            [_player play];
-            currentIndex = sender.view.tag - 200;
-            [cell.animationImage startAnimating];
-
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+       
+        NSData *audioData = [NSData dataWithContentsOfURL:url];
+        NSLog(@"-------------%ld", audioData.length);
+        NSString *amrPath = [TeacherDrawViewController getPathByFilename:[NSString stringWithFormat:@"%ld%ld", self.imageIndex , sender.view.tag - 200] ofType:@"amr"];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:amrPath]) {
+            [audioData writeToFile:amrPath atomically:YES];
         }
-    }else {
+        
+        self.playFilePath = [TeacherDrawViewController getPathByFilename:[NSString stringWithFormat:@"%ld%ld",self.imageIndex , sender.view.tag - 200] ofType:@"wav"];
+        int result = [VoiceConverter ConvertAmrToWav:amrPath wavSavePath:_playFilePath];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            NSLog(@"%@", result == 1 ? @"格式转换成功" : @"格式转换失败");
+            [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:nil];
+            [[AVAudioSession sharedInstance] setActive:YES error:nil];
+            
+            AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:self.playFilePath]];
+            
+            NSLog(@"%@", self.voiceArr);
+            
+            if (self.player) {
+                if (currentIndex == sender.view.tag - 200) {
+                    [_player pause];
+                    [cell.animationImage stopAnimating];
+                    _player = nil;
+                }else {
+                    
+                    [_player pause];
+                    currentIndex = sender.view.tag - 200;
+                    UIImageView *imageview = (UIImageView *)[self.view viewWithTag:currentIndex + 300];
+                    [imageview stopAnimating];
+                    self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+                    [_player play];
+                    currentIndex = sender.view.tag - 200;
+                    [cell.animationImage startAnimating];
+                    
+                }
+            }else {
+                
+                self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+                [_player play];
+                [cell.animationImage startAnimating];
+                currentIndex = sender.view.tag - 200;
+            }
+
+            
+            
+        });
+        
+    });
     
-        self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
-        [_player play];
-        [cell.animationImage startAnimating];
-        currentIndex = sender.view.tag - 200;
-    }
     
 }
 
@@ -608,13 +631,29 @@
         [imageview stopAnimating];
         [_player pause];
         NSURL *url = [NSURL URLWithString:[_voiceArr[currentIndex] objectForKey:@"url"]];
-        [self changeAMRtoWAVbyUrl:url];
-        AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:self.playFilePath]];
-        [_player replaceCurrentItemWithPlayerItem:playerItem];
-        [_player play];
-        UIImageView *imageview2 = (UIImageView *)[self.view viewWithTag:currentIndex + 300];
-        [imageview2 startAnimating];
-
+        
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            
+            NSData *audioData = [NSData dataWithContentsOfURL:url];
+            NSLog(@"-------------%ld", audioData.length);
+            NSString *amrPath = [TeacherDrawViewController getPathByFilename:[NSString stringWithFormat:@"%ld%ld",self.imageIndex, currentIndex] ofType:@"amr"];
+            if (![[NSFileManager defaultManager] fileExistsAtPath:amrPath]) {
+                [audioData writeToFile:amrPath atomically:YES];
+            }
+            
+            self.playFilePath = [TeacherDrawViewController getPathByFilename:[NSString stringWithFormat:@"%ld%ld",self.imageIndex, currentIndex] ofType:@"wav"];
+            int result = [VoiceConverter ConvertAmrToWav:amrPath wavSavePath:_playFilePath];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"%@", result == 1 ? @"格式转换成功" : @"格式转换失败");
+                AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:self.playFilePath]];
+                [_player replaceCurrentItemWithPlayerItem:playerItem];
+                [_player play];
+                UIImageView *imageview2 = (UIImageView *)[self.view viewWithTag:currentIndex + 300];
+                [imageview2 startAnimating];
+            });
+        });
+        
         
     }else {
     

@@ -149,51 +149,38 @@
 
 // 点击老师按钮
 - (IBAction)teacherBtnClicked:(id)sender {
-//    if (_teacherBtn.isSelected) {
-//        [_teacherBtn setSelected:NO];
-//        ((AppDelegate*)SYS_DELEGATE).role = @"none";
-//        _uesrNameTF.placeholder = @"";
-//    }else {
-    
-        [_teacherBtn setSelected:YES];
-        _uesrNameTF.placeholder = @"用户名";
-        ((AppDelegate*)SYS_DELEGATE).role = @"teacher";
-        [_parentsBtn setSelected:NO];
-        [_stuBtn setSelected:NO];
-//    }
+
+    [SYS_CACHE removeObjectForKey:@"AutoLogoin"];
+    [_teacherBtn setSelected:YES];
+    _uesrNameTF.placeholder = @"用户名";
+    ((AppDelegate*)SYS_DELEGATE).role = @"teacher";
+
+    [_parentsBtn setSelected:NO];
+    [_stuBtn setSelected:NO];
+
     
 }
 
 - (IBAction)parentsBtnClicked:(id)sender {
-//    if (_parentsBtn.isSelected) {
-//        [_parentsBtn setSelected:NO];
-//        ((AppDelegate*)SYS_DELEGATE).role = @"none";
-//        _uesrNameTF.placeholder = @"";
-//        
-//    }else {
-    
-        [_parentsBtn setSelected:YES];
-        _uesrNameTF.placeholder = @"用户名";
-        ((AppDelegate*)SYS_DELEGATE).role = @"parents";
-        [_teacherBtn setSelected:NO];
-        [_stuBtn setSelected:NO];
-//    }
+
+    [SYS_CACHE removeObjectForKey:@"AutoLogoin"];
+    [_parentsBtn setSelected:YES];
+    _uesrNameTF.placeholder = @"用户名";
+    ((AppDelegate*)SYS_DELEGATE).role = @"parents";
+    [_teacherBtn setSelected:NO];
+    [_stuBtn setSelected:NO];
+
 }
 
 - (IBAction)stuBtnClicked:(id)sender {
-//    if (_stuBtn.isSelected) {
-//        [_stuBtn setSelected:NO];
-//        ((AppDelegate*)SYS_DELEGATE).role = @"none";
-//        _uesrNameTF.placeholder = @"";
-//        
-//    }else {
-    
-        [_stuBtn setSelected:YES];
-        _uesrNameTF.placeholder = @"用户名";
-        ((AppDelegate*)SYS_DELEGATE).role = @"student";
-        [_parentsBtn setSelected:NO];
-        [_teacherBtn setSelected:NO];
-//    }
+
+    [SYS_CACHE removeObjectForKey:@"AutoLogoin"];
+    [_stuBtn setSelected:YES];
+    _uesrNameTF.placeholder = @"用户名";
+    ((AppDelegate*)SYS_DELEGATE).role = @"student";
+    [_parentsBtn setSelected:NO];
+    [_teacherBtn setSelected:NO];
+
     
 }
 
