@@ -153,10 +153,8 @@
         }
         
         
-        cell.textLabel.text = self.titleArr[indexPath.row];
         
-        
-        //    cell.textLabel.text = model.name;
+            cell.textLabel.text = model.name;
         if(!(cell.textLabel.text == nil)){
             [self.titleArr addObject:cell.textLabel.text];
         }

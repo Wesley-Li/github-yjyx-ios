@@ -22,12 +22,12 @@
 /**
  * QA环境地址
  * **/
-//#define BaseURL @"https://192.168.1.231"
+//#define BaseURL @"https://qa.zgyjyx.net"
 //#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
 
 
 // QA2环境地址
-//#define BaseURL @"https://120.26.235.152"
+//#define BaseURL @"https://njqa.zgyjyx.net"
 //#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
 
 
