@@ -126,15 +126,15 @@
                                                object:nil
      ];
     
-
-   
     [self readDataFromNetwork];
     
-    
-    
-    
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    if(_openMember == 1){
+        [self readDataFromNetwork];
+    }
+}
 - (void)viewDidDisappear:(BOOL)animated
 {
     
@@ -347,30 +347,30 @@
             }
 
             
-                self.responseObject = responseObject;
-                self.microName = responseObject[@"name"];
-                self.knowledgedesc = responseObject[@"knowledgedesc"];
-                self.microNameLabel.text = _microName;
-                NSArray *array = [responseObject[@"quizcontent"] JSONValue][@"questionList"][0][1];
-                NSLog(@"-------%@", array);
-                // id列表
-                for (NSDictionary *dic in array) {
-                    if ([dic[@"level"] isEqual:@1]) {
-                        [self.baseQuestionIDList addObject:dic[@"id"]];
-                    }else if ([dic[@"level"] isEqual:@2]) {
-                        [self.consolidateIDList addObject:dic[@"id"]];
-                    }else {
-                        
-                        [self.improveIDList addObject:dic[@"id"]];
-                    }
-                }
-                
-                if ([[responseObject allKeys] containsObject:@"videoobjlist"]) {
-                    self.microArr = [responseObject[@"videoobjlist"] JSONValue];
-                    self.videoURL = _microArr[0][@"url"];
-                    [self configureWMPlayer];
-                    [self configureTheNumBtn:_microArr];
-                }
+//                self.responseObject = responseObject;
+//                self.microName = responseObject[@"name"];
+//                self.knowledgedesc = responseObject[@"knowledgedesc"];
+//                self.microNameLabel.text = _microName;
+//                NSArray *array1 = [responseObject[@"quizcontent"] JSONValue][@"questionList"][0][1];
+//                NSLog(@"-------%@", array1);
+//                // id列表
+//                for (NSDictionary *dic in array1) {
+//                    if ([dic[@"level"] isEqual:@1]) {
+//                        [self.baseQuestionIDList addObject:dic[@"id"]];
+//                    }else if ([dic[@"level"] isEqual:@2]) {
+//                        [self.consolidateIDList addObject:dic[@"id"]];
+//                    }else {
+//                        
+//                        [self.improveIDList addObject:dic[@"id"]];
+//                    }
+//                }
+//                
+//                if ([[responseObject allKeys] containsObject:@"videoobjlist"]) {
+//                    self.microArr = [responseObject[@"videoobjlist"] JSONValue];
+//                    self.videoURL = _microArr[0][@"url"];
+//                    [self configureWMPlayer];
+//                    [self configureTheNumBtn:_microArr];
+//                }
 
             }
             
@@ -579,7 +579,7 @@
     if (![[self.responseObject allKeys] containsObject:@"videoobjlist"]) {
         
         [self getMemberInfo];
-        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"观看该视频需要会员权限,是否前往试用或成为会员" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"观看该视频需要会员权限,是否前往试用或成为会员?" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             if(self.entity == nil){

@@ -18,7 +18,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="liy-2v-Wbr">
                     <rect key="frame" x="0.0" y="1" width="248" height="75"/>
                     <subviews>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKJ-vl-oWZ">
+                        <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKJ-vl-oWZ">
                             <rect key="frame" x="15" y="14" width="47" height="47"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="lKJ-vl-oWZ" secondAttribute="height" id="UPi-sW-8hQ"/>
@@ -32,7 +32,7 @@
                                 <action selector="answerBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="mha-AT-8ds"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7r-LM-2iO">
+                        <button hidden="YES" opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7r-LM-2iO">
                             <rect key="frame" x="72" y="14" width="47" height="47"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -44,7 +44,7 @@
                                 <action selector="answerBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="FBn-4d-G8b"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rwr-Do-ymv">
+                        <button hidden="YES" opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rwr-Do-ymv">
                             <rect key="frame" x="129" y="14" width="47" height="47"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -56,7 +56,7 @@
                                 <action selector="answerBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="XXv-kl-rvl"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMc-Nj-eev">
+                        <button hidden="YES" opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BMc-Nj-eev">
                             <rect key="frame" x="186" y="14" width="47" height="47"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -124,6 +124,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="c_answerView" destination="liy-2v-Wbr" id="YRJ-UX-TsY"/>
                 <outlet property="choiceAnswerView" destination="liy-2v-Wbr" id="5M6-5U-thC"/>
                 <outlet property="fourBtn" destination="BMc-Nj-eev" id="jgs-a4-l0I"/>
                 <outlet property="nextWorkBtn" destination="xvM-t9-fr6" id="nbp-JW-7YT"/>

@@ -17,5 +17,6 @@
 @property (strong, nonatomic) NSNumber *book_id;// 册号
 @property (copy, nonatomic) NSString *textbookunitid;// 节点id
 
+@property (assign, nonatomic) NSInteger openMember;// 1代表开通了会员
 
 @end

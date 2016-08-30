@@ -10,6 +10,8 @@
 
 @interface YjyxDoingView()<UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *c_answerView;
+
 @property (weak, nonatomic) IBOutlet UIButton *oneBtn;
 @property (weak, nonatomic) IBOutlet UIButton *twoBtn;
 @property (weak, nonatomic) IBOutlet UIButton *threeBtn;
@@ -47,28 +49,62 @@
 }
 - (void)setCount:(NSInteger)count
 {
-    for (int i = 0; i < count; i++) {
-        UITextField *blankAnswer = [[UITextField alloc] init];
-        blankAnswer.tag = i + 200;
-        blankAnswer.delegate = self;
-//        blankAnswer1.borderStyle = UITextBorderStyleLine;
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 15, 39)];
-        label.text = [NSString stringWithFormat:@"%d", i + 1];
-        label.textAlignment = NSTextAlignmentCenter;
-        
-        blankAnswer.leftView = label;
-        blankAnswer.leftViewMode = UITextFieldViewModeAlways;
-        blankAnswer.backgroundColor = [UIColor whiteColor];
-        blankAnswer.placeholder = @" 请填写答案";
-        blankAnswer.frame = CGRectMake(0, 40 * i , SCREEN_WIDTH - 70, 40 -1);
-        [self.scrollView addSubview:blankAnswer];
-    }
-    if(count == 1){
-        UIView *blankAnswer = [[UIView alloc] init];
-        blankAnswer.backgroundColor = [UIColor whiteColor];
-        blankAnswer.userInteractionEnabled = NO;
-        blankAnswer.frame = CGRectMake(0, 40 , SCREEN_WIDTH - 70, 40 -1);
-        [self.scrollView addSubview:blankAnswer];
+    if(self.scrollView.hidden == NO){
+        for (int i = 0; i < count; i++) {
+            UITextField *blankAnswer = [[UITextField alloc] init];
+            blankAnswer.tag = i + 200;
+            blankAnswer.delegate = self;
+    //        blankAnswer1.borderStyle = UITextBorderStyleLine;
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 15, 39)];
+            label.text = [NSString stringWithFormat:@"%d", i + 1];
+            label.textAlignment = NSTextAlignmentCenter;
+            
+            blankAnswer.leftView = label;
+            blankAnswer.leftViewMode = UITextFieldViewModeAlways;
+            blankAnswer.backgroundColor = [UIColor whiteColor];
+            blankAnswer.placeholder = @" 请填写答案";
+            blankAnswer.frame = CGRectMake(0, 40 * i , SCREEN_WIDTH - 70, 40 -1);
+            [self.scrollView addSubview:blankAnswer];
+        }
+        if(count == 1){
+            UIView *blankAnswer = [[UIView alloc] init];
+            blankAnswer.backgroundColor = [UIColor whiteColor];
+            blankAnswer.userInteractionEnabled = NO;
+            blankAnswer.frame = CGRectMake(0, 40 , SCREEN_WIDTH - 70, 40 -1);
+            [self.scrollView addSubview:blankAnswer];
+        }
+    }else{
+        NSArray *choiceAnswer = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L"];
+        CGFloat margin = 3;
+        CGFloat BtnWH = 0;
+        if(count <= 5){
+            BtnWH = (SCREEN_WIDTH - 70 - (count + 1) * margin) / count;
+            if(BtnWH >= 70){
+                BtnWH = 60;
+            }
+        }else{
+            BtnWH = 35;
+            margin = (SCREEN_WIDTH - 70 - 5 * BtnWH) / 6;
+           
+        }
+        for (int i = 0; i < count; i++) {
+            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [btn setTitle:choiceAnswer[i] forState:UIControlStateNormal];
+            btn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            btn.layer.borderWidth = 1;
+            [btn addTarget:self action:@selector(answerBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            btn.tag = i + 1;
+            [self.c_answerView addSubview:btn];
+            btn.width = BtnWH;
+            btn.height = BtnWH;
+            if(count <= 5){
+                btn.center = CGPointMake(margin + BtnWH / 2 + (margin + BtnWH) * (i % 5), 79 / 2);
+            }else{
+                btn.center = CGPointMake(margin + BtnWH / 2 + (margin + BtnWH) * (i % 5), 79 / 4 + (79  * 2 / 4) * (i / 5));
+            }
+            
+        }
     }
 }
 - (IBAction)nextWorkBtnClick:(UIButton *)sender {

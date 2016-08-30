@@ -60,18 +60,7 @@
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uny-44-H5H">
                             <rect key="frame" x="38" y="0.0" width="155" height="64"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="草稿板" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNX-Vb-kx8">
-                                    <rect key="frame" x="52" y="31" width="51" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="VNX-Vb-kx8" firstAttribute="centerX" secondItem="uny-44-H5H" secondAttribute="centerX" id="XpZ-VQ-5M2"/>
-                            </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.8980392157" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -82,7 +71,6 @@
                         <constraint firstItem="5yb-GA-qi1" firstAttribute="centerY" secondItem="9oF-rq-dE8" secondAttribute="centerY" id="Lx1-Cf-l8b"/>
                         <constraint firstAttribute="bottom" secondItem="b8E-b4-fvb" secondAttribute="bottom" constant="8" id="MPF-7e-dYz"/>
                         <constraint firstAttribute="bottom" secondItem="uny-44-H5H" secondAttribute="bottom" id="Mbf-Mc-2aa"/>
-                        <constraint firstItem="VNX-Vb-kx8" firstAttribute="centerY" secondItem="b8E-b4-fvb" secondAttribute="centerY" id="NH4-Jd-sda"/>
                         <constraint firstAttribute="height" constant="64" id="XLf-e8-tI2"/>
                         <constraint firstAttribute="trailing" secondItem="9oF-rq-dE8" secondAttribute="trailing" constant="17" id="d7B-5D-uKW"/>
                         <constraint firstItem="9oF-rq-dE8" firstAttribute="centerY" secondItem="b8E-b4-fvb" secondAttribute="centerY" id="dae-fs-tT6"/>
@@ -111,7 +99,7 @@
             <connections>
                 <outlet property="drawView" destination="Qrd-Rg-6l9" id="aax-3j-nQi"/>
             </connections>
-            <point key="canvasLocation" x="218" y="145"/>
+            <point key="canvasLocation" x="30" y="113"/>
         </view>
     </objects>
     <resources>

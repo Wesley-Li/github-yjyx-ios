@@ -232,7 +232,7 @@
         }else{
             YjyxParentModifyPwdController *vc = [[YjyxParentModifyPwdController alloc] init];
             [vc setHidesBottomBarWhenPushed:YES];
-            vc.roleType = @2;
+            vc.roleType = @1;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else if (indexPath.section == 1) {

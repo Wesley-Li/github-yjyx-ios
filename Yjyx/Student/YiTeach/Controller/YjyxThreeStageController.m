@@ -186,6 +186,7 @@ static NSString *ID = @"CELL";
         YjyxThreeStageAnswerController *vc = [[YjyxThreeStageAnswerController alloc] init];
         vc.threeStageSubjectArr = self.threeStageArr;
         vc.subjectid  = self.subjectid;
+        vc.randomFiveArr = self.randomFiveArr;
         [self.navigationController pushViewController:vc animated:YES];
         
     }];

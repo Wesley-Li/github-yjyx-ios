@@ -12,7 +12,9 @@
 #import "DataSigner.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "YjyxPayDetailViewController.h"
-
+#import "YjyxStuWrongListViewController.h"
+#import "YjyxWorkDetailController.h"
+#import "YjyxThreeStageAnswerController.h"
 @interface YjyxMemberDetailViewController ()<UIWebViewDelegate>
 {
     UIView *chooseView;
@@ -216,6 +218,13 @@
             if (result != nil) {
                 if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                     [self getStudentStatus];//开通以后重新刷新界面
+                    for (UIViewController *vc in self.navigationController.childViewControllers) {
+                        if ([vc isKindOfClass:[YjyxStuWrongListViewController class]] || [vc isKindOfClass:[YjyxWorkDetailController class]] || [vc isKindOfClass:[YjyxThreeStageAnswerController class]]) {
+                            ((YjyxStuWrongListViewController *)vc).openMember = 1;
+//                            [self.navigationController popToViewController:vc animated:YES];
+                            break;
+                        }
+                    }
                 }else{
                     [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
                 }

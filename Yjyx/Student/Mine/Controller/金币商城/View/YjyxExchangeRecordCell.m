@@ -30,6 +30,11 @@
     UIPasteboard *pab = [UIPasteboard generalPasteboard];
     NSString *string = self.descLabel.text;
     [pab setString:string];
+    if(pab == nil){
+        [SVProgressHUD showErrorWithStatus:@"复制失败"];
+    }else{
+        [SVProgressHUD showSuccessWithStatus:@"复制成功"];
+    }
 }
 
 - (void)setRecordModel:(YjyxExchangeRecordModel *)recordModel

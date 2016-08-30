@@ -16,13 +16,15 @@
 
 @property (weak, nonatomic) IBOutlet UIView *bg_view;
 
+@property (weak, nonatomic) UIWebView *web;
+
 @end
 
 @implementation SolutionCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+   
 }
 
 
@@ -46,10 +48,12 @@
         web.scrollView.scrollEnabled = NO;
         web.scrollView.bounces = NO;
         web.delegate = self;
-        [web loadHTMLString:jsString baseURL:nil];
         [self.bg_view addSubview:web];
+        [web loadHTMLString:jsString baseURL:nil];
+        
         
     }
+    
     
     
 }
@@ -73,6 +77,7 @@
     [webView stringByEvaluatingJavaScriptFromString:js];
     [webView stringByEvaluatingJavaScriptFromString:@"imgAutoFit()"];
     
+    NSLog(@"%@", NSStringFromCGSize(webView.scrollView.contentSize));
     frame.size.height = webView.scrollView.contentSize.height;
     webView.frame = frame;
     

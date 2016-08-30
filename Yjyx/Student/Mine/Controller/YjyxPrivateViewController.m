@@ -219,7 +219,7 @@
             [self.navigationController pushViewController:phoneVC animated:YES];
         }else{
             YjyxParentModifyPwdController *vc = [[YjyxParentModifyPwdController alloc] init];
-            vc.roleType = @3;
+            vc.roleType = @2;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else if (indexPath.section == 1) {
