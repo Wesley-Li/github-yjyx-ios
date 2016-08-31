@@ -96,6 +96,10 @@ static NSString *HomeADID = @"HomeADID";
     // 注册公告cell
     [self.collectView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxHomeAdCell class]) bundle:nil] forCellWithReuseIdentifier:HomeADID];
     
+    if (((AppDelegate *)SYS_DELEGATE).isComeFromNoti) {
+        [self stuPushSwitch];
+    }
+    
 //    self.workTableV.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
 
 

@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *rightLabel;
 @property (weak, nonatomic) IBOutlet UILabel *wrongLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *lineChartScrollview;
 
@@ -64,6 +65,12 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = COMMONCOLOR;
     self.lineImageView.backgroundColor = COMMONCOLOR;
+    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.tipLabel.bounds byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii:CGSizeMake(5, 5)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = _tipLabel.bounds;
+    maskLayer.path = maskPath.CGPath;
+    self.tipLabel.layer.mask = maskLayer;
     
     [self getDataFromNet];
     

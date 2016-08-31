@@ -17,6 +17,7 @@
 //从外部传递的 笔刷长度和宽度，在包含画板的VC中 要是颜色、粗细有所改变 都应该将对应的值传进来
 @property (nonatomic,strong)UIColor *currentPaintBrushColor;
 @property (nonatomic)float currentPaintBrushWidth;
+@property (nonatomic, assign) double num;
 
 + (YjyxDrawLine *)defaultLine;
 

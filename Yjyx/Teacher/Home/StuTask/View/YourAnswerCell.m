@@ -93,6 +93,7 @@
                 numLabel.layer.cornerRadius = 7.5;
                 numLabel.layer.masksToBounds = YES;
                 numLabel.textAlignment = NSTextAlignmentCenter;
+                numLabel.font = [UIFont systemFontOfSize:11];
                 numLabel.textColor = [UIColor whiteColor];
                 numLabel.text = [NSString stringWithFormat:@"%ld", [[processArr[i] objectForKey:@"teachervoice"] count]];
                 [voiceView addSubview:numLabel];

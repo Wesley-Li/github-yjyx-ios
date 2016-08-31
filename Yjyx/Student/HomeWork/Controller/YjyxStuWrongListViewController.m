@@ -71,8 +71,8 @@
     self.navigationController.navigationBarHidden = NO;
     self.index = 0;
     self.count = 20;
-    if ([self.targetListArr count] - self.index < 20) {
-        self.count = [self.targetListArr count] - 1 - self.index;
+    if ([self.targetListArr count] < 20) {
+        self.count = [self.targetListArr count];
     }
     
     self.tempArr = [self.targetListArr subarrayWithRange:NSMakeRange(self.index, self.count)];
@@ -124,8 +124,8 @@
         
         self.index = 0;
         self.count = 20;
-        if ([self.targetListArr count] - self.index < 20) {
-            self.count = [self.targetListArr count] - 1 - self.index;
+        if ([self.targetListArr count] < 20) {
+            self.count = [self.targetListArr count];
         }
         self.tempArr = [self.targetListArr subarrayWithRange:NSMakeRange(self.index, self.count)];
 
@@ -163,7 +163,6 @@
     [manager GET:[BaseURL stringByAppendingString:STUDENT_GET_WRONG_LIST_GET] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
         if ([responseObject[@"retcode"] isEqual:@0]) {
-            
             NSLog(@"======%ld", [responseObject[@"data"] count]);
             
             for (NSDictionary *dic in responseObject[@"data"]) {
@@ -174,9 +173,10 @@
             }
             
             NSLog(@"----%ld", self.dataSource.count);
-            self.index = self.dataSource.count;
-            if (self.index == [[self.targetlist JSONValue] count]) {
+            self.index += 20;
+            if (self.dataSource.count == [[self.targetlist JSONValue] count]) {
                 self.tableView.footerRefreshingText = @"没有更多了";
+                self.index = self.dataSource.count;
             }
             
 

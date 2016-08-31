@@ -152,9 +152,11 @@
             
         }
         
+        if (self.titleArr.count) {
+            cell.textLabel.text = self.titleArr[indexPath.row];
+
+        }
         
-        
-            cell.textLabel.text = model.name;
         if(!(cell.textLabel.text == nil)){
             [self.titleArr addObject:cell.textLabel.text];
         }
@@ -182,7 +184,10 @@
         ClassDetailViewController *detailVC = [[ClassDetailViewController alloc] initWithNibName:@"ClassDetailViewController" bundle:nil];
         if (indexPath.row < self.dataSource.count) {
            detailVC.model = self.dataSource[indexPath.row];
-           detailVC.navigationItem.title = self.titleArr[indexPath.row];
+            if (self.titleArr.count) {
+                detailVC.navigationItem.title = self.titleArr[indexPath.row];
+
+            }
         }else{
             detailVC.groupModel = self.groupArr[indexPath.row - self.dataSource.count];
         }

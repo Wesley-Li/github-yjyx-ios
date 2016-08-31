@@ -16,7 +16,7 @@
     IBOutlet UIButton *openBtn;
     IBOutlet UIButton *payBtn;
     UIView *productView;
-    RCLabel *contentLb;
+    UILabel *contentLb;
     IBOutlet UILabel *titleLb;
 }
 
