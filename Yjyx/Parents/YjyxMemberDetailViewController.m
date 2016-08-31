@@ -16,6 +16,9 @@
 #import "YjyxWorkDetailController.h"
 #import "YjyxThreeStageAnswerController.h"
 #import "YiTeachMicroController.h"
+
+#import "ChildrenResultViewController.h"
+
 @interface YjyxMemberDetailViewController ()<UIWebViewDelegate>
 {
     UIView *chooseView;
@@ -217,7 +220,9 @@
                 if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                     [self getStudentStatus];//开通以后重新刷新界面
                     for (UIViewController *vc in self.navigationController.childViewControllers) {
-                        if ([vc isKindOfClass:[YjyxStuWrongListViewController class]] || [vc isKindOfClass:[YjyxWorkDetailController class]] || [vc isKindOfClass:[YjyxThreeStageAnswerController class]] || [vc isKindOfClass:[YiTeachMicroController class]]) {
+
+                        if ([vc isKindOfClass:[YjyxStuWrongListViewController class]] || [vc isKindOfClass:[YjyxWorkDetailController class]] || [vc isKindOfClass:[YjyxThreeStageAnswerController class]] || [vc isKindOfClass:[YiTeachMicroController class]] || [vc isKindOfClass:[ChildrenResultViewController class]]) {
+
                             ((YjyxStuWrongListViewController *)vc).openMember = 1;
 //                            [self.navigationController popToViewController:vc animated:YES];
                             break;

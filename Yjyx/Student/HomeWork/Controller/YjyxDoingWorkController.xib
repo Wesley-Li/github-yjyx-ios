@@ -8,10 +8,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YjyxDoingWorkController">
             <connections>
                 <outlet property="answerWorkCardBtn" destination="GZF-lg-Ghx" id="WDm-XB-Uvs"/>
+                <outlet property="bgCollectionView" destination="8eh-UR-cGq" id="SE0-zE-0KN"/>
                 <outlet property="bgView" destination="npi-hj-PX9" id="je6-Ju-X5j"/>
-                <outlet property="bottomConstrait" destination="ilf-lr-0qd" id="fRM-9F-t3c"/>
                 <outlet property="consumeTimeLabel" destination="fue-Wm-Pud" id="YMA-3y-5le"/>
-                <outlet property="scrollView" destination="cU6-MX-Few" id="7tw-fa-tIJ"/>
                 <outlet property="titlenumberLabel" destination="4Ud-IZ-XhU" id="IlZ-tr-vIb"/>
                 <outlet property="totalTitleLabel" destination="FHC-p0-y4a" id="apN-5U-OBo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -87,7 +86,7 @@
                                     </constraints>
                                     <state key="normal" image="comm_back.png"/>
                                     <connections>
-                                        <action selector="backBtnClick:" destination="-1" eventType="touchUpInside" id="WfU-Xm-F18"/>
+                                        <action selector="backBtnClick:" destination="-1" eventType="touchUpInside" id="ZyO-nu-SdI"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZF-lg-Ghx">
@@ -171,26 +170,36 @@
                         <constraint firstAttribute="trailing" secondItem="npi-hj-PX9" secondAttribute="trailing" id="cd3-Dd-uGT"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cU6-MX-Few">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="8eh-UR-cGq">
                     <rect key="frame" x="0.0" y="124" width="320" height="444"/>
-                </scrollView>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oId-Ft-JDd">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="MdV-M1-oeR"/>
+                        <outlet property="delegate" destination="-1" id="Tu8-CT-iTx"/>
+                    </connections>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" red="0.86666666670000003" green="0.87450980389999999" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="8eh-UR-cGq" firstAttribute="top" secondItem="thN-19-vjW" secondAttribute="bottom" constant="10" id="2hz-IA-cr1"/>
                 <constraint firstAttribute="trailing" secondItem="bEv-fi-Zth" secondAttribute="trailing" id="4Ml-Kx-GLb"/>
-                <constraint firstAttribute="trailing" secondItem="cU6-MX-Few" secondAttribute="trailing" id="A5p-6U-67T"/>
+                <constraint firstItem="8eh-UR-cGq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Aii-dR-n71"/>
                 <constraint firstItem="bEv-fi-Zth" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="DMI-1q-A4Z"/>
-                <constraint firstItem="cU6-MX-Few" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EAf-C7-CeN"/>
                 <constraint firstItem="thN-19-vjW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="U6j-6D-1wW"/>
                 <constraint firstAttribute="trailing" secondItem="thN-19-vjW" secondAttribute="trailing" id="Vld-gV-aye"/>
-                <constraint firstAttribute="bottom" secondItem="cU6-MX-Few" secondAttribute="bottom" id="ilf-lr-0qd"/>
+                <constraint firstAttribute="trailing" secondItem="8eh-UR-cGq" secondAttribute="trailing" id="XvQ-IU-XHE"/>
                 <constraint firstItem="thN-19-vjW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lr8-M4-iQR"/>
                 <constraint firstItem="thN-19-vjW" firstAttribute="top" secondItem="bEv-fi-Zth" secondAttribute="bottom" id="lyO-jD-2dS"/>
-                <constraint firstItem="cU6-MX-Few" firstAttribute="top" secondItem="thN-19-vjW" secondAttribute="bottom" constant="10" id="pdb-BY-sHV"/>
+                <constraint firstAttribute="bottom" secondItem="8eh-UR-cGq" secondAttribute="bottom" id="wBs-BK-94k"/>
                 <constraint firstItem="bEv-fi-Zth" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wMh-kv-JEe"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="576" y="-120"/>
+            <point key="canvasLocation" x="500" y="-118"/>
         </view>
     </objects>
     <resources>

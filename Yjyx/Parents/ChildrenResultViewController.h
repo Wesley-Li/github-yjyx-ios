@@ -14,6 +14,6 @@
 @property (nonatomic,strong) NSString *taskResultId;
 @property (nonatomic,copy) NSString *childrenName;
 
-
+@property (assign, nonatomic) NSInteger openMember; // 1代表开通了会员
 
 @end

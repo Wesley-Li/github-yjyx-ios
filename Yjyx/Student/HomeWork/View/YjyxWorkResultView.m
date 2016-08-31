@@ -9,7 +9,7 @@
 #import "YjyxWorkResultView.h"
 #import "YjyxDoingWorkModel.h"
 #import "Masonry.h"
-
+#import "YjyxDoingWorkModel.h"
 @interface YjyxWorkResultView()
 @property (weak, nonatomic) UIButton *submitBtn;
 
@@ -60,32 +60,28 @@
 - (void)setWorkType:(NSMutableArray *)workType andArr:(NSMutableArray *)arr
 {
     CGFloat margin = (SCREEN_WIDTH - 45 * 6) / 7;
-    for (int i = 0; i < arr.count; i++) {
+    for (int i = 0; i < workType.count; i++) {
+        YjyxDoingWorkModel *model = workType[i];
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame = CGRectMake((margin + 45) * (i % 6) + margin, margin + (margin + 45) * (i / 6), 45, 45);
         [btn setTitle:[NSString stringWithFormat:@"%d", i + 1] forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(workNumBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         btn.tag = i + 1;
-        if([workType[i] questiontype] == 1){ // 选择题
-        if ([arr[i] count] != 0) {
-            btn.backgroundColor = STUDENTCOLOR;
-            self.layer.borderWidth = 0;
-            btn.layer.cornerRadius = btn.height / 2;
-        }else{
-        btn.layer.borderWidth = 1;
-        btn.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        btn.layer.cornerRadius = btn.height / 2;
-        }
-        }else{ // 填空题
-            NSInteger flag = 0;
-            for (NSString *str in arr[i]) {
-                if(str.length != 0){
-                    flag = 1;
-                    break;
-                }
+        if(model.questiontype == 1){ // 选择题
+        if ( model.answerArr.count != 0) {
+                btn.backgroundColor = STUDENTCOLOR;
+                self.layer.borderWidth = 0;
+                btn.layer.cornerRadius = btn.height / 2;
+            }else{
+                btn.layer.borderWidth = 1;
+                btn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+                btn.layer.cornerRadius = btn.height / 2;
             }
-            if(flag == 1){
+        }else{ // 填空题
+            NSString *str = [model.blankfillArr componentsJoinedByString:@""];
+            str = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
+             if(![str isEqualToString:@""]){
                 btn.backgroundColor = STUDENTCOLOR;
                 self.layer.borderWidth = 0;
                 btn.layer.cornerRadius = btn.height / 2;
@@ -100,7 +96,9 @@
 //    if(self.bgView.frame.size.height > SCREEN_HEIGHT - 64){
 //        self.bgView.height = SCREEN_HEIGHT - 64;
 //    }
-     self.submitBtn.y = (margin + 45) * ( 1 + (arr.count - 1) / 6) + 65;
+
+     self.submitBtn.y = (margin + 45) * ( 1 + (workType.count - 1) / 6) + 65;
+
 
 }
 

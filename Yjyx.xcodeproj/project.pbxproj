@@ -468,6 +468,8 @@
 		3CE18EA31D2122ED007E0874 /* ReleaseStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE18EA11D2122ED007E0874 /* ReleaseStudentCell.m */; };
 		3CE18EA41D2122ED007E0874 /* ReleaseStudentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE18EA21D2122ED007E0874 /* ReleaseStudentCell.xib */; };
 		3CE22BB31D5AB7A600536082 /* YjyxHomeAdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE22BB21D5AB7A600536082 /* YjyxHomeAdController.m */; };
+		3CE67C031D75747A00341783 /* YjyxDoWorkCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE67C011D75747A00341783 /* YjyxDoWorkCollectionCell.m */; };
+		3CE67C041D75747A00341783 /* YjyxDoWorkCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CE67C021D75747A00341783 /* YjyxDoWorkCollectionCell.xib */; };
 		3CEA95A21D30973500F4773D /* YjyxDoingWorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA95A11D30973500F4773D /* YjyxDoingWorkModel.m */; };
 		3CEA95A51D30F18E00F4773D /* YjyxWorkResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA95A41D30F18E00F4773D /* YjyxWorkResultView.m */; };
 		3CECA4AB1D2C99310039DCB6 /* YjyxTimeField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CECA4AA1D2C99310039DCB6 /* YjyxTimeField.m */; };
@@ -1331,6 +1333,9 @@
 		3CE18EA21D2122ED007E0874 /* ReleaseStudentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseStudentCell.xib; sourceTree = "<group>"; };
 		3CE22BB11D5AB7A600536082 /* YjyxHomeAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxHomeAdController.h; sourceTree = "<group>"; };
 		3CE22BB21D5AB7A600536082 /* YjyxHomeAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxHomeAdController.m; sourceTree = "<group>"; };
+		3CE67C001D75747A00341783 /* YjyxDoWorkCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxDoWorkCollectionCell.h; sourceTree = "<group>"; };
+		3CE67C011D75747A00341783 /* YjyxDoWorkCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxDoWorkCollectionCell.m; sourceTree = "<group>"; };
+		3CE67C021D75747A00341783 /* YjyxDoWorkCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxDoWorkCollectionCell.xib; sourceTree = "<group>"; };
 		3CEA95A01D30973500F4773D /* YjyxDoingWorkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxDoingWorkModel.h; sourceTree = "<group>"; };
 		3CEA95A11D30973500F4773D /* YjyxDoingWorkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxDoingWorkModel.m; sourceTree = "<group>"; };
 		3CEA95A31D30F18E00F4773D /* YjyxWorkResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxWorkResultView.h; sourceTree = "<group>"; };
@@ -2827,6 +2832,9 @@
 				3CFE92771D338CB2004DE4A8 /* YjyxDrawView.m */,
 				3CFE92791D3394ED004DE4A8 /* YjyxBezierPath.h */,
 				3CFE927A1D3394ED004DE4A8 /* YjyxBezierPath.m */,
+				3CE67C001D75747A00341783 /* YjyxDoWorkCollectionCell.h */,
+				3CE67C011D75747A00341783 /* YjyxDoWorkCollectionCell.m */,
+				3CE67C021D75747A00341783 /* YjyxDoWorkCollectionCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3883,6 +3891,7 @@
 				80D978E81D265BAF000BD95E /* CustomSectionView.xib in Resources */,
 				3BB773A91CD8784000A24485 /* BookViewController.xib in Resources */,
 				3BCF19251CDC66E600E2EA1A /* stu_pic.png in Resources */,
+				3CE67C041D75747A00341783 /* YjyxDoWorkCollectionCell.xib in Resources */,
 				80FEB6891D1BB545009EB126 /* StudentViewController.xib in Resources */,
 				3CE15F691D6EBA920082DE23 /* YjyxConvertDetailCell.xib in Resources */,
 				3BB773AE1CD8786900A24485 /* TestViewController.xib in Resources */,
@@ -4176,6 +4185,7 @@
 				801F44A81CDF164800B7E7E1 /* DataSigner.m in Sources */,
 				8013D33D1CF4552700F82301 /* StudentDetailController.m in Sources */,
 				3CD7E45B1D2B593800769FDE /* UIView+MJExtension.m in Sources */,
+				3CE67C031D75747A00341783 /* YjyxDoWorkCollectionCell.m in Sources */,
 				807959341CD217BC00C9B841 /* ClassDetailViewController.m in Sources */,
 				3AA1655D1C91AB40006B8756 /* RegexKitLite.m in Sources */,
 				3A8CAE911C70A11800BDEB6B /* ParentMoifyNameViewController.m in Sources */,

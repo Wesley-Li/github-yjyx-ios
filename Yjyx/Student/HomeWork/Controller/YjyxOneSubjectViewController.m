@@ -230,19 +230,19 @@ static NSString *ID = @"CELL";
     // 已完成
     YjyxTodayWorkModel *model = self.allWorkArray[indexPath.row];
     YjyxWorkDetailController *workDetailVc = [[YjyxWorkDetailController alloc] init];
-    workDetailVc.title = model.task_description;
+    workDetailVc.title = model.resourcename;
     workDetailVc.taskType = model.tasktype;
     workDetailVc.t_id = model.t_id;
     // 做普通作业
     YjyxWorkPreviewViewController *doingVc = [[YjyxWorkPreviewViewController alloc] init];
     doingVc.taskid = model.task_id;
     doingVc.examid = model.task_relatedresourceid;
-    doingVc.title = model.task_description;
+    doingVc.title = model.resourcename;
     // 做微课作业
     YjyxMicroClassViewController *microVc = [[YjyxMicroClassViewController alloc] init];
     microVc.taskid = model.task_id;
     microVc.lessonid = model.task_relatedresourceid;
-    microVc.title = model.task_description;
+    microVc.title = model.resourcename;
     
     if ([model.finished isEqual:@1]) {
         NSLog(@"%@", self.subjectid);

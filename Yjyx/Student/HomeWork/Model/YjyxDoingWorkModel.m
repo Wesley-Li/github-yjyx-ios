@@ -18,6 +18,16 @@
     model.content = dict[@"content"];
     model.answer = dict[@"answer"];
     model.t_id = dict[@"id"];
+    model.processImgUrlArr = [NSMutableArray array];
+    model.processAssetArr = [NSMutableArray array];
+  
+    model.answerArr = [NSMutableArray array];;
+    model.processImgArr = [NSMutableArray array];
+    model.blankfillArr = [NSMutableArray array];
+    for (int i = 0; i < [model.blankcount integerValue]; i++) {
+        NSString *str = @"";
+        [model.blankfillArr addObject:str];
+    }
     return model;
 }
 @end

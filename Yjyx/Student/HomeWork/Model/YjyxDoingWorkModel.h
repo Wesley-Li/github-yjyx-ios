@@ -18,5 +18,12 @@
 @property (strong, nonatomic) NSString *content;
 @property (strong, nonatomic) NSNumber *t_id;
 
+@property (strong, nonatomic) NSMutableArray *processImgArr;
+@property (strong, nonatomic) NSMutableArray *processAssetArr;
+@property (strong, nonatomic) NSMutableArray *processImgUrlArr;
+@property (strong, nonatomic) NSMutableArray *answerArr;
+@property (strong, nonatomic) NSMutableArray *blankfillArr;
+
+@property (assign, nonatomic) NSInteger drainTime; // 消耗的时间
 + (instancetype)doingWorkModelWithDict:(NSDictionary *)dict;
 @end

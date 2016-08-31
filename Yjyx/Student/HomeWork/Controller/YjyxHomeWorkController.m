@@ -409,14 +409,14 @@ static NSString *HomeADID = @"HomeADID";
             workDetailVc.t_id = model.t_id;
             // 未完成之普通作业
             YjyxWorkPreviewViewController *doingVc = [[YjyxWorkPreviewViewController alloc] init];
+            doingVc.title = model.resourcename;
             doingVc.taskid = model.task_id;
             doingVc.examid = model.task_relatedresourceid;
-            doingVc.title = model.task_description;
             // 未完成之微课作业
             YjyxMicroClassViewController *microVc = [[YjyxMicroClassViewController alloc] init];
             microVc.taskid = model.task_id;
             microVc.lessonid = model.task_relatedresourceid;
-            microVc.title = model.task_description;
+            microVc.title = model.resourcename;
             
             if ([model.finished isEqual:@1]) {
                 YjyxHomeDataModel *model = self.subjectTypeArr[indexPath.section];
@@ -535,17 +535,6 @@ static NSString *HomeADID = @"HomeADID";
 
     
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 @end
