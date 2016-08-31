@@ -222,7 +222,7 @@
             [self.navigationController pushViewController:vc animated:YES];
         }else{
             YjyxParentModifyPwdController *modifyPwdVc = [[YjyxParentModifyPwdController alloc] init];
-            modifyPwdVc.roleType = @1;
+            modifyPwdVc.roleType = @3;
             [modifyPwdVc setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:modifyPwdVc animated:YES];
         }

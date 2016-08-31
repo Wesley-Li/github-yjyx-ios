@@ -125,7 +125,7 @@
     UILabel *label = [[UILabel alloc] init];
     self.promptLabel = label;
     [self.bgView addSubview:label];
-    label.text = @"您账户积分不足";
+    label.text = @"您账户金币不足";
     label.font = [UIFont systemFontOfSize:13];
     label.textColor = RGBACOLOR(255.0, 90.0, 18.0, 1);
     [label sizeToFit];

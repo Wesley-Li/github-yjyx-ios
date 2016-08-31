@@ -14,6 +14,8 @@
 #import "YjyxStuWrongListViewController.h"
 #import "YjyxWorkDetailController.h"
 #import "YjyxThreeStageAnswerController.h"
+#import "YiTeachMicroController.h"
+#import "ChildrenResultViewController.h"
 @interface YjyxPayDetailViewController ()
 {
     UIView *chooseView;
@@ -332,7 +334,7 @@
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             for (UIViewController *vc in self.navigationController.childViewControllers) {
-                if ([vc isKindOfClass:[YjyxStuWrongListViewController class]] || [vc isKindOfClass:[YjyxWorkDetailController class]] || [vc isKindOfClass:[YjyxThreeStageAnswerController class]]) {
+                if ([vc isKindOfClass:[YjyxStuWrongListViewController class]] || [vc isKindOfClass:[YjyxWorkDetailController class]] || [vc isKindOfClass:[YjyxThreeStageAnswerController class]] || [vc isKindOfClass:[YiTeachMicroController class]] || [vc isKindOfClass:[ChildrenResultViewController class]]) {
                     ((YjyxStuWrongListViewController *)vc).openMember = 1;
                     [self.navigationController popToViewController:vc animated:YES];
                     break;
