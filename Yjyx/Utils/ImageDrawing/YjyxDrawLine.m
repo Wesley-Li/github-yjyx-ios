@@ -74,18 +74,23 @@ static YjyxDrawLine *drawLine = nil;
     [info.linePoints addObject:[NSValue valueWithCGPoint:bPoint]];
     
     [self.allMyDrawPaletteLineInfos addObject:info];
+    self.num = self.allMyDrawPaletteLineInfos.count;
 }
 
 //在触摸移动的时候 将现有的线条的最后一条的 point增加相应的触摸过的坐标
 - (void)drawPaletteTouchesMovedWithPonit:(CGPoint)mPoint {
     YjyxDrawlineInfo *lastInfo = [self.allMyDrawPaletteLineInfos lastObject];
     [lastInfo.linePoints addObject:[NSValue valueWithCGPoint:mPoint]];
+    self.num = self.allMyDrawPaletteLineInfos.count;
+
 }
 
 // 清空
 - (void)cleanAllDrawBySelf {
     if ([self.allMyDrawPaletteLineInfos count]>0)  {
         [self.allMyDrawPaletteLineInfos removeAllObjects];
+        self.num = self.allMyDrawPaletteLineInfos.count;
+
         [self setNeedsDisplay];
     }
 }
@@ -95,6 +100,8 @@ static YjyxDrawLine *drawLine = nil;
     if ([self.allMyDrawPaletteLineInfos count]>0) {
         [self.tempInfos addObject:self.allMyDrawPaletteLineInfos.lastObject];
         [self.allMyDrawPaletteLineInfos  removeLastObject];
+        self.num = self.allMyDrawPaletteLineInfos.count;
+
     }
     [self setNeedsDisplay];
 }
@@ -105,6 +112,8 @@ static YjyxDrawLine *drawLine = nil;
     if ([self.tempInfos count] > 0) {
         [self.allMyDrawPaletteLineInfos addObject:self.tempInfos.lastObject];
         [self.tempInfos removeLastObject];
+        self.num = self.allMyDrawPaletteLineInfos.count;
+
     }
     [self setNeedsDisplay];
 }

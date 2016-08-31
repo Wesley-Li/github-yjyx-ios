@@ -29,7 +29,7 @@
 
 //@property (nonatomic, strong) dispatch_source_t timer;// 定时器
 @property (nonatomic, strong) NSMutableArray *stuListArr;
-
+@property (nonatomic, assign) BOOL isComeFromNoti;
 
 
 - (void)fillViews;

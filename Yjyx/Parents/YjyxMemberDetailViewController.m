@@ -40,19 +40,16 @@
     
     self.navigationItem.title = [_productEntity.subject_name stringByAppendingString:@"会员"];
     titleLb.text = [NSString stringWithFormat:@"%@会员特权",self.productEntity.subject_name];
+    NSLog(@"%@", self.productEntity.content);
     
-    NSString *content = [self.productEntity.content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    // 此处rclabel暂时不受影响,可不改
-    contentLb = [[RCLabel alloc] initWithFrame:CGRectMake(35, 46, SCREEN_WIDTH - 50, 999)];
-    contentLb.userInteractionEnabled = NO;
+    contentLb = [[UILabel alloc] initWithFrame:CGRectMake(35, 46, SCREEN_WIDTH - 50, 50)];
     contentLb.font = [UIFont systemFontOfSize:12];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    contentLb.componentsAndPlainText = componentsDS;
-    CGSize optimalSize = [contentLb optimumSize];
-    contentLb.frame = CGRectMake(35, 46, optimalSize.width, optimalSize.height);
+    NSAttributedString *attString = [[NSAttributedString alloc] initWithData:[self.productEntity.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    contentLb.attributedText = attString;
+    CGFloat height = [contentLb.attributedText boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 50, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size.height;
+    contentLb.frame = CGRectMake(35, 46, SCREEN_WIDTH - 50, height);
     [self.view addSubview:contentLb];
     
-
     // Do any additional setup after loading the view from its nib.
 }
 

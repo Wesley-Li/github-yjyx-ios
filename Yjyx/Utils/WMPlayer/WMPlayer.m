@@ -64,6 +64,8 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         
         //bottomView
         self.bottomView = [[UIView alloc]init];
+        self.bottomView.backgroundColor = [UIColor blackColor];
+        self.bottomView.alpha = 0.5;
         [self addSubview:self.bottomView];
         //autoLayout bottomView
         [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -290,7 +292,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 - (void)handleSingleTap{
     [UIView animateWithDuration:0.5 animations:^{
         if (self.bottomView.alpha == 0.0) {
-            self.bottomView.alpha = 1.0;
+            self.bottomView.alpha = 0.5;
             self.closeBtn.alpha = 1.0;
             self.backBtn.alpha = 1.0;
 

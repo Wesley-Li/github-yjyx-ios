@@ -19,8 +19,8 @@
 @interface TeacherDrawViewController ()<AVAudioRecorderDelegate>
 {
     BOOL isExpand;
-    BOOL isStore;// 是否储存
     BOOL isEdit;// 是否编辑
+    BOOL isChoosePencil;
     NSDate *startDate;
     NSDate *endDate;
     NSInteger currentIndex;
@@ -64,8 +64,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    isStore = NO;
     isEdit = NO;
+    isChoosePencil = NO;
     [self configureNavBar];
     self.imgURL = [self.processArr[_imageIndex] objectForKey:@"img"];
     self.voiceArr = [[self.processArr[_imageIndex] objectForKey:@"teachervoice"] mutableCopy];
@@ -131,8 +131,8 @@
 - (void)goBack {
     
     // 如果做了编辑,判断是否储存
-    if ([YjyxDrawLine defaultLine].allMyDrawPaletteLineInfos.count != 0 || isEdit == YES) {
-        if (!isStore) {
+    if ([YjyxDrawLine defaultLine].num != 0 || isEdit == YES) {
+        
             UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"友情提示" message:@"您当前的操作还没有储存,如果返回,将会使操作丢失,是否确定返回?" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:nil];
             UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -150,18 +150,14 @@
             
             [self presentViewController:alertVC animated:YES completion:nil];
             
-        }else {
-            [self cleanAllStudioFile];
-            // 清空画图
-            [[YjyxDrawLine defaultLine] cleanAllDrawBySelf];
-            [self.navigationController popViewControllerAnimated:YES];
-            
-        }
- 
+        
     }else {
     
         // 清空audio文件
         [self cleanAllStudioFile];
+        // 清空画图
+        [[YjyxDrawLine defaultLine] cleanAllDrawBySelf];
+
         [self.navigationController popViewControllerAnimated:YES];
 
         
@@ -209,7 +205,12 @@
         
         self.voiceImage.hidden = NO;
         self.voiceNumLabel.hidden = NO;
-        self.imageview.userInteractionEnabled = YES;
+        if (isChoosePencil) {
+            self.imageview.userInteractionEnabled = YES;
+        }else {
+            self.imageview.userInteractionEnabled = NO;
+        }
+        
         [self.view sendSubviewToBack:self.voiceList];
     }
     
@@ -251,6 +252,7 @@
     self.yellowPenBtn.selected = NO;
     self.redPenBtn.selected = NO;
     self.imageview.userInteractionEnabled = YES;
+    isChoosePencil = YES;
     [YjyxDrawLine defaultLine].currentPaintBrushColor = [UIColor blueColor];
     
 }
@@ -261,6 +263,7 @@
     self.yellowPenBtn.selected = YES;
     self.redPenBtn.selected = NO;
     self.imageview.userInteractionEnabled = YES;
+    isChoosePencil = YES;
     [YjyxDrawLine defaultLine].currentPaintBrushColor = [UIColor yellowColor];
 }
 
@@ -270,6 +273,7 @@
     self.yellowPenBtn.selected = NO;
     self.redPenBtn.selected = YES;
     self.imageview.userInteractionEnabled = YES;
+    isChoosePencil = YES;
     [YjyxDrawLine defaultLine].currentPaintBrushColor = [UIColor redColor];
 }
 
@@ -305,7 +309,7 @@
 - (IBAction)speakStart:(UIButton *)sender {
     
     NSLog(@"开始录音了");
-    
+    isEdit = YES;
     self.imageview.userInteractionEnabled = NO;
     self.animationImage.hidden = NO;
     [self.animationImage startAnimating];
@@ -496,7 +500,8 @@
         if ([responseObject[@"retcode"] isEqual:@0]) {
             [SVProgressHUD showSuccessWithStatus:@"保存成功"];
             [SVProgressHUD dismissWithDelay:1.5];
-            isStore = YES;
+            isEdit = NO;
+            [YjyxDrawLine defaultLine].num = 0;
         }else {
             [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@", responseObject[@"reason"]]];
         
@@ -551,7 +556,9 @@
 #pragma mark - 删除单个音频
 - (void)deleteTheVoice:(UIButton *)sender {
     isEdit = YES;
+   
     [self.voiceArr removeObjectAtIndex:sender.tag - 400];
+    self.voiceNumLabel.text = [NSString stringWithFormat:@"%ld", self.voiceArr.count];
     if (self.voiceArr.count == 0) {
         // 移除通知
         [[NSNotificationCenter defaultCenter] removeObserver:self];

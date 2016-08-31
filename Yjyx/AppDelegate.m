@@ -65,11 +65,10 @@
     [self initUmeng:launchOptions];
     // Override point for customization after application launch.
     
-    //点击推送是否跳转到指定页面标记
-    /*
+    //点击推送是否跳转到指定页面标记(处于关闭状态)
     NSDictionary *remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (remoteNotification != nil) {
-        
+        /*
         // 家长端
         if ([remoteNotification[@"type"] isEqualToString:@"childactivity"]) {
             if ([remoteNotification[@"finished"] integerValue] == 0 ) {
@@ -103,11 +102,13 @@
             
             
         }
-        
+        */
+        _isComeFromNoti = YES;
+        [self dealPushNotification:remoteNotification];
         
         
     }
-    */
+   
 
     // 自动登录,从本地取值
     NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
@@ -266,7 +267,7 @@
         
         
     }else{// 后台,直接跳转
-        
+        /*
         // 家长端
         if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {
             
@@ -300,6 +301,16 @@
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
             
+            }else if ([userInfo[@"type"] isEqualToString:@"childstats"]) {//统计数据更新处理
+                NSString *cachePath = [USER_IMGCACHE stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[userInfo objectForKey:@"cid"]]];
+                
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSArray *contents = [fileManager contentsOfDirectoryAtPath:cachePath error:nil];
+                NSEnumerator *e = [contents objectEnumerator];
+                NSString *fileName;
+                while (fileName = [e nextObject]) {
+                    [fileManager removeItemAtPath:[cachePath stringByAppendingPathComponent:fileName] error:NULL];
+                }
             }
 
             
@@ -334,13 +345,94 @@
             
         }
         
-        
+        */
+        [self dealPushNotification:userInfo];
         
     }
     
 }
 
+- (void)dealPushNotification:(NSDictionary *)userInfo {
 
+    // 家长端
+    if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"parents"]) {
+        
+        if ([userInfo[@"type"] isEqualToString:@"childactivity"]) {//
+            if ([userInfo[@"finished"] integerValue] == 0 ) {
+                if ([userInfo[@"tasktype"] integerValue] ==1) {
+                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
+                }else{
+                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
+                }
+            }else{
+                if ([userInfo[@"tasktype"] integerValue] ==1) {
+                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_RESULTHOMEWORK;
+                }else{
+                    [YjyxOverallData sharedInstance].pushType = PUSHTYPE_RESULTMICRO;
+                }
+            }
+            [YjyxOverallData sharedInstance].historyId = userInfo[@"id"];
+            [YjyxOverallData sharedInstance].previewRid = userInfo[@"rid"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
+            
+        }else if ([userInfo[@"type"] isEqualToString:@"hastentask"]){
+            
+            if ([userInfo[@"tasktype"] integerValue] == 1) {
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
+            }else{
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
+            }
+            
+            [YjyxOverallData sharedInstance].previewRid = userInfo[@"rid"];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
+            
+        }else if ([userInfo[@"type"] isEqualToString:@"childstats"]) {//统计数据更新处理
+            NSString *cachePath = [USER_IMGCACHE stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[userInfo objectForKey:@"cid"]]];
+            
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSArray *contents = [fileManager contentsOfDirectoryAtPath:cachePath error:nil];
+            NSEnumerator *e = [contents objectEnumerator];
+            NSString *fileName;
+            while (fileName = [e nextObject]) {
+                [fileManager removeItemAtPath:[cachePath stringByAppendingPathComponent:fileName] error:NULL];
+            }
+        }
+        
+        
+    }else if ([((AppDelegate *)SYS_DELEGATE).role isEqualToString:@"student"]) {
+        
+        if ([userInfo[@"type"] isEqualToString:@"newtask"]) {// 新作业
+            
+            if ([userInfo[@"tasktype"] integerValue] ==1) {
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
+            }else{
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
+            }
+            [YjyxOverallData sharedInstance].taskid = userInfo[@"taskid"];
+            [YjyxOverallData sharedInstance].examid = userInfo[@"rid"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
+            
+        }else if ([userInfo[@"type"] isEqualToString:@"hastentask"]) {
+            
+            if ([userInfo[@"tasktype"] integerValue] ==1) {
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
+            }else{
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
+            }
+            [YjyxOverallData sharedInstance].taskid = userInfo[@"taskid"];
+            [YjyxOverallData sharedInstance].examid = userInfo[@"rid"];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
+            
+            
+        }
+        
+        
+    }
+    
+
+}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
