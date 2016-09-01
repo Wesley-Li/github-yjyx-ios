@@ -64,6 +64,10 @@ static NSString *ID = @"CELL";
 
 
 }
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 // 设置右按钮
 - (void)setupRightNavItem
 {

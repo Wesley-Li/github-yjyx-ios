@@ -129,6 +129,7 @@
      ];
     //注册全屏播放通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
+    [self closeTheVideo:nil];
     if(_openMember == 1){
         [self readDataFromNetwork];
     }
@@ -136,7 +137,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self closeTheVideo:nil];
+    
     
 }
 - (BOOL)prefersStatusBarHidden
