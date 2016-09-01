@@ -38,7 +38,6 @@
     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
     
     self.navigationController.navigationBarHidden = NO;
-    [self loadBackBtn];
     _doWorkArr = [NSMutableArray array];
     _choices = [[NSArray alloc] init];
     _blankfills = [[NSArray alloc] init];
@@ -102,7 +101,7 @@
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
     }
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
-    
+    [self loadBackBtn];
    
 }
 
