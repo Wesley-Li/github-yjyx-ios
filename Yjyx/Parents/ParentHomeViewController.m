@@ -71,7 +71,8 @@
 
 - (void)getRemote {
 
-    NSDictionary *userInfo = [SYS_CACHE objectForKey:@"remoteNoti"];
+    NSDictionary *userInfo = ((AppDelegate *)SYS_DELEGATE).remoteNoti;
+    
     if ([userInfo[@"type"] isEqualToString:@"childactivity"]) {//
         if ([userInfo[@"finished"] integerValue] == 0 ) {
             if ([userInfo[@"tasktype"] integerValue] ==1) {
@@ -120,8 +121,6 @@
 -(void)pushSwitch
 {
     
-    [self.view makeToast:[NSString stringWithFormat:@"从推送消息进来的%d", [YjyxOverallData sharedInstance].pushType] duration:1.0 position:SHOW_CENTER complete:nil];
-        
         switch ([YjyxOverallData sharedInstance].pushType) {
                 
                 

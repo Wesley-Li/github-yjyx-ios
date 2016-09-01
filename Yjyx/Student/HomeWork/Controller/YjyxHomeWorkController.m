@@ -504,7 +504,7 @@ static NSString *HomeADID = @"HomeADID";
 // 获取远程推送消息
 - (void)getRemote {
 
-     NSDictionary *userInfo = [SYS_CACHE objectForKey:@"remoteNoti"];
+     NSDictionary *userInfo = ((AppDelegate *)SYS_DELEGATE).remoteNoti;
     if ([userInfo[@"type"] isEqualToString:@"newtask"]) {// 新作业
         
         if ([userInfo[@"tasktype"] integerValue] ==1) {

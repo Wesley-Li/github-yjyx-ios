@@ -69,7 +69,8 @@
     NSDictionary *remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (remoteNotification != nil) {
         _isComeFromNoti = YES;
-        [SYS_CACHE setObject:remoteNotification forKey:@"remoteNoti"];
+        _remoteNoti = remoteNotification;
+
         
     }
    
