@@ -116,6 +116,7 @@ static NSString *HomeADID = @"HomeADID";
 - (void)viewWillAppear:(BOOL)animated
 {
     // 自动刷新
+    [self loadAdData];
     [self workData];
     self.navigationController.navigationBarHidden = NO;
     NSLog(@"will%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
@@ -161,6 +162,7 @@ static NSString *HomeADID = @"HomeADID";
 // 请求公告数据
 - (void)loadAdData
 {
+    
     AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
     self.mgr = mgr;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -168,6 +170,7 @@ static NSString *HomeADID = @"HomeADID";
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/yj_notice/" ] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
 //        NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] integerValue] == 0) {
+            [self.homeAdArray removeAllObjects];
             for (NSDictionary *dict in responseObject[@"retlist"]) {
                 YjyxHomeAdModel *model = [YjyxHomeAdModel homeAdModelWithDict:dict];
                 [self.homeAdArray addObject:model];

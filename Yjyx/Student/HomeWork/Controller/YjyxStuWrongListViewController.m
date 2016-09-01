@@ -182,10 +182,12 @@
             if (self.index == 0 ) {
                 [self.dataSource removeAllObjects];
                 [self.dataSource addObjectsFromArray:currentArr];
+                self.index += 20;
                 
             }else {
             
                 self.index += 20;
+                [self.dataSource addObjectsFromArray:currentArr];
                 if (self.dataSource.count == [[self.targetlist JSONValue] count]) {
                     self.tableView.footerRefreshingText = @"没有更多了";
                     self.index = self.dataSource.count;
