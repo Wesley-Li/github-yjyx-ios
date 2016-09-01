@@ -108,6 +108,7 @@ static NSString *HomeADID = @"HomeADID";
 {
     [super viewDidLayoutSubviews];
     NSLog(@"subview1%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
+    
     self.workTableV.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.scrollV.height);
     self.wrongWorkTableV.frame  = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, self.scrollV.height);
     NSLog(@"subview2%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
@@ -120,6 +121,7 @@ static NSString *HomeADID = @"HomeADID";
     [self workData];
     self.navigationController.navigationBarHidden = NO;
     NSLog(@"will%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
+    self.workTableV.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     if(self.homeAdArray.count != 1 && self.homeAdArray.count != 0 && self.timer == nil){
         self.timer = nil;
         self.AdNumPageControl.currentPage = 0;
@@ -133,6 +135,7 @@ static NSString *HomeADID = @"HomeADID";
 - (void)viewDidAppear:(BOOL)animated
 {
     NSLog(@"did%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
+
     
 }
 - (void)viewWillDisappear:(BOOL)animated
