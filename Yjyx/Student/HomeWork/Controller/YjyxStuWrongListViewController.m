@@ -87,12 +87,16 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxStuWrongListCell class]) bundle:nil] forCellReuseIdentifier:ID ];
     // 上拉加载
     [self loadRefresh];
+   
+    
 }
-
+// 尾部加载
 - (void)loadRefresh
 {
     [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
 }
+
+
 
 - (void)loadMoreData
 {
@@ -120,6 +124,7 @@
    
     self.navigationController.navigationBarHidden = NO;
     self.targetListArr = [[[self.targetlist JSONValue] reverseObjectEnumerator] allObjects];
+    NSLog(@"%ld", _openMember);
     if(_openMember == 1){
         
         self.index = 0;
@@ -128,11 +133,11 @@
             self.count = [self.targetListArr count];
         }
         self.tempArr = [self.targetListArr subarrayWithRange:NSMakeRange(self.index, self.count)];
-
         [self getDataFromNet];
         
+        
     }
-    
+
     
 }
 
@@ -164,20 +169,31 @@
         
         if ([responseObject[@"retcode"] isEqual:@0]) {
             NSLog(@"======%ld", [responseObject[@"data"] count]);
+            // 创建临时数组
+            NSMutableArray *currentArr = [NSMutableArray array];
             
             for (NSDictionary *dic in responseObject[@"data"]) {
                 
                 YjyxStuWrongListModel *model = [[YjyxStuWrongListModel alloc] init];
                 [model initModelWithDic:dic];
-                [self.dataSource addObject:model];
+                [currentArr addObject:model];
             }
             
-            NSLog(@"----%ld", self.dataSource.count);
-            self.index += 20;
-            if (self.dataSource.count == [[self.targetlist JSONValue] count]) {
-                self.tableView.footerRefreshingText = @"没有更多了";
-                self.index = self.dataSource.count;
+            if (self.index == 0 ) {
+                [self.dataSource removeAllObjects];
+                [self.dataSource addObjectsFromArray:currentArr];
+                
+            }else {
+            
+                self.index += 20;
+                if (self.dataSource.count == [[self.targetlist JSONValue] count]) {
+                    self.tableView.footerRefreshingText = @"没有更多了";
+                    self.index = self.dataSource.count;
+                }
+
+            
             }
+            
             
 
         }else {
@@ -187,6 +203,7 @@
         
        [self.tableView reloadData];
        [self.tableView footerEndRefreshing];
+      
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 
         NSLog(@"%@", error.localizedDescription);
