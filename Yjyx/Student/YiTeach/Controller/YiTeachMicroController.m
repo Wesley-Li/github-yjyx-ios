@@ -302,6 +302,8 @@
 #pragma mark - 读取网络数据
 - (void)readDataFromNetwork {
 
+    [SVProgressHUD showWithStatus:@"正在拼命加载数据"];
+
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"m_getbootunit_lesson", @"action", self.version_id, @"textbookverid", self.subject_id, @"subjectid", self.classes_id, @"gradeid", self.book_id, @"textbookvolid", self.textbookunitid, @"textbookunitid", nil];
     UIView *convertView = [[UIView alloc] init];
     [self.view addSubview:convertView];
@@ -315,7 +317,6 @@
         [convertView hideToastActivity];
         NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] isEqual:@0]) {
-
 
             self.responseObject = responseObject;
             self.microName = responseObject[@"name"];
@@ -340,6 +341,11 @@
                 
             }
             
+            if ([responseObject[@"showview"] isEqual:@0]) {
+                [SVProgressHUD showErrorWithStatus:@"暂无亿教课"];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            
             if ([[responseObject allKeys] containsObject:@"videoobjlist"]) {
                 self.microArr = [responseObject[@"videoobjlist"] JSONValue];
                 self.videoURL = _microArr[0][@"url"];
@@ -349,18 +355,21 @@
             
                 self.topConstraint.constant = 20;
             }
-
-
+            [SVProgressHUD dismissWithDelay:0.1];
+            
             
         }else {
         
-            [self.view makeToast:responseObject[@"msg"] duration:1 position:SHOW_CENTER complete:nil];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+            [SVProgressHUD dismissWithDelay:0.8];
+
 
         }
         
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.view makeToast:@"网络出错了" duration:1 position:SHOW_CENTER complete:nil];
+        [SVProgressHUD dismiss];
         [convertView hideToastActivity];
         [convertView removeFromSuperview];
     }];

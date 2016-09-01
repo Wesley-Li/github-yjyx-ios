@@ -104,7 +104,7 @@
     if (self.index == [self.targetListArr count]) {
         self.tableView.footerRefreshingText = @"没有更多了";
         [self.tableView footerEndRefreshing];
-    }else if([self.targetListArr count]  - 1 - self.index < 20) {
+    }else if([self.targetListArr count] - self.index < 20) {
         self.count = [self.targetListArr count] - self.index;
         self.tempArr = [self.targetListArr subarrayWithRange:NSMakeRange(self.index, self.count)];
         [self getDataFromNet];
@@ -191,7 +191,13 @@
                 
             }else {
             
-                self.index += 20;
+                if([self.targetListArr count] - self.index < 20) {
+                
+                    self.index += [self.targetListArr count] - self.index;
+                }else {
+                    self.index += 20;
+                }
+                
                 [self.dataSource addObjectsFromArray:currentArr];
                 if (self.dataSource.count == [[self.targetlist JSONValue] count]) {
                     self.tableView.footerRefreshingText = @"没有更多了";
