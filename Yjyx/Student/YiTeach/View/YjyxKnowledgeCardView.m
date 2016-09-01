@@ -37,6 +37,7 @@
     
     knowledgeContent = [knowledgeContent  stringByReplacingOccurrencesOfString:@"<p>" withString:str];
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", knowledgeContent];
+    NSLog(@"%@", jsString);
     [self.webView loadHTMLString:jsString baseURL:nil];
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView {

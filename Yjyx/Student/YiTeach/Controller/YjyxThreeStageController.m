@@ -69,17 +69,18 @@ static NSString *ID = @"CELL";
     [self setupRightNavItem];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
    
-
+    [self knowledge];
     NSLog(@"%@", self.qidlist);
 
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxThreeStageSubjectCell class]) bundle:nil] forCellReuseIdentifier:ID];
     // 注册通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHeight:) name:@"WEBVIEW_HEIGHT" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadView:) name:@"WEBVIEW_HEIGHT3" object:nil];
+
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadView:) name:@"WEBVIEW_HEIGHT3" object:nil];
+    NSLog(@"%@", self.knowledge);
      NSMutableArray *tempArr = [NSMutableArray array];
     [self.randomFiveArr removeAllObjects];
     // 随机难度的5道题目

@@ -159,17 +159,18 @@
         
         [mgr GET:[BaseURL stringByAppendingString:USERNAME_ISEXIST_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
             NSLog(@"%@", responseObject);
-            sender.enabled = YES;
+            
             if([responseObject[@"retcode"] isEqual: @0]){
                 if ([responseObject[@"exist"] isEqual: @1]) {
                     [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
-                    
+                    sender.enabled = YES;
                     _flag = 1000;
                     return;
                 }else if([responseObject[@"exist"] isEqual: @0]){
                     NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",phoneText.text];
                     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",[sign md5],@"sign",@"MREGISTER",@"stype",nil];
                     [[YjxService sharedInstance] getSMSsendcode:dic withBlock:^(id result, NSError *error){//验证验证码
+                        sender.enabled = YES;
                         [self.view hideToastActivity];
                         if (result) {
                             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
@@ -191,6 +192,7 @@
                                 
                             }
                         }else{
+                            
                             [self.view makeToast:@"电话号码不存在" duration:1.0 position:SHOW_CENTER complete:nil];
                         }
                     }];
