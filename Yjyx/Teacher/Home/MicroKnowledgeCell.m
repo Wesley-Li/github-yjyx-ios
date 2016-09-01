@@ -28,6 +28,7 @@
     web.scrollView.bounces = NO;
     web.scrollView.scrollEnabled = NO;
     web.userInteractionEnabled = NO;
+    web.detectsPhoneNumbers = NO;
     web.delegate = self;
     self.web = web;
     [self.contentView addSubview:web];

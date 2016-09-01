@@ -12,13 +12,15 @@
 #import "YjyxThreeStageModel.h"
 #import "YjyxMemberDetailViewController.h"
 #import "ChildrenVideoViewController.h"
+#import "YjyxKnowledgeCardView.h"
 
 @interface YjyxThreeStageAnswerController ()<UITableViewDelegate, UITableViewDataSource, ThreeStageAnswerCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) YjyxKnowledgeCardView *knowledgeView;
 
 @property (strong, nonatomic) NSMutableDictionary *heightDict;
-
+@property (assign, nonatomic) CGFloat height;
 @property (strong, nonatomic) ProductEntity *entity;
 
 
@@ -26,6 +28,18 @@
 
 @implementation YjyxThreeStageAnswerController
 static NSString *ID = @"CELL";
+
+
+- (YjyxKnowledgeCardView *)knowledgeView
+{
+    if (_knowledgeView == nil) {
+        YjyxKnowledgeCardView  *knowledgeView = [YjyxKnowledgeCardView knowledgeCardView];
+        self.knowledgeView = knowledgeView;
+        [_knowledgeView setKnowledgeContent:self.knowledge andHeight:self.height];
+        _knowledgeView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+    }
+    return _knowledgeView;
+}
 
 
 - (void)viewDidLoad {
@@ -37,13 +51,48 @@ static NSString *ID = @"CELL";
     [backBtn setImage:[UIImage imageNamed:@"comm_back"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBtnItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.leftBarButtonItem = leftBtnItem;
+    
+    [self setupRightNavItem];
+    
     self.navigationItem.title = @"亿教课堂";
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxThreeStageAnswerCell class]) bundle:nil] forCellReuseIdentifier:ID];
     self.heightDict = [NSMutableDictionary dictionary];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHeight:) name:@"WEBVIEW_HEIGHT2" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadView:) name:@"WEBVIEW_HEIGHT3" object:nil];
+
+
 }
+// 设置右按钮
+- (void)setupRightNavItem
+{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"知识卡" style:UIBarButtonItemStylePlain target:self action:@selector(knowLedgeBtnClick)];
+}
+
+- (void)reloadView:(NSNotification *)noti
+{
+    CGFloat height = [noti.userInfo[@"hight"] floatValue];
+    self.height  = height;
+    [self.knowledgeView removeFromSuperview];
+    self.knowledgeView = nil;
+    [self.view addSubview:self.knowledgeView];
+    
+}
+
+// 知识卡点击
+- (void)knowLedgeBtnClick
+{
+    
+    if ([self.view.subviews containsObject:self.knowledgeView]) {
+        [self.knowledgeView removeFromSuperview];
+    }else{
+        [self.view addSubview:self.knowledgeView];
+    }
+    
+}
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = NO;

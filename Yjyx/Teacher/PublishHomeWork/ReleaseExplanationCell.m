@@ -33,6 +33,7 @@
     
     UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 50)];
     web.delegate = self;
+    web.detectsPhoneNumbers = NO;
     web.scrollView.scrollEnabled = NO;
     web.scrollView.showsHorizontalScrollIndicator = NO;
     web.scrollView.bounces = NO;

@@ -188,8 +188,10 @@ static NSString *ID = @"BGCEll";
 // 销毁定时器
 - (void)releaseTimer
 {
+
     [_timer invalidate];
     _timer = nil;
+
 
 }
 // 记时的方法

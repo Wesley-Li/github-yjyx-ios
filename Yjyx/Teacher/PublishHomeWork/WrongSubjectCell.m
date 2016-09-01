@@ -61,6 +61,7 @@
     // web赋值
     UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 50)];
     web.scrollView.showsHorizontalScrollIndicator = NO;
+    web.detectsPhoneNumbers = NO;
     web.scrollView.bounces = NO;
     web.scrollView.scrollEnabled = NO;
     web.delegate = self;

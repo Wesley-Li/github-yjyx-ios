@@ -681,6 +681,7 @@
     NSString *content = _knowledgeName;
     UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, kowLabel.origin.y + 40, SCREEN_WIDTH, 10)];
     web.scrollView.scrollEnabled = NO;
+    web.detectsPhoneNumbers = NO;
     web.scrollView.showsHorizontalScrollIndicator = NO;
     web.delegate = self;
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", content];
