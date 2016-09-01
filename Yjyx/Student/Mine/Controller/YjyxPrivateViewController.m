@@ -265,7 +265,6 @@
     
     NSLog(@"退出登录");
   
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:[YjyxOverallData sharedInstance].parentInfo.pid,@"pid", nil];
     [self.view makeToastActivity:SHOW_CENTER];
     LoginViewController *loginVC = [[LoginViewController alloc] init];
     loginVC.roleType = 2;
@@ -273,7 +272,8 @@
     AppDelegate *mydelegate = (AppDelegate*)SYS_DELEGATE;
     nav.navigationBarHidden = YES;
     [mydelegate.window setRootViewController:nav];
-    [[YjxService sharedInstance] teacherLogout:dic withBlock:^(id result, NSError *error) {
+    
+    [[YjxService sharedInstance] studentLogout:nil withBlock:^(id result, NSError *error) {
         [self.view hideToastActivity];
         
         if (result != nil) {
@@ -291,17 +291,18 @@
                 // 清楚本地标记
                 [SYS_CACHE removeObjectForKey:@"AutoLogoin"];
                 [SYS_CACHE removeObjectForKey:@"getDate"];
-//                [[QuestionDataBase shareDataBase] deleteQuestionTable];
+                //                [[QuestionDataBase shareDataBase] deleteQuestionTable];
                 
-         
+                
             }
         }else {
             NSLog(@"%@", error.userInfo[NSLocalizedDescriptionKey]);
             [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2.0 position:SHOW_CENTER complete:nil];
         }
         
-        
+
     }];
+    
     
 }
 

@@ -185,7 +185,7 @@
                 total_wrong = [result[@"data"][@"task__total_wrong"] isEqual:[NSNull null]] ? @0 : result[@"data"][@"task__total_wrong"];
                 questionRight = result[@"data"][@"summary"][@"correct"] == nil ? @0 : result[@"data"][@"summary"][@"correct"];
                 questionWrong = result[@"data"][@"summary"][@"wrong"] == nil ? @0 : result[@"data"][@"summary"][@"wrong"];
-//                self.childrenName = result[@"data"][@"recipientname"];
+                self.childrenName = result[@"data"][@"recipientname"];
                 NSLog(@"%@, %@", questionRight, questionWrong);
                 NSString *questionRate = [questionRight floatValue] + [questionWrong floatValue] == 0 ? @"0%" : [NSString stringWithFormat:@"%.f%%", [questionRight floatValue] * 100 / ([questionRight floatValue] + [questionWrong floatValue])];
                 NSString *taskRate = [total_right floatValue] + [total_wrong floatValue] == 0 ? @"0%" : [NSString stringWithFormat:@"%.f%%", [total_right floatValue] * 100 / ([total_right floatValue] + [total_wrong floatValue])];

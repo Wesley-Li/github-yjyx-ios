@@ -19,6 +19,7 @@
     WMPlayer *wmPlayer;
     CGRect playerFrame;
     UIImageView *videoImage;
+    BOOL isPlay;
     
 }
 
@@ -110,16 +111,20 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    isPlay = NO;
     if(_openMember == 1){
         [self readDataFromNetwork];
     }
+    [self configureWMPlayer];
 }
-- (void)viewDidDisappear:(BOOL)animated
-{
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+
     
-    [self closeTheVideo:nil];
-    
+    [self releaseWMPlayer];
 }
+
 - (BOOL)prefersStatusBarHidden
 {
     if(wmPlayer.isFullscreen == YES){
@@ -130,7 +135,7 @@
 }
 #pragma mark - videoEvent
 -(void)videoDidFinished:(NSNotification *)notice{
-    
+    isPlay = NO;
     if(wmPlayer.isFullscreen == YES){
         [self toNormal];
     }
@@ -144,7 +149,7 @@
 }
 
 -(void)closeTheVideo:(NSNotification *)obj{
-    
+    isPlay = NO;
     wmPlayer.closeBtn.hidden = YES;
     [wmPlayer.player pause];
     [self releaseWMPlayer];
@@ -197,6 +202,12 @@
         wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
         wmPlayer.playerLayer.frame =  wmPlayer.bounds;
         [self.videoBgView addSubview:wmPlayer];
+        if (isPlay) {
+            [self.view sendSubviewToBack:videoImage];
+        }else {
+            [self.view bringSubviewToFront:videoImage];
+        }
+        
         [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(wmPlayer).with.offset(0);
             make.right.equalTo(wmPlayer).with.offset(0);
@@ -355,14 +366,18 @@
         [self.view addSubview:wmPlayer];
         [wmPlayer.player pause];
         
-        videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
-        videoImage.image = [UIImage imageNamed:@"Common_video.png"];
+        if ([self.view.subviews containsObject:videoImage]) {
+            videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
+            videoImage.image = [UIImage imageNamed:@"Common_video.png"];
+            
+            videoImage.layer.masksToBounds = YES;
+            videoImage.userInteractionEnabled = YES;
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
+            [videoImage addGestureRecognizer:tap];
+            [self.view addSubview:videoImage];
+
+        }
         
-        videoImage.layer.masksToBounds = YES;
-        videoImage.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
-        [videoImage addGestureRecognizer:tap];
-        [self.view addSubview:videoImage];
         
     }else{
         videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
@@ -550,9 +565,8 @@
 
         
     }else {
-    
-        [videoImage removeFromSuperview];
-        videoImage = nil;
+        isPlay = YES;
+        [self.view sendSubviewToBack:videoImage];
         [wmPlayer.player play];
         wmPlayer.closeBtn.hidden = NO;
 
