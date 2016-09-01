@@ -84,10 +84,7 @@ static NSString *ID = @"CELL";
     
 }
 
-- (void)dealloc {
 
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 // 知识卡点击
 - (void)knowLedgeBtnClick

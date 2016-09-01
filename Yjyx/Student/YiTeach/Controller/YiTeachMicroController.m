@@ -132,18 +132,22 @@
     //注册全屏播放通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
 
-    [self closeTheVideo:nil];
+    
 
     if(_openMember == 1){
         [self readDataFromNetwork];
     }
     
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self closeTheVideo:nil];
+}
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
 
 }
 
@@ -177,16 +181,17 @@
     wmPlayer.closeBtn.hidden = YES;
     [wmPlayer.player pause];
     [self releaseWMPlayer];
-//    [wmPlayer removeFromSuperview];
-////    wmPlayer = nil;
-//    [videoImage removeFromSuperview];
+    [wmPlayer removeFromSuperview];
+    [wmPlayer.playerLayer removeFromSuperlayer];
+
+    [videoImage removeFromSuperview];
    
     [self configureWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
 -(void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation{
-   ;
+   
     [wmPlayer removeFromSuperview];
     wmPlayer.transform = CGAffineTransformIdentity;
     if (interfaceOrientation==UIInterfaceOrientationLandscapeLeft) {
@@ -394,9 +399,7 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
         [videoImage addGestureRecognizer:tap];
         [self.view addSubview:videoImage];
-
-        
-        
+ 
         
     }else{
         videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
@@ -498,7 +501,7 @@
     
         [wmPlayer removeFromSuperview];
         [wmPlayer.playerLayer removeFromSuperlayer];
-        [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
+//        [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
         wmPlayer.player = nil;
         wmPlayer.currentItem = nil;
         
