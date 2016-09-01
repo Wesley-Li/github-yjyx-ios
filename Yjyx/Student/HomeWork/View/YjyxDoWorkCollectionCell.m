@@ -117,7 +117,7 @@
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 15, 39)];
             label.text = [NSString stringWithFormat:@"%d", i + 1];
             label.textAlignment = NSTextAlignmentCenter;
-            
+            blankAnswer.tintColor = [UIColor lightGrayColor];
             blankAnswer.leftView = label;
             blankAnswer.leftViewMode = UITextFieldViewModeAlways;
             blankAnswer.backgroundColor = [UIColor whiteColor];
