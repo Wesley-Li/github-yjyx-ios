@@ -85,26 +85,6 @@
     self.navigationItem.leftBarButtonItem = leftBtnItem;
     self.navigationItem.title = @"亿教课堂";
     
-    
-//    // 注册通知
-//    //旋转屏幕通知
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(onDeviceOrientationChange)
-//                                                 name:UIDeviceOrientationDidChangeNotification
-//                                               object:nil
-//     ];
-//
-//    //注册播放完成通知
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-//  
-//    
-//    //关闭通知
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(closeTheVideo:)
-//                                                 name:WMPlayerClosedNotification
-//                                               object:nil
-//     ];
-    
     [self readDataFromNetwork];
     
 }
@@ -143,6 +123,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
 }
@@ -507,7 +488,7 @@
     
         [wmPlayer removeFromSuperview];
         [wmPlayer.playerLayer removeFromSuperlayer];
-        [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
+//        [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
         wmPlayer.player = nil;
         wmPlayer.currentItem = nil;
         
