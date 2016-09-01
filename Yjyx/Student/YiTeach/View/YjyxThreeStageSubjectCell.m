@@ -97,6 +97,9 @@ static CGFloat btnWH = 44;
 {
     _model = model;
     [self setupAnswerView];
+    NSString *str = @"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">";
+    
+    model.content = [model.content  stringByReplacingOccurrencesOfString:@"<p>" withString:str];
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
     [self.webView loadHTMLString:jsString baseURL:nil];
     

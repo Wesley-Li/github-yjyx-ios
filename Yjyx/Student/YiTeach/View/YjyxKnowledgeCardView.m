@@ -33,6 +33,9 @@
 {
     _knowledgeContent = knowledgeContent;
     self.height = high;
+    NSString *str = @"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">";
+    
+    knowledgeContent = [knowledgeContent  stringByReplacingOccurrencesOfString:@"<p>" withString:str];
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", knowledgeContent];
     [self.webView loadHTMLString:jsString baseURL:nil];
 }

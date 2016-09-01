@@ -93,8 +93,12 @@
         self.bottomConst.constant = 5;
         self.solveProcessLabel.hidden = NO;
     }
-    
+    NSString *str = @"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">";
+
+    model.content = [model.content  stringByReplacingOccurrencesOfString:@"<p>" withString:str];
+    NSLog(@"%@",model.content);
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
+    
     [_webView loadHTMLString:jsString baseURL:nil];
     // 学生答案
     if(model.questiontype == 2){
@@ -440,22 +444,24 @@
 // 键盘弹出
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
+    NSLog(@"%@", self.superview.superview);
     NSDictionary *userInfo = [aNotification userInfo];
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect = [aValue CGRectValue];
     int height = keyboardRect.size.height;
     
     NSLog(@"%@", NSStringFromCGSize(self.preSize));
-//    if(CGSizeEqualToSize(self.preSize, CGSizeZero)){
-//        self.preSize = CGSizeMake(0, height - 104);
-//        CGSize size = self.webView.scrollView.contentSize;
-//        size.height += self.preSize.height;
-//        
-//        self.webView.scrollView.contentSize = size;
-//        NSLog(@"%@, ++%@", NSStringFromCGSize(self.webView.scrollView.contentSize), NSStringFromCGRect(self.webView.frame));
-//    }
+    if(CGSizeEqualToSize(self.preSize, CGSizeZero)){
+        self.preSize = CGSizeMake(0, height - 104);
+        CGSize size = self.webView.scrollView.contentSize;
+        size.height += self.preSize.height;
+        
+        self.webView.scrollView.contentSize = size;
+        NSLog(@"%@, ++%@", NSStringFromCGSize(self.webView.scrollView.contentSize), NSStringFromCGRect(self.webView.frame));
+    }
    
     [UIView animateWithDuration:[aNotification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
+        self.superview.superview.centerY = SCREEN_HEIGHT / 2 - 104;
         self.bgAnswerBottomConst.constant = height - 104;
     }];
     
@@ -471,13 +477,12 @@
     [UIView animateWithDuration:[aNotification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
         self.bgAnswerBottomConst.constant = 0;
     }];
-//    _webView.scrollView.backgroundColor = [UIColor whiteColor];
-//    CGSize size = self.webView.scrollView.contentSize;
-//    size.height -= self.preSize.height + 1;
-//    self.webView.scrollView.contentSize = size;
-//    NSLog(@"%@, --%@", NSStringFromCGSize(self.webView.scrollView.contentSize), NSStringFromCGRect(self.webView.frame));
-//   
-//    self.preSize = CGSizeZero;
+    CGSize size = self.webView.scrollView.contentSize;
+    size.height -= self.preSize.height;
+    self.webView.scrollView.contentSize = size;
+    NSLog(@"%@, --%@", NSStringFromCGSize(self.webView.scrollView.contentSize), NSStringFromCGRect(self.webView.frame));
+   self.superview.superview.centerY = SCREEN_HEIGHT / 2 ;
+    self.preSize = CGSizeZero;
 }
 
 @end

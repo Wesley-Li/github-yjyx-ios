@@ -50,6 +50,9 @@
 - (void)setFinishModel:(YjyxWorkDetailModel *)finishModel
 {
     _finishModel = finishModel;
+    NSString *str = @"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">";
+    
+    finishModel.content = [finishModel.content  stringByReplacingOccurrencesOfString:@"<p>" withString:str];
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", finishModel.content];
     
     [_web loadHTMLString:jsString baseURL:nil];
