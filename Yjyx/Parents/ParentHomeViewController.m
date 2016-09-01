@@ -32,12 +32,14 @@
     _iconImage.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeIcon)];
     [_iconImage addGestureRecognizer:tap];
-    if (((AppDelegate *)SYS_DELEGATE).isComeFromNoti) {
-        [self pushSwitch];
-    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushSwitch) name:@"ChildActivityNotification" object:nil];
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
+    
+    if (((AppDelegate *)SYS_DELEGATE).isComeFromNoti == YES) {
+        [self getRemote];
+    }
     // Do any additional setup after loading the view from its nib.
     
 //    UIImageView *imageV = [[UIImageView alloc] init];
@@ -67,12 +69,62 @@
 
 #pragma mark -MyEvent
 
+- (void)getRemote {
+
+    NSDictionary *userInfo = [SYS_CACHE objectForKey:@"remoteNoti"];
+    if ([userInfo[@"type"] isEqualToString:@"childactivity"]) {//
+        if ([userInfo[@"finished"] integerValue] == 0 ) {
+            if ([userInfo[@"tasktype"] integerValue] ==1) {
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
+            }else{
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
+            }
+        }else{
+            if ([userInfo[@"tasktype"] integerValue] ==1) {
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_RESULTHOMEWORK;
+            }else{
+                [YjyxOverallData sharedInstance].pushType = PUSHTYPE_RESULTMICRO;
+            }
+        }
+        [YjyxOverallData sharedInstance].historyId = userInfo[@"id"];
+        [YjyxOverallData sharedInstance].previewRid = userInfo[@"rid"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
+        
+    }else if ([userInfo[@"type"] isEqualToString:@"hastentask"]){
+        
+        if ([userInfo[@"tasktype"] integerValue] == 1) {
+            [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
+        }else{
+            [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
+        }
+        
+        [YjyxOverallData sharedInstance].previewRid = userInfo[@"rid"];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
+        
+    }else if ([userInfo[@"type"] isEqualToString:@"childstats"]) {//统计数据更新处理
+        NSString *cachePath = [USER_IMGCACHE stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",[userInfo objectForKey:@"cid"]]];
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSArray *contents = [fileManager contentsOfDirectoryAtPath:cachePath error:nil];
+        NSEnumerator *e = [contents objectEnumerator];
+        NSString *fileName;
+        while (fileName = [e nextObject]) {
+            [fileManager removeItemAtPath:[cachePath stringByAppendingPathComponent:fileName] error:NULL];
+        }
+    }
+
+}
+
+
 -(void)pushSwitch
 {
     
-    
+    [self.view makeToast:[NSString stringWithFormat:@"从推送消息进来的%d", [YjyxOverallData sharedInstance].pushType] duration:1.0 position:SHOW_CENTER complete:nil];
         
         switch ([YjyxOverallData sharedInstance].pushType) {
+                
+                
             case 1:{
                 YjyxWorkPreviewViewController *result = [[YjyxWorkPreviewViewController alloc] init];
                 result.previewRid = [YjyxOverallData sharedInstance].previewRid;

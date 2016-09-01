@@ -96,8 +96,8 @@ static NSString *HomeADID = @"HomeADID";
     // 注册公告cell
     [self.collectView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxHomeAdCell class]) bundle:nil] forCellWithReuseIdentifier:HomeADID];
     
-    if (((AppDelegate *)SYS_DELEGATE).isComeFromNoti) {
-        [self stuPushSwitch];
+    if (((AppDelegate *)SYS_DELEGATE).isComeFromNoti == YES) {
+        [self getRemote];
     }
     
 //    self.workTableV.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
@@ -498,6 +498,39 @@ static NSString *HomeADID = @"HomeADID";
         vc.page_detail = model.detail_page;
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+
+// 获取远程推送消息
+- (void)getRemote {
+
+     NSDictionary *userInfo = [SYS_CACHE objectForKey:@"remoteNoti"];
+    if ([userInfo[@"type"] isEqualToString:@"newtask"]) {// 新作业
+        
+        if ([userInfo[@"tasktype"] integerValue] ==1) {
+            [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
+        }else{
+            [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
+        }
+        [YjyxOverallData sharedInstance].taskid = userInfo[@"taskid"];
+        [YjyxOverallData sharedInstance].examid = userInfo[@"rid"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
+        
+    }else if ([userInfo[@"type"] isEqualToString:@"hastentask"]) {
+        
+        if ([userInfo[@"tasktype"] integerValue] ==1) {
+            [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEWHOME;
+        }else{
+            [YjyxOverallData sharedInstance].pushType = PUSHTYPE_PREVIEMICRO;
+        }
+        [YjyxOverallData sharedInstance].taskid = userInfo[@"taskid"];
+        [YjyxOverallData sharedInstance].examid = userInfo[@"rid"];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ChildActivityNotification" object:nil];
+        
+        
+    }
+
 }
 
 
