@@ -129,6 +129,8 @@ static NSString *VideoNumID = @"VideoNum";
      ];
     [self.tableView reloadData];
 }
+
+
 - (void)viewDidDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
