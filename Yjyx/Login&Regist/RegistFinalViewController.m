@@ -145,11 +145,13 @@
 -(IBAction)getRegisterCode:(UIButton *)sender
 {
 //    [self textFieldDidEndEditing:phoneText];
+    
     if(_flag == 1000){
         if (phoneText.text.length != 11) {
             [self.view makeToast:@"请输入正确的手机号" duration:1.0 position:SHOW_CENTER complete:nil];
             return;
         }
+        [verifyBtn setEnabled:false];
         AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
         NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
         pamar[@"action"] = @"checkuserexist";
@@ -157,6 +159,7 @@
         
         [mgr GET:[BaseURL stringByAppendingString:USERNAME_ISEXIST_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
             NSLog(@"%@", responseObject);
+            sender.enabled = YES;
             if([responseObject[@"retcode"] isEqual: @0]){
                 if ([responseObject[@"exist"] isEqual: @1]) {
                     [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
@@ -193,7 +196,9 @@
                     }];
 
                 }
+               
             }else{
+                [verifyBtn setEnabled:true];
                 if ([responseObject[@"msg"] isEqualToString:@"ratelimitted"]) {
                     [self.view makeToast:@"操作过快" duration:1.0 position:SHOW_CENTER complete:nil];
                 }else{
@@ -202,6 +207,7 @@
             }
            
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            sender.enabled = YES;
             [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
            
         }];
@@ -217,6 +223,7 @@
             _flag = 1000;
             return;
         }
+        [verifyBtn setEnabled:false];
         NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",phoneText.text];
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",[sign md5],@"sign",@"MREGISTER",@"stype",nil];
         [[YjxService sharedInstance] getSMSsendcode:dic withBlock:^(id result, NSError *error){//验证验证码
@@ -230,6 +237,7 @@
                     //发送注册码按钮失效，防止频繁请求
                     [verifyBtn setEnabled:false];
                 }else{
+                    sender.enabled = YES;
                     NSLog(@"%@", result);
                     if ([result[@"msg"] isEqualToString:@"ratelimitted"]) {
                         [self.view makeToast:@"操作过快" duration:1.0 position:SHOW_CENTER complete:nil];
@@ -240,7 +248,9 @@
                     }
                     
                 }
+                
             }else{
+               sender.enabled = YES;
                 [self.view makeToast:@"电话号码不存在" duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }];
@@ -326,6 +336,10 @@
                 parentEntity.receive_notify = @"1";
                 parentEntity.notify_with_sound = @"1";
                 [YjyxOverallData sharedInstance].parentInfo = parentEntity;
+                NSString *desPassWord = [parentPasswordText.text des3:kCCEncrypt withPass:@"12345678asdf"];
+                
+                NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"parents", @"role", phoneText.text,@"username",desPassWord,@"password", nil];
+                [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
                 [(AppDelegate *)SYS_DELEGATE fillViews];
             }else{
                 if ([result[@"msg"] isEqualToString:@"ratelimitted"]) {

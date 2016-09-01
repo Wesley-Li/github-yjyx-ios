@@ -341,7 +341,7 @@
 
                     ((YjyxStuWrongListViewController *)vc).openMember = 1;
                     [self.navigationController popToViewController:vc animated:YES];
-                    break;
+                    
                 }
             }
         });

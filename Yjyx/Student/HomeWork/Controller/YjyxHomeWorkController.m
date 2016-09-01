@@ -120,7 +120,7 @@ static NSString *HomeADID = @"HomeADID";
     [self workData];
     self.navigationController.navigationBarHidden = NO;
     NSLog(@"will%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
-    if(self.homeAdArray.count != 1 && self.homeAdArray.count != 0){
+    if(self.homeAdArray.count != 1 && self.homeAdArray.count != 0 && self.timer == nil){
         self.timer = nil;
         self.AdNumPageControl.currentPage = 0;
         NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(autoScroll) userInfo:nil repeats:YES];
@@ -183,7 +183,7 @@ static NSString *HomeADID = @"HomeADID";
             [self.collectView reloadData];
             self.AdNumPageControl.numberOfPages = self.homeAdArray.count;
             self.AdNumPageControl.currentPage = 0;
-            if(self.homeAdArray.count != 1 && self.homeAdArray.count != 0){
+            if(self.homeAdArray.count != 1 && self.homeAdArray.count != 0 && self.timer == nil){
             NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(autoScroll) userInfo:nil repeats:YES];
             self.timer = timer;
             [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
