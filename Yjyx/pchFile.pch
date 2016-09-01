@@ -183,6 +183,8 @@
 // 学生部分
 // 学生登录
 #define STUDENT_LOGIN_CONNET_POST  @"/api/student/mobile/login/"
+// 学生登出
+#define STUDENT_LOGOUT_CONNET_POST @"/api/student/mobile/logout/"
 // 修改名字和手机号
 #define STUDENT_NAME_AND_PHONE_CONNECT_POST @"/api/student/setting/"
 //  上报消息通知

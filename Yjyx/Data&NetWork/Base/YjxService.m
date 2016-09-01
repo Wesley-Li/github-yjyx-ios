@@ -575,6 +575,23 @@
     
 }
 
+// 学生登出
+- (void)studentLogout:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block {
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:[BaseURL stringByAppendingString:STUDENT_LOGOUT_CONNET_POST] parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            block(responseObject, nil);
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        block(nil, error);
+    }];
+    
+}
+
+
+
+
 // 学生上传青牛云
 -(void)studentUploadFile:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block {
     

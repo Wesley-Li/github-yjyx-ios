@@ -20,6 +20,7 @@
     CGRect playerFrame;
     UIImageView *videoImage;
     
+    
 }
 
 
@@ -127,18 +128,27 @@
                                                  name:WMPlayerClosedNotification
                                                object:nil
      ];
+
     //注册全屏播放通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
+
+    
     if(_openMember == 1){
         [self readDataFromNetwork];
     }
+    
 }
+
+
 - (void)viewDidDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self closeTheVideo:nil];
-    
+
 }
+
+
+
 - (BOOL)prefersStatusBarHidden
 {
     if(wmPlayer.isFullscreen == YES){
@@ -216,6 +226,7 @@
         wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
         wmPlayer.playerLayer.frame =  wmPlayer.bounds;
         [self.videoBgView addSubview:wmPlayer];
+        
         [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(wmPlayer).with.offset(0);
             make.right.equalTo(wmPlayer).with.offset(0);
@@ -374,6 +385,7 @@
         [self.view addSubview:wmPlayer];
         [wmPlayer.player pause];
         
+       
         videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
         videoImage.image = [UIImage imageNamed:@"Common_video.png"];
         
@@ -382,6 +394,9 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
         [videoImage addGestureRecognizer:tap];
         [self.view addSubview:videoImage];
+
+        
+        
         
     }else{
         videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
@@ -569,9 +584,8 @@
 
         
     }else {
-    
-        [videoImage removeFromSuperview];
-        videoImage = nil;
+        
+        [self.view sendSubviewToBack:videoImage];
         [wmPlayer.player play];
         wmPlayer.closeBtn.hidden = NO;
 

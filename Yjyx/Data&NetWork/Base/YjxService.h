@@ -15,8 +15,8 @@
 
 
 //生产环境
-//#define BaseURL @"https://www.zgyjyx.com"
-//#define QiniuYunURL @"http://cdn-web-img.zgyjyx.com/"
+#define BaseURL @"https://www.zgyjyx.com"
+#define QiniuYunURL @"http://cdn-web-img.zgyjyx.com/"
 //#define QiniuYunURL @"http://cdn-web-video.zgyjyx.com/"
 
 /**
@@ -126,6 +126,9 @@
 - (void)studentLogin:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 
 - (void)studentLogin:(NSDictionary *)params autoLogin:(BOOL)autoLogin withBlock:(void(^)(id result, NSError *error))block;
+
+// 学生登出
+- (void)studentLogout:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
 
 // 学生上传青牛云
 -(void)studentUploadFile:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block;
