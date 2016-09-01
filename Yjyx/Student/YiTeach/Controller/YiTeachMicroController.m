@@ -85,6 +85,30 @@
     self.navigationItem.title = @"亿教课堂";
     
     
+//    // 注册通知
+//    //旋转屏幕通知
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(onDeviceOrientationChange)
+//                                                 name:UIDeviceOrientationDidChangeNotification
+//                                               object:nil
+//     ];
+//
+//    //注册播放完成通知
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+//  
+//    
+//    //关闭通知
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(closeTheVideo:)
+//                                                 name:WMPlayerClosedNotification
+//                                               object:nil
+//     ];
+    
+    [self readDataFromNetwork];
+    
+}
+- (void)viewWillAppear:(BOOL)animated
+{
     // 注册通知
     //旋转屏幕通知
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -92,11 +116,10 @@
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil
      ];
-
+    
     //注册播放完成通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    //注册全屏播放通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
+    
     
     //关闭通知
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -104,19 +127,15 @@
                                                  name:WMPlayerClosedNotification
                                                object:nil
      ];
-    
-    [self readDataFromNetwork];
-    
-}
-- (void)viewWillAppear:(BOOL)animated
-{
+    //注册全屏播放通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
     if(_openMember == 1){
         [self readDataFromNetwork];
     }
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self closeTheVideo:nil];
     
 }

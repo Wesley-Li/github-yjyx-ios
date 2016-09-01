@@ -75,7 +75,7 @@ static NSString *ID = @"CELL";
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxThreeStageSubjectCell class]) bundle:nil] forCellReuseIdentifier:ID];
     // 注册通知
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHeight:) name:@"WEBVIEW_HEIGHT" object:nil];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
