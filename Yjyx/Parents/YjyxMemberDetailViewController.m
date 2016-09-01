@@ -226,7 +226,7 @@
                             ((YjyxStuWrongListViewController *)vc).openMember = 1;
                             
 //                            [self.navigationController popToViewController:vc animated:YES];
-                            break;
+                           
                         }
                     }
                 }else{
@@ -251,7 +251,15 @@
         if (result != nil) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 [self getChildrenStatus];//开通以后重新刷新界面
-                               
+                for (UIViewController *vc in self.navigationController.childViewControllers) {
+                    
+                    if ([vc isKindOfClass:[YjyxStuWrongListViewController class]] || [vc isKindOfClass:[YjyxWorkDetailController class]] || [vc isKindOfClass:[YjyxThreeStageAnswerController class]] || [vc isKindOfClass:[YiTeachMicroController class]] || [vc isKindOfClass:[ChildrenResultViewController class]]) {
+                        
+                        ((YjyxStuWrongListViewController *)vc).openMember = 1;
+  
+                      
+                    }
+                }
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }

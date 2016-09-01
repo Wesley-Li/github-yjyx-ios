@@ -157,7 +157,9 @@ static NSString *ID = @"CELL";
         return;
     }
     if ([self.view.subviews containsObject:self.knowledgeView]) {
+        
         [self.knowledgeView removeFromSuperview];
+        self.knowledgeView = nil;
     }else{
         [self.view addSubview:self.knowledgeView];
     }
