@@ -167,6 +167,7 @@
        [videoImage addGestureRecognizer:tap];
        [self.view addSubview:videoImage];
         UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, playerFrame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - playerFrame.size.height)];
+       web.detectsPhoneNumbers = NO;
        NSLog(@"%@", _explantionStr);
        if ([_explantionStr isEqualToString:@""]) {
            [web loadHTMLString:@"暂无解析" baseURL:nil];
@@ -204,7 +205,7 @@
        NSLog(@"%f,%f", SCREEN_WIDTH, SCREEN_HEIGHT);
 
        web.delegate = self;
-       
+       web.detectsPhoneNumbers = NO;
        if ([_explantionStr isEqualToString:@""]) {
            [web loadHTMLString:@"暂无解析" baseURL:nil];
        }else {

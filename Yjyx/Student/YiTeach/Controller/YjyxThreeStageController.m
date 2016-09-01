@@ -101,6 +101,11 @@ static NSString *ID = @"CELL";
     // 加载网络数据
     [self loadData];
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 #pragma mark -私有方法
 // 网络数据请求
 - (void)loadData
@@ -187,6 +192,7 @@ static NSString *ID = @"CELL";
         vc.threeStageSubjectArr = self.threeStageArr;
         vc.subjectid  = self.subjectid;
         vc.randomFiveArr = self.randomFiveArr;
+        vc.knowledge = self.knowledge;
         [self.navigationController pushViewController:vc animated:YES];
         
     }];

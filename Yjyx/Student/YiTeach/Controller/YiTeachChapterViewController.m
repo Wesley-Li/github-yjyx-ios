@@ -133,11 +133,38 @@
     microVC.book_id = self.book_id;
     microVC.textbookunitid = item1.nodeId;
     
-    
-    [self.navigationController pushViewController:microVC animated:YES];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"m_getbootunit_lesson", @"action", self.version_id, @"textbookverid", self.subject_id, @"subjectid", self.classes_id, @"gradeid", self.book_id, @"textbookvolid", microVC.textbookunitid, @"textbookunitid", nil];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/student/product_yjmemeber/"] parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        
+        NSLog(@"%@", responseObject);
+        if ([responseObject[@"retcode"] isEqual:@0]) {
+            
+            if ([responseObject[@"showview"] isEqual:@0]) {
+                [self.view makeToast:@"暂无亿教课程" duration:1.0 position:SHOW_BOTTOM complete:nil];
+            }else {
+                
+                  [self.navigationController pushViewController:microVC animated:YES];
+                
+            }
+            
+        }else {
+            
+            [self.view makeToast:responseObject[@"msg"] duration:1 position:SHOW_CENTER complete:nil];
+            
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view makeToast:@"网络出错了" duration:1 position:SHOW_CENTER complete:nil];
+        
+    }];
 
     
+    
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

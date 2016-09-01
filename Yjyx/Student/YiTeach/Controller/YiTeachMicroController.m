@@ -22,28 +22,7 @@
     
 }
 
-@property (weak, nonatomic) IBOutlet UIButton *baseButton;
-@property (weak, nonatomic) IBOutlet UIButton *consolidateButton;
-@property (weak, nonatomic) IBOutlet UIButton *improveButton;
 
-@property (nonatomic, copy) NSString *videoURL;
-@property (nonatomic, copy) NSMutableArray *videoURLArr;
-@property (nonatomic, copy) NSString *microName;
-@property (weak, nonatomic) IBOutlet UIView *videoBgView;
-@property (weak, nonatomic) IBOutlet UILabel *microNameLabel;
-@property (weak, nonatomic) IBOutlet UIScrollView *numBtnBgView;
-@property (strong, nonatomic) UIButton *preBtn;
-@property (nonatomic, strong) NSMutableArray *microArr;// 视频列表，
-
-@property (nonatomic, strong) NSMutableArray *baseQuestionIDList;// 基础题列表
-@property (nonatomic, strong) NSMutableArray *consolidateIDList;// 巩固题列表
-@property (nonatomic, strong) NSMutableArray *improveIDList;// 提高题列表
-@property (nonatomic, strong) NSNumber *showview;// 有无亿教课视频,1有,0没有
-@property (nonatomic, strong) NSDictionary *responseObject;// 判断是否需要开通会员,注意，如果学生不是该科目会员，那么这个videoobjlist key不存在，前端判断如果这个key不存在，表示需要会员身份
-@property (strong, nonatomic) ProductEntity *entity;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
-@property (nonatomic, copy) NSString *knowledgedesc;// 知识卡信息
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scroHeightConstraint;
 
 
 @end
@@ -307,12 +286,6 @@
         NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] isEqual:@0]) {
 
-            
-            if ([responseObject[@"showview"] isEqual:@0]) {
-                [self.view makeToast:@"暂无亿教课程" duration:1.0 position:SHOW_CENTER complete:^{
-                    [self.navigationController popViewControllerAnimated:YES];
-                }];
-            }else {
 
             self.responseObject = responseObject;
             self.microName = responseObject[@"name"];
@@ -336,19 +309,18 @@
                 self.scroHeightConstraint.constant = 1;
                 
             }
-            if([responseObject[@"showview"] integerValue] == 0){
-                [self.navigationController popViewControllerAnimated:YES];
-            }
+            
             if ([[responseObject allKeys] containsObject:@"videoobjlist"]) {
                 self.microArr = [responseObject[@"videoobjlist"] JSONValue];
                 self.videoURL = _microArr[0][@"url"];
                 [self configureWMPlayer];
                 [self configureTheNumBtn:_microArr];
+            }else {
+            
+                self.topConstraint.constant = 20;
             }
 
 
-
-            }
             
         }else {
         

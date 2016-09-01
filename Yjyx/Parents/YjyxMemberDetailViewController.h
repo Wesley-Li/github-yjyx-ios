@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ProductEntity.h"
 #import "RCLabel.h"
-
 @interface YjyxMemberDetailViewController : BaseViewController
 {
     IBOutlet UIButton *trailBtn;
@@ -24,6 +23,8 @@
 @property (assign, nonatomic) NSInteger jumpType; //  从上个界面跳转类型
 @property (weak,nonatomic) IBOutlet UIView *detailView;
 @property (strong, nonatomic) NSNumber *subjectid;
+
+
 
 
 @end

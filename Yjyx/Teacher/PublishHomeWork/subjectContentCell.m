@@ -151,6 +151,7 @@
     self.subjectLevelLabel.text = subjectLevel;
     
     UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 50)];
+    web.detectsPhoneNumbers = NO;
     web.userInteractionEnabled = NO;
     web.delegate = self;
     web.scrollView.scrollEnabled = NO;

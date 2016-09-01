@@ -587,6 +587,7 @@
         }
         // 添加webview
         UIWebView *webView = [[UIWebView alloc] init];
+        webView.detectsPhoneNumbers = NO;
         webView.scrollView.showsHorizontalScrollIndicator = NO;
         webView.frame =  CGRectMake(i * SCREEN_WIDTH, 0, SCREEN_WIDTH, self.scrollView.height - 81);
         if([model.requireprocess integerValue] == 1){

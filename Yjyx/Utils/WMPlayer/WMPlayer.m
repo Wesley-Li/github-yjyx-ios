@@ -182,8 +182,8 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _closeBtn.showsTouchWhenHighlighted = YES;
         [_closeBtn addTarget:self action:@selector(colseTheVideo:) forControlEvents:UIControlEventTouchUpInside];
-        [_closeBtn setImage:[UIImage imageNamed:WMVideoSrcName(@"close")] ?: [UIImage imageNamed:WMVideoFrameworkSrcName(@"close")] forState:UIControlStateNormal];
-        [_closeBtn setImage:[UIImage imageNamed:WMVideoSrcName(@"close")] ?: [UIImage imageNamed:WMVideoFrameworkSrcName(@"close")] forState:UIControlStateSelected];
+        [_closeBtn setImage:[UIImage imageNamed:@"videoCancle"] forState:UIControlStateNormal];
+        [_closeBtn setImage:[UIImage imageNamed:@"videoCancle"] forState:UIControlStateSelected];
         _closeBtn.layer.cornerRadius = 30/2;
         [self addSubview:_closeBtn];
         

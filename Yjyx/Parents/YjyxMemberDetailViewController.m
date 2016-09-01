@@ -16,6 +16,7 @@
 #import "YjyxWorkDetailController.h"
 #import "YjyxThreeStageAnswerController.h"
 #import "YiTeachMicroController.h"
+#import "ChildrenResultViewController.h"
 @interface YjyxMemberDetailViewController ()<UIWebViewDelegate>
 {
     UIView *chooseView;
@@ -219,6 +220,7 @@
                     for (UIViewController *vc in self.navigationController.childViewControllers) {
                         if ([vc isKindOfClass:[YjyxStuWrongListViewController class]] || [vc isKindOfClass:[YjyxWorkDetailController class]] || [vc isKindOfClass:[YjyxThreeStageAnswerController class]] || [vc isKindOfClass:[YiTeachMicroController class]]) {
                             ((YjyxStuWrongListViewController *)vc).openMember = 1;
+                            
 //                            [self.navigationController popToViewController:vc animated:YES];
                             break;
                         }
@@ -234,6 +236,7 @@
     
 }
 
+
 -(void)chooseChildren:(id)sender//小孩试用
 {
     UIButton *btn = (UIButton *)sender;
@@ -244,6 +247,7 @@
         if (result != nil) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 [self getChildrenStatus];//开通以后重新刷新界面
+                               
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }

@@ -29,6 +29,7 @@
     web.scrollView.scrollEnabled = NO;
     web.scrollView.showsHorizontalScrollIndicator = NO;
     web.scrollView.bounces = NO;
+    web.detectsPhoneNumbers = NO;
     web.delegate = self;
     NSString *jsStrig = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", content];
     [web loadHTMLString:jsStrig baseURL:nil];

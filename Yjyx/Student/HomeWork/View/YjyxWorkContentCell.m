@@ -39,6 +39,7 @@
     
     // 题目内容赋值
     UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 50)];
+    web.detectsPhoneNumbers = NO;
     _web = web;
     web.delegate = self;
     web.scrollView.scrollEnabled = NO;

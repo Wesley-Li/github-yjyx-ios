@@ -47,6 +47,7 @@
         web.scrollView.showsHorizontalScrollIndicator = NO;
         web.scrollView.scrollEnabled = NO;
         web.scrollView.bounces = NO;
+        web.detectsPhoneNumbers = NO;
         web.delegate = self;
         [self.bg_view addSubview:web];
         [web loadHTMLString:jsString baseURL:nil];
