@@ -156,7 +156,9 @@
     web.scrollView.scrollEnabled = NO;
     web.scrollView.showsHorizontalScrollIndicator = NO;
     web.scrollView.bounces = NO;
-
+    NSString *str = @"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">";
+    
+    _item.content_text = [_item.content_text  stringByReplacingOccurrencesOfString:@"<p>" withString:str];
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", _item.content_text];
     
     [web loadHTMLString:jsString baseURL:nil];

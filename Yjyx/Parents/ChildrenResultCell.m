@@ -78,7 +78,9 @@
     web.scrollView.scrollEnabled = NO;
     web.scrollView.bounces = NO;
     web.scrollView.showsHorizontalScrollIndicator = NO;
+    NSString *str = @"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">";
     
+    model.content = [model.content  stringByReplacingOccurrencesOfString:@"<p>" withString:str];
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
     
     [web loadHTMLString:jsString baseURL:nil];
@@ -250,7 +252,9 @@
     web.scrollView.scrollEnabled = NO;
     web.scrollView.bounces = NO;
     web.scrollView.showsHorizontalScrollIndicator = NO;
+    NSString *str = @"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">";
     
+    model.content = [model.content  stringByReplacingOccurrencesOfString:@"<p>" withString:str];
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
     
     [web loadHTMLString:jsString baseURL:nil];

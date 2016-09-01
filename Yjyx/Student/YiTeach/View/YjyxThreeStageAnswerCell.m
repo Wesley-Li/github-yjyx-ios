@@ -91,6 +91,9 @@ static CGFloat btnWH = 24;
     NSArray *choiceAnswer = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L"];
     _model = model;
     [self setupAnswerView];
+    NSString *str = @"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">";
+    
+    model.content = [model.content  stringByReplacingOccurrencesOfString:@"<p>" withString:str];
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
     [self.webView loadHTMLString:jsString baseURL:nil];
     

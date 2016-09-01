@@ -66,7 +66,9 @@
     web.delegate = self;
     web.userInteractionEnabled = NO;
     [self.webBgview addSubview:web];
-
+    NSString *str = @"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">";
+    
+    wrongSubModel.content = [wrongSubModel.content stringByReplacingOccurrencesOfString:@"<p>" withString:str];
     NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", wrongSubModel.content];
     [web loadHTMLString:jsString baseURL:nil];
     

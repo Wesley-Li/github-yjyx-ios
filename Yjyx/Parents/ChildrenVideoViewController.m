@@ -176,6 +176,9 @@
            
            NSLog(@"%@", NSStringFromRange(range));
            if(range.length == 0 && range.location > 5000000){
+               NSString *str = @"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">";
+               
+               _explantionStr = [_explantionStr  stringByReplacingOccurrencesOfString:@"<p>" withString:str];
                NSString *str2 = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", _explantionStr];
                [web loadHTMLString:str2 baseURL:nil];
            }else if(range.length != 1){
@@ -213,7 +216,9 @@
            
            NSLog(@"%@", NSStringFromRange(range));
            if(range.length == 0 && range.location > 5000000){
+               NSString *str = @"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">";
                
+               _explantionStr = [_explantionStr  stringByReplacingOccurrencesOfString:@"<p>" withString:str];
                NSString *str2 = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", _explantionStr];
                [web loadHTMLString:str2 baseURL:nil];
                

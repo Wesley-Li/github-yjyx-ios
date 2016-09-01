@@ -108,16 +108,7 @@ static NSString *ID = @"BGCEll";
     self.workNameLabel.text = self.desc;
     [self.bgCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxDoWorkCollectionCell class]) bundle:nil] forCellWithReuseIdentifier:ID];
     [self createTimer];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    
-    //增加监听，当键退出时收出消息
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackgroud) name:UIApplicationWillResignActiveNotification object:nil];
    
@@ -125,27 +116,6 @@ static NSString *ID = @"BGCEll";
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = YES;
-    
-}
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
- 
-    
-}
-- (void)viewWillDisappear:(BOOL)animated
-{
-
-
-}
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-
-}
-- (void)viewDidAppear:(BOOL)animated
-{
-
     
 }
 
@@ -609,36 +579,5 @@ static NSString *ID = @"BGCEll";
     }
     
 }
-
-#pragma mark - 键盘的弹出和退下
-// 键盘弹出
-- (void)keyboardWillShow:(NSNotification *)aNotification
-{
-    NSDictionary *userInfo = [aNotification userInfo];
-    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGRect keyboardRect = [aValue CGRectValue];
-//    int height = keyboardRect.size.height;
-    [UIView animateWithDuration:[aNotification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
-        self.view.centerY = SCREEN_HEIGHT / 2 - 104;
-    }];
-    
-
-
-}
-
-//当键退出时调用
-- (void)keyboardWillHide:(NSNotification *)aNotification
-{
-
-    NSDictionary *userInfo = [aNotification userInfo];
-    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGRect keyboardRect = [aValue CGRectValue];
-//    int height = keyboardRect.size.height;
-    [UIView animateWithDuration:[aNotification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue] animations:^{
-        self.view.centerY = SCREEN_HEIGHT / 2 ;
-    }];
-
-}
-
 
 @end

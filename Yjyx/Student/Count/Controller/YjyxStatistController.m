@@ -181,9 +181,9 @@
         
         // 赋值总数据信息
         self.finishTaskNumLabel.text = [NSString stringWithFormat:@"%@", model.tasks_num];
-        self.finishQuestionNumLabel.text = [NSString stringWithFormat:@"%@", model.questiontotal];
-        self.correctQuestionNumLabel.text = [NSString stringWithFormat:@"%@", model.questioncorrect];
-        self.wrongQuestionNumLabel.text = [NSString stringWithFormat:@"%@", model.questionwrong];
+        self.finishQuestionNumLabel.text = [NSString stringWithFormat:@"%@", model.questiontotal == nil ? @0 : model.questiontotal];
+        self.correctQuestionNumLabel.text = [NSString stringWithFormat:@"%@", model.questioncorrect == nil ? @0 :model.questioncorrect];
+        self.wrongQuestionNumLabel.text = [NSString stringWithFormat:@"%@", model.questionwrong == nil ? @0 : model.questionwrong];
         
         // 赋值折线图信息
         [self getPNLineChartDataWithSubjectid:model.subjectid];
@@ -308,24 +308,10 @@
     
 }
 
-
-
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
