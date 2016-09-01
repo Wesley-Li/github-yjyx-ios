@@ -133,6 +133,9 @@
     microVC.book_id = self.book_id;
     microVC.textbookunitid = item1.nodeId;
     
+    [self.navigationController pushViewController:microVC animated:YES];
+
+    
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"m_getbootunit_lesson", @"action", self.version_id, @"textbookverid", self.subject_id, @"subjectid", self.classes_id, @"gradeid", self.book_id, @"textbookvolid", microVC.textbookunitid, @"textbookunitid", nil];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:[BaseURL stringByAppendingString:@"/api/student/product_yjmemeber/"] parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
@@ -144,7 +147,6 @@
                 [self.view makeToast:@"暂无亿教课程" duration:1.0 position:SHOW_BOTTOM complete:nil];
             }else {
                 
-                  [self.navigationController pushViewController:microVC animated:YES];
                 
             }
             
