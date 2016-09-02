@@ -25,6 +25,8 @@
     UILabel *_namelb;
     NSDictionary *lessDic;
     UIView *headerView;
+    BOOL isPlay;
+
 
 }
 
@@ -122,6 +124,7 @@
 
     [wmPlayer removeFromSuperview];
     [self releaseWMPlayer];
+    isPlay = NO;
 }
 
 -(void)videoDidFinished:(NSNotification *)notice{
@@ -135,6 +138,7 @@
     [wmPlayer removeFromSuperview];
     [videoImage removeFromSuperview];
     [self configureWMPlayer];
+    isPlay = NO;
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
@@ -145,6 +149,7 @@
     [wmPlayer removeFromSuperview];
     [videoImage removeFromSuperview];
     [self configureWMPlayer];
+    isPlay = NO;
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
@@ -152,15 +157,22 @@
 -(void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation{
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
     [wmPlayer removeFromSuperview];
+    [videoImage removeFromSuperview];
+    videoImage.transform = CGAffineTransformIdentity;
     wmPlayer.transform = CGAffineTransformIdentity;
     if (interfaceOrientation==UIInterfaceOrientationLandscapeLeft) {
+        videoImage.transform = CGAffineTransformMakeRotation(-M_PI_2);
         wmPlayer.transform = CGAffineTransformMakeRotation(-M_PI_2);
     }else if(interfaceOrientation==UIInterfaceOrientationLandscapeRight){
+        videoImage.transform = CGAffineTransformMakeRotation(M_PI_2);
+        
         wmPlayer.transform = CGAffineTransformMakeRotation(M_PI_2);
+        
     }
+
     wmPlayer.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     wmPlayer.playerLayer.frame =  CGRectMake(0,0, SCREEN_HEIGHT,SCREEN_WIDTH);
-    
+    videoImage.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(40);
         make.top.mas_equalTo(SCREEN_WIDTH-40);
@@ -174,7 +186,16 @@
         make.top.equalTo(wmPlayer).with.offset(5);
         
     }];
-    [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
+    if (isPlay) {
+        [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
+        wmPlayer.playOrPauseBtn.selected = NO;
+    }else {
+        wmPlayer.playOrPauseBtn.selected = YES;
+        [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
+        [[UIApplication sharedApplication].keyWindow addSubview:videoImage];
+    }
+    
+
     wmPlayer.isFullscreen = YES;
     wmPlayer.fullScreenBtn.selected = YES;
     [wmPlayer bringSubviewToFront:wmPlayer.bottomView];
@@ -188,6 +209,8 @@
     
 
     [UIView animateWithDuration:0.5f animations:^{
+        videoImage.transform = CGAffineTransformIdentity;
+        videoImage.frame = CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4);
         wmPlayer.transform = CGAffineTransformIdentity;
         wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
         wmPlayer.playerLayer.frame =  wmPlayer.bounds;
@@ -556,6 +579,7 @@
 - (void)configureWMPlayer {
 
     if (self.videoURL != nil || self.videoURL.length != 0) {
+    
         playerFrame = CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
         if (self.jumpType == 1) {
             playerFrame.origin.y = 0;
@@ -570,6 +594,7 @@
         wmPlayer.closeBtn.hidden = YES;
         wmPlayer.layer.masksToBounds = YES;
         [self.view addSubview:wmPlayer];
+        isPlay = NO;
         [wmPlayer.player pause];
         
         videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
@@ -727,10 +752,12 @@
     
     self.videoURL = [self.microArr[sender.tag - 500] objectForKey:@"url"];
     [wmPlayer.player pause];
+    isPlay = NO;
     [wmPlayer removeFromSuperview];
     [videoImage removeFromSuperview];
     [self configureWMPlayer];
     [wmPlayer.player play];
+    isPlay = YES;
     wmPlayer.closeBtn.hidden = NO;
     [self.view sendSubviewToBack:videoImage];
     
@@ -908,7 +935,9 @@
     [videoImage removeFromSuperview];
     videoImage = nil;
     [wmPlayer.player play];
+    isPlay = YES;
     wmPlayer.closeBtn.hidden = NO;
+    wmPlayer.playOrPauseBtn.selected = NO;
 
 }
 

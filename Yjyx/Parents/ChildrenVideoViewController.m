@@ -15,6 +15,7 @@
     CGRect playerFrame;
     UIImageView *videoImage;
     UIButton *backBtn;
+    BOOL isPlay;
 }
 @property (assign, nonatomic) NSInteger flag;  // 1代表学生端
 @end
@@ -36,12 +37,19 @@
 -(void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation{
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
     [wmPlayer removeFromSuperview];
+    [videoImage removeFromSuperview];
+    videoImage.transform = CGAffineTransformIdentity;
     wmPlayer.transform = CGAffineTransformIdentity;
     if (interfaceOrientation==UIInterfaceOrientationLandscapeLeft) {
+        videoImage.transform = CGAffineTransformMakeRotation(-M_PI_2);
         wmPlayer.transform = CGAffineTransformMakeRotation(-M_PI_2);
     }else if(interfaceOrientation==UIInterfaceOrientationLandscapeRight){
+        videoImage.transform = CGAffineTransformMakeRotation(M_PI_2);
+        
         wmPlayer.transform = CGAffineTransformMakeRotation(M_PI_2);
+        
     }
+    videoImage.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     wmPlayer.frame = CGRectMake(0, 0, self.view.frame.size.width, SCREEN_HEIGHT);
     wmPlayer.playerLayer.frame =  CGRectMake(0,0, self.view.frame.size.height,SCREEN_HEIGHT);
     
@@ -58,7 +66,16 @@
         make.top.equalTo(wmPlayer).with.offset(5);
         
     }];
-    [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
+    if (isPlay) {
+        [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
+        wmPlayer.playOrPauseBtn.selected = YES;
+    }else {
+        wmPlayer.playOrPauseBtn.selected = NO;
+        [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
+        [[UIApplication sharedApplication].keyWindow addSubview:videoImage];
+    }
+    
+
     wmPlayer.isFullscreen = YES;
     wmPlayer.fullScreenBtn.selected = YES;
     [wmPlayer bringSubviewToFront:wmPlayer.bottomView];
@@ -68,6 +85,8 @@
     [wmPlayer removeFromSuperview];
     [backBtn removeFromSuperview];
     [UIView animateWithDuration:0.5f animations:^{
+        videoImage.transform = CGAffineTransformIdentity;
+        videoImage.frame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4);
         wmPlayer.transform = CGAffineTransformIdentity;
         wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
         wmPlayer.playerLayer.frame =  wmPlayer.bounds;
@@ -159,6 +178,7 @@
        wmPlayer.closeBtn.hidden = YES;
        [self.view addSubview:wmPlayer];
        [wmPlayer.player pause];
+       isPlay = NO;
 
        videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
        videoImage.image = [UIImage imageNamed:@"Common_video.png"];
@@ -287,6 +307,7 @@
 {
   
     [self releaseWMPlayer];
+    isPlay = NO;
 }
 -(void)goBack
 {
@@ -297,6 +318,7 @@
 {
 //    backBtn.hidden = YES;
     [wmPlayer.player play];
+    isPlay = YES;
     [videoImage removeFromSuperview];
     videoImage = nil;
 }
