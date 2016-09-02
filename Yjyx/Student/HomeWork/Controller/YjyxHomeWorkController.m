@@ -118,10 +118,10 @@ static NSString *HomeADID = @"HomeADID";
 {
     // 自动刷新
     [self loadAdData];
-    [self workData];
+    
     self.navigationController.navigationBarHidden = NO;
     NSLog(@"will%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
-    self.workTableV.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    
     if(self.homeAdArray.count != 1 && self.homeAdArray.count != 0 && self.timer == nil){
         self.timer = nil;
         self.AdNumPageControl.currentPage = 0;
@@ -134,14 +134,16 @@ static NSString *HomeADID = @"HomeADID";
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+    [self workData];
+    self.workTableV.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     NSLog(@"did%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
 
     
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self.mgr.tasks makeObjectsPerformSelector:@selector(cancel)];
-    [self.workTableV headerEndRefreshing];
+//    [self.mgr.tasks makeObjectsPerformSelector:@selector(cancel)];
+//    [self.workTableV headerEndRefreshing];
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
@@ -275,7 +277,7 @@ static NSString *HomeADID = @"HomeADID";
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"action"] = @"m_gettaskhomepagedata";
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/tasks/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject);
 //        NSLog(@"%@", responseObject[@"retlist"][0][@"name"]);
         if([responseObject[@"retcode"] isEqual:@0]){
         NSMutableArray *tempArr = [NSMutableArray array];
@@ -290,7 +292,17 @@ static NSString *HomeADID = @"HomeADID";
         }else{
             [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
         }
-        [self.workTableV headerEndRefreshing];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.workTableV headerEndRefreshing];
+            
+//            NSLog(@"---%@",  NSStringFromUIEdgeInsets(self.workTableV.contentInset));
+//        });
+        
+        NSLog(@"++++%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
+        if(self.workTableV.contentInset.top < -1){
+            self.workTableV.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        }
+        
      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
          [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
          [self.workTableV headerEndRefreshing];
