@@ -549,13 +549,13 @@ static NSString *videoNumID = @"VIDEONumID";
         wmPlayer.closeBtn.hidden = YES;
         
     }
-    
+     wmPlayer.isPlay = YES;
     // 将按钮放到底部
     [self.videoCell.backgroundIV addSubview:wmPlayer];
     [self.videoCell.backgroundIV bringSubviewToFront:wmPlayer];
     //    [self.videoCell.playBtn.superview sendSubviewToBack:self.videoCell.playBtn];
     self.videoCell.playBtn.hidden = YES;
-    
+//    NSLog(@"%ld", wmPlayer.isPlay);
     [self.tableView reloadData];
     
 }
@@ -783,6 +783,7 @@ static NSString *videoNumID = @"VIDEONumID";
         }else {
             
             cell.playBtn.hidden = NO;
+            
             [cell.playBtn.superview bringSubviewToFront:cell.playBtn];
         }
         

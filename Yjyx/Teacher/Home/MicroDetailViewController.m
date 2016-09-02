@@ -627,7 +627,7 @@ static NSString *VideoNumID = @"VideoNum";
         wmPlayer.closeBtn.hidden = YES;
         
     }
-    
+     wmPlayer.isPlay = YES;
     // 将按钮放到底部
     [self.videoCell.backgroundIV addSubview:wmPlayer];
     [self.videoCell.backgroundIV bringSubviewToFront:wmPlayer];
