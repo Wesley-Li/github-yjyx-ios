@@ -175,8 +175,8 @@
         if (result != nil) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 
-                NSLog(@"%@", result);
-                NSLog(@"%@", result[@"data"][@"summary"][@"correct"]);
+                NSLog(@"-----%@", result);
+               
                 [self.resultchoices removeAllObjects];
                 [self.resultblankfills removeAllObjects];
 //                NSNumber *num = result[@"data"][@"summary"][@"correct"];
@@ -189,7 +189,7 @@
                     self.childrenName = result[@"data"][@"recipientname"];
                 }
                 
-                NSLog(@"%@, %@", questionRight, questionWrong);
+                
                 NSString *questionRate = [questionRight floatValue] + [questionWrong floatValue] == 0 ? @"0%" : [NSString stringWithFormat:@"%.f%%", [questionRight floatValue] * 100 / ([questionRight floatValue] + [questionWrong floatValue])];
                 NSString *taskRate = [total_right floatValue] + [total_wrong floatValue] == 0 ? @"0%" : [NSString stringWithFormat:@"%.f%%", [total_right floatValue] * 100 / ([total_right floatValue] + [total_wrong floatValue])];
                 NSString *summaryString = [NSString stringWithFormat:@"对%@题  错%@题\n%@作业正确率%@  |  所有学生平均正确率%@", questionRight, questionWrong, self.childrenName, questionRate, taskRate];
