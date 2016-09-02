@@ -191,7 +191,7 @@
 }
 
 -(void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation{
-   
+    NSLog(@"%@", wmPlayer);
     [wmPlayer removeFromSuperview];
     wmPlayer.transform = CGAffineTransformIdentity;
     if (interfaceOrientation==UIInterfaceOrientationLandscapeLeft) {
@@ -224,6 +224,7 @@
 }
 -(void)toNormal{
     [wmPlayer removeFromSuperview];
+    [self.view sendSubviewToBack:videoImage];
     wmPlayer.isFullscreen = NO;
     [self setNeedsStatusBarAppearanceUpdate];
     [UIView animateWithDuration:0.5f animations:^{
@@ -560,8 +561,7 @@
     threeStageVC.subjectid = self.subject_id;
     threeStageVC.knowledge = self.knowledgedesc;
     [self.navigationController pushViewController:threeStageVC animated:YES];
-
-    
+  
 }
 
 
@@ -624,8 +624,6 @@
     }];
 }
 
-
-
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self releaseWMPlayer];
@@ -633,20 +631,9 @@
     NSLog(@"player deallco");
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
