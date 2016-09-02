@@ -33,6 +33,9 @@
  */
 #define WMPlayerDoubleTapNotification @"WMPlayerDoubleTapNotification"
 
+#define WMVideoSrcName(file) [@"WMPlayer.bundle" stringByAppendingPathComponent:file]
+#define WMVideoFrameworkSrcName(file) [@"Frameworks/WMPlayer.framework/WMPlayer.bundle" stringByAppendingPathComponent:file]
+
 
 #import <UIKit/UIKit.h>
 #import "Masonry.h"
@@ -88,6 +91,7 @@
 
 /* playItem */
 @property (nonatomic, retain) AVPlayerItem *currentItem;
+
 
 @property (nonatomic,retain) UIButton *backBtn;
 /**

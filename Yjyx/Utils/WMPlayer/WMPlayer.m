@@ -15,8 +15,7 @@
  */
 
 #import "WMPlayer.h"
-#define WMVideoSrcName(file) [@"WMPlayer.bundle" stringByAppendingPathComponent:file]
-#define WMVideoFrameworkSrcName(file) [@"Frameworks/WMPlayer.framework/WMPlayer.bundle" stringByAppendingPathComponent:file]
+
 
 
 static void *PlayViewCMTimeValue = &PlayViewCMTimeValue;

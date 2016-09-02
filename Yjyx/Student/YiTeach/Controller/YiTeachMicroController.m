@@ -19,7 +19,8 @@
     WMPlayer *wmPlayer;
     CGRect playerFrame;
     UIImageView *videoImage;
-    
+    BOOL isPlay;
+
     
 }
 
@@ -77,7 +78,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    
     UIButton *backBtn1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
     [backBtn1 addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [backBtn1 setImage:[UIImage imageNamed:@"comm_back"] forState:UIControlStateNormal];
@@ -123,6 +123,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self closeTheVideo:nil];
+    isPlay = NO;
 }
 
 
@@ -144,9 +145,11 @@
     
     //    currentCell.playBtn.hidden = NO;
     [wmPlayer.player pause];
+    isPlay = NO;
     [wmPlayer removeFromSuperview];
     [videoImage removeFromSuperview];
     [self configureWMPlayer];
+    
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
@@ -159,7 +162,7 @@
     [wmPlayer.playerLayer removeFromSuperlayer];
 
     [videoImage removeFromSuperview];
-   
+    isPlay = NO;
     [self configureWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
 }
@@ -167,15 +170,21 @@
 -(void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation{
    
     [wmPlayer removeFromSuperview];
+    [videoImage removeFromSuperview];
+    videoImage.transform = CGAffineTransformIdentity;
     wmPlayer.transform = CGAffineTransformIdentity;
     if (interfaceOrientation==UIInterfaceOrientationLandscapeLeft) {
+        videoImage.transform = CGAffineTransformMakeRotation(-M_PI_2);
         wmPlayer.transform = CGAffineTransformMakeRotation(-M_PI_2);
     }else if(interfaceOrientation==UIInterfaceOrientationLandscapeRight){
+        videoImage.transform = CGAffineTransformMakeRotation(M_PI_2);
+
         wmPlayer.transform = CGAffineTransformMakeRotation(M_PI_2);
+
     }
+    videoImage.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     wmPlayer.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     wmPlayer.playerLayer.frame =  CGRectMake(0,0, SCREEN_HEIGHT,SCREEN_WIDTH);
-    
     [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(40);
         make.top.mas_equalTo(SCREEN_WIDTH-40);
@@ -189,10 +198,22 @@
         make.top.equalTo(wmPlayer).with.offset(5);
         
     }];
-    [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
+    
+    if (isPlay) {
+        [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
+        wmPlayer.playOrPauseBtn.selected = NO;
+    }else {
+    
+        [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
+        [[UIApplication sharedApplication].keyWindow addSubview:videoImage];
+         wmPlayer.playOrPauseBtn.selected = YES;
+    }
+    
+    
     wmPlayer.isFullscreen = YES;
     wmPlayer.fullScreenBtn.selected = YES;
     [wmPlayer bringSubviewToFront:wmPlayer.bottomView];
+    
     [self setNeedsStatusBarAppearanceUpdate];
     
 }
@@ -201,6 +222,8 @@
     wmPlayer.isFullscreen = NO;
     [self setNeedsStatusBarAppearanceUpdate];
     [UIView animateWithDuration:0.5f animations:^{
+        videoImage.transform = CGAffineTransformIdentity;
+        videoImage.frame = CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4);
         wmPlayer.transform = CGAffineTransformIdentity;
         wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
         wmPlayer.playerLayer.frame =  wmPlayer.bounds;
@@ -212,6 +235,16 @@
             make.height.mas_equalTo(40);
             make.bottom.equalTo(wmPlayer).with.offset(0);
         }];
+        
+        wmPlayer.fullScreenBtn.selected = NO;
+        if (isPlay) {
+            [self.view sendSubviewToBack:videoImage];
+            wmPlayer.playOrPauseBtn.selected = NO;
+        }else {
+            [self.view bringSubviewToFront:videoImage];
+            wmPlayer.playOrPauseBtn.selected = YES;
+        }
+
         [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(wmPlayer).with.offset(-10);
             make.height.mas_equalTo(30);
@@ -371,8 +404,8 @@
         wmPlayer.closeBtn.hidden = YES;
         wmPlayer.layer.masksToBounds = YES;
         [self.view addSubview:wmPlayer];
+        isPlay = NO;
         [wmPlayer.player pause];
-        
        
         videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
         videoImage.image = [UIImage imageNamed:@"Common_video.png"];
@@ -448,10 +481,12 @@
     
     self.videoURL = [self.microArr[sender.tag - 500] objectForKey:@"url"];
     [wmPlayer.player pause];
+    isPlay = NO;
     [wmPlayer removeFromSuperview];
     [videoImage removeFromSuperview];
     [self configureWMPlayer];
     [wmPlayer.player play];
+    isPlay = YES;
     wmPlayer.closeBtn.hidden = NO;
     [self.view sendSubviewToBack:videoImage];
     
@@ -571,7 +606,11 @@
         
     }else {
         
+        [videoImage removeFromSuperview];
+
         [wmPlayer.player play];
+        isPlay = YES;
+        wmPlayer.playOrPauseBtn.selected = NO;
         wmPlayer.closeBtn.hidden = NO;
 
     }
