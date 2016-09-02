@@ -72,6 +72,8 @@
  *  BOOL值判断当前的状态
  */
 @property(nonatomic,assign)BOOL isFullscreen;
+
+@property (nonatomic, assign) BOOL isPlay;
 /**
  *  显示播放时间的UILabel
  */
@@ -91,7 +93,6 @@
 
 /* playItem */
 @property (nonatomic, retain) AVPlayerItem *currentItem;
-
 
 @property (nonatomic,retain) UIButton *backBtn;
 /**

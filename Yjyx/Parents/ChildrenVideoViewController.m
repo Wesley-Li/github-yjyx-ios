@@ -15,7 +15,7 @@
     CGRect playerFrame;
     UIImageView *videoImage;
     UIButton *backBtn;
-    BOOL isPlay;
+    
 }
 @property (assign, nonatomic) NSInteger flag;  // 1代表学生端
 @end
@@ -66,11 +66,11 @@
         make.top.equalTo(wmPlayer).with.offset(5);
         
     }];
-    if (isPlay) {
+    if (wmPlayer.isPlay) {
         [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
-        wmPlayer.playOrPauseBtn.selected = YES;
-    }else {
         wmPlayer.playOrPauseBtn.selected = NO;
+    }else {
+        wmPlayer.playOrPauseBtn.selected = YES;
         [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
         [[UIApplication sharedApplication].keyWindow addSubview:videoImage];
     }
@@ -178,7 +178,7 @@
        wmPlayer.closeBtn.hidden = YES;
        [self.view addSubview:wmPlayer];
        [wmPlayer.player pause];
-       isPlay = NO;
+       wmPlayer.isPlay = NO;
 
        videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
        videoImage.image = [UIImage imageNamed:@"Common_video.png"];
@@ -307,7 +307,7 @@
 {
   
     [self releaseWMPlayer];
-    isPlay = NO;
+    
 }
 -(void)goBack
 {
@@ -318,7 +318,8 @@
 {
 //    backBtn.hidden = YES;
     [wmPlayer.player play];
-    isPlay = YES;
+    wmPlayer.isPlay = YES;
+    wmPlayer.playOrPauseBtn.selected = NO;
     [videoImage removeFromSuperview];
     videoImage = nil;
 }

@@ -25,7 +25,7 @@
     UILabel *_namelb;
     NSDictionary *lessDic;
     UIView *headerView;
-    BOOL isPlay;
+    
 
 
 }
@@ -124,7 +124,7 @@
 
     [wmPlayer removeFromSuperview];
     [self releaseWMPlayer];
-    isPlay = NO;
+    
 }
 
 -(void)videoDidFinished:(NSNotification *)notice{
@@ -138,7 +138,7 @@
     [wmPlayer removeFromSuperview];
     [videoImage removeFromSuperview];
     [self configureWMPlayer];
-    isPlay = NO;
+    wmPlayer.isPlay = NO;
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
@@ -149,7 +149,7 @@
     [wmPlayer removeFromSuperview];
     [videoImage removeFromSuperview];
     [self configureWMPlayer];
-    isPlay = NO;
+    wmPlayer.isPlay = NO;
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
@@ -186,7 +186,7 @@
         make.top.equalTo(wmPlayer).with.offset(5);
         
     }];
-    if (isPlay) {
+    if (wmPlayer.isPlay) {
         [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
         wmPlayer.playOrPauseBtn.selected = NO;
     }else {
@@ -594,7 +594,7 @@
         wmPlayer.closeBtn.hidden = YES;
         wmPlayer.layer.masksToBounds = YES;
         [self.view addSubview:wmPlayer];
-        isPlay = NO;
+        wmPlayer.isPlay = NO;
         [wmPlayer.player pause];
         
         videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
@@ -752,12 +752,12 @@
     
     self.videoURL = [self.microArr[sender.tag - 500] objectForKey:@"url"];
     [wmPlayer.player pause];
-    isPlay = NO;
+    wmPlayer.isPlay = NO;
     [wmPlayer removeFromSuperview];
     [videoImage removeFromSuperview];
     [self configureWMPlayer];
     [wmPlayer.player play];
-    isPlay = YES;
+    wmPlayer.isPlay = YES;
     wmPlayer.closeBtn.hidden = NO;
     [self.view sendSubviewToBack:videoImage];
     
@@ -931,11 +931,10 @@
 -(void)playvideo
 {
     
-    
     [videoImage removeFromSuperview];
     videoImage = nil;
     [wmPlayer.player play];
-    isPlay = YES;
+    wmPlayer.isPlay = YES;
     wmPlayer.closeBtn.hidden = NO;
     wmPlayer.playOrPauseBtn.selected = NO;
 

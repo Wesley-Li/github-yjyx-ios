@@ -243,11 +243,13 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 }
 -(void)colseTheVideo:(UIButton *)sender{
     [self.player pause];
+    _isPlay = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"closeTheVideo" object:sender];
 }
 
 -(void)goBack:(UIButton *)sender{
     [self.player pause];
+    _isPlay = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"goBackBtnClickNotice" object:sender];
 }
 
@@ -280,8 +282,10 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         if ([self currentTime] == [self duration])
             [self setCurrentTime:0.f];
         [self.player play];
+        _isPlay = YES;
     } else {
         [self.player pause];
+        _isPlay = NO;
     }
     
     //    CMTime time = [self.player currentTime];
@@ -313,8 +317,10 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         if ([self currentTime] == self.duration)
             [self setCurrentTime:0.f];
         [self.player play];
+        self.isPlay = YES;
     } else {
         [self.player pause];
+        self.isPlay = NO;
     }
 }
 #pragma mark - 设置播放的视频
@@ -350,7 +356,8 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     __weak typeof(self) weakSelf = self;
     [self.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
         [weakSelf.progressSlider setValue:0.0 animated:YES];
-        weakSelf.playOrPauseBtn.selected = NO;
+        weakSelf.playOrPauseBtn.selected = YES;
+        weakSelf.isPlay = NO;
     }];
 }
 #pragma mark - 播放进度
@@ -415,6 +422,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 - (void)finishedPlay:(NSTimer *)timer{
     if (self.currentTime == self.duration&&self.player.rate==.0f) {
         self.playOrPauseBtn.selected = YES;
+        self.isPlay = NO;
         //播放完成后的通知
         [[NSNotificationCenter defaultCenter] postNotificationName:@"finishedPlay" object:nil];
         [self.durationTimer invalidate];

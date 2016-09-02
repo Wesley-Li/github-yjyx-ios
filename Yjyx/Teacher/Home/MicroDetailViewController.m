@@ -25,7 +25,7 @@
     WMPlayer *wmPlayer;
     NSIndexPath *currentIndexPath;
     BOOL isSmallScreen;
-    BOOL isPlay;
+    
 }
 @property (strong, nonatomic) MicroDetailModel *microDetailM;
 @property (strong, nonatomic) NSMutableDictionary *cellHeightDic;
@@ -136,7 +136,7 @@ static NSString *VideoNumID = @"VideoNum";
     [SVProgressHUD dismiss];
     [wmPlayer removeFromSuperview];
     [self releaseWMPlayer];
-    isPlay = NO;
+    wmPlayer.isPlay = NO;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -412,7 +412,7 @@ static NSString *VideoNumID = @"VideoNum";
 -(void)videoDidFinished:(NSNotification *)notice{
     [self toCell];
     ReleaseMicroCell *currentCell = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    isPlay = NO;
+    wmPlayer.isPlay = NO;
     currentCell.playBtn.hidden = NO;
     [self releaseWMPlayer];
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
@@ -422,7 +422,7 @@ static NSString *VideoNumID = @"VideoNum";
     
     ReleaseMicroCell *currentCell = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     currentCell.playBtn.hidden = NO;
-    isPlay = NO;
+    wmPlayer.isPlay = NO;
     [self toCell];
     [self releaseWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
@@ -596,7 +596,7 @@ static NSString *VideoNumID = @"VideoNum";
     currentIndexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
     NSLog(@"currentIndexPath.row = %ld",(long)currentIndexPath.row);
     
-    isPlay = YES;
+    wmPlayer.isPlay = YES;
     
     if ([UIDevice currentDevice].systemVersion.floatValue>=8||[UIDevice currentDevice].systemVersion.floatValue<7) {
         self.videoCell = (ReleaseMicroCell *)sender.superview.superview;
@@ -734,7 +734,7 @@ static NSString *VideoNumID = @"VideoNum";
         cell.playBtn.tag = indexPath.row;
       
         // 按钮的显示
-        if (isPlay == YES) {
+        if (wmPlayer.isPlay == YES) {
             cell.playBtn.hidden = YES;
         }else {
             
@@ -759,7 +759,6 @@ static NSString *VideoNumID = @"VideoNum";
                 }else{
                     wmPlayer.hidden = YES;
                     
-                    NSLog(@"%d", isPlay);
                     
                 }
             }else{

@@ -61,6 +61,7 @@
     _webView.scrollView.bounces = NO;
     _webView.scrollView.showsHorizontalScrollIndicator = NO;
     _webView.scrollView.showsVerticalScrollIndicator = NO;
+    _webView.detectsPhoneNumbers = NO;
     
     _itemWH = SCREEN_WIDTH  / 5;
     [self setupCollectionView];

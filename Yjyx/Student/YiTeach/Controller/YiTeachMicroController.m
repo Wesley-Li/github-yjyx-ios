@@ -19,7 +19,7 @@
     WMPlayer *wmPlayer;
     CGRect playerFrame;
     UIImageView *videoImage;
-    BOOL isPlay;
+    
 
     
 }
@@ -123,7 +123,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self closeTheVideo:nil];
-    isPlay = NO;
+    
 }
 
 
@@ -145,7 +145,7 @@
     
     //    currentCell.playBtn.hidden = NO;
     [wmPlayer.player pause];
-    isPlay = NO;
+    wmPlayer.isPlay = NO;
     [wmPlayer removeFromSuperview];
     [videoImage removeFromSuperview];
     [self configureWMPlayer];
@@ -162,7 +162,7 @@
     [wmPlayer.playerLayer removeFromSuperlayer];
 
     [videoImage removeFromSuperview];
-    isPlay = NO;
+    wmPlayer.isPlay = NO;
     [self configureWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
 }
@@ -199,7 +199,7 @@
         
     }];
     
-    if (isPlay) {
+    if (wmPlayer.isPlay) {
         [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
         wmPlayer.playOrPauseBtn.selected = NO;
     }else {
@@ -238,7 +238,7 @@
         }];
         
         wmPlayer.fullScreenBtn.selected = NO;
-        if (isPlay) {
+        if (wmPlayer.isPlay) {
             [self.view sendSubviewToBack:videoImage];
             wmPlayer.playOrPauseBtn.selected = NO;
         }else {
@@ -405,7 +405,7 @@
         wmPlayer.closeBtn.hidden = YES;
         wmPlayer.layer.masksToBounds = YES;
         [self.view addSubview:wmPlayer];
-        isPlay = NO;
+        wmPlayer.isPlay = NO;
         [wmPlayer.player pause];
        
         videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
@@ -482,12 +482,12 @@
     
     self.videoURL = [self.microArr[sender.tag - 500] objectForKey:@"url"];
     [wmPlayer.player pause];
-    isPlay = NO;
+    wmPlayer.isPlay = NO;
     [wmPlayer removeFromSuperview];
     [videoImage removeFromSuperview];
     [self configureWMPlayer];
     [wmPlayer.player play];
-    isPlay = YES;
+    wmPlayer.isPlay = YES;
     wmPlayer.closeBtn.hidden = NO;
     [self.view sendSubviewToBack:videoImage];
     
@@ -609,7 +609,7 @@
         [videoImage removeFromSuperview];
 
         [wmPlayer.player play];
-        isPlay = YES;
+        wmPlayer.isPlay = YES;
         wmPlayer.playOrPauseBtn.selected = NO;
         wmPlayer.closeBtn.hidden = NO;
 
