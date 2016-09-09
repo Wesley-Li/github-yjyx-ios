@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 //开发环境
-//#define BaseURL @"http://139.196.14.118"
-//#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
+#define BaseURL @"http://139.196.14.118"
+#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
 //#define BaseURL @"https://ssl.zgyjyx.com"
 
 
@@ -19,11 +19,11 @@
 //#define QiniuYunURL @"http://cdn-web-img.zgyjyx.com/"
 //#define QiniuYunURL @"http://cdn-web-video.zgyjyx.com/"
 
-/**
- * QA环境地址
- * **/
-#define BaseURL @"https://qa.zgyjyx.net"
-#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
+///**
+// * QA环境地址
+// * **/
+//#define BaseURL @"https://qa.zgyjyx.net"
+//#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
 
 
 
