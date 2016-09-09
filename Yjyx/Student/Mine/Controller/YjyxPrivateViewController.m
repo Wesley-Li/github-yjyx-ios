@@ -13,6 +13,7 @@
 #import "YjyxChangeSoundViewController.h"
 #import "FeedBackViewController.h"
 #import "YjyxParentModifyPwdController.h"
+#import "YjyxModifyClassViewController.h"
 @interface YjyxPrivateViewController ()
 
 {
@@ -81,7 +82,7 @@
     
     switch (section) {
         case 0:
-            return 3;
+            return 4;
             break;
         case 1:
             return 4;
@@ -123,8 +124,12 @@
             cell.textLabel.text = @"手机号码: ";
             cell.detailTextLabel.text = [YjyxOverallData sharedInstance].studentInfo.phonenumber;
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-        }else{
+        }else if (indexPath.row ==2){
             cell.textLabel.text = @"修改密码";
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        }
+        else{
+            cell.textLabel.text = @"更改班级";
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         }
     }
@@ -217,10 +222,18 @@
             YjyxChangePhoneController *phoneVC = [[YjyxChangePhoneController alloc] init];
             phoneVC.title = @"修改手机号";
             [self.navigationController pushViewController:phoneVC animated:YES];
-        }else{
+        }else if(indexPath.row == 2){
             YjyxParentModifyPwdController *vc = [[YjyxParentModifyPwdController alloc] init];
             vc.roleType = @2;
             [self.navigationController pushViewController:vc animated:YES];
+        }
+        else{
+          
+            YjyxModifyClassViewController *classVc = [[YjyxModifyClassViewController alloc] init];
+            //classVc.roleType = @2;
+            [self.navigationController pushViewController:classVc animated:YES];
+        
+        
         }
     }else if (indexPath.section == 1) {
         

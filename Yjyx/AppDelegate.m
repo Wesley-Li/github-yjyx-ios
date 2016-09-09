@@ -86,7 +86,7 @@
         self.window.rootViewController = _navigation;
         [self.window makeKeyAndVisible];
     }else{
-//        _deviceToken = @"1231231312da1231sqwc1213";
+        _deviceToken = @"1231231312da1231sqwc1213";
         LoginViewController *loginView = [[LoginViewController alloc] init];
         _navigation = [[NavRootViewController alloc] initWithRootViewController:loginView];
 //        _navigation.navigationBar.hidden = YES;
@@ -823,7 +823,7 @@
             for (NSDictionary *dic in responseObject[@"allstudents"]) {
                 StudentEntity *model = [[StudentEntity alloc] init];
                 [model initStudentWithDic:dic];
-                [((AppDelegate*)SYS_DELEGATE).stuListArr addObject:model];
+                [((AppDelegate*)SYS_DELEGATE).stuListArr addObject:model]; 
                 // 插入学生数据
                 [[StuDataBase shareStuDataBase] insertStudent:model];
             }

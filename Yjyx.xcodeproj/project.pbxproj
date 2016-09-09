@@ -642,6 +642,8 @@
 		CB4004851C609BCD00556AA7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4004841C609BCD00556AA7 /* ViewController.m */; };
 		CB4004881C609BCD00556AA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB4004861C609BCD00556AA7 /* Main.storyboard */; };
 		CB40048A1C609BCD00556AA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB4004891C609BCD00556AA7 /* Assets.xcassets */; };
+		D22739051D815EB6007AA202 /* YjyxModifyClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D22739031D815EB6007AA202 /* YjyxModifyClassViewController.m */; };
+		D22739061D815EB6007AA202 /* YjyxModifyClassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22739041D815EB6007AA202 /* YjyxModifyClassViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1687,6 +1689,9 @@
 		CB4004871C609BCD00556AA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CB4004891C609BCD00556AA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB40048E1C609BCD00556AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D22739021D815EB6007AA202 /* YjyxModifyClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxModifyClassViewController.h; sourceTree = "<group>"; };
+		D22739031D815EB6007AA202 /* YjyxModifyClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxModifyClassViewController.m; sourceTree = "<group>"; };
+		D22739041D815EB6007AA202 /* YjyxModifyClassViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxModifyClassViewController.xib; sourceTree = "<group>"; };
 		FC5EA116648F3CD0B9CBAC77 /* Pods-Yjyx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yjyx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yjyx/Pods-Yjyx.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -3139,6 +3144,9 @@
 				3CD2F16F1D27909E0031AF2E /* YjyxChangePhoneController.xib */,
 				3CD2F1721D27A3C70031AF2E /* YjyxChangeSoundViewController.h */,
 				3CD2F1731D27A3C70031AF2E /* YjyxChangeSoundViewController.m */,
+				D22739021D815EB6007AA202 /* YjyxModifyClassViewController.h */,
+				D22739031D815EB6007AA202 /* YjyxModifyClassViewController.m */,
+				D22739041D815EB6007AA202 /* YjyxModifyClassViewController.xib */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -3833,6 +3841,7 @@
 				80D978F71D28CC6E000BD95E /* GetTaskCell.xib in Resources */,
 				3B48644D1CCF10C200D2DE3C /* new.png in Resources */,
 				3A8827921C6EEFEF0008367F /* Personal_children@3x.png in Resources */,
+				D22739061D815EB6007AA202 /* YjyxModifyClassViewController.xib in Resources */,
 				80590BED1D0CF5D500867D9B /* home_img_knowledge@3x.png in Resources */,
 				3BB773971CD86B3A00A24485 /* home_img_camera@3x.png in Resources */,
 				3A26EE651C71A81B009C3242 /* Parent_message@3x.png in Resources */,
@@ -4276,6 +4285,7 @@
 				3BD9C7F81CEEE33A008232D7 /* SoundChangeViewController.m in Sources */,
 				3BFE3B8A1CDA0D6F00502769 /* StuGroupEntity.m in Sources */,
 				3B35DB981CE07049000B7F83 /* CorectCell.m in Sources */,
+				D22739051D815EB6007AA202 /* YjyxModifyClassViewController.m in Sources */,
 				3AEF27231C61F08A0028BE09 /* SecurityStrategy.m in Sources */,
 				3A04A5D31C93E6290040D913 /* View+MASAdditions.m in Sources */,
 				3CAC45521D40EEDF00ACBDA9 /* YjyxExchangeRecordModel.m in Sources */,
@@ -4493,8 +4503,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
+
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -4533,7 +4545,9 @@
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+
 				PROVISIONING_PROFILE = "92e9b2c4-8833-4ab2-bf04-b311a25d4413";
+
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -4547,6 +4561,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
+
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
 				COPY_PHASE_STRIP = YES;
@@ -4586,6 +4601,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+
 				PROVISIONING_PROFILE = "92e9b2c4-8833-4ab2-bf04-b311a25d4413";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
