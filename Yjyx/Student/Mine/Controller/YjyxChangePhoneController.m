@@ -12,7 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UITextField *codeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextfield;
-@property (weak, nonatomic) IBOutlet UILabel *getCodeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *getCodeBtn;
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (assign, nonatomic) NSInteger second;

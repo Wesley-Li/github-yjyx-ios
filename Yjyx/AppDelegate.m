@@ -614,17 +614,17 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"checkupgrade", @"action", @1, @"ostype", currentVerdion, @"currver", nil];
-    
-    [manager GET:[BaseURL stringByAppendingString:[NSString stringWithFormat:@"/api/%@/version/", role]] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    NSDictionary *dict = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
+    [manager GET:[BaseURL stringByAppendingString:[NSString stringWithFormat:@"/api/%@/version/", dict[@"role"]]] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        NSLog(@"%@", responseObject);
+        NSLog(@"%@, %@", responseObject, [NSString stringWithFormat:@"/api/%@/version/", role]);
         
         if ([responseObject[@"retcode"] isEqual:@0]) {
             
             
             if ([responseObject[@"version"] isEqualToString:@""] || [responseObject[@"version"] isEqual:[NSNull null]] || responseObject[@"version"] == nil) {
                 
-
+                [SYS_CACHE setObject:[NSDate date] forKey:@"date"];
                 // 如果是空不做处理
                 return;
                 

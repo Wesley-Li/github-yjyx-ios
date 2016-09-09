@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -8,7 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YjyxChangePhoneController">
             <connections>
                 <outlet property="codeTextField" destination="4iC-6o-6j3" id="C1E-gf-NZ0"/>
-                <outlet property="getCodeBtn" destination="QOY-GT-fno" id="Idb-iV-LeE"/>
+                <outlet property="getCodeBtn" destination="kJH-M2-eLZ" id="E7L-9p-HXc"/>
                 <outlet property="phoneTextfield" destination="dLs-fX-Pt8" id="7wL-ZL-flY"/>
                 <outlet property="timeLabel" destination="QOY-GT-fno" id="QHg-SL-pSq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -23,17 +23,17 @@
                     <rect key="frame" x="0.0" y="85" width="320" height="100"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UEd-lt-tx9">
-                            <rect key="frame" x="20" y="50" width="220" height="1"/>
+                            <rect key="frame" x="20" y="50" width="210" height="1"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="KVP-eC-MdB"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJH-M2-eLZ">
-                            <rect key="frame" x="240" y="50" width="80" height="50"/>
+                            <rect key="frame" x="230" y="50" width="90" height="50"/>
                             <color key="backgroundColor" red="0.35686274509803922" green="0.76862745098039209" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="80" id="Hxz-LB-2k3"/>
+                                <constraint firstAttribute="width" constant="90" id="Hxz-LB-2k3"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal">
@@ -49,14 +49,14 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4iC-6o-6j3">
-                            <rect key="frame" x="20" y="51" width="220" height="49"/>
+                            <rect key="frame" x="20" y="51" width="210" height="49"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="获取验证码" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOY-GT-fno">
-                            <rect key="frame" x="240" y="50" width="80" height="50"/>
+                            <rect key="frame" x="230" y="50" width="90" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>

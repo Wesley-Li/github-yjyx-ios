@@ -102,6 +102,9 @@
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     ChildrenEntity *children = [_childrenAry objectAtIndex:indexPath.row];
+    if ([children.childavatar isEqual:[NSNull null]]) {
+        children.childavatar = nil;
+    }
     [cell.iconImage setImageWithURL:[NSURL URLWithString:children.childavatar] placeholderImage:[UIImage imageNamed:@"Personal_children.png"]];
     cell.iconImage.tag = indexPath.row;
     cell.nameLb.text = children.name;
