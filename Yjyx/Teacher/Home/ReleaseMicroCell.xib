@@ -24,7 +24,7 @@
                             <constraint firstAttribute="width" constant="80" id="Mcy-mc-UYe"/>
                             <constraint firstAttribute="width" secondItem="doD-4g-Ljm" secondAttribute="height" id="suU-18-wIy"/>
                         </constraints>
-                        <state key="normal" title="Button" image="start_btn.png"/>
+                        <state key="normal" image="start_btn.png"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmo-7P-aAz">
                         <rect key="frame" x="5" y="0.0" width="44" height="40"/>
@@ -54,7 +54,7 @@
                 <outlet property="backgroundIV" destination="LlM-F9-hZ4" id="ZMG-kP-e37"/>
                 <outlet property="playBtn" destination="doD-4g-Ljm" id="VIz-lZ-yWQ"/>
             </connections>
-            <point key="canvasLocation" x="450.5" y="214.5"/>
+            <point key="canvasLocation" x="431.5" y="215.5"/>
         </tableViewCell>
     </objects>
     <resources>
