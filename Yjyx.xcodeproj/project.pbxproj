@@ -344,7 +344,6 @@
 		3BE01BDF1CDDC3A400781B86 /* TCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE01BDE1CDDC3A400781B86 /* TCustomView.m */; };
 		3BE01BE11CDDCA8200781B86 /* TCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BE01BE01CDDCA8200781B86 /* TCustomView.xib */; };
 		3BFE3B781CD9816D00502769 /* YjxService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B691CD9816D00502769 /* YjxService.m */; };
-		3BFE3B791CD9816D00502769 /* YjyxOverallData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B6B1CD9816D00502769 /* YjyxOverallData.m */; };
 		3BFE3B7A1CD9816D00502769 /* ChildrenActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B6E1CD9816D00502769 /* ChildrenActivity.m */; };
 		3BFE3B7B1CD9816D00502769 /* ChildrenEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B701CD9816D00502769 /* ChildrenEntity.m */; };
 		3BFE3B7C1CD9816D00502769 /* ParentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B721CD9816D00502769 /* ParentEntity.m */; };
@@ -485,6 +484,7 @@
 		3CF0D1771D24B0B7002EE9BF /* RegistStudentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0D1751D24B0B7002EE9BF /* RegistStudentController.m */; };
 		3CF0D1781D24B0B7002EE9BF /* RegistStudentController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF0D1761D24B0B7002EE9BF /* RegistStudentController.xib */; };
 		3CF0D1821D2542B2002EE9BF /* OneStudentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF0D1811D2542B2002EE9BF /* OneStudentEntity.m */; };
+		3CF148ED1D828AFD0085643C /* YjyxOverallData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE3B6B1CD9816D00502769 /* YjyxOverallData.m */; };
 		3CF1AD4B1D6BF46C0070CAA9 /* YjyxKnowledgeCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF1AD4A1D6BF46C0070CAA9 /* YjyxKnowledgeCardView.m */; };
 		3CF1AD4D1D6BF47D0070CAA9 /* YjyxKnowledgeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CF1AD4C1D6BF47D0070CAA9 /* YjyxKnowledgeCardView.xib */; };
 		3CF1AD511D6C1E120070CAA9 /* YjyxThreeStageAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CF1AD4F1D6C1E120070CAA9 /* YjyxThreeStageAnswerCell.m */; };
@@ -4311,6 +4311,7 @@
 				80D978FA1D28E1E4000BD95E /* GetTaskModel.m in Sources */,
 				80D979101D36352B000BD95E /* TeacherDrawViewController.m in Sources */,
 				CB40047F1C609BCD00556AA7 /* main.m in Sources */,
+				3CF148ED1D828AFD0085643C /* YjyxOverallData.m in Sources */,
 				3CD7E4551D2B593800769FDE /* MJRefreshBaseView.m in Sources */,
 				3CA896381D06B3890092D292 /* TreeNode.m in Sources */,
 				3A8CAEC11C70B3C200BDEB6B /* ParentChildrensViewController.m in Sources */,
@@ -4367,7 +4368,6 @@
 				80D979181D3882AE000BD95E /* YjyxDrawLine.m in Sources */,
 				8013D32F1CF4495300F82301 /* SpendTimeCell.m in Sources */,
 				3CF01B4B1D0E49C5001C4251 /* siftContentView.m in Sources */,
-				3BFE3B791CD9816D00502769 /* YjyxOverallData.m in Sources */,
 				80D978EC1D27A71D000BD95E /* OneStuViewController.m in Sources */,
 				80D978F11D27DE07000BD95E /* GetTaskViewController.m in Sources */,
 				80F718C21CF28961007C0B75 /* SubmitCell.m in Sources */,

@@ -89,15 +89,12 @@
         _deviceToken = @"1231231312da1231sqwc1213";
         LoginViewController *loginView = [[LoginViewController alloc] init];
         _navigation = [[NavRootViewController alloc] initWithRootViewController:loginView];
-//        _navigation.navigationBar.hidden = YES;
+        _navigation.navigationBar.hidden = YES;
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         self.window.backgroundColor = [UIColor whiteColor];
         self.window.rootViewController = _navigation;
         [self.window makeKeyAndVisible];
     }
- 
-    
-
     return YES;
 }
 
@@ -625,7 +622,7 @@
         if ([responseObject[@"retcode"] isEqual:@0]) {
             
             
-            if ([responseObject[@"version"] isEqualToString:@""] && [responseObject[@"version"] isEqual:[NSNull null]]) {
+            if ([responseObject[@"version"] isEqualToString:@""] || [responseObject[@"version"] isEqual:[NSNull null]] || responseObject[@"version"] == nil) {
                 
 
                 // 如果是空不做处理
