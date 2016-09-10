@@ -457,6 +457,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     double interval = .1f;
     
     CMTime playerDuration = [self playerItemDuration];
+    NSLog(@"%f", playerDuration);
     if (CMTIME_IS_INVALID(playerDuration))
     {
         return;

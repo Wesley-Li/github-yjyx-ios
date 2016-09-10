@@ -300,6 +300,10 @@ static NSString *ID = @"CELL";
     NSMutableArray *IDArr = [NSMutableArray array];
     for (StudentEntity *stuModel in self.stuArr) {
         if(stuModel.isSelect == YES){
+            if(stuModel.user_id == nil){
+                [SVProgressHUD showErrorWithStatus:@"发布失败"];
+                return;
+            }
             if(![IDArr containsObject:stuModel.user_id]){
             [tempArr addObject:stuModel];
             [IDArr addObject:stuModel.user_id];

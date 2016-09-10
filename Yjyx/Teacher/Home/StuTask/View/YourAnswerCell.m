@@ -97,6 +97,8 @@
                 numLabel.textColor = [UIColor whiteColor];
                 numLabel.text = [NSString stringWithFormat:@"%ld", [[processArr[i] objectForKey:@"teachervoice"] count]];
                 [voiceView addSubview:numLabel];
+                numLabel.font = [UIFont systemFontOfSize:12];
+              
 
             }
             
@@ -159,10 +161,11 @@
         CGFloat padding = 10;// 间距
         NSInteger num = 5;
         
-        CGFloat tWidth = (self.imageBGView.width - padding *(num - 1)) / num;
+        CGFloat tWidth = (SCREEN_WIDTH -20 - padding *(num - 1)) / num;
         
         CGFloat tHeigh = tWidth;
-        
+//        size.width  = tWidth;
+//        size.height = tHeigh;
         NSArray *processArr = [dic[@"summary"][4] objectForKey:@"writeprocess"];
         
         for (int i = 0; i < processArr.count; i++) {
@@ -180,10 +183,16 @@
             
             if ([[processArr[i] objectForKey:@"teachervoice"] count] > 0) {
                 
+//                UIImageView *voiceView = [[UIImageView alloc] init];
+//                voiceView.width = imageview.width / 2;
+//                voiceView.height = voiceView.width;
+//                voiceView.center = imageview.center;
+//                voiceView.image = [UIImage imageNamed:@"voice_icon"];
+//                [imageview addSubview:voiceView];
                 UIImageView *voiceView = [[UIImageView alloc] init];
                 voiceView.width = imageview.width / 2;
                 voiceView.height = voiceView.width;
-                voiceView.center = imageview.center;
+                voiceView.frame = CGRectMake(imageview.width/2 - voiceView.width/2, imageview.height/2 - voiceView.height/2, voiceView.width, voiceView.height);
                 voiceView.image = [UIImage imageNamed:@"voice_icon"];
                 [imageview addSubview:voiceView];
                 // 角标
@@ -194,7 +203,10 @@
                 numLabel.backgroundColor = [UIColor redColor];
                 numLabel.textColor = [UIColor whiteColor];
                 numLabel.text = [NSString stringWithFormat:@"%ld", [[processArr[i] objectForKey:@"teachervoice"] count]];
-                
+                NSLog(@"+++_____%ld", [[processArr[i] objectForKey:@"teachervoice"] count]);
+                numLabel.font = [UIFont systemFontOfSize:12];
+               
+                [voiceView addSubview:numLabel];
             }
             
             if (self.imageBGView.width - size.width <= 0) {

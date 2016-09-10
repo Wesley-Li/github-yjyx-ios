@@ -54,10 +54,10 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1m-gl-AEs">
-                        <rect key="frame" x="476" y="50" width="20" height="20"/>
+                        <rect key="frame" x="466" y="45" width="30" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="X9A-6S-NMq"/>
-                            <constraint firstAttribute="height" constant="20" id="qF7-e9-Mz1"/>
+                            <constraint firstAttribute="width" constant="30" id="X9A-6S-NMq"/>
+                            <constraint firstAttribute="height" constant="30" id="qF7-e9-Mz1"/>
                         </constraints>
                         <state key="normal" backgroundImage="voice_de"/>
                     </button>

@@ -78,8 +78,11 @@ static NSString *StudentID = @"StudentCell";
     [super viewDidLoad];
     [self loadData];
     self.navigationController.navigationBarHidden = NO;
-    self.navigationItem.title = @"发布微课";
-    
+    if(self.w_id == nil){
+         self.navigationItem.title = @"发布作业";
+    }else{
+        self.navigationItem.title = @"发布微课";
+    }
     for (StuClassEntity *stuClassModel in self.classArr) {
         NSMutableArray *tempArr = [NSMutableArray array];
         for (NSNumber *num in stuClassModel.memberlist) {
@@ -154,6 +157,10 @@ static NSString *StudentID = @"StudentCell";
     NSMutableArray *IDArr = [NSMutableArray array];
     for (StudentEntity *stuModel in self.stuArr) {
         if(stuModel.isSelect == YES){
+            if(stuModel.user_id == nil){
+                [SVProgressHUD showErrorWithStatus:@"发布失败"];
+                return;
+            }
             if(![IDArr containsObject:stuModel.user_id]){
             [tempArr addObject:stuModel];
             [IDArr addObject:stuModel.user_id];
