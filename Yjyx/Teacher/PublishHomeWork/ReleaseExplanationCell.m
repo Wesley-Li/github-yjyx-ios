@@ -40,8 +40,8 @@
     web.userInteractionEnabled = NO;
     NSString *str = @"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">";
     
-    model.content = [model.content  stringByReplacingOccurrencesOfString:@"<p>" withString:str];
-    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.content];
+    model.explanation = [model.explanation  stringByReplacingOccurrencesOfString:@"<p>" withString:str];
+    NSString *jsString = [NSString stringWithFormat:@"<p style=\"word-wrap:break-word; width:SCREEN_WIDTH;\">%@</p>", model.explanation];
     [web loadHTMLString:jsString baseURL:nil];
     [self.bgview addSubview:web];
 

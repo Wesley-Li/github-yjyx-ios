@@ -41,25 +41,25 @@
         [view removeFromSuperview];
     }
     
-    for (NSNumber *num in correctArray) {
-        StudentEntity *studentEntity = [[StuDataBase shareStuDataBase] selectStuById:num];
-        if ([studentEntity.realname isEqual:[NSNull null]]) {
-            [self getStuNameAndImageFromNetByids:correctArray];
-            [self.CStuArr addObjectsFromArray:self.stuArr];
-            break;
-        }
-        [self.CStuArr addObject:studentEntity];
-    }
-    
-    for (NSNumber *num in wrongArray) {
-        StudentEntity *studentEntity = [[StuDataBase shareStuDataBase] selectStuById:num];
-        if ([studentEntity.realname isEqual:[NSNull null]]) {
-            [self getStuNameAndImageFromNetByids:wrongArray];
-            [self.WStuArr addObjectsFromArray:self.stuArr];
-            break;
-        }
-        [self.WStuArr addObject:studentEntity];
-    }
+//    for (NSNumber *num in correctArray) {
+//        StudentEntity *studentEntity = [[StuDataBase shareStuDataBase] selectStuById:num];
+//        if ([studentEntity.realname isEqual:[NSNull null]] || studentEntity.realname == nil) {
+//            [self getStuNameAndImageFromNetByids:correctArray];
+//            [self.CStuArr addObjectsFromArray:self.stuArr];
+//            break;
+//        }
+//        [self.CStuArr addObject:studentEntity];
+//    }
+//    
+//    for (NSNumber *num in wrongArray) {
+//        StudentEntity *studentEntity = [[StuDataBase shareStuDataBase] selectStuById:num];
+//        if ([studentEntity.realname isEqual:[NSNull null]] || studentEntity.realname == nil) {
+//            [self getStuNameAndImageFromNetByids:wrongArray];
+//            [self.WStuArr addObjectsFromArray:self.stuArr];
+//            break;
+//        }
+//        [self.WStuArr addObject:studentEntity];
+//    }
 
     NSInteger totalCount = correctArray.count + wrongArray.count;
     UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.summaryLabel.height, SCREEN_WIDTH - 20, 20)];
@@ -146,24 +146,28 @@
             imageBtn.layer.cornerRadius = tWidth / 2;
             imageBtn.layer.masksToBounds = YES;
             imageBtn.tag = 200 + i;
-            StudentEntity *studentEntity = self.CStuArr[i];
             
-            if ([studentEntity.avatar_url isEqual:[NSNull null]]) {
-                
-                [imageBtn setBackgroundImage:[UIImage imageNamed:@"student_p"] forState:UIControlStateNormal];
-                
-            }else {
-            
-                [imageBtn setBackgroundImageWithURL:[NSURL URLWithString:studentEntity.avatar_url] placeholderImage:[UIImage imageNamed:@"student_p"]];
-            }
-            
-            [imageBtn addTarget:self action:@selector(imageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            StudentEntity *studentEntity = correctArray[i];
             
             // 姓名
             UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, tWidth, tWidth, 20)];
             nameLabel.text = [NSString stringWithFormat:@"%@", studentEntity.realname];
             nameLabel.font = [UIFont systemFontOfSize:12];
             nameLabel.textAlignment = NSTextAlignmentCenter;
+            
+            if ([studentEntity.avatar_url isEqual:[NSNull null]]) {
+                    
+                [imageBtn setBackgroundImage:[UIImage imageNamed:@"student_p"] forState:UIControlStateNormal];
+                    
+            }else {
+                    
+                [imageBtn setBackgroundImageWithURL:[NSURL URLWithString:studentEntity.avatar_url] placeholderImage:[UIImage imageNamed:@"student_p"]];
+            }
+            
+            
+            [imageBtn addTarget:self action:@selector(imageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            
+            
         
             [taskView addSubview:imageBtn];
             [taskView addSubview:nameLabel];
@@ -255,24 +259,23 @@
             imageBtn.layer.cornerRadius = tWidth2 / 2;
             imageBtn.layer.masksToBounds = YES;
             imageBtn.tag = 200 + i;
-            StudentEntity *studentEntity = self.WStuArr[i];
             
-            if ([studentEntity.avatar_url isEqual:[NSNull null]]) {
-                
-                [imageBtn setBackgroundImage:[UIImage imageNamed:@"student_p"] forState:UIControlStateNormal];
-                
-            }else {
-                
-                [imageBtn setBackgroundImageWithURL:[NSURL URLWithString:studentEntity.avatar_url] placeholderImage:[UIImage imageNamed:@"student_p"]];
-            }
-            
-            [imageBtn addTarget:self action:@selector(handleImageBtn:) forControlEvents:UIControlEventTouchUpInside];
+            StudentEntity *studentEntity = wrongArray[i];
             
             // 姓名
             UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, tWidth2, tWidth2, 20)];
             nameLabel.text = [NSString stringWithFormat:@"%@", studentEntity.realname];
             nameLabel.font = [UIFont systemFontOfSize:12];
             nameLabel.textAlignment = NSTextAlignmentCenter;
+
+            if ([studentEntity.avatar_url isEqual:[NSNull null]]) {
+                [imageBtn setBackgroundImage:[UIImage imageNamed:@"student_p"] forState:UIControlStateNormal];
+            }else {
+                [imageBtn setBackgroundImageWithURL:[NSURL URLWithString:studentEntity.avatar_url] placeholderImage:[UIImage imageNamed:@"student_p"]];
+            }
+            
+
+            [imageBtn addTarget:self action:@selector(handleImageBtn:) forControlEvents:UIControlEventTouchUpInside];
             
             [taskView addSubview:imageBtn];
             [taskView addSubview:nameLabel];
@@ -293,6 +296,7 @@
 
 }
 
+/*
 // 根据学生id列表获取学生的头像和姓名
 - (void)getStuNameAndImageFromNetByids:(NSArray *)idArr {
 
@@ -321,7 +325,7 @@
     }];
 
 }
-
+*/
 - (void)imageBtnClick:(UIButton *)sender {
     
     [self.delegate handlePushCorrectWithSender:sender];

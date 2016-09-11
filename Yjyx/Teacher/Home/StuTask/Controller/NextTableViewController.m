@@ -34,6 +34,7 @@
     NSString *_explanation;
     NSString *_videourl;
     NSInteger rows;
+   
     
     
 }
@@ -47,7 +48,8 @@
 @property (nonatomic, strong) VideoCell *videoCell;
 @property (nonatomic, strong) NSMutableDictionary *cellHeightDic;
 @property (assign, nonatomic) NSInteger flag;
-
+@property (nonatomic, strong) NSMutableArray *correctArr;
+@property (nonatomic, strong) NSMutableArray *wrongArr;
 
 
 @end
@@ -66,6 +68,23 @@
     return self;
 }
  */
+
+
+- (NSMutableArray *)correctArr {
+
+    if (!_correctArr) {
+        self.correctArr = [NSMutableArray array];
+    }
+    return _correctArr;
+}
+
+- (NSMutableArray *)wrongArr {
+
+    if (!_wrongArr) {
+        self.wrongArr = [NSMutableArray array];
+    }
+    return _wrongArr;
+}
 
 -(BOOL)prefersStatusBarHidden{
     if (wmPlayer) {
@@ -301,6 +320,7 @@
     
     // 请求网络
     [self readDataFromNetWork];
+
     
     if ([_qtype isEqualToNumber:@1]) {
         self.title = [NSString stringWithFormat:@"选择题(%ld/%ld)", (long)_currentNumber, (long)_totalNumber];
@@ -357,6 +377,9 @@
             
             self.dic = [NSDictionary dictionaryWithDictionary:responseObject];
             
+            // 核查学生
+            [self checkTheStudentIsInDatabase];
+            
             if ([responseObject[@"question"] allKeys].count == 0) {
                 rows = 0;
                 UIImageView *wrongImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wrong"]];
@@ -381,6 +404,94 @@
     }];
 
 }
+
+
+- (void)checkTheStudentIsInDatabase  {
+
+    // 答题正确人数
+    NSArray *correctArray = [_dic[@"summary"] objectForKey:@"CNL"];
+    for (NSNumber *num in correctArray) {
+        StudentEntity *studentEntity = [[StuDataBase shareStuDataBase] selectStuById:num];
+        if (studentEntity.realname == nil) {// 不在班级里
+            NSArray *idArr = [NSArray arrayWithObject:num];
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"studentdisattr", @"action", [idArr JSONString], @"ids", nil];
+            [manager GET:[BaseURL stringByAppendingString:@"/api/teacher/mobile/yj_teachers/"] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                
+                if ([responseObject[@"retcode"] isEqual:@0]) {
+                    for (NSDictionary *dic in responseObject[@"students"]) {
+                        
+                        StudentEntity *entity = [[StudentEntity alloc] init];
+                        [entity initStudentWithDic:dic];
+                        [self.correctArr addObject:entity];
+                        
+                    }
+                    
+                }else {
+                    
+                    [self.view makeToast:responseObject[@"msg"] duration:1 position:SHOW_CENTER complete:nil];
+                }
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+                
+                [self.view makeToast:@"网络出错" duration:1 position:SHOW_CENTER complete:nil];
+                
+            }];
+
+        }else {
+            
+            [self.correctArr addObject:studentEntity];
+        
+        }
+    }
+    
+    // 答题错误人数
+    NSArray *wrongArray = [_dic[@"summary"] objectForKey:@"WNL"];
+    for (NSNumber *num in wrongArray) {
+        StudentEntity *studentEntity = [[StuDataBase shareStuDataBase] selectStuById:num];
+        if (studentEntity.realname == nil) {// 不在班级里
+            NSArray *idArr = [NSArray arrayWithObject:num];
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"studentdisattr", @"action", [idArr JSONString], @"ids", nil];
+            [manager GET:[BaseURL stringByAppendingString:@"/api/teacher/mobile/yj_teachers/"] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                
+                if ([responseObject[@"retcode"] isEqual:@0]) {
+                    for (NSDictionary *dic in responseObject[@"students"]) {
+                        
+                        StudentEntity *entity = [[StudentEntity alloc] init];
+                        [entity initStudentWithDic:dic];
+                        [self.wrongArr addObject:entity];
+                        
+                    }
+                    
+                }else {
+                    
+                    [self.view makeToast:responseObject[@"msg"] duration:1 position:SHOW_CENTER complete:nil];
+                }
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+                
+                [self.view makeToast:@"网络出错" duration:1 position:SHOW_CENTER complete:nil];
+                
+            }];
+
+        }else {
+        
+            [self.wrongArr addObject:studentEntity];
+        }
+    }
+    
+
+}
+
+
+
+
+
+
+
 - (void)viewWillDisappear:(BOOL)animated {
     
     if (isPlay) {
@@ -499,7 +610,11 @@
         _AnswerSituationCell.delegate = self;
         _AnswerSituationCell.c_isExpand = _isCorrectShowMore ? YES : NO;
         _AnswerSituationCell.w_isExpand = _isWrongShowMore ? YES : NO;
-        [_AnswerSituationCell setValueWithCorrectArray:[_dic[@"summary"] objectForKey:@"CNL"] andWrongArray:[_dic[@"summary"] objectForKey:@"WNL"]];
+        
+        
+        [_AnswerSituationCell setValueWithCorrectArray:self.correctArr andWrongArray:self.wrongArr];
+        
+        
         return _AnswerSituationCell;
     }else if (indexPath.row == 2) {
     
