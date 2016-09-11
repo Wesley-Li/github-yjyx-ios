@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OneStuViewController">
             <connections>
+                <outlet property="alertLabel" destination="7cf-XK-bB5" id="bCI-Qn-Ssa"/>
                 <outlet property="bgScrollView" destination="UJz-F5-L0m" id="FWq-iH-aPT"/>
                 <outlet property="corectNumLabel" destination="xBX-Oq-bp0" id="DFM-g6-5ns"/>
                 <outlet property="finishLabel" destination="YEj-Ou-XGm" id="xhD-H6-6EG"/>
@@ -281,6 +282,12 @@
                     <rect key="frame" x="0.0" y="325" width="600" height="301"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </scrollView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="暂无数据" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cf-XK-bB5">
+                    <rect key="frame" x="279" y="335" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -288,10 +295,12 @@
                 <constraint firstItem="rxW-Wc-4MF" firstAttribute="top" secondItem="MBf-nl-L89" secondAttribute="bottom" constant="10" id="0g6-Ya-LWo"/>
                 <constraint firstItem="0R1-DG-aeg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4JD-Ex-DI0"/>
                 <constraint firstItem="UJz-F5-L0m" firstAttribute="top" secondItem="rxW-Wc-4MF" secondAttribute="bottom" id="6CP-4O-GdZ"/>
+                <constraint firstItem="7cf-XK-bB5" firstAttribute="top" secondItem="MBf-nl-L89" secondAttribute="bottom" constant="80" id="6yv-sf-EQL"/>
                 <constraint firstItem="0R1-DG-aeg" firstAttribute="height" secondItem="VO1-ig-5Xr" secondAttribute="height" id="BrM-OZ-Zj3"/>
                 <constraint firstAttribute="bottom" secondItem="UJz-F5-L0m" secondAttribute="bottom" id="DKX-7e-nm6"/>
                 <constraint firstAttribute="trailing" secondItem="UJz-F5-L0m" secondAttribute="trailing" id="IEW-L8-cc8"/>
                 <constraint firstItem="kdo-Wi-XKf" firstAttribute="height" secondItem="VO1-ig-5Xr" secondAttribute="height" id="KO8-ay-kcU"/>
+                <constraint firstItem="7cf-XK-bB5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="LRU-3c-grs"/>
                 <constraint firstItem="48T-tD-sVb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NSz-t6-ZVm"/>
                 <constraint firstItem="VO1-ig-5Xr" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="1.2:15" id="PIo-Ty-tq9"/>
                 <constraint firstItem="48T-tD-sVb" firstAttribute="height" secondItem="VO1-ig-5Xr" secondAttribute="height" id="Peh-NX-wHI"/>

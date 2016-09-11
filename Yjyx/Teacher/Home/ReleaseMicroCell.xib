@@ -54,7 +54,7 @@
                 <outlet property="backgroundIV" destination="LlM-F9-hZ4" id="ZMG-kP-e37"/>
                 <outlet property="playBtn" destination="doD-4g-Ljm" id="VIz-lZ-yWQ"/>
             </connections>
-            <point key="canvasLocation" x="450.5" y="214.5"/>
+            <point key="canvasLocation" x="431.5" y="215.5"/>
         </tableViewCell>
     </objects>
     <resources>

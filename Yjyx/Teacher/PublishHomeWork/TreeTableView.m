@@ -32,6 +32,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
         self.delegate = self;
         _data = data;
         _tempData = [self createTempData:data];
+//        self.rowHeight = UITableViewAutomaticDimension;
         [self registerNib:[UINib nibWithNibName:NSStringFromClass([ParentChapterCell class]) bundle:nil] forCellReuseIdentifier:NODE_CELL_ID];
     }
     return self;
@@ -111,7 +112,10 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 40;
+    TreeNode *node = [_tempData objectAtIndex:indexPath.row];
+    CGRect rect = [node.name boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 82, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17.0]} context:nil];
+    NSLog(@"%f", rect.size.height);
+    return rect.size.height + 15;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

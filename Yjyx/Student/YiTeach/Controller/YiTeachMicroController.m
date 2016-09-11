@@ -335,19 +335,23 @@
             self.microName = responseObject[@"name"];
             self.knowledgedesc = responseObject[@"knowledgedesc"];
             self.microNameLabel.text = _microName;
-            NSArray *array = [responseObject[@"quizcontent"] JSONValue][@"questionList"][0][1];
-            NSLog(@"-------%@", array);
-            // id列表
-            for (NSDictionary *dic in array) {
-                if ([dic[@"level"] isEqual:@1]) {
-                    [self.baseQuestionIDList addObject:dic[@"id"]];
-                }else if ([dic[@"level"] isEqual:@2]) {
-                    [self.consolidateIDList addObject:dic[@"id"]];
-                }else {
-                    
-                    [self.improveIDList addObject:dic[@"id"]];
+          
+            if([[responseObject[@"quizcontent"] JSONValue][@"questionList"][0] count] != 0){
+                NSArray *array = [responseObject[@"quizcontent"] JSONValue][@"questionList"][0][1];
+                
+                NSLog(@"-------%@", array);
+                // id列表
+                for (NSDictionary *dic in array) {
+                    if ([dic[@"level"] isEqual:@1]) {
+                        [self.baseQuestionIDList addObject:dic[@"id"]];
+                    }else if ([dic[@"level"] isEqual:@2]) {
+                        [self.consolidateIDList addObject:dic[@"id"]];
+                    }else {
+                        
+                        [self.improveIDList addObject:dic[@"id"]];
+                    }
                 }
-            }
+                }
             if([responseObject[@"showview"] integerValue] == 1 && ![[responseObject allKeys] containsObject:@"videoobjlist"]){
                 [self configureWMPlayer];
                 self.scroHeightConstraint.constant = 1;

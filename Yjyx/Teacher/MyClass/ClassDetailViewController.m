@@ -73,6 +73,9 @@
         
         
         NSMutableArray *groupArray = [[StuDataBase shareStuDataBase] selectAllGroup];
+        for (StuGroupEntity *currGroupModel in groupArray) {
+            NSLog(@"%@",currGroupModel.memberlist);
+        }
         
         //    self.model = classArray[self.currentIndex];
         if(self.groupModel != nil){

@@ -238,8 +238,13 @@
 {
     TaskModel *model = self.dataSource[cell.tag];
     ReleaseMicroController *vc = [[ReleaseMicroController alloc] init];
-    vc.examid = model.relatedresourceid;
-    vc.releaseType = 1;
+    if([model.tasktype integerValue] == 1){
+        vc.examid = model.relatedresourceid;
+        vc.releaseType = 1;
+        
+    }else{
+        vc.w_id = model.relatedresourceid;
+    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 

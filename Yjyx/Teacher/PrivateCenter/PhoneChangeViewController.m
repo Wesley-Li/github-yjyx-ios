@@ -134,7 +134,10 @@
             [self.navigationController popViewControllerAnimated:YES];
            
         }else {
-            
+            if([responseObject[@"retcode"] integerValue] == 10){
+                [self.view makeToast:@"该手机已经有老师在使用，请更换手机号码" duration:1.0 position:SHOW_CENTER complete:nil];
+                return ;
+            }
             [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
         }
         
@@ -161,7 +164,7 @@
         if (result) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
-                _timeLabel.backgroundColor = [UIColor grayColor];
+                _timeLabel.backgroundColor = [UIColor colorWithRed:3 / 255.0 green:136 / 255.0 blue:227 / 255.0 alpha:1];
                 //发送注册码按钮失效，防止频繁请求
                 self.timeLabel.text = [NSString stringWithFormat:@"%lds",(long)_second--];
                 [self.getCodeBtn setEnabled:false];
@@ -189,7 +192,7 @@
 #pragma mark - 重置时间器
 -(void)resetTimer
 {
-    _timeLabel.backgroundColor = RGBACOLOR(11.0, 102.0, 254.0, 1);
+    _timeLabel.backgroundColor = RGBACOLOR(3.0, 136.0, 227.0, 1);
     _second = 60;
     _timeLabel.text = @"获取验证码";
     [_timer invalidate];

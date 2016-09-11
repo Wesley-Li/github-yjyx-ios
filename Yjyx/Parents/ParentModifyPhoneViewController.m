@@ -115,6 +115,10 @@
                 [YjyxOverallData sharedInstance].parentInfo.phone = _phoneTextfield.text;
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
+                if([result[@"retcode"] integerValue] == 10){
+                    [self.view makeToast:@"该手机已经有老师在使用，请更换手机号码" duration:1.0 position:SHOW_CENTER complete:nil];
+                    return ;
+                }
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
@@ -138,7 +142,7 @@
         if (result) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
-                timeLb.backgroundColor = [UIColor grayColor];
+//                timeLb.backgroundColor = [UIColor grayColor];
                 //发送注册码按钮失效，防止频繁请求
                 timeLb.text = [NSString stringWithFormat:@"%ds",_second--];
                 [verifyBtn setEnabled:false];

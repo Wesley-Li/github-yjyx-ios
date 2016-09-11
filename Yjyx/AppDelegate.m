@@ -86,18 +86,15 @@
         self.window.rootViewController = _navigation;
         [self.window makeKeyAndVisible];
     }else{
-//        _deviceToken = @"1231231312da1231sqwc1213";
+        _deviceToken = @"1231231312da1231sqwc1213";
         LoginViewController *loginView = [[LoginViewController alloc] init];
         _navigation = [[NavRootViewController alloc] initWithRootViewController:loginView];
-//        _navigation.navigationBar.hidden = YES;
+        _navigation.navigationBar.hidden = YES;
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         self.window.backgroundColor = [UIColor whiteColor];
         self.window.rootViewController = _navigation;
         [self.window makeKeyAndVisible];
     }
- 
-    
-
     return YES;
 }
 
@@ -617,17 +614,17 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"checkupgrade", @"action", @1, @"ostype", currentVerdion, @"currver", nil];
-    
-    [manager GET:[BaseURL stringByAppendingString:[NSString stringWithFormat:@"/api/%@/version/", role]] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    NSDictionary *dict = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
+    [manager GET:[BaseURL stringByAppendingString:[NSString stringWithFormat:@"/api/%@/version/", dict[@"role"]]] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        NSLog(@"%@", responseObject);
+        NSLog(@"%@, %@", responseObject, [NSString stringWithFormat:@"/api/%@/version/", role]);
         
         if ([responseObject[@"retcode"] isEqual:@0]) {
             
             
-            if ([responseObject[@"version"] isEqualToString:@""] && [responseObject[@"version"] isEqual:[NSNull null]]) {
+            if ([responseObject[@"version"] isEqualToString:@""] || [responseObject[@"version"] isEqual:[NSNull null]] || responseObject[@"version"] == nil) {
                 
-
+                [SYS_CACHE setObject:[NSDate date] forKey:@"date"];
                 // 如果是空不做处理
                 return;
                 
@@ -775,26 +772,47 @@
         [[StuDataBase shareStuDataBase] deleteStuTable];
         
         if ([responseObject[@"retcode"] integerValue] == 0) {
-            
+            NSMutableArray *tempArr = [NSMutableArray array];
             for (NSDictionary *dic in responseObject[@"allstudents"]) {
                 StudentEntity *model = [[StudentEntity alloc] init];
                 [model initStudentWithDic:dic];
+                [tempArr addObject:dic[@"user_id"]];
                 [((AppDelegate*)SYS_DELEGATE).stuListArr addObject:model];
                 // 插入学生数据
                 [[StuDataBase shareStuDataBase] insertStudent:model];
             }
             
             for (NSDictionary *dic in responseObject[@"classes"]) {
-                StuClassEntity *model = [[StuClassEntity alloc] init];
-                [model initStuClassWithDic:dic];
-                [[StuDataBase shareStuDataBase] insertStuClass:model];
+                NSMutableArray *currArr = [NSMutableArray arrayWithArray:dic[@"memberlist"]];
+                for (NSString *num in dic[@"memberlist"]) {
+                    if(![tempArr containsObject:num]){
+                        [currArr removeObject:num];
+                    }
+                }
+                NSMutableDictionary *tempDict = [NSMutableDictionary dictionaryWithDictionary:dic];
+
+                    StuClassEntity *model = [[StuClassEntity alloc] init];
+                    [model initStuClassWithDic:tempDict];
+                    [[StuDataBase shareStuDataBase] insertStuClass:model];
+               
             }
             
             for (NSDictionary *dic in responseObject[@"groups"]) {
-                StuGroupEntity *model = [[StuGroupEntity alloc] init];
-                [model initStuGroupWithDic:dic];
-                [[StuDataBase shareStuDataBase] insertStuGroup:model];
-            }
+                NSLog(@"%@", dic[@"memberlist"]);
+                NSMutableArray *currArr = [NSMutableArray arrayWithArray:dic[@"memberlist"]];
+                for (NSString *num in dic[@"memberlist"]) {
+                    if(![tempArr containsObject:num]){
+                        [currArr removeObject:num];
+                    }
+                }
+                NSMutableDictionary *tempDict = [NSMutableDictionary dictionaryWithDictionary:dic];
+                
+                [tempDict setValue:currArr forKey:@"memberlist"];
+                    StuGroupEntity *model = [[StuGroupEntity alloc] init];
+                    [model initStuGroupWithDic:tempDict];
+                    [[StuDataBase shareStuDataBase] insertStuGroup:model];
+                }
+           
             
             [SYS_CACHE setObject:[NSDate date] forKey:@"getDate"];
             
@@ -814,29 +832,50 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[BaseURL stringByAppendingString:TEACHER_GETALLSTULIST_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        NSLog(@"%@", responseObject);
+//        NSLog(@"%@", responseObject);
         // 创建数据表
         [[StuDataBase shareStuDataBase] deleteStuTable];
         
         if ([responseObject[@"retcode"] integerValue] == 0) {
-            
+            NSMutableArray *tempArr = [NSMutableArray array];
             for (NSDictionary *dic in responseObject[@"allstudents"]) {
                 StudentEntity *model = [[StudentEntity alloc] init];
                 [model initStudentWithDic:dic];
-                [((AppDelegate*)SYS_DELEGATE).stuListArr addObject:model];
+                [tempArr addObject:dic[@"user_id"]];
+                [((AppDelegate*)SYS_DELEGATE).stuListArr addObject:model]; 
                 // 插入学生数据
                 [[StuDataBase shareStuDataBase] insertStudent:model];
             }
             
             for (NSDictionary *dic in responseObject[@"classes"]) {
+                NSMutableArray *currArr = [NSMutableArray arrayWithArray:dic[@"memberlist"]];
+                NSLog(@"tempArr--%@", tempArr);
+                for (NSString *num in dic[@"memberlist"]) {
+                    if(![tempArr containsObject:num]){
+                        [currArr removeObject:num];
+                    }
+                }
+                NSMutableDictionary *tempDict = [NSMutableDictionary dictionaryWithDictionary:dic];
+                [tempDict setValue:currArr forKey:@"memberlist"];
                 StuClassEntity *model = [[StuClassEntity alloc] init];
-                [model initStuClassWithDic:dic];
+                [model initStuClassWithDic:tempDict];
                 [[StuDataBase shareStuDataBase] insertStuClass:model];
             }
             
             for (NSDictionary *dic in responseObject[@"groups"]) {
+//                NSLog(@"%@", dic[@"memberlist"]);
+                NSMutableArray *currArr = [NSMutableArray arrayWithArray:dic[@"memberlist"]];
+                for (NSString *num in dic[@"memberlist"]) {
+                    if(![tempArr containsObject:num]){
+                        [currArr removeObject:num];
+                    }
+                }
+                NSMutableDictionary *tempDict = [NSMutableDictionary dictionaryWithDictionary:dic];
+                NSLog(@"tempDict ---%@", tempDict);
+                [tempDict setValue:currArr forKey:@"memberlist"];
+                
                 StuGroupEntity *model = [[StuGroupEntity alloc] init];
-                [model initStuGroupWithDic:dic];
+                [model initStuGroupWithDic:tempDict];
                 [[StuDataBase shareStuDataBase] insertStuGroup:model];
             }
             

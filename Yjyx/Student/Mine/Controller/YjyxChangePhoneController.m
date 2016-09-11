@@ -12,7 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UITextField *codeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextfield;
-@property (weak, nonatomic) IBOutlet UILabel *getCodeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *getCodeBtn;
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (assign, nonatomic) NSInteger second;
@@ -125,7 +125,10 @@
             [self.navigationController popViewControllerAnimated:YES];
          
         }else {
-            
+            if([responseObject[@"retcode"] integerValue] == 10){
+                [self.view makeToast:@"该手机已经有老师在使用，请更换手机号码" duration:1.0 position:SHOW_CENTER complete:nil];
+                return ;
+            }
             [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
         }
         

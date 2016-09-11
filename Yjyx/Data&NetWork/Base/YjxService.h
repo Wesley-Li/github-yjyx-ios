@@ -19,12 +19,12 @@
 //#define QiniuYunURL @"http://cdn-web-img.zgyjyx.com/"
 //#define QiniuYunURL @"http://cdn-web-video.zgyjyx.com/"
 
+
 /**
  * QA环境地址
  * **/
 //#define BaseURL @"https://qa.zgyjyx.net"
 //#define QiniuYunURL @"http://7xkxyy.com1.z0.glb.clouddn.com/"
-
 
 
 // QA2环境地址

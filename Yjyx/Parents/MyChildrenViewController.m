@@ -219,6 +219,10 @@
     ChildrenActivity *children = [_activities objectAtIndex:indexPath.row];
     for (ChildrenEntity *entity in _childrenAry) {
         if ([children.cid integerValue] == [entity.cid integerValue]) {
+            NSLog(@"%@", entity.childavatar);
+            if ([entity.childavatar isEqual:[NSNull null]]) {
+                entity.childavatar = nil;
+            }
             [cell.iconImage setImageWithURL:[NSURL URLWithString:entity.childavatar] placeholderImage:[UIImage imageNamed:@"Personal_children.png"]];
             break;
         }

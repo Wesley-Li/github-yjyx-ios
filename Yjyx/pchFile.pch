@@ -206,4 +206,5 @@
 
 // 学生提交作业
 #define STUDENT_UPLOAD_WORK_POST @"/api/student/mobile/tasks/"
-
+//学生修改班级
+#define STUDENT_MODIFYClASS_PUT @"/api/student/mobile/yj_students/"

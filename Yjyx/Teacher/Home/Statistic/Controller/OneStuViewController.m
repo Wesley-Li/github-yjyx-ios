@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *wrongNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rateLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *alertLabel;
 
 
 
@@ -81,15 +82,18 @@
         if ([responseObject[@"retcode"] isEqual:@0]) {
             // 任务和题目数据的显示
             NSDictionary *dic = responseObject[@"taskandquestioncount"];
-            self.finishLabel.text = [dic[@"tasks_num"] isEqual:[NSNull null]] ? [NSString stringWithFormat:@"%d", 0] : [NSString stringWithFormat:@"%@", dic[@"tasks_num"]];
+            self.finishLabel.text = [dic[@"tasks_num"] isEqual:[NSNull null]] || dic[@"tasks_num"] == nil ? [NSString stringWithFormat:@"%d", 0] : [NSString stringWithFormat:@"%@", dic[@"tasks_num"]];
             NSInteger rec_num = [dic[@"recv_num"] isEqual:[NSNull null]] ? 0 : [dic[@"recv_num"] integerValue];
             NSInteger tasks_num = [dic[@"tasks_num"] isEqual:[NSNull null]] ? 0 : [dic[@"tasks_num"] integerValue];
             self.unfinishLabel.text = [NSString stringWithFormat:@"%ld", rec_num - tasks_num];
             NSLog(@"%@", [dic allKeys]);
             self.questionFinishLabel.text = [[dic allKeys] containsObject:@"questiontotal"] ? [NSString stringWithFormat:@"%@", dic[@"questiontotal"]] : [NSString stringWithFormat:@"%d", 0];
+          
             self.questionRightLabel.text = [[dic allKeys] containsObject:@"questioncorrect"] ? [NSString stringWithFormat:@"%@", dic[@"questioncorrect"]] : [NSString stringWithFormat:@"%d", 0];
             self.questionWrongLabel.text = [[dic allKeys] containsObject:@"questionwrong"] ? [NSString stringWithFormat:@"%@", dic[@"questionwrong"]] : [NSString stringWithFormat:@"%d", 0];
-            
+            if([self.questionFinishLabel.text integerValue] == 0){
+                self.alertLabel.hidden = NO;
+            }
             // 折线图显示
             self.lineArr = responseObject[@"chartdata"];
             [self configureTheLineChartWithArray:_lineArr];
@@ -100,7 +104,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        NSLog(@"%@", error.localizedDescription);
         [self.view makeToast:[NSString stringWithFormat:@"数据请求失败, 请检查您的网络"] duration:1.0 position:SHOW_CENTER complete:nil];
         
     }];

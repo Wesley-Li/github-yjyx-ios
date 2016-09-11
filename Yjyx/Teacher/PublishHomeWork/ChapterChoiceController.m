@@ -289,7 +289,7 @@
             
             if (self.dataSoruce.count == 0) {
                 
-                [SVProgressHUD showErrorWithStatus:@"暂时还没有响应题目,我们会尽快添加,敬请期待"];
+                [SVProgressHUD showErrorWithStatus:@"您还没有创建题目哦"];
                 
             }else {
                 
