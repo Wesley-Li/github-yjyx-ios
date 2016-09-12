@@ -430,8 +430,6 @@
 		3CD1BC221D1E34C3009ED261 /* MicroNameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1BC201D1E34C3009ED261 /* MicroNameCell.m */; };
 		3CD1BC231D1E34C3009ED261 /* MicroNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CD1BC211D1E34C3009ED261 /* MicroNameCell.xib */; };
 		3CD1D6C61D08054D0027E797 /* GradeVerVolItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1D6C51D08054D0027E797 /* GradeVerVolItem.m */; };
-		3CD2F1601D275FD70031AF2E /* YjyxPrivateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD2F15E1D275FD70031AF2E /* YjyxPrivateViewController.m */; };
-		3CD2F1611D275FD70031AF2E /* YjyxPrivateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CD2F15F1D275FD70031AF2E /* YjyxPrivateViewController.xib */; };
 		3CD2F16B1D2790640031AF2E /* YjyxChangeNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD2F1691D2790640031AF2E /* YjyxChangeNameController.m */; };
 		3CD2F16C1D2790640031AF2E /* YjyxChangeNameController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CD2F16A1D2790640031AF2E /* YjyxChangeNameController.xib */; };
 		3CD2F1701D27909E0031AF2E /* YjyxChangePhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD2F16E1D27909E0031AF2E /* YjyxChangePhoneController.m */; };
@@ -589,6 +587,10 @@
 		80A0E8CF1D694F4A00ED68A1 /* YiTeachContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A0E8CE1D694F4A00ED68A1 /* YiTeachContentModel.m */; };
 		80A0E8D11D6979A500ED68A1 /* YiTeachCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80A0E8D01D6979A500ED68A1 /* YiTeachCustomView.xib */; };
 		80A0E8D41D69AD7500ED68A1 /* YiTeachChapterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A0E8D31D69AD7500ED68A1 /* YiTeachChapterViewController.m */; };
+		80ADE5391D8638850089FC37 /* YjyxPrivateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ADE5361D8638850089FC37 /* YjyxPrivateViewController.xib */; };
+		80ADE53A1D8638850089FC37 /* YjyxPrivateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80ADE5371D8638850089FC37 /* YjyxPrivateViewController.m */; };
+		80ADE53E1D863CB70089FC37 /* YjyxModifyClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80ADE53C1D863CB70089FC37 /* YjyxModifyClassViewController.m */; };
+		80ADE53F1D863CB70089FC37 /* YjyxModifyClassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80ADE53D1D863CB70089FC37 /* YjyxModifyClassViewController.xib */; };
 		80CCF43F1CF2F0EC000C93D9 /* UnSubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80CCF43D1CF2F0EC000C93D9 /* UnSubmitCell.m */; };
 		80CCF4401CF2F0EC000C93D9 /* UnSubmitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CCF43E1CF2F0EC000C93D9 /* UnSubmitCell.xib */; };
 		80D978E61D265B80000BD95E /* CustomSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D978E51D265B80000BD95E /* CustomSectionView.m */; };
@@ -1269,9 +1271,6 @@
 		3CD1BC211D1E34C3009ED261 /* MicroNameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MicroNameCell.xib; sourceTree = "<group>"; };
 		3CD1D6C41D08054D0027E797 /* GradeVerVolItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeVerVolItem.h; sourceTree = "<group>"; };
 		3CD1D6C51D08054D0027E797 /* GradeVerVolItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradeVerVolItem.m; sourceTree = "<group>"; };
-		3CD2F15D1D275FD70031AF2E /* YjyxPrivateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxPrivateViewController.h; sourceTree = "<group>"; };
-		3CD2F15E1D275FD70031AF2E /* YjyxPrivateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxPrivateViewController.m; sourceTree = "<group>"; };
-		3CD2F15F1D275FD70031AF2E /* YjyxPrivateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxPrivateViewController.xib; sourceTree = "<group>"; };
 		3CD2F1681D2790640031AF2E /* YjyxChangeNameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxChangeNameController.h; sourceTree = "<group>"; };
 		3CD2F1691D2790640031AF2E /* YjyxChangeNameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxChangeNameController.m; sourceTree = "<group>"; };
 		3CD2F16A1D2790640031AF2E /* YjyxChangeNameController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxChangeNameController.xib; sourceTree = "<group>"; };
@@ -1595,6 +1594,12 @@
 		80A0E8D01D6979A500ED68A1 /* YiTeachCustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = YiTeachCustomView.xib; path = Yjyx/Student/YiTeach/Controller/YiTeachCustomView.xib; sourceTree = SOURCE_ROOT; };
 		80A0E8D21D69AD7500ED68A1 /* YiTeachChapterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YiTeachChapterViewController.h; sourceTree = "<group>"; };
 		80A0E8D31D69AD7500ED68A1 /* YiTeachChapterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YiTeachChapterViewController.m; sourceTree = "<group>"; };
+		80ADE5361D8638850089FC37 /* YjyxPrivateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxPrivateViewController.xib; sourceTree = "<group>"; };
+		80ADE5371D8638850089FC37 /* YjyxPrivateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxPrivateViewController.m; sourceTree = "<group>"; };
+		80ADE5381D8638850089FC37 /* YjyxPrivateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxPrivateViewController.h; sourceTree = "<group>"; };
+		80ADE53B1D863CB70089FC37 /* YjyxModifyClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxModifyClassViewController.h; sourceTree = "<group>"; };
+		80ADE53C1D863CB70089FC37 /* YjyxModifyClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxModifyClassViewController.m; sourceTree = "<group>"; };
+		80ADE53D1D863CB70089FC37 /* YjyxModifyClassViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxModifyClassViewController.xib; sourceTree = "<group>"; };
 		80CCF43C1CF2F0EC000C93D9 /* UnSubmitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnSubmitCell.h; sourceTree = "<group>"; };
 		80CCF43D1CF2F0EC000C93D9 /* UnSubmitCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnSubmitCell.m; sourceTree = "<group>"; };
 		80CCF43E1CF2F0EC000C93D9 /* UnSubmitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnSubmitCell.xib; sourceTree = "<group>"; };
@@ -3128,9 +3133,6 @@
 		3CD2F1621D278F740031AF2E /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				3CD2F15D1D275FD70031AF2E /* YjyxPrivateViewController.h */,
-				3CD2F15E1D275FD70031AF2E /* YjyxPrivateViewController.m */,
-				3CD2F15F1D275FD70031AF2E /* YjyxPrivateViewController.xib */,
 				3CD2F1681D2790640031AF2E /* YjyxChangeNameController.h */,
 				3CD2F1691D2790640031AF2E /* YjyxChangeNameController.m */,
 				3CD2F16A1D2790640031AF2E /* YjyxChangeNameController.xib */,
@@ -3139,6 +3141,12 @@
 				3CD2F16F1D27909E0031AF2E /* YjyxChangePhoneController.xib */,
 				3CD2F1721D27A3C70031AF2E /* YjyxChangeSoundViewController.h */,
 				3CD2F1731D27A3C70031AF2E /* YjyxChangeSoundViewController.m */,
+				80ADE5361D8638850089FC37 /* YjyxPrivateViewController.xib */,
+				80ADE5371D8638850089FC37 /* YjyxPrivateViewController.m */,
+				80ADE5381D8638850089FC37 /* YjyxPrivateViewController.h */,
+				80ADE53B1D863CB70089FC37 /* YjyxModifyClassViewController.h */,
+				80ADE53C1D863CB70089FC37 /* YjyxModifyClassViewController.m */,
+				80ADE53D1D863CB70089FC37 /* YjyxModifyClassViewController.xib */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -3833,6 +3841,7 @@
 				80D978F71D28CC6E000BD95E /* GetTaskCell.xib in Resources */,
 				3B48644D1CCF10C200D2DE3C /* new.png in Resources */,
 				3A8827921C6EEFEF0008367F /* Personal_children@3x.png in Resources */,
+				80ADE53F1D863CB70089FC37 /* YjyxModifyClassViewController.xib in Resources */,
 				80590BED1D0CF5D500867D9B /* home_img_knowledge@3x.png in Resources */,
 				3BB773971CD86B3A00A24485 /* home_img_camera@3x.png in Resources */,
 				3A26EE651C71A81B009C3242 /* Parent_message@3x.png in Resources */,
@@ -3876,6 +3885,7 @@
 				8010A9001D5D94E60091F6EA /* tab_homework_select@3x.png in Resources */,
 				80F718C31CF28961007C0B75 /* SubmitCell.xib in Resources */,
 				3CF1AD571D6C24570070CAA9 /* YjyxThreeStageAnswerController.xib in Resources */,
+				80ADE5391D8638850089FC37 /* YjyxPrivateViewController.xib in Resources */,
 				3AE894101C6C47C400E8BA97 /* login_right_line@3x.png in Resources */,
 				3CA04D061D180EEC0054A05D /* ReleaseVideoCell.xib in Resources */,
 				3CD1BC1E1D1E33BA009ED261 /* MicroKnowledgeCell.xib in Resources */,
@@ -3918,7 +3928,6 @@
 				3A4166791CEAE014005D2032 /* YjyxShopMallViewController.xib in Resources */,
 				3A66A8041C931BBA005E2D43 /* ChildrenExplantionViewController.xib in Resources */,
 				3AE894041C6C28C300E8BA97 /* login_textView_bg@3x.png in Resources */,
-				3CD2F1611D275FD70031AF2E /* YjyxPrivateViewController.xib in Resources */,
 				80A0E8C41D682FD300ED68A1 /* YjyxYiTeachController.xib in Resources */,
 				3B4864471CCF10C200D2DE3C /* mall.png in Resources */,
 				3A8CAE921C70A11800BDEB6B /* ParentMoifyNameViewController.xib in Resources */,
@@ -4090,6 +4099,7 @@
 				3B4864701CCF117300D2DE3C /* MessageViewController.m in Sources */,
 				3AEF27221C61F08A0028BE09 /* PasswordStipulateCheckin.m in Sources */,
 				3CA8963F1D06DF540092D292 /* ParentChapterCell.m in Sources */,
+				80ADE53A1D8638850089FC37 /* YjyxPrivateViewController.m in Sources */,
 				3CF1AD561D6C24570070CAA9 /* YjyxThreeStageAnswerController.m in Sources */,
 				CB4004821C609BCD00556AA7 /* AppDelegate.m in Sources */,
 				3BE01BD41CDD7DBE00781B86 /* BlankFillModel.m in Sources */,
@@ -4202,7 +4212,6 @@
 				3A8CAEB91C70B36200BDEB6B /* SDWebImageDownloader.m in Sources */,
 				80D978F61D28CC6E000BD95E /* GetTaskCell.m in Sources */,
 				80590BF21D0CF9AA00867D9B /* KnowledgeViewController.m in Sources */,
-				3CD2F1601D275FD70031AF2E /* YjyxPrivateViewController.m in Sources */,
 				3BFE3B7C1CD9816D00502769 /* ParentEntity.m in Sources */,
 				3C15669E1D0D615D006670D6 /* subjectContentCell.m in Sources */,
 				3CE18E8F1D20C2E4007E0874 /* ReleaseMicroCell.m in Sources */,
@@ -4276,6 +4285,7 @@
 				3BD9C7F81CEEE33A008232D7 /* SoundChangeViewController.m in Sources */,
 				3BFE3B8A1CDA0D6F00502769 /* StuGroupEntity.m in Sources */,
 				3B35DB981CE07049000B7F83 /* CorectCell.m in Sources */,
+				80ADE53E1D863CB70089FC37 /* YjyxModifyClassViewController.m in Sources */,
 				3AEF27231C61F08A0028BE09 /* SecurityStrategy.m in Sources */,
 				3A04A5D31C93E6290040D913 /* View+MASAdditions.m in Sources */,
 				3CAC45521D40EEDF00ACBDA9 /* YjyxExchangeRecordModel.m in Sources */,
