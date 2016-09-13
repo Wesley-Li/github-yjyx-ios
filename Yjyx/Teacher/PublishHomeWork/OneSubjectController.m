@@ -636,9 +636,9 @@ static NSString *VideoID = @"VIDEOCELL";
     }else if(indexPath.row == 2){
         CGFloat height = [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] floatValue];
         if ([_model.explanation isEqualToString:@""]) {
-            
             return 0;
         }
+
         return height;
         
     }else{

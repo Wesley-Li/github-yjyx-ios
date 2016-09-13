@@ -10,6 +10,7 @@
 #import "YjyxDoingWorkController.h"
 #import "YjyxThreeStageController.h"
 #import "YjyxThreeStageAnswerController.h"
+#import "YjyxWorkDetailController.h"
 @interface YjyxCommonNavController ()
 
 @end
@@ -48,7 +49,7 @@
 
 -(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    if (navigationController.viewControllers.count == 1 || [viewController isKindOfClass:[YjyxDoingWorkController class]]|| [viewController isKindOfClass:[YjyxThreeStageController class]] || [viewController isKindOfClass:[YjyxThreeStageAnswerController class]])
+    if (navigationController.viewControllers.count == 1 || [viewController isKindOfClass:[YjyxDoingWorkController class]]|| [viewController isKindOfClass:[YjyxThreeStageController class]] || [viewController isKindOfClass:[YjyxThreeStageAnswerController class]] || [viewController isKindOfClass:[YjyxWorkDetailController class]])
         self.currentShowVC = Nil;
     else
         self.currentShowVC = viewController;

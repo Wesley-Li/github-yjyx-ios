@@ -29,5 +29,5 @@
 @property (nonatomic, copy) NSString *knowledgetreeidvalue;// 知识点
 @property (nonatomic, strong) NSNumber *onlysearchmine;// 私有题目
 
-
+@property (assign, nonatomic) NSInteger privateTag; // 是不是从私有题库进来的 1代表是
 @end

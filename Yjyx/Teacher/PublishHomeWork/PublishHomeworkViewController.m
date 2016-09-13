@@ -200,6 +200,7 @@
     ChapterChoiceController *privateVC = [[ChapterChoiceController alloc] init];
     privateVC.onlysearchmine = @1;
     privateVC.navigationItem.title = @"私有题库";
+    privateVC.privateTag = 1;
     [self.navigationController pushViewController:privateVC animated:YES];
 }
 

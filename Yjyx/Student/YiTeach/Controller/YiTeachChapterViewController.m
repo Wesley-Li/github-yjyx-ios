@@ -55,7 +55,10 @@
     
     
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = NO;
+}
 // 网络请求
 - (void)readDataFromNetWork {
     

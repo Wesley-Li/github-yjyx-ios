@@ -535,7 +535,7 @@ static NSString *ID = @"BGCEll";
             }
             [SVProgressHUD dismiss];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:@"提交作业失败" duration:0.5 position:SHOW_CENTER complete:nil];
             [coverView removeFromSuperview];
             [SVProgressHUD dismiss];
         }];
@@ -573,7 +573,7 @@ static NSString *ID = @"BGCEll";
             }
             [SVProgressHUD dismiss];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:@"提交作业失败" duration:0.5 position:SHOW_CENTER complete:nil];
             [coverView removeFromSuperview];
             [SVProgressHUD dismiss];
         }];

@@ -121,7 +121,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-
+    [videoImage removeFromSuperview];
     [wmPlayer removeFromSuperview];
     [self releaseWMPlayer];
     
@@ -204,17 +204,24 @@
 }
 -(void)toNormal{
     [wmPlayer removeFromSuperview];
+    [videoImage removeFromSuperview];
 //    _namelb.frame = CGRectMake(0, 0, SCREEN_WIDTH, 40);
 //    _knowledgeView.frame = CGRectMake(0, _namelb.frame.origin.y + 50, SCREEN_WIDTH, 60);
     
 
     [UIView animateWithDuration:0.5f animations:^{
         videoImage.transform = CGAffineTransformIdentity;
-        videoImage.frame = CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4);
+        if(self.jumpType == 1){// 学生
+            videoImage.frame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4);
+        }else {
+            videoImage.frame = CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4);
+        }
+        
         wmPlayer.transform = CGAffineTransformIdentity;
         wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
         wmPlayer.playerLayer.frame =  wmPlayer.bounds;
         [self.view insertSubview:wmPlayer belowSubview:_backBtn];
+        [self.view insertSubview:videoImage belowSubview:_backBtn];
         [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(wmPlayer).with.offset(0);
             make.right.equalTo(wmPlayer).with.offset(0);
@@ -490,7 +497,10 @@
                     model.questiontype = 2;
                     [self.doWorkArr addObject:model];
                 }
-                
+                if(self.doWorkArr.count == 0){
+                   [self.view makeToast:@"题目已经被老师删除了" duration:3.0 position:SHOW_CENTER complete:nil];
+                    
+                }
                 NSInteger i = 0;
                 for (NSArray *arr in [responseObject[@"retobj"][@"lessonobj"][@"quizcontent"] JSONValue][@"questionList"]) {
                     if(arr.count == 0){
@@ -557,10 +567,21 @@
                 
                 [self.subjectTable reloadData];
             }else{
-                [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
+                
+                [self.view makeToast:@"获取作业失败" duration:0.5 position:SHOW_CENTER complete:nil];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+                self.submitBtn.userInteractionEnabled = NO;
             }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
+        [self.view hideToastActivity];
+        [self.view makeToast:@"获取作业失败" duration:0.5 position:SHOW_CENTER complete:nil];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.navigationController popViewControllerAnimated:YES];
+        });
+        self.submitBtn.userInteractionEnabled = NO;
+        
     }];
 }
 // 做作业按钮被点击

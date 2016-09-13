@@ -112,7 +112,7 @@
     //注册全屏播放通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
 
-    
+    self.navigationController.navigationBarHidden = NO;
 
     if(_openMember == 1){
         [self readDataFromNetwork];
@@ -366,6 +366,9 @@
             if ([[responseObject allKeys] containsObject:@"videoobjlist"]) {
                 self.microArr = [responseObject[@"videoobjlist"] JSONValue];
                 self.videoURL = _microArr[0][@"url"];
+                if(self.openMember == 1){
+                    [videoImage removeFromSuperview];
+                }
                 [self configureWMPlayer];
                 [self configureTheNumBtn:_microArr];
             }else {
