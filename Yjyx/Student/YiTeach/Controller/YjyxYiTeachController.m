@@ -122,7 +122,10 @@
     
 
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = NO;
+}
 #pragma mark - 配置课堂选择项
 
 - (void)configureTheBookCanBeSelect {

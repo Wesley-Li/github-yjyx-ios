@@ -155,6 +155,10 @@
             self.subject_id = responseObject[@"retobj"][@"examobj"][@"subjectid"];
             _choices = responseObject[@"retobj"][@"questions"][@"choice"][@"questionlist"];
             _blankfills = responseObject[@"retobj"][@"questions"][@"blankfill"][@"questionlist"];
+            if(_choices.count + _blankfills.count == 0){
+                [self.view makeToast:@"题目已经被老师删除了" duration:3.0 position:SHOW_CENTER complete:nil];
+                return ;
+            }
             [_previewTable reloadData];
             for (NSDictionary *dict in responseObject[@"retobj"][@"questions"][@"choice"][@"questionlist"]) {
                 YjyxDoingWorkModel *model = [YjyxDoingWorkModel doingWorkModelWithDict:dict];
@@ -202,10 +206,13 @@
             }
 
         }else{
-           [self.view makeToast:[responseObject objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+           [self.view makeToast:@"获取作业失败" duration:1.0 position:SHOW_CENTER complete:nil];
+            self.beginWorkBtn.userInteractionEnabled = NO;
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
+        [self.view hideToastActivity];
+        [self.view makeToast:@"获取作业失败" duration:1.0 position:SHOW_CENTER complete:nil];
+        self.beginWorkBtn.userInteractionEnabled = NO;
     }];
 }
 // 开始作业 按钮的点击
@@ -232,6 +239,8 @@
     }else{
         return [_blankfills count];
     }
+    
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

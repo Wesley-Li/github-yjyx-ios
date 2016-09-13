@@ -286,16 +286,16 @@
             }
             
             [self.tableView reloadData];
-            
+            NSLog(@"%ld", self.navigationController.childViewControllers.count);
             if (self.dataSoruce.count == 0) {
-                
-                [SVProgressHUD showErrorWithStatus:@"您还没有创建题目哦"];
+                if(self.privateTag == 1){
+                   [SVProgressHUD showErrorWithStatus:@"您还没有创建题目哦"];
+                }else{
+                   [SVProgressHUD showErrorWithStatus:@"暂时还没有相应题目,我们会尽快添加,敬请期待"];
+                }
                 
             }else {
-                
                 [SVProgressHUD dismissWithDelay:0.1];
-
-            
             }
             
         }else{

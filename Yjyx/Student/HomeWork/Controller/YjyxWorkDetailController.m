@@ -300,6 +300,9 @@ static NSString *videoNumID = @"VIDEONumID";
         }
         if (tempArr1.count + tempArr2.count == 0) {
             [self.view makeToast:@"题目已被老师移除" duration:2.0 position:SHOW_CENTER complete:nil];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
         }
         self.stuChoiceAnswerArr = tempArr1;
         self.stuBlankAnswerArr = tempArr2;

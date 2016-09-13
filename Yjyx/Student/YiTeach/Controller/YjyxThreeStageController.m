@@ -97,7 +97,7 @@ static NSString *ID = @"CELL";
             [self.randomFiveArr addObject:self.qidlist[r]];
         }
     }
-  
+  self.navigationController.navigationBarHidden = NO;
     [self.tableView setContentOffset:CGPointZero animated:YES];
     // 加载网络数据
     [self loadData];

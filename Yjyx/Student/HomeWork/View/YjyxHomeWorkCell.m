@@ -34,10 +34,10 @@
 - (void)setHomeWorkModel:(YjyxHomeDataModel *)homeWorkModel
 {
     _homeWorkModel = homeWorkModel;
-    if([homeWorkModel.icon isEqual:[NSNull null]]){
+    if([homeWorkModel.icon isEqual:[NSNull null]] || homeWorkModel.icon == nil){
         self.subjectImageView.image = [UIImage imageNamed:@"default_image"];
     }else{
-    [self.subjectImageView setImageWithURL:[NSURL URLWithString:homeWorkModel.icon]];
+        [self.subjectImageView setImageWithURL:[NSURL URLWithString:homeWorkModel.icon]];
     }
     self.subjectNameLabel.text = homeWorkModel.name;
     self.doneCountLabel.text = @"所有作业";
@@ -45,10 +45,10 @@
 - (void)setHomeWrongModel:(YjyxHomeWrongModel *)homeWrongModel
 {
     _homeWrongModel = homeWrongModel;
-    if([homeWrongModel.icon isEqual:[NSNull null]]){
+    if([homeWrongModel.icon isEqual:[NSNull null]] || homeWrongModel.icon == nil){
         self.subjectImageView.image = [UIImage imageNamed:@"default_image"];
     }else{
-    [self.subjectImageView setImageWithURL:[NSURL URLWithString:homeWrongModel.icon] ];
+        [self.subjectImageView setImageWithURL:[NSURL URLWithString:homeWrongModel.icon] ];
     }
     self.subjectNameLabel.text = homeWrongModel.subjectname;
 

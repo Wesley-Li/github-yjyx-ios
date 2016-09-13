@@ -162,12 +162,12 @@
 
         }else {
         
-            [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:@"获取作业失败" duration:1.0 position:SHOW_CENTER complete:nil];
         }
         
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
+        [self.view makeToast:@"获取作业失败" duration:1.0 position:SHOW_CENTER complete:nil];
         [SVProgressHUD dismiss];
     }];
     
