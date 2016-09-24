@@ -52,6 +52,10 @@
     self.bgView.layer.borderWidth = 1;
     self.bgView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     
+    self.requireProcessBtn.layer.cornerRadius = 5;
+    self.requireProcessBtn.layer.borderColor = TEACHERCOLOR.CGColor;
+    self.requireProcessBtn.layer.borderWidth = 1;
+    self.requireProcessBtn.layer.masksToBounds = YES;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [self.topView addGestureRecognizer:tap];
@@ -59,6 +63,11 @@
 - (IBAction)requireProcessBtnClick:(UIButton *)sender {
     sender.selected = !sender.selected;
     _model.isRequireProcess = sender.selected;
+    if(sender.selected == YES){
+        sender.backgroundColor = TEACHERCOLOR;
+    }else{
+        sender.backgroundColor = [UIColor whiteColor];
+    }
     if ([self.delegate respondsToSelector:@selector(subjectDetailCell:requireProcessBtnClick:)]) {
         [self.delegate subjectDetailCell:self requireProcessBtnClick:sender];
     }
@@ -69,6 +78,11 @@
 {
     _model = model;
     self.requireProcessBtn.selected = model.isRequireProcess;
+    if(self.requireProcessBtn.selected == YES){
+        self.requireProcessBtn.backgroundColor = TEACHERCOLOR;
+    }else{
+        self.requireProcessBtn.backgroundColor = [UIColor whiteColor];
+    }
     self.subjectTypeLabel.text = model.type == 1 ? @"选择题" : @"填空题";
     self.levelLabel.text = model.level;
     

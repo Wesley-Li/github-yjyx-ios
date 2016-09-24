@@ -8,6 +8,10 @@
 
 #import "SpendTimeCell.h"
 
+@interface SpendTimeCell()
+@property (weak, nonatomic) IBOutlet UILabel *timeTitleLabel;
+
+@end
 @implementation SpendTimeCell
 
 - (void)awakeFromNib {
@@ -15,8 +19,16 @@
     // Initialization code
 }
 
-
+- (void)setFinishTime:(NSInteger)finishTime
+{
+    _finishTime = finishTime;
+    self.timeTitleLabel.text = @"建议完成时间";
+   
+    self.spendTimeLabel.text = [NSString stringWithFormat:@"%ld分钟", finishTime];
+}
 - (void)setValueWithDic:(NSDictionary *)dic {
+    
+    self.timeTitleLabel.text = @"用时";
     
     NSNumber *seconds = [dic[@"result"] objectForKey:@"spendTime"];
     NSInteger second = [seconds integerValue];

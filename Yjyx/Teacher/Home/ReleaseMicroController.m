@@ -202,16 +202,34 @@ static NSString *StudentID = @"StudentCell";
     NSString *dateStr = [fmt stringFromDate:newDate];
     
     NSLog(@"%@--%@", [NSDate date], dateStr);
-    ReleaseDescrpitionCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:self.classArr.count + self.groupArr.count]];
-   
+    ReleaseDescrpitionCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:self.classArr.count + self.groupArr.count + 1]];
+    ReleaseFinishTimeCell *timecell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:self.classArr.count + self.groupArr.count ]];
     self.descripStr = cell.descriptionTextField.text;
+    self.timeStr = timecell.timeLabel.text;
      NSString *descStr = [NSString stringWithFormat:@"%@ 微课", dateStr];
     if(self.releaseType == 1){
        descStr = [NSString stringWithFormat:@"%@ 作业", dateStr];
     }
     NSString *descTempStr = [self.descripStr stringByReplacingOccurrencesOfString:@" " withString:@""];
     param[@"desc"] = [descTempStr isEqualToString:@""] ? descStr : self.descripStr;
-//    param[@"suggestspendtime"] = [self.timeStr isEqualToString:@""] ? @"30" : self.timeStr;
+    
+    NSString *numstr = [self.timeStr stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]];
+    if(numstr.length > 0 ){
+        [SVProgressHUD showWithStatus:@"输入的建议完成时间包含特殊字符"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        return;
+    }
+    NSLog(@"%@", self.timeStr);
+    if([self.timeStr integerValue] == 0 && ![self.timeStr isEqualToString:@""]){
+        [SVProgressHUD showWithStatus:@"建议完成时间必须大于0"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+         return;
+    }
+    param[@"suggestspendtime"] = [self.timeStr isEqualToString:@""] ? @"30" : self.timeStr;
     NSLog(@"%@", param);
     UIView *coverView = [[UIView alloc] init];
     coverView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -223,7 +241,7 @@ static NSString *StudentID = @"StudentCell";
         NSLog(@"%@", responseObject[@"reason"]);
         if([responseObject[@"retcode"] isEqual:@0]){
             [SVProgressHUD showSuccessWithStatus:@"发布成功"];
-          
+           
             // 跳转到学生作业列表
             StuTaskTableViewController *stuTaskVC = [[StuTaskTableViewController alloc] init];
             [self.navigationController pushViewController:stuTaskVC animated:YES];
@@ -242,7 +260,7 @@ static NSString *StudentID = @"StudentCell";
 #pragma mark - UITableView数据源方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.classArr.count + self.groupArr.count + 1;
+    return self.classArr.count + self.groupArr.count + 2;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -266,12 +284,12 @@ static NSString *StudentID = @"StudentCell";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (indexPath.section == self.classArr.count ){
-//        ReleaseFinishTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:FinishTimeID];
-//        self.timeStr = cell.timeLabel.text;
-//        return cell;
-//   }else
-    if(indexPath.section == self.classArr.count + self.groupArr.count){
+    if (indexPath.section == self.classArr.count + self.groupArr.count ){
+        ReleaseFinishTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:FinishTimeID];
+        self.timeStr = cell.timeLabel.text;
+        cell.selectionStyle = UITableViewCellSeparatorStyleNone; 
+        return cell;
+   }else if(indexPath.section == self.classArr.count + self.groupArr.count + 1){
         ReleaseDescrpitionCell *cell = [tableView dequeueReusableCellWithIdentifier:DescID];
         self.descripStr = cell.descriptionTextField.text;
         return cell;
@@ -280,12 +298,13 @@ static NSString *StudentID = @"StudentCell";
         cell.delegate = self;
         if (indexPath.row == 0) {
             cell.classEntity = _classArr[indexPath.section];
-            
+            cell.backgroundColor = [UIColor whiteColor];
         }else{
         
             NSMutableArray *arr =  self.classStuArr[indexPath.section];
             StudentEntity *stuModel =  arr[indexPath.row - 1];
             cell.stuEntity = stuModel;
+            cell.backgroundColor = [UIColor colorWithHexString:@"#F3F3F3"];
             
         }
  
@@ -295,12 +314,13 @@ static NSString *StudentID = @"StudentCell";
         cell.delegate = self;
         if (indexPath.row == 0) {
             cell.groupEntity = _groupArr[indexPath.section - _classArr.count];
-            
+            cell.backgroundColor = [UIColor whiteColor];
         }else{
             
             NSMutableArray *arr =  self.groupStuArr[indexPath.section -  _classArr.count];
             StudentEntity *stuModel =  arr[indexPath.row - 1];
             cell.stuEntity = stuModel;
+            cell.backgroundColor = [UIColor colorWithHexString:@"#F3F3F3"];
         }
         
         return cell;
@@ -348,7 +368,9 @@ static NSString *StudentID = @"StudentCell";
                 }
         
     }
-     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    if(indexPath.section < self.classArr.count + self.groupArr.count){
+         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }
 }
 #pragma mark - ReleaseStudentCell代理方法
 - (void)releaseStudentCell:(ReleaseStudentCell *)cell allBtnSelectedClicked:(UIButton *)btn
@@ -399,7 +421,7 @@ static NSString *StudentID = @"StudentCell";
 #pragma mark - 键盘处理
 #pragma mark 键盘即将显示
 - (void)keyBoardWillShow:(NSNotification *)note{
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:self.classArr.count + self.groupArr.count]];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:self.classArr.count + self.groupArr.count + 1]];
     NSLog(@"%@", NSStringFromCGRect(cell.frame));
         CGRect rect = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     

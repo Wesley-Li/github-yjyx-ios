@@ -39,7 +39,7 @@
 -(void)uploadFile:(NSDictionary *)params withBlock:(void(^)(id result, NSError *error))block
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:[BaseURL stringByAppendingString:@"/api/teacher/avatar/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
+    [manager POST:[BaseURL stringByAppendingString:@"/api/parents/avatar/"] parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject){
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
         }else{

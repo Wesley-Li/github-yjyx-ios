@@ -93,6 +93,7 @@
     [[YjxService sharedInstance] getchildrenActivity:dic withBlock:^(id result, NSError *error){
         [self.view hideToastActivity];
         if (result != nil) {
+            NSLog(@"%@", result);
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 [_activities removeAllObjects];
                 [totalAry removeAllObjects];
@@ -172,17 +173,11 @@
 //    self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
-
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];;
+    
     
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-//    self.navigationController.navigationBarHidden = NO;
-  
-    [super viewWillDisappear:YES];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -201,7 +196,10 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    ChildrenActivity *children = [_activities objectAtIndex:indexPath.row];
-    return 63;
+   
+        return 95 +  10 ;
+   
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -216,6 +214,7 @@
     if (_activities.count == 0) {
         return nil;
     }
+    cell.childActivity = _activities[indexPath.row];
     ChildrenActivity *children = [_activities objectAtIndex:indexPath.row];
     for (ChildrenEntity *entity in _childrenAry) {
         if ([children.cid integerValue] == [entity.cid integerValue]) {
@@ -228,17 +227,17 @@
         }
     }
     cell.timelb.text = children.update;
-    UILabel *titleLb = [UILabel labelWithFrame:CGRectMake(85, 23, SCREEN_WIDTH - 106 , 21) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:children.title];
-    if ([children.finished integerValue] == 1) {
-        titleLb.textColor =RGBACOLOR(119, 162, 150, 1);
-        cell.finishedImage.hidden = NO;
-    }else{
-        titleLb.textColor =[UIColor blackColor];
-        cell.finishedImage.hidden = YES;
-    }
-    titleLb.numberOfLines = 0;
-    [cell.contentView addSubview:titleLb];
-    [titleLb sizeToFit];
+//    UILabel *titleLb = [UILabel labelWithFrame:CGRectMake(85, 23, SCREEN_WIDTH - 106 , 21) textColor:[UIColor blackColor] font:[UIFont systemFontOfSize:15] context:children.title];
+//    if ([children.finished integerValue] == 1) {
+//        titleLb.textColor =RGBACOLOR(119, 162, 150, 1);
+//        cell.finishedImage.hidden = NO;
+//    }else{
+//        titleLb.textColor =[UIColor blackColor];
+//        cell.finishedImage.hidden = YES;
+//    }
+//    titleLb.numberOfLines = 0;
+//    [cell.contentView addSubview:titleLb];
+//    [titleLb sizeToFit];
     
 
     if ([children.tasktype integerValue] == 1) {

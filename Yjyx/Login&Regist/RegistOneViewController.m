@@ -29,7 +29,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 -(IBAction)checkCode:(id)sender
 {

@@ -24,6 +24,9 @@
 @property (strong, nonatomic) NSNumber *t_id; // 获取老数据使用
 @property (strong, nonatomic) NSNumber *totalCorrect;
 @property (strong, nonatomic) NSNumber *totalWrong;
+@property (strong, nonatomic) NSNumber *spendTime; // 花费时间
+@property (strong, nonatomic) NSNumber *task__suggestspendtime; // 建议时间
+
 @property (assign, nonatomic) CGFloat height;
 
 + (instancetype)todayWorkModelWithDict:(NSDictionary *)dict;

@@ -22,7 +22,7 @@
 @property (nonatomic, strong) NSNumber *total_correct;// 做对人数
 @property (nonatomic, strong) NSNumber *total_wrong;// 做错人数
 @property (nonatomic, assign) CGFloat height;
-
+@property (strong, nonatomic) NSNumber *suggestspendtime; // 建议用时
 
 - (void)initTaskModelWithDic:(NSDictionary *)dic;
 

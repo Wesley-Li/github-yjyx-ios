@@ -108,6 +108,7 @@ static NSString *ID = @"CELL";
     
      [_homeWorkNameTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
      [_descriptionTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [_timeTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -172,7 +173,13 @@ static NSString *ID = @"CELL";
 
 - (void)textFieldDidChange:(UITextField *)textField
 {
-    
+    if([textField isEqual:_timeTextField]){
+        if(textField.text.length > 3){
+            textField.text = [textField.text substringToIndex:3];
+            [self.view makeToast:@"建议时间最多999分钟" duration:1.0 position:SHOW_TOP complete:nil];
+        }
+        return;
+    }
     NSString *toBeString = textField.text;
     NSString *lang = [[UITextInputMode currentInputMode] primaryLanguage]; // 键盘输入模式
     if ([lang isEqualToString:@"zh-Hans"]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写
@@ -311,6 +318,10 @@ static NSString *ID = @"CELL";
             }
         }
     }
+    if(self.selectArr.count == 0){
+        [self.view makeToast:@"作业题目为空,请至少添加一道题目!!!" duration:1.0 position:SHOW_CENTER complete:nil];
+        return;
+    }
     NSString *nameStr = [self.homeWorkNameTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     if ([nameStr isEqualToString:@""]) {
         [self.view makeToast:@"请输入作业名称" duration:1.0 position:SHOW_CENTER complete:nil];
@@ -382,6 +393,23 @@ static NSString *ID = @"CELL";
     NSString *descStr = [NSString stringWithFormat:@"%@ 作业", dateStr];
     NSString *descTempStr = [self.descriptionTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     pamar[@"desc"] = [descTempStr isEqualToString:@""] ? descStr : self.descriptionTextField.text;
+    NSString *numstr = [self.timeTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]];
+    if(numstr.length > 0 ){
+        [SVProgressHUD showWithStatus:@"输入的建议完成时间包含特殊字符"];
+        [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        return;
+    }
+    if([self.timeTextField.text integerValue] == 0 && ![self.timeTextField.text isEqualToString:@""]){
+        [SVProgressHUD showWithStatus:@"建议完成时间必须大于0"];
+        [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        return;
+    }
     pamar[@"suggestspendtime"] = [self.timeTextField.text isEqualToString:@""] ? @"30" : self.timeTextField.text;
     pamar[@"questionlist"] = [self.questionList JSONString];
 

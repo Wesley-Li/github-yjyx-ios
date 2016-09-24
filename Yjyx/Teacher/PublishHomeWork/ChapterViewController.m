@@ -100,10 +100,11 @@
     pamar[@"gradeid"] = @(_gradeid);
     pamar[@"verid"] = @(_verid);
     pamar[@"volid"] = @(_volid);
+    NSLog(@"%@", pamar);
     [self.chaperArr removeAllObjects];
     
     [mgr GET:[BaseURL stringByAppendingString:TEACHER_POST_CHAPTER_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        
+        NSLog(@"%@", responseObject[@"msg"] );
         
         if ([responseObject[@"retcode"] isEqual:@0]) {
             for (NSDictionary *dict in responseObject[@"content"]) {

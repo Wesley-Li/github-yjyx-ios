@@ -50,7 +50,14 @@
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
-    
+    [self seperatePart];
+    [self saveDataToTemp];
+    if(self.selectArr.count == 0){
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    self.selectArr = [[QuestionDataBase shareDataBase] selectAllTempQuestion];
+    [self.tableView reloadData];
+    NSLog(@"%@", self.selectArr);
 }
 
 // 选择和填空分开
@@ -111,11 +118,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"预览作业";
-    [self seperatePart];
-    [self saveDataToTemp];
-    self.selectArr = [[QuestionDataBase shareDataBase] selectAllTempQuestion];
-    
-    NSLog(@"%@", self.selectArr);
+  
     [self loadBackBtn];
     self.configurePublishBtn.backgroundColor = RGBACOLOR(3, 138, 228, 1);
     self.cellHeightDic = [NSMutableDictionary dictionary];
@@ -142,8 +145,6 @@
 //        self.rebackBtn.userInteractionEnabled = YES;
 //    }
 //
-    
-
     
 }
 

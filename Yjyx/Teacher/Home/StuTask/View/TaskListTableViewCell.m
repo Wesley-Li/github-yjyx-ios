@@ -79,12 +79,15 @@
     
     if ([model.deadlinetime isEqual:[NSNull null]]) {
         self.deadlineLabel.text = @"";
-        _deadlineLabel.hidden = YES;
+        _deadlineLabel.hidden = NO;
     }else {
         self.deadlineLabel.text = model.deadlinetime;
-        _deadlineLabel.hidden = YES;
+        _deadlineLabel.hidden = NO;
     }
-    
+    if([model.suggestspendtime isEqual:[NSNull null]] || [model.suggestspendtime integerValue] == 0){
+        model.suggestspendtime  = @30;
+    }
+    self.deadlineLabel.text = [NSString stringWithFormat:@"| 建议完成时间:%@分钟", model.suggestspendtime];
     
     
 

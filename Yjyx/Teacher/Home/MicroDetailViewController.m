@@ -118,7 +118,8 @@ static NSString *VideoNumID = @"VideoNum";
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
     
     //旋转屏幕通知
@@ -137,6 +138,8 @@ static NSString *VideoNumID = @"VideoNum";
     [wmPlayer removeFromSuperview];
     [self releaseWMPlayer];
     wmPlayer.isPlay = NO;
+    
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -157,6 +160,7 @@ static NSString *VideoNumID = @"VideoNum";
     NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
     pamar[@"action"] = @"m_preview";
     pamar[@"id"] = self.m_id;
+    NSLog(@"%@", pamar);
     [mgr GET:[BaseURL stringByAppendingString:@"/api/teacher/yj_lessons/"] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         NSLog(@"%@", responseObject);
 
@@ -323,7 +327,18 @@ static NSString *VideoNumID = @"VideoNum";
 }
 - (void)backBtnClicked
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    if (_flag == 1) {
+        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:@"您正处于编辑状态,确认要退出?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alertVc addAction:action1];
+        [alertVc addAction:action2];
+        [self presentViewController:alertVc animated:YES completion:nil];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 - (void)modifyTitleBtnClick
 {
@@ -342,6 +357,7 @@ static NSString *VideoNumID = @"VideoNum";
                                     animated:YES
                               scrollPosition:UITableViewScrollPositionTop];
         [SVProgressHUD showInfoWithStatus:@"请先确认发布的题目,并按下确定键"];
+        [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             SubjectTitleCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:4]];
 
@@ -388,6 +404,7 @@ static NSString *VideoNumID = @"VideoNum";
         if(model.type == 1){
             [choiceArr addObject:model];
             if(i < self.choicecount){
+                NSLog(@"%d", [self.allSubjectArr[i] isRequireProcess]);
                 model.isRequireProcess = [self.allSubjectArr[i] isRequireProcess];
                 i++;
             }
@@ -405,6 +422,8 @@ static NSString *VideoNumID = @"VideoNum";
     [self.allSubjectArr removeAllObjects];
     [self.allSubjectArr addObjectsFromArray:choiceArr];
     [self.allSubjectArr addObjectsFromArray:blankfillArr];
+    self.choicecount = choiceArr.count;
+    self.blankcount = blankfillArr.count;
     NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:4];
     [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
 }
@@ -908,6 +927,7 @@ static NSString *VideoNumID = @"VideoNum";
             [SVProgressHUD showErrorWithStatus:@"题目不能为空,编辑失败"];
             NSLog(@"%@", self.saveSubjectArr);
             self.allSubjectArr = self.saveSubjectArr;
+            _flag = 0;
             NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:4];
             [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
             for (MicroSubjectModel *model in _allSubjectArr) {
@@ -919,6 +939,7 @@ static NSString *VideoNumID = @"VideoNum";
         for (MicroSubjectModel *model in _allSubjectArr) {
             model.btnIsShow = NO;
         }
+        
     }
     [self.tableView reloadData];
 }

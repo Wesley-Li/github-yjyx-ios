@@ -15,41 +15,36 @@
                 <rect key="frame" x="0.0" y="0.0" width="438" height="115"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="建议完成时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0a-1F-Vwv">
-                        <rect key="frame" x="13" y="47" width="102" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="建议完成时间(默认30分钟)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0a-1F-Vwv">
+                        <rect key="frame" x="13" y="49" width="179" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分钟" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z41-qE-YTb">
-                        <rect key="frame" x="396" y="47" width="34" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="HHD-bT-7Dy"/>
-                            <constraint firstAttribute="width" constant="34" id="uov-mE-XSS"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="30" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B2f-Sk-824">
-                        <rect key="frame" x="374" y="50" width="22" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="点击输入用时" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B2f-Sk-824">
+                        <rect key="frame" x="331" y="49" width="94" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     </textField>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="B2f-Sk-824" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Iso-DQ-JkN"/>
                     <constraint firstItem="B2f-Sk-824" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Mor-gf-odF"/>
-                    <constraint firstItem="Z41-qE-YTb" firstAttribute="leading" secondItem="B2f-Sk-824" secondAttribute="trailing" id="NNR-WB-GFz"/>
                     <constraint firstItem="n0a-1F-Vwv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="Sns-fo-VBL"/>
+                    <constraint firstAttribute="bottom" secondItem="B2f-Sk-824" secondAttribute="bottom" id="hTT-Sd-mba"/>
                     <constraint firstItem="n0a-1F-Vwv" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="r7M-zT-rz1"/>
-                    <constraint firstAttribute="trailing" secondItem="Z41-qE-YTb" secondAttribute="trailing" constant="8" id="snK-lc-7A5"/>
-                    <constraint firstItem="Z41-qE-YTb" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xxf-cO-wAO"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="B2f-Sk-824" secondAttribute="trailing" constant="5" id="wnk-pK-yqv"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Mor-gf-odF"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="timeLabel" destination="B2f-Sk-824" id="p2h-4A-KO0"/>
             </connections>
-            <point key="canvasLocation" x="534" y="272"/>
+            <point key="canvasLocation" x="252" y="255"/>
         </tableViewCell>
     </objects>
 </document>

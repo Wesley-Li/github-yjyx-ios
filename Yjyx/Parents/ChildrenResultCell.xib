@@ -203,7 +203,7 @@
                 <outlet property="stuAnswer" destination="Jtl-um-AYO" id="8Mg-dv-pEo"/>
                 <outlet property="summaryLabel" destination="FVn-zA-6co" id="ALs-s0-S2Z"/>
             </connections>
-            <point key="canvasLocation" x="685.5" y="513"/>
+            <point key="canvasLocation" x="581.5" y="359"/>
         </tableViewCell>
     </objects>
     <resources>

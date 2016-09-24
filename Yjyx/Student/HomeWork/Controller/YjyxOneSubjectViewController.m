@@ -14,7 +14,7 @@
 #import "YjyxWorkDetailController.h"
 #import "YjyxWorkPreviewViewController.h"
 #import "YjyxMicroClassViewController.h"
-
+#import "YjyxDoingWorkController.h"
 @interface YjyxOneSubjectViewController ()<SearchViewDelegate, WorkDetailCellDelegate>
 
 @property (strong, nonatomic) NSMutableArray *allWorkArray;
@@ -76,7 +76,8 @@ static NSString *ID = @"CELL";
     [self loadData];
     [self loadRightNavItem];
     [self loadRefresh];
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#dcdcdc"];
     self.tableView.tableFooterView = [[UIView alloc] init];
     //  注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxWorkDetailCell class]) bundle:nil] forCellReuseIdentifier:ID];
@@ -234,10 +235,11 @@ static NSString *ID = @"CELL";
     workDetailVc.taskType = model.tasktype;
     workDetailVc.t_id = model.t_id;
     // 做普通作业
-    YjyxWorkPreviewViewController *doingVc = [[YjyxWorkPreviewViewController alloc] init];
+    YjyxDoingWorkController *doingVc = [[YjyxDoingWorkController alloc] init];
     doingVc.taskid = model.task_id;
     doingVc.examid = model.task_relatedresourceid;
-    doingVc.title = model.resourcename;
+    doingVc.desc = model.resourcename;
+    doingVc.type = @1;
     // 做微课作业
     YjyxMicroClassViewController *microVc = [[YjyxMicroClassViewController alloc] init];
     microVc.taskid = model.task_id;

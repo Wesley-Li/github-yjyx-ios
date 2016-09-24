@@ -43,7 +43,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 //    [self judgeTimeIsOneDay];
     // 初始化
     self.nameLabel.text = [YjyxOverallData sharedInstance].studentInfo.realname;

@@ -131,9 +131,13 @@ static BookViewController *_instance;
     NSInteger volid = 1;
     NSInteger gradeid = 0;
     NSInteger verid = 0;
-    if([cell2.detail_label.text containsString:@"下"]){
-        volid = 2;
+    for (NSArray *tempArr in self.volArr) {
+        if([cell2.detail_label.text containsString:tempArr[1]]){
+            volid = [tempArr[0] integerValue];
+            break;
+        }
     }
+    
     for (NSArray *tempArr in _gradeArr) {
         if([tempArr[1] isEqualToString:grade]){
             gradeid = [tempArr[0] integerValue];

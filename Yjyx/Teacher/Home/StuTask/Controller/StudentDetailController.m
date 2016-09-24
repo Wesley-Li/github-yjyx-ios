@@ -82,9 +82,13 @@
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
+    
+    
+    
+}
+- (void)viewWillAppear:(BOOL)animated
+{
     [self readDataFromNetWork];
-    
-    
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
@@ -100,7 +104,8 @@
         self.dic = [NSDictionary dictionaryWithDictionary:responseObject];
         
         NSLog(@"%@", responseObject);
-        
+        [self.choiceArray removeAllObjects];
+        [self.blankfillArray removeAllObjects];
         if ([[responseObject[@"result"] allKeys] containsObject:@"choice"]) {
             
             NSString *jsonString = [responseObject[@"result"] objectForKey:@"choice"];
@@ -175,23 +180,24 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return self.choiceArray.count + self.blankfillArray.count == 0 ? 0 : 5;
+    return self.choiceArray.count + self.blankfillArray.count == 0 ? 0 : 6;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
 
-    
-    if (indexPath.row == 0) {
+    if(indexPath.row == 0){
         return 40;
     }else if (indexPath.row == 1) {
+        return 40;
+    }else if (indexPath.row == 2) {
         
         return 60;
-    }else if (indexPath.row == 2){
+    }else if (indexPath.row == 3){
         
         return 50;
-    }else if (indexPath.row == 3) {
+    }else if (indexPath.row == 4) {
         
         return _choiceCellHeight;
     }else {
@@ -207,25 +213,32 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-  
-        
     if (indexPath.row == 0) {
+        SpendTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:kSpendTime forIndexPath:indexPath];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        if ([self.dic[@"suggestspendtime"] isEqual:[NSNull null]] || [self.dic[@"suggestspendtime"] integerValue] == 0) {
+            cell.finishTime = 30;
+        }else{
+            cell.finishTime = [self.dic[@"suggestspendtime"] integerValue];
+        }
+        return cell;
+    }else if (indexPath.row == 1) {
         SpendTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:kSpendTime forIndexPath:indexPath];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [cell setValueWithDic:_dic];
         return cell;
-    }else if (indexPath.row == 1) {
+    }else if (indexPath.row == 2) {
         SubTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:kSubMit forIndexPath:indexPath];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [cell setValueWithDic:_dic];
         return cell;
-    }else if (indexPath.row == 2) {
+    }else if (indexPath.row == 3) {
         
         CardCell *cell = [tableView dequeueReusableCellWithIdentifier:kCard forIndexPath:indexPath];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         return cell;
         
-    }else if (indexPath.row == 3) {
+    }else if (indexPath.row == 4) {
     
         ChoiceCell *cell = [tableView dequeueReusableCellWithIdentifier:kChoice forIndexPath:indexPath];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -235,6 +248,7 @@
         
             cell.titleLabel.hidden = NO;
         }
+        NSLog(@"_choiceArray---%ld", _choiceArray.count);
         [self cell:cell addSubviewsWithChoiceArray:_choiceArray];
         
         return cell;
@@ -464,48 +478,5 @@
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

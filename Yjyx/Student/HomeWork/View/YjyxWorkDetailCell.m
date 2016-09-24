@@ -20,12 +20,16 @@
 @property (weak, nonatomic) IBOutlet UILabel *releaseTimeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *progressBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leadConstant;
+@property (weak, nonatomic) IBOutlet UILabel *timeInfoLabel; // 时间描述
+
 @end
 @implementation YjyxWorkDetailCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.progressBtn.layer.cornerRadius = 5;
+    self.separatorInset = UIEdgeInsetsZero;
+    self.layoutMargins = UIEdgeInsetsZero;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -59,19 +63,48 @@
         NSString *rateString = total == 0 ? @"0%" : [NSString stringWithFormat:@"%.f%%", [todayWorkModel.totalCorrect floatValue] * 100 / total];
         NSString *myRate = [NSString stringWithFormat:@"%.f%%", [todayWorkModel.summary[@"correct"] floatValue] * 100 / myTotal];
         NSString *raString = [NSString stringWithFormat:@"\n本次平均正确率%@  |  我的正确率%@", rateString, myRate];
-        NSString *summaryString = [NSString stringWithFormat:@"今天%@  由%@老师发布%@", str1, todayWorkModel.delivername, raString];
+        
+        NSString *summaryString = [NSString stringWithFormat:@"今天%@  由%@老师发布\n提交时间:%@%@", str1, todayWorkModel.delivername, todayWorkModel.finishtime, raString];
+        if([todayWorkModel.finishtime isEqual:[NSNull null]]){
+            summaryString = [NSString stringWithFormat:@"今天%@  由%@老师发布%@", str1, todayWorkModel.delivername, raString];
+        }
         NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:summaryString];
         [attString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#e71419"] range:NSMakeRange(summaryString.length - raString.length, raString.length)];
         self.releaseTimeLabel.attributedText = attString;
-        todayWorkModel.height = [self.releaseTimeLabel.attributedText boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size.height + 55;
+        todayWorkModel.height = [self.releaseTimeLabel.attributedText boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size.height + 95;
+        // 花费时间
+        if([todayWorkModel.task__suggestspendtime isEqual:[NSNull null]] || [todayWorkModel.task__suggestspendtime integerValue] == 0){
+            todayWorkModel.task__suggestspendtime = @30;
+        }
+        
+        NSInteger time = [todayWorkModel.spendTime integerValue];
+        NSString *spendtimeStr = @"";
+        if(time < 60){
+            spendtimeStr = [NSString stringWithFormat:@"%ld秒", time];
+        }else if(time < 60 * 60){
+            spendtimeStr = [NSString stringWithFormat:@"%ld分%ld秒", time / 60, time % 60];
+        }else{
+            spendtimeStr = [NSString stringWithFormat:@"%ld时%ld分%ld秒",time / 3600, (time % 3600)/ 60, (time % 3600) % 60];
+        }
+        if([todayWorkModel.spendTime integerValue] == 0){
+             self.timeInfoLabel.text = [NSString stringWithFormat:@"建议完成时间:%@分钟 ", todayWorkModel.task__suggestspendtime];
+        }else{
+            self.timeInfoLabel.text = [NSString stringWithFormat:@"建议完成时间:%@分钟 | 用时:%@", todayWorkModel.task__suggestspendtime, spendtimeStr];
+        }
+        
 
     }else{
         NSString *summaryString = [NSString stringWithFormat:@"今天%@  由%@老师发布", str1, todayWorkModel.delivername];
         self.releaseTimeLabel.text = summaryString;
-        todayWorkModel.height = [self.releaseTimeLabel.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height + 55;
+        todayWorkModel.height = [self.releaseTimeLabel.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height + 95;
         
         [self.progressBtn setTitle:@"做作业" forState:UIControlStateNormal];
         self.progressBtn.backgroundColor = [UIColor colorWithHexString:@"#d8261d"];
+        if([todayWorkModel.task__suggestspendtime isEqual:[NSNull null]] || [todayWorkModel.task__suggestspendtime integerValue] == 0){
+            todayWorkModel.task__suggestspendtime = @30;
+        }
+        self.timeInfoLabel.text = [NSString stringWithFormat:@"建议完成时间:%@分钟 ", todayWorkModel.task__suggestspendtime];
+
     }
 }
 
@@ -106,25 +139,59 @@
         NSString *rateString = total == 0 ? @"0%" : [NSString stringWithFormat:@"%.f%%", [OneSubjectModel.totalCorrect floatValue] * 100 / total];
         NSString *myRate = [NSString stringWithFormat:@"%.f%%", [OneSubjectModel.summary[@"correct"] floatValue] * 100 / myTotal];
         NSString *raString = [NSString stringWithFormat:@"本次平均正确率%@  |  我的正确率%@", rateString, myRate];
-        NSString *summaryString = [NSString stringWithFormat:@"%@  由%@老师发布\n%@", str1, OneSubjectModel.delivername, raString];
+        NSString *summaryString = [NSString stringWithFormat:@"%@  由%@老师发布\n提交时间:%@\n%@", str1, OneSubjectModel.delivername, OneSubjectModel.finishtime, raString];
+        if([OneSubjectModel.finishtime isEqual:[NSNull null]]){
+            summaryString = [NSString stringWithFormat:@"%@  由%@老师发布\n%@", str1, OneSubjectModel.delivername, raString]; 
+        }
         NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:summaryString];
         [attString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#e71419"] range:NSMakeRange(summaryString.length - raString.length, raString.length)];
         self.releaseTimeLabel.attributedText = attString;
-        OneSubjectModel.height = [self.releaseTimeLabel.attributedText boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size.height + 55;
-
+        OneSubjectModel.height = [self.releaseTimeLabel.attributedText boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size.height + 95;
+        // 花费时间
+        if([OneSubjectModel.task__suggestspendtime isEqual:[NSNull null]] || [OneSubjectModel.task__suggestspendtime integerValue] == 0){
+            OneSubjectModel.task__suggestspendtime = @30;
+        }
+        NSInteger time = [OneSubjectModel.spendTime integerValue];
+        NSString *spendtimeStr = @"";
+        if(time < 60){
+            spendtimeStr = [NSString stringWithFormat:@"%ld秒", time];
+        }else if(time < 60 * 60){
+            spendtimeStr = [NSString stringWithFormat:@"%ld分%ld秒", time / 60, time % 60];
+        }else{
+            spendtimeStr = [NSString stringWithFormat:@"%ld时%ld分%ld秒",time / 3600, (time % 3600)/ 60, (time % 3600) % 60];
+        }
+        if([OneSubjectModel.spendTime integerValue] == 0){
+            self.timeInfoLabel.text = [NSString stringWithFormat:@"建议完成时间:%@分钟", OneSubjectModel.task__suggestspendtime];
+        }else{
+            self.timeInfoLabel.text = [NSString stringWithFormat:@"建议完成时间:%@分钟 | 用时:%@", OneSubjectModel.task__suggestspendtime , spendtimeStr];
+        }
+        
     }else{
         
         NSString *summaryString = [NSString stringWithFormat:@"%@  由%@老师发布", str1, OneSubjectModel.delivername];
         self.releaseTimeLabel.text = summaryString;
-        OneSubjectModel.height = [self.releaseTimeLabel.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height + 55;
+        OneSubjectModel.height = [self.releaseTimeLabel.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, SCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:nil context:nil].size.height + 95;
 
         [self.progressBtn setTitle:@"做作业" forState:UIControlStateNormal];
         self.progressBtn.backgroundColor = [UIColor colorWithHexString:@"#d8261d"];
+        if([OneSubjectModel.task__suggestspendtime isEqual:[NSNull null]] || [OneSubjectModel.task__suggestspendtime integerValue] == 0){
+            OneSubjectModel.task__suggestspendtime = @30;
+        }
+        self.timeInfoLabel.text = [NSString stringWithFormat:@"建议完成时间:%@分钟", OneSubjectModel.task__suggestspendtime];
     }
     
 }
 
-
+- (void)setFrame:(CGRect)frame
+{
+    if(self.OneSubjectModel != nil){
+        CGRect rect = frame;
+        rect.size.height -= 10;
+        frame = rect;
+    }
+    
+    [super setFrame:frame];
+}
 
 - (IBAction)doingBtnClick:(UIButton *)sender {
     if([[sender titleForState:UIControlStateNormal] isEqualToString:@"做作业"]){

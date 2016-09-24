@@ -507,7 +507,6 @@
     }else{
         arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
         if (arr.count == 0) {
-            
             [self.view makeToast:@"您还没有选择题目,请选择" duration:1.0 position:SHOW_BOTTOM complete:nil];
         }else {
             

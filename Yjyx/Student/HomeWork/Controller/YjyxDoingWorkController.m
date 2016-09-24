@@ -99,15 +99,29 @@ static NSString *ID = @"BGCEll";
     }
     return _draftV;
 }
+- (NSMutableArray *)jumpDoworkArr
+{
+    if (_jumpDoworkArr == nil) {
+        _jumpDoworkArr = [NSMutableArray array];
+    }
+    return _jumpDoworkArr;
+}
 #pragma mark - view生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupCollectionView];
-    self.totalTitleLabel.text = [NSString stringWithFormat:@"%ld", self.jumpDoworkArr.count];
-    self.titlenumberLabel.text = @"1";
     self.workNameLabel.text = self.desc;
+    if (self.jumpDoworkArr.count == 0) {
+        [self loadData];
+        self.titlenumberLabel.text = @"0";
+    }else{
+        self.totalTitleLabel.text = [NSString stringWithFormat:@"%ld", self.jumpDoworkArr.count];
+        self.titlenumberLabel.text = @"1";
+        
+        [self createTimer];
+    }
     [self.bgCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxDoWorkCollectionCell class]) bundle:nil] forCellWithReuseIdentifier:ID];
-    [self createTimer];
+    
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackgroud) name:UIApplicationWillResignActiveNotification object:nil];
@@ -115,7 +129,7 @@ static NSString *ID = @"BGCEll";
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
 }
 
@@ -131,20 +145,112 @@ static NSString *ID = @"BGCEll";
     [super didReceiveMemoryWarning];
     
 }
+- (void)dealloc
+{
+    [self releaseTimer];
+}
 #pragma mark - 私有方法
+- (void)loadData
+{
+    UIView *coverView = [[UIView alloc] init];
+    coverView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT);
+    coverView.backgroundColor = [UIColor whiteColor] ;
+    [self.view addSubview:coverView];
+    [coverView makeToastActivity:SHOW_CENTER];
+    AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"action"] = @"m_get_task_exam_preview_data";
+    param[@"taskid"] = self.taskid;
+    param[@"examid"] = self.examid;
+    [mgr GET:[BaseURL stringByAppendingString:@"/api/student/tasks/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        [self.view hideToastActivity];
+        NSLog(@"%@", responseObject);
+        [coverView removeFromSuperview];
+        if ([responseObject[@"retcode"] isEqual:@0]) {
+            self.subject_id = responseObject[@"retobj"][@"examobj"][@"subjectid"];
+            NSArray  *choices = responseObject[@"retobj"][@"questions"][@"choice"][@"questionlist"];
+            NSArray  *blankfills = responseObject[@"retobj"][@"questions"][@"blankfill"][@"questionlist"];
+            if(choices.count + blankfills.count == 0){
+                [self.view makeToast:@"题目已经被老师删除了" duration:3.0 position:SHOW_CENTER complete:nil];
+                return ;
+            }
+            
+            for (NSDictionary *dict in responseObject[@"retobj"][@"questions"][@"choice"][@"questionlist"]) {
+                YjyxDoingWorkModel *model = [YjyxDoingWorkModel doingWorkModelWithDict:dict];
+                model.questiontype = 1;
+                [self.jumpDoworkArr addObject:model];
+            }
+            for (NSDictionary *dict in responseObject[@"retobj"][@"questions"][@"blankfill"][@"questionlist"]) {
+                YjyxDoingWorkModel *model = [YjyxDoingWorkModel doingWorkModelWithDict:dict];
+                model.questiontype = 2;
+                [self.jumpDoworkArr addObject:model];
+            }
+            
+            
+            NSInteger i = 0;
+            for (NSArray *arr in [responseObject[@"retobj"][@"examobj"][@"questionlist"] JSONValue]) {
+                if(arr.count == 0){
+                    continue;
+                }
+                if ([arr[0] isEqualToString:@"choice"]) {
+                    for (NSDictionary *dict in arr[1]) {
+                        if(i >= self.jumpDoworkArr.count){
+                            continue;
+                        }
+                        YjyxDoingWorkModel *model = self.jumpDoworkArr[i];
+                        if([dict[@"id"] isEqual:model.t_id]){
+                            model.requireprocess = dict[@"requireprocess"];
+                            i++;
+                        }
+                        
+                        
+                    }
+                }
+                if ([arr[0] isEqualToString:@"blankfill"]) {
+                    for (NSDictionary *dict in arr[1]) {
+                        if(i >= self.jumpDoworkArr.count){
+                            continue;
+                        }
+                        YjyxDoingWorkModel *model = self.jumpDoworkArr[i];
+                        if([dict[@"id"] isEqual:model.t_id]){
+                            model.requireprocess = dict[@"requireprocess"];
+                            i++;
+                        }
+                    }
+                }
+            }
+            self.totalTitleLabel.text = [NSString stringWithFormat:@"%ld", self.jumpDoworkArr.count];
+            self.titlenumberLabel.text = @"1";
+            [self createTimer];
+            [self.bgCollectionView reloadData];
+        }else{
+            [self.view makeToast:@"获取作业失败" duration:1.0 position:SHOW_CENTER complete:nil];
+           
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self.view hideToastActivity];
+        [coverView removeFromSuperview];
+        [self.view makeToast:@"获取作业失败" duration:1.0 position:SHOW_CENTER complete:nil];
+        
+    }];
+}
+
+
+
 - (void)appDidBecomeActive
 {
-    NSTimeInterval  timeCount = [[NSDate date] timeIntervalSinceDate:self.oldDate];
-    _consumeTime += timeCount;
-    self.consumeTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", _consumeTime / 60, _consumeTime % 60];
-    [self createTimer];
-    NSLog(@"++++++++++%f", timeCount);
+    if(self.jumpDoworkArr.count != 0){
+        NSTimeInterval  timeCount = [[NSDate date] timeIntervalSinceDate:self.oldDate];
+        _consumeTime += timeCount;
+        self.consumeTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", _consumeTime / 60, _consumeTime % 60];
+        [self createTimer];
+        NSLog(@"++++++++++%f", timeCount);
+    }
 }
 - (void)appDidEnterBackgroud
 {
     self.oldDate = [NSDate date];
     [self releaseTimer];
-    
 }
 // 创建定时器
 - (void)createTimer
@@ -280,6 +386,7 @@ static NSString *ID = @"BGCEll";
 #pragma mark - uicollectionView数据源方法
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    NSLog(@"%ld", self.jumpDoworkArr.count);
     return self.jumpDoworkArr.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

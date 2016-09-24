@@ -23,7 +23,9 @@
 {
     _model = model;
     if (![model.img isEqual:[NSNull null]]) {
-         [self.adImageView setImageWithURL:[NSURL URLWithString:model.img]];
+         [self.adImageView setImageWithURL:[NSURL URLWithString:model.img] placeholderImage:[UIImage imageNamed:@"BANNER"]];
+    }else{
+        self.adImageView.image = [UIImage imageNamed:@"BANNER"];
     }
    
 }

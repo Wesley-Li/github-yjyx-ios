@@ -115,11 +115,9 @@
                 [YjyxOverallData sharedInstance].parentInfo.phone = _phoneTextfield.text;
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
-                if([result[@"retcode"] integerValue] == 10){
-                    [self.view makeToast:@"该手机已经有老师在使用，请更换手机号码" duration:1.0 position:SHOW_CENTER complete:nil];
+               [self.view makeToast:@"该手机已经有家长在使用，请更换手机号码" duration:1.0 position:SHOW_CENTER complete:nil];
                     return ;
-                }
-                [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+               
             }
         }else{
             [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];

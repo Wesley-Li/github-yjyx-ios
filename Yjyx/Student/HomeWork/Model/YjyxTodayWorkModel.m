@@ -27,6 +27,8 @@
     model.t_id = dict[@"id"];
     model.totalCorrect = dict[@"task__total_correct"];
     model.totalWrong = dict[@"task__total_wrong"];
+    model.spendTime = dict[@"spendTime"];
+    model.task__suggestspendtime = dict[@"task__suggestspendtime"];
     return model;
 }
 
@@ -55,6 +57,19 @@
     fmt.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
     NSDate *tempDate = [fmt dateFromString:timeStr];
 //    NSLog(@"%@", tempDate);
+    fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSString *str = [fmt stringFromDate:tempDate];
+    return str;
+}
+- (NSString *)finishtime
+{
+    //    NSLog(@"%@", _task_delivertime);
+    NSArray *arr = [_finishtime componentsSeparatedByString:@"."];
+    NSString *timeStr = arr.firstObject;
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
+    NSDate *tempDate = [fmt dateFromString:timeStr];
+    //    NSLog(@"%@", tempDate);
     fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     NSString *str = [fmt stringFromDate:tempDate];
     return str;

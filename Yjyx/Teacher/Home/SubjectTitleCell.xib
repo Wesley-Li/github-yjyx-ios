@@ -23,6 +23,7 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Izl-8q-oxD">
                         <rect key="frame" x="266" y="4" width="46" height="30"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="46" id="jZd-yF-qyS"/>
                         </constraints>
@@ -38,10 +39,10 @@
                             <action selector="editBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FKV-hX-edX"/>
                         </connections>
                     </button>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fom-mB-gPk">
-                        <rect key="frame" x="48" y="0.0" width="211" height="39"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fom-mB-gPk">
+                        <rect key="frame" x="48" y="0.0" width="214" height="39"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4z-sr-e18" customClass="YjyxTeacherButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4z-sr-e18" customClass="YjyxTeacherButton">
                                 <rect key="frame" x="0.0" y="2" width="106" height="35"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="添加题目" image="add_homework">
@@ -51,14 +52,18 @@
                                     <action selector="addBtnClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="UWi-cq-5Zn"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p1J-qe-tHd">
-                                <rect key="frame" x="121" y="5" width="90" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p1J-qe-tHd">
+                                <rect key="frame" x="114" y="5" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="kRq-Xa-A53"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="全部需要过程">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <state key="selected">
-                                    <color key="titleColor" red="0.058823529409999999" green="0.44705882349999998" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="requireProcessBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oKC-EM-EQr"/>
@@ -70,7 +75,7 @@
                             <constraint firstAttribute="bottom" secondItem="b4z-sr-e18" secondAttribute="bottom" constant="2" id="1fm-MD-zbP"/>
                             <constraint firstAttribute="trailing" secondItem="p1J-qe-tHd" secondAttribute="trailing" id="IHo-Mo-rq1"/>
                             <constraint firstItem="p1J-qe-tHd" firstAttribute="centerY" secondItem="Fom-mB-gPk" secondAttribute="centerY" id="ear-SP-cmc"/>
-                            <constraint firstItem="p1J-qe-tHd" firstAttribute="leading" secondItem="b4z-sr-e18" secondAttribute="trailing" constant="15" id="kTq-Hl-6h9"/>
+                            <constraint firstItem="p1J-qe-tHd" firstAttribute="leading" secondItem="b4z-sr-e18" secondAttribute="trailing" constant="8" id="kTq-Hl-6h9"/>
                             <constraint firstItem="b4z-sr-e18" firstAttribute="top" secondItem="Fom-mB-gPk" secondAttribute="top" constant="2" id="lTe-nI-H0u"/>
                             <constraint firstItem="b4z-sr-e18" firstAttribute="leading" secondItem="Fom-mB-gPk" secondAttribute="leading" id="who-dY-H6f"/>
                         </constraints>

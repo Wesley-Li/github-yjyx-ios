@@ -113,7 +113,7 @@
     }
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
     if(self.jumpType == 1){
-        self.navigationController.navigationBarHidden = YES;
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
     }else{
     self.navigationController.navigationBarHidden = NO;
     }

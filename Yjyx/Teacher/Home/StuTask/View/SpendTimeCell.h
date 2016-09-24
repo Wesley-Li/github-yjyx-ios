@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *spendTimeLabel;
 
+@property (assign, nonatomic) NSInteger finishTime;
 - (void)setValueWithDic:(NSDictionary *)dic;
 
 @end

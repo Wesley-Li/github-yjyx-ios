@@ -132,7 +132,7 @@ static NSString *videoNumID = @"VIDEONumID";
         self.navigationController.navigationBarHidden = NO;
      ;
     }else{
-        self.navigationController.navigationBarHidden = YES;
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
     }
 
     if (self.openMember == 1) {

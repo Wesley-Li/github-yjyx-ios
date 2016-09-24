@@ -23,6 +23,7 @@
     self.resourcename = dic[@"resourcename"];
     self.total_correct = dic[@"total_correct"];
     self.total_wrong = dic[@"total_wrong"];
+    self.suggestspendtime  = dic[@"suggestspendtime"];
 
 }
 

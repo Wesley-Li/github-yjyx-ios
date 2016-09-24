@@ -37,7 +37,7 @@
     
     // 配置导航栏
     self.navigationItem.title = @"统计";
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:3/255.0 green:136/255.0 blue:227/255.0 alpha:1.0];
+    self.navigationController.navigationBar.barTintColor = RGBACOLOR(14.0, 115.0, 221.0, 1);
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     

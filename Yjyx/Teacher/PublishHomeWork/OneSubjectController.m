@@ -23,6 +23,7 @@
 #import "ChapterChoiceController.h"
 #import "WrongSubjectController.h"
 #import "MicroSubjectModel.h"
+#import "QuestionPreviewController.h"
 @interface OneSubjectController ()<UITableViewDelegate, UITableViewDataSource>
 {
     WMPlayer *wmPlayer;
@@ -120,7 +121,7 @@ static NSString *VideoID = @"VIDEOCELL";
     }else{
         [self.moveToReleaseBtn setTitle:@"移除本题" forState:UIControlStateNormal];
     }
-
+    self.navigationController.navigationBarHidden = NO;
    
     NSLog(@"%@$$$$$$$", self.parentViewController);
 }
@@ -444,6 +445,7 @@ static NSString *VideoID = @"VIDEOCELL";
         [SVProgressHUD dismiss];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error.localizedDescription);
         [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
         [SVProgressHUD dismiss];
     }];
@@ -506,15 +508,34 @@ static NSString *VideoID = @"VIDEOCELL";
             }
         }
     }
-    for (UIViewController *vc in self.parentViewController.childViewControllers) {
-        if ([vc isKindOfClass:[ChapterChoiceController class]]) {
-            [self.navigationController popToViewController:vc animated:YES];
+//    for (UIViewController *vc in self.parentViewController.childViewControllers) {
+//        if ([vc isKindOfClass:[ChapterChoiceController class]]) {
+//            [self.navigationController popToViewController:vc animated:YES];
+//            return;
+//        }
+//        if ([vc isKindOfClass:[WrongSubjectController class]]) {
+//            [self.navigationController popToViewController:vc animated:YES];
+//            return;
+//        }
+//    }
+//    for (UIViewController *vc in self.parentViewController.childViewControllers) {
+//        if ([vc isKindOfClass:[QuestionPreviewController class]]) {
+//            NSMutableArray  *arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
+//            ((QuestionPreviewController *)vc).selectArr = arr;
+//            [self.navigationController popToViewController:vc animated:YES];
+//            return;
+//        }
+//    }
+        for (UIViewController *vc in self.parentViewController.childViewControllers) {
+            if ([vc isKindOfClass:[QuestionPreviewController class]]) {
+                NSMutableArray  *arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
+                ((QuestionPreviewController *)vc).selectArr = arr;
+                [self.navigationController popToViewController:vc animated:YES];
+                return;
+            }
         }
-        if ([vc isKindOfClass:[WrongSubjectController class]]) {
-            [self.navigationController popToViewController:vc animated:YES];
-        }
-    }
-
+  
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 

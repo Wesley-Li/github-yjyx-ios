@@ -133,7 +133,7 @@
     [self.view addSubview:scrollV];
     scrollV.showsVerticalScrollIndicator = NO;
     scrollV.showsHorizontalScrollIndicator = NO;
-    scrollV.contentSize = CGSizeMake(SCREEN_WIDTH ,margin + (height + 25) * (productAry.count / 3));
+    scrollV.contentSize = CGSizeMake(SCREEN_WIDTH ,margin + (height + margin + 25) * ((productAry.count - 1) / 3 + 1));
     for (int i=0; i < [productAry count]; i++) {
         ProductEntity *entity = [productAry objectAtIndex:i];
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake( margin +(margin+ height)*(i % 3) , margin + (margin + (height + 25)) * (i / 3), height, height + 25)];

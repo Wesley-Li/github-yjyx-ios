@@ -52,14 +52,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.navigationController.navigationBarHidden = YES ;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
-//- (void)viewDidAppear:(BOOL)animated
-//{
-//    self.navigationController.navigationBarHidden = YES ;
-//    
-//}
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -120,7 +120,7 @@
 
 -(void)pushSwitch
 {
-    
+    ((AppDelegate *)SYS_DELEGATE).isComeFromNoti = nil;
         switch ([YjyxOverallData sharedInstance].pushType) {
                 
                 

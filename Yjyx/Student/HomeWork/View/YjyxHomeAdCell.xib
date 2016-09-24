@@ -13,18 +13,18 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="249" height="173"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zbk-dQ-LMk">
-                        <rect key="frame" x="0.0" y="0.0" width="249" height="168"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zbk-dQ-LMk">
+                        <rect key="frame" x="0.0" y="0.0" width="249" height="173"/>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Zbk-dQ-LMk" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="1Qx-V6-DWs"/>
-                <constraint firstAttribute="trailing" secondItem="Zbk-dQ-LMk" secondAttribute="trailing" id="AYr-3p-Wm0"/>
-                <constraint firstItem="Zbk-dQ-LMk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="SrR-2J-UcO"/>
-                <constraint firstAttribute="bottom" secondItem="Zbk-dQ-LMk" secondAttribute="bottom" id="TR0-Ry-b68"/>
+                <constraint firstAttribute="trailing" secondItem="Zbk-dQ-LMk" secondAttribute="trailing" id="42C-Ml-bAl"/>
+                <constraint firstAttribute="bottom" secondItem="Zbk-dQ-LMk" secondAttribute="bottom" id="GOA-ea-cL4"/>
+                <constraint firstItem="Zbk-dQ-LMk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="IZq-3p-Ig3"/>
+                <constraint firstItem="Zbk-dQ-LMk" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="zRA-2n-HCk"/>
             </constraints>
             <size key="customSize" width="249" height="173"/>
             <connections>

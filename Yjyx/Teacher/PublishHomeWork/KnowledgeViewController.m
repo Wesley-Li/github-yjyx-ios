@@ -113,8 +113,14 @@
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
 }
-
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [SVProgressHUD dismiss];
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [SVProgressHUD dismiss];
+}
 #pragma mark - TreeTableCellDelegate
 
 - (void)cellClick:(TreeNode *)node {

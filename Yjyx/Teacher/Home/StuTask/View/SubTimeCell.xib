@@ -23,37 +23,32 @@
                                     <constraint firstAttribute="height" constant="20" id="o1S-da-nAl"/>
                                     <constraint firstAttribute="width" constant="80" id="pq4-ad-mte"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMR-1L-TnM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMR-1L-TnM">
                                 <rect key="frame" x="337" y="60" width="150" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="QKt-Uk-4u0"/>
                                     <constraint firstAttribute="height" constant="20" id="UBV-fc-RWA"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="QKt-Uk-4u0"/>
+                                    </mask>
+                                </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7jj-f9-6cL">
-                                <rect key="frame" x="10" y="0.0" width="487" height="1"/>
-                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="PHj-oi-6Er"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="uMR-1L-TnM" firstAttribute="centerY" secondItem="yZH-6a-Umb" secondAttribute="centerY" id="9sg-Fk-NdO"/>
                             <constraint firstItem="Zwf-KN-XrK" firstAttribute="leading" secondItem="yZH-6a-Umb" secondAttribute="leading" constant="10" id="Y9g-xJ-Wff"/>
-                            <constraint firstItem="7jj-f9-6cL" firstAttribute="leading" secondItem="yZH-6a-Umb" secondAttribute="leading" constant="10" id="gmz-Vb-TNy"/>
                             <constraint firstItem="Zwf-KN-XrK" firstAttribute="centerY" secondItem="yZH-6a-Umb" secondAttribute="centerY" id="hyI-P6-FKJ"/>
-                            <constraint firstAttribute="trailing" secondItem="7jj-f9-6cL" secondAttribute="trailing" id="j6h-fM-Al0"/>
                             <constraint firstAttribute="trailing" secondItem="uMR-1L-TnM" secondAttribute="trailing" constant="10" id="kda-4w-ewu"/>
-                            <constraint firstItem="7jj-f9-6cL" firstAttribute="top" secondItem="yZH-6a-Umb" secondAttribute="top" id="yaJ-Dg-O1S"/>
                         </constraints>
                     </view>
                 </subviews>

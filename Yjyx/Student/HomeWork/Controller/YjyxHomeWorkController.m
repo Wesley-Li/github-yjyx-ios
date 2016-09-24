@@ -19,11 +19,14 @@
 #import "YjyxWorkDetailController.h"
 #import "YjyxWorkPreviewViewController.h"
 #import "YjyxMicroClassViewController.h"
-
+#import "YjyxDoingWorkController.h"
 #import "YjyxHomeAdModel.h"
 #import "YjyxHomeAdCell.h"
 #import "YjyxHomeAdController.h"
 @interface YjyxHomeWorkController ()<UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource>
+{
+    UIImageView *navBarHairlineImageView;
+}
 @property (weak, nonatomic) IBOutlet UIImageView *clickBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *homeWorkBtn;
@@ -87,7 +90,9 @@ static NSString *HomeADID = @"HomeADID";
     [self loadAdData];
   
     [self wrongWorkData];
+    
 
+  
     // 注册cell
     [self.workTableV registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxHomeWorkCell class]) bundle:nil] forCellReuseIdentifier:WORKID];
     [self.workTableV registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxWorkDetailCell class]) bundle:nil] forCellReuseIdentifier:DETAILID];
@@ -101,9 +106,25 @@ static NSString *HomeADID = @"HomeADID";
     }
     
 //    self.workTableV.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-
+    //再定义一个imageview来等同于这个黑线
+    
+    navBarHairlineImageView = [self findHairlineImageViewUnder:self.navigationController.navigationBar];
 
 }
+
+- (UIImageView *)findHairlineImageViewUnder:(UIView *)view {
+    if ([view isKindOfClass:UIImageView.class] && view.bounds.size.height <= 1.0) {
+        return (UIImageView *)view;
+    }
+    for (UIView *subview in view.subviews) {
+        UIImageView *imageView = [self findHairlineImageViewUnder:subview];
+        if (imageView) {
+            return imageView;
+        }
+    }
+    return nil;
+}
+
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -130,12 +151,12 @@ static NSString *HomeADID = @"HomeADID";
         [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
         self.collectView.contentOffset = CGPointMake(50 * self.homeAdArray.count * SCREEN_WIDTH, 0);
     }
-    
+    navBarHairlineImageView.hidden = YES;
 }
 - (void)viewDidAppear:(BOOL)animated
 {
     [self workData];
-    self.workTableV.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.workTableV.contentInset = UIEdgeInsetsMake(-1, 0, 0, 0);
     NSLog(@"did%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
 
     
@@ -144,6 +165,7 @@ static NSString *HomeADID = @"HomeADID";
 {
 //    [self.mgr.tasks makeObjectsPerformSelector:@selector(cancel)];
 //    [self.workTableV headerEndRefreshing];
+    navBarHairlineImageView.hidden = NO;
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
@@ -224,7 +246,7 @@ static NSString *HomeADID = @"HomeADID";
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumInteritemSpacing = 0;
     layout.minimumLineSpacing = 0;
-    layout.itemSize = CGSizeMake(SCREEN_WIDTH, 160);
+    layout.itemSize = CGSizeMake(SCREEN_WIDTH, 169);
    
     self.collectView.pagingEnabled = YES;
     self.collectView.showsHorizontalScrollIndicator = NO;
@@ -253,14 +275,21 @@ static NSString *HomeADID = @"HomeADID";
     scrollV.delegate = self;
     scrollV.bounces = NO;
     // 添加作业tableView
-    UITableView *workTableV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, scrollV.height) style:UITableViewStylePlain];
+    UITableView *workTableV = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, scrollV.height) style:UITableViewStyleGrouped];
     
     self.workTableV = workTableV;
+    
 //    self.workTableV.backgroundColor = [UIColor lightGrayColor];
     workTableV.delegate = self;
     workTableV.dataSource = self;
     [self.scrollV addSubview:workTableV];
     self.workTableV.tableFooterView = [[UIView alloc] init];
+    UIView *headV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
+    headV.backgroundColor = [UIColor whiteColor];
+    self.workTableV.tableHeaderView = headV;
+    self.workTableV.sectionHeaderHeight = 0;
+    self.workTableV.sectionFooterHeight = 0;
+   
     // 添加错题榜的tableview
     UITableView *wrongWorkTableV = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, self.scrollV.height) style:UITableViewStylePlain];
 //    self.wrongWorkTableV.backgroundColor = [UIColor lightGrayColor];
@@ -300,7 +329,7 @@ static NSString *HomeADID = @"HomeADID";
         
         NSLog(@"++++%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
         if(self.workTableV.contentInset.top < -1){
-            self.workTableV.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+            self.workTableV.contentInset = UIEdgeInsetsMake(-1, 0, 0, 0);
         }
         
      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -426,10 +455,11 @@ static NSString *HomeADID = @"HomeADID";
             workDetailVc.taskType = model.tasktype;
             workDetailVc.t_id = model.t_id;
             // 未完成之普通作业
-            YjyxWorkPreviewViewController *doingVc = [[YjyxWorkPreviewViewController alloc] init];
-            doingVc.title = model.resourcename;
+            YjyxDoingWorkController *doingVc = [[YjyxDoingWorkController alloc] init];
+            doingVc.desc = model.resourcename;
             doingVc.taskid = model.task_id;
             doingVc.examid = model.task_relatedresourceid;
+            doingVc.type = @1;
             // 未完成之微课作业
             YjyxMicroClassViewController *microVc = [[YjyxMicroClassViewController alloc] init];
             microVc.taskid = model.task_id;
@@ -463,6 +493,19 @@ static NSString *HomeADID = @"HomeADID";
     }
     
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if([tableView isEqual:self.workTableV]){
+        if(self.subjectTypeArr.count - 1 == section){
+            return 0;
+        }else{
+            return 10;
+        }
+    }else{
+        return 0;
+    }
+}
 #pragma mark -ScrollView的代理
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
@@ -487,6 +530,8 @@ static NSString *HomeADID = @"HomeADID";
     }
    
 }
+
+
 //- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 //{
 //    if([scrollView isEqual:self.collectView]){
@@ -554,7 +599,7 @@ static NSString *HomeADID = @"HomeADID";
 
 // 响应推送消息
 -(void)stuPushSwitch {
-
+    ((AppDelegate *)SYS_DELEGATE).isComeFromNoti = nil;
         switch ([YjyxOverallData sharedInstance].pushType) {
             case 1:{
                 YjyxWorkPreviewViewController *result = [[YjyxWorkPreviewViewController alloc] init];

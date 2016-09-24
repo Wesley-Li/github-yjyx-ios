@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class ChildrenActivity;
 @interface MyChildrenTableViewCell : UITableViewCell
 @property(weak,nonatomic) IBOutlet UIImageView *iconImage;
 @property(weak,nonatomic) IBOutlet UIButton *typeImage;
 @property(weak,nonatomic) IBOutlet UILabel *timelb;
 @property(weak,nonatomic) IBOutlet UIImageView *finishedImage;
+
+@property (strong, nonatomic) ChildrenActivity *childActivity;
 //@property(weak,nonatomic) IBOutlet UILabel *titlelb;
 @end

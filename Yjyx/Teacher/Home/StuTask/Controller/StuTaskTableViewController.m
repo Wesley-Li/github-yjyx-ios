@@ -75,7 +75,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"TaskListTableViewCell" bundle:nil]forCellReuseIdentifier:kk];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.backgroundColor = COMMONCOLOR;
-    
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, -49, 0);
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

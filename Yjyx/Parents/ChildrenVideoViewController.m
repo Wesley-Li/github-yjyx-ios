@@ -287,7 +287,7 @@
      ];
     
     if (_URLString.length > 0) {
-        self.navigationController.navigationBarHidden = YES;
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
     }else{
         if(_flag == 0){
         [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];

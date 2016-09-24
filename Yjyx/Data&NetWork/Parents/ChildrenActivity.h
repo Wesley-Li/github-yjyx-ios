@@ -17,5 +17,7 @@
 @property(nonatomic,strong) NSString *title;
 @property(nonatomic,strong) NSString *update;
 @property(nonatomic,strong) NSString *rid;
+@property (strong, nonatomic) NSNumber *spendTime; // 花费时间
+@property (strong, nonatomic) NSNumber *task__suggestspendtime; // 建议时间
 +(ChildrenActivity *)wrapChildrenActivityWithDic:(NSDictionary *)dic;
 @end

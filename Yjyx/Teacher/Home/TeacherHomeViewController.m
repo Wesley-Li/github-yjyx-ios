@@ -33,7 +33,7 @@
     self.signLabel.hidden = YES;
     self.signButton.hidden = YES;
      _nameLabel.text = [YjyxOverallData sharedInstance].teacherInfo.name;
-    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     // 积分
     _scoreLabel.text = [YjyxOverallData sharedInstance].teacherInfo.coins;
     
@@ -47,7 +47,6 @@
         _signButton.userInteractionEnabled = YES;
         _signLabel.text = @"签到有奖";
     }else {
-        
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyyMMdd"];
         NSString *strDateNow = [formatter stringFromDate:[NSDate date]];
@@ -67,9 +66,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-
     // 头像
     if ([[YjyxOverallData sharedInstance].teacherInfo.avatar isEqual:[NSNull null]]) {
         

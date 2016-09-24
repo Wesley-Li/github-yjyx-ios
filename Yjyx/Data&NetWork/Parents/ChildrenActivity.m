@@ -21,6 +21,8 @@
     childrenActivity.title = [dic objectForKey:@"title"];
     childrenActivity.update = [dic objectForKey:@"update"];
     childrenActivity.rid = [dic objectForKey:@"rid"];
+    childrenActivity.spendTime = dic[@"spendTime"];
+    childrenActivity.task__suggestspendtime = dic[@"task__suggestspendtime"];
     return childrenActivity;
     
 }
