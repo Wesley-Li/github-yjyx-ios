@@ -64,6 +64,7 @@
 - (NSString *)finishtime
 {
     //    NSLog(@"%@", _task_delivertime);
+    NSLog(@"%@", _finishtime);
     NSArray *arr = [_finishtime componentsSeparatedByString:@"."];
     NSString *timeStr = arr.firstObject;
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];

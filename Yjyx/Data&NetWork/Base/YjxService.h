@@ -15,7 +15,9 @@
 
 
 //生产环境
+
 //#define BaseURL @"https://www.zgyjyx.com"
+
 //#define QiniuYunURL @"http://cdn-web-img.zgyjyx.com/"
 //#define QiniuYunURL @"http://cdn-web-video.zgyjyx.com/"
 

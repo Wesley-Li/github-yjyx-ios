@@ -130,16 +130,8 @@
         view.titleLabel.text = model.name;
         
     }else {
-        
-        for (NSArray *arr in _gradeArr) {
-            if ([model.gradeid isEqual:arr[2]]) {
-                NSString *titleString = [NSString stringWithFormat:@"%@%@", arr[3], model.name];
-                view.titleLabel.text = titleString;
-                
-            }
-            
-        }
-        
+        NSString *titleString = [NSString stringWithFormat:@"%@%@", model.gradename, model.name];
+        view.titleLabel.text = titleString; 
     }
 
 //    view.titleLabel.text = model.name;

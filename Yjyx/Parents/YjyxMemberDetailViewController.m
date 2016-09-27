@@ -165,11 +165,13 @@
 }
 
 #pragma mark -MyEvent
-- (IBAction)probationClicked:(id)sender //试用按钮
+- (IBAction)probationClicked:(UIButton *)sender //试用按钮
 {
+    sender.userInteractionEnabled = NO;
     if(_jumpType == 0){// 家长端
     if (trailChildAry.count== 0) {
         [self.view makeToast:@"暂无可试用小孩" duration:1.0 position:SHOW_CENTER complete:nil];
+         sender.userInteractionEnabled = YES;
         return;
     }
     chooseView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
@@ -231,9 +233,12 @@
                     }
                 }else{
                     [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                     sender.userInteractionEnabled = YES;
                 }
+               
             }else{
                 [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+                sender.userInteractionEnabled = YES;
             }
         }];
     }
@@ -262,9 +267,11 @@
                 }
             }else{
                 [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                trailBtn.userInteractionEnabled = YES;
             }
         }else{
             [self.view makeToast:[error description] duration:1.0 position:SHOW_CENTER complete:nil];
+            trailBtn.userInteractionEnabled = YES;
         }
     }];
 

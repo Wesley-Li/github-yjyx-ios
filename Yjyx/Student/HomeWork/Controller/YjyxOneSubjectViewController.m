@@ -86,12 +86,13 @@ static NSString *ID = @"CELL";
 {
     self.navigationController.navigationBarHidden = NO;
     if(_jumpType == 1){
-        NSLog(@"%ld", _selIndexPath.row);
-        YjyxTodayWorkModel *model = self.allWorkArray[_selIndexPath.row];
-        model.finished = @1;
-        _jumpType = 0;
+//        NSLog(@"%ld", _selIndexPath.row);
+//        YjyxTodayWorkModel *model = self.allWorkArray[_selIndexPath.row];
+//        model.finished = @1;
+////        _jumpType = 0;
+        self.lastid = @0;
         [self loadData];
-        [self.tableView reloadRowsAtIndexPaths:@[_selIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+
         
     }
     
@@ -140,10 +141,11 @@ static NSString *ID = @"CELL";
                 if(self.allWorkArray.count == 0){
                     [SVProgressHUD showInfoWithStatus:@"暂无作业..."];
                 }
-           
           
-          
-            [self.tableView reloadData];
+                
+                [self.tableView reloadData];
+            
+    
         }else{
             [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
         }
@@ -240,11 +242,13 @@ static NSString *ID = @"CELL";
     doingVc.examid = model.task_relatedresourceid;
     doingVc.desc = model.resourcename;
     doingVc.type = @1;
+    doingVc.workTitle = model.task_description;
     // 做微课作业
     YjyxMicroClassViewController *microVc = [[YjyxMicroClassViewController alloc] init];
     microVc.taskid = model.task_id;
     microVc.lessonid = model.task_relatedresourceid;
     microVc.title = model.resourcename;
+    microVc.workDesc = model.task_description;
     
     if ([model.finished isEqual:@1]) {
         NSLog(@"%@", self.subjectid);

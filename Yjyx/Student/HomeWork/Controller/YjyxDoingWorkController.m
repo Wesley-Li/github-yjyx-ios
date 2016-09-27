@@ -110,7 +110,7 @@ static NSString *ID = @"BGCEll";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupCollectionView];
-    self.workNameLabel.text = self.desc;
+    self.workNameLabel.text = self.workTitle;
     if (self.jumpDoworkArr.count == 0) {
         [self loadData];
         self.titlenumberLabel.text = @"0";

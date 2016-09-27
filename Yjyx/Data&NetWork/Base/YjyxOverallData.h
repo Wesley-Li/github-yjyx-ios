@@ -31,6 +31,7 @@ typedef enum PUSH_TYPE{
 // 家长端
 @property(strong, nonatomic) NSString *historyId;
 @property(strong, nonatomic) NSString *previewRid;
+
 // 学生端
 @property(strong, nonatomic) NSNumber *taskid;
 @property(strong, nonatomic) NSNumber *examid;

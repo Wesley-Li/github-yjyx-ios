@@ -22,7 +22,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AIT-M7-Xj0">
                     <rect key="frame" x="0.0" y="84" width="320" height="100"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入新手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dIj-Dc-fow">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入新手机号码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dIj-Dc-fow">
                             <rect key="frame" x="20" y="5" width="300" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>

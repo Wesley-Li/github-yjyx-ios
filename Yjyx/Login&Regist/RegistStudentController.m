@@ -144,7 +144,13 @@
         [self.view makeToast:@"请输入正确的手机号码" duration:1.0 position:SHOW_CENTER complete:nil];
         return;
     }
+    //发送注册码按钮失效，防止频繁请求
     [_recvCodeBtn setEnabled:false];
+    [self checkCodeTimeout];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    
+   
     NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",_phoneTextField.text];
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneTextField.text,@"target",[sign md5],@"sign",@"MREGISTER",@"stype",nil];
     [[YjxService sharedInstance] getSMSsendcode:dic withBlock:^(id result, NSError *error){//验证验证码
@@ -153,10 +159,7 @@
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                 //                _timeLabel.backgroundColor = RGBACOLOR(229.0, 230.0, 231.0, 1);
                 
-                _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
-                [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-                //发送注册码按钮失效，防止频繁请求
-                [_recvCodeBtn setEnabled:false];
+               
             }else{
                 
                 if ([result[@"msg"] isEqualToString:@"ratelimitted"]) {
@@ -256,23 +259,34 @@
     }else if(_loginNameTextField.text.length < 2){
         [self.view makeToast:@"登录名太短" duration:0.5 position:SHOW_CENTER complete:nil];
         return;
+    }else if(![_pswTextField.text isEqualToString:_conFirmpswTextField.text]){
+        [self.view makeToast:@"两次输入的密码不一样" duration:0.5 position:SHOW_CENTER complete:nil];
+        return;
     }else{
+        [SVProgressHUD showWithStatus:@"正在注册"];
+        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneTextField.text,@"target",_codeTextField.text,@"code",@"MREGISTER",@"stype",nil];
         [[YjxService sharedInstance] checkOutVerfirycode:dic withBlock:^(id result, NSError *error){//验证验证码
             [self.view hideToastActivity];
+            [SVProgressHUD dismiss];
             if (result) {
                 if ([[result objectForKey:@"retcode"] integerValue] == 0) {
                     [self regist];//注册
                 }else{
-                    [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                    NSString *showStr = result[@"msg"];
+                    if(result[@"reason"] != nil){
+                        showStr = result[@"reason"];
+                    }
+                    [self.view makeToast:showStr duration:1.0 position:SHOW_CENTER complete:nil];
 //                    [self resetTimer];
                 }
             }else{
+                 [SVProgressHUD dismiss];
                 if (error.code == -1009) {
                     [self.view makeToast:@"您的网络可能不太好,请重试!" duration:3.0 position:SHOW_CENTER complete:nil];
                     return;
                 }
-                [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:3.0 position:SHOW_CENTER complete:nil];
+                [self.view makeToast:error.localizedDescription duration:3.0 position:SHOW_CENTER complete:nil];
             }
 //            [self resetTimer];
         }];
@@ -314,7 +328,11 @@
         }else if ([responseObject[@"retcode"] isEqual:@7]){
             [self.view makeToast:@"此手机号已被注册" duration:0.5 position:SHOW_CENTER complete:nil];
         }else{
-            [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
+            NSString *showStr = responseObject[@"msg"];
+            if(responseObject[@"reason"] != nil){
+                showStr = responseObject[@"reason"];
+            }
+            [self.view makeToast:showStr duration:0.5 position:SHOW_CENTER complete:nil];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];

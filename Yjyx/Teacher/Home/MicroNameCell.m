@@ -53,11 +53,11 @@
         }
         _model.name = self.microNameTextField.text;
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ModifyTitleBtnClick" object:nil];
+       
         self.microNameTextField.userInteractionEnabled = NO;
         [self.microNameTextField resignFirstResponder];
     }
-  
+   [[NSNotificationCenter defaultCenter] postNotificationName:@"ModifyTitleBtnClick" object:nil userInfo:@{@"btn" : @(sender.selected)}];
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {

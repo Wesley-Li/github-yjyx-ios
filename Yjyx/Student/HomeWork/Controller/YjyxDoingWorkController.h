@@ -16,6 +16,8 @@
 @property (strong, nonatomic) NSString *desc;
 @property (strong, nonatomic) NSNumber *type;
 
+@property (strong, nonatomic) NSString *workTitle; // 做作业标题
+
 @property (strong, nonatomic) NSMutableArray *jumpDoworkArr;
 @property (strong, nonatomic) NSNumber *subject_id;
 @end

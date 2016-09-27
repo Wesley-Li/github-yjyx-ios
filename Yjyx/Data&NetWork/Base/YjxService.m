@@ -97,7 +97,9 @@
     if (autoLogin) {
     
         NSData *cookiesdata = [[NSUserDefaults standardUserDefaults] objectForKey:@"SessionID"];
+        NSLog(@"0000000)%@", cookiesdata);
         if([cookiesdata length]) {
+            NSLog(@"%@", cookiesdata);
             NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData:cookiesdata];
             NSHTTPCookie *cookie;
             for (cookie in cookies) {
@@ -110,7 +112,7 @@
             block(responseObject,nil);
             if ([[responseObject objectForKey:@"retcode"] integerValue] == 0) {
                 NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:[BaseURL stringByAppendingString:@"/api/parents/login/"]]];
-                NSLog(@"+++++++%@", cookies);
+
                 NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 [defaults setObject:data forKey:@"SessionID"];

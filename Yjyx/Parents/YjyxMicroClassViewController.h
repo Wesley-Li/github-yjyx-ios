@@ -17,4 +17,6 @@
 // 学生端参数
 @property (strong, nonatomic) NSNumber *taskid;
 @property (strong, nonatomic) NSNumber *lessonid;
+
+@property (strong, nonatomic) NSString *workDesc;
 @end

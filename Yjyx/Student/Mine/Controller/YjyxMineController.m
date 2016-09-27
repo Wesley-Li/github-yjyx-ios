@@ -56,7 +56,7 @@
     
     self.gradeLabel.text = [NSString stringWithFormat:@"%@%@%@",str3, str4, str5];
     self.coinLabel.text = [[YjyxOverallData sharedInstance].studentInfo.coins stringValue];
-    self.codeLabel.text = [NSString stringWithFormat:@"家长邀请码: %@" ,[YjyxOverallData sharedInstance].studentInfo.invitecode ];
+    self.codeLabel.text = [NSString stringWithFormat:@"家长注册码: %@" ,[YjyxOverallData sharedInstance].studentInfo.invitecode ];
     // 头像
     if ([[YjyxOverallData sharedInstance].studentInfo.avatar_url isEqual:[NSNull null]]) {
         

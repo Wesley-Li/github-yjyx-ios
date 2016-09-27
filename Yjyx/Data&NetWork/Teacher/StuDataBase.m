@@ -69,7 +69,7 @@ static StuDataBase *singleton = nil;
     BOOL isSuccess = [self.db executeUpdate:@"create table if not exists StuList(id integer PRIMARY KEY AUTOINCREMENT,user_id text, realname text, avatar_url text, isyjmember text)"];
     NSLog(@"%@", isSuccess ? @"建表成功" : @"建表失败");
     // 班级列表
-    [self.db executeUpdate:@"create table if not exists SC(id integer PRIMARY KEY AUTOINCREMENT, cid text, memberlist text, gradeid text, name text, invitecode text)"];
+    [self.db executeUpdate:@"create table if not exists SC(id integer PRIMARY KEY AUTOINCREMENT, cid text, memberlist text, gradeid text, name text, invitecode text, gradename text)"];
     // 群组列表
     [self.db executeUpdate:@"create table if not exists SG(id integer PRIMARY KEY AUTOINCREMENT, gid text , memberlist text, name text)"];
     
@@ -119,7 +119,7 @@ static StuDataBase *singleton = nil;
     NSData *memberListData = [NSJSONSerialization dataWithJSONObject:stuClass.memberlist options:NSJSONWritingPrettyPrinted error:nil];
     NSString *memberListString = [[NSString alloc] initWithData:memberListData encoding:NSUTF8StringEncoding];
     
-    BOOL isSuccess = [self.db executeUpdate:@"insert into SC(cid, memberlist, gradeid, name, invitecode) values(?,?,?,?,?)", stuClass.cid, memberListString, stuClass.gradeid, stuClass.name, stuClass.invitecode];
+    BOOL isSuccess = [self.db executeUpdate:@"insert into SC(cid, memberlist, gradeid, name, invitecode, gradename) values(?,?,?,?,?,?)", stuClass.cid, memberListString, stuClass.gradeid, stuClass.name, stuClass.invitecode, stuClass.gradename];
     NSLog(@"%@", isSuccess ? @"插入班级数据成功" : @"插入班级数据失败");
     [self.db close];
 }
@@ -180,7 +180,7 @@ static StuDataBase *singleton = nil;
         NSString *name = [set stringForColumn:@"name"];
         NSString *invitecode = [set stringForColumn:@"invitecode"];
         NSString *memberlist = [set stringForColumn:@"memberlist"];
-        
+        NSString *gradename = [set stringForColumn:@"gradename"];
         
         // 封装到模型
         StuClassEntity *model = [[StuClassEntity alloc] init];
@@ -191,7 +191,7 @@ static StuDataBase *singleton = nil;
         model.gradeid = [numberFormatter numberFromString:gradeid];
         model.invitecode = [numberFormatter numberFromString:invitecode];
         model.name = name;
-        
+        model.gradename = gradename;
         
         NSData *data = [memberlist dataUsingEncoding:NSUTF8StringEncoding];
         model.memberlist = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];

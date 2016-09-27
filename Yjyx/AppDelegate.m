@@ -63,6 +63,9 @@
     ((AppDelegate*)SYS_DELEGATE).stuListArr = [NSMutableArray array];
  
 
+   
+    
+    
     [self initUmeng:launchOptions];
     // Override point for customization after application launch.
     
@@ -832,8 +835,8 @@
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"getstudents", @"action", nil];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[BaseURL stringByAppendingString:TEACHER_GETALLSTULIST_CONNECT_GET] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-//        NSLog(@"%@", responseObject);
+//        [YjyxOverallData sharedInstance].teacherInfo.school_classes = [responseObject[@"classes"] JSONString];
+        NSLog(@"%@", responseObject);
         // 创建数据表
         [[StuDataBase shareStuDataBase] deleteStuTable];
         

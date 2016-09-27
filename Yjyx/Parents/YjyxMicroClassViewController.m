@@ -588,6 +588,7 @@
 - (IBAction)doWorkBtnClick:(UIButton *)sender {
     YjyxDoingWorkController *vc = [[YjyxDoingWorkController alloc] init];
     vc.desc = self.navigationItem.title;
+    vc.workTitle = self.workDesc;
     vc.type = @2;
     vc.jumpDoworkArr = self.doWorkArr;
     vc.taskid = self.taskid;

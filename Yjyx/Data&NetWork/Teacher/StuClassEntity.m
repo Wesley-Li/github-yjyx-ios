@@ -18,6 +18,7 @@
     
 //    NSNumberFormatter *numberF = [[NSNumberFormatter alloc] init];
     self.invitecode = dic[@"invitecode"];
+    self.gradename = dic[@"gradename"];
     self.name = dic[@"name"];
 }
 

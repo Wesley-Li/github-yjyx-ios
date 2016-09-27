@@ -457,11 +457,13 @@ static NSString *HomeADID = @"HomeADID";
             // 未完成之普通作业
             YjyxDoingWorkController *doingVc = [[YjyxDoingWorkController alloc] init];
             doingVc.desc = model.resourcename;
+            doingVc.workTitle = model.task_description;
             doingVc.taskid = model.task_id;
             doingVc.examid = model.task_relatedresourceid;
             doingVc.type = @1;
             // 未完成之微课作业
             YjyxMicroClassViewController *microVc = [[YjyxMicroClassViewController alloc] init];
+            microVc.workDesc = model.task_description;
             microVc.taskid = model.task_id;
             microVc.lessonid = model.task_relatedresourceid;
             microVc.title = model.resourcename;

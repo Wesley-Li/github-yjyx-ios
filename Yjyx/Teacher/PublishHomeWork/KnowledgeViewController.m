@@ -67,6 +67,7 @@
     
     [manager GET:[BaseURL stringByAppendingString:TEACHER_POST_CHAPTER_CONNECT_GET] parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
+        NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] isEqual:@0]) {
             
             self.root_id = responseObject[@"id"];

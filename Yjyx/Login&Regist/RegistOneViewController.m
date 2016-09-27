@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *studentBtn;
 @property (weak, nonatomic) IBOutlet UIButton *parentBtn;
 @property (strong, nonatomic) UIButton *preSelBtn;
+@property (weak, nonatomic) IBOutlet UILabel *alertMsgLabel;
 @end
 
 @implementation RegistOneViewController
@@ -105,8 +106,10 @@
     if (btn.tag == 1) {
         partentRegistView.hidden = NO;
         self.CodeTypeLabel.text = @"请输入您班级的邀请码";
+        self.alertMsgLabel.hidden = YES;
     }else{
-        self.CodeTypeLabel.text = @"请输入您孩子的邀请码";
+        self.CodeTypeLabel.text = @"请输入家长注册码";
+        self.alertMsgLabel.hidden = NO;
         partentRegistView.hidden = NO;
     }
 }

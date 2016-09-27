@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@class MicroDetailModel;
+@class MicroDetailModel, MicroNameCell;
+@protocol MicroNameCellDelegate <NSObject>
+
+- (void)microNameCell:(MicroNameCell *)cell editMicroTitleBtn:(UIButton *)btn;
+
+@end
 @interface MicroNameCell : UITableViewCell
 
 @property (strong, nonatomic) MicroDetailModel *model;
+
+
+@property (weak, nonatomic) id<MicroNameCellDelegate> delegate;
 @end

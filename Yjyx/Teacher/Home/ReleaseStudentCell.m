@@ -43,16 +43,8 @@
         self.classOrStudentLabel.text = classEntity.name;
         
     }else {
-        
-        for (NSArray *arr in _gradeArr) {
-            if ([classEntity.gradeid isEqual:arr[2]]) {
-                NSString *titleString = [NSString stringWithFormat:@"%@%@", arr[3], classEntity.name];
-                self.classOrStudentLabel.text = titleString;
-                
-            }
-            
-        }
-        
+        NSString *titleString = [NSString stringWithFormat:@"%@%@", classEntity.gradename, classEntity.name];
+        self.classOrStudentLabel.text = titleString; 
     }
 
 }
