@@ -88,11 +88,12 @@
         }
 
     }
-    
+     NSLog(@"%@", self.selectArr);
     [self.selectArr removeAllObjects];
+   
     [self.selectArr addObjectsFromArray:tempChoiceArr];
     [self.selectArr addObjectsFromArray:tempBlankfillArr];
-    
+     NSLog(@"%@", self.selectArr);
     
 }
 
@@ -148,7 +149,7 @@
     
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [[QuestionDataBase shareDataBase] deleteQuestionTable];
     for (int i = 0; i < _selectArr.count; i++) {

@@ -15,6 +15,8 @@
 @property (nonatomic, strong) NSNumber *cid;// 班级ID
 @property (nonatomic, strong) NSNumber *invitecode;// 邀请码
 @property (nonatomic, copy) NSString *name;// 班级名称
+@property (nonatomic, copy) NSString *gradename;// 年级名称
+
 
 @property (assign, nonatomic, readwrite) BOOL isExpanded;
 @property (assign, nonatomic, readwrite) BOOL isSelect;

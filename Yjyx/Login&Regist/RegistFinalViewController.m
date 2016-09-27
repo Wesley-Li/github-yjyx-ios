@@ -151,11 +151,20 @@
             [self.view makeToast:@"请输入正确的手机号" duration:1.0 position:SHOW_CENTER complete:nil];
             return;
         }
+        //发送注册码按钮失效，防止频繁请求
         [verifyBtn setEnabled:false];
+        [self checkCodeTimeout];
+        timeLb.backgroundColor = RGBACOLOR(229.0, 230.0, 231.0, 1);
+        
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+       
+        
         AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
         NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
         pamar[@"action"] = @"checkuserexist";
         pamar[@"username"] =  phoneText.text;
+        
         
         [mgr GET:[BaseURL stringByAppendingString:USERNAME_ISEXIST_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
             NSLog(@"%@", responseObject);
@@ -174,12 +183,7 @@
                         [self.view hideToastActivity];
                         if (result) {
                             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
-                                timeLb.backgroundColor = RGBACOLOR(229.0, 230.0, 231.0, 1);
-                                
-                                _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
-                                [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-                                //发送注册码按钮失效，防止频繁请求
-                                [verifyBtn setEnabled:false];
+                           
                             }else{
                                 NSLog(@"%@", result);
                                 if ([result[@"msg"] isEqualToString:@"ratelimitted"]) {
@@ -225,19 +229,21 @@
             _flag = 1000;
             return;
         }
+        //发送注册码按钮失效，防止频繁请求
         [verifyBtn setEnabled:false];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+        timeLb.backgroundColor = RGBACOLOR(229.0, 230.0, 231.0, 1);
+        
         NSString *sign = [NSString stringWithFormat:@"yjyx_%@_smssign",phoneText.text];
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",[sign md5],@"sign",@"MREGISTER",@"stype",nil];
         [[YjxService sharedInstance] getSMSsendcode:dic withBlock:^(id result, NSError *error){//验证验证码
             [self.view hideToastActivity];
             if (result) {
                 if ([[result objectForKey:@"retcode"] integerValue] == 0) {
-                    timeLb.backgroundColor = RGBACOLOR(229.0, 230.0, 231.0, 1);
+                   
                     
-                    _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCodeTimeout) userInfo:nil repeats:YES];
-                    [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-                    //发送注册码按钮失效，防止频繁请求
-                    [verifyBtn setEnabled:false];
+                   
                 }else{
                     sender.enabled = YES;
                     NSLog(@"%@", result);
@@ -342,6 +348,8 @@
                 
                 NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"parents", @"role", phoneText.text,@"username",desPassWord,@"password", nil];
                 [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
+                
+
                 [(AppDelegate *)SYS_DELEGATE fillViews];
             }else{
                 if ([result[@"msg"] isEqualToString:@"ratelimitted"]) {

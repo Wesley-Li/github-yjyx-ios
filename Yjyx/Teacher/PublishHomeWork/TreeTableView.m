@@ -84,7 +84,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
         for (int j = 0; j < _data.count; j++){
             TreeNode *sNode = [_data objectAtIndex:j];
      
-            if(node.nodeId == sNode.parentId){
+            if([node.nodeId isEqualToString: sNode.parentId]){
                 if (node.expand) {
                     cell.imageV.image = [UIImage imageNamed:@"list_icon_2_expand"];
                 }else{
@@ -94,9 +94,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
                 
             }else{
                 cell.imageV.image = [UIImage imageNamed:@"list_icon_3"];
-//                cell.chooseIndicator.hidden = NO;
-//                cell.widthConstant.constant = 10;
-//                cell.heightConstant.constant = 10;
+
             }
         }
     }
@@ -142,7 +140,7 @@ static NSString *NODE_CELL_ID2 = @"node_cell_id2";
     
     for (int i=0; i<_data.count; i++) {
         TreeNode *node = [_data objectAtIndex:i];
-        if (node.parentId == parentNode.nodeId) {
+        if ([node.parentId isEqualToString: parentNode.nodeId]) {
             
             node.show = !node.show;
             if (node.show) {

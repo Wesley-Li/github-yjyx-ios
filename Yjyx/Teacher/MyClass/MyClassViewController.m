@@ -59,18 +59,35 @@
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = NO;
     
-    
+    [self.titleArr removeAllObjects];
     self.dataSource = [[[StuDataBase shareStuDataBase] selectAllClass] mutableCopy];
     
-    
+    NSLog(@"dataSource%@", self.dataSource);
     if (self.dataSource.count == 0) {
         [self.view makeToast:@"您暂时没有班级" duration:1.0 position:SHOW_CENTER complete:nil];
     }
     
     self.gradeArr = [[[YjyxOverallData sharedInstance].teacherInfo.school_classes JSONValue] mutableCopy];
+    NSLog(@"gradeArr%@",  self.gradeArr);
+    self.groupArr = [[[StuDataBase shareStuDataBase] selectAllGroup] mutableCopy];
+    NSLog(@"groupArr%@", self.groupArr);
     
-    self.groupArr = [[StuDataBase shareStuDataBase] selectAllGroup];
-    [self.tableView reloadData];
+    for (int i = 0; i< self.dataSource.count; i++) {
+        StuClassEntity *model = self.dataSource[i];
+        
+        if ([model.name containsString:@"年级"]) {
+            
+            [self.titleArr addObject:model.name];
+        }else {
+            NSLog(@"%@", _gradeArr);
+            NSString *titleString = [NSString stringWithFormat:@"%@%@", model.gradename, model.name];
+            [self.titleArr addObject:titleString];
+            NSLog(@"%@", titleString);   
+        }
+
+    }
+    NSLog(@"%@", self.titleArr);
+        [self.tableView reloadData];
 }
 
 - (void)viewDidLoad {
@@ -87,28 +104,28 @@
     
     self.navigationItem.title = @"我的班级";
 
-    [self refreshAll];
+//    [self refreshAll];
 //    [self.classListTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"1"];
     
     self.tableView.tableFooterView = [[UIView alloc] init];
 }
-// 刷新
-- (void)refreshAll {
-    
-    // 头部刷新
-    [self.tableView addHeaderWithTarget:self action:@selector(headerRefresh)];
-  
-}
-- (void)headerRefresh
-{
-    self.dataSource = [[[StuDataBase shareStuDataBase]selectAllClass] mutableCopy];
-    self.groupArr = [[StuDataBase shareStuDataBase] selectAllGroup];
-    self.gradeArr = [[[YjyxOverallData sharedInstance].teacherInfo.school_classes JSONValue] mutableCopy];
-    [self.tableView reloadData];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableView headerEndRefreshing];
-    });
-}
+//// 刷新
+//- (void)refreshAll {
+//    
+//    // 头部刷新
+//    [self.tableView addHeaderWithTarget:self action:@selector(headerRefresh)];
+//  
+//}
+//- (void)headerRefresh
+//{
+//    self.dataSource = [[[StuDataBase shareStuDataBase] selectAllClass] mutableCopy];
+//    self.groupArr = [[[StuDataBase shareStuDataBase] selectAllGroup] mutableCopy];
+//    self.gradeArr = [[[YjyxOverallData sharedInstance].teacherInfo.school_classes JSONValue] mutableCopy];
+//    [self.tableView reloadData];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self.tableView headerEndRefreshing];
+//    });
+//}
 #pragma mark - delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -133,24 +150,7 @@
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (indexPath.row < self.dataSource.count) {
-        StuClassEntity *model = self.dataSource[indexPath.row];
-        
-        if ([model.name containsString:@"年级"]) {
-            
-            cell.textLabel.text = model.name;
-            [self.titleArr addObject:model.name];
-        }else {
-            
-            for (NSArray *arr in _gradeArr) {
-                if ([model.gradeid isEqual:arr[2]]) {
-                    NSString *titleString = [NSString stringWithFormat:@"%@%@", arr[3], arr[1]];
-                    [self.titleArr addObject:titleString];
-                    
-                }
-                
-            }
-            
-        }
+          StuClassEntity *model = self.dataSource[indexPath.row];
         
         if (self.titleArr.count) {
             cell.textLabel.text = self.titleArr[indexPath.row];

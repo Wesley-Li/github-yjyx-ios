@@ -102,7 +102,7 @@ static NSString *VideoNumID = @"VideoNum";
     // 返回按钮被点击
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backBtnClicked) name:@"BackButtonClicked" object:nil];
     // 修改标题按钮呗点击
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modifyTitleBtnClick) name:@"ModifyTitleBtnClick" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modifyTitleBtnClick:) name:@"ModifyTitleBtnClick" object:nil];
     // 添加按钮的点击
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBtnClick) name:@"AddBtnClick" object:nil];
     //关闭通知
@@ -340,12 +340,18 @@ static NSString *VideoNumID = @"VideoNum";
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
-- (void)modifyTitleBtnClick
+- (void)modifyTitleBtnClick:(NSNotification *)noti
 {
-    [self modifiTitleData];
-    if ([self.delegate respondsToSelector:@selector(microDetailViewController:andName:)]) {
-        [self.delegate microDetailViewController:self andName:_microDetailM.name];
+    if([noti.userInfo[@"btn"] integerValue] == 1){
+        _flag = 1;
+    }else{
+        _flag = 0;
+        [self modifiTitleData];
+        if ([self.delegate respondsToSelector:@selector(microDetailViewController:andName:)]) {
+            [self.delegate microDetailViewController:self andName:_microDetailM.name];
+        }
     }
+   
 }
 - (void)releaseBtnClicked
 {
@@ -889,6 +895,7 @@ static NSString *VideoNumID = @"VideoNum";
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.view endEditing:YES];
     if(indexPath.section == 4 && indexPath.row != 0){
         OneSubjectController *vc = [[OneSubjectController alloc] init];
         MicroSubjectModel *model = self.allSubjectArr[indexPath.row - 1];
@@ -923,11 +930,12 @@ static NSString *VideoNumID = @"VideoNum";
         }
         _flag = 1;
     }else{
+        _flag = 0;
         if(self.allSubjectArr.count == 0){
             [SVProgressHUD showErrorWithStatus:@"题目不能为空,编辑失败"];
             NSLog(@"%@", self.saveSubjectArr);
             self.allSubjectArr = self.saveSubjectArr;
-            _flag = 0;
+            
             NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:4];
             [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
             for (MicroSubjectModel *model in _allSubjectArr) {
