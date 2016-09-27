@@ -78,7 +78,7 @@
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             block(responseObject,nil);
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:[responseObject objectForKey:@"sessionid"] forKey:@"SessionID"];
+            [defaults setObject:[responseObject objectForKey:@"sessionid"] forKey:@"NPSessionID"];
             [defaults synchronize];
         }else{
             block(nil,nil);
@@ -110,9 +110,11 @@
             block(responseObject,nil);
             if ([[responseObject objectForKey:@"retcode"] integerValue] == 0) {
                 NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: [NSURL URLWithString:[BaseURL stringByAppendingString:@"/api/parents/login/"]]];
+                NSLog(@"+++++++%@", cookies);
                 NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 [defaults setObject:data forKey:@"SessionID"];
+                [defaults removeObjectForKey:@"NPSessionID"];
                 [defaults synchronize];
             }
         }else{
@@ -564,6 +566,7 @@
                 NSData *data = [NSKeyedArchiver archivedDataWithRootObject:cookies];
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 [defaults setObject:data forKey:@"SSessionID"];
+                [defaults removeObjectForKey:@"NSSessionID"];
                 [defaults synchronize];
             }
             

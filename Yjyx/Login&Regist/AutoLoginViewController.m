@@ -30,7 +30,14 @@
     // 判断身份
     if ([role isEqualToString:@"parents"]) {
         // 家长的自动登录实现
-        NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:username,@"username",password,@"password",@"1",@"ostype",model,@"description",devicetoken,@"devicetoken",nil];
+        NSString *npSessionID = [[NSUserDefaults standardUserDefaults] objectForKey:@"NPSessionID"];
+        NSDictionary *dic;
+        if ([npSessionID length]) {
+            dic = [[NSDictionary alloc] initWithObjectsAndKeys:username,@"username",password,@"password",@"1",@"ostype",model,@"description",devicetoken,@"devicetoken",  npSessionID, @"sessionid", nil];
+        }else {
+        
+            dic = [[NSDictionary alloc] initWithObjectsAndKeys:username,@"username",password,@"password",@"1",@"ostype",model,@"description",devicetoken,@"devicetoken",nil];
+        }
         
         [[YjxService sharedInstance] parentsLogin:dic autoLogin:YES withBlock:^(id result,NSError *error){
             [self.view hideToastActivity];
@@ -96,7 +103,14 @@
         }];
     }else {
         // 学生的自动登录实现,此处保留
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:username,@"username",password,@"password",@"1",@"ostype",model,@"description",devicetoken,@"devicetoken", nil];
+        NSString *nsSessionID = [[NSUserDefaults standardUserDefaults] objectForKey:@"NSSessionID"];
+        NSDictionary *dic;
+        if ([nsSessionID length]) {
+            dic = [NSDictionary dictionaryWithObjectsAndKeys:username,@"username",password,@"password",@"1",@"ostype",model,@"description",devicetoken,@"devicetoken", nsSessionID,@"sessionid", nil];
+        }else {
+            dic = [NSDictionary dictionaryWithObjectsAndKeys:username,@"username",password,@"password",@"1",@"ostype",model,@"description",devicetoken,@"devicetoken", nil];
+        }
+        
         [[YjxService sharedInstance] studentLogin:dic autoLogin:YES withBlock:^(id result, NSError *error) {
             [self.view hideToastActivity];
             if (result != nil) {

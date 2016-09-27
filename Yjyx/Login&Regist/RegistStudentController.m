@@ -9,6 +9,7 @@
 #import "RegistStudentController.h"
 #import "OneStudentEntity.h"
 #import "YjyxOverallData.h"
+#import "AutoLoginViewController.h"
 @interface RegistStudentController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
@@ -298,13 +299,16 @@
     
     [mgr POST:[BaseURL stringByAppendingString:@"/api/student/mobile/register/"] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         if([responseObject[@"retcode"] isEqual:@0]){
+            NSString *stusession = responseObject[@"sessionid"];
+            [SYS_CACHE setObject:stusession forKey:@"NSSessionID"];
             OneStudentEntity *oneStudent = [OneStudentEntity studentEntityWithDict:responseObject];
             [YjyxOverallData sharedInstance].studentInfo = oneStudent;
             NSString *desPassWord = [_pswTextField.text des3:kCCEncrypt withPass:@"12345678asdf"];
-            
             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"student", @"role", _loginNameTextField.text,@"username",desPassWord,@"password", nil];
             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
-            [((AppDelegate *)SYS_DELEGATE) fillViews];
+            AutoLoginViewController *autolog = [[AutoLoginViewController alloc] init];
+            [autolog autoLoginWithRole:dic[@"role"] username:dic[@"username"] password:pamar[@"password"]];
+            
         }else if ([responseObject[@"retcode"] isEqual:@6]){
             [self.view makeToast:@"此班级人数已达到上限" duration:0.5 position:SHOW_CENTER complete:nil];
         }else if ([responseObject[@"retcode"] isEqual:@7]){

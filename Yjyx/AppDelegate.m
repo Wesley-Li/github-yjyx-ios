@@ -20,8 +20,9 @@
 #import "ChildrenResultViewController.h"
 #import "YjyxMicroClassViewController.h"
 #import "YjyxWorkPreviewViewController.h"
-
 #import "AutoLoginViewController.h"
+
+
 #import "UMessage.h"
 #import "YjyxPMemberCenterViewController.h"
 #import <AlipaySDK/AlipaySDK.h>

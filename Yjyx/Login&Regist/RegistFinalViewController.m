@@ -7,6 +7,7 @@
 //
 
 #import "RegistFinalViewController.h"
+#import "AutoLoginViewController.h"
 
 @interface RegistFinalViewController ()
 
@@ -328,21 +329,22 @@
         [self.view hideToastActivity];
         if (result) {
             if ([[result objectForKey:@"retcode"] integerValue] == 0) {
-                ParentEntity *parentEntity = [[ParentEntity alloc] init];
-                parentEntity.name = parentNameText.text;
-                parentEntity.phone = phoneText.text;
-                parentEntity.avatar = @"";
-                parentEntity.pid = [NSString stringWithFormat:@"%@",[result objectForKey:@"pid"]];
-                parentEntity.childrens = [NSMutableArray arrayWithObjects:_childrenEntity, nil];
-                parentEntity.notify_sound =@"default";
-                parentEntity.receive_notify = @"1";
-                parentEntity.notify_with_sound = @"1";
-                [YjyxOverallData sharedInstance].parentInfo = parentEntity;
+//                ParentEntity *parentEntity = [[ParentEntity alloc] init];
+//                parentEntity.name = parentNameText.text;
+//                parentEntity.phone = phoneText.text;
+//                parentEntity.avatar = @"";
+//                parentEntity.pid = [NSString stringWithFormat:@"%@",[result objectForKey:@"pid"]];
+//                parentEntity.childrens = [NSMutableArray arrayWithObjects:_childrenEntity, nil];
+//                parentEntity.notify_sound =@"default";
+//                parentEntity.receive_notify = @"1";
+//                parentEntity.notify_with_sound = @"1";
+//                [YjyxOverallData sharedInstance].parentInfo = parentEntity;
                 NSString *desPassWord = [parentPasswordText.text des3:kCCEncrypt withPass:@"12345678asdf"];
-                
                 NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"parents", @"role", phoneText.text,@"username",desPassWord,@"password", nil];
                 [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
-                [(AppDelegate *)SYS_DELEGATE fillViews];
+                AutoLoginViewController *autolog = [[AutoLoginViewController alloc] init];
+                [autolog autoLoginWithRole:dic[@"role"] username:dic[@"username"] password:parentPasswordText.text];
+                
             }else{
                 if ([result[@"msg"] isEqualToString:@"ratelimitted"]) {
                     [self.view makeToast:@"操作过快" duration:1.0 position:SHOW_CENTER complete:nil];
