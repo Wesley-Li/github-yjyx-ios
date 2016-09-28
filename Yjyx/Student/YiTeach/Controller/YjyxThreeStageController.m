@@ -121,7 +121,7 @@ static NSString *ID = @"CELL";
     [self.view makeToastActivity:SHOW_CENTER];
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/yj_questions/choice/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         [self.view hideToastActivity];
-//        NSLog(@"%@", responseObject);
+        NSLog(@"%@", responseObject);
         [self.threeStageArr removeAllObjects];
         if ([responseObject[@"retcode"] integerValue] == 0) {
             for (NSDictionary *dict in responseObject[@"questionlist"]) {

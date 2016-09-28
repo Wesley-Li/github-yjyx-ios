@@ -558,7 +558,8 @@ static NSString *HomeADID = @"HomeADID";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     YjyxHomeAdModel *model = self.homeAdArray[indexPath.row % self.homeAdArray.count];
-    if (![model.detail_page isEqual:[NSNull null]]) {
+    NSLog(@"%@", model.detail_page);
+    if (![model.detail_page isEqual:[NSNull null]] && ![model.detail_page isEqualToString:@""] && model.detail_page != nil) {
         YjyxHomeAdController *vc = [[YjyxHomeAdController alloc] init];
         vc.page_detail = model.detail_page;
         [self.navigationController pushViewController:vc animated:YES];

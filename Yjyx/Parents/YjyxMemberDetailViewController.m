@@ -41,7 +41,11 @@
     trailChildAry = [[NSMutableArray alloc] init];
     openChildAry = [[NSMutableArray alloc] init];
     payBtn.hidden = YES;
-    
+    if(_productEntity.price_pacakge.count == 0){
+        openBtn.enabled = NO;
+    }else{
+        openBtn.enabled = YES;
+    }
     self.navigationItem.title = [_productEntity.subject_name stringByAppendingString:@"会员"];
     titleLb.text = [NSString stringWithFormat:@"%@会员特权",self.productEntity.subject_name];
     NSLog(@"%@", self.productEntity.content);

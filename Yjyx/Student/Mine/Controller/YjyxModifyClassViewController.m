@@ -23,7 +23,10 @@
     self.title = @"更改班级";
     [self setBackButtonItem];
 }
-
+- (void)viewDidDisappear:(BOOL)animated
+{
+     [SVProgressHUD dismiss];
+}
 //设置返回按钮
 - (void)setBackButtonItem{
     
@@ -39,7 +42,6 @@
 
 //返回操作
 - (void)goBack:(UIButton *)button{
-
     [self.navigationController popViewControllerAnimated:YES];
 
 }
@@ -83,6 +85,8 @@
 - (void)sendRequest:(NSString *)str{
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"changemyclass", @"action", str, @"invitecode", nil];
+    [SVProgressHUD showWithStatus:@"正在修改..."];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager PUT:[BaseURL stringByAppendingString:STUDENT_MODIFYClASS_PUT] parameters:dic  success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         OneStudentEntity *studentInfo =[YjyxOverallData sharedInstance].studentInfo;
@@ -101,9 +105,10 @@
             [self.view makeToast:reason duration:0.5 position:SHOW_CENTER complete:nil];
         }
         NSLog(@"responseObject==%@",responseObject);
-        
+        [SVProgressHUD dismiss];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"error==%@",error);
+         [SVProgressHUD dismiss];
         [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
     }];
 

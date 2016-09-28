@@ -169,10 +169,14 @@
             [self.convertGoodsArr removeAllObjects];
             for (NSDictionary *dict in responseObject[@"retlist"]) {
                 YjyxExchangeRecordModel *model = [YjyxExchangeRecordModel exchangeRecordModelWithDict:dict];
-                [self.convertGoodsArr addObject:model];
+                if(![model.specific_info isEqual:[NSNull null]]){
+                    [self.convertGoodsArr addObject:model];
+                }
+                
             }
             YjyxConvertDetailController *vc = [[YjyxConvertDetailController alloc] init];
             vc.convertShopArr = self.convertGoodsArr;
+            
             [self.navigationController pushViewController:vc animated:YES];
 //            UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"您的充值卡序列号: %@", responseObject[@"retlist"][0][@"specific_info"]] preferredStyle:UIAlertControllerStyleAlert];
 //            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];

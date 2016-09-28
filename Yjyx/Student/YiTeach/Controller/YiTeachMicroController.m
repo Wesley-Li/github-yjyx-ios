@@ -323,11 +323,11 @@
     convertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
     convertView.backgroundColor = [UIColor lightGrayColor];
     convertView.alpha = 0.1;
-    [convertView makeToastActivity:SHOW_CENTER];
+//    [convertView makeToastActivity:SHOW_CENTER];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:[BaseURL stringByAppendingString:@"/api/student/product_yjmemeber/"] parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         [convertView removeFromSuperview];
-        [convertView hideToastActivity];
+//        [convertView hideToastActivity];
         NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] isEqual:@0]) {
 
