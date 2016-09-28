@@ -15,7 +15,7 @@
 @property (nonatomic, copy) NSString *descriptionText;
 @property (nonatomic, strong) NSNumber *taskid;
 @property (nonatomic, strong) NSNumber *taskType;
-
+@property (strong, nonatomic) NSNumber *tasktrackid;
 
 - (void) initModelWithDic:(NSDictionary *)dic;
 

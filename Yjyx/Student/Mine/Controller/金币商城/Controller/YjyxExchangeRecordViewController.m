@@ -41,7 +41,7 @@ static NSString *ID = @"cell";
     // 注册cell
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxExchangeRecordCell class]) bundle:nil] forCellReuseIdentifier:ID];
     self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0 , 0);
-    
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 0, 0);
     [self setupRefresh];
 }
 -(void)viewDidDisappear:(BOOL)animated
@@ -76,12 +76,12 @@ static NSString *ID = @"cell";
             for (NSDictionary *dict in responseObject[@"retlist"]) {
                 [tempArr addObject:[YjyxExchangeRecordModel exchangeRecordModelWithDict:dict]];
             }
-            self.tempArr = tempArr;
-            if([self.lastid isEqual:@0]){
-                self.productRecordArr = tempArr;
-            }else{
+//            self.tempArr = tempArr;
+//            if([self.lastid isEqual:@0]){
+//                self.productRecordArr = tempArr;
+//            }else{
                 [self.productRecordArr addObjectsFromArray:tempArr];
-            }
+//            }
         }else{
             [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
         }
@@ -100,7 +100,7 @@ static NSString *ID = @"cell";
 }
 - (void)setupRefresh{
     [self.tableView addHeaderWithTarget:self action:@selector(loadNewData)];
-    [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
+//    [self.tableView addFooterWithTarget:self action:@selector(loadMoreData)];
 }
 -(void)loadNewData{
     self.lastid = @0;

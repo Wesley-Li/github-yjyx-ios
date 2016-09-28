@@ -56,7 +56,7 @@
     self.requireCoinLabel.text = [self.oneShopModel.exchange_coins stringValue];
     NSInteger coinNum = [[YjyxOverallData sharedInstance].teacherInfo.coins integerValue];
     self.exchangBtn.enabled = [self.requireCoinLabel.text integerValue] > coinNum ? NO : YES;
-    [self.paperImageView setImageWithURL:[NSURL URLWithString:[self.oneShopModel.goods_display JSONValue][@"small_img_url"]] placeholderImage:[UIImage imageNamed:@"conver_paper"]];
+    [self.paperImageView setImageWithURL:[NSURL URLWithString:[self.oneShopModel.goods_display JSONValue][@"small_img_url"]] placeholderImage:[UIImage imageNamed:@"T_deafultPicture"]];
     if (![[self.oneShopModel.goods_display JSONValue][@"detail_url"] isEqual:[NSNull null]]) {
         NSURL *url = [NSURL URLWithString:[self.oneShopModel.goods_display JSONValue][@"detail_url"]];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];

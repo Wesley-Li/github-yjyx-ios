@@ -156,6 +156,7 @@
 - (void)loadNewData
 {
     self.last_id = @0;
+   
     [self readDataFromNetWork];
 }
 
@@ -275,7 +276,7 @@
 //            NSLog(@"%@", currentArr);
 
             if ([self.last_id isEqual:@0]) {
-                
+        
                 [self.dataSoruce removeAllObjects];
                 [self.dataSoruce addObjectsFromArray:currentArr];
                 [self.tableView headerEndRefreshing];
@@ -286,6 +287,9 @@
             }
             
             [self.tableView reloadData];
+            if ([self.last_id isEqual:@0] && self.dataSoruce.count != 0) {
+                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            }
             NSLog(@"%ld", self.navigationController.childViewControllers.count);
             if (self.dataSoruce.count == 0) {
                 if(self.privateTag == 1){

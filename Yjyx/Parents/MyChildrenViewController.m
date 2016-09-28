@@ -89,7 +89,7 @@
 -(void)getnewChildrenActivityWihtCid:(NSString *)cid
 {
     [self.view makeToastActivity:SHOW_CENTER];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"20",@"count",@"1",@"direction", cid,@"cids", nil];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"1",@"direction", cid,@"cids", nil];
     [[YjxService sharedInstance] getchildrenActivity:dic withBlock:^(id result, NSError *error){
         [self.view hideToastActivity];
         if (result != nil) {
@@ -129,7 +129,7 @@
 -(void)getoldChildrenActivityWihtCid:(NSString *)cid
 {
     [self.view makeToastActivity:SHOW_CENTER];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"20",@"count",@"0",@"direction", cid,@"cids", nil];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"0",@"direction", cid,@"cids", nil];
     [[YjxService sharedInstance] getchildrenActivity:dic withBlock:^(id result, NSError *error){
         [self.view hideToastActivity];
         if (result != nil) {

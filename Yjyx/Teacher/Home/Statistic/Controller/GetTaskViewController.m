@@ -79,7 +79,7 @@
 - (void)footerRefresh {
     
     GetTaskModel *model = self.dataSouece.lastObject;
-    self.lastID = model.taskid;
+    self.lastID = model.tasktrackid;
     
     if ([self.hasmore isEqual:@0]) {
         self.tableview.footerRefreshingText = @"没有更多了!!!";

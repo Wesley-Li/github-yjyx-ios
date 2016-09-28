@@ -257,7 +257,14 @@
         lineScroll.backgroundColor = [UIColor clearColor];
         lineScroll.showsHorizontalScrollIndicator = NO;
         [subjectView addSubview:lineScroll];
-        
+        if(_reverseArr.count == 1){
+            NSString *questioncorrect = [[_reverseArr objectAtIndex:0] objectForKey:@"correct"];
+            NSString *questionwrong = [[_reverseArr objectAtIndex:0] objectForKey:@"wrong"];
+            NSString *dataStr = [[_reverseArr objectAtIndex:0] objectForKey:@"date"];
+            label1.text = [NSString stringWithFormat:@"正确%@,错误%@",questioncorrect,questionwrong];
+            label2.text = [NSString stringWithFormat:@"正确率%.0f%%",[[[_reverseArr objectAtIndex:0] objectForKey:@"ratio"] floatValue]* 100];
+            label3.text = [NSString stringWithFormat:@"%@",dataStr];
+        }
         [pieLineChart removeFromSuperview];
         pieLineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 0, lineScroll.contentSize.width, lineScroll.contentSize.height)];
         pieLineChart.backgroundColor = [UIColor clearColor];
@@ -439,7 +446,7 @@
 -(void)getchildrenTaskWithCid:(NSString *)cid
 {
     [self.view makeToastActivity:SHOW_CENTER];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"task",@"action",cid,@"cid",@"20",@"count",nil];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"task",@"action",cid,@"cid",nil];
     [[YjxService sharedInstance] getChildrenachievement:dic withBlock:^(id result, NSError *error){
         [self.view hideToastActivity];
         if (result) {
@@ -483,7 +490,7 @@
 -(void)getchildrenbillionWithCid:(NSString *)cid
 {
     [self.view makeToastActivity:SHOW_CENTER];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"yjlesson",@"action",cid,@"cid",@"20",@"count",nil];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"yjlesson",@"action",cid,@"cid",nil];
     [[YjxService sharedInstance] getChildrenachievement:dic withBlock:^(id result, NSError *error){
         [self.view hideToastActivity];
         if (result) {

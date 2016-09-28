@@ -32,7 +32,7 @@
     self.taskType = dic[@"tasktype"];
     self.taskid = dic[@"taskid"];
     
-    
+    self.tasktrackid = dic[@"tasktrackid"];
     
 }
 

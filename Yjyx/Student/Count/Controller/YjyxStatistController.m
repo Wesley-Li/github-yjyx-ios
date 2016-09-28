@@ -276,7 +276,21 @@
     [lineChart strokeChart];
     [self.lineChartScrollview addSubview:lineChart];
     
-
+    if(array.count == 1){
+        NSString *title = [[_lineChartDataSource objectAtIndex:0] objectForKey:@"task__description"];
+        
+        NSNumber *questionRight = [[[[_lineChartDataSource objectAtIndex:0] objectForKey:@"summary"] JSONValue] objectForKey:@"correct"];
+        
+        NSNumber *questionwrong = [[[[_lineChartDataSource objectAtIndex:0] objectForKey:@"summary"] JSONValue] objectForKey:@"wrong"];
+        
+        NSString *rate = [NSString stringWithFormat:@"正确率: %.f%%", [questionRight floatValue]*100/([questionRight floatValue] + [questionwrong floatValue])];
+        
+        self.titleLabel.text = title;
+        self.rightLabel.text = [NSString stringWithFormat:@"正确:%@   ", questionRight];
+        self.rightLabel.textColor = RGBACOLOR(100, 174, 99, 1);
+        self.wrongLabel.text = [NSString stringWithFormat:@"   错误:%@", questionwrong];
+        self.rateLabel.text = rate;
+    }
     
 }
 

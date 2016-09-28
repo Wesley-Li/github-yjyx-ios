@@ -278,13 +278,14 @@
             trailBtn.userInteractionEnabled = YES;
         }
     }];
-
+    trailBtn.userInteractionEnabled = YES;
     [self dissmissChooseView:nil];
     
 }
 
 -(void)dissmissChooseView:(UITapGestureRecognizer *)gesture
 {
+    trailBtn.userInteractionEnabled = YES;
     [chooseView removeFromSuperview];
     chooseView = nil;
 }
