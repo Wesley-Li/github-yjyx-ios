@@ -632,6 +632,7 @@
     param[@"action"] = @"getonememproductinfo";
     param[@"subjectid"] = self.subject_id;
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/mobile/m_product/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] integerValue] == 0) {
             ProductEntity *entity = [ProductEntity wrapProductEntityWithDic:responseObject];
             self.entity = entity;
@@ -639,6 +640,7 @@
             [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error.localizedDescription);
         [self.view makeToast:error.localizedDescription duration:0.5 position:SHOW_CENTER complete:nil];
     }];
 }
