@@ -126,7 +126,7 @@
     self.targetListArr = [[[self.targetlist JSONValue] reverseObjectEnumerator] allObjects];
     NSLog(@"%ld", _openMember);
     if(_openMember == 1){
-        
+       
         self.index = 0;
         self.count = 20;
         if ([self.targetListArr count] < 20) {

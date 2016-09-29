@@ -103,6 +103,7 @@ static NSString *ID = @"CELL";
 {
     self.navigationController.navigationBarHidden = NO;
     if(_openMember == 1){
+       
        [self loadData]; 
     }
     
@@ -115,6 +116,7 @@ static NSString *ID = @"CELL";
                 ((YiTeachMicroController *)vc).openMember = 1;
             }
         }
+       
     }
 }
 - (void)didReceiveMemoryWarning {

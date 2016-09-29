@@ -116,6 +116,7 @@
 
     if(_openMember == 1){
         [self readDataFromNetwork];
+        
     }
     
 }

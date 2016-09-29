@@ -136,6 +136,7 @@ static NSString *videoNumID = @"VIDEONumID";
     }
 
     if (self.openMember == 1) {
+        
         [self loadData];
     }
 
