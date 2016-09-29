@@ -706,7 +706,7 @@
 		3A3C1B421C9562A900514C32 /* YjyxMicroClassViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxMicroClassViewController.xib; sourceTree = "<group>"; };
 		3A3E6DE61CD8F4B8002133D8 /* Parent_read@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Parent_read@3x.png"; sourceTree = "<group>"; };
 		3A4057041CCF6FAF00258784 /* ForgetOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetOneViewController.h; sourceTree = "<group>"; };
-		3A4057051CCF6FAF00258784 /* ForgetOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetOneViewController.m; sourceTree = "<group>"; };
+		3A4057051CCF6FAF00258784 /* ForgetOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetOneViewController.m; sourceTree = "<group>"; wrapsLines = 0; };
 		3A4057061CCF6FAF00258784 /* ForgetOneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetOneViewController.xib; sourceTree = "<group>"; };
 		3A4057091CCF732800258784 /* ForgetTwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetTwoViewController.h; sourceTree = "<group>"; };
 		3A40570A1CCF732800258784 /* ForgetTwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetTwoViewController.m; sourceTree = "<group>"; };
@@ -4503,8 +4503,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -4543,7 +4543,7 @@
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2f8ad128-e076-49ad-a75a-bbfaa50c0de7";
+				PROVISIONING_PROFILE = "8738e8ea-9b10-4c1a-9734-06599c5639a1";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -4557,8 +4557,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -4596,7 +4596,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2f8ad128-e076-49ad-a75a-bbfaa50c0de7";
+				PROVISIONING_PROFILE = "8738e8ea-9b10-4c1a-9734-06599c5639a1";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};

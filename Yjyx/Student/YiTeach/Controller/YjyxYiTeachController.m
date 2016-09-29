@@ -74,7 +74,7 @@
     selectedImageArr = @[@"YiTeach_version_select", @"YiTeach_subject_select", @"YiTeach_classes_select", @"YiTeach_book_select"];
     defaultIndicatorArr = @[@"YiTeach_indicator_down", @"YiTeach_indicator_up"];
     selectedIndicatorArr = @[@"YiTeach_indicator_down_select", @"YiTeach_indicator_up_select"];
-    defaultTitleArr = @[@"版本", @"科目", @"班级", @"册号"];
+    defaultTitleArr = @[@"版本", @"科目", @"年级", @"册号"];
     
     isExpand = NO;
     self.versionDataSource = [NSMutableArray array];
@@ -190,7 +190,7 @@
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:@"list", @"action", nil];
     [manager GET:[BaseURL stringByAppendingString:@"/api/student/vgsv/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        
+        NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] isEqual:@0]) {
         
             // 版本

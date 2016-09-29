@@ -53,7 +53,7 @@
                 [SVProgressHUD dismiss];
                 return;
             }
-            [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:3.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:error.localizedDescription duration:3.0 position:SHOW_CENTER complete:nil];
             sender.enabled = YES;
             [SVProgressHUD dismiss];
         }

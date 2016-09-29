@@ -85,7 +85,7 @@
                 [self.navigationController pushViewController:vc animated:YES];
 
             }else{
-                [self.view makeToast:@"请输入正确的账号" duration:1.0 position:SHOW_CENTER complete:nil];
+                [self.view makeToast:result[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
             if (error.code == -1009) {

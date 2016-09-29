@@ -57,12 +57,12 @@
     [messageAttr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, messageStr.length)];
         [alertController setValue:messageAttr forKey:@"attributedMessage"];
    /*cancelAction*/
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelStr style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelStr style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
     }];
     
     /*okAction*/
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okStr style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:okStr style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         NSString *invitationCodeStr = self.InvitationCodeTextFeid.text;
         if (invitationCodeStr.length == 0) {
             [self.view makeToast:@"邀请码为空,请重新输入" duration:1.0 position:SHOW_CENTER complete:nil];;
@@ -72,11 +72,11 @@
         
         
     }];
-    /*取消按钮的字体颜色*/
-    [cancelAction setValue:[UIColor colorWithHexString:@"f30000"] forKey:@"_titleTextColor"];
-    
-    /*确定按钮字体*/
-    [okAction setValue:[UIColor blackColor] forKey:@"_titleTextColor"];
+//    /*取消按钮的字体颜色*/
+//    [cancelAction setValue:[UIColor colorWithHexString:@"f30000"] forKey:@"_titleTextColor"];
+//    
+//    /*确定按钮字体*/
+//    [okAction setValue:[UIColor blackColor] forKey:@"_titleTextColor"];
     [alertController addAction:cancelAction];
     [alertController addAction:okAction];
     [self presentViewController:alertController animated:YES completion:nil];
