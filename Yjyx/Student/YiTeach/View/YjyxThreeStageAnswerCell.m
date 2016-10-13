@@ -124,6 +124,12 @@ static CGFloat btnWH = 24;
         self.stuAnswerLabel.textColor = [UIColor colorWithHexString:@"#e74c3c"];
     }
     
+    if([model.videourl isEqualToString:@""] && [model.explanation isEqualToString:@""]){
+        self.analysisBtn.hidden = YES;
+    }else{
+        self.analysisBtn.hidden = NO;
+    }
+    
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     

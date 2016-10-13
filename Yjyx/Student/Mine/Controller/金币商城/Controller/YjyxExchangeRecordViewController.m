@@ -88,6 +88,9 @@ static NSString *ID = @"cell";
         if(self.productRecordArr.count == 0){
             [SVProgressHUD showInfoWithStatus:@"暂没有兑换记录"];
         }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
         [self.tableView  reloadData];
         [self.tableView footerEndRefreshing];
         [self.tableView headerEndRefreshing];

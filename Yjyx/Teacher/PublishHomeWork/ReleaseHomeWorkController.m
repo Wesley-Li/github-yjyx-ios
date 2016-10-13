@@ -16,6 +16,7 @@
 #import "YjyxWrongSubModel.h"
 #import "StudentEntity.h"
 #import "StuGroupEntity.h"
+#import "NSString+emjoy.h"
 @interface ReleaseHomeWorkController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextField *homeWorkNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
@@ -173,6 +174,15 @@ static NSString *ID = @"CELL";
 
 - (void)textFieldDidChange:(UITextField *)textField
 {
+    
+    BOOL flag=[NSString isContainsTwoEmoji:textField.text];
+    if (flag)
+    {
+        [self.view makeToast:@"不能添加表情符号" duration:1.0 position:SHOW_CENTER complete:nil];
+        textField.text = [textField.text substringToIndex:textField.text.length -2];
+        
+    }
+    
     if([textField isEqual:_timeTextField]){
         if(textField.text.length > 3){
             textField.text = [textField.text substringToIndex:3];

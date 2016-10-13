@@ -40,6 +40,13 @@
 // 限制输入的长度
 - (void)textFieldDidChange:(UITextField *)textField
 {
+    BOOL flag=[NSString isContainsTwoEmoji:textField.text];
+    if (flag)
+    {
+        [self.view makeToast:@"不能添加表情符号" duration:1.0 position:SHOW_CENTER complete:nil];
+        textField.text = [textField.text substringToIndex:textField.text.length -2];
+        
+    }
     if([textField.text containsString:@" "]){
         [self.view makeToast:@"不能含有空格,请重新输入" duration:1.0 position:SHOW_CENTER complete:nil];
         textField.text = nil;

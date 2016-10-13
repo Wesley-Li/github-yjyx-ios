@@ -230,6 +230,7 @@ static NSString *VideoNumID = @"VideoNum";
         [SVProgressHUD dismiss];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error.localizedDescription);
+       
         [SVProgressHUD dismiss];
     }];
 }
@@ -618,6 +619,10 @@ static NSString *VideoNumID = @"VideoNum";
     
 }
 -(void)startPlayVideo:(UIButton *)sender{
+    if(self.videoURL == nil){
+        [self.view makeToast:@"请检查你的网络连接状态" duration:1.5 position:SHOW_CENTER complete:nil];
+        return;
+    }
     currentIndexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
     NSLog(@"currentIndexPath.row = %ld",(long)currentIndexPath.row);
     
@@ -949,7 +954,10 @@ static NSString *VideoNumID = @"VideoNum";
         }
         
     }
-    [self.tableView reloadData];
+    NSIndexPath *indexpath = [self.tableView indexPathForCell:cell];
+    NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:indexpath.section];
+    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+//    [self.tableView reloadData];
 }
 - (void)subjectTitleCell:(SubjectTitleCell *)cell requireProcessBtnClicked:(UIButton *)btn
 {

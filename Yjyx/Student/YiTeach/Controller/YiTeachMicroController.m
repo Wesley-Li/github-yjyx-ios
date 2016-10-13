@@ -116,7 +116,7 @@
 
     if(_openMember == 1){
         [self readDataFromNetwork];
-        
+         _openMember = 0;
     }
     
 }
@@ -418,6 +418,7 @@
        
         videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
         videoImage.image = [UIImage imageNamed:@"Common_video.png"];
+        
         
         videoImage.layer.masksToBounds = YES;
         videoImage.userInteractionEnabled = YES;

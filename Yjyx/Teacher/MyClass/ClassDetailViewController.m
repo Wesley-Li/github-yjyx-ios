@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    [self loadBackBtn];
     // 右边刷新按钮
     UIButton *refreshBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     [refreshBtn addTarget:self action:@selector(refresh) forControlEvents:UIControlEventTouchUpInside];

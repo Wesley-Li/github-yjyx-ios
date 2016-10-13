@@ -58,7 +58,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.title = @"我要吐槽";
     _selectedPhotos = [NSMutableArray array];
     _selectedAssets = [NSMutableArray array];
     

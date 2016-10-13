@@ -7,7 +7,7 @@
 //
 
 #import "ReleaseFinishTimeCell.h"
-
+#import "NSString+emjoy.h"
 @interface ReleaseFinishTimeCell()
 
 @end
@@ -19,6 +19,13 @@
 }
 - (void)textFieldDidChange:(UITextField *)textField
 {
+    BOOL flag=[NSString isContainsTwoEmoji:textField.text];
+    if (flag)
+    {
+        [[UIApplication sharedApplication].keyWindow makeToast:@"不能添加表情符号" duration:1.0 position:SHOW_CENTER complete:nil];
+        self.timeLabel.text = [textField.text substringToIndex:textField.text.length -2];
+        
+    }
     if(textField.text.length > 3){
         textField.text = [textField.text substringToIndex:3];
         [SVProgressHUD showWithStatus:@"建议完成时间必须最多999分钟"];

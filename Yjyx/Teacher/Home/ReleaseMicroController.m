@@ -144,6 +144,7 @@ static NSString *StudentID = @"StudentCell";
     [SVProgressHUD dismiss];
 }
 #pragma mark - 私有方法
+
 - (void)loadData
 {
     self.classArr = [[StuDataBase shareStuDataBase] selectAllClass];
@@ -257,6 +258,8 @@ static NSString *StudentID = @"StudentCell";
         [coverView removeFromSuperview];
     }];
 }
+
+
 #pragma mark - UITableView数据源方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

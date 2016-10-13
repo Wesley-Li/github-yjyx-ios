@@ -136,7 +136,7 @@ static NSString *videoNumID = @"VIDEONumID";
     }
 
     if (self.openMember == 1) {
-        
+        _openMember = 0;
         [self loadData];
     }
 
@@ -329,8 +329,15 @@ static NSString *videoNumID = @"VIDEONumID";
         NSLog(@"%ld",  self.stuChoiceContentArr.count);
         [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
-        [SVProgressHUD showWithStatus:error.localizedDescription];
+        [self.view hideToastActivity];
+        if([error.localizedDescription containsString:@"互联网"]){
+            [self.view makeToast:@"请检查您的网络连接情况" duration:1.0 position:SHOW_CENTER complete:^{
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+        }else{
+            [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+
     }];
 }
 #pragma mark - wmPlayer的方法
@@ -343,7 +350,11 @@ static NSString *videoNumID = @"VIDEONumID";
     wmPlayer.isPlay = NO;
     currentCell.playBtn.hidden = NO;
     [self releaseWMPlayer];
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    if(!(self.stuBlankAnswerArr.count == 0 && self.stuChoiceAnswerArr.count == 0)){
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 //    [self setNeedsStatusBarAppearanceUpdate];
 }
 -(void)closeTheVideo:(NSNotification *)obj{

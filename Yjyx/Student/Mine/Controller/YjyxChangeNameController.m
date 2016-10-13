@@ -8,6 +8,7 @@
 
 #import "YjyxChangeNameController.h"
 #import "OneStudentEntity.h"
+#import "NSString+emjoy.h"
 @interface YjyxChangeNameController ()
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *doneBtn;
@@ -31,7 +32,13 @@
 }
 - (void)textFieldDidChange:(UITextField *)textField
 {
-    
+    BOOL flag=[NSString isContainsTwoEmoji:textField.text];
+    if (flag)
+    {
+        [self.view makeToast:@"不能添加表情符号" duration:1.0 position:SHOW_CENTER complete:nil];
+        textField.text = [textField.text substringToIndex:textField.text.length -2];
+        
+    }
     
     NSString *toBeString = textField.text;
     NSString *lang = [[UITextInputMode currentInputMode] primaryLanguage]; // 键盘输入模式

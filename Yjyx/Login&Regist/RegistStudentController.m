@@ -27,7 +27,7 @@
 @property (strong, nonatomic) NSTimer *timer;
 @property (assign, nonatomic) NSInteger second;
 @end
-
+#define kAlphaNum @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 @implementation RegistStudentController
 
 - (void)viewDidLoad {
@@ -37,7 +37,7 @@
     self.sureBtn.layer.cornerRadius = 20;
     _second = 60;
     self.navigationItem.title = @"学生注册";
-    self.titleLabel.text = [NSString stringWithFormat:@"杭州市%@%@%@邀请码", self.attrArr[0], self.attrArr[1], self.attrArr[2]];
+    self.titleLabel.text = [NSString stringWithFormat:@"%@%@%@邀请码", self.attrArr[0], self.attrArr[1], self.attrArr[2]];
     
     // 设置导航栏属性
     self.navigationController.navigationBar.barTintColor = RGBACOLOR(28.0, 222.0, 182.0, 1);
@@ -77,6 +77,13 @@
 // 限制输入的长度
 - (void)textFieldDidChange:(UITextField *)textField
 {
+    BOOL flag=[NSString isContainsTwoEmoji:textField.text];
+    if (flag)
+    {
+        [self.view makeToast:@"不能添加表情符号" duration:1.0 position:SHOW_CENTER complete:nil];
+        textField.text = [textField.text substringToIndex:textField.text.length -2];
+        
+    }
        if ([textField isEqual:_loginNameTextField]){
     
            if (textField.text.length > 15) {
@@ -165,11 +172,8 @@
                 if ([result[@"msg"] isEqualToString:@"ratelimitted"]) {
                     [self.view makeToast:@"操作过快" duration:1.0 position:SHOW_CENTER complete:nil];
                 }else {
-                    
                     [self.view makeToast:[result objectForKey:@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
-                    
                 }
-                
             }
         }else{
             [self.view makeToast:@"电话号码不存在" duration:1.0 position:SHOW_CENTER complete:nil];
@@ -360,5 +364,22 @@
 }
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if([textField isEqual:self.loginNameTextField]){
+        NSCharacterSet *cs;
+        cs = [[NSCharacterSet characterSetWithCharactersInString:kAlphaNum] invertedSet];
+        
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""]; //按cs分离出数组,数组按@""分离出字符串
+        
+        BOOL canChange = [string isEqualToString:filtered];
+        if (!canChange) {
+            [self.view makeToast:@"用户名不能输入中文" duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+        return  canChange;
+    }
+    return YES;
+    
+}
 
 @end

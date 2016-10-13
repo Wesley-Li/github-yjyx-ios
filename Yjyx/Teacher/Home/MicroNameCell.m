@@ -20,7 +20,17 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.microNameTextField.delegate = self;
-    
+    [_microNameTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+}
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    BOOL flag=[NSString isContainsTwoEmoji:textField.text];
+    if (flag)
+    {
+        [[UIApplication sharedApplication].keyWindow makeToast:@"不能添加表情符号" duration:1.0 position:SHOW_CENTER complete:nil];
+        textField.text = [textField.text substringToIndex:textField.text.length -2];
+        
+    }
 }
 
 - (void)setModel:(MicroDetailModel *)model

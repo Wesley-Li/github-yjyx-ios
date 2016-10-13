@@ -73,8 +73,7 @@
     self.tipLabel.layer.mask = maskLayer;
     
     [self getDataFromNet];
-    
-    
+
 }
 
 - (void)getDataFromNet {

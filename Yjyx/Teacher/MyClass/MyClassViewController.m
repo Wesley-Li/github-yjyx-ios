@@ -160,14 +160,15 @@
         if(!(cell.textLabel.text == nil)){
             [self.titleArr addObject:cell.textLabel.text];
         }
-        
+        cell.detailTextLabel.hidden = NO;
         
         NSNumberFormatter *numberF = [[NSNumberFormatter alloc] init];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"邀请码:%@", [numberF stringFromNumber: model.invitecode]];
         cell.detailTextLabel.textColor = [UIColor lightGrayColor];
 
-           }else{
-        NSLog(@"%ld, %ld", indexPath.row, self.dataSource.count);
+    }else{
+        NSLog(@"%ld, %ld", indexPath.row, (unsigned long)self.dataSource.count);
+        cell.detailTextLabel.hidden = YES;
         StuGroupEntity *model = self.groupArr[indexPath.row - self.dataSource.count];
         cell.textLabel.text = model.name;
     }

@@ -8,11 +8,17 @@
 
 #import "ReleaseDescrpitionCell.h"
 
+#import "NSString+emjoy.h"
+
+@interface ReleaseDescrpitionCell()<UITextFieldDelegate>
+
+@end
+
 @implementation ReleaseDescrpitionCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    [self.descriptionTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -20,5 +26,16 @@
 
     // Configure the view for the selected state
 }
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    BOOL flag=[NSString isContainsTwoEmoji:textField.text];
+    if (flag)
+    {
+        [[UIApplication sharedApplication].keyWindow makeToast:@"不能添加表情符号" duration:1.0 position:SHOW_CENTER complete:nil];
+        self.descriptionTextField.text = [textField.text substringToIndex:textField.text.length -2];
+        
+    }
+}
+
 
 @end

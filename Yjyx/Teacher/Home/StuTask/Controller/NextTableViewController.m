@@ -711,7 +711,9 @@
         self.videoCell = (VideoCell *)sender.superview.superview.subviews;
         
     }
-
+    if(_dic == nil){
+        
+    }
         //    isSmallScreen = NO;
     if (isSmallScreen) {
         [self releaseWMPlayer];

@@ -103,7 +103,7 @@ static NSString *ID = @"CELL";
 {
     self.navigationController.navigationBarHidden = NO;
     if(_openMember == 1){
-       
+        _openMember = 0;
        [self loadData]; 
     }
     
@@ -134,7 +134,7 @@ static NSString *ID = @"CELL";
     [self.view makeToastActivity:SHOW_CENTER];
     [mgr GET:[BaseURL stringByAppendingString:@"/api/student/yj_questions/choice/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         [self.view hideToastActivity];
-        //        NSLog(@"%@", responseObject);
+        NSLog(@"%@", responseObject);
         [self.threeStageSubjectArr removeAllObjects];
         if ([responseObject[@"retcode"] integerValue] == 0) {
             for (NSDictionary *dict in responseObject[@"questionlist"]) {

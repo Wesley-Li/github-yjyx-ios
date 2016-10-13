@@ -130,6 +130,11 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         self.progressSlider.minimumTrackTintColor = [UIColor greenColor];
         self.progressSlider.value = 0.0;//指定初始值
         [self.progressSlider addTarget:self action:@selector(updateProgress:) forControlEvents:UIControlEventTouchUpInside];
+        
+         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionTapGesture:)];
+//        _tapGesture.delegate = self;
+        [_progressSlider addGestureRecognizer:tapGesture];
+        
         [self.bottomView addSubview:self.progressSlider];
         
         //autoLayout slider
@@ -226,6 +231,12 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         
     }
     return self;
+}
+- (void)actionTapGesture:(UITapGestureRecognizer *)sender {
+    CGPoint touchPoint = [sender locationInView:_progressSlider];
+    CGFloat value = (_progressSlider.maximumValue - _progressSlider.minimumValue) * (touchPoint.x / _progressSlider.frame.size.width );
+    [_progressSlider setValue:value animated:YES];
+    [self.player seekToTime:CMTimeMakeWithSeconds(_progressSlider.value, 1)];
 }
 - (void)updateSystemVolumeValue:(UISlider *)slider{
     systemSlider.value = slider.value;

@@ -24,6 +24,7 @@
     NSDate *startDate;
     NSDate *endDate;
     NSInteger currentIndex;
+    NSInteger flag;
 
 }
 
@@ -311,33 +312,46 @@
 
 // 语音录制
 - (IBAction)speakStart:(UIButton *)sender {
-    
-    NSLog(@"开始录音了");
-    isEdit = YES;
-    self.imageview.userInteractionEnabled = NO;
-    self.animationImage.hidden = NO;
-    [self.animationImage startAnimating];
-    startDate = [NSDate date];
-    
-
+    [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+        if (granted) {
+            // 用户同意获取数据
+            NSLog(@"开始录音了");
+            isEdit = YES;
+            self.imageview.userInteractionEnabled = NO;
+            self.animationImage.hidden = NO;
+            [self.animationImage startAnimating];
+            startDate = [NSDate date];
+            
+            
 #warning  录音开始
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-    [[AVAudioSession sharedInstance] setActive:YES error:nil];
+            [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+            [[AVAudioSession sharedInstance] setActive:YES error:nil];
+            
+            // 根据当前时间生成文件名
+            self.recordFileName = [TeacherDrawViewController getCurrentTimeString];
+            // 获取路径
+            self.recordFilePath = [TeacherDrawViewController getPathByFilename:_recordFileName ofType:@"wav"];
+            NSLog(@"%@", self.recordFilePath);
+            // 初始化录音
+            self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL URLWithString:_recordFilePath] settings:[VoiceConverter GetAudioRecorderSettingDict] error:nil];
+            
+            self.recorder.delegate = self;
+            self.recorder.meteringEnabled = YES;
+            // 准备录音
+            [self.recorder prepareToRecord];
+            [self.recorder record];
 
-    // 根据当前时间生成文件名
-    self.recordFileName = [TeacherDrawViewController getCurrentTimeString];
-    // 获取路径
-    self.recordFilePath = [TeacherDrawViewController getPathByFilename:_recordFileName ofType:@"wav"];
-    NSLog(@"%@", self.recordFilePath);
-    // 初始化录音
-    self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL URLWithString:_recordFilePath] settings:[VoiceConverter GetAudioRecorderSettingDict] error:nil];
-    
-    self.recorder.delegate = self;
-    self.recorder.meteringEnabled = YES;
-    // 准备录音
-    [self.recorder prepareToRecord];
-    [self.recorder record];
-
+        } else {
+            // 可以显示一个提示框告诉用户这个app没有得到允许？
+            UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:@"请在\"设置-隐私-麦克风\"打开麦克风" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+            [alertVc addAction:action];
+            [self presentViewController:alertVc animated:YES completion:nil];
+            flag = 1;
+            return ;
+        }
+    }];
+   
     
     
 }
@@ -345,6 +359,10 @@
 #pragma mark - 录音结束
 - (void)speakEnd:(UIButton *)sender {
 
+    if(flag == 1){
+        flag = 0;
+        return;
+    }
     // 停止录音
     [self.recorder stop];
     self.recorder = nil;
@@ -363,7 +381,6 @@
         NSLog(@"%@", result == 1 ? @"格式转换成功" : @"格式转换失败");
         
         // 音频上传七牛云
-        
         NSData *data = [NSData dataWithContentsOfFile:amrPath];
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
         

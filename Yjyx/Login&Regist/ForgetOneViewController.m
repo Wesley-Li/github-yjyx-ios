@@ -85,7 +85,8 @@
                 [self.navigationController pushViewController:vc animated:YES];
 
             }else{
-                [self.view makeToast:result[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
+                NSString *str = result[@"msg"] == nil ? result[@"reason"] : result[@"msg"];
+                [self.view makeToast:str duration:1.0 position:SHOW_CENTER complete:nil];
             }
         }else{
             if (error.code == -1009) {

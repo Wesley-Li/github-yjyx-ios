@@ -135,7 +135,7 @@
         self.tempArr = [self.targetListArr subarrayWithRange:NSMakeRange(self.index, self.count)];
         [self getDataFromNet];
         
-        
+         _openMember = 0;
     }
 
     

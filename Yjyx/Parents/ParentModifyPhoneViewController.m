@@ -8,8 +8,10 @@
 
 #import "ParentModifyPhoneViewController.h"
 
-@interface ParentModifyPhoneViewController ()
+@interface ParentModifyPhoneViewController ()<UITextFieldDelegate>
 
+@property (assign, nonatomic) NSInteger flag;
+@property (strong, nonatomic) NSString *phoneNumStr;
 @end
 
 @implementation ParentModifyPhoneViewController
@@ -67,8 +69,50 @@
 }
 - (void)textFieldDidChange:(UITextField *)textField
 {
-    if(textField.text.length > 11){
+    self.phoneTextfield.textColor = [UIColor blackColor];
+    verifyBtn.userInteractionEnabled = YES;
+    if(textField.text.length >= 11){
         textField.text = [textField.text substringToIndex:11];
+        if([textField.text isEqualToString:self.phoneNumStr]){
+            if(_flag == 1){
+                self.phoneTextfield.textColor = [UIColor redColor];
+                verifyBtn.userInteractionEnabled = NO;
+                [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
+                return;
+            }
+        }
+        self.phoneNumStr = textField.text;
+        AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+        NSMutableDictionary *pamar = [NSMutableDictionary dictionary];
+        pamar[@"action"] = @"checkuserexist";
+        pamar[@"username"] = [NSString stringWithFormat:@"4*#*_%@", textField.text];
+        
+        [mgr GET:[BaseURL stringByAppendingString:USERNAME_ISEXIST_CONNECT_GET] parameters:pamar success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+            if([responseObject[@"retcode"] isEqual: @0]){
+                NSLog(@"%@", responseObject);
+                if ([responseObject[@"exist"] isEqual: @1]) {
+                    [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
+                    verifyBtn.userInteractionEnabled = NO;
+                    self.phoneTextfield.textColor = [UIColor redColor];
+                    _flag = 1;
+                }else if([responseObject[@"exist"] isEqual: @0]){
+                    _flag = 0;
+                }
+            }else{
+                if ([responseObject[@"msg"] isEqualToString:@"ratelimitted"]) {
+                    [self.view makeToast:@"操作过快" duration:0.5 position:SHOW_CENTER complete:nil];
+                }else {
+                    
+                    [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
+                    
+                }
+            }
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
+            
+        }];
+        
     }
 }
 #pragma mark - 确定
@@ -99,6 +143,7 @@
 #pragma mark - 更改手机号
 -(void)changePhone
 {
+    [self.phoneTextfield resignFirstResponder];
     NSString *nickName = [_phoneTextfield.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if (nickName.length == 0&&[nickName isPhone]) {
         [self.view makeToast:@"请输入正确手机号"
@@ -107,6 +152,7 @@
                     complete:nil];
         return;
     }
+  
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"modify",@"action",@"phone",@"type",_phoneTextfield.text,@"value",[YjyxOverallData sharedInstance].parentInfo.pid,@"pid", nil];
     [[YjxService sharedInstance] parentsAboutChildrenSetting:dic withBlock:^(id result,NSError *error){
         [self.view hideToastActivity];
@@ -175,14 +221,6 @@
 }
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

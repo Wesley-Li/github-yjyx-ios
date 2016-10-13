@@ -73,7 +73,7 @@
 
 #pragma mark - 确定
 - (void)goSure {
-    [self resetTimer];
+//    [self resetTimer];
     if (_phoneTextfield.text.length == 0||_codeTextField.text.length == 0) {
         [self.view makeToast:@"请输入完整信息" duration:1.0 position:SHOW_CENTER complete:nil];
     }else{

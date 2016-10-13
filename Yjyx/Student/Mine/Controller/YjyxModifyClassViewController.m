@@ -7,7 +7,7 @@
 //
 
 #import "YjyxModifyClassViewController.h"
-
+#import "NSString+emjoy.h"
 @interface YjyxModifyClassViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *
@@ -22,6 +22,18 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"更改班级";
     [self setBackButtonItem];
+    [self.InvitationCodeTextFeid addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+}
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    BOOL flag=[NSString isContainsTwoEmoji:textField.text];
+    if (flag)
+    {
+        [self.view makeToast:@"不能添加表情符号" duration:1.0 position:SHOW_CENTER complete:nil];
+        textField.text = [textField.text substringToIndex:textField.text.length -2];
+        
+    }
+
 }
 - (void)viewDidDisappear:(BOOL)animated
 {

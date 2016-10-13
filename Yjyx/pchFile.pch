@@ -34,6 +34,7 @@
 #import "SVProgressHUD.h"
 #import "Masonry.h"
 #import <UMMobClick/MobClick.h>
+#import "NSString+emjoy.h"
 //系统版本
 // 家长sessionid
 #define SESSIONID [[NSUserDefaults standardUserDefaults] objectForKey:@"SessionID"]

@@ -142,6 +142,7 @@
 {
     if(_openMember == 1){
         [self getchildResult:self.taskResultId];
+        _openMember = 0;
     }
     [super viewWillAppear:YES];
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];

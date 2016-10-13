@@ -18,7 +18,10 @@
 #import "ForgetTwoViewController.h"
 #import "OneStudentEntity.h"
 
-@interface LoginViewController ()
+
+#define kAlphaNum @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+
+@interface LoginViewController ()<UITextFieldDelegate>
 {
     UIView *serverView;
     UITextField *serverTextField;
@@ -42,6 +45,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"登录";
+    
     if(self.roleType == 1){
         ((AppDelegate*)SYS_DELEGATE).role = @"teacher";
         [_parentsBtn setSelected:NO];
@@ -59,7 +63,15 @@
     [_teacherBtn setSelected:NO];
     [_stuBtn setSelected:NO];
     }
-    
+    NSMutableDictionary *dic = (NSMutableDictionary *)[SYS_CACHE objectForKey:@"LoginUserName"];
+    if(dic == nil){
+        NSMutableDictionary *dic1 = [NSMutableDictionary dictionary];
+        [SYS_CACHE setObject:dic1 forKey:@"LoginUserName"];
+    }
+    if(dic[((AppDelegate*)SYS_DELEGATE).role] != nil){
+        
+        self.uesrNameTF.text = dic[((AppDelegate*)SYS_DELEGATE).role];
+    }
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clicked:)];
     [self.view addGestureRecognizer:tap];
     
@@ -157,7 +169,12 @@
 
     [_parentsBtn setSelected:NO];
     [_stuBtn setSelected:NO];
-
+    NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"LoginUserName"];
+    if(dic[@"teacher"] != nil){
+        self.uesrNameTF.text = dic[@"teacher"];
+    }else{
+        self.uesrNameTF.text = nil;
+    }
     
 }
 
@@ -169,6 +186,12 @@
     ((AppDelegate*)SYS_DELEGATE).role = @"parents";
     [_teacherBtn setSelected:NO];
     [_stuBtn setSelected:NO];
+    NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"LoginUserName"];
+    if(dic[@"parents"] != nil){
+        self.uesrNameTF.text = dic[@"parents"];
+    }else{
+        self.uesrNameTF.text = nil;
+    }
 
 }
 
@@ -180,7 +203,12 @@
     ((AppDelegate*)SYS_DELEGATE).role = @"student";
     [_parentsBtn setSelected:NO];
     [_teacherBtn setSelected:NO];
-
+    NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"LoginUserName"];
+    if(dic[@"student"] != nil){
+        self.uesrNameTF.text = dic[@"student"];
+    }else{
+        self.uesrNameTF.text = nil;
+    }
     
 }
 
@@ -217,6 +245,11 @@
                             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:((AppDelegate*)SYS_DELEGATE).role, @"role", _uesrNameTF.text,@"username",desPassWord,@"password", nil];
                             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
                             [SYS_CACHE synchronize];
+                            //  在此处储存用户名
+                            NSMutableDictionary *dic1 = (NSMutableDictionary *)[SYS_CACHE objectForKey:@"LoginUserName"];
+                             NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:dic1];
+                            [dict setValue:self.uesrNameTF.text forKey:@"parents"];
+                             [SYS_CACHE setObject:dict forKey:@"LoginUserName"];
                              [(AppDelegate *)SYS_DELEGATE fillViews];
                         }else{
                             if ([result[@"msg"] length] > 20) {
@@ -260,9 +293,15 @@
                             
                             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
                             [SYS_CACHE synchronize];
+                            
+                            //  在此处储存用户名
+                            NSMutableDictionary *dic1 = (NSMutableDictionary *)[SYS_CACHE objectForKey:@"LoginUserName"];
+                             NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:dic1];
+                            [dict setValue:self.uesrNameTF.text forKey:@"teacher"];
+                            
+                            [SYS_CACHE setObject:dict forKey:@"LoginUserName"];
                             [(AppDelegate *)SYS_DELEGATE fillViews];
-                             // GCD写定时器启动
-//                            dispatch_resume(((AppDelegate*)SYS_DELEGATE).timer);
+                           
 //
                         }else {
                             
@@ -309,11 +348,15 @@
                             
                             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
                             [SYS_CACHE synchronize];
-                             [(AppDelegate *)SYS_DELEGATE fillViews];
                             
-                            // GCD写定时器启动
-                            //                            dispatch_resume(((AppDelegate*)SYS_DELEGATE).timer);
-                            //
+                            //  在此处储存用户名
+                            NSMutableDictionary *dic1 = (NSMutableDictionary *)[SYS_CACHE objectForKey:@"LoginUserName"];
+                            NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:dic1];
+                            [dict setValue:self.uesrNameTF.text forKey:@"student"];
+                            NSLog(@"%@", dic1);
+                            [SYS_CACHE setObject:dict forKey:@"LoginUserName"];
+                             [(AppDelegate *)SYS_DELEGATE fillViews];
+                           
                         }else {
                             
                             if ([result[@"msg"] length] > 20) {
@@ -442,15 +485,20 @@
     });
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - UITextFieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSCharacterSet *cs;
+    cs = [[NSCharacterSet characterSetWithCharactersInString:kAlphaNum] invertedSet];
+    
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""]; //按cs分离出数组,数组按@""分离出字符串
+    
+    BOOL canChange = [string isEqualToString:filtered];
+    if (!canChange) {
+        [self.view makeToast:@"用户名不能输入中文" duration:1.0 position:SHOW_CENTER complete:nil];
+    }
+    return  canChange;
+    
 }
-*/
 
 @end
