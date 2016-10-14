@@ -233,7 +233,7 @@ static NSString *ID = @"CELL";
     // 已完成
     YjyxTodayWorkModel *model = self.allWorkArray[indexPath.row];
     YjyxWorkDetailController *workDetailVc = [[YjyxWorkDetailController alloc] init];
-    workDetailVc.title = model.resourcename;
+    workDetailVc.title = model.task_description;
     workDetailVc.taskType = model.tasktype;
     workDetailVc.t_id = model.t_id;
     // 做普通作业

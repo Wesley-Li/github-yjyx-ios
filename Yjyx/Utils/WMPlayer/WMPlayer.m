@@ -294,9 +294,11 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
             [self setCurrentTime:0.f];
         [self.player play];
         _isPlay = YES;
+        sender.selected = NO;
     } else {
         [self.player pause];
         _isPlay = NO;
+        sender.selected = YES;
     }
     
     //    CMTime time = [self.player currentTime];

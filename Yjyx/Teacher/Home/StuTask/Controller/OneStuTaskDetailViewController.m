@@ -79,8 +79,9 @@
 
 
 -(void)videoDidFinished:(NSNotification *)notice{
-    
-    [self toCell];
+    if(wmPlayer != nil){
+        [self toCell];
+    }
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
     currentCell.playBtn.hidden = NO;
     isPlay = NO;

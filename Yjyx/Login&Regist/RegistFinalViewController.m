@@ -355,7 +355,14 @@
                 NSString *desPassWord = [parentPasswordText.text des3:kCCEncrypt withPass:@"12345678asdf"];
                 NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"parents", @"role", phoneText.text,@"username",desPassWord,@"password", nil];
                 [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
-
+                
+                //  在此处储存用户名
+                NSMutableDictionary *dic1 = (NSMutableDictionary *)[SYS_CACHE objectForKey:@"LoginUserName"];
+                NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:dic1];
+                [dict setValue:phoneText.text forKey:@"parents"];
+                [SYS_CACHE setObject:dict forKey:@"LoginUserName"];
+                
+                
                 AutoLoginViewController *autolog = [[AutoLoginViewController alloc] init];
                 [autolog autoLoginWithRole:dic[@"role"] username:dic[@"username"] password:parentPasswordText.text];
                 

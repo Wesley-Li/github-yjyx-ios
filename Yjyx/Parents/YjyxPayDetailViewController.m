@@ -54,13 +54,12 @@
     NSString *content = [self.productEntity.content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
     
     // 此处rclabel也不受影响,暂时不改
-    contentLb = [[RCLabel alloc] initWithFrame:CGRectMake(35, 46, SCREEN_WIDTH - 50, 999)];
-    contentLb.userInteractionEnabled = NO;
+    CGRect rect = [content  boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 35, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12]} context:nil];
+    contentLb = [[UILabel alloc] init];
+    contentLb.text = content;
     contentLb.font = [UIFont systemFontOfSize:12];
-    RTLabelComponentsStructure *componentsDS = [RCLabel extractTextStyle:content];
-    contentLb.componentsAndPlainText = componentsDS;
-    CGSize optimalSize = [contentLb optimumSize];
-    contentLb.frame = CGRectMake(35, 46, optimalSize.width, optimalSize.height);
+  
+    contentLb.frame = CGRectMake(35, 46, rect.size.width, rect.size.height);
     [self.view addSubview:contentLb];
     
     _detailView.frame = CGRectMake(0, 0, SCREEN_WIDTH, (contentLb.frame.origin.y+contentLb.frame.size.height + 20));

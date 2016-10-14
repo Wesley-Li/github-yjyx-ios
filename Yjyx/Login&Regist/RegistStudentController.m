@@ -324,6 +324,15 @@
             NSString *desPassWord = [_pswTextField.text des3:kCCEncrypt withPass:@"12345678asdf"];
             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"student", @"role", _loginNameTextField.text,@"username",desPassWord,@"password", nil];
             [SYS_CACHE setObject:dic forKey:@"AutoLogoin"];
+            
+            //  在此处储存用户名
+            NSMutableDictionary *dic1 = (NSMutableDictionary *)[SYS_CACHE objectForKey:@"LoginUserName"];
+            NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:dic1];
+            [dict setValue:_loginNameTextField.text forKey:@"student"];
+            NSLog(@"%@", dic1);
+            [SYS_CACHE setObject:dict forKey:@"LoginUserName"];
+            
+            
             AutoLoginViewController *autolog = [[AutoLoginViewController alloc] init];
             [autolog autoLoginWithRole:dic[@"role"] username:dic[@"username"] password:pamar[@"password"]];
             

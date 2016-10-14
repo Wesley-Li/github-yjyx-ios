@@ -330,13 +330,13 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
    
-    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
    
 }
 
 // 进入激活状态
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     // 判断版本更新
     [self judgeAndUpdate];
     

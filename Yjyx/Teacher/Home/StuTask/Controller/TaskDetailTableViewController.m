@@ -22,6 +22,8 @@
 #import "StudentDetailController.h"
 #import "NextTableViewController.h"
 
+#import "ReleaseMicroController.h"
+
 #define stuCondition @"stuConditionCell"
 #define taskConditon @"taskConditonCell"
 #define submit @"submitCell"
@@ -108,7 +110,7 @@
     self.navigationItem.leftBarButtonItem = leftBtnItem;
 
     
-    [self readDataFromNetWork];
+//    [self readDataFromNetWork];
     
     // 注册
     [self.tableView registerNib:[UINib nibWithNibName:@"TaskConditionTableViewCell" bundle:nil] forCellReuseIdentifier:taskConditon];
@@ -116,10 +118,74 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"SubmitCell" bundle:nil] forCellReuseIdentifier:submit];
     [self.tableView registerNib:[UINib nibWithNibName:@"UnSubmitCell" bundle:nil] forCellReuseIdentifier:unSubmit];
     
-   
+    // footerView
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+
+    self.tableView.tableFooterView = footerView;
+    
+    UIButton *addStuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addStuBtn setImage:[UIImage imageNamed:@"add_homework"] forState:UIControlStateNormal];
+    [addStuBtn setTitle:@"添加学生" forState:UIControlStateNormal];
+    addStuBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
+    addStuBtn.imageView.contentMode =  UIViewContentModeScaleAspectFit;
+    addStuBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+    [addStuBtn setTitleColor:RGBACOLOR(19.0, 127.0, 223.0, 1)  forState:UIControlStateNormal];
+    [footerView addSubview:addStuBtn];
+    [addStuBtn addTarget:self action:@selector(addReleaseStu:) forControlEvents:UIControlEventTouchUpInside];
+    [addStuBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(footerView).with.offset(-10);
+        make.centerY.equalTo(footerView);
+        make.height.mas_equalTo(25);
+    }];
+    
     self .automaticallyAdjustsScrollViewInsets = YES;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self readDataFromNetWork];
+}
+- (void)addReleaseStu:(UIButton *)btn
+{
+    [SVProgressHUD showWithStatus:@"正在拼命加载学生数据"];
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"get_onetask_append_suids", @"action", self.taskModel.t_id, @"taskid", nil];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:[BaseURL stringByAppendingString:@"/api/teacher/mobile/general_task/"] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//            [SVProgressHUD dismiss];
+            NSLog(@"%@", responseObject);
+            if([responseObject[@"retcode"] integerValue] == 0){
+            NSArray *stuArr = responseObject[@"data"][@"studentuids"];
+            NSLog(@"%@", [UIApplication sharedApplication].keyWindow);
+            if (stuArr.count == 0) {
+                [SVProgressHUD showInfoWithStatus:@"没有可追加的学生"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [SVProgressHUD dismiss];
+                });
+                NSLog(@"%@", @"哈哈");
+            }else{
+                ReleaseMicroController *vc = [[ReleaseMicroController alloc] init];
+                vc.releaseType = 2;
+                vc.addStuArr = stuArr;
+                vc.taskModel = _taskModel;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }else{
+            NSString *str = responseObject[@"msg"] == nil ? responseObject[@"reason"] : responseObject[@"msg"];
+            [SVProgressHUD showWithStatus:str];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+
+        [SVProgressHUD showWithStatus:error.localizedDescription];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    }];
+}
 // 网络请求
 - (void)readDataFromNetWork {
     
@@ -132,7 +198,10 @@
         NSLog(@"%@", responseObject);
         
         if ([responseObject[@"retcode"] isEqual:@0]) {
-            
+            [self.blankFillDataSource removeAllObjects];
+            [self.choiceDataSource removeAllObjects];
+            [self.finishedArr removeAllObjects];
+            [self.unfinishedArr removeAllObjects];
             // 填空
             for (NSDictionary *dic in [responseObject[@"questionstats"] objectForKey:@"blankfill"]) {
                 BlankFillModel *model = [[BlankFillModel alloc] init];

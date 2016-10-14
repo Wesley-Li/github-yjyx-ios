@@ -15,6 +15,7 @@
 #import "StudentEntity.h"
 #import "StuGroupEntity.h"
 #import "StuTaskTableViewController.h"
+#import "TaskModel.h"
 @interface ReleaseMicroController ()<UITableViewDelegate, UITableViewDataSource, ReleaseStudentCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -78,28 +79,66 @@ static NSString *StudentID = @"StudentCell";
     [super viewDidLoad];
     [self loadData];
     self.navigationController.navigationBarHidden = NO;
-    if(self.w_id == nil){
-         self.navigationItem.title = @"发布作业";
+    if(self.w_id != nil || [_taskModel.tasktype isEqual:@2]){
+         self.navigationItem.title = @"发布微课";
     }else{
-        self.navigationItem.title = @"发布微课";
+        self.navigationItem.title = @"发布作业";
     }
+    NSMutableArray *newClassArr = [NSMutableArray array];
     for (StuClassEntity *stuClassModel in self.classArr) {
         NSMutableArray *tempArr = [NSMutableArray array];
         for (NSNumber *num in stuClassModel.memberlist) {
             StudentEntity *stuModel = [[StuDataBase shareStuDataBase] selectStuById:num];
-            [self.stuArr addObject:stuModel];
-            [tempArr addObject:stuModel];
+            if(self.releaseType == 2){
+                if([self.addStuArr containsObject:num]){
+                    [self.stuArr addObject:stuModel];
+                    [tempArr addObject:stuModel];
+                }
+            }else{
+                [self.stuArr addObject:stuModel];
+                [tempArr addObject:stuModel];
+            }
         }
-        [self.classStuArr addObject:tempArr];
+        if(self.releaseType == 2){
+            if(tempArr.count != 0){
+                [newClassArr addObject:stuClassModel];
+                [self.classStuArr addObject:tempArr];
+            }
+            
+        }else{
+            [self.classStuArr addObject:tempArr];
+        }
     }
+    if(self.releaseType == 2){
+        self.classArr = newClassArr;
+    }
+    NSMutableArray *newGroupArr = [NSMutableArray array];
     for (StuGroupEntity *stuGroupModel in self.groupArr) {
         NSMutableArray *tempArr = [NSMutableArray array];
         for (NSNumber *num in stuGroupModel.memberlist) {
             StudentEntity *stuModel = [[StuDataBase shareStuDataBase] selectStuById:num];
-            [self.stuArr addObject:stuModel];
-            [tempArr addObject:stuModel];
+            if(self.releaseType == 2){
+                if([self.addStuArr containsObject:num]){
+                    [self.stuArr addObject:stuModel];
+                    [tempArr addObject:stuModel];
+                }
+            }else{
+                [self.stuArr addObject:stuModel];
+                [tempArr addObject:stuModel];
+            }
         }
-        [self.groupStuArr addObject:tempArr];
+        if(self.releaseType == 2){
+            if(tempArr.count != 0){
+                [newGroupArr addObject:stuGroupModel];
+                [self.groupStuArr addObject:tempArr];
+            }
+           
+        }else{
+            [self.groupStuArr addObject:tempArr];
+        }
+    }
+    if(self.releaseType == 2){
+        self.groupArr = newGroupArr;
     }
     [self loadBackBtn];
     // 注册cell
@@ -107,9 +146,16 @@ static NSString *StudentID = @"StudentCell";
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ReleaseFinishTimeCell class]) bundle:nil] forCellReuseIdentifier:FinishTimeID];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ReleaseStudentCell class]) bundle:nil] forCellReuseIdentifier:StudentID];
     self.tableView.sectionFooterHeight = 0;
-    self.tableView.sectionHeaderHeight = 10;
-    self.tableView.contentInset = UIEdgeInsetsMake(-35, 0, -49, 0);
+//    self.tableView.sectionHeaderHeight = 10;
+    if(self.releaseType == 2){
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
+    }else{
+        self.tableView.contentInset = UIEdgeInsetsMake(-35, 0, -49, 0);
+
+    }
+    
     self.tableView.rowHeight = 55;
+    
     
     // 设置footerView
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 80)];
@@ -182,12 +228,21 @@ static NSString *StudentID = @"StudentCell";
         return;
     }
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"action"] = @"add_task";
+    if (self.releaseType == 2) {
+        param[@"action"] = @"task_append_students";
+    }else{
+        param[@"action"] = @"add_task";
+    }
     NSLog(@"%@", [pamarArr JSONString]);
     param[@"recipients"] = [pamarArr JSONString];
     if(self.releaseType == 1){
         param[@"tasktype"] = @"exam";
         param[@"examid"] = self.examid;
+    }else if(self.releaseType == 2){
+        param[@"tasktype"] = _taskModel.tasktype;
+        param[@"taskid"] = _taskModel.t_id;
+        param[@"relatedresourceid"] = _taskModel.relatedresourceid;
+        
     }else{
         param[@"tasktype"] = @"lesson";
         param[@"lessonid"] = self.w_id;
@@ -212,7 +267,10 @@ static NSString *StudentID = @"StudentCell";
        descStr = [NSString stringWithFormat:@"%@ 作业", dateStr];
     }
     NSString *descTempStr = [self.descripStr stringByReplacingOccurrencesOfString:@" " withString:@""];
-    param[@"desc"] = [descTempStr isEqualToString:@""] ? descStr : self.descripStr;
+    if (self.releaseType != 2) {
+        param[@"desc"] = [descTempStr isEqualToString:@""] ? descStr : self.descripStr;
+    }
+    
     
     NSString *numstr = [self.timeStr stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]];
     if(numstr.length > 0 ){
@@ -223,14 +281,18 @@ static NSString *StudentID = @"StudentCell";
         return;
     }
     NSLog(@"%@", self.timeStr);
-    if([self.timeStr integerValue] == 0 && ![self.timeStr isEqualToString:@""]){
-        [SVProgressHUD showWithStatus:@"建议完成时间必须大于0"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });
-         return;
+    if (self.releaseType != 2) {
+        if([self.timeStr integerValue] == 0 && ![self.timeStr isEqualToString:@""]){
+            [SVProgressHUD showWithStatus:@"建议完成时间必须大于0"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
+             return;
+        }
+    
+        param[@"suggestspendtime"] = [self.timeStr isEqualToString:@""] ? @"30" : self.timeStr;
     }
-    param[@"suggestspendtime"] = [self.timeStr isEqualToString:@""] ? @"30" : self.timeStr;
+    
     NSLog(@"%@", param);
     UIView *coverView = [[UIView alloc] init];
     coverView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -242,10 +304,13 @@ static NSString *StudentID = @"StudentCell";
         NSLog(@"%@", responseObject[@"reason"]);
         if([responseObject[@"retcode"] isEqual:@0]){
             [SVProgressHUD showSuccessWithStatus:@"发布成功"];
-           
-            // 跳转到学生作业列表
-            StuTaskTableViewController *stuTaskVC = [[StuTaskTableViewController alloc] init];
-            [self.navigationController pushViewController:stuTaskVC animated:YES];
+            if (self.releaseType == 2) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                // 跳转到学生作业列表
+                StuTaskTableViewController *stuTaskVC = [[StuTaskTableViewController alloc] init];
+                [self.navigationController pushViewController:stuTaskVC animated:YES];
+            }
         }else{
             [self.view makeToast:responseObject[@"msg"] duration:1.0 position:SHOW_CENTER complete:nil];
         }
@@ -263,7 +328,12 @@ static NSString *StudentID = @"StudentCell";
 #pragma mark - UITableView数据源方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.classArr.count + self.groupArr.count + 2;
+    if(self.releaseType == 2){
+        return self.classArr.count + self.groupArr.count;
+    }else{
+        return self.classArr.count + self.groupArr.count + 2;
+    }
+    
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -272,14 +342,16 @@ static NSString *StudentID = @"StudentCell";
     }else if(section < self.classArr.count){
         StuClassEntity *classEntity = self.classArr[section];
         if (classEntity.isExpanded) {
-            return classEntity.memberlist.count + 1;
+//            return classEntity.memberlist.count + 1;
+            return [self.classStuArr[section] count] + 1;
         }else{
             return 1;
         }
     }else{
         StuGroupEntity *groupEntity = self.groupArr[section - _classArr.count];
         if (groupEntity.isExpanded) {
-            return groupEntity.memberlist.count + 1;
+//            return groupEntity.memberlist.count + 1;
+            return [self.groupStuArr[section - _classArr.count] count] + 1;
         }else{
             return 1;
         }
@@ -330,6 +402,7 @@ static NSString *StudentID = @"StudentCell";
     }
     
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.view endEditing:YES];
@@ -339,16 +412,22 @@ static NSString *StudentID = @"StudentCell";
         if (classEntity.isExpanded) {
             NSMutableArray *tempArr = [NSMutableArray array];
             NSInteger i = 1;
-            for (NSNumber *num in classEntity.memberlist) {
+            for (NSNumber *num in self.classStuArr[indexPath.section]) {
                 [tempArr addObject:[NSIndexPath indexPathForRow:i++ inSection:indexPath.section]];
             }
+//            for (NSNumber *num in classEntity.memberlist) {
+//                [tempArr addObject:[NSIndexPath indexPathForRow:i++ inSection:indexPath.section]];
+//            }
             [self.tableView insertRowsAtIndexPaths:tempArr withRowAnimation:UITableViewRowAnimationNone];
         }else{
             NSMutableArray *tempArr = [NSMutableArray array];
             NSInteger i = 1;
-            for (NSNumber *num in classEntity.memberlist) {
+            for (NSNumber *num in self.classStuArr[indexPath.section]) {
                 [tempArr addObject:[NSIndexPath indexPathForRow:i++ inSection:indexPath.section]];
             }
+//            for (NSNumber *num in classEntity.memberlist) {
+//                [tempArr addObject:[NSIndexPath indexPathForRow:i++ inSection:indexPath.section]];
+//            }
             [self.tableView deleteRowsAtIndexPaths:tempArr withRowAnimation:UITableViewRowAnimationNone];
         }
     }else if(indexPath.row == 0 && indexPath.section < self.classArr.count + self.groupArr.count){
@@ -357,22 +436,68 @@ static NSString *StudentID = @"StudentCell";
             if (groupEntity.isExpanded) {
                 NSMutableArray *tempArr = [NSMutableArray array];
                 NSInteger i = 1;
-                for (NSNumber *num in groupEntity.memberlist) {
+                for (NSNumber *num in self.groupStuArr[indexPath.section - _classArr.count]) {
                     [tempArr addObject:[NSIndexPath indexPathForRow:i++ inSection:indexPath.section]];
                 }
+//                for (NSNumber *num in groupEntity.memberlist) {
+//                    [tempArr addObject:[NSIndexPath indexPathForRow:i++ inSection:indexPath.section]];
+//                }
                 [self.tableView insertRowsAtIndexPaths:tempArr withRowAnimation:UITableViewRowAnimationNone];
             }else{
                     NSMutableArray *tempArr = [NSMutableArray array];
                     NSInteger i = 1;
-                    for (NSNumber *num in groupEntity.memberlist) {
-                        [tempArr addObject:[NSIndexPath indexPathForRow:i++ inSection:indexPath.section]];
-                    }
+                for (NSNumber *num in self.groupStuArr[indexPath.section - _classArr.count]) {
+                    [tempArr addObject:[NSIndexPath indexPathForRow:i++ inSection:indexPath.section]];
+                }
+//                    for (NSNumber *num in groupEntity.memberlist) {
+//                        [tempArr addObject:[NSIndexPath indexPathForRow:i++ inSection:indexPath.section]];
+//                    }
                     [self.tableView deleteRowsAtIndexPaths:tempArr withRowAnimation:UITableViewRowAnimationNone];
                 }
         
     }
     if(indexPath.section < self.classArr.count + self.groupArr.count){
          [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if(section == 0){
+        if(self.releaseType == 2){
+            return 49;
+        }else{
+            return 0;
+        }
+        
+    }else{
+        return 10;
+    }
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if(section == 0){
+        if(self.releaseType == 2){
+            UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 49)];
+            headerView.backgroundColor = [UIColor whiteColor];
+            
+            UILabel *infoLabel = [[UILabel alloc] init];
+            infoLabel.text = @"将作业布置给:";
+            [infoLabel sizeToFit];
+            infoLabel.x = 20;
+            infoLabel.centerY = headerView.height / 2;
+            infoLabel.font = [UIFont systemFontOfSize:16];
+            
+            
+            infoLabel.textColor = [UIColor blackColor];
+            
+            [headerView addSubview:infoLabel];
+            
+            return headerView;
+        }else{
+            return nil;
+        }
+    }else{
+        return nil;
     }
 }
 #pragma mark - ReleaseStudentCell代理方法

@@ -436,7 +436,9 @@ static NSString *VideoNumID = @"VideoNum";
 }
 #pragma mark - wmPlayer的方法
 -(void)videoDidFinished:(NSNotification *)notice{
-    [self toCell];
+    if(wmPlayer != nil){
+        [self toCell];
+    }
     ReleaseMicroCell *currentCell = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     wmPlayer.isPlay = NO;
     currentCell.playBtn.hidden = NO;
