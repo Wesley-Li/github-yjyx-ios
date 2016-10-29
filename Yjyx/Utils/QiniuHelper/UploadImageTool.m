@@ -210,7 +210,7 @@
 //成功上传的图，回传succeededUrls，格式：{key:url}
 //失败的图，回传failedImages，格式：{key:image}
 //成功和失败的图有可能都存在
-+ (void)uploadImagesWithIDs:(NSDictionary *)imageDictionary success:(void(^)(NSDictionary *succeededUrls))success failure:(void(^)(NSDictionary *failedImages))failure {
++ (void)uploadImagesWithKeys:(NSDictionary *)imagesDictionary success:(void(^)(NSDictionary *succeededUrls))success failure:(void(^)(NSDictionary *failedImages))failure {
     
     NSMutableDictionary *succeededUrls = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *failedImages = [[NSMutableDictionary alloc] init];
@@ -227,7 +227,7 @@
         dispatch_queue_t queue = dispatch_queue_create("yjyx.com.uploadImage", DISPATCH_QUEUE_SERIAL);
         dispatch_group_t group = dispatch_group_create();
 
-        [imageDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [imagesDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
             if ([obj isKindOfClass:[UIImage class]]) {
                 NSData *data = UIImageJPEGRepresentation((UIImage *)obj,0.01);
                 if (data) {
@@ -267,7 +267,7 @@
         });
     }failure:^{
         if (failure) {
-            failure(imageDictionary); //无Token, 全部失败
+            failure(imagesDictionary); //无Token, 全部失败
         }
     }];
 }
