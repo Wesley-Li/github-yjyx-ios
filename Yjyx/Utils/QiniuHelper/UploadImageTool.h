@@ -20,11 +20,8 @@
  *
  
  *@param image需要上传的image
- 
  *@param progress上传进度block
- 
  *@param success成功block返回url地址
- 
  *@param failure失败block
  
  */
@@ -35,10 +32,8 @@
 
 + (void)uploadImage:(UIImage*)image progress:(QNUpProgressHandler)progress success:(void(^)(NSString*url))success failure:(void(^)())failure;
 
-
-
 + (void)uploadImages:(NSArray*)imageArray progress:(void(^)(CGFloat))progress success:(void(^)(NSArray*))success failure:(void(^)())failure;
 
-
++ (void)uploadImagesWithIDs:(NSDictionary *)imageDictionary success:(void(^)(NSDictionary *succeededUrls))success failure:(void(^)(NSDictionary *failedImages))failure;
 
 @end

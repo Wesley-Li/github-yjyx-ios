@@ -203,12 +203,74 @@
     
         success(nil);
     }
-    
-    
-    
 }
 
+//上传多张带Key图片
+//imageDictionary格式：{key:image}
+//成功上传的图，回传succeededUrls，格式：{key:url}
+//失败的图，回传failedImages，格式：{key:image}
+//成功和失败的图有可能都存在
++ (void)uploadImagesWithIDs:(NSDictionary *)imageDictionary success:(void(^)(NSDictionary *succeededUrls))success failure:(void(^)(NSDictionary *failedImages))failure {
+    
+    NSMutableDictionary *succeededUrls = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *failedImages = [[NSMutableDictionary alloc] init];
+    
+    [UploadImageTool getQiniuUploadToken:^(NSString *token) {
+        QNUploadOption *opt = [[QNUploadOption alloc]initWithMime:nil
+                                                 progressHandler:^(NSString *key, float percent) {}
+                                                          params:nil
+                                                        checkCrc:NO
+                                              cancellationSignal:nil];
+        
+        QNUploadManager *uploadManager = [QNUploadManager sharedInstanceWithConfiguration:nil];
+        
+        dispatch_queue_t queue = dispatch_queue_create("yjyx.com.uploadImage", DISPATCH_QUEUE_SERIAL);
+        dispatch_group_t group = dispatch_group_create();
 
+        [imageDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[UIImage class]]) {
+                NSData *data = UIImageJPEGRepresentation((UIImage *)obj,0.01);
+                if (data) {
+                    dispatch_group_async(group, queue, ^{
+                        [uploadManager putData:data
+                                           key:nil
+                                         token:token
+                                      complete:^(QNResponseInfo *info,NSString *key,NSDictionary *resp) {
+                                          if (info.statusCode == 200 && resp) {
+                                              NSString *url= [NSString stringWithFormat:@"%@%@",QiniuYunURL, resp[@"key"]];
+                                              [succeededUrls setObject:url forKey:key];
+                                          }
+                                          else {
+                                              [failedImages setObject:obj forKey:key];
+                                          }
+                                      }
+                                        option:opt
+                         ];
+                    });
+                }
+                else{
+                    [failedImages setObject:obj forKey:key];
+                }
+            }
+            else{
+                [failedImages setObject:obj forKey:key];
+            }
+        }];
+        
+        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+            if (success) {
+                success(succeededUrls);
+            }
+            if (failure) {
+                failure(failedImages);
+            }
+        });
+    }failure:^{
+        if (failure) {
+            failure(imageDictionary); //无Token, 全部失败
+        }
+    }];
+}
 
 
 @end
