@@ -130,7 +130,17 @@
 }
 
 
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    for (UITouch *touch in touches) {
+        NSLog(@"%@", touch.view);
+        if([touch.view isKindOfClass:[self class]]){
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"SiftViewIsMove" object:nil];
+          
+        }
+    }
+    
+}
 
 
 - (IBAction)statusBtnClicked:(siftButton *)sender {

@@ -323,7 +323,7 @@
             } failure:^{
                 [SVProgressHUD showWithStatus:@"上传解题步骤时,出现错误,请选择图片重新上传"];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    
+                    [SVProgressHUD  dismiss];
                 });;
             }];
             _layout.itemCount = _selectedPhotos.count;
@@ -349,18 +349,21 @@
 #pragma mark Click Event
 - (void)deleteBtnClik:(UIButton *)sender {
     NSLog(@"%ld, %ld", sender.tag, _urlArr.count);
-    if(sender.tag >= _urlArr.count){
-        [SVProgressHUD showWithStatus:@"上传失败,请重新选择照片上传"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            return;
-        });
-        
-    }
+//    if(sender.tag >= _urlArr.count){
+//        [SVProgressHUD showWithStatus:@"上传失败,请重新选择照片上传"];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            return;
+//        });
+//        
+//    }
     [_selectedPhotos removeObjectAtIndex:sender.tag];
     if (!(_selectedAssets.count == 0)) {
         [_selectedAssets removeObjectAtIndex:sender.tag];
     }
-    [_urlArr removeObjectAtIndex:sender.tag];
+    if (sender.tag < _urlArr.count) {
+        [_urlArr removeObjectAtIndex:sender.tag];
+    }
+    
     _layout.itemCount = _selectedPhotos.count;
     
     [self.processCollectionView performBatchUpdates:^{
@@ -430,7 +433,7 @@
     } failure:^{
         [SVProgressHUD showWithStatus:@"上传解题步骤时,出现错误,请选择图片重新上传"];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
+            [SVProgressHUD dismiss];
         });;
     }];
     
@@ -447,7 +450,7 @@
 {
     NSLog(@"%@", self.superview.superview);
     NSDictionary *userInfo = [aNotification userInfo];
-    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] ;
     CGRect keyboardRect = [aValue CGRectValue];
     int height = keyboardRect.size.height;
     

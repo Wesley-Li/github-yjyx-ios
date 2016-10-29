@@ -314,6 +314,11 @@
 - (IBAction)speakStart:(UIButton *)sender {
     [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
         if (granted) {
+            if(flag == 500){
+                flag = 0;
+                return ;
+            }
+            
             // 用户同意获取数据
             NSLog(@"开始录音了");
             isEdit = YES;
@@ -363,6 +368,7 @@
         flag = 0;
         return;
     }
+    flag = 500;
     // 停止录音
     [self.recorder stop];
     self.recorder = nil;
@@ -382,6 +388,9 @@
         
         // 音频上传七牛云
         NSData *data = [NSData dataWithContentsOfFile:amrPath];
+        if (data == nil) {
+            return;
+        }
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:@"getuploadtoken",@"action",@"img",@"resource_type",nil];
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

@@ -7,7 +7,7 @@
 //
 
 #import "AddChildrenViewController.h"
-
+#import "NSString+emjoy.h"
 @interface AddChildrenViewController ()
 
 @end
@@ -43,13 +43,22 @@
     textField3.delegate = self;
     textField4.delegate = self;
     
-    
+    [textField4 addTarget:self action:@selector(changTextField:) forControlEvents:UIControlEventEditingChanged];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clicked:)];
     [self.view addGestureRecognizer:tap];
 
     // Do any additional setup after loading the view from its nib.
 }
-
+- (void)changTextField:(UITextField *)textField
+{
+    BOOL flag=[NSString isContainsTwoEmoji:textField4.text];
+    if (flag)
+    {
+        [self.view makeToast:@"不能添加表情符号" duration:1.0 position:SHOW_TOP complete:nil];
+        textField.text = [textField.text substringToIndex:textField.text.length -2];
+        
+    }
+}
 -(void)goBack
 {
     [self.navigationController popViewControllerAnimated:YES];

@@ -53,5 +53,12 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+    <key>NSCameraUsageDescription</key>
+    <string>拍摄一下您的努力,让老师看到吧</string>
+    
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>让我们看一下你的努力吧</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>让学生们及时了解你的想法吧</string>
 </dict>
 </plist>

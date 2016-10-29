@@ -68,23 +68,30 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     [manager GET:[BaseURL stringByAppendingString:@"/api/student/vgsv/"] parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        
+        [SVProgressHUD dismiss];
+        NSLog(@"%@", responseObject);
         if ([responseObject[@"retcode"] isEqual:@0]) {
             
             self.root_id = responseObject[@"id"];
-            
-            if ([responseObject[@"content"] count] == 0) {
+            NSInteger flag = 0;
+            if ([responseObject[@"content"] count] <= 1) {
                 
-                UIImage *image = [UIImage imageNamed:@"isbuilding"];
-                UIImageView *imageV = [[UIImageView alloc] initWithImage:image];
-                imageV.width = SCREEN_WIDTH - 80;
-                imageV.height = image.size.height *imageV.width/image.size.width;
-                imageV.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
-                
-                [self.view addSubview:imageV];
+                if(!([responseObject[@"content"] count] == 1 && [((NSString *)responseObject[@"content"][0][@"parent"]) isEqualToString:@"#"])){
+                    flag = 1;
+                }
+                if(flag == 0){
+                    UIImage *image = [UIImage imageNamed:@"isbuilding"];
+                    UIImageView *imageV = [[UIImageView alloc] initWithImage:image];
+                    imageV.width = SCREEN_WIDTH - 80;
+                    imageV.height = image.size.height *imageV.width/image.size.width;
+                    imageV.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+                    
+                    [self.view addSubview:imageV];
+                    return ;
+                }
 
                 
-            }else {
+            }
             
                 for (NSDictionary *dic in responseObject[@"content"]) {
                     GradeContentItem *item = [GradeContentItem gradeContentItem:dic];
@@ -103,7 +110,7 @@
                 [self.view addSubview:tableview];
                 
                 [SVProgressHUD dismissWithDelay:0.1];
-            }
+            
             
         }else {
             

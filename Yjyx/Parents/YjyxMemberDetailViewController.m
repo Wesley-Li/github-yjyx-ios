@@ -42,6 +42,7 @@
     openChildAry = [[NSMutableArray alloc] init];
     payBtn.hidden = YES;
     if(_productEntity.price_pacakge.count == 0){
+        [self.view makeToast:@"此科目暂时无开通套餐" duration:3.0 position:SHOW_CENTER complete:nil];
         openBtn.enabled = NO;
     }else{
         openBtn.enabled = YES;
