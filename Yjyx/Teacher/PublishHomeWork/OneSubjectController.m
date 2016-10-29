@@ -469,6 +469,7 @@ static NSString *VideoID = @"VIDEOCELL";
                 [[QuestionDataBase shareDataBase] deleteQuestionByid:_w_id andQuestionType:str andJumpType:@"1"];
             }
         }
+        _flag = 10;
     }else{
         if (_wrongSubjectModel == nil) {
             MicroSubjectModel *model = [[MicroSubjectModel alloc] init];
@@ -530,6 +531,13 @@ static NSString *VideoID = @"VIDEOCELL";
             if ([vc isKindOfClass:[QuestionPreviewController class]]) {
                 NSMutableArray  *arr = [[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"1"];
                 ((QuestionPreviewController *)vc).selectArr = arr;
+                if(_flag == 10){ // 标志点击了删除按钮
+                    ((QuestionPreviewController *)vc).preSelIndexPath = _selIndexPath;
+                    ((QuestionPreviewController *)vc).isMoved = 1;
+                    ((QuestionPreviewController *)vc).model = _wrongSubjectModel == nil ? _chaperContentModel : _wrongSubjectModel;
+                 
+                }
+                
                 [self.navigationController popToViewController:vc animated:YES];
                 return;
             }

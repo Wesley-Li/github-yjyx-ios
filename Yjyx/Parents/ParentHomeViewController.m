@@ -14,6 +14,9 @@
 #import "YjyxWorkPreviewViewController.h"
 #import "YjyxShopMallViewController.h"
 #import "YjyxPMemberCenterViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <AVFoundation/AVCaptureDevice.h>
+#import <AVFoundation/AVMediaFormat.h>
 @interface ParentHomeViewController ()
 
 @end

@@ -19,7 +19,7 @@
 #import "OneStudentEntity.h"
 
 
-#define kAlphaNum @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+#define kAlphaNum @"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz0123456789.@+-(),_#%|?/<>~"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 {
@@ -148,9 +148,15 @@
 - (void)textFieldDidChange:(UITextField *)textField
 {
     
-        if (textField.text.length > 20) {
-            textField.text = [textField.text substringToIndex:20];
+    if (textField.text.length > 20) {
+        textField.text = [textField.text substringToIndex:20];
+    }
+    if([textField isEqual:_passWordTF]){
+        if([textField.text containsString:@" "]){
+            textField.text = [textField.text substringToIndex:textField.text.length - 1];
+            [self.view makeToast:@"密码不能含有空格" duration:1.5 position:SHOW_CENTER complete:nil];
         }
+    }
     
 }
 
@@ -488,17 +494,20 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    NSCharacterSet *cs;
-    cs = [[NSCharacterSet characterSetWithCharactersInString:kAlphaNum] invertedSet];
-    
-    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""]; //按cs分离出数组,数组按@""分离出字符串
-    
-    BOOL canChange = [string isEqualToString:filtered];
-    if (!canChange) {
-        [self.view makeToast:@"用户名不能输入中文" duration:1.0 position:SHOW_CENTER complete:nil];
+    if(![textField isEqual:self.passWordTF]){
+        NSCharacterSet *cs;
+        cs = [[NSCharacterSet characterSetWithCharactersInString:kAlphaNum] invertedSet];
+        
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""]; //按cs分离出数组,数组按@""分离出字符串
+        NSLog(@"++%@--%@++", string, filtered);
+        BOOL canChange = [string isEqualToString:filtered];
+        if (!canChange) {
+            [self.view makeToast:@"用户名不能输入中文" duration:1.0 position:SHOW_CENTER complete:nil];
+        }
+        return  canChange;
+    }else{
+        return YES;
     }
-    return  canChange;
-    
 }
 
 @end

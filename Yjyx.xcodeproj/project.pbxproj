@@ -1148,6 +1148,7 @@
 		3BFE3B861CDA0D4A00502769 /* StuClassEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuClassEntity.m; sourceTree = "<group>"; };
 		3BFE3B881CDA0D6F00502769 /* StuGroupEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuGroupEntity.h; sourceTree = "<group>"; };
 		3BFE3B891CDA0D6F00502769 /* StuGroupEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuGroupEntity.m; sourceTree = "<group>"; };
+		3C1152BE1DBDEE7D0010CC02 /* Yjyx.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Yjyx.entitlements; sourceTree = "<group>"; };
 		3C1566951D0D54D0006670D6 /* ChaperContentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaperContentItem.h; sourceTree = "<group>"; };
 		3C1566961D0D54D0006670D6 /* ChaperContentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaperContentItem.m; sourceTree = "<group>"; };
 		3C1566981D0D5B49006670D6 /* ChapterChoiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterChoiceController.h; sourceTree = "<group>"; };
@@ -3628,6 +3629,7 @@
 		CB40047C1C609BCD00556AA7 /* Yjyx */ = {
 			isa = PBXGroup;
 			children = (
+				3C1152BE1DBDEE7D0010CC02 /* Yjyx.entitlements */,
 				801F443F1CDF164800B7E7E1 /* Alipay */,
 				CB4004801C609BCD00556AA7 /* AppDelegate.h */,
 				CB4004811C609BCD00556AA7 /* AppDelegate.m */,
@@ -3696,6 +3698,9 @@
 						DevelopmentTeam = 4TCW3KT5AU;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -4509,9 +4514,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				CODE_SIGN_ENTITLEMENTS = Yjyx/Yjyx.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 4TCW3KT5AU;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4549,7 +4556,8 @@
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2f8ad128-e076-49ad-a75a-bbfaa50c0de7";
+				PROVISIONING_PROFILE = "74c96b55-2af0-4d0a-bb34-872508825ade";
+				PROVISIONING_PROFILE_SPECIFIER = "YJYX-VERIFY";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -4563,10 +4571,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				CODE_SIGN_ENTITLEMENTS = Yjyx/Yjyx.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 4TCW3KT5AU;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4602,7 +4612,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2f8ad128-e076-49ad-a75a-bbfaa50c0de7";
+				PROVISIONING_PROFILE = "74c96b55-2af0-4d0a-bb34-872508825ade";
+				PROVISIONING_PROFILE_SPECIFIER = "YJYX-VERIFY";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};

@@ -89,6 +89,7 @@
 - (void)configureTextview {
 
     contentText = [[FEPlaceHolderTextView alloc] initWithFrame:CGRectMake(3, 0, SCREEN_WIDTH-6, self.textBGview.frame.size.height)];
+    
     contentText.placeholder = @"请简要描述您的问题和意见";
     contentText.font = [UIFont systemFontOfSize:14];
     [_textBGview addSubview:contentText];

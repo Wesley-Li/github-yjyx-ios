@@ -135,7 +135,7 @@
                       }option:opt];
         
     }failure:^{
-        
+         failure();
     }];
     
 }
@@ -147,7 +147,7 @@
 
 {
     
-    NSMutableArray*array = [[NSMutableArray alloc]init];
+    NSMutableArray *array = [[NSMutableArray alloc]init];
     
 //    __block CGFloat totalProgress =0.0f;
 //    

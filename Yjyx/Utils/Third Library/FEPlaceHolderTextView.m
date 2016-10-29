@@ -7,6 +7,7 @@
 //
 
 #import "FEPlaceHolderTextView.h"
+#import "NSString+emjoy.h"
 @interface FEPlaceHolderTextView ()
 @property (nonatomic, retain) UILabel *placeHolderLabel;
 @end
@@ -41,6 +42,13 @@ CGFloat const UI_PLACEHOLDER_TEXT_CHANGED_ANIMATION_DURATION = 0.25;
 }
 - (void)textChanged:(NSNotification *)notification
 {
+    BOOL flag=[NSString isContainsTwoEmoji:self.text];
+    if (flag)
+    {
+        [self makeToast:@"不能添加表情符号" duration:1.0 position:SHOW_CENTER complete:nil];
+        self.text = [self.text substringToIndex:self.text.length -2];
+        
+    }
     if([[self placeholder] length] == 0)
     {
         return;

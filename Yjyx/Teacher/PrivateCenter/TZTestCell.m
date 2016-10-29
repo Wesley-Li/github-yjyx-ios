@@ -41,6 +41,7 @@
     _deleteBtn.tag = row;
 }
 
+
 - (UIView *)snapshotView {
     UIView *snapshotView = [[UIView alloc]init];
     
