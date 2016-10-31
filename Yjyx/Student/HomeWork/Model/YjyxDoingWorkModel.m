@@ -19,6 +19,7 @@
     model.answer = dict[@"answer"];
     model.t_id = dict[@"id"];
     model.processImgUrlArr = [NSMutableArray array];
+    model.isSuccessUrlArr = [NSMutableArray array];
     model.processAssetArr = [NSMutableArray array];
   
     model.answerArr = [NSMutableArray array];;

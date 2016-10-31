@@ -274,7 +274,7 @@ static NSString *ID = @"BGCEll";
         timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(QOS_CLASS_BACKGROUND,0));
         dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC, 1 * NSEC_PER_SEC);
         dispatch_source_set_event_handler(timer, ^{
-            NSLog(@"Fired");
+//            NSLog(@"Fired");
            
             [self countTime];
         });
@@ -577,6 +577,9 @@ static NSString *ID = @"BGCEll";
             if ([model.requireprocess integerValue] == 1) {
                 NSMutableArray *processArr = [NSMutableArray array];
                 for (NSString *str in model.processImgUrlArr) {
+                    if ([str isEqualToString:@" "]) {
+                        continue;
+                    }
                     NSMutableDictionary *tempDict = [NSMutableDictionary dictionary];
                     [tempDict setObject:str forKey:@"img"];
                     [tempDict setObject:[NSMutableArray array] forKey:@"teachervoice"];
@@ -612,6 +615,9 @@ static NSString *ID = @"BGCEll";
             if ([model.requireprocess integerValue] == 1) {
                 NSMutableArray *processArr = [NSMutableArray array];
                 for (NSString *str in model.processImgUrlArr) {
+                    if ([str isEqualToString:@" "]) {
+                        continue;
+                    }
                     NSMutableDictionary *tempDict = [NSMutableDictionary dictionary];
                     [tempDict setObject:str forKey:@"img"];
                     [tempDict setObject:[NSMutableArray array] forKey:@"teachervoice"];

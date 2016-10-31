@@ -25,7 +25,7 @@
     BOOL _isSelectOriginalPhoto;
     
     NSMutableArray *_urlArr;
-    
+    NSMutableArray  *_isSuccessUrlArr;
     CGFloat _itemWH;
     CGFloat _margin;
     LxGridViewFlowLayout *_layout;
@@ -68,6 +68,7 @@
     _selectedPhotos = [NSMutableArray array];
     _selectedAssets = [NSMutableArray array];
     _urlArr = [NSMutableArray array];
+    _isSuccessUrlArr = [NSMutableArray array];
     self.processHeightConst.constant = _itemWH;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -183,6 +184,7 @@
     _selectedPhotos = model.processImgArr;
     _urlArr = model.processImgUrlArr;
     _selectedAssets = model.processAssetArr;
+    _isSuccessUrlArr = model.isSuccessUrlArr;
     [self.processCollectionView reloadData];
     // 下一题与提交
     if(self.tag == 1000){
@@ -282,9 +284,17 @@
     if (indexPath.row == _selectedPhotos.count) {
         cell.imageView.image = [UIImage imageNamed:@"AlbumAddBtn.png"];
         cell.deleteBtn.hidden = YES;
+        cell.signImageView.hidden = YES;
     } else {
+        cell.signImageView.hidden = NO;
         cell.imageView.image = _selectedPhotos[indexPath.row];
         cell.deleteBtn.hidden = NO;
+        NSLog(@"288 288 %@", _urlArr);
+        if ([_isSuccessUrlArr[indexPath.row] isEqual:@1]) {
+            cell.signImageView.image = [UIImage imageNamed:@"voice_select_flag"];
+        }else{
+            cell.signImageView.image = [UIImage imageNamed:@"upload_pic_failed"];
+        }
     }
     cell.deleteBtn.tag = indexPath.row;
     [cell.deleteBtn addTarget:self action:@selector(deleteBtnClik:) forControlEvents:UIControlEventTouchUpInside];
@@ -315,17 +325,44 @@
             [_selectedAssets addObjectsFromArray:tempArr];
           
             _isSelectOriginalPhoto = isSelectOriginalPhoto;
-            [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArr) {
-                [_urlArr removeAllObjects];
-               
-                [_urlArr addObjectsFromArray:urlArr];
-             
-            } failure:^{
+            NSMutableDictionary *tempDict = [NSMutableDictionary dictionary];
+            for (int i = 0; i < _selectedPhotos.count; i++) {
+                NSLog(@"photo %@", _selectedPhotos[i]);
+                [tempDict setObject:_selectedPhotos[i] forKey:[NSString stringWithFormat:@"%d", i]];
+                
+            }
+            NSLog(@"tempDict%@", tempDict);
+            [UploadImageTool uploadImagesWithKeys:tempDict success:^(NSDictionary *succeededUrls) {
+                for (int i = 0; i < _selectedPhotos.count; i++) {
+                    NSString *keyStr = [NSString stringWithFormat:@"%d", i];
+                    if ([succeededUrls.allKeys containsObject:keyStr]) {
+                        [_urlArr addObject:succeededUrls[keyStr]];
+                        [_isSuccessUrlArr addObject:@1];
+                    }else{
+                        [_urlArr addObject:@" "];
+                        [_isSuccessUrlArr addObject:@0];
+                    }
+                }
+//                _urlDict = (NSMutableDictionary *)succeededUrls;
+                [self.processCollectionView reloadData];
+            } failure:^(NSDictionary *failedImages) {
                 [SVProgressHUD showWithStatus:@"上传解题步骤时,出现错误,请选择图片重新上传"];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [SVProgressHUD  dismiss];
                 });;
             }];
+
+//            [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArr) {
+//                [_urlDict removeAllObjects];
+//               
+//                [_urlArr addObjectsFromArray:urlArr];
+//             
+//            } failure:^{
+//                [SVProgressHUD showWithStatus:@"上传解题步骤时,出现错误,请选择图片重新上传"];
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    [SVProgressHUD  dismiss];
+//                });;
+//            }];
             _layout.itemCount = _selectedPhotos.count;
             [self.processCollectionView  reloadData];
             
@@ -348,7 +385,7 @@
 
 #pragma mark Click Event
 - (void)deleteBtnClik:(UIButton *)sender {
-    NSLog(@"%ld, %ld", sender.tag, _urlArr.count);
+//    NSLog(@"%ld, %ld", sender.tag, _urlArr.count);
 //    if(sender.tag >= _urlArr.count){
 //        [SVProgressHUD showWithStatus:@"上传失败,请重新选择照片上传"];
 //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -356,21 +393,20 @@
 //        });
 //        
 //    }
+    NSLog(@"%ld", sender.tag);
     [_selectedPhotos removeObjectAtIndex:sender.tag];
     if (!(_selectedAssets.count == 0)) {
         [_selectedAssets removeObjectAtIndex:sender.tag];
     }
-    if (sender.tag < _urlArr.count) {
-        [_urlArr removeObjectAtIndex:sender.tag];
-    }
-    
+    [_urlArr removeObjectAtIndex:sender.tag];
+    [_isSuccessUrlArr removeObjectAtIndex:sender.tag];
     _layout.itemCount = _selectedPhotos.count;
     
     [self.processCollectionView performBatchUpdates:^{
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:sender.tag inSection:0];
         [self.processCollectionView deleteItemsAtIndexPaths:@[indexPath]];
     } completion:^(BOOL finished) {
-        NSLog(@"----%@, %@", _model.processImgArr, _model.processImgUrlArr);
+//        NSLog(@"----%@, %@", _model.processImgArr, _model.processImgUrlDict);
         [self.processCollectionView reloadData];
     }];
 }
@@ -423,33 +459,50 @@
     [_selectedPhotos removeAllObjects];
     [_selectedPhotos addObjectsFromArray:photos];
     [_selectedAssets addObjectsFromArray:assets];
-//    NSMutableDictionary *tempDict = [NSMutableDictionary dictionary];
-//    for (int i = 0; i < _selectedPhotos.count; i++) {
-//        NSLog(@"photo %@", _selectedPhotos[i]);
-//        [tempDict setObject:_selectedPhotos[i] forKey:[NSString stringWithFormat:@"%d", i]];
-//    }
-//    NSLog(@"tempDict%@", tempDict);
-//  [UploadImageTool uploadImagesWithKeys:tempDict success:^(NSDictionary *succeededUrls) {
-//      NSLog(@"%@", succeededUrls);
-//  } failure:^(NSDictionary *failedImages) {
-//      
-//  }];
     
-    [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArr) {
-        [_urlArr removeAllObjects];
-       
-        [_urlArr addObjectsFromArray:urlArr];
-        NSLog(@"+++%@, %@", _model.processImgArr, _model.processImgUrlArr);
-    } failure:^{
-        [SVProgressHUD showWithStatus:@"上传解题步骤时,出现错误,请选择图片重新上传"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-        });;
-    }];
+ 
+    NSMutableDictionary *tempDict = [NSMutableDictionary dictionary];
+    for (int i = 0; i < _selectedPhotos.count; i++) {
+        NSLog(@"photo %@", _selectedPhotos[i]);
+        [tempDict setObject:_selectedPhotos[i] forKey:[NSString stringWithFormat:@"%d", i]];
+        
+    }
+    NSLog(@"tempDict%@", tempDict);
+  [UploadImageTool uploadImagesWithKeys:tempDict success:^(NSDictionary *succeededUrls) {
+      for (int i = 0; i < _selectedPhotos.count; i++) {
+          NSString *keyStr = [NSString stringWithFormat:@"%d", i];
+          if ([succeededUrls.allKeys containsObject:keyStr]) {
+              [_urlArr addObject:succeededUrls[keyStr]];
+              [_isSuccessUrlArr addObject:@1];
+          }else{
+              [_urlArr addObject:@" "];
+              [_isSuccessUrlArr addObject:@0];
+          }
+      }
+//      _urlDict = (NSMutableDictionary *)succeededUrls;
+      [self.processCollectionView reloadData];
+  } failure:^(NSDictionary *failedImages) {
+      [SVProgressHUD showWithStatus:@"上传解题步骤时,出现错误,请选择图片重新上传"];
+      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+          [SVProgressHUD  dismiss];
+      });;
+  }];
+    
+//    [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArr) {
+//        [_urlArr removeAllObjects];
+//       
+//        [_urlArr addObjectsFromArray:urlArr];
+//        NSLog(@"+++%@, %@", _model.processImgArr, _model.processImgUrlArr);
+//    } failure:^{
+//        [SVProgressHUD showWithStatus:@"上传解题步骤时,出现错误,请选择图片重新上传"];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [SVProgressHUD dismiss];
+//        });;
+//    }];
     
     _isSelectOriginalPhoto = isSelectOriginalPhoto;
     _layout.itemCount = _selectedPhotos.count;
-    [self.processCollectionView reloadData];
+    
    
 
 }
