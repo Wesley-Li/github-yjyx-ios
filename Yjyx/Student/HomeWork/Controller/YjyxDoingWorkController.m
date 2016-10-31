@@ -59,7 +59,7 @@
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 
 @property (assign, nonatomic) NSInteger consumeTime; // 消耗的时间
-@property (strong, nonatomic) NSTimer *timer;
+//@property (strong, nonatomic) NSTimer *timer;
 
 //@property (weak, nonatomic) UIView *bg_view; // 解题步骤的背景
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -81,10 +81,12 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *bgCollectionView;
 
+
+
 @end
 
 @implementation YjyxDoingWorkController
-
+dispatch_source_t timer;
 static NSString *ID = @"BGCEll";
 #pragma mark - 懒加载
 - (YjyxDraftView *)draftV
@@ -131,13 +133,18 @@ static NSString *ID = @"BGCEll";
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    NSLog(@"viewwillAppear");
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
 }
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"viewdidappear");
+    [self createTimer];
+}
 - (void)viewDidDisappear:(BOOL)animated
 {
-   
+   [self releaseTimer];
     [SVProgressHUD dismiss];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
@@ -149,7 +156,8 @@ static NSString *ID = @"BGCEll";
 }
 - (void)dealloc
 {
-    [self releaseTimer];
+    NSLog(@"delloc");
+    
 }
 #pragma mark - 私有方法
 - (void)loadData
@@ -243,6 +251,7 @@ static NSString *ID = @"BGCEll";
 {
     if(self.jumpDoworkArr.count != 0){
         NSTimeInterval  timeCount = [[NSDate date] timeIntervalSinceDate:self.oldDate];
+        NSLog(@"%ld", _consumeTime);
         _consumeTime += timeCount;
         self.consumeTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", _consumeTime / 60, _consumeTime % 60];
         [self createTimer];
@@ -257,38 +266,47 @@ static NSString *ID = @"BGCEll";
 // 创建定时器
 - (void)createTimer
 {
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+
         // 开启定时器
 //        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countTime) userInfo:nil repeats:YES];
 //        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 //        _timer = timer;
-        dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(QOS_CLASS_BACKGROUND,0));
+        timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(QOS_CLASS_BACKGROUND,0));
         dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC, 1 * NSEC_PER_SEC);
         dispatch_source_set_event_handler(timer, ^{
             NSLog(@"Fired");
+           
             [self countTime];
         });
-//    });
-    dispatch_resume(timer);
-    
-    dispatch_main();
+
+       dispatch_resume(timer);
+//
+
 
 }
 // 销毁定时器
 - (void)releaseTimer
 {
-
-    [_timer invalidate];
-    _timer = nil;
-
+    if(timer == nil){
+        return;
+    }
+    dispatch_cancel(timer);
+    timer = nil;
+//    [_timer invalidate];
+//    _timer = nil;
+    
 
 }
 // 记时的方法
 - (void)countTime
 {
-    _consumeTime++;
-    self.consumeTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", _consumeTime / 60, _consumeTime % 60];
-//    [self.bgView layoutIfNeeded];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _consumeTime++;
+        self.consumeTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", _consumeTime / 60, _consumeTime % 60];
+        [self.bgView layoutIfNeeded];
+    });
+    
     
 }
 // 返回按钮被点击

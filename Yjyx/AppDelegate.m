@@ -105,6 +105,7 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     _deviceToken = [[[NSString stringWithFormat:@"%@",deviceToken] substringWithRange:NSMakeRange(1, 71)] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"%@", _deviceToken);
     [UMessage registerDeviceToken:deviceToken];
     if (autologin) {//获取到devicetoken后自动登录
         NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];

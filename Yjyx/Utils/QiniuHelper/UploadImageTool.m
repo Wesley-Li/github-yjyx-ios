@@ -109,7 +109,7 @@
                          token:token
          
                       complete:^(QNResponseInfo*info,NSString*key,NSDictionary*resp) {
-                          
+                          NSLog(@"oldKEY %@", key);
                           if(info.statusCode==200&& resp) {
                               
                               NSString*url= [NSString stringWithFormat:@"%@%@",QiniuYunURL, resp[@"key"]];
@@ -229,6 +229,7 @@
 
         [imagesDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
             if ([obj isKindOfClass:[UIImage class]]) {
+                NSLog(@"+++++%@", key);
                 NSData *data = UIImageJPEGRepresentation((UIImage *)obj,0.01);
                 if (data) {
                     dispatch_group_async(group, queue, ^{
@@ -236,6 +237,7 @@
                                            key:nil
                                          token:token
                                       complete:^(QNResponseInfo *info,NSString *key,NSDictionary *resp) {
+                                          NSLog(@"-----%@", key);
                                           if (info.statusCode == 200 && resp) {
                                               NSString *url= [NSString stringWithFormat:@"%@%@",QiniuYunURL, resp[@"key"]];
                                               [succeededUrls setObject:url forKey:key];

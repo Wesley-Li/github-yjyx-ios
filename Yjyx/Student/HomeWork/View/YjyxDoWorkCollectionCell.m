@@ -423,7 +423,17 @@
     [_selectedPhotos removeAllObjects];
     [_selectedPhotos addObjectsFromArray:photos];
     [_selectedAssets addObjectsFromArray:assets];
-  
+//    NSMutableDictionary *tempDict = [NSMutableDictionary dictionary];
+//    for (int i = 0; i < _selectedPhotos.count; i++) {
+//        NSLog(@"photo %@", _selectedPhotos[i]);
+//        [tempDict setObject:_selectedPhotos[i] forKey:[NSString stringWithFormat:@"%d", i]];
+//    }
+//    NSLog(@"tempDict%@", tempDict);
+//  [UploadImageTool uploadImagesWithKeys:tempDict success:^(NSDictionary *succeededUrls) {
+//      NSLog(@"%@", succeededUrls);
+//  } failure:^(NSDictionary *failedImages) {
+//      
+//  }];
     
     [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArr) {
         [_urlArr removeAllObjects];
