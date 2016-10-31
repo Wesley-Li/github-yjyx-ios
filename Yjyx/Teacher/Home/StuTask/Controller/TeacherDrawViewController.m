@@ -314,19 +314,17 @@
 - (IBAction)speakStart:(UIButton *)sender {
     [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
         if (granted) {
-            if(flag == 500){
-                flag = 0;
-                return ;
+            NSLog(@"%d", sender.highlighted);
+            if(sender.highlighted == NO){
+                return;
             }
-            
             // 用户同意获取数据
             NSLog(@"开始录音了");
             isEdit = YES;
             self.imageview.userInteractionEnabled = NO;
             self.animationImage.hidden = NO;
             [self.animationImage startAnimating];
-            startDate = [NSDate date];
-            
+           startDate = [NSDate date];
             
 #warning  录音开始
             [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
@@ -368,7 +366,7 @@
         flag = 0;
         return;
     }
-    flag = 500;
+
     // 停止录音
     [self.recorder stop];
     self.recorder = nil;

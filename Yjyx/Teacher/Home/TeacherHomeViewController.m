@@ -18,6 +18,7 @@
 #import "MyMicroMainController.h"
 #import "ReleaseMicroController.h"
 #import "YjyxShopDisplayController.h"
+
 @interface TeacherHomeViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *signLabel;

@@ -332,24 +332,51 @@
                 
             }
             NSLog(@"tempDict%@", tempDict);
-            [UploadImageTool uploadImagesWithKeys:tempDict success:^(NSDictionary *succeededUrls) {
-                for (int i = 0; i < _selectedPhotos.count; i++) {
-                    NSString *keyStr = [NSString stringWithFormat:@"%d", i];
-                    if ([succeededUrls.allKeys containsObject:keyStr]) {
+            [SVProgressHUD showWithStatus:@"正在上传解题步骤"];
+            [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+            [UploadImageTool uploadImagesWithKeys:tempDict completed:^(NSDictionary * _Nullable succeededUrls, NSDictionary * _Nullable failedImages) {
+                [_urlArr removeAllObjects];
+                [_isSuccessUrlArr removeAllObjects];
+//                [SVProgressHUD dismiss];
+                if(succeededUrls != nil && failedImages != nil){
+                    for (int i = 0; i < _selectedPhotos.count; i++) {
+                        NSString *keyStr = [NSString stringWithFormat:@"%d", i];
+                        if ([succeededUrls.allKeys containsObject:keyStr]) {
+                            [_urlArr addObject:succeededUrls[keyStr]];
+                            [_isSuccessUrlArr addObject:@1];
+                        }else{
+                            [_urlArr addObject:@" "];
+                            [_isSuccessUrlArr addObject:@0];
+                        }
+                    }
+                    [SVProgressHUD showWithStatus:@"上传解题步骤时,有叹号的图片上传失败,重新上传"];
+                    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [SVProgressHUD  dismiss];
+                    });;
+                }else if(failedImages == nil){
+                    [SVProgressHUD showWithStatus:@"上传解题步骤时,全部图片上传成功"];
+                    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [SVProgressHUD  dismiss];
+                    });;
+                    for (int i = 0; i < _selectedPhotos.count; i++) {
+                        NSString *keyStr = [NSString stringWithFormat:@"%d", i];
                         [_urlArr addObject:succeededUrls[keyStr]];
                         [_isSuccessUrlArr addObject:@1];
-                    }else{
+                    }
+                }else{
+                    [SVProgressHUD showWithStatus:@"上传解题步骤时,全部图片上传失败,重新上传"];
+                    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [SVProgressHUD  dismiss];
+                    });;
+                    for (int i = 0; i < _selectedPhotos.count; i++) {
                         [_urlArr addObject:@" "];
                         [_isSuccessUrlArr addObject:@0];
                     }
                 }
-//                _urlDict = (NSMutableDictionary *)succeededUrls;
-                [self.processCollectionView reloadData];
-            } failure:^(NSDictionary *failedImages) {
-                [SVProgressHUD showWithStatus:@"上传解题步骤时,出现错误,请选择图片重新上传"];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [SVProgressHUD  dismiss];
-                });;
+                [self.processCollectionView  reloadData];
             }];
 
 //            [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArr) {
@@ -364,7 +391,7 @@
 //                });;
 //            }];
             _layout.itemCount = _selectedPhotos.count;
-            [self.processCollectionView  reloadData];
+            
             
             //            _collectionView.contentSize = CGSizeMake(0, ((_selectedPhotos.count + 2) / 3 ) * (_margin + _itemWH));
         }];
@@ -468,25 +495,71 @@
         
     }
     NSLog(@"tempDict%@", tempDict);
-  [UploadImageTool uploadImagesWithKeys:tempDict success:^(NSDictionary *succeededUrls) {
-      for (int i = 0; i < _selectedPhotos.count; i++) {
-          NSString *keyStr = [NSString stringWithFormat:@"%d", i];
-          if ([succeededUrls.allKeys containsObject:keyStr]) {
-              [_urlArr addObject:succeededUrls[keyStr]];
-              [_isSuccessUrlArr addObject:@1];
-          }else{
-              [_urlArr addObject:@" "];
-              [_isSuccessUrlArr addObject:@0];
-          }
-      }
-//      _urlDict = (NSMutableDictionary *)succeededUrls;
-      [self.processCollectionView reloadData];
-  } failure:^(NSDictionary *failedImages) {
-      [SVProgressHUD showWithStatus:@"上传解题步骤时,出现错误,请选择图片重新上传"];
-      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-          [SVProgressHUD  dismiss];
-      });;
-  }];
+    [SVProgressHUD showWithStatus:@"正在上传解题步骤"];
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+    [UploadImageTool uploadImagesWithKeys:tempDict completed:^(NSDictionary * _Nullable succeededUrls, NSDictionary * _Nullable failedImages) {
+//        [SVProgressHUD dismiss];
+        [_urlArr removeAllObjects];
+        [_isSuccessUrlArr removeAllObjects];
+        if(succeededUrls != nil && failedImages != nil){
+            for (int i = 0; i < _selectedPhotos.count; i++) {
+                NSString *keyStr = [NSString stringWithFormat:@"%d", i];
+                if ([succeededUrls.allKeys containsObject:keyStr]) {
+                    [_urlArr addObject:succeededUrls[keyStr]];
+                    [_isSuccessUrlArr addObject:@1];
+                }else{
+                    [_urlArr addObject:@" "];
+                    [_isSuccessUrlArr addObject:@0];
+                }
+            }
+            [SVProgressHUD showWithStatus:@"上传解题步骤时,有叹号的图片上传失败,重新上传"];
+            [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [SVProgressHUD  dismiss];
+            });;
+        }else if(failedImages == nil){
+            [SVProgressHUD showWithStatus:@"上传解题步骤时,全部图片上传成功"];
+            [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [SVProgressHUD  dismiss];
+            });;
+            for (int i = 0; i < _selectedPhotos.count; i++) {
+                NSString *keyStr = [NSString stringWithFormat:@"%d", i];
+                [_urlArr addObject:succeededUrls[keyStr]];
+                [_isSuccessUrlArr addObject:@1];
+            }
+        }else{
+          [SVProgressHUD showWithStatus:@"上传解题步骤时,全部图片上传失败,重新上传"];
+          [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+              [SVProgressHUD  dismiss];
+          });;
+            for (int i = 0; i < _selectedPhotos.count; i++) {
+                [_urlArr addObject:@" "];
+                [_isSuccessUrlArr addObject:@0];
+            }
+        }
+        [self.processCollectionView reloadData];
+    }];
+//  [UploadImageTool uploadImagesWithKeys:tempDict success:^(NSDictionary *succeededUrls) {
+//      for (int i = 0; i < _selectedPhotos.count; i++) {
+//          NSString *keyStr = [NSString stringWithFormat:@"%d", i];
+//          if ([succeededUrls.allKeys containsObject:keyStr]) {
+//              [_urlArr addObject:succeededUrls[keyStr]];
+//              [_isSuccessUrlArr addObject:@1];
+//          }else{
+//              [_urlArr addObject:@" "];
+//              [_isSuccessUrlArr addObject:@0];
+//          }
+//      }
+////      _urlDict = (NSMutableDictionary *)succeededUrls;
+//      [self.processCollectionView reloadData];
+//  } failure:^(NSDictionary *failedImages) {
+//      [SVProgressHUD showWithStatus:@"上传解题步骤时,出现错误,请选择图片重新上传"];
+//      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//          [SVProgressHUD  dismiss];
+//      });;
+//  }];
     
 //    [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArr) {
 //        [_urlArr removeAllObjects];

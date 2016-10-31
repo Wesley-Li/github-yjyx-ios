@@ -103,7 +103,9 @@
     
         trailString = @"unfinishedonly";
     }
-    
+    if(_lastID == nil){
+        return;
+    }
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"gettasksforonestudent", @"action", self.stuID, @"suid", self.lastID, @"lastid",trailString, trailString,nil];
     
     [manager GET:[BaseURL stringByAppendingString:TEACHER_SEND_STATISTIC_GET] parameters:dic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
