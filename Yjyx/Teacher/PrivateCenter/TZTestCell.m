@@ -21,10 +21,14 @@
         [self addSubview:_imageView];
         self.clipsToBounds = YES;
         
+        _signImageView = [[UIImageView alloc] init];
+        [self addSubview:_signImageView];
+        
         _deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _deleteBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [_deleteBtn setImage:[UIImage imageNamed:@"photo_delete"] forState:UIControlStateNormal];
-        _deleteBtn.frame = CGRectMake(self.tz_width - 36, 0, 36, 36);
-        _deleteBtn.imageEdgeInsets = UIEdgeInsetsMake(-10, 0, 0, -10);
+        _deleteBtn.frame = CGRectMake(self.tz_width - 26, 0, 26, 26);
+        _deleteBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         _deleteBtn.alpha = 0.6;
         [self addSubview:_deleteBtn];
     }
@@ -34,6 +38,10 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     _imageView.frame = self.bounds;
+    _signImageView.width = _imageView.width * 2 / 3;
+    _signImageView.height = _signImageView.width;
+    _signImageView.center = _imageView.center;
+    
 }
 
 - (void)setRow:(NSInteger)row {
