@@ -216,6 +216,11 @@
     NSMutableDictionary *failedImages = [[NSMutableDictionary alloc] init];
     
     [UploadImageTool getQiniuUploadToken:^(NSString *token) {
+        if (token == nil || [token stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length <= 0) {
+            failure(imagesDictionary); //无Token, 全部失败
+            return;
+        }
+        
         QNUploadOption *opt = [[QNUploadOption alloc]initWithMime:nil
                                                  progressHandler:^(NSString *key, float percent) {}
                                                           params:nil
@@ -231,17 +236,22 @@
             if ([obj isKindOfClass:[UIImage class]]) {
                 NSData *data = UIImageJPEGRepresentation((UIImage *)obj,0.01);
                 if (data) {
+                    dispatch_group_enter(group);
                     dispatch_group_async(group, queue, ^{
                         [uploadManager putData:data
                                            key:nil
                                          token:token
-                                      complete:^(QNResponseInfo *info,NSString *key,NSDictionary *resp) {
+                                      complete:^(QNResponseInfo *info,NSString *qiniuKey,NSDictionary *resp) {
                                           if (info.statusCode == 200 && resp) {
                                               NSString *url= [NSString stringWithFormat:@"%@%@",QiniuYunURL, resp[@"key"]];
+                                              NSLog(@"image uploaded, url:%@ key:%@",url,key);
                                               [succeededUrls setObject:url forKey:key];
+                                              dispatch_group_leave(group);
                                           }
                                           else {
+                                              NSLog(@"image uploading failed, key:%@",key);
                                               [failedImages setObject:obj forKey:key];
+                                              dispatch_group_leave(group);
                                           }
                                       }
                                         option:opt
