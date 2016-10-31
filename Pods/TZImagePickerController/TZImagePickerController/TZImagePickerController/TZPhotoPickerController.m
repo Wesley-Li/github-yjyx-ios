@@ -15,6 +15,7 @@
 #import "TZImageManager.h"
 #import "TZVideoPlayerController.h"
 
+
 @interface TZPhotoPickerController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate> {
     NSMutableArray *_models;
     
@@ -338,7 +339,17 @@ static CGSize AssetGridThumbnailSize;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     // take a picture / 去拍照
     if (indexPath.row >= _models.count) {
-        [self takePicture]; return;
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        if (authStatus == AVAuthorizationStatusRestricted || authStatus ==AVAuthorizationStatusDenied)
+        {
+            //无权限
+             [((TZImagePickerController *)self.navigationController) showAlertWithTitle:@"请去手机的\"设置->隐私->相机\"打开权限"];
+//            [self.view makeToast:@"请去手机的\"设置->隐私->相机\"打开权限" duration:3.0 position:SHOW_CENTER complete:nil];
+        }else{
+            [self takePicture];
+        }
+
+         return;
     }
     // preview phote or video / 预览照片或视频
     TZAssetModel *model = _models[indexPath.row];

@@ -94,7 +94,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         
         
         MPVolumeView *volumeView = [[MPVolumeView alloc]init];
-        [self addSubview:volumeView];
+//        [self addSubview:volumeView];
         [volumeView sizeToFit];
         
         
