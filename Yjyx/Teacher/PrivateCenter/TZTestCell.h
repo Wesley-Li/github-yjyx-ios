@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIButton *deleteBtn;
 @property (nonatomic, assign) NSInteger row;
+@property (strong, nonatomic) UIImageView *signImageView;
 
 - (UIView *)snapshotView;
 
