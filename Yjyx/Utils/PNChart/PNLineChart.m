@@ -204,7 +204,7 @@
     if (_showLabel) {
         for (int index = 0; index < xLabels.count; index++) {
             labelText = xLabels[index];
-
+            NSLog(@"%f, %f", _chartMarginLeft , _xLabelWidth);
             NSInteger x = (index *  _xLabelWidth + _chartMarginLeft + _xLabelWidth /2.0 );
             NSInteger y = _chartMarginBottom + _chartCavanHeight;
 

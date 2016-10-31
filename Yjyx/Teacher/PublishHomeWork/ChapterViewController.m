@@ -26,6 +26,8 @@
 
 @property (strong, nonatomic) NSMutableArray *data;
 @property (assign, nonatomic) NSInteger flag;
+
+@property (weak, nonatomic) UIImageView *remindImageV;
 @end
 
 @implementation ChapterViewController
@@ -126,9 +128,32 @@
             TreeTableView *tableview = [[TreeTableView alloc] initWithFrame:CGRectMake(0, 64+49, SCREEN_WIDTH , SCREEN_HEIGHT - 64 - 49) withData:_data];
             tableview.treeTableCellDelegate = self;
             tableview.chapterArray = self.chaperArr;
-//            tableview.gradeNumItem = self.GradeNumItem;
+            //            tableview.gradeNumItem = self.GradeNumItem;
             tableview.bounces = NO;
             [self.view addSubview:tableview];
+            [self.remindImageV removeFromSuperview];
+            if(self.data.count <= 1){
+                if(self.data.count == 1){
+                    TreeNode *tmpNode = self.data[0];
+                    if([tmpNode.parentId isEqualToString:@"#"]){
+                        UIImageView *remindImageV = [[UIImageView alloc] init];
+                        remindImageV.frame = CGRectMake(50, 129, SCREEN_WIDTH -100, SCREEN_HEIGHT - 129 - 100);
+                        remindImageV.contentMode = UIViewContentModeScaleAspectFit;
+                        self.remindImageV = remindImageV;
+                        remindImageV.image = [UIImage imageNamed:@"isbuilding"];
+                         [self.view addSubview:self.remindImageV];
+                    }
+                }else{
+                    UIImageView *remindImageV = [[UIImageView alloc] init];
+                    remindImageV.frame = CGRectMake(50, 129, SCREEN_WIDTH - 100, SCREEN_HEIGHT - 129 - 100);
+                    remindImageV.contentMode = UIViewContentModeScaleAspectFit;
+                    self.remindImageV = remindImageV;
+                    remindImageV.image = [UIImage imageNamed:@"isbuilding"];
+                     [self.view addSubview:self.remindImageV];
+                }
+            }
+         
+           
            
         }else{
             

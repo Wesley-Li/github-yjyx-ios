@@ -331,9 +331,11 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
             [self setCurrentTime:0.f];
         [self.player play];
         self.isPlay = YES;
+        self.playOrPauseBtn.selected = NO;
     } else {
         [self.player pause];
         self.isPlay = NO;
+        self.playOrPauseBtn.selected = YES;
     }
 }
 #pragma mark - 设置播放的视频

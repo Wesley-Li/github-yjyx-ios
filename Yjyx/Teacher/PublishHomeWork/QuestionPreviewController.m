@@ -50,6 +50,12 @@
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
+    if(self.isMoved == 1){
+        _model.tag = _preSelIndexPath.row + 200;
+        [self.tempArray addObject:_model];
+        // 发通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"checkTheNum" object:self];
+    }
     [self seperatePart];
     [self saveDataToTemp];
     if(self.selectArr.count == 0){
@@ -224,6 +230,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OneSubjectController *vc = [[OneSubjectController alloc] init];
+    vc.selIndexPath = indexPath;
     vc.is_select = 1;
     if ([self.selectArr[indexPath.row] isKindOfClass:[YjyxWrongSubModel class]]) {
         YjyxWrongSubModel *model = self.selectArr[indexPath.row];
@@ -364,7 +371,10 @@
 
         
     }
-    
+    if(self.tempArray.count == 0){
+        [self.rebackBtn setBackgroundImage:[UIImage imageNamed:@"reback_icon_de"] forState:UIControlStateNormal];
+        self.rebackBtn.userInteractionEnabled = NO;
+    }
     
 }
 

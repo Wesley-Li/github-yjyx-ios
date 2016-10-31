@@ -286,7 +286,7 @@
 -(void)resetTimer
 {
     _second = 60;
-    codeText.text = @"";
+
     [verifyBtn setEnabled:YES];
 
     timeLb.text = @"获取验证码";

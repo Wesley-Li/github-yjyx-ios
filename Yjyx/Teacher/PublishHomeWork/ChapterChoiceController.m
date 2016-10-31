@@ -36,6 +36,7 @@
 @property (assign, nonatomic) NSInteger flag;
 @property (nonatomic, strong) subjectContentCell *cell;
 
+@property (weak, nonatomic) IBOutlet UIImageView *remindImageV;
 
 @end
 
@@ -89,6 +90,7 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(notice:) name:@"bottomBtnNameChange" object:nil];
     [center addObserver:self selector:@selector(cellHeightChage:) name:@"subjectContentCellHeight" object:nil];
+    [center addObserver:self selector:@selector(siftIsMove) name:@"SiftViewIsMove" object:nil];
     if(_flag == 1){
       [self.bottom_button setTitle:[NSString stringWithFormat:@"确定(已选%ld题)", [[[QuestionDataBase shareDataBase] selectAllQuestionWithJumpType:@"2"] count]] forState:UIControlStateNormal];
     }else{
@@ -99,6 +101,7 @@
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [SVProgressHUD dismiss];
 }
 - (void)viewDidLoad {
@@ -168,7 +171,10 @@
     self.last_id = [NSNumber numberWithInteger:model.t_id];
     [self readDataFromNetWork];
 }
-
+- (void)siftIsMove
+{
+    [self sift:self.siftBtn];
+}
 
 // 筛选按钮的点击
 - (void)sift:(UIButton *)btn
@@ -177,15 +183,15 @@
     NSLog(@"%zd", btn.selected);
 
     if(btn.selected){
-    self.siftV.transform = CGAffineTransformMakeTranslation(0, SCREEN_HEIGHT - 64);
+        self.siftV.transform = CGAffineTransformMakeTranslation(0, SCREEN_HEIGHT - 64);
+        self.bottom_button.userInteractionEnabled = NO;
         
     }else{
         
-    self.siftV.transform = CGAffineTransformMakeTranslation(0, -(SCREEN_HEIGHT - 64));
-        
+        self.siftV.transform = CGAffineTransformMakeTranslation(0, -(SCREEN_HEIGHT - 64));
+        self.bottom_button.userInteractionEnabled = YES;
     }
 
-    
 }
 
 
@@ -272,7 +278,11 @@
                 [currentArr addObject:model];
             
             }
-            
+            if(currentArr.count == 0){
+                self.remindImageV.hidden = NO;
+            }else{
+                self.remindImageV.hidden = YES;
+            }
 //            NSLog(@"%@", currentArr);
 
             if ([self.last_id isEqual:@0]) {

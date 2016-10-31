@@ -257,10 +257,21 @@ static NSString *ID = @"BGCEll";
 // 创建定时器
 - (void)createTimer
 {
-    // 开启定时器
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countTime) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-    _timer = timer;
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        // 开启定时器
+//        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countTime) userInfo:nil repeats:YES];
+//        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+//        _timer = timer;
+        dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(QOS_CLASS_BACKGROUND,0));
+        dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC, 1 * NSEC_PER_SEC);
+        dispatch_source_set_event_handler(timer, ^{
+            NSLog(@"Fired");
+            [self countTime];
+        });
+//    });
+    dispatch_resume(timer);
+    
+    dispatch_main();
 
 }
 // 销毁定时器
@@ -277,7 +288,7 @@ static NSString *ID = @"BGCEll";
 {
     _consumeTime++;
     self.consumeTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", _consumeTime / 60, _consumeTime % 60];
-    [self.bgView layoutIfNeeded];
+//    [self.bgView layoutIfNeeded];
     
 }
 // 返回按钮被点击

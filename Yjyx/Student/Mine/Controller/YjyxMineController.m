@@ -13,6 +13,9 @@
 #import "ToolsViewController.h"
 #import "YjyxWorkPreviewViewController.h"
 #import "YjyxMicroClassViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <AVFoundation/AVCaptureDevice.h>
+#import <AVFoundation/AVMediaFormat.h>
 
 @interface YjyxMineController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -27,9 +30,11 @@
 @end
 
 @implementation YjyxMineController
+
+
 - (void)awakeFromNib
 {
-    
+   
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -101,10 +106,19 @@
         
         UIImagePickerController *pickerIamge = [[UIImagePickerController alloc] init];
         pickerIamge.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        // 允许编辑
-        pickerIamge.allowsEditing = YES;
-        pickerIamge.delegate = self;
-        [self presentViewController:pickerIamge animated:YES completion:nil];
+        
+        ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
+        if (author == ALAuthorizationStatusRestricted || author == ALAuthorizationStatusDenied){
+            //无权限
+//            UIAlertController *infoAlertVc = [UIAlertController alertControllerWithTitle:nil message:@"请去手机的\"设置->隐私->相片\"打开权限" preferredStyle:UIAlertControllerStyleAlert];
+            [self.view makeToast:@"请去手机的\"设置->隐私->相片\"打开权限" duration:3.0 position:SHOW_CENTER complete:nil];
+        }else{
+            // 允许编辑
+            pickerIamge.allowsEditing = YES;
+            pickerIamge.delegate = self;
+            [self presentViewController:pickerIamge animated:YES completion:nil];
+        }
+       
         
     }]];
     
@@ -112,10 +126,18 @@
         
         UIImagePickerController *pickerIamge = [[UIImagePickerController alloc] init];
         pickerIamge.sourceType = UIImagePickerControllerSourceTypeCamera;
-        // 允许编辑
-        pickerIamge.allowsEditing = YES;
-        pickerIamge.delegate = self;
-        [self presentViewController:pickerIamge animated:YES completion:nil];
+        
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        if (authStatus == AVAuthorizationStatusRestricted || authStatus ==AVAuthorizationStatusDenied)
+        {
+            //无权限
+             [self.view makeToast:@"请去手机的\"设置->隐私->相机\"打开权限" duration:3.0 position:SHOW_CENTER complete:nil];
+        }else{
+            // 允许编辑
+            pickerIamge.allowsEditing = YES;
+            pickerIamge.delegate = self;
+            [self presentViewController:pickerIamge animated:YES completion:nil];
+        }
         
         
     }]];

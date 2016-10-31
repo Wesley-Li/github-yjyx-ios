@@ -97,13 +97,17 @@
     NSInteger totalPrice = num * [_oneShopModel.exchange_coins integerValue];
     self.requireCoinLabel.text = [NSString stringWithFormat:@"%ld", totalPrice];
     NSInteger coinNum = [[YjyxOverallData sharedInstance].teacherInfo.coins integerValue];
-    self.exchangBtn.enabled = [self.requireCoinLabel.text integerValue] >= coinNum ? NO : YES;
-    self.promptLabel.hidden = [self.requireCoinLabel.text integerValue] >= coinNum ? NO : YES;
+    self.exchangBtn.enabled = [self.requireCoinLabel.text integerValue] > coinNum ? NO : YES;
+    self.promptLabel.hidden = [self.requireCoinLabel.text integerValue] > coinNum ? NO : YES;
+    if(self.exchangBtn.enabled == YES){
+        self.promptLabel.hidden = YES;
+    }
 }
 // 增加数量
 - (IBAction)addNumBtnClick:(UIButton *)sender {
     NSInteger coinNum = [[YjyxOverallData sharedInstance].teacherInfo.coins integerValue];
     if([self.requireCoinLabel.text integerValue] > coinNum){
+        self.promptLabel.hidden = NO;
         [self addMessageLabel];
         return;
     }
