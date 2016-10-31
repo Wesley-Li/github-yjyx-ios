@@ -109,7 +109,7 @@
                          token:token
          
                       complete:^(QNResponseInfo*info,NSString*key,NSDictionary*resp) {
-                          
+                          NSLog(@"oldKEY %@", key);
                           if(info.statusCode==200&& resp) {
                               
                               NSString*url= [NSString stringWithFormat:@"%@%@",QiniuYunURL, resp[@"key"]];
@@ -233,6 +233,7 @@
 
         [imagesDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
             if ([obj isKindOfClass:[UIImage class]]) {
+                NSLog(@"+++++%@", key);
                 NSData *data = UIImageJPEGRepresentation((UIImage *)obj,0.01);
                 if (data) {
                     dispatch_group_enter(group);
@@ -240,7 +241,10 @@
                         [uploadManager putData:data
                                            key:nil
                                          token:token
+
                                       complete:^(QNResponseInfo *info,NSString *qiniuKey,NSDictionary *resp) {
+
+
                                           if (info.statusCode == 200 && resp) {
                                               NSString *url= [NSString stringWithFormat:@"%@%@",QiniuYunURL, resp[@"key"]];
                                               NSLog(@"image uploaded, url:%@ key:%@",url,key);
