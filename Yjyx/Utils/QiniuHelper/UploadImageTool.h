@@ -34,6 +34,6 @@
 
 + (void)uploadImages:(NSArray*)imageArray progress:(void(^)(CGFloat))progress success:(void(^)(NSArray*))success failure:(void(^)())failure;
 
-+ (void)uploadImagesWithKeys:(NSDictionary *)imagesDictionary success:(void(^)(NSDictionary *succeededUrls))success failure:(void(^)(NSDictionary *failedImages))failure;
++ (void)uploadImagesWithKeys:(NSDictionary *)imagesDictionary completed:(void(^ _Nonnull)(NSDictionary *_Nullable succeededUrls,NSDictionary *_Nullable failedImages))completion;
 
 @end

@@ -207,17 +207,16 @@
 
 //上传多张带Key图片
 //imageDictionary格式：{key:image}
-//成功上传的图，回传succeededUrls，格式：{key:url}
-//失败的图，回传failedImages，格式：{key:image}
-//成功和失败的图有可能都存在
-+ (void)uploadImagesWithKeys:(NSDictionary *)imagesDictionary success:(void(^)(NSDictionary *succeededUrls))success failure:(void(^)(NSDictionary *failedImages))failure {
+//成功上传的图放在succeededUrls，格式：{key:url}
+//失败的图放在failedImages，格式：{key:image}
++ (void)uploadImagesWithKeys:(NSDictionary *)imagesDictionary completed:(void(^ _Nonnull)(NSDictionary *_Nullable succeededUrls,NSDictionary *_Nullable failedImages))completion; {
     
     NSMutableDictionary *succeededUrls = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *failedImages = [[NSMutableDictionary alloc] init];
     
     [UploadImageTool getQiniuUploadToken:^(NSString *token) {
         if (token == nil || [token stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length <= 0) {
-            failure(imagesDictionary); //无Token, 全部失败
+            completion(nil, imagesDictionary); //无Token, 全部失败
             return;
         }
         
@@ -268,17 +267,21 @@
         }];
         
         dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-            if (success) {
-                success(succeededUrls);
+            if ([succeededUrls count] > 0 && [failedImages count] > 0) {
+                completion(succeededUrls, failedImages); //成功的图和失败的图都存在
             }
-            if (failure) {
-                failure(failedImages);
+            else if ([succeededUrls count] > 0 && [failedImages count] <= 0) {
+                completion(succeededUrls, nil); //全部成功
+            }
+            else if ([succeededUrls count] <= 0 && [failedImages count] > 0) {
+                completion(nil, failedImages); //全部失败
+            }
+            else{
+                completion(nil, nil); //应该不会出现这个情况
             }
         });
     }failure:^{
-        if (failure) {
-            failure(imagesDictionary); //无Token, 全部失败
-        }
+        completion(nil, imagesDictionary); //无Token, 全部失败
     }];
 }
 
