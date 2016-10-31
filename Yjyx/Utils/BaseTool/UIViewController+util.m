@@ -22,11 +22,13 @@
 {
     [self.view hideKeyboard];
     [APP_WINDOW hideToastActivity];
+    /* 此段代码作用未明，并且objc_removeAssociatedObjects方法断开了所有关联，会有潜在问题，先注释掉。
     dispatch_block_t block = objc_getAssociatedObject(self, "backEvent");
     if (block) {
         block();
         objc_removeAssociatedObjects(self);
     }
+    */
     if ([self.navigationController popViewControllerAnimated:YES] == nil) {
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }
