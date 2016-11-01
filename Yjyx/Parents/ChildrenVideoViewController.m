@@ -15,7 +15,6 @@
     CGRect playerFrame;
     UIImageView *videoImage;
     UIButton *backBtn;
-    
 }
 @property (assign, nonatomic) NSInteger flag;  // 1代表学生端
 @end
@@ -166,12 +165,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = NO;
+    
     [self loadBackBtn];
+    
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
     {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self configureWMPlayer];
+    
    if (_URLString.length > 0) {
        playerFrame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
        wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.URLString];
@@ -220,7 +224,6 @@
        backBtn = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 44, 44)];
        [backBtn setImage:[UIImage imageNamed:@"Parent_VideoBack"] forState:UIControlStateNormal];
        [backBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-//       [self.view addSubview:backBtn];
        [self.view insertSubview:backBtn aboveSubview:videoImage];
       
    }else{
@@ -258,6 +261,16 @@
        
        [self.view addSubview:web];
    }
+    
+    
+    
+    //旋转屏幕通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onDeviceOrientationChange)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil
+     ];
+
   //    [self toFullScreenWithInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
     if([self.navigationController isKindOfClass:[YjyxCommonNavController class]]){
         _flag = 1;
@@ -301,38 +314,32 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-    [self configureWMPlayer];
-    //旋转屏幕通知
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onDeviceOrientationChange)
-                                                 name:UIDeviceOrientationDidChangeNotification
-                                               object:nil
-     ];
     
     if (_URLString.length > 0) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
     }else{
         if(_flag == 0){
-        [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
-        [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
+            [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
+            [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
         }
         self.navigationController.navigationBarHidden = NO;
+        [self setNeedsStatusBarAppearanceUpdate];
     }
-    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-//    self.navigationController.navigationBarHidden = YES;
+    //[self.navigationController setNavigationBarHidden:NO animated:YES];
     [super viewWillDisappear:animated];
 }
+
 - (void)viewDidDisappear:(BOOL)animated
 {
   
     [self releaseWMPlayer];
     [super viewDidDisappear:animated];
 }
+
 -(void)goBack
 {
     [self.navigationController popViewControllerAnimated:YES];

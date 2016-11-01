@@ -130,9 +130,7 @@ static NSString *videoNumID = @"VIDEONumID";
                                                object:nil
      ];
     if ([self.taskType isEqual:@1]) {
-    
-        self.navigationController.navigationBarHidden = NO;
-     ;
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
     }else{
         [self.navigationController setNavigationBarHidden:YES animated:YES];
     }
