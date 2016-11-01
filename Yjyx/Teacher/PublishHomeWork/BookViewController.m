@@ -51,7 +51,7 @@ static BookViewController *_instance;
     self.navigationItem.title = @"选择教材课本";
     [self loadBackBtn];
    
-    [self loadData];
+    
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ChooseMaterialCell class]) bundle:nil] forCellReuseIdentifier:ID];
     self.types = [[NSArray alloc] initWithObjects:@"选择教材版本", @"选择课本", nil];
     self.tableView.rowHeight = 65;
@@ -65,6 +65,7 @@ static BookViewController *_instance;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
+    [self loadData];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {

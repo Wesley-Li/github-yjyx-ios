@@ -48,7 +48,7 @@
 @property (strong, nonatomic) NSString *recordFilePath;
 @property (strong, nonatomic) NSString *playFilePath;
 
-
+@property (weak, nonatomic) UIView *infoView;
 @end
 
 @implementation TeacherDrawViewController
@@ -102,6 +102,9 @@
     
     // 录音
     [self.voiceBtn addTarget:self action:@selector(speakEnd:) forControlEvents:UIControlEventTouchUpInside];
+    [self.voiceBtn addTarget:self action:@selector(speakLeavel:) forControlEvents:UIControlEventTouchDragExit];
+    [self.voiceBtn addTarget:self action:@selector(speakOut:) forControlEvents:UIControlEventTouchUpOutside];
+    [self.voiceBtn addTarget:self action:@selector(speakEnter:) forControlEvents:UIControlEventTouchDragEnter];
     [self recordingAnimationConfigure];
     
     // 注册cell
@@ -360,13 +363,40 @@
 }
 
 #pragma mark - 录音结束
+- (void)speakEnter:(UIButton *)sender{
+    [self.infoView removeFromSuperview];
+}
+- (void)speakOut:(UIButton *)sender{
+    [self.infoView removeFromSuperview];
+    [self.recorder stop];
+    self.recorder = nil;
+    [self.animationImage stopAnimating];
+    self.animationImage.hidden = YES;
+}
+- (void)speakLeavel:(UIButton *)sender{
+    NSLog(@"_____");
+    UIView *infoView = [[UIView alloc] init];
+    infoView.backgroundColor = [UIColor lightGrayColor];
+    infoView.width = 100;
+    infoView.height = 100;
+    infoView.center = CGPointMake(self.view.width / 2, self.view.height * 2 / 3);
+    UILabel *infoLabel = [[UILabel alloc] init];
+    infoLabel.numberOfLines = 0;
+    infoLabel.text = @"松开手指\n将取消录音";
+    infoLabel.textAlignment = NSTextAlignmentCenter;
+    infoLabel.textColor = [UIColor whiteColor];
+    [infoLabel sizeToFit];
+    infoLabel.center = CGPointMake(infoView.width / 2, infoView.height / 2);
+    [self.view addSubview:infoView];
+    self.infoView = infoView;
+    [infoView addSubview:infoLabel];
+}
 - (void)speakEnd:(UIButton *)sender {
-
     if(flag == 1){
         flag = 0;
         return;
     }
-
+    [self.infoView removeFromSuperview];
     // 停止录音
     [self.recorder stop];
     self.recorder = nil;

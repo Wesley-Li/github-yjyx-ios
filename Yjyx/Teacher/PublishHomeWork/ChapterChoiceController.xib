@@ -38,7 +38,7 @@
                         <action selector="bottomBtnClick:" destination="-1" eventType="touchUpInside" id="FHg-UT-i5H"/>
                     </connections>
                 </button>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="isbuilding.png" translatesAutoresizingMaskIntoConstraints="NO" id="JJO-VF-TzW"/>
+                <imageView hidden="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="isbuilding.png" translatesAutoresizingMaskIntoConstraints="NO" id="JJO-VF-TzW"/>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -54,7 +54,7 @@
                 <constraint firstAttribute="trailing" secondItem="2fs-oI-AIS" secondAttribute="trailing" id="hAD-kL-bGb"/>
                 <constraint firstAttribute="bottom" secondItem="2fs-oI-AIS" secondAttribute="bottom" constant="49" id="jn4-7b-rNE"/>
             </constraints>
-            <point key="canvasLocation" x="383.5" y="342.5"/>
+            <point key="canvasLocation" x="-14" y="153"/>
         </view>
     </objects>
     <resources>

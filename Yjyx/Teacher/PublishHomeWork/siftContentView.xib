@@ -311,7 +311,7 @@
                 <outlet property="middleBtn" destination="fBs-ux-X8G" id="WZS-cY-MAw"/>
                 <outlet property="neverUseBtn" destination="bFa-Sr-P4R" id="53n-f8-DJy"/>
             </connections>
-            <point key="canvasLocation" x="505.5" y="270.5"/>
+            <point key="canvasLocation" x="-54" y="178"/>
         </view>
     </objects>
 </document>
