@@ -73,6 +73,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     for (UIViewController *vc in self.parentViewController.childViewControllers) {
         if ([vc isKindOfClass:[MicroDetailViewController class]]) {
             _flag = 1;
@@ -89,6 +90,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
+    [super viewWillDisappear:animated];
 }
 - (void)dealloc
 {

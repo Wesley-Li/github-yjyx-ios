@@ -47,14 +47,17 @@ static NSString *ID = @"cell";
 -(void)viewDidDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
+    [super viewDidDisappear:animated];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     NSLog(@"---coninset %@",  NSStringFromUIEdgeInsets(self.tableView.contentInset));
     NSLog(@"---offset %@", NSStringFromCGPoint(self.tableView.contentOffset));
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     NSLog(@"coninset %@",  NSStringFromUIEdgeInsets(self.tableView.contentInset));
     NSLog(@"offset %@", NSStringFromCGPoint(self.tableView.contentOffset));
 }

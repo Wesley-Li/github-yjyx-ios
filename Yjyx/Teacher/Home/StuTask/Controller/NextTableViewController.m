@@ -501,6 +501,7 @@
  
     [SVProgressHUD dismiss];
    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super viewWillDisappear:animated];
 }
 - (void)goBack {
     

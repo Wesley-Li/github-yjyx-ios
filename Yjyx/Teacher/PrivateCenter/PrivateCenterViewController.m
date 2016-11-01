@@ -33,7 +33,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 
-    [super viewWillAppear:YES];
+    [super viewWillAppear:animated];
     
     notify_sound = [YjyxOverallData sharedInstance].teacherInfo.notify_sound;
     notify_with_sound = [YjyxOverallData sharedInstance].teacherInfo.notify_with_sound;
@@ -80,7 +80,7 @@
         }];
 
     }
-    
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - delegate

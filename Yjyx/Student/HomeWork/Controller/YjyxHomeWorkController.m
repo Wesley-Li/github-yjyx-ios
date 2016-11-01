@@ -137,6 +137,8 @@ static NSString *HomeADID = @"HomeADID";
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     // 自动刷新
     [self loadAdData];
     
@@ -155,6 +157,7 @@ static NSString *HomeADID = @"HomeADID";
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [self workData];
     self.workTableV.contentInset = UIEdgeInsetsMake(-1, 0, 0, 0);
     NSLog(@"did%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
@@ -166,12 +169,13 @@ static NSString *HomeADID = @"HomeADID";
 //    [self.mgr.tasks makeObjectsPerformSelector:@selector(cancel)];
 //    [self.workTableV headerEndRefreshing];
     navBarHairlineImageView.hidden = NO;
+    [super viewWillDisappear:animated];
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
-    
     [self.timer invalidate];
     self.timer = nil;
+    [super viewDidDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

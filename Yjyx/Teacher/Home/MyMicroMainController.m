@@ -67,6 +67,7 @@ static NSString *ID = @"CELL";
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(14.0, 115.0, 221.0, 1)];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
@@ -88,6 +89,7 @@ static NSString *ID = @"CELL";
     [SVProgressHUD dismiss];
     [self.tableView footerEndRefreshing];
     [self.tableView headerEndRefreshing];
+    [super viewWillDisappear:animated];
 }
 #pragma mark - 私有方法
 - (void)loadRefresh

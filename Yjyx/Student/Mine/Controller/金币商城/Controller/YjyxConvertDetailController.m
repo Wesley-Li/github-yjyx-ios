@@ -32,6 +32,7 @@ static NSString *ID = @"CELL";
 - (void)viewWillDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
+    [super viewWillDisappear:animated];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

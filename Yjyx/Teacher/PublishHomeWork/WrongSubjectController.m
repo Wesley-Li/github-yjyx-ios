@@ -78,6 +78,8 @@ static NSString *ID = @"WrongSubjectCell";
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
@@ -104,6 +106,7 @@ static NSString *ID = @"WrongSubjectCell";
 - (void)viewWillDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
+    [super viewWillDisappear:animated];
 }
 - (void)dealloc
 {

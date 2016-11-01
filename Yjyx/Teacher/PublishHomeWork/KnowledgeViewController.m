@@ -110,6 +110,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
@@ -117,10 +118,12 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
+    [super viewWillDisappear:animated];
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
+    [super viewDidDisappear:animated];
 }
 #pragma mark - TreeTableCellDelegate
 

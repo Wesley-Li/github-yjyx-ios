@@ -54,7 +54,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 
-    
+    [super viewWillAppear:animated];
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = NO;

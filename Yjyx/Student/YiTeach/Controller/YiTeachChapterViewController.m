@@ -58,6 +58,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
 }
 // 网络请求

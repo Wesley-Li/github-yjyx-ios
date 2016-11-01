@@ -570,7 +570,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     self.durationTimer = nil;
     self.player = nil;
     [self.currentItem removeObserver:self forKeyPath:@"status"];
-   
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end
 // 版权属于原作者

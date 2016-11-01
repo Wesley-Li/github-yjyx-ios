@@ -20,6 +20,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
 //    self.tabBarItem.imageInsets = UIEdgeInsetsMake(7, 7, 7, 7);
 }
 - (void)didReceiveMemoryWarning {

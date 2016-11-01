@@ -62,6 +62,7 @@ static BookViewController *_instance;
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
@@ -69,6 +70,7 @@ static BookViewController *_instance;
 - (void)viewWillDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
+    [super viewWillDisappear:animated];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

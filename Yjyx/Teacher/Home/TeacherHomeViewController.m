@@ -32,6 +32,8 @@
 @implementation TeacherHomeViewController
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
 //    [self judgeTimeIsOneDay];
     self.signLabel.hidden = YES;
     self.signButton.hidden = YES;

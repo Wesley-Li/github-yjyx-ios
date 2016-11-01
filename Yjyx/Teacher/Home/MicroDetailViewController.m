@@ -118,6 +118,7 @@ static NSString *VideoNumID = @"VideoNum";
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
@@ -139,7 +140,7 @@ static NSString *VideoNumID = @"VideoNum";
     [self releaseWMPlayer];
     wmPlayer.isPlay = NO;
     
-    
+    [super viewDidDisappear:animated];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

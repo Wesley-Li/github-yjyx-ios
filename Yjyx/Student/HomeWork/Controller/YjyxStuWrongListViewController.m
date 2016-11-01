@@ -121,7 +121,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-   
+   [super viewWillAppear:animated];
+    
     self.navigationController.navigationBarHidden = NO;
     self.targetListArr = [[[self.targetlist JSONValue] reverseObjectEnumerator] allObjects];
     NSLog(@"%ld", _openMember);

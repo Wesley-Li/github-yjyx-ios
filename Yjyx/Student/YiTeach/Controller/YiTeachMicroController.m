@@ -90,6 +90,8 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     // 注册通知
     //旋转屏幕通知
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -124,7 +126,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self closeTheVideo:nil];
-    
+    [super viewWillDisappear:animated];
 }
 
 

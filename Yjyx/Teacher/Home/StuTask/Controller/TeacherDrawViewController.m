@@ -241,12 +241,14 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if([self.navigationController isKindOfClass:[YjyxCommonNavController class]]){
         self.navigationController.navigationBar.barTintColor = STUDENTCOLOR;
     }
 }
 - (void)viewDidAppear:(BOOL)animated {
 
+    [super viewDidAppear:animated];
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 }
 

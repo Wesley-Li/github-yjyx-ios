@@ -38,6 +38,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
      [SVProgressHUD dismiss];
+    [super viewDidDisappear:animated];
 }
 //设置返回按钮
 - (void)setBackButtonItem{

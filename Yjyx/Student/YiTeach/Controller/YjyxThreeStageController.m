@@ -78,6 +78,8 @@ static NSString *ID = @"CELL";
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     // 注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHeight:) name:@"WEBVIEW_HEIGHT" object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadView:) name:@"WEBVIEW_HEIGHT3" object:nil];
@@ -107,6 +109,7 @@ static NSString *ID = @"CELL";
 - (void)viewWillDisappear:(BOOL)animated {
 
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super viewWillDisappear:animated];
 }
 #pragma mark -私有方法
 // 网络数据请求

@@ -276,7 +276,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:YES];
+    [super viewWillAppear:animated];
 
 
     //旋转屏幕通知
@@ -301,13 +301,13 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
 //    self.navigationController.navigationBarHidden = YES;
-    [super viewWillDisappear:YES];
+    [super viewWillDisappear:animated];
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
   
     [self releaseWMPlayer];
-    
+    [super viewDidDisappear:animated];
 }
 -(void)goBack
 {

@@ -25,6 +25,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
+    [super viewWillAppear:animated];
+    
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
@@ -50,6 +52,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self.view endEditing:YES];
+    [super viewWillDisappear:animated];
 }
 #pragma mark - 配置导航栏
 - (void)configureNavBar {

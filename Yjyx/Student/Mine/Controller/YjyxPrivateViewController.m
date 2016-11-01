@@ -30,7 +30,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    [super viewWillAppear:YES];
+    [super viewWillAppear:animated];
     NSString *reciNoti = [YjyxOverallData sharedInstance].studentInfo.receive_notify;
     NSString *soundNoti = [YjyxOverallData sharedInstance].studentInfo.notify_with_sound;
     NSMutableArray *arr = [NSMutableArray arrayWithObjects:reciNoti, soundNoti, nil];
@@ -70,6 +70,7 @@
         
         //        NSLog(@"%@", error);
     }];
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - delegate

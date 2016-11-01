@@ -143,6 +143,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self readDataFromNetWork];
 }
 - (void)addReleaseStu:(UIButton *)btn
@@ -244,6 +245,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
+    [super viewWillDisappear:animated];
 }
 - (void)goBack {
     

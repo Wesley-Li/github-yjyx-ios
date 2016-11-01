@@ -41,6 +41,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self.view endEditing:YES];
+    [super viewWillDisappear:animated];
 }
 #pragma mark - 配置导航栏
 - (void)configureNavBar {

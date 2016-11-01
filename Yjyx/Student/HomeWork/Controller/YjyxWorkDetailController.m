@@ -118,6 +118,8 @@ static NSString *videoNumID = @"VIDEONumID";
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     [self setNeedsStatusBarAppearanceUpdate];
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
     [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
@@ -145,6 +147,7 @@ static NSString *videoNumID = @"VIDEONumID";
 {
 
     [SVProgressHUD dismiss];
+    [super viewWillDisappear:animated];
     
 }
 - (void)viewDidAppear:(BOOL)animated
@@ -160,9 +163,9 @@ static NSString *videoNumID = @"VIDEONumID";
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
-    
     [wmPlayer removeFromSuperview];
     [self releaseWMPlayer];
+    [super viewDidDisappear:animated];
 }
 - (void)dealloc
 {

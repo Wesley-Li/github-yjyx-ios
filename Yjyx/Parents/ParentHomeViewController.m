@@ -54,14 +54,13 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:YES];
+    [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    
-
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

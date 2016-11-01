@@ -40,7 +40,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:YES];
+    [super viewWillAppear:animated];
     
     notify_with_sound = [YjyxOverallData sharedInstance].parentInfo.notify_with_sound;
     receive_notify = [YjyxOverallData sharedInstance].parentInfo.receive_notify;
@@ -63,9 +63,9 @@
 
         }
     }
-    [super viewWillDisappear:YES];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

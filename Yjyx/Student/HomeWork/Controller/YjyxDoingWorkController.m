@@ -133,12 +133,15 @@ static NSString *ID = @"BGCEll";
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     NSLog(@"viewwillAppear");
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     NSLog(@"viewdidappear");
     [self createTimer];
 }
@@ -147,7 +150,7 @@ static NSString *ID = @"BGCEll";
    [self releaseTimer];
     [SVProgressHUD dismiss];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
+    [super viewDidDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

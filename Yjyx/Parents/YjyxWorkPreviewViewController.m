@@ -90,7 +90,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:YES];
+    [super viewWillAppear:animated];
      self.navigationController.navigationBarHidden = NO;
     if(self.jumpType == 1){
          self.beginWorkBtn.hidden = NO;
@@ -108,7 +108,7 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cellHeighChange" object:nil];
-    [super viewWillDisappear:YES];
+    [super viewWillDisappear:animated];
 }
 - (void)dealloc{
     

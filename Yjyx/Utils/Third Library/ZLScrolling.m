@@ -133,10 +133,12 @@ static NSInteger pageCount = 1000;
 - (void)viewDidDisappear:(BOOL)animated
 {
     [self removeTimer];
+    [super viewDidDisappear:animated];
 }
 // 添加timer
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     if (!_timer) {
         [self addTimer];
     }

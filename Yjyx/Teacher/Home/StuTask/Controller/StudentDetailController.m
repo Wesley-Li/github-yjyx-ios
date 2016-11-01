@@ -88,11 +88,13 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self readDataFromNetWork];
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
+    [super viewDidDisappear:animated];
 }
 - (void)readDataFromNetWork {
     

@@ -47,6 +47,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;

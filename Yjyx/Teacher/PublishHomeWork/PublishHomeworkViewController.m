@@ -57,6 +57,8 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     self.navigationController.navigationBarHidden = NO;
 //    self.navigationController.navigationBar.hidden = NO;
     for (UIViewController *vc in self.parentViewController.childViewControllers) {

@@ -27,6 +27,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
+    [super viewDidDisappear:animated];
 }
 - (void)textFieldDidChange:(UITextField *)textField
 {

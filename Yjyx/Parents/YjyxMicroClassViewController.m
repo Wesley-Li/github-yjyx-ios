@@ -124,7 +124,7 @@
     [videoImage removeFromSuperview];
     [wmPlayer removeFromSuperview];
     [self releaseWMPlayer];
-    
+    [super viewDidDisappear:animated];
 }
 
 -(void)videoDidFinished:(NSNotification *)notice{

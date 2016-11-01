@@ -188,6 +188,7 @@ static NSString *StudentID = @"StudentCell";
 - (void)viewDidDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
+    [super viewDidDisappear:animated];
 }
 #pragma mark - 私有方法
 

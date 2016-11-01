@@ -64,7 +64,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:YES];
+    [super viewWillAppear:animated];
     if(self.jumpType == 1){
         [self getStudentStatus];
     }else{

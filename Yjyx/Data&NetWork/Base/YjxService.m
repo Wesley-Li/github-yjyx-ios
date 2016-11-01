@@ -120,6 +120,9 @@
                 [defaults synchronize];
             }
         }else{
+            
+        
+            
             block(nil,nil);
         }
     }failure:^(AFHTTPRequestOperation *operation, NSError *error){

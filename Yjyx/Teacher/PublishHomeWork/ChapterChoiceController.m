@@ -82,6 +82,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
+    [super viewWillAppear:animated];
+    
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tab_bgImage.hidden = YES;
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.customButton.hidden = YES;
@@ -103,6 +105,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [SVProgressHUD dismiss];
+    [super viewWillDisappear:animated];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

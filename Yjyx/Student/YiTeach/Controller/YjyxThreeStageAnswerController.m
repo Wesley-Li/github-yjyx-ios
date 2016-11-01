@@ -101,6 +101,7 @@ static NSString *ID = @"CELL";
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
     if(_openMember == 1){
         _openMember = 0;
@@ -116,8 +117,8 @@ static NSString *ID = @"CELL";
                 ((YiTeachMicroController *)vc).openMember = 1;
             }
         }
-       
     }
+    [super viewWillDisappear:animated];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

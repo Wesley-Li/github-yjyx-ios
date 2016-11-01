@@ -140,11 +140,12 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if(_openMember == 1){
         [self getchildResult:self.taskResultId];
         _openMember = 0;
     }
-    [super viewWillAppear:YES];
+
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
     [self.navigationController setNavigationBarHidden:NO animated:YES];;

@@ -64,7 +64,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:YES];
+    [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
     self.navigationController.navigationBarHidden = NO;
@@ -74,7 +74,7 @@
 {
     
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [super viewWillDisappear:YES];
+    [super viewWillDisappear:animated];
 }
 
 - (void)initView

@@ -315,7 +315,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 
-    
+    [super viewDidAppear:animated];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 
@@ -326,6 +326,7 @@
     }
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super viewWillDisappear:animated];
 }
 
 

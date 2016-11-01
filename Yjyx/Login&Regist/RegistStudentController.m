@@ -64,6 +64,7 @@
 }
 -  (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     NSLog(@"%@", self.navigationController.childViewControllers);
     self.navigationController.navigationBarHidden = NO;
 }

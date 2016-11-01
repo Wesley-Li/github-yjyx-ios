@@ -107,6 +107,8 @@ static NSString *VideoID = @"VIDEOCELL";
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
     
     //旋转屏幕通知
@@ -135,6 +137,7 @@ static NSString *VideoID = @"VIDEOCELL";
         [self closeTheVideo:nil];
     }
     [SVProgressHUD dismiss];
+    [super viewWillDisappear:animated];
 }
 -(void)dealloc{
     [wmPlayer removeFromSuperview];

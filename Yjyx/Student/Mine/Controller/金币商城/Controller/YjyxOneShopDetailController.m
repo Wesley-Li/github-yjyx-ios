@@ -73,11 +73,13 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     self.navigationItem.title = @"金币商城";
   
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     if (self.exchangBtn.enabled == NO) {
         [self addMessageLabel];
     }

@@ -84,6 +84,7 @@ static NSString *ID = @"CELL";
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
     if(_jumpType == 1){
 //        NSLog(@"%ld", _selIndexPath.row);
@@ -102,6 +103,7 @@ static NSString *ID = @"CELL";
     [SVProgressHUD dismiss];
     self.wds.height = 0;
     [self.searchV removeFromSuperview];
+    [super viewWillDisappear:animated];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -213,7 +215,7 @@ static NSString *ID = @"CELL";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    YjyxWorkDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    YjyxWorkDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
     cell.delegate = self;
     cell.OneSubjectModel = self.allWorkArray[indexPath.row];
     cell.tag = indexPath.row;

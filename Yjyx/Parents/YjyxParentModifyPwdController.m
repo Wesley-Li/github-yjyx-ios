@@ -34,6 +34,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
+    [super viewDidDisappear:animated];
 }
 - (void)setupBarButtonItem
 {
