@@ -51,7 +51,7 @@ static NSString *VideoID = @"VIDEOCELL";
     [super viewDidLoad];
     
     [SVProgressHUD showWithStatus:@"正在加载..."];
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationItem.title = @"题目详情";
     // 加载返回按钮
     [self loadBackBtn];
@@ -123,7 +123,7 @@ static NSString *VideoID = @"VIDEOCELL";
     }else{
         [self.moveToReleaseBtn setTitle:@"移除本题" forState:UIControlStateNormal];
     }
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
    
     NSLog(@"%@$$$$$$$", self.parentViewController);
 }

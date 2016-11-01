@@ -35,7 +35,7 @@
     NSString *soundNoti = [YjyxOverallData sharedInstance].studentInfo.notify_with_sound;
     NSMutableArray *arr = [NSMutableArray arrayWithObjects:reciNoti, soundNoti, nil];
     [[NSUserDefaults standardUserDefaults] setObject:arr forKey:@"StudentVoice"];
-     self.navigationController.navigationBarHidden = NO;
+     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.tableView reloadData];
 }
 

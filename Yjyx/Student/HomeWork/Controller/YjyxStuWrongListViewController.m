@@ -68,7 +68,7 @@
     self.blankfillExpandDic = [NSMutableDictionary dictionary];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.index = 0;
     self.count = 20;
     if ([self.targetListArr count] < 20) {
@@ -123,7 +123,7 @@
 {
    [super viewWillAppear:animated];
     
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.targetListArr = [[[self.targetlist JSONValue] reverseObjectEnumerator] allObjects];
     NSLog(@"%ld", _openMember);
     if(_openMember == 1){

@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self loadBackBtn];
     [self initView];
     // Do any additional setup after loading the view from its nib.

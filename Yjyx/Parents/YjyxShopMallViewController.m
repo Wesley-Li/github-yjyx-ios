@@ -35,12 +35,12 @@
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RCLabelReload" object:nil];
     [super viewWillDisappear:animated];
 }

@@ -37,7 +37,7 @@
 //    }
     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
     
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     _doWorkArr = [NSMutableArray array];
     _choices = [[NSArray alloc] init];
     _blankfills = [[NSArray alloc] init];
@@ -91,7 +91,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-     self.navigationController.navigationBarHidden = NO;
+     [self.navigationController setNavigationBarHidden:NO animated:YES];
     if(self.jumpType == 1){
          self.beginWorkBtn.hidden = NO;
 //        self.previewTable.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);

@@ -78,7 +78,7 @@ static NSString *StudentID = @"StudentCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadData];
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     if(self.w_id != nil || [_taskModel.tasktype isEqual:@2]){
          self.navigationItem.title = @"发布微课";
     }else{

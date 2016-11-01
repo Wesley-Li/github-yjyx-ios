@@ -60,12 +60,12 @@
 {
     [super viewWillAppear:animated];
     [self preparechildrens];
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-//    self.navigationController.navigationBarHidden = YES;
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
     [super viewWillDisappear:animated];
 }
 

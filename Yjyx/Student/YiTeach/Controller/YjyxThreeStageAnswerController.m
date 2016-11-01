@@ -102,7 +102,7 @@ static NSString *ID = @"CELL";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     if(_openMember == 1){
         _openMember = 0;
        [self loadData]; 

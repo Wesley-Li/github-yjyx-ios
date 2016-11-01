@@ -47,7 +47,7 @@
     
     isNeednotifySet = YES;
     [_personalTab reloadData];
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil]];
 }

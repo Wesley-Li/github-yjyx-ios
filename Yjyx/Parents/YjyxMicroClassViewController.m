@@ -116,7 +116,7 @@
     if(self.jumpType == 1){
         [self.navigationController setNavigationBarHidden:YES animated:YES];
     }else{
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     }
 }
 
@@ -304,7 +304,7 @@
 //    self.blankfills = [NSMutableArray array];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self loadBackBtn];
     self.view.backgroundColor = RGBACOLOR(240, 240, 240, 1);
     

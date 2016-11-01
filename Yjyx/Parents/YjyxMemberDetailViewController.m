@@ -70,7 +70,7 @@
     }else{
     [self getChildrenStatus];
     }
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 #pragma mark - 家长端中的小孩

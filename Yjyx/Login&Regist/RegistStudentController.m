@@ -66,7 +66,7 @@
 {
     [super viewWillAppear:animated];
     NSLog(@"%@", self.navigationController.childViewControllers);
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 #pragma mark - 私有方法

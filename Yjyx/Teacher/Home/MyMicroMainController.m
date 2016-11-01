@@ -68,7 +68,7 @@ static NSString *ID = @"CELL";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(14.0, 115.0, 221.0, 1)];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     ((AppDelegate*)SYS_DELEGATE).cusTBViewController.tabBar.hidden = YES;

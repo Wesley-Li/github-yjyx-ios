@@ -142,7 +142,7 @@ static NSString *HomeADID = @"HomeADID";
     // 自动刷新
     [self loadAdData];
     
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     NSLog(@"will%@", NSStringFromUIEdgeInsets(self.workTableV.contentInset));
     
     if(self.homeAdArray.count != 1 && self.homeAdArray.count != 0 && self.timer == nil){

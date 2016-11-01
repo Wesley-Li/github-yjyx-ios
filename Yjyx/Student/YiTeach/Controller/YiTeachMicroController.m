@@ -114,7 +114,7 @@
     //注册全屏播放通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
 
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 
     if(_openMember == 1){
         [self readDataFromNetwork];

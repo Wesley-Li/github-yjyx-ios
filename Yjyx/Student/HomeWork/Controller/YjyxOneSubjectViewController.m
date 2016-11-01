@@ -85,7 +85,7 @@ static NSString *ID = @"CELL";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     if(_jumpType == 1){
 //        NSLog(@"%ld", _selIndexPath.row);
 //        YjyxTodayWorkModel *model = self.allWorkArray[_selIndexPath.row];
