@@ -98,6 +98,7 @@
 //}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self configureWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
     //旋转屏幕通知
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -345,17 +346,17 @@
     // 保存高度
     if (cell.indexPath.section == 0) {
         
-        if (![self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height)
+        if (![self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||fabs([[self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] - cell.height) > 2)
         {
             [self.choiceCellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld",cell.tag]];
             [self.subjectTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:0 ]] withRowAnimation:UITableViewRowAnimationNone];
         }
         
     }else {
-        if (![self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height)
+        if (![self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||fabs([[self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] - cell.height) > 2)
         {
             [self.blankfillHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld",cell.tag]];
-            [self.subjectTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:1 ]] withRowAnimation:UITableViewRowAnimationNone];
+            [self.subjectTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
         }
         
     }
@@ -606,7 +607,10 @@
         if (self.jumpType == 1) {
             playerFrame.origin.y = 0;
         }
-        wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.videoURL];
+        if (wmPlayer == nil) {
+            wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.videoURL];
+        }
+        
         [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(wmPlayer).with.offset(-10);
             make.height.mas_equalTo(30);
@@ -618,8 +622,10 @@
         [self.view addSubview:wmPlayer];
         wmPlayer.isPlay = NO;
         [wmPlayer.player pause];
-        
-        videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
+        if (videoImage == nil) {
+            videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
+
+        }
         videoImage.image = [UIImage imageNamed:@"Common_video.png"];
         if (self.jumpType == 1) {
             videoImage.y = 0;

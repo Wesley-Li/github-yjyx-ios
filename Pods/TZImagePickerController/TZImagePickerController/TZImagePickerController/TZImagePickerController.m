@@ -14,6 +14,7 @@
 #import "UIView+Layout.h"
 #import "TZImageManager.h"
 
+
 @interface TZImagePickerController () {
     NSTimer *_timer;
     UILabel *_tipLable;

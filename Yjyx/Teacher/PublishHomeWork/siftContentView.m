@@ -99,7 +99,7 @@
         
         self.level = @"1|2|3";
         
-    }else if (self.allLevelBtn.selected ) {
+    }else if (self.allLevelBtn.selected || (!self.easyBtn.selected && !self.middleBtn.selected && !self.hardBtn.selected && !self.allLevelBtn.selected )) {
         
         self.easyBtn.selected = NO;
         self.middleBtn.selected = NO;
@@ -153,7 +153,7 @@
 - (IBAction)configureBtnClick:(UIButton *)sender {
     
     [self.delegate configurePamra];
-    self.transform = CGAffineTransformMakeTranslation(0, -(SCREEN_HEIGHT - 64));
+//    self.transform = CGAffineTransformMakeTranslation(0, -(SCREEN_HEIGHT - 64));
     
     
 }

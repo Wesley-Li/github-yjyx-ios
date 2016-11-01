@@ -50,6 +50,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 - (instancetype)initWithFrame:(CGRect)frame videoURLStr:(NSString *)videoURLStr{
     self = [super init];
     if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDoubleTap) name:@"SCREENOPENORClose" object:nil];
         self.frame = frame;
         self.backgroundColor = [UIColor blackColor];
         self.currentItem = [self getPlayItemWithURLString:videoURLStr];
@@ -444,6 +445,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         self.durationTimer = nil;
     }
 }
+
 #pragma mark
 #pragma mark autoDismissBottomView
 -(void)autoDismissBottomView:(NSTimer *)timer{
@@ -487,7 +489,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     
     __weak typeof(self) weakSelf = self;
     
-    [weakSelf.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(interval, NSEC_PER_SEC)  queue:NULL /* If you pass NULL, the main queue is used. */ usingBlock:^(CMTime time){
+    [weakSelf.player addPeriodicTimeObserverForInterval:CMTimeMakeWithSeconds(1, NSEC_PER_SEC)  queue:NULL /* If you pass NULL, the main queue is used. */ usingBlock:^(CMTime time){
         [weakSelf syncScrubber];
     }];
     
@@ -569,6 +571,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     self.autoDismissTimer = nil;
     self.durationTimer = nil;
     self.player = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.currentItem removeObserver:self forKeyPath:@"status"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

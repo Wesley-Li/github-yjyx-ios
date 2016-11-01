@@ -264,7 +264,31 @@
     }
     
 }
-
+- (void)configureWMPlayer
+{
+    if (_URLString.length > 0) {
+        playerFrame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
+        if (wmPlayer == nil) {
+            wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.URLString];
+        }
+        
+        wmPlayer.closeBtn.hidden = YES;
+        [self.view addSubview:wmPlayer];
+        [wmPlayer.player pause];
+        wmPlayer.isPlay = NO;
+        if (videoImage == nil) {
+            videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
+        }
+        
+        videoImage.image = [UIImage imageNamed:@"Common_video.png"];
+        videoImage.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playVideo)];
+        [videoImage addGestureRecognizer:tap];
+        [self.view addSubview:videoImage];
+        UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, playerFrame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - playerFrame.size.height)];
+        web.detectsPhoneNumbers = NO;
+    }
+}
 
 - (BOOL)prefersStatusBarHidden {
     if(self.URLString.length > 0){
@@ -278,7 +302,7 @@
 {
     [super viewWillAppear:animated];
 
-
+    [self configureWMPlayer];
     //旋转屏幕通知
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onDeviceOrientationChange)

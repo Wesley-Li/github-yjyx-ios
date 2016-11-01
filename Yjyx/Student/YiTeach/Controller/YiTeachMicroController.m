@@ -99,7 +99,7 @@
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil
      ];
-    
+    [self configureWMPlayer];     
     //注册播放完成通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     
@@ -404,7 +404,10 @@
     
     if (self.videoURL != nil || self.videoURL.length != 0) {
         playerFrame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
-        wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.videoURL];
+        if (wmPlayer == nil) {
+            wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.videoURL];
+        }
+        
         NSLog(@"%@", wmPlayer);
         [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(wmPlayer).with.offset(-10);
@@ -417,8 +420,10 @@
         [self.view addSubview:wmPlayer];
         wmPlayer.isPlay = NO;
         [wmPlayer.player pause];
-       
-        videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
+        if (videoImage == nil) {
+            videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
+        }
+        
         videoImage.image = [UIImage imageNamed:@"Common_video.png"];
         
         

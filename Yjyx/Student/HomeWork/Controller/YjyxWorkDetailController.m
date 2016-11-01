@@ -220,14 +220,14 @@ static NSString *videoNumID = @"VIDEONumID";
     // 保存高度
     if (cell.indexPath.section == 4) {
         
-        if (![self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height)
+        if (![self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||fabs([[self.choiceCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] - cell.height) > 2)
         {
             [self.choiceCellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld",cell.tag]];
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:4 ]] withRowAnimation:UITableViewRowAnimationNone];
         }
         
     }else if(cell.indexPath.section == 5){
-        if (![self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height)
+        if (![self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||fabs([[self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] - cell.height) > 2)
         {
             
             NSLog(@"%@", [self.blankfillHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]);
@@ -245,7 +245,7 @@ static NSString *videoNumID = @"VIDEONumID";
 {
     MicroKnowledgeCell *cell = [noti object];
     NSLog(@"%ld", cell.tag);
-    if (![self.knowCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||[[self.knowCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] != cell.height) {
+    if (![self.knowCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]||fabs([[self.knowCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]] floatValue] - cell.height) > 2) {
         NSLog(@"%f-----%@", cell.height, [self.knowCellHeightDic objectForKey:[NSString stringWithFormat:@"%ld",cell.tag]]);
         [self.knowCellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.tag]];
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:cell.tag inSection:2]] withRowAnimation:UITableViewRowAnimationNone];

@@ -114,9 +114,16 @@
             
             
         }else {
-            
+            NSLog(@"%@", responseObject[@"msg"]);
             [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
-            [SVProgressHUD dismissWithDelay:0.8];
+//            [SVProgressHUD dismissWithDelay:0.8];
+            UIImage *image = [UIImage imageNamed:@"isbuilding"];
+            UIImageView *imageV = [[UIImageView alloc] initWithImage:image];
+            imageV.width = SCREEN_WIDTH - 80;
+            imageV.height = image.size.height *imageV.width/image.size.width;
+            imageV.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+            
+            [self.view addSubview:imageV];
             
         }
         

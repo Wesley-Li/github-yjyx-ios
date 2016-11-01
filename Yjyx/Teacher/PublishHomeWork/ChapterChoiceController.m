@@ -184,7 +184,7 @@
 {
     btn.selected = !btn.selected;
     NSLog(@"%zd", btn.selected);
-
+    self.bottom_button.selected = btn.selected;
     if(btn.selected){
         self.siftV.transform = CGAffineTransformMakeTranslation(0, SCREEN_HEIGHT - 64);
         self.bottom_button.userInteractionEnabled = NO;
@@ -281,11 +281,7 @@
                 [currentArr addObject:model];
             
             }
-            if(currentArr.count == 0){
-                self.remindImageV.hidden = NO;
-            }else{
-                self.remindImageV.hidden = YES;
-            }
+          
 //            NSLog(@"%@", currentArr);
 
             if ([self.last_id isEqual:@0]) {
@@ -298,7 +294,11 @@
                 [self.dataSoruce addObjectsFromArray:currentArr];
                 [self.tableView footerEndRefreshing];
             }
-            
+            if(self.dataSoruce.count == 0){
+                self.remindImageV.hidden = NO;
+            }else{
+                self.remindImageV.hidden = YES;
+            }
             [self.tableView reloadData];
             if ([self.last_id isEqual:@0] && self.dataSoruce.count != 0) {
                 [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
@@ -373,7 +373,7 @@
 
     subjectContentCell *cell = [sender object];
     
-    if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.tag]] || [[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.tag]] floatValue] != cell.height ) {
+    if (![self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.tag]] || fabs([[self.cellHeightDic objectForKey:[NSString stringWithFormat:@"%ld", cell.tag]] floatValue] - cell.height) > 2 ) {
         
         [self.cellHeightDic setObject:[NSNumber numberWithFloat:cell.height] forKey:[NSString stringWithFormat:@"%ld", cell.tag]];
         
@@ -541,10 +541,11 @@
 
 #pragma mark - siftContentViewDelegate
 - (void)configurePamra {
-
+    [self sift:self.bottom_button];
     self.questionType = self.siftV.questionType;
     self.level = self.siftV.level;
     self.siftBtn.selected = !_siftBtn.selected;
+    NSLog(@"%@,%@,%d", self.questionType, self.level, self.siftBtn.selected);
     [self loadNewData];
     
     
