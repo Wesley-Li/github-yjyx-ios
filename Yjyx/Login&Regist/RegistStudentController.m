@@ -199,7 +199,7 @@
             if([responseObject[@"retcode"] isEqual: @0]){
                 if ([responseObject[@"exist"] isEqual: @1]) {
                     [self.view makeToast:@"此用户名已经存在" duration:1.0 position:SHOW_CENTER complete:nil];
-                   
+                    [_recvCodeBtn setEnabled:YES];
                 }else{
                     //发送注册码按钮失效，防止频繁请求
                     [_recvCodeBtn setEnabled:false];
@@ -233,10 +233,11 @@
                 }
             }else{
                 [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
+                [_recvCodeBtn setEnabled:YES];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-           
             [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
+            [_recvCodeBtn setEnabled:YES];
         }];
 
     }
@@ -244,7 +245,8 @@
 }
 - (void)checkCodeTimeout
 {
-    _timeLabel.text = [NSString stringWithFormat:@"%ld",(long)_second--];
+    _timeLabel.text = [NSString stringWithFormat:@"%ld秒后重发",(long)_second--];
+    _timeLabel.textColor = [UIColor darkGrayColor];
     if (_second < 0) {
         [self resetTimer];
     }
@@ -257,6 +259,7 @@
     [_recvCodeBtn setEnabled:YES];
     
     _timeLabel.text = @"获取验证码";
+    _timeLabel.textColor = [UIColor blackColor];
 //    timeLb.backgroundColor = RGBACOLOR(19.0, 141.0, 101.0, 1);
     
     [_timer invalidate];
