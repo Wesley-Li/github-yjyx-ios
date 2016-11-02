@@ -164,7 +164,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     [self loadBackBtn];
     
@@ -322,20 +321,15 @@
             [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
             [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, [UIFont systemFontOfSize:17],NSFontAttributeName,nil]];
         }
+        
         [self.navigationController setNavigationBarHidden:NO animated:YES];
         [self setNeedsStatusBarAppearanceUpdate];
     }
 }
 
--(void)viewWillDisappear:(BOOL)animated
-{
-    //[self.navigationController setNavigationBarHidden:NO animated:YES];
-    [super viewWillDisappear:animated];
-}
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-  
     [self releaseWMPlayer];
     [super viewDidDisappear:animated];
 }
