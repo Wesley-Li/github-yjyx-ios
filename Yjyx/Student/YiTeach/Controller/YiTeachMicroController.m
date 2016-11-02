@@ -402,51 +402,41 @@
 #pragma mark - 配置视频
 - (void)configureWMPlayer {
     
-    if (self.videoURL != nil || self.videoURL.length != 0) {
+    if (self.videoURL != nil || self.videoURL.length > 0) {
         playerFrame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
         if (wmPlayer == nil) {
             wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.videoURL];
+            
+            [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(wmPlayer).with.offset(-10);
+                make.height.mas_equalTo(30);
+                make.width.mas_equalTo(30);
+                make.top.equalTo(wmPlayer).with.offset(5);
+            }];
+            
+            wmPlayer.layer.masksToBounds = YES;
+        }
+        else{
+            [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
+            [wmPlayer setVideoURLStr:self.videoURL];
         }
         
-        NSLog(@"%@", wmPlayer);
-        [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(wmPlayer).with.offset(-10);
-            make.height.mas_equalTo(30);
-            make.width.mas_equalTo(30);
-            make.top.equalTo(wmPlayer).with.offset(5);
-        }];
         wmPlayer.closeBtn.hidden = YES;
-        wmPlayer.layer.masksToBounds = YES;
         [self.view addSubview:wmPlayer];
         wmPlayer.isPlay = NO;
         [wmPlayer.player pause];
+
         if (videoImage == nil) {
             videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
+            videoImage.image = [UIImage imageNamed:@"Common_video.png"];
+            videoImage.layer.masksToBounds = YES;
+            videoImage.userInteractionEnabled = YES;
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
+            [videoImage addGestureRecognizer:tap];
         }
-        
-        videoImage.image = [UIImage imageNamed:@"Common_video.png"];
-        
-        
-        videoImage.layer.masksToBounds = YES;
-        videoImage.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
-        [videoImage addGestureRecognizer:tap];
         [self.view addSubview:videoImage];
- 
-        
-    }else{
-        videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
-        videoImage.image = [UIImage imageNamed:@"Common_video.png"];
-        
-        videoImage.layer.masksToBounds = YES;
-        videoImage.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
-        [videoImage addGestureRecognizer:tap];
-        [self.view addSubview:videoImage];
-        
-
+        [self.view bringSubviewToFront:videoImage];
     }
-
     
 }
 
@@ -489,8 +479,6 @@
         self.numBtnBgView.hidden = YES;
         self.topConstraint.constant = 20;
     }
-
-    
 }
 
 
