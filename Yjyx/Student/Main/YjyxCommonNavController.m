@@ -45,8 +45,8 @@
 -(id)initWithRootViewController:(UIViewController *)rootViewController
 {
     YjyxCommonNavController* nvc = [super initWithRootViewController:rootViewController];
-    self.interactivePopGestureRecognizer.delegate = (id)self;
-    nvc.delegate = (id)self;
+//    self.interactivePopGestureRecognizer.delegate = (id)self; //右滑手势和自定义后退键在一起会有NavigationBar混乱的问题，先禁用下。
+//    nvc.delegate = (id)self;
     return nvc;
 }
 

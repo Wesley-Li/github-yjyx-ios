@@ -65,7 +65,8 @@ static NSString *videoNumID = @"VIDEONumID";
 #pragma mark - view的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    
     UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
     [backBtn addTarget:self action:@selector(backBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [backBtn setImage:[UIImage imageNamed:@"comm_back"] forState:UIControlStateNormal];
@@ -110,6 +111,13 @@ static NSString *videoNumID = @"VIDEONumID";
                                                  name:WMPlayerClosedNotification
                                                object:nil
      ];
+    
+    //旋转屏幕通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onDeviceOrientationChange)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil
+     ];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -119,27 +127,21 @@ static NSString *videoNumID = @"VIDEONumID";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     [self setNeedsStatusBarAppearanceUpdate];
+
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
     [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
-    //旋转屏幕通知
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onDeviceOrientationChange)
-                                                 name:UIDeviceOrientationDidChangeNotification
-                                               object:nil
-     ];
+
     if ([self.taskType isEqual:@1]) {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     }else{
         [self.navigationController setNavigationBarHidden:YES animated:YES];
     }
-
+    
     if (self.openMember == 1) {
         _openMember = 0;
         [self loadData];
     }
-
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -151,12 +153,12 @@ static NSString *videoNumID = @"VIDEONumID";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+
+    
     if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
-        
         [self prefersStatusBarHidden];
-        
         [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
-        
     }
 }
 - (void)viewDidDisappear:(BOOL)animated

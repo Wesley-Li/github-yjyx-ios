@@ -86,6 +86,7 @@ static NSString *ID = @"CELL";
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
     if(_jumpType == 1){
 //        NSLog(@"%ld", _selIndexPath.row);
 //        YjyxTodayWorkModel *model = self.allWorkArray[_selIndexPath.row];
@@ -93,8 +94,6 @@ static NSString *ID = @"CELL";
 ////        _jumpType = 0;
         self.lastid = @0;
         [self loadData];
-
-        
     }
     
 }
