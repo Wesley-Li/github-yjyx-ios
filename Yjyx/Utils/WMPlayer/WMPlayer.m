@@ -50,7 +50,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 - (instancetype)initWithFrame:(CGRect)frame videoURLStr:(NSString *)videoURLStr{
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDoubleTap) name:@"SCREENOPENORClose" object:nil];
+
         self.frame = frame;
         self.backgroundColor = [UIColor blackColor];
         self.currentItem = [self getPlayItemWithURLString:videoURLStr];
@@ -512,6 +512,12 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
 //        NSLog(@"时间 :: %f",(maxValue - minValue) * time / duration + minValue);
         [weakSelf.progressSlider setValue:(maxValue - minValue) * time / duration + minValue];
     }
+    if (weakSelf.isPlay) {
+        [weakSelf.player play];
+    }else {
+    
+        [weakSelf.player pause];
+    }
 }
 
 - (CMTime)playerItemDuration{
@@ -571,7 +577,7 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
     self.autoDismissTimer = nil;
     self.durationTimer = nil;
     self.player = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self.currentItem removeObserver:self forKeyPath:@"status"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

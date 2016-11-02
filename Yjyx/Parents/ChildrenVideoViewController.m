@@ -11,7 +11,7 @@
 #import "YjyxCommonNavController.h"
 @interface ChildrenVideoViewController ()<UIWebViewDelegate>
 {
-//    WMPlayer *wmPlayer;
+
     CGRect playerFrame;
     UIImageView *videoImage;
     UIButton *backBtn;
@@ -37,17 +37,6 @@
     return _wmPlayer;
 }
 
-//- (instancetype)init
-//{
-//    self = [super init];
-//    if (self) {
-//        //注册播放完成通知
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:@"fullScreenBtnClickNotice" object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goBack) name:@"goBackBtnClickNotice" object:nil];
-////         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-//    }
-//    return self;
-//}
 
 -(void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation{
 //    [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
@@ -75,14 +64,7 @@
         make.top.equalTo(_wmPlayer).with.offset(5);
         
     }];
-//    if (wmPlayer.isPlay) {
-//        [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
-//        wmPlayer.playOrPauseBtn.selected = NO;
-//    }else {
-//        wmPlayer.playOrPauseBtn.selected = YES;
-//        [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
-//        [[UIApplication sharedApplication].keyWindow addSubview:videoImage];
-//    }
+
     
     [[UIApplication sharedApplication].keyWindow addSubview:_wmPlayer];
     _wmPlayer.fullScreenBtn.selected = YES;
@@ -143,23 +125,20 @@
             break;
         case UIInterfaceOrientationPortrait:{
             NSLog(@"第0个旋转方向---电池栏在上");
-            if (_wmPlayer.isFullscreen) {
-                [self toNormal];
-            }
+            [self toNormal];
+
         }
             break;
         case UIInterfaceOrientationLandscapeLeft:{
             NSLog(@"第2个旋转方向---电池栏在左");
-            if (_wmPlayer.isFullscreen == NO) {
                 [self toFullScreenWithInterfaceOrientation:interfaceOrientation];
-            }
+
         }
             break;
         case UIInterfaceOrientationLandscapeRight:{
             NSLog(@"第1个旋转方向---电池栏在右");
-            if (_wmPlayer.isFullscreen == NO) {
                 [self toFullScreenWithInterfaceOrientation:interfaceOrientation];
-            }
+
         }
             break;
         default:
@@ -179,7 +158,6 @@
     }
     self.view.backgroundColor = [UIColor whiteColor];
     
-//    [self configureWMPlayer];
     
    if (_URLString.length > 0) {
        
@@ -197,11 +175,6 @@
 
        
        playerFrame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
-//       wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.URLString];
-//       wmPlayer.closeBtn.hidden = YES;
-//       [self.view addSubview:wmPlayer];
-//       [wmPlayer.player pause];
-//       wmPlayer.isPlay = NO;
 
        videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
        videoImage.image = [UIImage imageNamed:@"Common_video.png"];
@@ -281,40 +254,13 @@
        [self.view addSubview:web];
    }
     
-//   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goBack) name:@"goBackBtnClickNotice" object:nil];
-    
-   
-  //    [self toFullScreenWithInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
+
     if([self.navigationController isKindOfClass:[YjyxCommonNavController class]]){
         _flag = 1;
     }
     
 }
-//- (void)configureWMPlayer
-//{
-//    if (_URLString.length > 0) {
-//        playerFrame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
-//        if (wmPlayer == nil) {
-//            wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.URLString];
-//        }
-//        
-//        wmPlayer.closeBtn.hidden = YES;
-//        [self.view addSubview:wmPlayer];
-//        [wmPlayer.player pause];
-//        wmPlayer.isPlay = NO;
-//        if (videoImage == nil) {
-//            videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
-//        }
-//        
-//        videoImage.image = [UIImage imageNamed:@"Common_video.png"];
-//        videoImage.userInteractionEnabled = YES;
-//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playVideo)];
-//        [videoImage addGestureRecognizer:tap];
-//        [self.view addSubview:videoImage];
-//        UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, playerFrame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - playerFrame.size.height)];
-//        web.detectsPhoneNumbers = NO;
-//    }
-//}
+
 
 - (BOOL)prefersStatusBarHidden {
     if(self.URLString.length > 0){
@@ -344,12 +290,11 @@
 {
     //[self.navigationController setNavigationBarHidden:NO animated:YES];
     [super viewWillDisappear:animated];
+    [self releaseWMPlayer];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-  
-    [self releaseWMPlayer];
     [super viewDidDisappear:animated];
 }
 
@@ -363,13 +308,8 @@
     
     videoImage.hidden = YES;
     [self.wmPlayer.player play];
-    
-//    backBtn.hidden = YES;
-//    [wmPlayer.player play];
-//    wmPlayer.isPlay = YES;
-//    wmPlayer.playOrPauseBtn.selected = NO;
-//    [videoImage removeFromSuperview];
-//    videoImage = nil;
+    self.wmPlayer.isPlay = YES;
+
 }
 
 - (void)didReceiveMemoryWarning {

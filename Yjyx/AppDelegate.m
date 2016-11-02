@@ -322,7 +322,6 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     NSLog(@"willResignActive");
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"SCREENOPENORClose" object:nil];
     [self.window endEditing:YES];
 }
 
