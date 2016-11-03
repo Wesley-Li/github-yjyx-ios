@@ -25,9 +25,8 @@
     UILabel *_namelb;
     NSDictionary *lessDic;
     UIView *headerView;
-    
-
-
+    NSInteger lastSelectedVideoTag;
+    NSMutableDictionary *playingTaskIntervals;
 }
 
 @property (nonatomic, copy) NSString *videoURL;
@@ -85,17 +84,21 @@
     }
     }
 }
-//- (instancetype)init
-//{
-//    self = [super init];
-//    if (self) {
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        lastSelectedVideoTag = -1;
+        playingTaskIntervals = [[NSMutableDictionary alloc] init];
 //        //注册播放完成通知
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:@"fullScreenBtnClickNotice" object:nil];
 //        //注册播放完成通知
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-//    }
-//    return self;
-//}
+    }
+    return self;
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self configureWMPlayer];
@@ -145,6 +148,7 @@
 
 -(void)closeTheVideo:(NSNotification *)obj{
    
+    lastSelectedVideoTag = -1;
     wmPlayer.closeBtn.hidden = YES;
     [wmPlayer.player pause];
     [wmPlayer removeFromSuperview];
@@ -783,25 +787,47 @@
 }
 
 - (void)microNumButtonClick:(UIButton *)sender {
-    
+    if (lastSelectedVideoTag == sender.tag) { //点击同个视频，忽略
+        return;
+    }
+    lastSelectedVideoTag = sender.tag;
+
     self.videoURL = [self.microArr[sender.tag - 500] objectForKey:@"url"];
     [wmPlayer.player pause];
     wmPlayer.isPlay = NO;
-    [wmPlayer removeFromSuperview];
-    [videoImage removeFromSuperview];
-    [self configureWMPlayer];
-    [wmPlayer.player play];
-    wmPlayer.isPlay = YES;
-    wmPlayer.closeBtn.hidden = NO;
-    [self.view sendSubviewToBack:videoImage];
-    [self.view bringSubviewToFront:_backBtn];
-    
+
     self.preBtn.backgroundColor = [UIColor whiteColor];
     self.preBtn.tintColor = [UIColor lightGrayColor];
     sender.backgroundColor = [UIColor lightGrayColor];
     self.preBtn.selected = NO;
     sender.selected = YES;
     self.preBtn = sender;
+    
+    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSince1970];
+    [playingTaskIntervals setObject:@(timeInterval) forKey:@(sender.tag)];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ //延迟0.5秒播放，防止暴力点击
+        if (lastSelectedVideoTag != sender.tag) { //当0.5秒后播放时，发现用户已点了另外视频，则放弃本次播放
+            NSLog(@"已点另外视频，放弃本次播放任务");
+            return;
+        }
+        
+        NSTimeInterval lastTimeInterval = ((NSNumber *)[playingTaskIntervals objectForKey:@(sender.tag)]).doubleValue;
+        if (lastTimeInterval > timeInterval) { //就算同个视频，已有更加新的任务在计划播放它了，则放弃本次播放
+            NSLog(@"当前视频已由新任务计划播放，放弃本次播放任务");
+            return;
+        }
+        
+        NSLog(@"延时播放开始，对应按钮号：%ld",lastSelectedVideoTag);
+        
+        [wmPlayer removeFromSuperview];
+        [videoImage removeFromSuperview];
+        [self configureWMPlayer];
+        [wmPlayer.player play];
+        wmPlayer.isPlay = YES;
+        wmPlayer.closeBtn.hidden = NO;
+        [self.view sendSubviewToBack:videoImage];
+        [self.view bringSubviewToFront:_backBtn];
+    });
 }
 
 #pragma mark - UIWebViewDelegate
