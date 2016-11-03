@@ -981,9 +981,6 @@ static NSString *VideoNumID = @"VideoNum";
 {
 //    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     self.videoURL = _microDetailM.videoUrlArr[btn.tag];
-    [wmPlayer.player pause];
-    [wmPlayer removeFromSuperview];
-    wmPlayer = nil;
     ReleaseMicroCell *cell2 = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [self startPlayVideo:cell2.playBtn];
 
