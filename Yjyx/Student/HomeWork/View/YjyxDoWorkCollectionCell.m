@@ -333,7 +333,6 @@
             }
             NSLog(@"tempDict%@", tempDict);
             [SVProgressHUD showWithStatus:@"正在上传解题步骤"];
-            [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
             [UploadImageTool uploadImagesWithKeys:tempDict completed:^(NSDictionary * _Nullable succeededUrls, NSDictionary * _Nullable failedImages) {
                 [_urlArr removeAllObjects];
                 [_isSuccessUrlArr removeAllObjects];
@@ -350,13 +349,11 @@
                         }
                     }
                     [SVProgressHUD showWithStatus:@"上传解题步骤时,有叹号的图片上传失败,重新上传"];
-                    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         [SVProgressHUD  dismiss];
                     });;
                 }else if(failedImages == nil){
                     [SVProgressHUD showWithStatus:@"上传解题步骤时,全部图片上传成功"];
-                    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         [SVProgressHUD  dismiss];
                     });;
@@ -367,7 +364,6 @@
                     }
                 }else{
                     [SVProgressHUD showWithStatus:@"上传解题步骤时,全部图片上传失败,重新上传"];
-                    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         [SVProgressHUD  dismiss];
                     });;
@@ -496,7 +492,6 @@
     }
     NSLog(@"tempDict%@", tempDict);
     [SVProgressHUD showWithStatus:@"正在上传解题步骤"];
-    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
     [UploadImageTool uploadImagesWithKeys:tempDict completed:^(NSDictionary * _Nullable succeededUrls, NSDictionary * _Nullable failedImages) {
 //        [SVProgressHUD dismiss];
         [_urlArr removeAllObjects];
@@ -513,13 +508,11 @@
                 }
             }
             [SVProgressHUD showWithStatus:@"上传解题步骤时,有叹号的图片上传失败,重新上传"];
-            [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [SVProgressHUD  dismiss];
             });;
         }else if(failedImages == nil){
             [SVProgressHUD showWithStatus:@"上传解题步骤时,全部图片上传成功"];
-            [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [SVProgressHUD  dismiss];
             });;
@@ -530,7 +523,6 @@
             }
         }else{
           [SVProgressHUD showWithStatus:@"上传解题步骤时,全部图片上传失败,重新上传"];
-          [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
               [SVProgressHUD  dismiss];
           });;

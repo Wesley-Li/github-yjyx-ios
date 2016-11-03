@@ -61,11 +61,7 @@
     
 //    ((AppDelegate*)SYS_DELEGATE).role = @"parents";
     ((AppDelegate*)SYS_DELEGATE).stuListArr = [NSMutableArray array];
- 
 
-   
-    
-    
     [self initUmeng:launchOptions];
     // Override point for customization after application launch.
     
@@ -74,10 +70,10 @@
     if (remoteNotification != nil) {
         _isComeFromNoti = YES;
         _remoteNoti = remoteNotification;
-
-        
     }
    
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+    
     // 自动登录,从本地取值
     NSDictionary *dic = (NSDictionary *)[SYS_CACHE objectForKey:@"AutoLogoin"];
     NSLog(@"%@", dic);

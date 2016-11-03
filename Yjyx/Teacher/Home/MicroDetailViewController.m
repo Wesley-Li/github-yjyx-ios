@@ -365,7 +365,6 @@ static NSString *VideoNumID = @"VideoNum";
                                     animated:YES
                               scrollPosition:UITableViewScrollPositionTop];
         [SVProgressHUD showInfoWithStatus:@"请先确认发布的题目,并按下确定键"];
-        [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             SubjectTitleCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:4]];
 

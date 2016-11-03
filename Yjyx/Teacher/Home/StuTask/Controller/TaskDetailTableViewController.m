@@ -159,14 +159,13 @@
 - (void)addReleaseStu:(UIButton *)btn
 {
     [SVProgressHUD showWithStatus:@"正在拼命加载学生数据"];
-    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"get_onetask_append_suids", @"action", self.taskModel.t_id, @"taskid", nil];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[BaseURL stringByAppendingString:@"/api/teacher/mobile/general_task/"] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//            [SVProgressHUD dismiss];
-            NSLog(@"%@", responseObject);
-            if([responseObject[@"retcode"] integerValue] == 0){
+        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
+        NSLog(@"%@", responseObject);
+        if([responseObject[@"retcode"] integerValue] == 0){
             NSArray *stuArr = responseObject[@"data"][@"studentuids"];
             NSLog(@"%@", [UIApplication sharedApplication].keyWindow);
             if (stuArr.count == 0) {
@@ -190,7 +189,7 @@
             });
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-
+        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
         [SVProgressHUD showWithStatus:error.localizedDescription];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];

@@ -19,7 +19,9 @@
 #import "MicroDetailViewController.h"
 #define ID @"subjectContentCell"
 
-@interface ChapterChoiceController ()<UITableViewDelegate, UITableViewDataSource, siftContentViewDelegate>
+@interface ChapterChoiceController ()<UITableViewDelegate, UITableViewDataSource, siftContentViewDelegate>{
+    BOOL firstTime;
+}
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *bottom_button;
@@ -111,6 +113,8 @@
     [super viewDidLoad];
     [self loadBackBtn];
     
+    firstTime = YES;
+    
     self.cellHeightDic = [NSMutableDictionary dictionary];
     for (UIViewController *vc in self.parentViewController.childViewControllers) {
         if([vc isKindOfClass:[MicroDetailViewController class]]){
@@ -192,8 +196,8 @@
     }else{
         self.siftV.transform = CGAffineTransformMakeTranslation(0, -(SCREEN_HEIGHT - 64));
         self.bottom_button.userInteractionEnabled = YES;
-        [self.siftV.superview bringSubviewToFront:self.siftV];
     }
+    [self.siftV.superview bringSubviewToFront:self.siftV];
 
 }
 
@@ -310,8 +314,11 @@
                 }else{
                    [SVProgressHUD showErrorWithStatus:@"暂时还没有相应题目,我们会尽快添加,敬请期待"];
                 }
-                
+                if (firstTime) {
+                    self.siftBtn.hidden = YES;
+                }
             }else {
+                self.siftBtn.hidden = NO;
                 [SVProgressHUD dismissWithDelay:0.1];
             }
             
@@ -320,7 +327,7 @@
             
             [SVProgressHUD dismiss];
         }
-        
+        firstTime = NO;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error.localizedDescription);
         [SVProgressHUD dismiss];

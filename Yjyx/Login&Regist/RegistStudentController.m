@@ -335,6 +335,7 @@
         [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_phoneTextField.text,@"target",_codeTextField.text,@"code",@"MREGISTER",@"stype",nil];
         [[YjxService sharedInstance] checkOutVerfirycode:dic withBlock:^(id result, NSError *error){//验证验证码
+            [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
             [self.view hideToastActivity];
             [SVProgressHUD dismiss];
             if (result) {
