@@ -364,15 +364,14 @@ static NSString *VideoID = @"VIDEOCELL";
     }
     if (wmPlayer) {
         [wmPlayer removeFromSuperview];
-        wmPlayer.backBtn.hidden = YES;
         [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
-        [wmPlayer setVideoURLStr:self.model.videourl];
-        [wmPlayer.player play];
     }else{
         wmPlayer = [[WMPlayer alloc]initWithFrame:self.videoCell.backgroundIV.bounds videoURLStr:self.model.videourl];
-        wmPlayer.backBtn.hidden = YES;
-        
     }
+    wmPlayer.backBtn.hidden = YES;
+    [wmPlayer setVideoURLStr:self.model.videourl];
+    [wmPlayer.player play];
+    wmPlayer.isPlay = YES;
     
     // 将按钮放到底部
     [self.videoCell.backgroundIV addSubview:wmPlayer];
@@ -380,7 +379,7 @@ static NSString *VideoID = @"VIDEOCELL";
     //    [self.videoCell.playBtn.superview sendSubviewToBack:self.videoCell.playBtn];
     self.videoCell.playBtn.hidden = YES;
     
-    [self.tableView reloadData];
+   // [self.tableView reloadData];
     
 }
 /**
