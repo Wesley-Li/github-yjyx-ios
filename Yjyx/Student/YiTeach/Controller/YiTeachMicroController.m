@@ -16,20 +16,28 @@
 @interface YiTeachMicroController ()
 
 {
-    WMPlayer *wmPlayer;
+//    WMPlayer *wmPlayer;
     CGRect playerFrame;
     UIImageView *videoImage;
     
-
-    
 }
 
-
+@property (nonatomic, strong) WMPlayer *wmPlayer;
 
 
 @end
 
 @implementation YiTeachMicroController
+
+- (WMPlayer *)wmPlayer {
+
+    if (!_wmPlayer) {
+        _wmPlayer = [[WMPlayer alloc] initWithFrame:playerFrame videoURLStr:self.videoURL];
+        _wmPlayer.closeBtn.hidden = YES;
+        [self.view insertSubview:_wmPlayer belowSubview:videoImage];
+    }
+    return _wmPlayer;
+}
 
 - (NSMutableArray *)baseQuestionIDList {
 
@@ -85,13 +93,8 @@
     self.navigationItem.leftBarButtonItem = leftBtnItem;
     self.navigationItem.title = @"亿教课堂";
     
-    [self readDataFromNetwork];
-    
-}
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
+    // 配置视频相关
+//    [self configureWMPlayer];
     // 注册通知
     //旋转屏幕通知
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -99,10 +102,9 @@
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil
      ];
-    [self configureWMPlayer];     
+    
     //注册播放完成通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    
     
     //关闭通知
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -110,10 +112,18 @@
                                                  name:WMPlayerClosedNotification
                                                object:nil
      ];
-
+    
     //注册全屏播放通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
 
+    
+    [self readDataFromNetwork];
+    
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 
     if(_openMember == 1){
@@ -133,7 +143,7 @@
 
 - (BOOL)prefersStatusBarHidden
 {
-    if(wmPlayer.isFullscreen == YES){
+    if(_wmPlayer.isFullscreen == YES){
         return YES;
     }else{
         return NO;
@@ -142,14 +152,14 @@
 #pragma mark - videoEvent
 -(void)videoDidFinished:(NSNotification *)notice{
     
-    if(wmPlayer.isFullscreen == YES){
+    if(_wmPlayer.isFullscreen == YES){
         [self toNormal];
     }
     
     //    currentCell.playBtn.hidden = NO;
-    [wmPlayer.player pause];
-    wmPlayer.isPlay = NO;
-    [wmPlayer removeFromSuperview];
+    [_wmPlayer.player pause];
+    _wmPlayer.isPlay = NO;
+    [_wmPlayer removeFromSuperview];
     [videoImage removeFromSuperview];
     [self configureWMPlayer];
     
@@ -158,104 +168,68 @@
 
 -(void)closeTheVideo:(NSNotification *)obj{
     
-    wmPlayer.closeBtn.hidden = YES;
-    [wmPlayer.player pause];
+    
+    [_wmPlayer.player pause];
     [self releaseWMPlayer];
-    [wmPlayer removeFromSuperview];
-    [wmPlayer.playerLayer removeFromSuperlayer];
+    [_wmPlayer removeFromSuperview];
+    [_wmPlayer.playerLayer removeFromSuperlayer];
 
     [videoImage removeFromSuperview];
-    wmPlayer.isPlay = NO;
+    _wmPlayer.isPlay = NO;
     [self configureWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
 -(void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation{
-    NSLog(@"%@", wmPlayer);
-    [wmPlayer removeFromSuperview];
-    [videoImage removeFromSuperview];
-    videoImage.transform = CGAffineTransformIdentity;
-    wmPlayer.transform = CGAffineTransformIdentity;
+    
+    [_wmPlayer removeFromSuperview];
+    _wmPlayer.transform = CGAffineTransformIdentity;
     if (interfaceOrientation==UIInterfaceOrientationLandscapeLeft) {
-        videoImage.transform = CGAffineTransformMakeRotation(-M_PI_2);
-        wmPlayer.transform = CGAffineTransformMakeRotation(-M_PI_2);
+        _wmPlayer.transform = CGAffineTransformMakeRotation(-M_PI_2);
     }else if(interfaceOrientation==UIInterfaceOrientationLandscapeRight){
-        videoImage.transform = CGAffineTransformMakeRotation(M_PI_2);
 
-        wmPlayer.transform = CGAffineTransformMakeRotation(M_PI_2);
+        _wmPlayer.transform = CGAffineTransformMakeRotation(M_PI_2);
 
     }
-    videoImage.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    wmPlayer.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    wmPlayer.playerLayer.frame =  CGRectMake(0,0, SCREEN_HEIGHT,SCREEN_WIDTH);
-    [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    _wmPlayer.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    _wmPlayer.playerLayer.frame =  CGRectMake(0,0, SCREEN_HEIGHT,SCREEN_WIDTH);
+    [_wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(40);
         make.top.mas_equalTo(SCREEN_WIDTH-40);
         make.width.mas_equalTo(SCREEN_HEIGHT);
     }];
     
-    [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(wmPlayer).with.offset((-SCREEN_HEIGHT/2));
-        make.height.mas_equalTo(30);
-        make.width.mas_equalTo(30);
-        make.top.equalTo(wmPlayer).with.offset(5);
-        
-    }];
+    [[UIApplication sharedApplication].keyWindow addSubview:_wmPlayer];
     
-    if (wmPlayer.isPlay) {
-        [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
-        wmPlayer.playOrPauseBtn.selected = NO;
-    }else {
-    
-        [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
-        [[UIApplication sharedApplication].keyWindow addSubview:videoImage];
-         wmPlayer.playOrPauseBtn.selected = YES;
-    }
-    
-    
-    wmPlayer.isFullscreen = YES;
-    wmPlayer.fullScreenBtn.selected = YES;
-    [wmPlayer bringSubviewToFront:wmPlayer.bottomView];
+    _wmPlayer.isFullscreen = YES;
+    _wmPlayer.fullScreenBtn.selected = YES;
+    [_wmPlayer bringSubviewToFront:_wmPlayer.bottomView];
     
     [self setNeedsStatusBarAppearanceUpdate];
     
 }
 -(void)toNormal{
-    [wmPlayer removeFromSuperview];
-    [self.view sendSubviewToBack:videoImage];
-    wmPlayer.isFullscreen = NO;
+    [_wmPlayer removeFromSuperview];
+    _wmPlayer.isFullscreen = NO;
     [self setNeedsStatusBarAppearanceUpdate];
     [UIView animateWithDuration:0.5f animations:^{
-        videoImage.transform = CGAffineTransformIdentity;
-        videoImage.frame = CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4);
-        wmPlayer.transform = CGAffineTransformIdentity;
-        wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
-        wmPlayer.playerLayer.frame =  wmPlayer.bounds;
-        [self.videoBgView addSubview:wmPlayer];
+        _wmPlayer.transform = CGAffineTransformIdentity;
+        _wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
+        _wmPlayer.playerLayer.frame =  _wmPlayer.bounds;
+        [self.videoBgView addSubview:_wmPlayer];
         
-        [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(wmPlayer).with.offset(0);
-            make.right.equalTo(wmPlayer).with.offset(0);
+        [_wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_wmPlayer).with.offset(0);
+            make.right.equalTo(_wmPlayer).with.offset(0);
             make.height.mas_equalTo(40);
-            make.bottom.equalTo(wmPlayer).with.offset(0);
+            make.bottom.equalTo(_wmPlayer).with.offset(0);
         }];
         
-        wmPlayer.fullScreenBtn.selected = NO;
-        if (wmPlayer.isPlay) {
-            [self.view sendSubviewToBack:videoImage];
-            wmPlayer.playOrPauseBtn.selected = NO;
-        }else {
-            [self.view bringSubviewToFront:videoImage];
-            wmPlayer.playOrPauseBtn.selected = YES;
-        }
-
-        [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(wmPlayer).with.offset(-10);
-            make.height.mas_equalTo(30);
-            make.width.mas_equalTo(30);
-            make.top.equalTo(wmPlayer).with.offset(5);
-        }];
+        _wmPlayer.isFullscreen = NO;
+        _wmPlayer.fullScreenBtn.selected = NO;
+        _wmPlayer.playOrPauseBtn.selected = NO;
         
+            
     }completion:^(BOOL finished) {
         [self setNeedsStatusBarAppearanceUpdate];
         
@@ -266,7 +240,7 @@
     if (fullScreenBtn.isSelected) {//全屏显示
         [self toFullScreenWithInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
     }else{
-        wmPlayer.isFullscreen = NO;
+        _wmPlayer.isFullscreen = NO;
         [self toNormal];
     }
 }
@@ -274,7 +248,7 @@
  *  旋转屏幕通知
  */
 - (void)onDeviceOrientationChange{
-    if (wmPlayer==nil||wmPlayer.superview==nil){
+    if (_wmPlayer==nil||_wmPlayer.superview==nil){
         return;
     }
     
@@ -287,21 +261,21 @@
             break;
         case UIInterfaceOrientationPortrait:{
             NSLog(@"第0个旋转方向---电池栏在上");
-            if (wmPlayer.isFullscreen) {
+            if (_wmPlayer.isFullscreen) {
                 [self toNormal];
             }
         }
             break;
         case UIInterfaceOrientationLandscapeLeft:{
             NSLog(@"第2个旋转方向---电池栏在左");
-            if (wmPlayer.isFullscreen == NO) {
+            if (_wmPlayer.isFullscreen == NO) {
                 [self toFullScreenWithInterfaceOrientation:interfaceOrientation];
             }
         }
             break;
         case UIInterfaceOrientationLandscapeRight:{
             NSLog(@"第1个旋转方向---电池栏在右");
-            if (wmPlayer.isFullscreen == NO) {
+            if (_wmPlayer.isFullscreen == NO) {
                 [self toFullScreenWithInterfaceOrientation:interfaceOrientation];
             }
         }
@@ -370,7 +344,7 @@
                 self.microArr = [responseObject[@"videoobjlist"] JSONValue];
                 self.videoURL = _microArr[0][@"url"];
                 if(self.openMember == 1){
-                    [videoImage removeFromSuperview];
+                    videoImage.hidden = YES;
                 }
                 [self configureWMPlayer];
                 [self configureTheNumBtn:_microArr];
@@ -402,52 +376,16 @@
 #pragma mark - 配置视频
 - (void)configureWMPlayer {
     
-    if (self.videoURL != nil || self.videoURL.length != 0) {
-        playerFrame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
-        if (wmPlayer == nil) {
-            wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.videoURL];
-        }
-        
-        NSLog(@"%@", wmPlayer);
-        [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(wmPlayer).with.offset(-10);
-            make.height.mas_equalTo(30);
-            make.width.mas_equalTo(30);
-            make.top.equalTo(wmPlayer).with.offset(5);
-        }];
-        wmPlayer.closeBtn.hidden = YES;
-        wmPlayer.layer.masksToBounds = YES;
-        [self.view addSubview:wmPlayer];
-        wmPlayer.isPlay = NO;
-        [wmPlayer.player pause];
-        if (videoImage == nil) {
-            videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
-        }
-        
-        videoImage.image = [UIImage imageNamed:@"Common_video.png"];
-        
-        
-        videoImage.layer.masksToBounds = YES;
-        videoImage.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
-        [videoImage addGestureRecognizer:tap];
-        [self.view addSubview:videoImage];
- 
-        
-    }else{
-        videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
-        videoImage.image = [UIImage imageNamed:@"Common_video.png"];
-        
-        videoImage.layer.masksToBounds = YES;
-        videoImage.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
-        [videoImage addGestureRecognizer:tap];
-        [self.view addSubview:videoImage];
-        
-
-    }
-
+    playerFrame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4);
+    videoImage = [[UIImageView alloc] initWithFrame:playerFrame];
+    videoImage.image = [UIImage imageNamed:@"Common_video.png"];
     
+    videoImage.layer.masksToBounds = YES;
+    videoImage.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
+    [videoImage addGestureRecognizer:tap];
+    [self.view addSubview:videoImage];
+
 }
 
 #pragma mark - 配置视频选择按钮
@@ -496,16 +434,15 @@
 
 - (void)microNumButtonClick:(UIButton *)sender {
     
+    
     self.videoURL = [self.microArr[sender.tag - 500] objectForKey:@"url"];
-    [wmPlayer.player pause];
-    wmPlayer.isPlay = NO;
-    [wmPlayer removeFromSuperview];
-    [videoImage removeFromSuperview];
-    [self configureWMPlayer];
-    [wmPlayer.player play];
-    wmPlayer.isPlay = YES;
-    wmPlayer.closeBtn.hidden = NO;
-    [self.view sendSubviewToBack:videoImage];
+    if (!self.wmPlayer) {
+        [self playvideo];
+    }else {
+        [self.wmPlayer setVideoURLStr:self.videoURL];
+        [self playvideo];
+    }
+    
     
     self.preBtn.backgroundColor = [UIColor whiteColor];
     self.preBtn.tintColor = [UIColor lightGrayColor];
@@ -517,39 +454,38 @@
 }
 
 -(void)releaseWMPlayer{
-    if(wmPlayer == nil){
+    if(_wmPlayer == nil){
         
         return;
     }
-//    [wmPlayer removeFromSuperview];
-//    [wmPlayer.playerLayer removeFromSuperlayer];
+    [_wmPlayer removeFromSuperview];
+    [_wmPlayer.playerLayer removeFromSuperlayer];
 //    wmPlayer = nil;
-    NSLog(@"%@, %@", wmPlayer, [NSThread currentThread]);
     
-    
-        [wmPlayer.player.currentItem cancelPendingSeeks];
-        [wmPlayer.player.currentItem.asset cancelLoading];
-        [wmPlayer.player pause];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [_wmPlayer.player.currentItem cancelPendingSeeks];
+        [_wmPlayer.player.currentItem.asset cancelLoading];
+        [_wmPlayer.player pause];
         
         //移除观察者
-        [wmPlayer.currentItem removeObserver:wmPlayer forKeyPath:@"status"];
+        [_wmPlayer.currentItem removeObserver:_wmPlayer forKeyPath:@"status"];
     
-        [wmPlayer removeFromSuperview];
-        [wmPlayer.playerLayer removeFromSuperlayer];
-//        [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
-        wmPlayer.player = nil;
-        wmPlayer.currentItem = nil;
+//        [_wmPlayer removeFromSuperview];
+//        [_wmPlayer.playerLayer removeFromSuperlayer];
+        [_wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
+        _wmPlayer.player = nil;
+        _wmPlayer.currentItem = nil;
         
         //释放定时器，否侧不会调用WMPlayer中的dealloc方法
-        [wmPlayer.autoDismissTimer invalidate];
-        wmPlayer.autoDismissTimer = nil;
-        [wmPlayer.durationTimer invalidate];
-        wmPlayer.durationTimer = nil;
+        [_wmPlayer.autoDismissTimer invalidate];
+        _wmPlayer.autoDismissTimer = nil;
+        [_wmPlayer.durationTimer invalidate];
+        _wmPlayer.durationTimer = nil;
         
-        wmPlayer.playOrPauseBtn = nil;
-        wmPlayer.playerLayer = nil;
-        wmPlayer = nil;
-//    });
+        _wmPlayer.playOrPauseBtn = nil;
+        _wmPlayer.playerLayer = nil;
+        _wmPlayer = nil;
+    });
     
 }
 
@@ -622,12 +558,12 @@
         
     }else {
         
-        [videoImage removeFromSuperview];
+        videoImage.hidden = YES;
 
-        [wmPlayer.player play];
-        wmPlayer.isPlay = YES;
-        wmPlayer.playOrPauseBtn.selected = NO;
-        wmPlayer.closeBtn.hidden = NO;
+        [self.wmPlayer.player play];
+        _wmPlayer.isPlay = YES;
+        _wmPlayer.playOrPauseBtn.selected = NO;
+        
 
     }
     
