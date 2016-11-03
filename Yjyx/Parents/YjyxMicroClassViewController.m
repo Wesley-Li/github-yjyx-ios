@@ -100,7 +100,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self configureWMPlayer];
+//    [self configureWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
     //旋转屏幕通知
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -122,11 +122,18 @@
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+
+    [super viewWillDisappear:animated];
+    [wmPlayer pause];
+
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [videoImage removeFromSuperview];
-    [wmPlayer removeFromSuperview];
-    [self releaseWMPlayer];
+//    [videoImage removeFromSuperview];
+//    [wmPlayer removeFromSuperview];
+//    [self releaseWMPlayer];
     [super viewDidDisappear:animated];
 }
 
@@ -182,7 +189,7 @@
         make.top.mas_equalTo(SCREEN_WIDTH-40);
         make.width.mas_equalTo(SCREEN_HEIGHT);
     }];
-    
+    wmPlayer.closeBtn.hidden = YES;
     [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(wmPlayer).with.offset((-SCREEN_HEIGHT/2));
         make.height.mas_equalTo(30);
@@ -232,6 +239,7 @@
             make.height.mas_equalTo(40);
             make.bottom.equalTo(wmPlayer).with.offset(0);
         }];
+        wmPlayer.closeBtn.hidden = YES;
         [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(wmPlayer).with.offset(-10);
             make.height.mas_equalTo(30);
@@ -388,7 +396,7 @@
     }
     [wmPlayer removeFromSuperview];
     [wmPlayer.playerLayer removeFromSuperlayer];
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [wmPlayer.player.currentItem cancelPendingSeeks];
         [wmPlayer.player.currentItem.asset cancelLoading];
         [wmPlayer.player pause];
@@ -412,7 +420,7 @@
         wmPlayer.playOrPauseBtn = nil;
         wmPlayer.playerLayer = nil;
         wmPlayer = nil;
-    });
+//    });
     
 }
 //- (void)viewDidDisappear:(BOOL)animated
@@ -422,7 +430,7 @@
 //    }
 //}
 -(void)dealloc{
-    
+    [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"player deallco");
 }
@@ -620,7 +628,7 @@
         }
         if (wmPlayer == nil) {
             wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.videoURL];
-            
+            wmPlayer.closeBtn.hidden = YES;
             [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.right.equalTo(wmPlayer).with.offset(-10);
                 make.height.mas_equalTo(30);
@@ -817,7 +825,7 @@
         [self configureWMPlayer];
         [wmPlayer.player play];
         wmPlayer.isPlay = YES;
-        wmPlayer.closeBtn.hidden = NO;
+        wmPlayer.closeBtn.hidden = YES;
         [self.view sendSubviewToBack:videoImage];
         [self.view bringSubviewToFront:_backBtn];
     });
@@ -988,7 +996,7 @@
     videoImage = nil;
     [wmPlayer.player play];
     wmPlayer.isPlay = YES;
-    wmPlayer.closeBtn.hidden = NO;
+    wmPlayer.closeBtn.hidden = YES;
     wmPlayer.playOrPauseBtn.selected = NO;
 
 }
