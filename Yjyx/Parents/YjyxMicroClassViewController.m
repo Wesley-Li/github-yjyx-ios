@@ -303,6 +303,14 @@
 //    self.choices = [NSMutableArray array];
 //    self.blankfills = [NSMutableArray array];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    _backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _backBtn.frame = CGRectMake(0, 0, 50, 50);
+    [_backBtn setImage:[UIImage imageNamed:@"Parent_VideoBack"] forState:UIControlStateNormal];
+    [_backBtn addTarget:self action:@selector(backBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_backBtn];
+    [self.view bringSubviewToFront:_backBtn];
+    
     [YjyxOverallData sharedInstance].pushType = PUSHTYPE_NONE;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self loadBackBtn];
@@ -609,45 +617,43 @@
         }
         if (wmPlayer == nil) {
             wmPlayer = [[WMPlayer alloc]initWithFrame:playerFrame videoURLStr:self.videoURL];
+            
+            [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(wmPlayer).with.offset(-10);
+                make.height.mas_equalTo(30);
+                make.width.mas_equalTo(30);
+                make.top.equalTo(wmPlayer).with.offset(5);
+            }];
+            
+            wmPlayer.layer.masksToBounds = YES;
         }
-        
-        [wmPlayer.closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(wmPlayer).with.offset(-10);
-            make.height.mas_equalTo(30);
-            make.width.mas_equalTo(30);
-            make.top.equalTo(wmPlayer).with.offset(5);
-        }];
+        else{
+            [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
+            [wmPlayer setVideoURLStr:self.videoURL];
+        }
+
         wmPlayer.closeBtn.hidden = YES;
-        wmPlayer.layer.masksToBounds = YES;
         [self.view addSubview:wmPlayer];
         wmPlayer.isPlay = NO;
         [wmPlayer.player pause];
+        
         if (videoImage == nil) {
             videoImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4)];
-
+            videoImage.image = [UIImage imageNamed:@"Common_video.png"];
+            videoImage.layer.masksToBounds = YES;
+            videoImage.userInteractionEnabled = YES;
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
+            [videoImage addGestureRecognizer:tap];
         }
-        videoImage.image = [UIImage imageNamed:@"Common_video.png"];
+        [self.view addSubview:videoImage];
+        [self.view bringSubviewToFront:_backBtn];
+        
         if (self.jumpType == 1) {
             videoImage.y = 0;
         }
-        videoImage.layer.masksToBounds = YES;
-        videoImage.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
-        [videoImage addGestureRecognizer:tap];
-        [self.view addSubview:videoImage];
-
-        UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _backBtn = backBtn;
-        backBtn.frame = CGRectMake(0, 0, 50, 50);
-        [backBtn setImage:[UIImage imageNamed:@"Parent_VideoBack"] forState:UIControlStateNormal];
-        [backBtn addTarget:self action:@selector(backBtnClicked) forControlEvents:UIControlEventTouchUpInside];
-        if (self.jumpType == 1) {
-            [self.view insertSubview:backBtn aboveSubview:videoImage];
-        }
     }
-    
-
 }
+
 - (void)backBtnClicked
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -788,6 +794,7 @@
     wmPlayer.isPlay = YES;
     wmPlayer.closeBtn.hidden = NO;
     [self.view sendSubviewToBack:videoImage];
+    [self.view bringSubviewToFront:_backBtn];
     
     self.preBtn.backgroundColor = [UIColor whiteColor];
     self.preBtn.tintColor = [UIColor lightGrayColor];
@@ -795,7 +802,6 @@
     self.preBtn.selected = NO;
     sender.selected = YES;
     self.preBtn = sender;
-    
 }
 
 #pragma mark - UIWebViewDelegate

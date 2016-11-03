@@ -122,43 +122,44 @@
             [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
 
         }];
-    }else{
-        if(parentPasswordText.text.length == 0 && confirmpwdField.text.length == 0){
-            return;
-        }
-        if(textField.text.length < 6){
-            
-            [self.view makeToast:@"密码长度不能小于6位" duration:0.5 position:SHOW_CENTER complete:nil];
-            return;
-        }
-        if(parentPasswordText.text.length == 0 || confirmpwdField.text.length == 0){
-            return;
-        }
-        if(![parentPasswordText.text isEqualToString:confirmpwdField.text]){
-            [self.view makeToast:@"两次密码输入不一样" duration:0.5 position:SHOW_CENTER complete:nil];
-        }
     }
 }
 
+- (BOOL)checkTextFields {
+    if(parentPasswordText.text.length < 6 || confirmpwdField.text.length < 6 || parentPasswordText.text.length > 20 || confirmpwdField.text.length > 20){
+        [self.view makeToast:@"密码长度不能小于6位或大于20位" duration:0.5 position:SHOW_CENTER complete:nil];
+        return NO;
+    }
+    if(![parentPasswordText.text isEqualToString:confirmpwdField.text]){
+        [self.view makeToast:@"两次密码输入不一样" duration:0.5 position:SHOW_CENTER complete:nil];
+        return NO;
+    }
+    if (phoneText.text.length != 11) {
+        [self.view makeToast:@"请输入正确的11位手机号" duration:1.0 position:SHOW_CENTER complete:nil];
+        return NO;
+    }
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
 }
+
 #pragma mark - 获取验证码
 -(IBAction)getRegisterCode:(UIButton *)sender
 {
-//    [self textFieldDidEndEditing:phoneText];
-    
     if(_flag == 1000){
         if (phoneText.text.length != 11) {
             [self.view makeToast:@"请输入正确的手机号" duration:1.0 position:SHOW_CENTER complete:nil];
             return;
         }
+        
         //发送注册码按钮失效，防止频繁请求
         [verifyBtn setEnabled:false];
         [self checkCodeTimeout];
@@ -277,7 +278,8 @@
 #pragma mark - 倒计时走完
 -(void)checkCodeTimeout
 {
-    timeLb.text = [NSString stringWithFormat:@"%ds",_second--];
+    timeLb.text = [NSString stringWithFormat:@"%d秒后重发",_second--];
+    timeLb.textColor = [UIColor darkGrayColor];
     if (_second < 0) {
         [self resetTimer];
     }
@@ -290,6 +292,7 @@
     [verifyBtn setEnabled:YES];
 
     timeLb.text = @"获取验证码";
+    timeLb.textColor = [UIColor whiteColor];
     timeLb.backgroundColor = RGBACOLOR(19.0, 141.0, 101.0, 1);
    
     [_timer invalidate];
@@ -339,6 +342,10 @@
 #pragma mark - 注册
 -(void)regist
 {
+    if (![self checkTextFields]) {
+        return;
+    }
+    
     [self resetTimer];
     [self.view makeToastActivity:SHOW_CENTER];
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:_verifyCode,@"code",parentNameText.text,@"name",parentPasswordText.text,@"password",phoneText.text,@"phone",relationText.text,@"relation",_childrenEntity.cid,@"cid",@"",@"sessionid",@"1",@"ostype",((AppDelegate *)SYS_DELEGATE).deviceToken,@"devicetoken",[[UIDevice currentDevice] model],@"description",nil];

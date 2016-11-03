@@ -190,9 +190,9 @@
         self.bottom_button.userInteractionEnabled = NO;
         
     }else{
-        
         self.siftV.transform = CGAffineTransformMakeTranslation(0, -(SCREEN_HEIGHT - 64));
         self.bottom_button.userInteractionEnabled = YES;
+        [self.siftV.superview bringSubviewToFront:self.siftV];
     }
 
 }
