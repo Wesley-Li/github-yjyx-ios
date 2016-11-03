@@ -128,7 +128,7 @@
     [addStuBtn setTitle:@"添加学生" forState:UIControlStateNormal];
     addStuBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
     addStuBtn.imageView.contentMode =  UIViewContentModeScaleAspectFit;
-    addStuBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -8, 0, 0);
+    addStuBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
     [addStuBtn setTitleColor:RGBACOLOR(19.0, 127.0, 223.0, 1)  forState:UIControlStateNormal];
     [footerView addSubview:addStuBtn];
     [addStuBtn addTarget:self action:@selector(addReleaseStu:) forControlEvents:UIControlEventTouchUpInside];
@@ -136,6 +136,7 @@
         make.right.equalTo(footerView).with.offset(-10);
         make.centerY.equalTo(footerView);
         make.height.mas_equalTo(25);
+        make.width.mas_greaterThanOrEqualTo(110);
     }];
     
     self .automaticallyAdjustsScrollViewInsets = YES;
