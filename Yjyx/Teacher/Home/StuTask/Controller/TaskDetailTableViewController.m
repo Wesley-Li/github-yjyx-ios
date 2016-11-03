@@ -124,11 +124,9 @@
     self.tableView.tableFooterView = footerView;
     
     UIButton *addStuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addStuBtn setImage:[UIImage imageNamed:@"add_homework"] forState:UIControlStateNormal];
     [addStuBtn setTitle:@"添加学生" forState:UIControlStateNormal];
     addStuBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
-    addStuBtn.imageView.contentMode =  UIViewContentModeScaleAspectFit;
-    addStuBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
+    addStuBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 25, 0, 0);
     [addStuBtn setTitleColor:RGBACOLOR(19.0, 127.0, 223.0, 1)  forState:UIControlStateNormal];
     [footerView addSubview:addStuBtn];
     [addStuBtn addTarget:self action:@selector(addReleaseStu:) forControlEvents:UIControlEventTouchUpInside];
@@ -138,6 +136,17 @@
         make.height.mas_equalTo(25);
         make.width.mas_greaterThanOrEqualTo(110);
     }];
+    
+    UIImageView *addImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"add_homework"]];
+    addImageView.contentMode =  UIViewContentModeScaleAspectFit;
+    [footerView addSubview:addImageView];
+    [addImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(footerView);
+        make.right.equalTo(addStuBtn.mas_left).with.offset(30);
+        make.width.mas_equalTo(22);
+        make.height.mas_equalTo(22);
+    }];
+    
     
     self .automaticallyAdjustsScrollViewInsets = YES;
 }
