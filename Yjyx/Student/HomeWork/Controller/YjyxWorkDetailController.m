@@ -129,8 +129,8 @@ static NSString *videoNumID = @"VIDEONumID";
     [super viewWillAppear:animated];
     [self setNeedsStatusBarAppearanceUpdate];
 
-    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
-    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+//    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
+//    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
 
     if ([self.taskType isEqual:@1]) {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
@@ -145,7 +145,7 @@ static NSString *videoNumID = @"VIDEONumID";
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
-
+    [wmPlayer pause];
     [SVProgressHUD dismiss];
     [super viewWillDisappear:animated];
     
@@ -163,14 +163,14 @@ static NSString *videoNumID = @"VIDEONumID";
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [wmPlayer removeFromSuperview];
-    [self releaseWMPlayer];
+//    [wmPlayer removeFromSuperview];
+//    [self releaseWMPlayer];
     [super viewDidDisappear:animated];
 }
 - (void)dealloc
 {
     NSLog(@"workdetail-------");
-   
+    [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (BOOL)prefersStatusBarHidden
@@ -479,7 +479,7 @@ static NSString *videoNumID = @"VIDEONumID";
     }
     wmPlayer.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     wmPlayer.playerLayer.frame =  CGRectMake(0,0, SCREEN_HEIGHT,SCREEN_WIDTH);
-    wmPlayer.closeBtn.hidden = NO;
+    wmPlayer.closeBtn.hidden = YES;
     [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(40);
         make.top.mas_equalTo(SCREEN_WIDTH-40);
@@ -509,7 +509,7 @@ static NSString *videoNumID = @"VIDEONumID";
         wmPlayer.frame = CGRectMake(SCREEN_WIDTH/2,SCREEN_HEIGHT-60-(SCREEN_WIDTH/2)*0.575, SCREEN_WIDTH/2, (SCREEN_WIDTH/2)*0.575);
         wmPlayer.playerLayer.frame =  wmPlayer.bounds;
         [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
-        wmPlayer.closeBtn.hidden = NO;
+        wmPlayer.closeBtn.hidden = YES;
         [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(wmPlayer).with.offset(0);
             make.right.equalTo(wmPlayer).with.offset(0);
@@ -586,7 +586,7 @@ static NSString *videoNumID = @"VIDEONumID";
     }
     [wmPlayer removeFromSuperview];
     [wmPlayer.playerLayer removeFromSuperlayer];
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [wmPlayer.player.currentItem cancelPendingSeeks];
         [wmPlayer.player.currentItem.asset cancelLoading];
         [wmPlayer.player pause];
@@ -611,7 +611,7 @@ static NSString *videoNumID = @"VIDEONumID";
         wmPlayer.playerLayer = nil;
         wmPlayer = nil;
     
-  });
+//  });
 
     
 }

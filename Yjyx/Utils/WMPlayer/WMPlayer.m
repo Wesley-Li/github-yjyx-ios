@@ -339,6 +339,15 @@ static void *PlayViewStatusObservationContext = &PlayViewStatusObservationContex
         self.playOrPauseBtn.selected = YES;
     }
 }
+
+#pragma mark - 视频暂停
+- (void)pause {
+
+    [self.player pause];
+    self.isPlay = NO;
+    self.playOrPauseBtn.selected = YES;
+
+}
 #pragma mark - 设置播放的视频
 - (void)setVideoURLStr:(NSString *)videoURLStr
 {

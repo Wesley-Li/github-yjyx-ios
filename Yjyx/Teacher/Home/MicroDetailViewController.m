@@ -135,13 +135,21 @@ static NSString *VideoNumID = @"VideoNum";
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [SVProgressHUD dismiss];
-    [wmPlayer removeFromSuperview];
-    [self releaseWMPlayer];
-    wmPlayer.isPlay = NO;
+    
+//    [wmPlayer removeFromSuperview];
+//    [self releaseWMPlayer];
+//    wmPlayer.isPlay = NO;
     
     [super viewDidDisappear:animated];
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
+    [wmPlayer pause];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
@@ -152,6 +160,7 @@ static NSString *VideoNumID = @"VideoNum";
 }
 - (void)dealloc
 {
+    [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 #pragma mark - 私有方法
@@ -566,7 +575,7 @@ static NSString *VideoNumID = @"VideoNum";
     }
     wmPlayer.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     wmPlayer.playerLayer.frame =  CGRectMake(0,0, SCREEN_HEIGHT,SCREEN_WIDTH);
-    wmPlayer.closeBtn.hidden = NO;
+    wmPlayer.closeBtn.hidden = YES;
     [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(40);
         make.top.mas_equalTo(SCREEN_WIDTH-40);
@@ -596,7 +605,7 @@ static NSString *VideoNumID = @"VideoNum";
         wmPlayer.frame = CGRectMake(SCREEN_WIDTH/2,SCREEN_HEIGHT-60-(SCREEN_WIDTH/2)*0.575, SCREEN_WIDTH/2, (SCREEN_WIDTH/2)*0.575);
         wmPlayer.playerLayer.frame =  wmPlayer.bounds;
         [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
-        wmPlayer.closeBtn.hidden = NO;
+        wmPlayer.closeBtn.hidden = YES;
         [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(wmPlayer).with.offset(0);
             make.right.equalTo(wmPlayer).with.offset(0);
@@ -679,7 +688,7 @@ static NSString *VideoNumID = @"VideoNum";
     }
     [wmPlayer removeFromSuperview];
     [wmPlayer.playerLayer removeFromSuperlayer];
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
     [wmPlayer.player.currentItem cancelPendingSeeks];
     [wmPlayer.player.currentItem.asset cancelLoading];
     [wmPlayer.player pause];
@@ -703,7 +712,7 @@ static NSString *VideoNumID = @"VideoNum";
     wmPlayer.playOrPauseBtn = nil;
     wmPlayer.playerLayer = nil;
     wmPlayer = nil;
-    });
+//    });
 }
 #pragma mark scrollView delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -981,6 +990,7 @@ static NSString *VideoNumID = @"VideoNum";
 {
 //    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     self.videoURL = _microDetailM.videoUrlArr[btn.tag];
+
     ReleaseMicroCell *cell2 = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     [self startPlayVideo:cell2.playBtn];
 
