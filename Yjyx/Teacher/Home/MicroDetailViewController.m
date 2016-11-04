@@ -950,20 +950,24 @@ static NSString *VideoNumID = @"VideoNum";
         if(self.allSubjectArr.count == 0){
             [SVProgressHUD showErrorWithStatus:@"题目不能为空,编辑失败"];
             NSLog(@"%@", self.saveSubjectArr);
-            self.allSubjectArr = self.saveSubjectArr;
+            [self.allSubjectArr addObjectsFromArray:self.saveSubjectArr];
             
+            if (cell.model) {
+                cell.model.isSelected = YES;
+            }
+
             NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:4];
             [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
             for (MicroSubjectModel *model in _allSubjectArr) {
+                model.btnIsShow = YES;
+            }
+        }
+        else{
+            [self modifiContentData];
+            for (MicroSubjectModel *model in _allSubjectArr) {
                 model.btnIsShow = NO;
             }
-            return;
         }
-        [self modifiContentData];
-        for (MicroSubjectModel *model in _allSubjectArr) {
-            model.btnIsShow = NO;
-        }
-        
     }
     NSIndexPath *indexpath = [self.tableView indexPathForCell:cell];
     NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:indexpath.section];
