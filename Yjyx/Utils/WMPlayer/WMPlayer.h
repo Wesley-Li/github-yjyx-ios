@@ -104,6 +104,10 @@
  *  @return id类型，实际上就是WMPlayer的一个对象
  */
 - (id)initWithFrame:(CGRect)frame videoURLStr:(NSString *)videoURLStr;
+/**
+ * 暂停
+ */
+- (void)pause;
 @end
 
 // 版权属于原作者

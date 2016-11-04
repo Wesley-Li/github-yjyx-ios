@@ -407,7 +407,6 @@ static NSString *ID = @"CELL";
     NSString *numstr = [self.timeTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]];
     if(numstr.length > 0 ){
         [SVProgressHUD showWithStatus:@"输入的建议完成时间包含特殊字符"];
-        [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
         });
@@ -415,7 +414,6 @@ static NSString *ID = @"CELL";
     }
     if([self.timeTextField.text integerValue] == 0 && ![self.timeTextField.text isEqualToString:@""]){
         [SVProgressHUD showWithStatus:@"建议完成时间必须大于0"];
-        [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];
         });

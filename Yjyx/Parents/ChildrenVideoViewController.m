@@ -146,6 +146,8 @@
     }
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -291,12 +293,15 @@
 {
     //[self.navigationController setNavigationBarHidden:NO animated:YES];
     [super viewWillDisappear:animated];
-    [self releaseWMPlayer];
+    [self.wmPlayer pause];
+    
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    
 }
 
 -(void)goBack
@@ -324,7 +329,7 @@
 
     [_wmPlayer removeFromSuperview];
     [_wmPlayer.playerLayer removeFromSuperlayer];
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [_wmPlayer.player.currentItem cancelPendingSeeks];
         [_wmPlayer.player.currentItem.asset cancelLoading];
         [_wmPlayer.player pause];
@@ -349,14 +354,15 @@
         _wmPlayer.playerLayer = nil;
         _wmPlayer = nil;
         
-    });
+//    });
     
     
 }
 
 -(void)dealloc{
-    
+    [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     NSLog(@"player deallco");
 }
 

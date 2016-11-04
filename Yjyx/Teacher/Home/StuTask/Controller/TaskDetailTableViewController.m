@@ -124,11 +124,9 @@
     self.tableView.tableFooterView = footerView;
     
     UIButton *addStuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addStuBtn setImage:[UIImage imageNamed:@"add_homework"] forState:UIControlStateNormal];
     [addStuBtn setTitle:@"添加学生" forState:UIControlStateNormal];
     addStuBtn.titleLabel.font = [UIFont systemFontOfSize:15.0];
-    addStuBtn.imageView.contentMode =  UIViewContentModeScaleAspectFit;
-    addStuBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 0);
+    addStuBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 25, 0, 0);
     [addStuBtn setTitleColor:RGBACOLOR(19.0, 127.0, 223.0, 1)  forState:UIControlStateNormal];
     [footerView addSubview:addStuBtn];
     [addStuBtn addTarget:self action:@selector(addReleaseStu:) forControlEvents:UIControlEventTouchUpInside];
@@ -138,6 +136,17 @@
         make.height.mas_equalTo(25);
         make.width.mas_greaterThanOrEqualTo(110);
     }];
+    
+    UIImageView *addImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"add_homework"]];
+    addImageView.contentMode =  UIViewContentModeScaleAspectFit;
+    [footerView addSubview:addImageView];
+    [addImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(footerView);
+        make.right.equalTo(addStuBtn.mas_left).with.offset(30);
+        make.width.mas_equalTo(22);
+        make.height.mas_equalTo(22);
+    }];
+    
     
     self .automaticallyAdjustsScrollViewInsets = YES;
 }
@@ -150,14 +159,13 @@
 - (void)addReleaseStu:(UIButton *)btn
 {
     [SVProgressHUD showWithStatus:@"正在拼命加载学生数据"];
-    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"get_onetask_append_suids", @"action", self.taskModel.t_id, @"taskid", nil];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[BaseURL stringByAppendingString:@"/api/teacher/mobile/general_task/"] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//            [SVProgressHUD dismiss];
-            NSLog(@"%@", responseObject);
-            if([responseObject[@"retcode"] integerValue] == 0){
+        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
+        NSLog(@"%@", responseObject);
+        if([responseObject[@"retcode"] integerValue] == 0){
             NSArray *stuArr = responseObject[@"data"][@"studentuids"];
             NSLog(@"%@", [UIApplication sharedApplication].keyWindow);
             if (stuArr.count == 0) {
@@ -181,7 +189,7 @@
             });
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-
+        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
         [SVProgressHUD showWithStatus:error.localizedDescription];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [SVProgressHUD dismiss];

@@ -102,6 +102,7 @@
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager PUT:[BaseURL stringByAppendingString:STUDENT_MODIFYClASS_PUT] parameters:dic  success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
         OneStudentEntity *studentInfo =[YjyxOverallData sharedInstance].studentInfo;
         if ([responseObject[@"retcode"] integerValue] ==0) {
             NSString *className = responseObject[@"classname"];
@@ -121,6 +122,7 @@
         [SVProgressHUD dismiss];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"error==%@",error);
+        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeNone];
          [SVProgressHUD dismiss];
         [self.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:1.0 position:SHOW_CENTER complete:nil];
     }];

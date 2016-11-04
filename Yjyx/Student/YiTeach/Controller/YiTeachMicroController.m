@@ -169,15 +169,16 @@
 -(void)closeTheVideo:(NSNotification *)obj{
     
     
-    [_wmPlayer.player pause];
-    [self releaseWMPlayer];
-    [_wmPlayer removeFromSuperview];
-    [_wmPlayer.playerLayer removeFromSuperlayer];
-
-    [videoImage removeFromSuperview];
-    _wmPlayer.isPlay = NO;
-    [self configureWMPlayer];
-    [self setNeedsStatusBarAppearanceUpdate];
+    [self.wmPlayer pause];
+//    _wmPlayer.playOrPauseBtn.selected = YES;
+//    [self releaseWMPlayer];
+//    [_wmPlayer removeFromSuperview];
+//    [_wmPlayer.playerLayer removeFromSuperlayer];
+//
+//    [videoImage removeFromSuperview];
+//    _wmPlayer.isPlay = NO;
+//    [self configureWMPlayer];
+//    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 -(void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation{
@@ -460,7 +461,7 @@
     [_wmPlayer.playerLayer removeFromSuperlayer];
 //    wmPlayer = nil;
     
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [_wmPlayer.player.currentItem cancelPendingSeeks];
         [_wmPlayer.player.currentItem.asset cancelLoading];
         [_wmPlayer.player pause];
@@ -483,7 +484,7 @@
         _wmPlayer.playOrPauseBtn = nil;
         _wmPlayer.playerLayer = nil;
         _wmPlayer = nil;
-    });
+//    });
     
 }
 
