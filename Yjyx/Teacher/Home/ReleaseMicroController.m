@@ -77,6 +77,7 @@ static NSString *StudentID = @"StudentCell";
 #pragma mark - view的生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     [self loadData];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     if(self.w_id != nil || [_taskModel.tasktype isEqual:@2]){
@@ -147,12 +148,12 @@ static NSString *StudentID = @"StudentCell";
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ReleaseStudentCell class]) bundle:nil] forCellReuseIdentifier:StudentID];
     self.tableView.sectionFooterHeight = 0;
 //    self.tableView.sectionHeaderHeight = 10;
-    if(self.releaseType == 2){
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
-    }else{
-        self.tableView.contentInset = UIEdgeInsetsMake(-35, 0, -49, 0);
-
-    }
+//    if(self.releaseType == 2){
+//        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
+//    }else{
+//        self.tableView.contentInset = UIEdgeInsetsMake(-35, 0, -49, 0);
+//
+//    }
     
     self.tableView.rowHeight = 55;
     
@@ -174,7 +175,7 @@ static NSString *StudentID = @"StudentCell";
     [footerView addSubview:releaseBtn];
     self.tableView.tableFooterView = footerView;
     
-    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, -49, 0);
+//    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, -49, 0);
     
     //  键盘通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -306,6 +307,7 @@ static NSString *StudentID = @"StudentCell";
         if([responseObject[@"retcode"] isEqual:@0]){
             [SVProgressHUD showSuccessWithStatus:@"发布成功"];
             if (self.releaseType == 2) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshHeader" object:nil];
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
                 // 跳转到学生作业列表

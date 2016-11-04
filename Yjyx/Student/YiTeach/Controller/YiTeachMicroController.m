@@ -134,9 +134,9 @@
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self closeTheVideo:nil];
+
     [super viewWillDisappear:animated];
+    [self.wmPlayer pause];
 }
 
 
@@ -169,16 +169,16 @@
 -(void)closeTheVideo:(NSNotification *)obj{
     
     
-    [self.wmPlayer pause];
-//    _wmPlayer.playOrPauseBtn.selected = YES;
-//    [self releaseWMPlayer];
-//    [_wmPlayer removeFromSuperview];
-//    [_wmPlayer.playerLayer removeFromSuperlayer];
-//
-//    [videoImage removeFromSuperview];
-//    _wmPlayer.isPlay = NO;
-//    [self configureWMPlayer];
-//    [self setNeedsStatusBarAppearanceUpdate];
+    
+    _wmPlayer.playOrPauseBtn.selected = YES;
+    [self releaseWMPlayer];
+    [_wmPlayer removeFromSuperview];
+    [_wmPlayer.playerLayer removeFromSuperlayer];
+
+    [videoImage removeFromSuperview];
+    _wmPlayer.isPlay = NO;
+    [self configureWMPlayer];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 -(void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation{
@@ -228,7 +228,6 @@
         
         _wmPlayer.isFullscreen = NO;
         _wmPlayer.fullScreenBtn.selected = NO;
-        _wmPlayer.playOrPauseBtn.selected = NO;
         
             
     }completion:^(BOOL finished) {

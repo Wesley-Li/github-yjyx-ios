@@ -77,11 +77,19 @@
     self.tableView.backgroundColor = COMMONCOLOR;
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, -49, 0);
     
+    // 注册刷新通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHeader) name:@"refreshHeader" object:nil];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)refreshHeader {
+
+    [self headerRefresh];
 }
 
 // 刷新
@@ -234,7 +242,7 @@
     [super viewWillDisappear:animated];
 }
 
-
+// 点击发布相同任务
 - (void)taskListTableViewCell:(TaskListTableViewCell *)cell releaseWorkBtn:(UIButton *)btn
 {
     TaskModel *model = self.dataSource[cell.tag];
@@ -247,6 +255,11 @@
         vc.w_id = model.relatedresourceid;
     }
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)dealloc {
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
