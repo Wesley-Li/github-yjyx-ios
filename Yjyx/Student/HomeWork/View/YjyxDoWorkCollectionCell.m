@@ -315,6 +315,8 @@
             //            _selectedPhotos = [NSMutableArray arrayWithArray:photos];
             //            _selectedAssets = [NSMutableArray arrayWithArray:assets];
             
+            return; //预览照片，不用做后续处理吧？
+            
             
             NSMutableArray *tempArr = [NSMutableArray array];
             [tempArr addObjectsFromArray:assets];
