@@ -602,14 +602,16 @@
     if (wmPlayer) {
         [wmPlayer removeFromSuperview];
         [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
-        [wmPlayer setVideoURLStr:[_dic[@"question"] objectForKey:@"videourl"]];
-        wmPlayer.backBtn.hidden = YES;
-        [wmPlayer.player play];
+        
     }else{
         wmPlayer = [[WMPlayer alloc]initWithFrame:self.videoCell.backgroundIV.bounds videoURLStr:[_dic[@"question"] objectForKey:@"videourl"]];
-        wmPlayer.backBtn.hidden = YES;
+        
         
     }
+    wmPlayer.backBtn.hidden = YES;
+    [wmPlayer setVideoURLStr:[_dic[@"question"] objectForKey:@"videourl"]];
+    [wmPlayer.player play];
+    wmPlayer.isPlay = YES;
     
     // 将按钮放到底部
     [self.videoCell.backgroundIV addSubview:wmPlayer];
@@ -617,7 +619,7 @@
     //    [self.videoCell.playBtn.superview sendSubviewToBack:self.videoCell.playBtn];
     isPlay = YES;
     self.videoCell.playBtn.hidden = YES;
-    [self.tableView reloadData];
+    
     
     
 }

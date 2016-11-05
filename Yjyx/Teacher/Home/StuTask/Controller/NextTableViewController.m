@@ -30,7 +30,7 @@
     WMPlayer *wmPlayer;
     NSIndexPath *currentIndexPath;
     BOOL isSmallScreen;
-    BOOL isPlay;
+    BOOL isStart;
     NSString *_explanation;
     NSString *_videourl;
     NSInteger rows;
@@ -125,7 +125,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if (isPlay || isSmallScreen || wmPlayer.isFullscreen) {
+    if (isStart || isSmallScreen || wmPlayer.isFullscreen) {
         [self closeTheVideo:nil];
     }
     
@@ -145,7 +145,8 @@
         [self toCell];
     }
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
-    isPlay = NO;
+    isStart = NO;
+    wmPlayer.isPlay = NO;
     currentCell.playBtn.hidden = NO;
     [self releaseWMPlayer];
 
@@ -156,7 +157,8 @@
 -(void)closeTheVideo:(NSNotification *)obj{
     VideoCell *currentCell = (VideoCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
     currentCell.playBtn.hidden = NO;
-    isPlay = NO;
+    isStart = NO;
+    wmPlayer.isPlay = NO;
     [self toCell];
     [self releaseWMPlayer];
     
@@ -344,7 +346,7 @@
     
     // 初始状态
     isSmallScreen = NO;
-    isPlay = NO;
+    isStart = NO;
     self.isCorrectShowMore = NO;
     self.isWrongShowMore = NO;
     
@@ -665,7 +667,7 @@
             _videoCell.videoLabel.hidden = YES;
         }
         // 按钮的显示
-        if (isPlay == YES) {
+        if (isStart == YES) {
             _videoCell.playBtn.hidden = YES;
         }else {
             
@@ -713,7 +715,7 @@
     currentIndexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
     NSLog(@"currentIndexPath.row = %ld",(long)currentIndexPath.row);
     
-    isPlay = YES;
+    isStart = YES;
     
     if ([UIDevice currentDevice].systemVersion.floatValue>=8||[UIDevice currentDevice].systemVersion.floatValue<7) {
         self.videoCell = (VideoCell *)sender.superview.superview;
@@ -732,25 +734,23 @@
     }
     if (wmPlayer) {
         [wmPlayer removeFromSuperview];
-        wmPlayer.backBtn.hidden = YES;
-        
         [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
-        [wmPlayer setVideoURLStr:[_dic[@"question"] objectForKey:@"videourl"]];
-        [wmPlayer.player play];
+  
     }else{
         wmPlayer = [[WMPlayer alloc]initWithFrame:self.videoCell.backgroundIV.bounds videoURLStr:[_dic[@"question"] objectForKey:@"videourl"]];
-
-        wmPlayer.backBtn.hidden = YES;
         
     }
-    
+    wmPlayer.backBtn.hidden = YES;
+    [wmPlayer setVideoURLStr:[_dic[@"question"] objectForKey:@"videourl"]];
+    [wmPlayer.player play];
+    wmPlayer.isPlay = YES;
     // 将按钮放到底部
     [self.videoCell.backgroundIV addSubview:wmPlayer];
     [self.videoCell.backgroundIV bringSubviewToFront:wmPlayer];
 //    [self.videoCell.playBtn.superview sendSubviewToBack:self.videoCell.playBtn];
     self.videoCell.playBtn.hidden = YES;
     
-    [self.tableView reloadData];
+    
     
 }
 
@@ -848,7 +848,7 @@
     [self.navigationController pushViewController:oneTaskVC animated:YES];
 }
 -(void)dealloc{
-    isPlay = NO;
+    isStart = NO;
     [wmPlayer removeFromSuperview];
     [self releaseWMPlayer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];

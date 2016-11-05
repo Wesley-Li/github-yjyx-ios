@@ -670,20 +670,17 @@ static NSString *VideoNumID = @"VideoNum";
     }
     if (wmPlayer) {
         [wmPlayer removeFromSuperview];
-        wmPlayer.backBtn.hidden = YES;
-        wmPlayer.closeBtn.hidden = YES;
+
          [wmPlayer.player replaceCurrentItemWithPlayerItem:nil];
         
-        
-        [wmPlayer setVideoURLStr:self.videoURL];
-      
-        [wmPlayer.player play];
     }else{
         wmPlayer = [[WMPlayer alloc]initWithFrame:self.videoCell.backgroundIV.bounds videoURLStr:self.videoURL];
-        wmPlayer.backBtn.hidden = YES;
         wmPlayer.closeBtn.hidden = YES;
         
     }
+    wmPlayer.backBtn.hidden = YES;
+    [wmPlayer setVideoURLStr:self.videoURL];
+    [wmPlayer.player play];
      wmPlayer.isPlay = YES;
     // 将按钮放到底部
     [self.videoCell.backgroundIV addSubview:wmPlayer];
@@ -691,7 +688,7 @@ static NSString *VideoNumID = @"VideoNum";
     //    [self.videoCell.playBtn.superview sendSubviewToBack:self.videoCell.playBtn];
     self.videoCell.playBtn.hidden = YES;
     
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
     
 }
 /**
@@ -1011,8 +1008,17 @@ static NSString *VideoNumID = @"VideoNum";
 //    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     self.videoURL = _microDetailM.videoUrlArr[btn.tag];
 
-    ReleaseMicroCell *cell2 = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    [self startPlayVideo:cell2.playBtn];
+    if (isSmallScreen) {// 小屏状态下
+        
+        [wmPlayer setVideoURLStr:self.videoURL];
+        [wmPlayer.player play];
+        
+    }else {// 正常状态下
+    
+        ReleaseMicroCell *cell2 = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [self startPlayVideo:cell2.playBtn];
+    }
+    
 
    
 //    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];

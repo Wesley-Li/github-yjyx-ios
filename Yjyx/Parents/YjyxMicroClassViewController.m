@@ -134,6 +134,12 @@
     [super viewWillDisappear:animated];
     if (wmPlayer.isFullscreen) {
         [self toNormal];
+        [wmPlayer.player pause];
+        [wmPlayer removeFromSuperview];
+        [videoImage removeFromSuperview];
+        [self configureWMPlayer];
+        wmPlayer.isPlay = NO;
+
     }else {
         [wmPlayer pause];
     }
