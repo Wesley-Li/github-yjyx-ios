@@ -68,6 +68,7 @@
     
     [[UIApplication sharedApplication].keyWindow addSubview:_wmPlayer];
     _wmPlayer.fullScreenBtn.selected = YES;
+    _wmPlayer.isFullscreen = YES;
     [_wmPlayer bringSubviewToFront:_wmPlayer.bottomView];
     
 }
@@ -78,7 +79,7 @@
         _wmPlayer.transform = CGAffineTransformIdentity;
         _wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
         _wmPlayer.playerLayer.frame = _wmPlayer.bounds;
-        [self.view insertSubview:_wmPlayer belowSubview:backBtn];
+        [self.view insertSubview:_wmPlayer belowSubview:videoImage];
 
         [_wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(_wmPlayer).with.offset(0);
@@ -96,6 +97,7 @@
     }completion:^(BOOL finished) {
         
         _wmPlayer.fullScreenBtn.selected = NO;
+        _wmPlayer.isFullscreen = NO;
         [[UIApplication sharedApplication] setStatusBarHidden:NO animated:NO];
         
     }];
@@ -162,18 +164,7 @@
     
    if (_URLString.length > 0) {
        
-       //旋转屏幕通知
-       [[NSNotificationCenter defaultCenter] addObserver:self
-                                                selector:@selector(onDeviceOrientationChange)
-                                                    name:UIDeviceOrientationDidChangeNotification
-                                                  object:nil
-        ];
-       //注册播放完成通知
-       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:@"fullScreenBtnClickNotice" object:nil];
        
-       //注册全屏播放通知
-       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
-
        
        playerFrame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320);
 
@@ -277,6 +268,18 @@
     
     if (_URLString.length > 0) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
+        //旋转屏幕通知
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onDeviceOrientationChange)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:nil
+         ];
+        //注册播放完成通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:@"fullScreenBtnClickNotice" object:nil];
+        
+        //注册全屏播放通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
+
     }else{
         if(_flag == 0){
             [self.navigationController.navigationBar setBarTintColor:RGBACOLOR(23, 155, 121, 1)];
@@ -293,8 +296,17 @@
 {
     //[self.navigationController setNavigationBarHidden:NO animated:YES];
     [super viewWillDisappear:animated];
-    [self.wmPlayer pause];
-    
+    [_wmPlayer pause];
+    if (_wmPlayer.isFullscreen) {
+        
+        [self toNormal];
+        videoImage.hidden = NO;
+        
+    }
+    // 此处只移除有关视频的通知,避免造成未知问题
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"fullScreenBtnClickNotice" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:WMPlayerFullScreenButtonClickedNotification object:nil];
     
 }
 

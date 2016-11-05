@@ -71,17 +71,6 @@ static NSString *VideoID = @"VIDEOCELL";
     // 初始状态
     isSmallScreen = NO;
     isPlay = NO;
-    //注册播放完成通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    //注册播放完成通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
-    
-    //关闭通知
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(closeTheVideo:)
-                                                 name:WMPlayerClosedNotification
-                                               object:nil
-     ];
     
     // cell高度通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cellHeightChange:) name:@"webHeight" object:nil];
@@ -117,6 +106,18 @@ static NSString *VideoID = @"VIDEOCELL";
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil
      ];
+    //注册播放完成通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    //注册播放完成通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
+    
+    //关闭通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(closeTheVideo:)
+                                                 name:WMPlayerClosedNotification
+                                               object:nil
+     ];
+
 //    self.moveToReleaseBtn.hidden = NO;
     if(_is_select == 0){
         [self.moveToReleaseBtn setTitle:@"出题" forState:UIControlStateNormal];
@@ -133,11 +134,17 @@ static NSString *VideoID = @"VIDEOCELL";
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
-    if (isPlay) {
+    [super viewWillDisappear:animated];
+    if (isPlay || isSmallScreen || wmPlayer.isFullscreen) {
         [self closeTheVideo:nil];
     }
     [SVProgressHUD dismiss];
-    [super viewWillDisappear:animated];
+    
+    // 此处只移除有关视频的通知,避免造成未知问题
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:WMPlayerClosedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:WMPlayerFullScreenButtonClickedNotification object:nil];
 }
 -(void)dealloc{
     [wmPlayer removeFromSuperview];
@@ -306,7 +313,7 @@ static NSString *VideoID = @"VIDEOCELL";
     
     
     [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
-    
+    wmPlayer.isFullscreen = YES;
     wmPlayer.fullScreenBtn.selected = YES;
     [wmPlayer bringSubviewToFront:wmPlayer.bottomView];
     

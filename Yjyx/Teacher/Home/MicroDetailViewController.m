@@ -25,6 +25,7 @@
     WMPlayer *wmPlayer;
     NSIndexPath *currentIndexPath;
     BOOL isSmallScreen;
+    BOOL isStart;
     
 }
 @property (strong, nonatomic) MicroDetailModel *microDetailM;
@@ -95,22 +96,12 @@ static NSString *VideoNumID = @"VideoNum";
     self.tableView.sectionFooterHeight = 0;
     self.cellHeightDic = [NSMutableDictionary dictionary];
     self.knowCellHeightDic = [NSMutableDictionary dictionary];
-    //注册播放完成通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    //注册全屏播放通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
     // 返回按钮被点击
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backBtnClicked) name:@"BackButtonClicked" object:nil];
     // 修改标题按钮呗点击
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(modifyTitleBtnClick:) name:@"ModifyTitleBtnClick" object:nil];
     // 添加按钮的点击
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addBtnClick) name:@"AddBtnClick" object:nil];
-    //关闭通知
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(closeTheVideo:)
-                                                 name:WMPlayerClosedNotification
-                                               object:nil
-     ];
     // web高度通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(webviewHeight:) name:@"webviewHeight" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(knowLegeWebViewHeight:) name:@"KnowlegewebviewHeight" object:nil];
@@ -122,13 +113,24 @@ static NSString *VideoNumID = @"VideoNum";
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
-    
+    //注册播放完成通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    //注册全屏播放通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
+
     //旋转屏幕通知
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onDeviceOrientationChange)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil
      ];
+    //关闭通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(closeTheVideo:)
+                                                 name:WMPlayerClosedNotification
+                                               object:nil
+     ];
+
     [self.tableView reloadData];
 }
 
@@ -147,7 +149,19 @@ static NSString *VideoNumID = @"VideoNum";
 
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
-    [wmPlayer pause];
+    if (isSmallScreen || wmPlayer.isFullscreen) {
+        [self closeTheVideo:nil];
+    }else {
+        [wmPlayer pause];
+    }
+    
+    
+    [SVProgressHUD dismiss];
+    // 此处只移除有关视频的通知,避免造成未知问题
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:WMPlayerClosedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:WMPlayerFullScreenButtonClickedNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -450,6 +464,7 @@ static NSString *VideoNumID = @"VideoNum";
     }
     ReleaseMicroCell *currentCell = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     wmPlayer.isPlay = NO;
+    isStart = NO;
     currentCell.playBtn.hidden = NO;
     [self releaseWMPlayer];
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
@@ -460,6 +475,7 @@ static NSString *VideoNumID = @"VideoNum";
     ReleaseMicroCell *currentCell = (ReleaseMicroCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     currentCell.playBtn.hidden = NO;
     wmPlayer.isPlay = NO;
+    isStart = NO;
     [self toCell];
     [self releaseWMPlayer];
     [self setNeedsStatusBarAppearanceUpdate];
@@ -638,7 +654,7 @@ static NSString *VideoNumID = @"VideoNum";
     NSLog(@"currentIndexPath.row = %ld",(long)currentIndexPath.row);
     
     wmPlayer.isPlay = YES;
-    
+    isStart = YES;
     if ([UIDevice currentDevice].systemVersion.floatValue>=8||[UIDevice currentDevice].systemVersion.floatValue<7) {
         self.videoCell = (ReleaseMicroCell *)sender.superview.superview;
     }else{//ios7系统 UITableViewCell上多了一个层级UITableViewCellScrollView
@@ -738,6 +754,7 @@ static NSString *VideoNumID = @"VideoNum";
                     
                 }else{
                     [self toCell];
+                    
                 }
             }
         }
@@ -775,7 +792,7 @@ static NSString *VideoNumID = @"VideoNum";
         cell.playBtn.tag = indexPath.row;
       
         // 按钮的显示
-        if (wmPlayer.isPlay == YES) {
+        if (wmPlayer.isPlay == YES || isStart == YES) {
             cell.playBtn.hidden = YES;
         }else {
             

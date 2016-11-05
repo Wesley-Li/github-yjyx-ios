@@ -223,10 +223,11 @@
 }
 
 - (void)sendVoiceListToBackground:(UITapGestureRecognizer *)sender {
-    isExpand = NO;
+    
     [self.voiceList reloadData];
     [self.view sendSubviewToBack:self.voiceList];
     self.scrollview.scrollEnabled = YES;
+    isExpand = NO;
     
 }
 

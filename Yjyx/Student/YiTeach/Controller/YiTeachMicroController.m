@@ -95,6 +95,14 @@
     
     // 配置视频相关
 //    [self configureWMPlayer];
+    
+    [self readDataFromNetwork];
+    
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     // 注册通知
     //旋转屏幕通知
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -115,14 +123,8 @@
     
     //注册全屏播放通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
+    
 
-    
-    [self readDataFromNetwork];
-    
-}
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 
@@ -136,7 +138,16 @@
 {
 
     [super viewWillDisappear:animated];
-    [self.wmPlayer pause];
+    if (_wmPlayer.isFullscreen) {
+        [self closeTheVideo:nil];
+    }else {
+        [_wmPlayer pause];
+    }
+    // 此处只移除有关视频的通知,避免造成未知问题
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:WMPlayerClosedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:WMPlayerFullScreenButtonClickedNotification object:nil];
 }
 
 

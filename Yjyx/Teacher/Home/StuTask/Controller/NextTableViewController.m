@@ -101,16 +101,44 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
-    
+    // 之所以写到这里,是因为页面消失的时候,要移除视频有关通知,不然,下级界面如果还有视频,会响应
     //旋转屏幕通知
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onDeviceOrientationChange)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil
      ];
+    //注册播放完成通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(VideoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    //注册全屏播放通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
+    
+    //关闭通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(closeTheVideo:)
+                                                 name:WMPlayerClosedNotification
+                                               object:nil
+     ];
+
     
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (isPlay || isSmallScreen || wmPlayer.isFullscreen) {
+        [self closeTheVideo:nil];
+    }
+    
+    [SVProgressHUD dismiss];
+    // 移除视频有关通知
+    // 此处只移除有关视频的通知,避免造成未知问题
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:WMPlayerClosedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:WMPlayerFullScreenButtonClickedNotification object:nil];
+    
+    
+}
 
 -(void)VideoDidFinished:(NSNotification *)notice{
     if(wmPlayer != nil){
@@ -262,6 +290,7 @@
     [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
     
     wmPlayer.fullScreenBtn.selected = YES;
+    wmPlayer.isFullscreen = YES;
     [wmPlayer bringSubviewToFront:wmPlayer.bottomView];
     
 }
@@ -338,17 +367,6 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"VideoCell" bundle:nil] forCellReuseIdentifier:KVideoCell];
     
     
-    //注册播放完成通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(VideoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    //注册播放完成通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
-    
-    //关闭通知
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(closeTheVideo:)
-                                                 name:WMPlayerClosedNotification
-                                               object:nil
-     ];
     
     // cell高度通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeCellHeight:) name:@"CellHeightChange" object:nil];
@@ -493,16 +511,6 @@
 
 
 
-- (void)viewWillDisappear:(BOOL)animated {
-    
-    if (isPlay) {
-        [self closeTheVideo:nil];
-    }
- 
-    [SVProgressHUD dismiss];
-   [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super viewWillDisappear:animated];
-}
 - (void)goBack {
     
     [self.navigationController popViewControllerAnimated:YES];

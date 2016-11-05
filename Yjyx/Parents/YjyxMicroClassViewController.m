@@ -108,6 +108,13 @@
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil
      ];
+    //注册播放完成通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    //注册全屏播放通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
+    
+    // 注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCellHeight:) name:@"cellHeighChange" object:nil];
     if(self.jumpType == 1){
         self.navigationController.navigationBar.barTintColor = STUDENTCOLOR;
         self.submitBtn.hidden = NO;
@@ -125,7 +132,16 @@
 - (void)viewWillDisappear:(BOOL)animated {
 
     [super viewWillDisappear:animated];
-    [wmPlayer pause];
+    if (wmPlayer.isFullscreen) {
+        [self toNormal];
+    }else {
+        [wmPlayer pause];
+    }
+    
+    // 此处只移除有关视频的通知,避免造成未知问题
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:WMPlayerFullScreenButtonClickedNotification object:nil];
 
 }
 
@@ -144,18 +160,6 @@
     }
 
 //    currentCell.playBtn.hidden = NO;
-    [wmPlayer.player pause];
-    [wmPlayer removeFromSuperview];
-    [videoImage removeFromSuperview];
-    [self configureWMPlayer];
-    wmPlayer.isPlay = NO;
-    [self setNeedsStatusBarAppearanceUpdate];
-}
-
--(void)closeTheVideo:(NSNotification *)obj{
-   
-    lastSelectedVideoTag = -1;
-    wmPlayer.closeBtn.hidden = YES;
     [wmPlayer.player pause];
     [wmPlayer removeFromSuperview];
     [videoImage removeFromSuperview];
@@ -332,18 +336,6 @@
     
     _doWorkArr = [NSMutableArray array];
     
-    //注册播放完成通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    //注册全屏播放通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
-    
-    //关闭通知
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(closeTheVideo:)
-                                                 name:WMPlayerClosedNotification
-                                               object:nil
-     ];
-
     
     // 注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCellHeight:) name:@"cellHeighChange" object:nil];

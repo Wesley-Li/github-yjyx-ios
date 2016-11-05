@@ -69,15 +69,14 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
     self.index = 0;
     self.count = 20;
     if ([self.targetListArr count] < 20) {
         self.count = [self.targetListArr count];
     }
-    
     self.tempArr = [self.targetListArr subarrayWithRange:NSMakeRange(self.index, self.count)];
-    NSLog(@"-----%@", self.targetlist);
-    NSLog(@"=====%@", [self.tempArr JSONString]);
+    
     [self getDataFromNet];
     
     // 注册加载完成高度的通知
@@ -126,7 +125,7 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.targetListArr = [[[self.targetlist JSONValue] reverseObjectEnumerator] allObjects];
     NSLog(@"%ld", _openMember);
-    if(_openMember == 1){
+    if(_openMember == 1){// 会员
        
         self.index = 0;
         self.count = 20;
@@ -180,35 +179,15 @@
                 [currentArr addObject:model];
             }
             
-            if (self.index == 0 ) {
-                self.index += 20;
-                [self.dataSource removeAllObjects];
-                [self.dataSource addObjectsFromArray:currentArr];
-                if (self.dataSource.count == [[self.targetlist JSONValue] count]) {
-                    self.tableView.footerRefreshingText = @"没有更多了";
-                    self.index = self.dataSource.count;
-                }
-
-                
+            if([self.targetListArr count] - self.index < 20) {// 加载完毕
+            
+                self.index += [self.targetListArr count] - self.index;
+                self.tableView.footerRefreshingText = @"没有更多了";
             }else {
-            
-                if([self.targetListArr count] - self.index < 20) {
-                
-                    self.index += [self.targetListArr count] - self.index;
-                }else {
-                    self.index += 20;
-                }
-                
-                [self.dataSource addObjectsFromArray:currentArr];
-                if (self.dataSource.count == [[self.targetlist JSONValue] count]) {
-                    self.tableView.footerRefreshingText = @"没有更多了";
-                    self.index = self.dataSource.count;
-                }
-
-            
+                self.index += 20;
             }
             
-            
+            [self.dataSource addObjectsFromArray:currentArr];
 
         }else {
         

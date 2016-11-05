@@ -99,12 +99,24 @@ static NSString *videoNumID = @"VIDEONumID";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTableviewCellHeight:) name:@"WEBVIEW_HEIGHT" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(knowLegeWebViewHeight:) name:@"KnowlegewebviewHeight" object:nil];
     
+        // 返回按钮被点击
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backBtnClicked) name:@"BackButtonClicked" object:nil];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self setNeedsStatusBarAppearanceUpdate];
+    
+    // 之所以将关于视频的通知写到viewWillAppear里,是因为在disapear里要移除这些通知,不然下级页面如果凑巧还有视频,会影响该视频
     //注册播放完成通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoDidFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     //注册全屏播放通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fullScreenBtnClick:) name:WMPlayerFullScreenButtonClickedNotification object:nil];
-    // 返回按钮被点击
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backBtnClicked) name:@"BackButtonClicked" object:nil];
     //关闭通知
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(closeTheVideo:)
@@ -118,16 +130,8 @@ static NSString *videoNumID = @"VIDEONumID";
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil
      ];
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self setNeedsStatusBarAppearanceUpdate];
+
 
 //    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
 //    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
@@ -145,16 +149,25 @@ static NSString *videoNumID = @"VIDEONumID";
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [wmPlayer pause];
-    [SVProgressHUD dismiss];
     [super viewWillDisappear:animated];
+    if (isSmallScreen || wmPlayer.isFullscreen) {
+        [self closeTheVideo:nil];
+    }else {
+    
+        [wmPlayer pause];
+    }
+
+    [SVProgressHUD dismiss];
+    // 此处只移除有关视频的通知,避免造成未知问题
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:WMPlayerClosedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:WMPlayerFullScreenButtonClickedNotification object:nil];
     
 }
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-
     
     if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
         [self prefersStatusBarHidden];
@@ -498,6 +511,7 @@ static NSString *videoNumID = @"VIDEONumID";
     [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
     
     wmPlayer.fullScreenBtn.selected = YES;
+    wmPlayer.isFullscreen = YES;
     [wmPlayer bringSubviewToFront:wmPlayer.bottomView];
     
 }
