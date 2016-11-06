@@ -9,14 +9,16 @@
 #import "TeacherDrawViewController.h"
 #import "YjyxDrawLine.h"
 #import "VoiceListCell.h"
-#import "VoiceConverter.h"
+#import "EMCDDeviceManager.h"
+#import "EMVoiceConverter.h"
+#import "NotifySoundTool.h"
 #import "OneStuTaskDetailViewController.h"
 #import "YjyxCommonNavController.h"
 
 @import AVFoundation;
 @import AudioToolbox;
 
-@interface TeacherDrawViewController ()<AVAudioRecorderDelegate>
+@interface TeacherDrawViewController ()<AVAudioRecorderDelegate,AVAudioPlayerDelegate>
 {
     BOOL isExpand;
     BOOL isEdit;// 是否编辑
@@ -25,6 +27,7 @@
     NSDate *endDate;
     NSInteger currentIndex;
     NSInteger flag;
+    UIImageView *animatingImageview;
 
 }
 
@@ -43,7 +46,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *redPenBtn;
 
 @property (strong, nonatomic) AVAudioRecorder *recorder;
-@property (strong, nonatomic) AVPlayer *player;
 @property (strong, nonatomic) NSString *recordFileName;
 @property (strong, nonatomic) NSString *recordFilePath;
 @property (strong, nonatomic) NSString *playFilePath;
@@ -112,8 +114,6 @@
     self.voiceList.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.voiceList.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    // 注册播放完成通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     
     // 添加长按手势
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressAction:)];
@@ -323,7 +323,12 @@
             if(sender.highlighted == NO){
                 return;
             }
-            // 用户同意获取数据
+            // **************************用户同意获取数据*************************
+            // 如果语音正在播放,将语音播放停止
+            [[EMCDDeviceManager sharedInstance] stopPlaying];
+            UIImageView *imageview = [self.voiceList viewWithTag:currentIndex + 300];
+            [imageview stopAnimating];
+            
             NSLog(@"开始录音了");
             isEdit = YES;
             self.imageview.userInteractionEnabled = NO;
@@ -341,7 +346,17 @@
             self.recordFilePath = [TeacherDrawViewController getPathByFilename:_recordFileName ofType:@"wav"];
             NSLog(@"%@", self.recordFilePath);
             // 初始化录音
-            self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL URLWithString:_recordFilePath] settings:[VoiceConverter GetAudioRecorderSettingDict] error:nil];
+            NSDictionary *recordSetting = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                           [NSNumber numberWithFloat: 8000.0],AVSampleRateKey, //采样率
+                                           [NSNumber numberWithInt: kAudioFormatLinearPCM],AVFormatIDKey,
+                                           [NSNumber numberWithInt:16],AVLinearPCMBitDepthKey,//采样位数 默认 16
+                                           [NSNumber numberWithInt: 1], AVNumberOfChannelsKey,//通道的数目
+                                           //                                   [NSNumber numberWithBool:NO],AVLinearPCMIsBigEndianKey,//大端还是小端 是内存的组织方式
+                                           //                                   [NSNumber numberWithBool:NO],AVLinearPCMIsFloatKey,//采样信号是整数还是浮点数
+                                           //                                   [NSNumber numberWithInt: AVAudioQualityMedium],AVEncoderAudioQualityKey,//音频编码质量
+                                           nil];
+
+            self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL URLWithString:_recordFilePath] settings:recordSetting error:nil];
             
             self.recorder.delegate = self;
             self.recorder.meteringEnabled = YES;
@@ -413,7 +428,8 @@
     
         NSString *amrPath = [TeacherDrawViewController getPathByFilename:_recordFileName ofType:@"amr"];
         //    NSString *wavPath = [TeacherDrawViewController getPathByFilename:_recordFileName ofType:@"wav"];
-        int result = [VoiceConverter ConvertWavToAmr:_recordFilePath amrSavePath:amrPath];
+//        int result = [EMVoiceConverter ConvertWavToAmr:_recordFilePath amrSavePath:amrPath];
+        int result = [EMVoiceConverter wavToAmr:_recordFilePath amrSavePath:amrPath];
         NSLog(@"%@", result == 1 ? @"格式转换成功" : @"格式转换失败");
         
         // 音频上传七牛云
@@ -732,10 +748,10 @@
    
     [self.voiceArr removeObjectAtIndex:sender.tag - 400];
     self.voiceNumLabel.text = [NSString stringWithFormat:@"%ld", self.voiceArr.count];
-    if (self.voiceArr.count == 0) {
-        // 移除通知
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-    }
+//    if (self.voiceArr.count == 0) {
+//        // 移除通知
+//        [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    }
     [self.voiceList reloadData];
 }
 
@@ -744,119 +760,60 @@
 - (void)voiceShow:(UITapGestureRecognizer *)sender {
 
     VoiceListCell *cell = (VoiceListCell *)sender.view.superview.superview;
-    NSURL *url = [NSURL URLWithString:[_voiceArr[sender.view.tag - 200] objectForKey:@"url"]];
+    NSString *urlString = [_voiceArr[sender.view.tag - 200] objectForKey:@"url"];
+    currentIndex = sender.view.tag - 200;
+    // 判断是否正在播放
+    if (cell.animationImage.isAnimating) {
+        [cell.animationImage stopAnimating];
+        [[EMCDDeviceManager sharedInstance] stopPlaying];
+    }else {
     
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-       
-        NSData *audioData = [NSData dataWithContentsOfURL:url];
-        NSLog(@"-------------%ld", audioData.length);
-        NSString *amrPath = [TeacherDrawViewController getPathByFilename:[NSString stringWithFormat:@"%ld%ld", self.imageIndex , sender.view.tag - 200] ofType:@"amr"];
-        if (![[NSFileManager defaultManager] fileExistsAtPath:amrPath]) {
-            [audioData writeToFile:amrPath atomically:YES];
-        }
+        [animatingImageview stopAnimating];
+        [cell.animationImage startAnimating];
+        animatingImageview = cell.animationImage;
         
-        self.playFilePath = [TeacherDrawViewController getPathByFilename:[NSString stringWithFormat:@"%ld%ld",self.imageIndex , sender.view.tag - 200] ofType:@"wav"];
-        int result = [VoiceConverter ConvertAmrToWav:amrPath wavSavePath:_playFilePath];
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            NSLog(@"%@", result == 1 ? @"格式转换成功" : @"格式转换失败");
-            [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:nil];
-            [[AVAudioSession sharedInstance] setActive:YES error:nil];
-            
-            AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:self.playFilePath]];
-            
-            NSLog(@"%@", self.voiceArr);
-            
-            if (self.player) {
-                if (currentIndex == sender.view.tag - 200) {
-                    [_player pause];
-                    [cell.animationImage stopAnimating];
-                    _player = nil;
-                }else {
-                    
-                    [_player pause];
-                    UIImageView *imageview = (UIImageView *)[self.view viewWithTag:currentIndex + 300];
-                    [imageview stopAnimating];
-                    self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
-                    [_player play];
-                    currentIndex = sender.view.tag - 200;
-                    [cell.animationImage startAnimating];
-                    
-                }
-            }else {
-                
-                self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
-                [_player play];
-                [cell.animationImage startAnimating];
-                currentIndex = sender.view.tag - 200;
+        [NotifySoundTool asyncPlayingWithUrl:urlString completion:^(NSError *error) {
+            [animatingImageview stopAnimating];
+            // 播放完成,自动播放下一句
+            if (error == NULL) {
+                [self playEnd:currentIndex];
             }
-
-            
-            
-        });
-        
-    });
+        }];
+    }
     
     
 }
 
-// 播放结束,自动播放下一句
-- (void)playDidEnd:(NSNotification *)sender {
+// 播放结束自动播放下一句
+- (void)playEnd:(NSInteger)curIndex {
 
-    if (currentIndex < self.voiceArr.count - 1) {
-        currentIndex++;
-        UIImageView *imageview = (UIImageView *)[self.view viewWithTag:currentIndex - 1 + 300];
-        [imageview stopAnimating];
-        [_player pause];
-        NSURL *url = [NSURL URLWithString:[_voiceArr[currentIndex] objectForKey:@"url"]];
+    if (curIndex < self.voiceArr.count - 1) {
+        currentIndex = curIndex + 1;
+        UIImageView *imageview = [self.voiceList viewWithTag:currentIndex + 200];
+        VoiceListCell *cell = (VoiceListCell *)imageview.superview.superview;
+        NSString *urlString = [_voiceArr[currentIndex] objectForKey:@"url"];
         
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            
-            NSData *audioData = [NSData dataWithContentsOfURL:url];
-            NSLog(@"-------------%ld", audioData.length);
-            NSString *amrPath = [TeacherDrawViewController getPathByFilename:[NSString stringWithFormat:@"%ld%ld",self.imageIndex, currentIndex] ofType:@"amr"];
-            if (![[NSFileManager defaultManager] fileExistsAtPath:amrPath]) {
-                [audioData writeToFile:amrPath atomically:YES];
+        [cell.animationImage startAnimating];
+        animatingImageview = cell.animationImage;
+        
+        [NotifySoundTool asyncPlayingWithUrl:urlString completion:^(NSError *error) {
+            [animatingImageview stopAnimating];
+            // 播放完成,自动播放下一句
+            if (error == NULL) {
+                [self playEnd:currentIndex];
             }
-            
-            self.playFilePath = [TeacherDrawViewController getPathByFilename:[NSString stringWithFormat:@"%ld%ld",self.imageIndex, currentIndex] ofType:@"wav"];
-            int result = [VoiceConverter ConvertAmrToWav:amrPath wavSavePath:_playFilePath];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"%@", result == 1 ? @"格式转换成功" : @"格式转换失败");
-                AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:self.playFilePath]];
-                [_player replaceCurrentItemWithPlayerItem:playerItem];
-                [_player play];
-                UIImageView *imageview2 = (UIImageView *)[self.view viewWithTag:currentIndex + 300];
-                [imageview2 startAnimating];
-            });
-        });
-        
+        }];
+
         
     }else {
     
         [self.view makeToast:@"最后一句已经播放完毕" duration:1.0 position:SHOW_CENTER complete:nil];
-        UIImageView *imageview = (UIImageView *)[self.view viewWithTag:currentIndex + 300];
-        [imageview stopAnimating];
-
     }
     
     
-    
 }
 
-// 获取amr音频并转码
-- (void)changeAMRtoWAVbyUrl:(NSURL *)url {
 
-    NSData *audioData = [NSData dataWithContentsOfURL:url];
-    NSString *amrPath = [TeacherDrawViewController getPathByFilename:[TeacherDrawViewController getCurrentTimeString] ofType:@"amr"];
-    [audioData writeToFile:amrPath atomically:YES];
-    self.playFilePath = [TeacherDrawViewController getPathByFilename:[TeacherDrawViewController getCurrentTimeString] ofType:@"wav"];
-    int result = [VoiceConverter ConvertAmrToWav:amrPath wavSavePath:_playFilePath];
-    NSLog(@"%@", result == 1 ? @"格式转换成功" : @"格式转换失败");
-    
-}
 
 #pragma mark - voice recording
 

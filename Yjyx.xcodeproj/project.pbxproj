@@ -615,12 +615,22 @@
 		80D979181D3882AE000BD95E /* YjyxDrawLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D979171D3882AE000BD95E /* YjyxDrawLine.m */; };
 		80D9791C1D3DBC41000BD95E /* VoiceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D9791A1D3DBC41000BD95E /* VoiceListCell.m */; };
 		80D9791D1D3DBC41000BD95E /* VoiceListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D9791B1D3DBC41000BD95E /* VoiceListCell.xib */; };
-		80D9792D1D3F0A32000BD95E /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 80D979211D3F0A32000BD95E /* amrFileCodec.mm */; };
-		80D9792E1D3F0A32000BD95E /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D979231D3F0A32000BD95E /* libopencore-amrnb.a */; };
-		80D9792F1D3F0A32000BD95E /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D979241D3F0A32000BD95E /* libopencore-amrwb.a */; };
-		80D979301D3F0A32000BD95E /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 80D9792C1D3F0A32000BD95E /* VoiceConverter.mm */; };
 		80D979361D430FB8000BD95E /* YjyxAnonatationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80D979341D430FB8000BD95E /* YjyxAnonatationController.m */; };
 		80D979371D430FB8000BD95E /* YjyxAnonatationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D979351D430FB8000BD95E /* YjyxAnonatationController.xib */; };
+		80DF40291DCDD7F3008C106E /* EaseUIResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 80DF40051DCDD7F3008C106E /* EaseUIResource.bundle */; };
+		80DF402A1DCDD7F3008C106E /* EMAudioPlayerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 80DF40091DCDD7F3008C106E /* EMAudioPlayerUtil.m */; };
+		80DF402B1DCDD7F3008C106E /* EMAudioRecorderUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 80DF400B1DCDD7F3008C106E /* EMAudioRecorderUtil.m */; };
+		80DF402C1DCDD7F3008C106E /* EMCDDeviceManager+Media.m in Sources */ = {isa = PBXBuildFile; fileRef = 80DF400D1DCDD7F3008C106E /* EMCDDeviceManager+Media.m */; };
+		80DF402D1DCDD7F3008C106E /* EMCDDeviceManager+Microphone.m in Sources */ = {isa = PBXBuildFile; fileRef = 80DF400F1DCDD7F3008C106E /* EMCDDeviceManager+Microphone.m */; };
+		80DF402E1DCDD7F3008C106E /* EMCDDeviceManager+ProximitySensor.m in Sources */ = {isa = PBXBuildFile; fileRef = 80DF40111DCDD7F3008C106E /* EMCDDeviceManager+ProximitySensor.m */; };
+		80DF402F1DCDD7F3008C106E /* EMCDDeviceManager+Remind.m in Sources */ = {isa = PBXBuildFile; fileRef = 80DF40131DCDD7F3008C106E /* EMCDDeviceManager+Remind.m */; };
+		80DF40301DCDD7F3008C106E /* EMCDDeviceManagerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 80DF40161DCDD7F3008C106E /* EMCDDeviceManagerBase.m */; };
+		80DF40311DCDD7F3008C106E /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 80DF401A1DCDD7F3008C106E /* amrFileCodec.mm */; };
+		80DF40321DCDD7F3008C106E /* wav.mm in Sources */ = {isa = PBXBuildFile; fileRef = 80DF401C1DCDD7F3008C106E /* wav.mm */; };
+		80DF40331DCDD7F4008C106E /* EMVoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 80DF401E1DCDD7F3008C106E /* EMVoiceConverter.mm */; };
+		80DF40341DCDD7F4008C106E /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DF40221DCDD7F3008C106E /* libopencore-amrnb.a */; };
+		80DF40351DCDD7F4008C106E /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DF40261DCDD7F3008C106E /* libopencore-amrwb.a */; };
+		80DF40361DCDD7F4008C106E /* NotifySoundTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 80DF40281DCDD7F3008C106E /* NotifySoundTool.m */; };
 		80F718C01CF28961007C0B75 /* StuConditionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BB1CF28961007C0B75 /* StuConditionCell.m */; };
 		80F718C11CF28961007C0B75 /* StuConditionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80F718BC1CF28961007C0B75 /* StuConditionCell.xib */; };
 		80F718C21CF28961007C0B75 /* SubmitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 80F718BE1CF28961007C0B75 /* SubmitCell.m */; };
@@ -1642,19 +1652,43 @@
 		80D979191D3DBC41000BD95E /* VoiceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceListCell.h; sourceTree = "<group>"; };
 		80D9791A1D3DBC41000BD95E /* VoiceListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceListCell.m; sourceTree = "<group>"; };
 		80D9791B1D3DBC41000BD95E /* VoiceListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoiceListCell.xib; sourceTree = "<group>"; };
-		80D979201D3F0A32000BD95E /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
-		80D979211D3F0A32000BD95E /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
-		80D979231D3F0A32000BD95E /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
-		80D979241D3F0A32000BD95E /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
-		80D979261D3F0A32000BD95E /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
-		80D979271D3F0A32000BD95E /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
-		80D979291D3F0A32000BD95E /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
-		80D9792A1D3F0A32000BD95E /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
-		80D9792B1D3F0A32000BD95E /* VoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceConverter.h; sourceTree = "<group>"; };
-		80D9792C1D3F0A32000BD95E /* VoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VoiceConverter.mm; sourceTree = "<group>"; };
 		80D979331D430FB8000BD95E /* YjyxAnonatationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxAnonatationController.h; sourceTree = "<group>"; };
 		80D979341D430FB8000BD95E /* YjyxAnonatationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxAnonatationController.m; sourceTree = "<group>"; };
 		80D979351D430FB8000BD95E /* YjyxAnonatationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxAnonatationController.xib; sourceTree = "<group>"; };
+		80DF40021DCDD7F3008C106E /* EMCDDeviceManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCDDeviceManagerDelegate.h; sourceTree = "<group>"; };
+		80DF40031DCDD7F3008C106E /* EMCDDeviceManagerProximitySensorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCDDeviceManagerProximitySensorDelegate.h; sourceTree = "<group>"; };
+		80DF40041DCDD7F3008C106E /* EaseLocalDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EaseLocalDefine.h; sourceTree = "<group>"; };
+		80DF40051DCDD7F3008C106E /* EaseUIResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EaseUIResource.bundle; sourceTree = "<group>"; };
+		80DF40071DCDD7F3008C106E /* DemoErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoErrorCode.h; sourceTree = "<group>"; };
+		80DF40081DCDD7F3008C106E /* EMAudioPlayerUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMAudioPlayerUtil.h; sourceTree = "<group>"; };
+		80DF40091DCDD7F3008C106E /* EMAudioPlayerUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMAudioPlayerUtil.m; sourceTree = "<group>"; };
+		80DF400A1DCDD7F3008C106E /* EMAudioRecorderUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMAudioRecorderUtil.h; sourceTree = "<group>"; };
+		80DF400B1DCDD7F3008C106E /* EMAudioRecorderUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMAudioRecorderUtil.m; sourceTree = "<group>"; };
+		80DF400C1DCDD7F3008C106E /* EMCDDeviceManager+Media.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMCDDeviceManager+Media.h"; sourceTree = "<group>"; };
+		80DF400D1DCDD7F3008C106E /* EMCDDeviceManager+Media.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMCDDeviceManager+Media.m"; sourceTree = "<group>"; };
+		80DF400E1DCDD7F3008C106E /* EMCDDeviceManager+Microphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMCDDeviceManager+Microphone.h"; sourceTree = "<group>"; };
+		80DF400F1DCDD7F3008C106E /* EMCDDeviceManager+Microphone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMCDDeviceManager+Microphone.m"; sourceTree = "<group>"; };
+		80DF40101DCDD7F3008C106E /* EMCDDeviceManager+ProximitySensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMCDDeviceManager+ProximitySensor.h"; sourceTree = "<group>"; };
+		80DF40111DCDD7F3008C106E /* EMCDDeviceManager+ProximitySensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMCDDeviceManager+ProximitySensor.m"; sourceTree = "<group>"; };
+		80DF40121DCDD7F3008C106E /* EMCDDeviceManager+Remind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EMCDDeviceManager+Remind.h"; sourceTree = "<group>"; };
+		80DF40131DCDD7F3008C106E /* EMCDDeviceManager+Remind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EMCDDeviceManager+Remind.m"; sourceTree = "<group>"; };
+		80DF40141DCDD7F3008C106E /* EMCDDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCDDeviceManager.h; sourceTree = "<group>"; };
+		80DF40151DCDD7F3008C106E /* EMCDDeviceManagerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCDDeviceManagerBase.h; sourceTree = "<group>"; };
+		80DF40161DCDD7F3008C106E /* EMCDDeviceManagerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMCDDeviceManagerBase.m; sourceTree = "<group>"; };
+		80DF40191DCDD7F3008C106E /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
+		80DF401A1DCDD7F3008C106E /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
+		80DF401B1DCDD7F3008C106E /* wav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wav.h; sourceTree = "<group>"; };
+		80DF401C1DCDD7F3008C106E /* wav.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = wav.mm; sourceTree = "<group>"; };
+		80DF401D1DCDD7F3008C106E /* EMVoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMVoiceConverter.h; sourceTree = "<group>"; };
+		80DF401E1DCDD7F3008C106E /* EMVoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EMVoiceConverter.mm; sourceTree = "<group>"; };
+		80DF40201DCDD7F3008C106E /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
+		80DF40211DCDD7F3008C106E /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
+		80DF40221DCDD7F3008C106E /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
+		80DF40241DCDD7F3008C106E /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
+		80DF40251DCDD7F3008C106E /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
+		80DF40261DCDD7F3008C106E /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
+		80DF40271DCDD7F3008C106E /* NotifySoundTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotifySoundTool.h; sourceTree = "<group>"; };
+		80DF40281DCDD7F3008C106E /* NotifySoundTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotifySoundTool.m; sourceTree = "<group>"; };
 		80F718BA1CF28961007C0B75 /* StuConditionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuConditionCell.h; sourceTree = "<group>"; };
 		80F718BB1CF28961007C0B75 /* StuConditionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuConditionCell.m; sourceTree = "<group>"; };
 		80F718BC1CF28961007C0B75 /* StuConditionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StuConditionCell.xib; sourceTree = "<group>"; };
@@ -1705,6 +1739,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AEC05AA1CF2E42300BDB2C6 /* UMMobClick.framework in Frameworks */,
+				80DF40341DCDD7F4008C106E /* libopencore-amrnb.a in Frameworks */,
 				3BC7DBE21CDB5E5A00E5E12F /* libsqlite3.0.tbd in Frameworks */,
 				3A44A92F1CBD10E000348B49 /* CoreGraphics.framework in Frameworks */,
 				3A44A92D1CBD10B200348B49 /* CoreText.framework in Frameworks */,
@@ -1717,8 +1752,8 @@
 				3AA1655F1C91AE73006B8756 /* libicucore.A.tbd in Frameworks */,
 				3AF27E4B1C7349C500698673 /* AssetsLibrary.framework in Frameworks */,
 				3AF27E491C73493300698673 /* CoreMedia.framework in Frameworks */,
-				80D9792E1D3F0A32000BD95E /* libopencore-amrnb.a in Frameworks */,
 				3ADD4BD61C7409D100F0210C /* libUMessage_Sdk_1.2.6.a in Frameworks */,
+				80DF40351DCDD7F4008C106E /* libopencore-amrwb.a in Frameworks */,
 				3AF27E471C73492900698673 /* CoreVideo.framework in Frameworks */,
 				3AF27E451C73491A00698673 /* CoreTelephony.framework in Frameworks */,
 				3AF27E431C73490300698673 /* MessageUI.framework in Frameworks */,
@@ -1730,7 +1765,6 @@
 				3A44A91F1CBD0F5000348B49 /* AlipaySDK.framework in Frameworks */,
 				3AEF27391C61F1230028BE09 /* SystemConfiguration.framework in Frameworks */,
 				3AEF27371C61F11B0028BE09 /* AddressBook.framework in Frameworks */,
-				80D9792F1D3F0A32000BD95E /* libopencore-amrwb.a in Frameworks */,
 				06A7910CD5717C4EB337F929 /* libPods-Yjyx.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2238,8 +2272,8 @@
 		3AEF26DB1C61F08A0028BE09 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				80DF3FFF1DCDD7F3008C106E /* AudioHelper */,
 				80A0E8B91D61A5E200ED68A1 /* UIcolorForHex */,
-				80D9791E1D3F0A32000BD95E /* VoiceConvert */,
 				80D979121D388212000BD95E /* ImageDrawing */,
 				80D979091D2E21A5000BD95E /* iCarousel */,
 				3BD9C7EF1CEEAC93008232D7 /* QiniuHelper */,
@@ -3505,51 +3539,99 @@
 			path = ImageDrawing;
 			sourceTree = "<group>";
 		};
-		80D9791E1D3F0A32000BD95E /* VoiceConvert */ = {
+		80DF3FFF1DCDD7F3008C106E /* AudioHelper */ = {
 			isa = PBXGroup;
 			children = (
-				80D9791F1D3F0A32000BD95E /* amrwapper */,
-				80D979221D3F0A32000BD95E /* lib */,
-				80D979251D3F0A32000BD95E /* opencore-amrnb */,
-				80D979281D3F0A32000BD95E /* opencore-amrwb */,
-				80D9792B1D3F0A32000BD95E /* VoiceConverter.h */,
-				80D9792C1D3F0A32000BD95E /* VoiceConverter.mm */,
+				80DF40001DCDD7F3008C106E /* DeviceHelper */,
+				80DF40271DCDD7F3008C106E /* NotifySoundTool.h */,
+				80DF40281DCDD7F3008C106E /* NotifySoundTool.m */,
+			);
+			path = AudioHelper;
+			sourceTree = "<group>";
+		};
+		80DF40001DCDD7F3008C106E /* DeviceHelper */ = {
+			isa = PBXGroup;
+			children = (
+				80DF40011DCDD7F3008C106E /* delegates */,
+				80DF40041DCDD7F3008C106E /* EaseLocalDefine.h */,
+				80DF40051DCDD7F3008C106E /* EaseUIResource.bundle */,
+				80DF40061DCDD7F3008C106E /* internal */,
+				80DF40171DCDD7F3008C106E /* VoiceConvert */,
+			);
+			path = DeviceHelper;
+			sourceTree = "<group>";
+		};
+		80DF40011DCDD7F3008C106E /* delegates */ = {
+			isa = PBXGroup;
+			children = (
+				80DF40021DCDD7F3008C106E /* EMCDDeviceManagerDelegate.h */,
+				80DF40031DCDD7F3008C106E /* EMCDDeviceManagerProximitySensorDelegate.h */,
+			);
+			path = delegates;
+			sourceTree = "<group>";
+		};
+		80DF40061DCDD7F3008C106E /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				80DF40071DCDD7F3008C106E /* DemoErrorCode.h */,
+				80DF40081DCDD7F3008C106E /* EMAudioPlayerUtil.h */,
+				80DF40091DCDD7F3008C106E /* EMAudioPlayerUtil.m */,
+				80DF400A1DCDD7F3008C106E /* EMAudioRecorderUtil.h */,
+				80DF400B1DCDD7F3008C106E /* EMAudioRecorderUtil.m */,
+				80DF400C1DCDD7F3008C106E /* EMCDDeviceManager+Media.h */,
+				80DF400D1DCDD7F3008C106E /* EMCDDeviceManager+Media.m */,
+				80DF400E1DCDD7F3008C106E /* EMCDDeviceManager+Microphone.h */,
+				80DF400F1DCDD7F3008C106E /* EMCDDeviceManager+Microphone.m */,
+				80DF40101DCDD7F3008C106E /* EMCDDeviceManager+ProximitySensor.h */,
+				80DF40111DCDD7F3008C106E /* EMCDDeviceManager+ProximitySensor.m */,
+				80DF40121DCDD7F3008C106E /* EMCDDeviceManager+Remind.h */,
+				80DF40131DCDD7F3008C106E /* EMCDDeviceManager+Remind.m */,
+				80DF40141DCDD7F3008C106E /* EMCDDeviceManager.h */,
+				80DF40151DCDD7F3008C106E /* EMCDDeviceManagerBase.h */,
+				80DF40161DCDD7F3008C106E /* EMCDDeviceManagerBase.m */,
+			);
+			path = internal;
+			sourceTree = "<group>";
+		};
+		80DF40171DCDD7F3008C106E /* VoiceConvert */ = {
+			isa = PBXGroup;
+			children = (
+				80DF40181DCDD7F3008C106E /* amrwapper */,
+				80DF401D1DCDD7F3008C106E /* EMVoiceConverter.h */,
+				80DF401E1DCDD7F3008C106E /* EMVoiceConverter.mm */,
+				80DF401F1DCDD7F3008C106E /* opencore-amrnb */,
+				80DF40231DCDD7F3008C106E /* opencore-amrwb */,
 			);
 			path = VoiceConvert;
 			sourceTree = "<group>";
 		};
-		80D9791F1D3F0A32000BD95E /* amrwapper */ = {
+		80DF40181DCDD7F3008C106E /* amrwapper */ = {
 			isa = PBXGroup;
 			children = (
-				80D979201D3F0A32000BD95E /* amrFileCodec.h */,
-				80D979211D3F0A32000BD95E /* amrFileCodec.mm */,
+				80DF40191DCDD7F3008C106E /* amrFileCodec.h */,
+				80DF401A1DCDD7F3008C106E /* amrFileCodec.mm */,
+				80DF401B1DCDD7F3008C106E /* wav.h */,
+				80DF401C1DCDD7F3008C106E /* wav.mm */,
 			);
 			path = amrwapper;
 			sourceTree = "<group>";
 		};
-		80D979221D3F0A32000BD95E /* lib */ = {
+		80DF401F1DCDD7F3008C106E /* opencore-amrnb */ = {
 			isa = PBXGroup;
 			children = (
-				80D979231D3F0A32000BD95E /* libopencore-amrnb.a */,
-				80D979241D3F0A32000BD95E /* libopencore-amrwb.a */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		80D979251D3F0A32000BD95E /* opencore-amrnb */ = {
-			isa = PBXGroup;
-			children = (
-				80D979261D3F0A32000BD95E /* interf_dec.h */,
-				80D979271D3F0A32000BD95E /* interf_enc.h */,
+				80DF40201DCDD7F3008C106E /* interf_dec.h */,
+				80DF40211DCDD7F3008C106E /* interf_enc.h */,
+				80DF40221DCDD7F3008C106E /* libopencore-amrnb.a */,
 			);
 			path = "opencore-amrnb";
 			sourceTree = "<group>";
 		};
-		80D979281D3F0A32000BD95E /* opencore-amrwb */ = {
+		80DF40231DCDD7F3008C106E /* opencore-amrwb */ = {
 			isa = PBXGroup;
 			children = (
-				80D979291D3F0A32000BD95E /* dec_if.h */,
-				80D9792A1D3F0A32000BD95E /* if_rom.h */,
+				80DF40241DCDD7F3008C106E /* dec_if.h */,
+				80DF40251DCDD7F3008C106E /* if_rom.h */,
+				80DF40261DCDD7F3008C106E /* libopencore-amrwb.a */,
 			);
 			path = "opencore-amrwb";
 			sourceTree = "<group>";
@@ -3837,6 +3919,7 @@
 				3BCF19211CDC66E600E2EA1A /* list_icon_note_nor2@3x.png in Resources */,
 				3A3E6DE71CD8F4B8002133D8 /* Parent_read@3x.png in Resources */,
 				3CAC454F1D40EACA00ACBDA9 /* YjyxExchangeRecordCell.xib in Resources */,
+				80DF40291DCDD7F3008C106E /* EaseUIResource.bundle in Resources */,
 				3A5477961CE41ACF001233C1 /* homework_close@3x.png in Resources */,
 				3A4302051C61FDFB00B8D259 /* LoginViewController.xib in Resources */,
 				3CC4738F1D05130A009FAC16 /* ChooseMaterialCell.xib in Resources */,
@@ -4131,11 +4214,13 @@
 				3B4864741CCF117300D2DE3C /* PrivateCenterViewController.m in Sources */,
 				3BB773A81CD8784000A24485 /* BookViewController.m in Sources */,
 				3CE18E991D212184007E0874 /* ReleaseDescrpitionCell.m in Sources */,
+				80DF402E1DCDD7F3008C106E /* EMCDDeviceManager+ProximitySensor.m in Sources */,
 				3B48647F1CCF3FBA00D2DE3C /* CustomTabBarViewController.m in Sources */,
 				3B35DB9D1CE0709A000B7F83 /* SolutionCell.m in Sources */,
 				3A04A5D21C93E6290040D913 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				80A0E8C21D66D9C700ED68A1 /* YjyxStuSummaryModel.m in Sources */,
 				3A04A5CC1C93E6290040D913 /* MASConstraint.m in Sources */,
+				80DF402A1DCDD7F3008C106E /* EMAudioPlayerUtil.m in Sources */,
 				3A04A5D91C93E6590040D913 /* ChildrenVideoViewController.m in Sources */,
 				3CF541D41D1CD990000EBAB5 /* MyMicroCell.m in Sources */,
 				80FEB69D1D2202DA009EB126 /* ResultModel.m in Sources */,
@@ -4144,6 +4229,7 @@
 				3AEF27251C61F08A0028BE09 /* UIDevice+Space.m in Sources */,
 				801F44AB1CDF164800B7E7E1 /* NSDataEx.m in Sources */,
 				3C3D93EB1D26442000AA22AE /* YjyxButton.m in Sources */,
+				80DF402B1DCDD7F3008C106E /* EMAudioRecorderUtil.m in Sources */,
 				3BB773A31CD8781400A24485 /* SmartViewController.m in Sources */,
 				3C4274C01D2A4E4D008A30FA /* YjyxHomeWorkCell.m in Sources */,
 				3CFF2C991D3E0E6200F5EB63 /* YjyxTeacherButton.m in Sources */,
@@ -4153,6 +4239,7 @@
 				801F44AC1CDF164800B7E7E1 /* openssl_wrapper.m in Sources */,
 				3CD7E45E1D2B819600769FDE /* YjyxHomeWrongModel.m in Sources */,
 				3BCF19511CDCC2B500E2EA1A /* TaskListTableViewCell.m in Sources */,
+				80DF402F1DCDD7F3008C106E /* EMCDDeviceManager+Remind.m in Sources */,
 				3A04A5CE1C93E6290040D913 /* MASLayoutConstraint.m in Sources */,
 				8010A9191D5DA4DA0091F6EA /* StudentStasticController.m in Sources */,
 				3BFE3B7B1CD9816D00502769 /* ChildrenEntity.m in Sources */,
@@ -4164,6 +4251,7 @@
 				3A91F4951C760CF4001568AA /* PNLineChart.m in Sources */,
 				3CD7E4641D2BD33D00769FDE /* YjyxSearchView.m in Sources */,
 				3C19D8541D6ACBD700CA7393 /* YjyxThreeStageSubjectCell.m in Sources */,
+				80DF402C1DCDD7F3008C106E /* EMCDDeviceManager+Media.m in Sources */,
 				3CECA4AE1D2CDAEB0039DCB6 /* YjyxWorkDetailController.m in Sources */,
 				3CD2F1701D27909E0031AF2E /* YjyxChangePhoneController.m in Sources */,
 				8094E4C21D129DB800EF221A /* QuestionPreviewCell.m in Sources */,
@@ -4179,6 +4267,7 @@
 				3CD1D6C61D08054D0027E797 /* GradeVerVolItem.m in Sources */,
 				3A04A5CD1C93E6290040D913 /* MASConstraintMaker.m in Sources */,
 				3C1566971D0D54D0006670D6 /* ChaperContentItem.m in Sources */,
+				80DF40361DCDD7F4008C106E /* NotifySoundTool.m in Sources */,
 				3AB212B41CA2E11900DCC618 /* KWFormViewQuickBuilder.m in Sources */,
 				3A04A5DF1C9406850040D913 /* YjyxWorkPreviewViewController.m in Sources */,
 				3AEF272B1C61F08A0028BE09 /* JSONKit.m in Sources */,
@@ -4276,10 +4365,10 @@
 				3CD7E4561D2B593800769FDE /* MJRefreshConst.m in Sources */,
 				8013D3461CF46B8700F82301 /* ChoiceCell.m in Sources */,
 				3AC1D1E31CCDE70E006291D0 /* RegistOneViewController.m in Sources */,
+				80DF40321DCDD7F3008C106E /* wav.mm in Sources */,
 				801F44A71CDF164800B7E7E1 /* base64.m in Sources */,
 				80CCF43F1CF2F0EC000C93D9 /* UnSubmitCell.m in Sources */,
 				3A188F9A1CE5C51600F055DD /* OrderTableViewCell.m in Sources */,
-				80D979301D3F0A32000BD95E /* VoiceConverter.mm in Sources */,
 				3AEF27271C61F08A0028BE09 /* UIImageEffects.m in Sources */,
 				3CA04CDC1D17CDD30054A05D /* WrongSubjectController.m in Sources */,
 				3AD1FD931C72BD8F00E362B9 /* MyChildrenTableViewCell.m in Sources */,
@@ -4301,6 +4390,8 @@
 				3A04A5D31C93E6290040D913 /* View+MASAdditions.m in Sources */,
 				3CAC45521D40EEDF00ACBDA9 /* YjyxExchangeRecordModel.m in Sources */,
 				3BE01BD71CDD7DD700781B86 /* ChoiceModel.m in Sources */,
+				80DF40301DCDD7F3008C106E /* EMCDDeviceManagerBase.m in Sources */,
+				80DF40331DCDD7F4008C106E /* EMVoiceConverter.mm in Sources */,
 				3C3D93E11D26119500AA22AE /* YjyxCommonNavController.m in Sources */,
 				3CE22BB31D5AB7A600536082 /* YjyxHomeAdController.m in Sources */,
 				80D979001D2CC928000BD95E /* YjyxStuWrongListModel.m in Sources */,
@@ -4326,6 +4417,7 @@
 				3CA896381D06B3890092D292 /* TreeNode.m in Sources */,
 				3A8CAEC11C70B3C200BDEB6B /* ParentChildrensViewController.m in Sources */,
 				3A91F49E1C760CF4001568AA /* PNScatterChartDataItem.m in Sources */,
+				80DF40311DCDD7F3008C106E /* amrFileCodec.mm in Sources */,
 				80A0E8BF1D66908200ED68A1 /* SummaryResultModel.m in Sources */,
 				3CAC453E1D40A4C000ACBDA9 /* YjyxShopDetailCell.m in Sources */,
 				3B91A6F71CE6010D0082A92C /* YourAnswerCell.m in Sources */,
@@ -4374,6 +4466,7 @@
 				3AA1655C1C91AB40006B8756 /* RCLabel.m in Sources */,
 				3C3D93DD1D26119500AA22AE /* YjyxStatistController.m in Sources */,
 				80A0E8CB1D694D5D00ED68A1 /* YiTeachChooseCell.m in Sources */,
+				80DF402D1DCDD7F3008C106E /* EMCDDeviceManager+Microphone.m in Sources */,
 				3A40570C1CCF732800258784 /* ForgetTwoViewController.m in Sources */,
 				80D979181D3882AE000BD95E /* YjyxDrawLine.m in Sources */,
 				8013D32F1CF4495300F82301 /* SpendTimeCell.m in Sources */,
@@ -4397,7 +4490,6 @@
 				3CD7E45A1D2B593800769FDE /* UIScrollView+MJRefresh.m in Sources */,
 				3CF541D81D1CFD09000EBAB5 /* MyMicroModel.m in Sources */,
 				3A88276F1C6EE0DE0008367F /* ParentHomeViewController.m in Sources */,
-				80D9792D1D3F0A32000BD95E /* amrFileCodec.mm in Sources */,
 				3CA04D001D180EBD0054A05D /* ReleaseExplanationCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4552,6 +4644,8 @@
 					"$(PROJECT_DIR)/Yjyx/Alipay",
 					"$(SRCROOT)/Yjyx/Alipay/AliSDK/openssl",
 					"$(PROJECT_DIR)/Yjyx/Utils/VoiceConvert/lib",
+					"$(PROJECT_DIR)/Yjyx/Utils/AudioHelper/DeviceHelper/VoiceConvert/opencore-amrnb",
+					"$(PROJECT_DIR)/Yjyx/Utils/AudioHelper/DeviceHelper/VoiceConvert/opencore-amrwb",
 				);
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
@@ -4609,6 +4703,8 @@
 					"$(PROJECT_DIR)/Yjyx/Alipay",
 					"$(SRCROOT)/Yjyx/Alipay/AliSDK/openssl",
 					"$(PROJECT_DIR)/Yjyx/Utils/VoiceConvert/lib",
+					"$(PROJECT_DIR)/Yjyx/Utils/AudioHelper/DeviceHelper/VoiceConvert/opencore-amrnb",
+					"$(PROJECT_DIR)/Yjyx/Utils/AudioHelper/DeviceHelper/VoiceConvert/opencore-amrwb",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
