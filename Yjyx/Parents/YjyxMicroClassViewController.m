@@ -27,6 +27,7 @@
     UIView *headerView;
     NSInteger lastSelectedVideoTag;
     NSTimeInterval lastPlayingTaskInterval;
+    BOOL isStart;
 }
 
 @property (nonatomic, copy) NSString *videoURL;
@@ -171,6 +172,7 @@
     [videoImage removeFromSuperview];
     [self configureWMPlayer];
     wmPlayer.isPlay = NO;
+    isStart = NO;
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
@@ -207,7 +209,7 @@
         make.top.equalTo(wmPlayer).with.offset(5);
         
     }];
-    if (wmPlayer.isPlay) {
+    if (isStart) {
         [[UIApplication sharedApplication].keyWindow addSubview:wmPlayer];
         wmPlayer.playOrPauseBtn.selected = NO;
     }else {
@@ -241,8 +243,13 @@
         wmPlayer.transform = CGAffineTransformIdentity;
         wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
         wmPlayer.playerLayer.frame =  wmPlayer.bounds;
-        [self.view insertSubview:wmPlayer belowSubview:_backBtn];
-        [self.view insertSubview:videoImage belowSubview:_backBtn];
+        if (isStart) {
+            [self.view insertSubview:wmPlayer belowSubview:_backBtn];
+        }else {
+            [self.view insertSubview:wmPlayer belowSubview:_backBtn];
+            [self.view insertSubview:videoImage belowSubview:_backBtn];
+        }
+        
         [wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(wmPlayer).with.offset(0);
             make.right.equalTo(wmPlayer).with.offset(0);
@@ -989,7 +996,7 @@
 #pragma mark -event
 -(void)playvideo
 {
-    
+    isStart = YES;
     [videoImage removeFromSuperview];
     videoImage = nil;
     [wmPlayer.player play];
