@@ -69,6 +69,7 @@
     
     isEdit = NO;
     isChoosePencil = NO;
+    currentIndex = -1;
     [self configureNavBar];
     self.imgURL = [self.processArr[_imageIndex] objectForKey:@"img"];
     self.voiceArr = [[self.processArr[_imageIndex] objectForKey:@"teachervoice"] mutableCopy];
@@ -753,14 +754,16 @@
 #pragma mark - 删除单个音频
 - (void)deleteTheVoice:(UIButton *)sender {
     isEdit = YES;
-   
-    [self.voiceArr removeObjectAtIndex:sender.tag - 400];
-    self.voiceNumLabel.text = [NSString stringWithFormat:@"%ld", self.voiceArr.count];
-//    if (self.voiceArr.count == 0) {
-//        // 移除通知
-//        [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    }
-    [self.voiceList reloadData];
+    if (currentIndex == sender.tag - 400) {
+        [self.view makeToast:@"当前语音正在播放,无法删除!" duration:1.0 position:SHOW_CENTER complete:nil];
+    }else {
+    
+        [self.voiceArr removeObjectAtIndex:sender.tag - 400];
+        self.voiceNumLabel.text = [NSString stringWithFormat:@"%ld", self.voiceArr.count];
+        
+        [self.voiceList reloadData];
+    }
+    
 }
 
 #pragma mark - 音频播放
@@ -814,7 +817,7 @@
 
         
     }else {
-    
+        currentIndex = -1;
         [self.view makeToast:@"最后一句已经播放完毕" duration:1.0 position:SHOW_CENTER complete:nil];
     }
     
