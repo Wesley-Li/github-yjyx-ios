@@ -13,6 +13,10 @@
 #import "ReleaseMicroController.h"
 #import "MJRefresh.h"
 @interface MyMicroMainController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, MicroDetailViewControllerDelegate>
+
+{
+    BOOL isSearch;// 搜索
+}
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -23,6 +27,7 @@
 
 @property (strong, nonatomic) MyMicroModel *model;
 @property (strong, nonatomic) NSNumber *last_id;
+@property (copy, nonatomic) NSString *searchkeyword;// 搜索关键词
 @end
 
 @implementation MyMicroMainController
@@ -113,6 +118,9 @@ static NSString *ID = @"CELL";
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"action"] = @"m_search";
     param[@"lastid"] = self.last_id;
+    if (self.searchkeyword != nil) {
+        param[@"searchkeyword"] = self.searchkeyword;
+    }
     [mgr GET:[BaseURL stringByAppendingString:@"/api/teacher/yj_lessons/"] parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         if([responseObject[@"retcode"] isEqual:@0]){
             NSMutableArray *currentArr = [NSMutableArray array];
@@ -123,6 +131,23 @@ static NSString *ID = @"CELL";
                 self.myMicroArr = currentArr;
             }else{
                 [self.myMicroArr addObjectsFromArray:currentArr];
+            }
+            
+            if (isSearch) {
+                if (self.myMicroArr.count == 0) {
+                    UIView *view = [[UIView alloc] init];
+                    view.height = 100;
+                    UILabel *label = [[UILabel alloc] init];
+                    label.text = @"无搜索结果";
+                    [label sizeToFit];
+                    
+                    label.centerX = self.view.centerX;
+                    label.centerY = view.centerY;
+                    label.textAlignment = NSTextAlignmentCenter;
+                    label.textColor = [UIColor lightGrayColor];
+                    [view addSubview:label];
+                    self.tableView.tableHeaderView = view;
+                }
             }
             
             [self.tableView reloadData];
@@ -163,11 +188,7 @@ static NSString *ID = @"CELL";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MyMicroCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (_seacherArr != nil) {
-        cell.microModel = self.seacherArr[indexPath.row];
-    }else{
     cell.microModel = self.myMicroArr[indexPath.row];
-    }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -183,39 +204,15 @@ static NSString *ID = @"CELL";
     
 }
 #pragma mark - UISearchBar的代理方法
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    NSLog(@"%@", searchText);
-    [self.seacherArr removeAllObjects];
-    if ([searchText isEqualToString:@""]) {
-        self.seacherArr = nil;
-        self.tableView.tableHeaderView = [[UIView alloc] init];
-        [self.tableView reloadData];
-        return;
-    }
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(loadData) object:nil];
+    self.searchkeyword = searchText;
+    isSearch = YES;
+    self.last_id = @0;
+    [self performSelector:@selector(loadData) withObject:nil afterDelay:0.5];
     
-    for (MyMicroModel *tempModel in self.myMicroArr) {
-        if([tempModel.name containsString:searchText]){
-            [self.seacherArr addObject:tempModel];
-        }
-    }
-    if (self.seacherArr.count == 0) {
-        UIView *view = [[UIView alloc] init];
-        view.height = 100;
-        UILabel *label = [[UILabel alloc] init];
-        label.text = @"无搜索结果";
-        [label sizeToFit];
-
-        label.centerX = self.view.centerX;
-        label.centerY = view.centerY;
-        label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = [UIColor lightGrayColor];
-        [view addSubview:label];
-        self.tableView.tableHeaderView = view;
-    }else{
-        self.tableView.tableHeaderView = [[UIView alloc] init];
-    }
-    [self.tableView reloadData];
   
 }
 @end
