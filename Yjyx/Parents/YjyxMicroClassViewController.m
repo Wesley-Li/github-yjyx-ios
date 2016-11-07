@@ -133,6 +133,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
 
     [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
     if (wmPlayer.isFullscreen) {
         [self toNormal];
         [wmPlayer.player pause];
@@ -158,6 +159,7 @@
 //    [wmPlayer removeFromSuperview];
 //    [self releaseWMPlayer];
     [super viewDidDisappear:animated];
+    
 }
 
 -(void)videoDidFinished:(NSNotification *)notice{
