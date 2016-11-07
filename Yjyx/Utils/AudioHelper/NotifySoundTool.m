@@ -168,7 +168,7 @@ void NotifySystemSoundFinishedPlayingCallback(SystemSoundID sound_id, void* user
             return [NSURL fileURLWithPath:path];
             
         } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DOWNLOADISFINISH" object:nil];
             // 下载完毕.播放
             NSString *voicePath = [filePath path];
             [[EMCDDeviceManager sharedInstance] asyncPlayingWithPath:voicePath completion:^(NSError *error) {

@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *voiceDelete;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *animationImage;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityView;
 
 
 

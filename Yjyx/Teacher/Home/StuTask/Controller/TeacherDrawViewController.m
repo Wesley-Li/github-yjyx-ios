@@ -51,6 +51,8 @@
 @property (strong, nonatomic) NSString *playFilePath;
 
 @property (weak, nonatomic) UIView *infoView;
+
+@property (strong, nonatomic) VoiceListCell *selCell;
 @end
 
 @implementation TeacherDrawViewController
@@ -120,6 +122,9 @@
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressAction:)];
     [self.voiceList addGestureRecognizer:longPress];
     
+    // 注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadUrlIsFinish) name:@"DOWNLOADISFINISH" object:nil];
+    
     
 }
 
@@ -177,7 +182,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
 
-    if ([[EMCDDeviceManager sharedInstance] isPlaying]) {
+    if ([[EMCDDeviceManager sharedInstance] isPlaying] || [self.selCell.activityView isAnimating]) {
         [[EMCDDeviceManager sharedInstance] stopPlaying];
 
     }
@@ -464,7 +469,7 @@
 
     }
     
-    
+//     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     
 }
 
@@ -733,7 +738,7 @@
 
     VoiceListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ID" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    cell.activityView.hidden = YES;
     cell.numLabel.text = [NSString stringWithFormat:@"%ld.", indexPath.row + 1];
     cell.timeLabel.text = [NSString stringWithFormat:@"%.f''",[[self.voiceArr[indexPath.row] objectForKey:@"time"] floatValue]];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(voiceShow:)];
@@ -767,10 +772,19 @@
 }
 
 #pragma mark - 音频播放
+// 下载音频结束
+- (void)loadUrlIsFinish
+{
+    self.selCell.activityView.hidden = YES;
+    [self.selCell.activityView stopAnimating];
+    [animatingImageview startAnimating];
+}
 // 音频播放
 - (void)voiceShow:(UITapGestureRecognizer *)sender {
-
+    self.selCell.activityView.hidden = YES;
+    [self.selCell.activityView stopAnimating];
     VoiceListCell *cell = (VoiceListCell *)sender.view.superview.superview;
+    self.selCell = cell;
     NSString *urlString = [_voiceArr[sender.view.tag - 200] objectForKey:@"url"];
     currentIndex = sender.view.tag - 200;
     // 判断是否正在播放
@@ -780,7 +794,10 @@
     }else {
     
         [animatingImageview stopAnimating];
-        [cell.animationImage startAnimating];
+//        [cell.animationImage startAnimating];
+        [[EMCDDeviceManager sharedInstance] stopPlaying];
+        cell.activityView.hidden = NO;
+        [cell.activityView startAnimating];
         animatingImageview = cell.animationImage;
         
         [NotifySoundTool asyncPlayingWithUrl:urlString completion:^(NSError *error) {
@@ -802,9 +819,12 @@
         currentIndex = curIndex + 1;
         UIImageView *imageview = [self.voiceList viewWithTag:currentIndex + 200];
         VoiceListCell *cell = (VoiceListCell *)imageview.superview.superview;
+        self.selCell = cell;
         NSString *urlString = [_voiceArr[currentIndex] objectForKey:@"url"];
         
-        [cell.animationImage startAnimating];
+//        [cell.animationImage startAnimating];
+        cell.activityView.hidden = NO;
+        [cell.activityView startAnimating];
         animatingImageview = cell.animationImage;
         
         [NotifySoundTool asyncPlayingWithUrl:urlString completion:^(NSError *error) {
