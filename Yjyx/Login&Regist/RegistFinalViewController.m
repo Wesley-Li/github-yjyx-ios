@@ -309,11 +309,13 @@
         [self.view makeToast:@"密码长度不能小于6位或大于20位" duration:1.0 position:SHOW_CENTER complete:nil];
     }else if(phoneText.text.length != 11){
         [self.view makeToast:@"电话号码输入有误" duration:1.0 position:SHOW_CENTER complete:nil];
+
     }
     else if (![parentPasswordText.text isEqualToString:confirmpwdField.text]) {
         [self.view makeToast:@"两次密码输入不一样" duration:1.0 position:SHOW_CENTER complete:nil];
     }
     else {
+
         NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:phoneText.text,@"target",codeText.text,@"code",@"MREGISTER",@"stype",nil];
         [[YjxService sharedInstance] checkOutVerfirycode:dic withBlock:^(id result, NSError *error){//验证验证码
             [self.view hideToastActivity];
