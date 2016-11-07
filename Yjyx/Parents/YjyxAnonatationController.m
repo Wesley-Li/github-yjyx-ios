@@ -145,7 +145,13 @@
     
 }
 
-
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    if ([[EMCDDeviceManager sharedInstance] isPlaying]) {
+        [[EMCDDeviceManager sharedInstance] stopPlaying];
+        
+    }
+}
 
 #pragma mark - 联动
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

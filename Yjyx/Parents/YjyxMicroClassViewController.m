@@ -830,6 +830,7 @@
         [self configureWMPlayer];
         [wmPlayer.player play];
         wmPlayer.isPlay = YES;
+        isStart = YES;
         wmPlayer.closeBtn.hidden = YES;
         [self.view sendSubviewToBack:videoImage];
         [self.view bringSubviewToFront:_backBtn];

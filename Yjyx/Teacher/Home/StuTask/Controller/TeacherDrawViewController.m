@@ -174,6 +174,14 @@
     
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+
+    if ([[EMCDDeviceManager sharedInstance] isPlaying]) {
+        [[EMCDDeviceManager sharedInstance] stopPlaying];
+
+    }
+}
+
 
 // 清空音频文件
 - (void)cleanAllStudioFile {

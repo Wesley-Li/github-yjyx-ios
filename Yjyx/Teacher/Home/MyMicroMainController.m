@@ -147,6 +147,9 @@ static NSString *ID = @"CELL";
                     label.textColor = [UIColor lightGrayColor];
                     [view addSubview:label];
                     self.tableView.tableHeaderView = view;
+                }else {
+                
+                    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
                 }
             }
             
