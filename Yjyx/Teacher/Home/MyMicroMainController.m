@@ -207,6 +207,11 @@ static NSString *ID = @"CELL";
     [self.navigationController pushViewController:microDetailVc animated:YES];
     
 }
+#pragma mark - UITableViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.searchBar resignFirstResponder];
+}
 #pragma mark - UISearchBar的代理方法
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
