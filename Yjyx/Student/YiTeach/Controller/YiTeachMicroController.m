@@ -170,7 +170,8 @@
     //    currentCell.playBtn.hidden = NO;
     [_wmPlayer.player pause];
     _wmPlayer.isPlay = NO;
-    [_wmPlayer removeFromSuperview];
+//    [_wmPlayer removeFromSuperview];
+    _wmPlayer = nil;
     [videoImage removeFromSuperview];
     [self configureWMPlayer];
     
