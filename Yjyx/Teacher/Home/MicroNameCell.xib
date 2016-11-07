@@ -13,7 +13,9 @@
             <rect key="frame" x="0.0" y="0.0" width="358" height="75"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="358" height="74"/>
+
+                <frame key="frameInset" width="358" height="75"/>
+
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OS-f2-eDF">
@@ -36,7 +38,11 @@
                             <action selector="editBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1eL-1E-N1E"/>
                         </connections>
                     </button>
-                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="244" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入微课名称" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ATv-Q5-jlS">
+
+
+
+                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="244" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入微课名称" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ATv-Q5-jlS">
+
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
@@ -62,7 +68,7 @@
                 <outlet property="editBtn" destination="7qq-t7-QqL" id="ua3-Yx-3u4"/>
                 <outlet property="microNameTextField" destination="ATv-Q5-jlS" id="sDk-fD-5Lc"/>
             </connections>
-            <point key="canvasLocation" x="686" y="329.5"/>
+            <point key="canvasLocation" x="-74" y="31"/>
         </tableViewCell>
     </objects>
 </document>
