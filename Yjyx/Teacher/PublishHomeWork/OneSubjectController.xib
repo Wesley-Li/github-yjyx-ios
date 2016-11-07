@@ -19,8 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iE-iQ-cBd">
-                    <frame key="frameInset" minY="431" width="320" height="49"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iE-iQ-cBd">
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="49" id="6gh-DX-7j1"/>
@@ -33,8 +32,7 @@
                         <action selector="moveOrReleaseBtnClick:" destination="-1" eventType="touchUpInside" id="iQg-TM-mGo"/>
                     </connections>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0iU-6O-gXO">
-                    <frame key="frameInset" width="320" height="431"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0iU-6O-gXO">
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="TzA-fq-EgR"/>
@@ -53,7 +51,7 @@
                 <constraint firstAttribute="trailing" secondItem="0iU-6O-gXO" secondAttribute="trailing" id="tfR-0r-04n"/>
                 <constraint firstItem="0iU-6O-gXO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xLe-qh-hRB"/>
             </constraints>
-            <point key="canvasLocation" x="403" y="275"/>
+            <point key="canvasLocation" x="1" y="111"/>
         </view>
     </objects>
 </document>

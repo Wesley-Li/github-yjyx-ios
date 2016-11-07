@@ -13,9 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="358" height="75"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-
                 <frame key="frameInset" width="358" height="75"/>
-
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OS-f2-eDF">
@@ -38,11 +36,7 @@
                             <action selector="editBtnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1eL-1E-N1E"/>
                         </connections>
                     </button>
-
-
-
-                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="244" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入微课名称" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ATv-Q5-jlS">
-
+                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="244" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入微课名称" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ATv-Q5-jlS">
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
@@ -52,6 +46,7 @@
                     <constraint firstItem="7qq-t7-QqL" firstAttribute="leading" secondItem="ATv-Q5-jlS" secondAttribute="trailing" constant="2" id="55a-HI-kbl"/>
                     <constraint firstItem="3OS-f2-eDF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="598-3n-oPQ"/>
                     <constraint firstItem="7qq-t7-QqL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="20" id="RsB-lo-rP0"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ATv-Q5-jlS" secondAttribute="bottom" id="X7U-hq-djg"/>
                     <constraint firstItem="7qq-t7-QqL" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="YFX-nF-d3V"/>
                     <constraint firstItem="3OS-f2-eDF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="YOu-Wx-0v1"/>
                     <constraint firstItem="7qq-t7-QqL" firstAttribute="leading" secondItem="ATv-Q5-jlS" secondAttribute="trailing" constant="5" id="mYR-JI-uM3"/>
