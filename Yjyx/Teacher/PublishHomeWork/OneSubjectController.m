@@ -495,8 +495,9 @@ static NSString *VideoID = @"VIDEOCELL";
             model.content = _chaperContentModel.content_text;
             if (_flag == 1) {
                 [[QuestionDataBase shareDataBase] insertMirco:model];
+            }else{
+                [[QuestionDataBase shareDataBase] insertQuestion:_chaperContentModel];
             }
-            [[QuestionDataBase shareDataBase] insertQuestion:_chaperContentModel];
         }else{
             if (_flag == 1) {
                 MicroSubjectModel *model = [[MicroSubjectModel alloc] init];

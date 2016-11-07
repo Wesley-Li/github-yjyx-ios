@@ -60,7 +60,7 @@
     _voiceList.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // 注册播放完成通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     
 }
 

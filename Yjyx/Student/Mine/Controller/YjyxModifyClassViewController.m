@@ -82,8 +82,7 @@
             return ;
         }
         [self sendRequest:invitationCodeStr];
-        
-        
+   
     }];
 //    /*取消按钮的字体颜色*/
 //    [cancelAction setValue:[UIColor colorWithHexString:@"f30000"] forKey:@"_titleTextColor"];
