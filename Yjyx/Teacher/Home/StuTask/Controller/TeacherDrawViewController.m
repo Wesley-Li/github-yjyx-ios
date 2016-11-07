@@ -754,7 +754,7 @@
 #pragma mark - 删除单个音频
 - (void)deleteTheVoice:(UIButton *)sender {
     isEdit = YES;
-    if (currentIndex == sender.tag - 400) {
+    if (currentIndex == sender.tag - 400 && [[EMCDDeviceManager sharedInstance] isPlaying] == YES) {
         [self.view makeToast:@"当前语音正在播放,无法删除!" duration:1.0 position:SHOW_CENTER complete:nil];
     }else {
     
