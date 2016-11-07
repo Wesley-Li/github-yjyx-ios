@@ -13,7 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
+    self.activityView.hidden = YES;
     self.voiceView.layer.cornerRadius = 6;
     self.voiceView.layer.masksToBounds = YES;
     

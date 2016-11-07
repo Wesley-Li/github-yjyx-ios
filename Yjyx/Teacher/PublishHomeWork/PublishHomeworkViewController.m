@@ -22,6 +22,9 @@
 #import "ChapterChoiceController.h"
 
 @interface PublishHomeworkViewController ()
+{
+    NSInteger isnoti;
+}
 
 @property (weak, nonatomic) IBOutlet UILabel *question_countLabel;
 
@@ -57,6 +60,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+ 
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
