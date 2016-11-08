@@ -63,10 +63,7 @@
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                     </subviews>
-
-                    <color key="backgroundColor" red="0.0" green="0.8980392157" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-
-
+                    <color key="backgroundColor" red="0.35686274509803922" green="0.76862745098039209" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="RX6-nr-MbR" firstAttribute="leading" secondItem="uny-44-H5H" secondAttribute="trailing" id="8Ef-VK-QUL"/>
                         <constraint firstItem="9oF-rq-dE8" firstAttribute="leading" secondItem="5yb-GA-qi1" secondAttribute="trailing" constant="10" id="ACx-xe-9dr"/>

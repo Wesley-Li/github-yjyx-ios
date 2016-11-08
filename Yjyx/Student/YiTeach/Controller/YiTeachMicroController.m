@@ -223,8 +223,10 @@
 }
 -(void)toNormal{
     [_wmPlayer removeFromSuperview];
+    [videoImage removeFromSuperview];
     _wmPlayer.isFullscreen = NO;
     [self setNeedsStatusBarAppearanceUpdate];
+    
     [UIView animateWithDuration:0.5f animations:^{
         _wmPlayer.transform = CGAffineTransformIdentity;
         _wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
@@ -356,7 +358,7 @@
                 self.microArr = [responseObject[@"videoobjlist"] JSONValue];
                 self.videoURL = _microArr[0][@"url"];
                 if(self.openMember == 1){
-                    videoImage.hidden = YES;
+//                    videoImage.hidden = YES;
                 }
                 [self configureWMPlayer];
                 [self configureTheNumBtn:_microArr];
@@ -389,7 +391,10 @@
 - (void)configureWMPlayer {
     
     playerFrame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH)*184/320+4);
-    videoImage = [[UIImageView alloc] initWithFrame:playerFrame];
+    if(videoImage == nil){
+         videoImage = [[UIImageView alloc] initWithFrame:playerFrame];
+    }
+   
     videoImage.image = [UIImage imageNamed:@"Common_video.png"];
 
     videoImage.layer.masksToBounds = YES;

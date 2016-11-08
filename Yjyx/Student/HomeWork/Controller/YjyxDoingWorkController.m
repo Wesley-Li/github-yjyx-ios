@@ -145,9 +145,13 @@ static NSString *ID = @"BGCEll";
     NSLog(@"viewdidappear");
     [self createTimer];
 }
+- (void)viewWillDisappear:(BOOL)animated
+{
+    NSLog(@"WILLdISAPPEAR");
+}
 - (void)viewDidDisappear:(BOOL)animated
 {
-   [self releaseTimer];
+   
     [SVProgressHUD dismiss];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewDidDisappear:animated];
@@ -159,6 +163,7 @@ static NSString *ID = @"BGCEll";
 }
 - (void)dealloc
 {
+//    [self releaseTimer];
     NSLog(@"delloc");
     
 }
@@ -319,6 +324,7 @@ static NSString *ID = @"BGCEll";
     [self presentViewController:alertVc animated:YES completion:nil];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         NSInteger flag = 0;
+        [self releaseTimer];
         for (UIViewController *vc in self.navigationController.childViewControllers) {
             if([vc isKindOfClass:[YjyxOneSubjectViewController class]]){
                 [self.navigationController popToViewController:vc animated:YES];

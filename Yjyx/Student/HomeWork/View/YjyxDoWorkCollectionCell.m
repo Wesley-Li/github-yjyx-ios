@@ -315,7 +315,7 @@
             //            _selectedPhotos = [NSMutableArray arrayWithArray:photos];
             //            _selectedAssets = [NSMutableArray arrayWithArray:assets];
             
-            return; //预览照片，不用做后续处理吧？
+//            return; //预览照片，不用做后续处理吧？
             
             
             NSMutableArray *tempArr = [NSMutableArray array];
@@ -513,6 +513,7 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [SVProgressHUD  dismiss];
             });;
+            [self.processCollectionView reloadData];
         }else if(failedImages == nil){
             [SVProgressHUD showWithStatus:@"上传解题步骤时,全部图片上传成功"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -523,6 +524,7 @@
                 [_urlArr addObject:succeededUrls[keyStr]];
                 [_isSuccessUrlArr addObject:@1];
             }
+            [self.processCollectionView reloadData];
         }else{
           [SVProgressHUD showWithStatus:@"上传解题步骤时,全部图片上传失败,重新上传"];
           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
