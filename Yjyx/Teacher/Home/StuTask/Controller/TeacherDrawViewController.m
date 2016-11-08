@@ -277,6 +277,11 @@
     self.redPenBtn.selected = NO;
     self.imageview.userInteractionEnabled = YES;
     isChoosePencil = YES;
+    [self.view sendSubviewToBack:self.voiceList];
+    if (self.voiceArr.count != 0) {
+        self.voiceImage.hidden = NO;
+        self.voiceNumLabel.hidden = NO;
+    }
     [YjyxDrawLine defaultLine].currentPaintBrushColor = [UIColor blueColor];
     
 }
@@ -288,6 +293,11 @@
     self.redPenBtn.selected = NO;
     self.imageview.userInteractionEnabled = YES;
     isChoosePencil = YES;
+    [self.view sendSubviewToBack:self.voiceList];
+    if (self.voiceArr.count != 0) {
+        self.voiceImage.hidden = NO;
+        self.voiceNumLabel.hidden = NO;
+    }
     [YjyxDrawLine defaultLine].currentPaintBrushColor = [UIColor yellowColor];
 }
 
@@ -298,6 +308,11 @@
     self.redPenBtn.selected = YES;
     self.imageview.userInteractionEnabled = YES;
     isChoosePencil = YES;
+    [self.view sendSubviewToBack:self.voiceList];
+    if (self.voiceArr.count != 0) {
+        self.voiceImage.hidden = NO;
+        self.voiceNumLabel.hidden = NO;
+    }
     [YjyxDrawLine defaultLine].currentPaintBrushColor = [UIColor redColor];
 }
 
