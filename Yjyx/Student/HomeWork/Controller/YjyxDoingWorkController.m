@@ -122,13 +122,12 @@ static NSString *ID = @"BGCEll";
         self.totalTitleLabel.text = [NSString stringWithFormat:@"%ld", self.jumpDoworkArr.count];
         self.titlenumberLabel.text = @"1";
         
-        [self createTimer];
+//        [self createTimer];
     }
     [self.bgCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([YjyxDoWorkCollectionCell class]) bundle:nil] forCellWithReuseIdentifier:ID];
     
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackgroud) name:UIApplicationWillResignActiveNotification object:nil];
+    
    
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -141,7 +140,8 @@ static NSString *ID = @"BGCEll";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackgroud) name:UIApplicationWillResignActiveNotification object:nil];
     NSLog(@"viewdidappear");
     [self createTimer];
 }
@@ -234,7 +234,7 @@ static NSString *ID = @"BGCEll";
             }
             self.totalTitleLabel.text = [NSString stringWithFormat:@"%ld", self.jumpDoworkArr.count];
             self.titlenumberLabel.text = @"1";
-            [self createTimer];
+//            [self createTimer];
             [self.bgCollectionView reloadData];
         }else{
             [self.view makeToast:@"获取作业失败" duration:1.0 position:SHOW_CENTER complete:nil];
