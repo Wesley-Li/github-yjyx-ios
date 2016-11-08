@@ -26,26 +26,21 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="epH-tj-3HJ">
-                    <frame key="frameInset" minY="64" width="600" height="200"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="epH-tj-3HJ">
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="w9d-Da-hWF"/>
                         <outlet property="delegate" destination="-1" id="rtb-t6-nuS"/>
                     </connections>
                 </tableView>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="evj-Xz-aaT">
-                    <frame key="frameInset" minY="64" width="600" height="487"/>
-                </imageView>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Ca-lM-50X">
-                    <frame key="frameInset" minY="551" width="600" height="49"/>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="evj-Xz-aaT"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ca-lM-50X">
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="49" id="AGt-Zm-k8n"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RdO-xl-N7I">
-                    <frame key="frameInset" minX="259" minY="518" width="82" height="82"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RdO-xl-N7I">
                     <constraints>
                         <constraint firstAttribute="width" constant="82" id="DK5-kR-4Jw"/>
                         <constraint firstAttribute="height" constant="82" id="Jrj-Hg-Onu"/>
@@ -58,8 +53,7 @@
                         <action selector="speakStart:" destination="-1" eventType="touchDown" id="UEa-YP-ExJ"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wfM-S0-HrM">
-                    <frame key="frameInset" minY="551" width="254" height="49"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wfM-S0-HrM">
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ny6-Zx-60E">
                             <constraints>
@@ -72,8 +66,7 @@
                                 <action selector="drawBlueLine:" destination="-1" eventType="touchUpInside" id="C8m-6t-vMB"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oek-5z-6ON">
-                            <frame key="frameInset" minX="112" minY="8" width="35" height="35"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oek-5z-6ON">
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="2nR-nw-x0u"/>
                                 <constraint firstAttribute="width" constant="35" id="6YF-Z5-obR"/>
@@ -84,8 +77,7 @@
                                 <action selector="drawYelloewLine:" destination="-1" eventType="touchUpInside" id="OJT-t9-6Ae"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EIG-68-1oA">
-                            <frame key="frameInset" minX="214" minY="7" width="35" height="35"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EIG-68-1oA">
                             <constraints>
                                 <constraint firstAttribute="width" constant="35" id="8Bc-73-3aK"/>
                                 <constraint firstAttribute="height" constant="35" id="z94-b1-ILf"/>
@@ -96,15 +88,13 @@
                                 <action selector="drawRedLine:" destination="-1" eventType="touchUpInside" id="H3z-eS-VdI"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bcf-DJ-zPp">
-                            <frame key="frameInset" minX="40" minY="7" width="70" height="35"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bcf-DJ-zPp">
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="BBG-4D-GIu"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rE6-Gj-LIB">
-                            <frame key="frameInset" minX="147" minY="8" width="77" height="35"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rE6-Gj-LIB">
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="hau-HG-pgh"/>
@@ -128,11 +118,9 @@
                         <constraint firstItem="Ny6-Zx-60E" firstAttribute="leading" secondItem="wfM-S0-HrM" secondAttribute="leading" constant="5" id="ipg-mn-3a1"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6PH-hC-pbO">
-                    <frame key="frameInset" minX="341" minY="551" width="259" height="49"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6PH-hC-pbO">
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W17-eb-l1B">
-                            <frame key="frameInset" minX="112" minY="7" width="35" height="35"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W17-eb-l1B">
                             <constraints>
                                 <constraint firstAttribute="width" constant="35" id="OMf-Rf-PZ4"/>
                                 <constraint firstAttribute="height" constant="35" id="VHw-SU-vUJ"/>
@@ -142,8 +130,7 @@
                                 <action selector="recoverLastLine:" destination="-1" eventType="touchUpInside" id="GyT-TY-PSY"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ccq-5b-T2W">
-                            <frame key="frameInset" minX="193" minY="7" width="35" height="35"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ccq-5b-T2W">
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="4hX-Z1-nfq"/>
                                 <constraint firstAttribute="width" constant="35" id="q4E-ey-byB"/>
@@ -153,8 +140,7 @@
                                 <action selector="removeAllLine:" destination="-1" eventType="touchUpInside" id="QX1-9w-n65"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHF-JC-mRw">
-                            <frame key="frameInset" minX="31" minY="7" width="35" height="35"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHF-JC-mRw">
                             <constraints>
                                 <constraint firstAttribute="width" constant="35" id="Lhi-9w-c30"/>
                                 <constraint firstAttribute="height" constant="35" id="opP-q3-kWF"/>
@@ -176,8 +162,7 @@
                         <constraint firstItem="bHF-JC-mRw" firstAttribute="centerY" secondItem="6PH-hC-pbO" secondAttribute="centerY" id="zgH-vb-UtS"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9FW-GD-O1t">
-                    <frame key="frameInset" minY="550" width="600" height="1"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9FW-GD-O1t">
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="SGY-Fl-4q4"/>
                     </constraints>
@@ -198,8 +183,7 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UYi-Ey-oqo">
-                    <frame key="frameInset" minX="240" minY="240" width="120" height="120"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UYi-Ey-oqo">
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="AeO-xr-4a8"/>
                         <constraint firstAttribute="height" constant="120" id="KLN-nY-eN7"/>

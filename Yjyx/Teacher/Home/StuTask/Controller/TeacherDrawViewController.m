@@ -18,7 +18,7 @@
 @import AVFoundation;
 @import AudioToolbox;
 
-@interface TeacherDrawViewController ()<AVAudioRecorderDelegate,AVAudioPlayerDelegate>
+@interface TeacherDrawViewController ()<AVAudioRecorderDelegate,AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     BOOL isExpand;
     BOOL isEdit;// 是否编辑
@@ -759,17 +759,18 @@
 #pragma mark - 删除单个音频
 - (void)deleteTheVoice:(UIButton *)sender {
     isEdit = YES;
-    if (currentIndex == sender.tag - 400 && [[EMCDDeviceManager sharedInstance] isPlaying] == YES) {
+    if ([animatingImageview isAnimating] == YES || [[EMCDDeviceManager sharedInstance] isPlaying] == YES) {
         [self.view makeToast:@"当前语音正在播放,无法删除!" duration:1.0 position:SHOW_CENTER complete:nil];
     }else {
     
         [self.voiceArr removeObjectAtIndex:sender.tag - 400];
         self.voiceNumLabel.text = [NSString stringWithFormat:@"%ld", self.voiceArr.count];
-        
         [self.voiceList reloadData];
+        
     }
     
 }
+
 
 #pragma mark - 音频播放
 // 下载音频结束
@@ -814,15 +815,17 @@
 
 // 播放结束自动播放下一句
 - (void)playEnd:(NSInteger)curIndex {
-
+    NSLog(@"---%ld", self.voiceArr.count);
+    
+    
     if (curIndex < self.voiceArr.count - 1) {
         currentIndex = curIndex + 1;
         UIImageView *imageview = [self.voiceList viewWithTag:currentIndex + 200];
         VoiceListCell *cell = (VoiceListCell *)imageview.superview.superview;
         self.selCell = cell;
-        NSString *urlString = [_voiceArr[currentIndex] objectForKey:@"url"];
+        NSString *urlString = [self.voiceArr[currentIndex] objectForKey:@"url"];
         
-//        [cell.animationImage startAnimating];
+        //        [cell.animationImage startAnimating];
         cell.activityView.hidden = NO;
         [cell.activityView startAnimating];
         animatingImageview = cell.animationImage;
@@ -834,12 +837,15 @@
                 [self playEnd:currentIndex];
             }
         }];
-
+        
         
     }else {
         currentIndex = -1;
         [self.view makeToast:@"最后一句已经播放完毕" duration:1.0 position:SHOW_CENTER complete:nil];
     }
+
+    
+    
     
     
 }
