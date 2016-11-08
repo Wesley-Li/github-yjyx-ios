@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.promptInfoLabel.width = SCREEN_WIDTH - 32;
-//    self.promptInfoLabel.height = 120;
+
     self.promptInfoLabel.numberOfLines = 0;
     self.promptInfoLabel.text = @"*温馨提醒:\n修改手机号成功后，您的登录账号也会一起改变哦。";
     [self.promptInfoLabel sizeToFit];
@@ -49,7 +49,7 @@
     self.navigationItem.rightBarButtonItem = rightBtnItem;
     
     [_phoneTextfield addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    // Do any additional setup after loading the view from its nib.
+    
 }
 
 - (void)goBack
