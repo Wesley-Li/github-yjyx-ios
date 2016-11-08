@@ -58,6 +58,7 @@
     imageUrlAry = [[NSMutableArray alloc] init];
     
     finishBtn.frame = CGRectMake(finishBtn.frame.origin.x, 175+SCREEN_WIDTH/4, finishBtn.frame.size.width, 40);
+    [feedView layoutIfNeeded];
     contentText = [[FEPlaceHolderTextView alloc] initWithFrame:CGRectMake(3, 0, SCREEN_WIDTH-6, feedView.frame.size.height)];
     contentText.placeholder = @"请简要描述您的问题和意见";
     contentText.font = [UIFont systemFontOfSize:14];
@@ -110,6 +111,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [SVProgressHUD dismiss];
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     }
@@ -271,7 +273,7 @@
     }
     
     [SVProgressHUD showWithStatus:@"正在拼命上传"];
-    
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
     [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArray) {
         
         
@@ -298,9 +300,9 @@
                 
                 // [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
                 [SVProgressHUD showErrorWithStatus:responseObject[@"reason"]];
-                [SVProgressHUD dismissWithDelay:1.5];
+//                [SVProgressHUD dismissWithDelay:1.5];
                 
-                [self performSelector:@selector(goBack) withObject:nil afterDelay:2.0];
+//                [self performSelector:@selector(goBack) withObject:nil afterDelay:2.0];
             }
             
         } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -312,9 +314,9 @@
     } failure:^{
         
         [SVProgressHUD showErrorWithStatus:@"上传失败"];
-        [SVProgressHUD dismissWithDelay:1.5];
+//        [SVProgressHUD dismissWithDelay:1.5];
         
-        [self performSelector:@selector(goBack) withObject:nil afterDelay:2.0];
+//        [self performSelector:@selector(goBack) withObject:nil afterDelay:2.0];
         
     }];
 
