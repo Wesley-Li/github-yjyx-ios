@@ -45,11 +45,12 @@
     {
         [self.view makeToast:@"不能添加表情符号" duration:1.0 position:SHOW_CENTER complete:nil];
         textField.text = [textField.text substringToIndex:textField.text.length -2];
-        
+        return;
     }
     if([textField.text containsString:@" "]){
         [self.view makeToast:@"不能含有空格,请重新输入" duration:1.0 position:SHOW_CENTER complete:nil];
-        textField.text = nil;
+        textField.text = [textField.text substringToIndex:textField.text.length - 1];
+        
     }else if ([textField isEqual:phoneText]) {
 
         if (textField.text.length > 11) {
@@ -122,6 +123,17 @@
             [self.view makeToast:error.localizedDescription duration:1.0 position:SHOW_CENTER complete:nil];
 
         }];
+    }else{
+        if(confirmpwdField.text.length == 0 && parentPasswordText.text.length == 0){
+            return;
+        }
+        if([textField isEqual:parentPasswordText] && textField.text.length < 6){
+            [self.view makeToast:@"密码长度不能小于6位" duration:0.5 position:SHOW_CENTER complete:nil];
+            return;
+        }
+        if([textField isEqual:confirmpwdField] && ![parentPasswordText.text isEqualToString:confirmpwdField.text]){
+            [self.view makeToast:@"两次密码输入不一样" duration:0.5 position:SHOW_CENTER complete:nil];
+        }
     }
 }
 
