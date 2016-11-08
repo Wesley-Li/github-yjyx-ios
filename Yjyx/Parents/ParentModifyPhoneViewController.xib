@@ -11,6 +11,7 @@
                 <outlet property="_phoneTextfield" destination="7do-hq-fQH" id="dgk-7v-mlQ"/>
                 <outlet property="codeText" destination="fvZ-9r-FPk" id="Nsf-jx-qAy"/>
                 <outlet property="phoneTextfield" destination="7do-hq-fQH" id="TmW-U4-SjT"/>
+                <outlet property="promptInfoLabel" destination="Uji-bB-nWN" id="in1-dr-b4n"/>
                 <outlet property="timeLb" destination="2BI-Fd-Ixc" id="RuT-bc-lB4"/>
                 <outlet property="verifyBtn" destination="j3y-UT-JgY" id="FLJ-aA-mMy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -68,17 +69,17 @@
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="修改手机号成功后，您的登录账号也会一起改变哦。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uji-bB-nWN">
-                    <frame key="frameInset" minX="16" minY="117" width="95.54%" height="21"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="温馨提醒:修改手机号成功后，您的登录账号也会一起改变哦。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Uji-bB-nWN">
+                    <frame key="frameInset" minX="16" minY="117" width="343" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-            <point key="canvasLocation" x="244.5" y="191.5"/>
+            <point key="canvasLocation" x="41" y="143"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

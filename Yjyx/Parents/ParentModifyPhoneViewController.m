@@ -12,12 +12,18 @@
 
 @property (assign, nonatomic) NSInteger flag;
 @property (strong, nonatomic) NSString *phoneNumStr;
+@property (weak, nonatomic) IBOutlet UILabel *promptInfoLabel;
 @end
 
 @implementation ParentModifyPhoneViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.promptInfoLabel.width = SCREEN_WIDTH - 32;
+//    self.promptInfoLabel.height = 120;
+    self.promptInfoLabel.numberOfLines = 0;
+    self.promptInfoLabel.text = @"*温馨提醒:\n修改手机号成功后，您的登录账号也会一起改变哦。";
+    [self.promptInfoLabel sizeToFit];
     _second = 60;
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
     {
