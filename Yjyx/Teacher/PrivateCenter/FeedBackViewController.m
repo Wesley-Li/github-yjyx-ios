@@ -82,12 +82,15 @@
 
     
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [SVProgressHUD dismiss];
+}
 /**
  * 配置textView
  */
 - (void)configureTextview {
-
+    [self.textBGview layoutIfNeeded];
     contentText = [[FEPlaceHolderTextView alloc] initWithFrame:CGRectMake(3, 0, SCREEN_WIDTH-6, self.textBGview.frame.size.height)];
     
     contentText.placeholder = @"请简要描述您的问题和意见";
@@ -141,6 +144,7 @@
     }
 
     [SVProgressHUD showWithStatus:@"正在拼命上传"];
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
     NSLog(@"%@", _selectedPhotos);
     [UploadImageTool uploadImages:_selectedPhotos progress:nil success:^(NSArray *urlArray) {
         
@@ -159,15 +163,15 @@
                 if ([responseObject[@"retcode"] isEqual:@0]) {
                     
                     [SVProgressHUD showSuccessWithStatus:@"感谢您的反馈"];
-                    [SVProgressHUD dismissWithDelay:1.5];
+//                    [SVProgressHUD dismissWithDelay:1.5];
                     [self performSelector:@selector(goBack) withObject:nil afterDelay:2.0];
                     
                 }else {
                     
                     //                [self.view makeToast:responseObject[@"msg"] duration:0.5 position:SHOW_CENTER complete:nil];
                     [SVProgressHUD showErrorWithStatus:responseObject[@"reason"]];
-                    [SVProgressHUD dismissWithDelay:1.5];
-                    [self performSelector:@selector(goBack) withObject:nil afterDelay:2.0];
+//                    [SVProgressHUD dismissWithDelay:1.5];
+//                    [self performSelector:@selector(goBack) withObject:nil afterDelay:2.0];
                 }
                 
             } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -179,8 +183,8 @@
         } failure:^{
             
             [SVProgressHUD showErrorWithStatus:@"上传失败"];
-            [SVProgressHUD dismissWithDelay:1.5];
-            [self performSelector:@selector(goBack) withObject:nil afterDelay:2.0];
+//            [SVProgressHUD dismissWithDelay:1.5];
+//            [self performSelector:@selector(goBack) withObject:nil afterDelay:2.0];
             
         }];
         

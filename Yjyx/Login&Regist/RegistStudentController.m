@@ -29,7 +29,7 @@
 
 @property (assign, nonatomic) NSInteger isExistFlag;
 @end
-#define kAlphaNum @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+#define kAlphaNum @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
 @implementation RegistStudentController
 
 - (void)viewDidLoad {
@@ -85,6 +85,7 @@
     {
         [self.view makeToast:@"不能添加表情符号" duration:1.0 position:SHOW_CENTER complete:nil];
         textField.text = [textField.text substringToIndex:textField.text.length -2];
+        return;
         
     }
        if ([textField isEqual:_loginNameTextField]){
@@ -105,6 +106,7 @@
         if([textField.text containsString:@" "] && ![textField isEqual:_realNameTextField]){
         [self.view makeToast:@"不能含有空格,请重新输入" duration:1.0 position:SHOW_CENTER complete:nil];
         textField.text = [textField.text substringToIndex:textField.text.length - 1];
+            return;
         }
         if ([textField isEqual:_realNameTextField] ) {
             NSString *toBeString = textField.text;
@@ -448,14 +450,14 @@
         }
         return;
     }else{
-        if(_conFirmpswTextField.text.length == 0 || _pswTextField.text.length == 0){
+        if(_conFirmpswTextField.text.length == 0 && _pswTextField.text.length == 0){
             return;
         }
-        if(textField.text.length < 6){
+        if([textField isEqual:_pswTextField] && textField.text.length < 6){
             [self.view makeToast:@"密码长度不能小于6位" duration:0.5 position:SHOW_CENTER complete:nil];
             return;
    }
-   if(![self.pswTextField.text isEqualToString:self.conFirmpswTextField.text]){
+   if([textField isEqual:_conFirmpswTextField] && ![self.pswTextField.text isEqualToString:self.conFirmpswTextField.text]){
         [self.view makeToast:@"两次密码输入不一样" duration:0.5 position:SHOW_CENTER complete:nil];
     }
 }
@@ -471,7 +473,7 @@
         
         BOOL canChange = [string isEqualToString:filtered];
         if (!canChange) {
-            [self.view makeToast:@"用户名不能输入中文" duration:1.0 position:SHOW_CENTER complete:nil];
+            [self.view makeToast:@"用户名不能输入除英文和数字以外其他字符或表情" duration:1.0 position:SHOW_CENTER complete:nil];
         }
         return  canChange;
     }

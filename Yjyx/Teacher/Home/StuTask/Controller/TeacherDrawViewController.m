@@ -14,7 +14,7 @@
 #import "NotifySoundTool.h"
 #import "OneStuTaskDetailViewController.h"
 #import "YjyxCommonNavController.h"
-
+#import <MediaPlayer/MediaPlayer.h>
 @import AVFoundation;
 @import AudioToolbox;
 
@@ -468,7 +468,7 @@
         
 
     }
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:MPVolumeViewWirelessRoutesAvailableDidChangeNotification object:nil];
 //     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     
 }
