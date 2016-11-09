@@ -317,10 +317,12 @@
             
 //            return; //预览照片，不用做后续处理吧？
             
-            
+            if(_selectedPhotos.count == photos.count){
+               return ;
+            }
             NSMutableArray *tempArr = [NSMutableArray array];
             [tempArr addObjectsFromArray:assets];
-         
+          
             [_selectedAssets removeAllObjects];
             [_selectedPhotos removeAllObjects];
             [_selectedPhotos addObjectsFromArray:photos];

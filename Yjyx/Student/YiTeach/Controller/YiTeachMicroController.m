@@ -102,7 +102,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    if (_microArr.count != 0 && _openMember == 0) {
+        [self configureWMPlayer];
+        [self configureTheNumBtn:_microArr];
+    }
+   
     // 注册通知
     //旋转屏幕通知
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -138,6 +142,7 @@
 {
 
     [super viewWillDisappear:animated];
+    [self releaseWMPlayer];
     if (_wmPlayer.isFullscreen) {
         [self closeTheVideo:nil];
     }else {
@@ -171,7 +176,7 @@
     [_wmPlayer.player pause];
     _wmPlayer.isPlay = NO;
 //    [_wmPlayer removeFromSuperview];
-    _wmPlayer = nil;
+//    _wmPlayer = nil;
     [videoImage removeFromSuperview];
     [self configureWMPlayer];
     
@@ -196,6 +201,7 @@
 -(void)toFullScreenWithInterfaceOrientation:(UIInterfaceOrientation )interfaceOrientation{
     
     [_wmPlayer removeFromSuperview];
+    NSLog(@"200%@", _wmPlayer);
     _wmPlayer.transform = CGAffineTransformIdentity;
     if (interfaceOrientation==UIInterfaceOrientationLandscapeLeft) {
         _wmPlayer.transform = CGAffineTransformMakeRotation(-M_PI_2);
@@ -396,12 +402,12 @@
     }
    
     videoImage.image = [UIImage imageNamed:@"Common_video.png"];
-
+    videoImage.frame = playerFrame;
     videoImage.layer.masksToBounds = YES;
     videoImage.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
     [videoImage addGestureRecognizer:tap];
-    [self.view addSubview:videoImage];
+    [self.videoBgView addSubview:videoImage];
 
 }
 
@@ -573,7 +579,8 @@
         
     }else {
         
-        videoImage.hidden = YES;
+//        videoImage.hidden = YES;
+        [videoImage removeFromSuperview];
 
         [self.wmPlayer.player play];
         _wmPlayer.isPlay = YES;
