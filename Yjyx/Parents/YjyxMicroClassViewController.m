@@ -804,6 +804,7 @@
     if (lastSelectedVideoTag == sender.tag) { //点击同个视频，忽略
         return;
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     lastSelectedVideoTag = sender.tag;
 
     self.videoURL = [self.microArr[sender.tag - 500] objectForKey:@"url"];
@@ -830,10 +831,10 @@
         [wmPlayer removeFromSuperview];
         [videoImage removeFromSuperview];
         [self configureWMPlayer];
-        [wmPlayer.player play];
-        wmPlayer.isPlay = YES;
-        isStart = YES;
-        wmPlayer.closeBtn.hidden = YES;
+        [self playvideo];
+//        wmPlayer.isPlay = YES;
+//        isStart = YES;
+//        wmPlayer.closeBtn.hidden = YES;
         [self.view sendSubviewToBack:videoImage];
         [self.view bringSubviewToFront:_backBtn];
     });

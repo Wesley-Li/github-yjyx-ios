@@ -29,7 +29,8 @@
     WMPlayer *wmPlayer;
     NSIndexPath *currentIndexPath;
     BOOL isSmallScreen;
-    
+    NSInteger lastSelectedVideoTag;
+    NSTimeInterval lastPlayingTaskInterval;
 }
 @property (strong, nonatomic) NSArray *stuChoiceAnswerArr;
 @property (strong, nonatomic) NSArray *stuBlankAnswerArr;
@@ -1043,7 +1044,22 @@ static NSString *videoNumID = @"VIDEONumID";
 #pragma mark - VideoNumShowCellDelegate代理方法
 - (void)videoNumShowCell:(VideoNumShowCell *)cell videoNumBtnClick:(UIButton *)btn
 {
+    if (lastSelectedVideoTag == btn.tag) { //点击同个视频，忽略
+        return;
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    lastSelectedVideoTag = btn.tag;
+  
     self.videoURL = _model.videoobjlist[btn.tag][@"url"];
+    lastPlayingTaskInterval = [[NSDate date] timeIntervalSince1970];
+    NSTimeInterval timeIntervalLocal = lastPlayingTaskInterval;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ //延迟0.5秒播放，防止暴力点击
+        if (lastPlayingTaskInterval > timeIntervalLocal) { //有新播放任务，放弃本次播放任务
+            NSLog(@"有新播放任务，放弃本次播放任务");
+            return;
+        }
+        
+        NSLog(@"延时播放开始，对应按钮号：%ld",lastSelectedVideoTag);
     if (isSmallScreen) {// 小屏状态下
         [wmPlayer setVideoURLStr:self.videoURL];
         [wmPlayer.player play];
@@ -1053,7 +1069,7 @@ static NSString *videoNumID = @"VIDEONumID";
         [self startPlayVideo:cell2.playBtn];
     }
     
-//    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    });
 }
 #pragma mark - 点击批注跳转
 - (void)getTheAnotation:(UIButton *)sender {

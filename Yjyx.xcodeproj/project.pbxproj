@@ -379,6 +379,7 @@
 		3C4274C71D2A5301008A30FA /* YjyxTodayWorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4274C61D2A5301008A30FA /* YjyxTodayWorkModel.m */; };
 		3C4274CB1D2A7736008A30FA /* YjyxWorkDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4274C91D2A7736008A30FA /* YjyxWorkDetailCell.m */; };
 		3C4274CC1D2A7736008A30FA /* YjyxWorkDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C4274CA1D2A7736008A30FA /* YjyxWorkDetailCell.xib */; };
+		3C52B85C1DD2C0A700AD3E1D /* YjyxCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C52B85B1DD2C0A700AD3E1D /* YjyxCollectionView.m */; };
 		3C8782B21DADCF0600534211 /* NSString+emjoy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8782B11DADCF0600534211 /* NSString+emjoy.m */; };
 		3C8782B41DAE1EE700534211 /* Common_video@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C8782B31DAE1EE700534211 /* Common_video@3x.png */; };
 		3C9C92281D2F801800B0159D /* ReleaseMicroController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9C92261D2F801800B0159D /* ReleaseMicroController.m */; };
@@ -1202,6 +1203,8 @@
 		3C4274C81D2A7736008A30FA /* YjyxWorkDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxWorkDetailCell.h; sourceTree = "<group>"; };
 		3C4274C91D2A7736008A30FA /* YjyxWorkDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxWorkDetailCell.m; sourceTree = "<group>"; };
 		3C4274CA1D2A7736008A30FA /* YjyxWorkDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YjyxWorkDetailCell.xib; sourceTree = "<group>"; };
+		3C52B85A1DD2C0A700AD3E1D /* YjyxCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YjyxCollectionView.h; sourceTree = "<group>"; };
+		3C52B85B1DD2C0A700AD3E1D /* YjyxCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YjyxCollectionView.m; sourceTree = "<group>"; };
 		3C8782B01DADCF0600534211 /* NSString+emjoy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+emjoy.h"; sourceTree = "<group>"; };
 		3C8782B11DADCF0600534211 /* NSString+emjoy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+emjoy.m"; sourceTree = "<group>"; };
 		3C8782B31DAE1EE700534211 /* Common_video@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Common_video@3x.png"; sourceTree = "<group>"; };
@@ -2880,6 +2883,8 @@
 				3CE67C001D75747A00341783 /* YjyxDoWorkCollectionCell.h */,
 				3CE67C011D75747A00341783 /* YjyxDoWorkCollectionCell.m */,
 				3CE67C021D75747A00341783 /* YjyxDoWorkCollectionCell.xib */,
+				3C52B85A1DD2C0A700AD3E1D /* YjyxCollectionView.h */,
+				3C52B85B1DD2C0A700AD3E1D /* YjyxCollectionView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4438,6 +4443,7 @@
 				3CAC454E1D40EACA00ACBDA9 /* YjyxExchangeRecordCell.m in Sources */,
 				801F44AD1CDF164800B7E7E1 /* RSADataSigner.m in Sources */,
 				3A91F4941C760CF4001568AA /* PNGenericChart.m in Sources */,
+				3C52B85C1DD2C0A700AD3E1D /* YjyxCollectionView.m in Sources */,
 				3A8CAEB61C70B36200BDEB6B /* MKAnnotationView+WebCache.m in Sources */,
 				3A91F4981C760CF4001568AA /* PNPieChart.m in Sources */,
 				3A91F4991C760CF4001568AA /* PNPieChartDataItem.m in Sources */,
@@ -4607,8 +4613,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
 				CODE_SIGN_ENTITLEMENTS = Yjyx/Yjyx.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 4TCW3KT5AU;
 				ENABLE_BITCODE = NO;
@@ -4650,10 +4656,8 @@
 				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-
-				PROVISIONING_PROFILE = "74c96b55-2af0-4d0a-bb34-872508825ade";
-
-				PROVISIONING_PROFILE_SPECIFIER = "YJYX-VERIFY";
+				PROVISIONING_PROFILE = "d6ae719a-ad6b-4f7c-8087-3207e693a3b1";
+				PROVISIONING_PROFILE_SPECIFIER = NEW_YJYX_INHOUSE;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -4668,8 +4672,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
 				CODE_SIGN_ENTITLEMENTS = Yjyx/Yjyx.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jianan Song (E722Y6JK88)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianan Song (E722Y6JK88)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jianan Song (4TCW3KT5AU)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 4TCW3KT5AU;
@@ -4710,10 +4714,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nijie.yjyx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-
-				PROVISIONING_PROFILE = "74c96b55-2af0-4d0a-bb34-872508825ade";
-
-				PROVISIONING_PROFILE_SPECIFIER = "YJYX-VERIFY";
+				PROVISIONING_PROFILE = "d6ae719a-ad6b-4f7c-8087-3207e693a3b1";
+				PROVISIONING_PROFILE_SPECIFIER = NEW_YJYX_INHOUSE;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};

@@ -6,7 +6,7 @@
 #import "LxGridViewFlowLayout.h"
 #import "TZTestCell.h"
 #import "UIView+Layout.h"
-
+#import "YjyxCollectionView.h"
 #define stringify   __STRING
 
 static CGFloat const PRESS_TO_MOVE_MIN_DURATION = 0.1;
@@ -393,6 +393,9 @@ CG_INLINE CGPoint CGPointOffset(CGPoint point, CGFloat dx, CGFloat dy)
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@stringify(collectionView)]) {
+        if ([self.collectionView isKindOfClass:[YjyxCollectionView class]]) {
+            return;
+        }
         if (self.collectionView) {
             [self addGestureRecognizers];
         }

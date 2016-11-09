@@ -333,17 +333,20 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshjurisdiction" object:nil];
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
             for (UIViewController *vc in self.navigationController.childViewControllers) {
 
                 if ([vc isKindOfClass:[YjyxStuWrongListViewController class]] || [vc isKindOfClass:[YjyxWorkDetailController class]] || [vc isKindOfClass:[YjyxThreeStageAnswerController class]] || [vc isKindOfClass:[YiTeachMicroController class]] || [vc isKindOfClass:[ChildrenResultViewController class]]) {
 
                     ((YjyxStuWrongListViewController *)vc).openMember = 1;
-                    [self.navigationController popToViewController:vc animated:YES];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self.navigationController popToViewController:vc animated:YES];
+                    });
+                    
                     
                 }
             }
-        });
+       
         
     }else{
         [self.view makeToast:@"支付失败" duration:1.5 position:SHOW_CENTER complete:nil];

@@ -168,9 +168,7 @@
 #pragma mark - videoEvent
 -(void)videoDidFinished:(NSNotification *)notice{
     
-    if(_wmPlayer.isFullscreen == YES){
-        [self toNormal];
-    }
+   
     
     //    currentCell.playBtn.hidden = NO;
     [_wmPlayer.player pause];
@@ -178,8 +176,10 @@
 //    [_wmPlayer removeFromSuperview];
 //    _wmPlayer = nil;
     [videoImage removeFromSuperview];
-    [self configureWMPlayer];
-    
+//    [self configureWMPlayer];
+    if(_wmPlayer.isFullscreen == YES){
+        [self toNormal];
+    }
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
@@ -237,7 +237,7 @@
         _wmPlayer.transform = CGAffineTransformIdentity;
         _wmPlayer.frame =CGRectMake(playerFrame.origin.x, playerFrame.origin.y, playerFrame.size.width, playerFrame.size.height);
         _wmPlayer.playerLayer.frame =  _wmPlayer.bounds;
-        [self.videoBgView addSubview:_wmPlayer];
+        [self.videoBgView insertSubview:_wmPlayer aboveSubview:videoImage];
         
         [_wmPlayer.bottomView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(_wmPlayer).with.offset(0);
@@ -408,6 +408,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(playvideo)];
     [videoImage addGestureRecognizer:tap];
     [self.videoBgView addSubview:videoImage];
+    
 
 }
 
@@ -419,6 +420,9 @@
     NSInteger num = 6;
     CGFloat tWidth = (SCREEN_WIDTH - 20 -(num - 1)*padding)/num;
     CGFloat tHeight = tWidth;
+    for (UIButton *btn in self.numBtnBgView.subviews) {
+        [btn removeFromSuperview];
+    }
     if (array.count > 1) {
         for (int i = 0; i < array.count; i++) {
             UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];

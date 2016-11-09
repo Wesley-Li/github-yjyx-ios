@@ -178,7 +178,9 @@
                 [model initModelWithDic:dic];
                 [currentArr addObject:model];
             }
-            
+            if(self.index == 0){
+                [self.dataSource removeAllObjects];
+            }
             if([self.targetListArr count] - self.index < 20) {// 加载完毕
             
                 self.index += [self.targetListArr count] - self.index;
@@ -186,7 +188,7 @@
             }else {
                 self.index += 20;
             }
-            
+           
             [self.dataSource addObjectsFromArray:currentArr];
 
         }else {

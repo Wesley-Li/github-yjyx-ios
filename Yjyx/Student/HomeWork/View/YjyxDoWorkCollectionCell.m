@@ -259,7 +259,7 @@
 {
     LxGridViewFlowLayout *layout = [[LxGridViewFlowLayout alloc] init];
     _margin = 0;
-    
+    [layout setValue:nil forKey:@"_longPressGestureRecognizer"];
     layout.itemSize = CGSizeMake(_itemWH, _itemWH);
     layout.minimumInteritemSpacing = _margin;
     layout.minimumLineSpacing = _margin;

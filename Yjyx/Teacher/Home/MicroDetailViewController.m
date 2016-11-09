@@ -26,6 +26,8 @@
     NSIndexPath *currentIndexPath;
     BOOL isSmallScreen;
     BOOL isStart;
+    NSInteger lastSelectedVideoTag;
+    NSTimeInterval lastPlayingTaskInterval;
     
 }
 @property (strong, nonatomic) MicroDetailModel *microDetailM;
@@ -975,6 +977,7 @@ static NSString *VideoNumID = @"VideoNum";
             for (MicroSubjectModel *model in _allSubjectArr) {
                 model.btnIsShow = YES;
             }
+            return;
         }
         else{
             [self modifiContentData];
@@ -984,6 +987,7 @@ static NSString *VideoNumID = @"VideoNum";
         }
     }
     NSIndexPath *indexpath = [self.tableView indexPathForCell:cell];
+    NSLog(@"987%ld", indexpath.section );
     NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:indexpath.section];
     [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
 //    [self.tableView reloadData];
@@ -1005,9 +1009,22 @@ static NSString *VideoNumID = @"VideoNum";
 #pragma mark - VideoNumShowCellDelegate代理方法
 - (void)videoNumShowCell:(VideoNumShowCell *)cell videoNumBtnClick:(UIButton *)btn
 {
-//    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    if (lastSelectedVideoTag == btn.tag) { //点击同个视频，忽略
+        return;
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    lastSelectedVideoTag = btn.tag;
     self.videoURL = _microDetailM.videoUrlArr[btn.tag];
 
+    lastPlayingTaskInterval = [[NSDate date] timeIntervalSince1970];
+    NSTimeInterval timeIntervalLocal = lastPlayingTaskInterval;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ //延迟0.5秒播放，防止暴力点击
+        if (lastPlayingTaskInterval > timeIntervalLocal) { //有新播放任务，放弃本次播放任务
+            NSLog(@"有新播放任务，放弃本次播放任务");
+            return;
+        }
+        
+        NSLog(@"延时播放开始，对应按钮号：%ld",lastSelectedVideoTag);
     if (isSmallScreen) {// 小屏状态下
         
         [wmPlayer setVideoURLStr:self.videoURL];
@@ -1019,7 +1036,7 @@ static NSString *VideoNumID = @"VideoNum";
         [self startPlayVideo:cell2.playBtn];
     }
     
-
+    });
    
 //    [[NSNotificationCenter defaultCenter] postNotificationName:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
